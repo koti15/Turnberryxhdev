@@ -49,6 +49,8 @@ Add every sprint story here, even when no code change is required.
 - Multiple, one, no-match, and lookup regression checks pass in `myProdOrg`.
 - DataRaptor-only collection-shape and singleton-array limitations are
   documented for review.
+- LegacyCases mock data now supplies structured claims/notes, merged
+  Interaction notes, `isClosed`, and empty history without Apex/IP additions.
 
 ## Sprint references
 

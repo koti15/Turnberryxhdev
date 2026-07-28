@@ -39,7 +39,7 @@
     },
     {
         "GlobalKey": "ba533a05-4c8d-4f0f-84ec-fdf5c78bf4af",
-        "InputFieldName": "legacyCaseData:interactions:serviceIntents:claims",
+        "InputFieldName": "legacyCaseData:interactions:serviceIntents:normalizedClaims",
         "IsDisabled": false,
         "IsRequiredForUpsert": false,
         "IsUpsertKey": false,
@@ -147,6 +147,25 @@
         },
         "OutputCreationSequence": 1,
         "OutputFieldName": "cases:interactionId",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "f8e37e6c-4b72-4a03-93b7-91ec83d93147",
+        "InputFieldName": "legacyCaseData:interactions:serviceIntents:isClosed",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "DRTransformPremigrationcasesCompatible",
+        "OmniDataTransformationId": {
+            "Name": "DRTransformPremigrationcasesCompatible",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/DRTransformPremigrationcasesCompatible",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:isClosed",
         "OutputObjectName": "json",
         "VlocityDataPackType": "SObject",
         "VlocityRecordSObjectType": "OmniDataTransformItem"
