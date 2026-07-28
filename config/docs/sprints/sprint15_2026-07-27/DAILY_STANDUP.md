@@ -3,6 +3,12 @@
 Keep this file short. Add the newest update first and retain older entries only
 when they remain useful.
 
+## 2026-07-28 — Existing mapper correction
+
+- Updated `DRTransformPremigrationcasesCompatible` with the unified mappings.
+- Reconnected and activated the IP using that existing mapper.
+- Direct, one-case, multiple-case, mixed-note, and no-match checks pass.
+
 ## 2026-07-28 — Unified-contract closure
 
 ### Completed

@@ -140,3 +140,22 @@ questions, screenshots, and follow-ups across all Sprint 15 stories.
 - Salesforce-case owners must emit the same unified contract.
 - FlexCard/consolidation owners must confirm Result JSON Path is `cases`.
 - Live API owners must confirm richer claim/note metadata.
+
+## 2026-07-28 — CS-1347 — Reuse existing compatible mapper
+
+### Decision
+
+- Update `DRTransformPremigrationcasesCompatible` instead of connecting the
+  separately named unified mapper.
+- Keep the normalized input node because it supplies the structured claims,
+  merged notes, derived closed flag, and initialized history collection.
+
+### Completed
+
+- Replaced the existing compatible mapper's earlier fields with all 19 unified
+  mappings.
+- Kept the mapper in the older compatible designer format.
+- Reconnected `liftCases` to `DRTransformPremigrationcasesCompatible`.
+- Rebuilt, deployed, and activated the Integration Procedure.
+- Verified the direct transform, one result, multiple results, merged notes,
+  and exact empty-array response.

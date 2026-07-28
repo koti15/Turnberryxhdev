@@ -34,7 +34,7 @@
     "RequiredPermission": "",
     "ResponseCacheTtlMinutes": "",
     "ResponseCacheType": "",
-    "SourceObject": "",
+    "SourceObject": "json",
     "SynchronousProcessThreshold": "",
     "TargetOutputDocumentIdentifier": "",
     "TargetOutputFileName": "",
