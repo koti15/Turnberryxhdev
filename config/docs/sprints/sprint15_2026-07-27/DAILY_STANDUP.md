@@ -3,6 +3,26 @@
 Keep this file short. Add the newest update first and retain older entries only
 when they remain useful.
 
+## 2026-07-28 — Unified-contract closure
+
+### Completed
+
+- Built and deployed the compatible unified legacy Data Mapper.
+- Normalized claims and merged parent/child notes before final mapping.
+- Guaranteed `cases` is an array for zero, one, or multiple results.
+- Passed one, multiple, no-match, and mixed-note IP scenarios.
+- Exported the exact active Data Mapper into the Git deployment package.
+
+### Remaining
+
+- Salesforce and FlexCard owners must align to the same contract.
+- A separate final org requires its authenticated alias before promotion.
+
+### One-line update
+
+CS-1347's legacy path now returns the full unified `cases[]` contract and passes
+all closure scenarios in the shared Developer Edition.
+
 ## 2026-07-28 — Compatible DataRaptor follow-up
 
 ### Completed

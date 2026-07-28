@@ -25,10 +25,10 @@
     "PropertySetConfig": {
         "actionMessage": "",
         "additionalInput": {
-            "legacyCaseData": "=%getLegacyCasesMock:legacyCaseData%"
+            "normalizedLegacyCaseData": "=%normalizeLegacyCases:normalizedLegacyCaseData%"
         },
         "additionalOutput": {},
-        "bundle": "DRTransformPremigrationcasesCompatible",
+        "bundle": "DRTransformPremigrationUnifiedCases",
         "chainOnStep": false,
         "disOnTplt": false,
         "executionConditionalFormula": "",
