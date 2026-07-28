@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Legacy Cases</label>
+    <protected>false</protected>
+    <values>
+        <field>DataBody__c</field>
+        <value xsi:type="xsd:string">[
+  {
+    &quot;subscriberId&quot;: &quot;EPI100000001&quot;,
+    &quot;interactions&quot;: [
+      {
+        &quot;interactionId&quot;: &quot;INT-CSD-20251015-0047&quot;,
+        &quot;createdAt&quot;: &quot;2025-10-15T09:32:00&quot;,
+        &quot;closedAt&quot;: &quot;2025-10-15T09:58:00&quot;,
+        &quot;status&quot;: &quot;closed&quot;,
+        &quot;sourceSystem&quot;: &quot;CSD&quot;,
+        &quot;meaAoNumber&quot;: &quot;AO-2274&quot;,
+        &quot;meaName&quot;: &quot;Sarah Chen&quot;,
+        &quot;callerInfo&quot;: { &quot;name&quot;: &quot;James Thornton&quot;, &quot;relationship&quot;: &quot;Self&quot;, &quot;phone&quot;: &quot;(916) 555-0101&quot; },
+        &quot;memberInfo&quot;: { &quot;memberId&quot;: &quot;MBR100000001&quot;, &quot;name&quot;: &quot;James Thornton&quot;, &quot;dob&quot;: &quot;1962-03-15&quot; },
+        &quot;notes&quot;: [],
+        &quot;serviceIntents&quot;: [
+          {
+            &quot;name&quot;: &quot;Claim Payment Inquiry - EOB001&quot;,
+            &quot;status&quot;: &quot;open&quot;,
+            &quot;lastActivityDate&quot;: &quot;2025-10-15&quot;,
+            &quot;notes&quot;: [
+              &quot;Member called to inquire about EOB for office visit on 01/15/2026 at Sacramento General Hospital.&quot;,
+              &quot;Member reports copay amount on EOB does not match what was collected at time of service.&quot;,
+              &quot;Routed to claims review team for reconciliation. Awaiting resolution.&quot;
+            ],
+            &quot;workBasket&quot;: &quot;Claims-Review&quot;,
+            &quot;claims&quot;: [&quot;EOB001&quot;],
+            &quot;memberId&quot;: &quot;MBR100000001&quot;,
+            &quot;provider&quot;: { &quot;id&quot;: &quot;NPI1234567890&quot;, &quot;name&quot;: &quot;Dr. Aisha Patel&quot; },
+            &quot;legacyId&quot;: &quot;SI-CSD-7789001&quot;,
+            &quot;sourceSystem&quot;: &quot;CSD&quot;,
+            &quot;subject&quot;: &quot;Claim Payment Inquiry - EOB001&quot;,
+            &quot;description&quot;: &quot;Member disputes copay amount on professional claim for office visit.&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Benefit Explanation - Cardiology&quot;,
+            &quot;status&quot;: &quot;closed&quot;,
+            &quot;lastActivityDate&quot;: &quot;2025-10-15&quot;,
+            &quot;notes&quot;: [
+              &quot;Member requested explanation of cardiology benefits and cost-sharing.&quot;,
+              &quot;MEA reviewed plan documents and explained deductible and out-of-pocket structure.&quot;,
+              &quot;Call resolved. No further action required.&quot;
+            ],
+            &quot;workBasket&quot;: &quot;Closed&quot;,
+            &quot;claims&quot;: [],
+            &quot;memberId&quot;: &quot;MBR100000001&quot;,
+            &quot;legacyId&quot;: &quot;SI-CSD-7789002&quot;,
+            &quot;sourceSystem&quot;: &quot;CSD&quot;,
+            &quot;subject&quot;: &quot;Benefit Explanation - Cardiology&quot;,
+            &quot;description&quot;: &quot;Member requested cardiology benefit summary.&quot;
+          }
+        ]
+      },
+      {
+        &quot;interactionId&quot;: &quot;INT-CSD-20251203-0112&quot;,
+        &quot;createdAt&quot;: &quot;2025-12-03T14:15:00&quot;,
+        &quot;closedAt&quot;: &quot;2025-12-03T14:44:00&quot;,
+        &quot;status&quot;: &quot;closed&quot;,
+        &quot;sourceSystem&quot;: &quot;CSD&quot;,
+        &quot;meaAoNumber&quot;: &quot;AO-1891&quot;,
+        &quot;meaName&quot;: &quot;Michael Torres&quot;,
+        &quot;callerInfo&quot;: { &quot;name&quot;: &quot;James Thornton&quot;, &quot;relationship&quot;: &quot;Self&quot;, &quot;phone&quot;: &quot;(916) 555-0101&quot; },
+        &quot;memberInfo&quot;: { &quot;memberId&quot;: &quot;MBR100000001&quot;, &quot;name&quot;: &quot;James Thornton&quot;, &quot;dob&quot;: &quot;1962-03-15&quot; },
+        &quot;notes&quot;: [],
+        &quot;serviceIntents&quot;: [
+          {
+            &quot;name&quot;: &quot;COB Inquiry - Secondary Coverage&quot;,
+            &quot;status&quot;: &quot;open&quot;,
+            &quot;lastActivityDate&quot;: &quot;2025-12-03&quot;,
+            &quot;notes&quot;: [
+              &quot;Member called to report spouse has employer-sponsored secondary coverage.&quot;,
+              &quot;COB coordination required for ECG claim (EOB002) and future claims.&quot;,
+              &quot;COB questionnaire submitted. Pending completion by member.&quot;
+            ],
+            &quot;workBasket&quot;: &quot;COB-Review&quot;,
+            &quot;claims&quot;: [&quot;EOB002&quot;],
+            &quot;memberId&quot;: &quot;MBR100000001&quot;,
+            &quot;cobRequests&quot;: [
+              { &quot;cobId&quot;: &quot;COB-20251203-0112&quot;, &quot;description&quot;: &quot;Secondary coverage through spouse employer — COB questionnaire submitted&quot; }
+            ],
+            &quot;legacyId&quot;: &quot;SI-CSD-8812001&quot;,
+            &quot;sourceSystem&quot;: &quot;CSD&quot;,
+            &quot;subject&quot;: &quot;COB Inquiry - Secondary Coverage&quot;,
+            &quot;description&quot;: &quot;Member reports secondary coverage. COB coordination initiated.&quot;
+          }
+        ]
+      }
+    ]
+  },
+  {
+    &quot;subscriberId&quot;: &quot;EPI100000002&quot;,
+    &quot;interactions&quot;: [
+      {
+        &quot;interactionId&quot;: &quot;INT-CSD-20251120-0063&quot;,
+        &quot;createdAt&quot;: &quot;2025-11-20T10:45:00&quot;,
+        &quot;closedAt&quot;: &quot;2025-11-20T11:12:00&quot;,
+        &quot;status&quot;: &quot;closed&quot;,
+        &quot;sourceSystem&quot;: &quot;CSD&quot;,
+        &quot;meaAoNumber&quot;: &quot;AO-3301&quot;,
+        &quot;meaName&quot;: &quot;Jessica Park&quot;,
+        &quot;callerInfo&quot;: { &quot;name&quot;: &quot;Maria Delgado&quot;, &quot;relationship&quot;: &quot;Self&quot;, &quot;phone&quot;: &quot;(559) 555-0202&quot; },
+        &quot;memberInfo&quot;: { &quot;memberId&quot;: &quot;MBR100000002&quot;, &quot;name&quot;: &quot;Maria Delgado&quot;, &quot;dob&quot;: &quot;1978-07-22&quot; },
+        &quot;notes&quot;: [],
+        &quot;serviceIntents&quot;: [
+          {
+            &quot;name&quot;: &quot;Inpatient Claim Review - Balance Billing&quot;,
+            &quot;status&quot;: &quot;open&quot;,
+            &quot;lastActivityDate&quot;: &quot;2025-11-20&quot;,
+            &quot;notes&quot;: [
+              &quot;Member received balance bill from Sacramento General Hospital for inpatient oncology stay (EOB005).&quot;,
+              &quot;Hospital billed $3,200; plan paid $2,560; member received bill for $640 remaining.&quot;,
+              &quot;Member contends balance billing violates in-network agreement.&quot;,
+              &quot;Escalated to Provider Relations for investigation. Open pending outcome.&quot;
+            ],
+            &quot;workBasket&quot;: &quot;Provider-Relations&quot;,
+            &quot;claims&quot;: [&quot;EOB005&quot;],
+            &quot;memberId&quot;: &quot;MBR100000002&quot;,
+            &quot;provider&quot;: { &quot;id&quot;: &quot;NPI1234567892&quot;, &quot;name&quot;: &quot;Dr. Linh Tran&quot; },
+            &quot;legacyId&quot;: &quot;SI-CSD-9901001&quot;,
+            &quot;sourceSystem&quot;: &quot;CSD&quot;,
+            &quot;subject&quot;: &quot;Inpatient Claim Review - Balance Billing&quot;,
+            &quot;description&quot;: &quot;Member disputes balance bill from in-network hospital for inpatient oncology stay.&quot;
+          }
+        ]
+      },
+      {
+        &quot;interactionId&quot;: &quot;INT-ENCOMPASS-20260115-0008&quot;,
+        &quot;createdAt&quot;: &quot;2026-01-15T11:30:00&quot;,
+        &quot;closedAt&quot;: &quot;2026-01-15T11:52:00&quot;,
+        &quot;status&quot;: &quot;closed&quot;,
+        &quot;sourceSystem&quot;: &quot;EnCompass&quot;,
+        &quot;meaAoNumber&quot;: &quot;AO-4410&quot;,
+        &quot;meaName&quot;: &quot;Rachel Foster&quot;,
+        &quot;callerInfo&quot;: { &quot;name&quot;: &quot;Maria Delgado&quot;, &quot;relationship&quot;: &quot;Self&quot;, &quot;phone&quot;: &quot;(559) 555-0202&quot; },
+        &quot;memberInfo&quot;: { &quot;memberId&quot;: &quot;MBR100000002&quot;, &quot;name&quot;: &quot;Maria Delgado&quot;, &quot;dob&quot;: &quot;1978-07-22&quot; },
+        &quot;notes&quot;: [ &quot;Follow-up call on balance billing case from November.&quot; ],
+        &quot;serviceIntents&quot;: [
+          {
+            &quot;name&quot;: &quot;Office Visit Claim Inquiry - EOB004&quot;,
+            &quot;status&quot;: &quot;closed&quot;,
+            &quot;lastActivityDate&quot;: &quot;2026-01-15&quot;,
+            &quot;notes&quot;: [
+              &quot;Member inquired about professional claim for office visit on 01/20/2026.&quot;,
+              &quot;Claim EOB004 confirmed processed and paid at $200.00 benefit amount.&quot;,
+              &quot;Call resolved.&quot;
+            ],
+            &quot;workBasket&quot;: &quot;Closed&quot;,
+            &quot;claims&quot;: [&quot;EOB004&quot;],
+            &quot;memberId&quot;: &quot;MBR100000002&quot;,
+            &quot;legacyId&quot;: &quot;SI-ENCP-1102001&quot;,
+            &quot;sourceSystem&quot;: &quot;EnCompass&quot;,
+            &quot;subject&quot;: &quot;Office Visit Claim Inquiry - EOB004&quot;,
+            &quot;description&quot;: &quot;Member confirmed EOB004 claim status — resolved.&quot;
+          }
+        ]
+      }
+    ]
+  },
+  {
+    &quot;subscriberId&quot;: &quot;EPI100000003&quot;,
+    &quot;interactions&quot;: [
+      {
+        &quot;interactionId&quot;: &quot;INT-ENCOMPASS-20250910-0022&quot;,
+        &quot;createdAt&quot;: &quot;2025-09-10T08:55:00&quot;,
+        &quot;closedAt&quot;: &quot;2025-09-10T09:28:00&quot;,
+        &quot;status&quot;: &quot;closed&quot;,
+        &quot;sourceSystem&quot;: &quot;EnCompass&quot;,
+        &quot;meaAoNumber&quot;: &quot;AO-4422&quot;,
+        &quot;meaName&quot;: &quot;David Lopez&quot;,
+        &quot;callerInfo&quot;: { &quot;name&quot;: &quot;Robert Kim&quot;, &quot;relationship&quot;: &quot;Self&quot;, &quot;phone&quot;: &quot;(619) 555-0303&quot; },
+        &quot;memberInfo&quot;: { &quot;memberId&quot;: &quot;MBR100000003&quot;, &quot;name&quot;: &quot;Robert Kim&quot;, &quot;dob&quot;: &quot;1955-11-08&quot; },
+        &quot;notes&quot;: [],
+        &quot;serviceIntents&quot;: [
+          {
+            &quot;name&quot;: &quot;Dialysis Authorization and Claim Tracking&quot;,
+            &quot;status&quot;: &quot;open&quot;,
+            &quot;lastActivityDate&quot;: &quot;2026-01-22&quot;,
+            &quot;notes&quot;: [
+              &quot;Member called regarding ongoing hemodialysis coverage at San Diego Dialysis Center.&quot;,
+              &quot;Authorization confirmed active through 2026-06-30.&quot;,
+              &quot;Member inquiring about claim processing timelines for recent dialysis sessions.&quot;,
+              &quot;Claims EOB006 and EOB007 confirmed paid at standard benefit rate.&quot;,
+              &quot;EOB008 submitted and pending as of call date.&quot;
+            ],
+            &quot;workBasket&quot;: &quot;Medical-Management&quot;,
+            &quot;claims&quot;: [&quot;EOB006&quot;, &quot;EOB007&quot;, &quot;EOB008&quot;],
+            &quot;memberId&quot;: &quot;MBR100000003&quot;,
+            &quot;provider&quot;: { &quot;id&quot;: &quot;NPI1234567893&quot;, &quot;name&quot;: &quot;Dr. Samuel Okafor&quot; },
+            &quot;authorizationReferral&quot;: {
+              &quot;authId&quot;: &quot;AUTH-20250910-RK001&quot;,
+              &quot;type&quot;: &quot;Authorization&quot;,
+              &quot;description&quot;: &quot;Hemodialysis — ongoing authorization through 2026-06-30&quot;
+            },
+            &quot;legacyId&quot;: &quot;SI-ENCP-2201001&quot;,
+            &quot;sourceSystem&quot;: &quot;EnCompass&quot;,
+            &quot;subject&quot;: &quot;Dialysis Authorization and Claim Tracking&quot;,
+            &quot;description&quot;: &quot;Member tracking ongoing dialysis authorization and associated claim processing.&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Benefit Quote - Dialysis Plan Year 2026&quot;,
+            &quot;status&quot;: &quot;closed&quot;,
+            &quot;lastActivityDate&quot;: &quot;2025-09-10&quot;,
+            &quot;notes&quot;: [
+              &quot;Member requested benefit quote for dialysis services for plan year 2026.&quot;,
+              &quot;MEA provided written summary — mailed to member.&quot;
+            ],
+            &quot;workBasket&quot;: &quot;Closed&quot;,
+            &quot;claims&quot;: [],
+            &quot;memberId&quot;: &quot;MBR100000003&quot;,
+            &quot;benefitQuotes&quot;: [
+              { &quot;quoteId&quot;: &quot;BQ-20250910-001&quot;, &quot;benefitid&quot;: &quot;ESRD-DIALYSIS-2026&quot;, &quot;name&quot;: &quot;Hemodialysis — Plan Year 2026 Benefit Summary&quot; }
+            ],
+            &quot;legacyId&quot;: &quot;SI-ENCP-2201002&quot;,
+            &quot;sourceSystem&quot;: &quot;EnCompass&quot;,
+            &quot;subject&quot;: &quot;Benefit Quote - Dialysis Plan Year 2026&quot;,
+            &quot;description&quot;: &quot;Annual benefit quote for dialysis services — mailed to member.&quot;
+          }
+        ]
+      },
+      {
+        &quot;interactionId&quot;: &quot;INT-CSD-20260122-0039&quot;,
+        &quot;createdAt&quot;: &quot;2026-01-22T15:10:00&quot;,
+        &quot;closedAt&quot;: &quot;2026-01-22T15:35:00&quot;,
+        &quot;status&quot;: &quot;closed&quot;,
+        &quot;sourceSystem&quot;: &quot;CSD&quot;,
+        &quot;meaAoNumber&quot;: &quot;AO-5517&quot;,
+        &quot;meaName&quot;: &quot;Amy Nakamura&quot;,
+        &quot;callerInfo&quot;: { &quot;name&quot;: &quot;Robert Kim&quot;, &quot;relationship&quot;: &quot;Self&quot;, &quot;phone&quot;: &quot;(619) 555-0303&quot; },
+        &quot;memberInfo&quot;: { &quot;memberId&quot;: &quot;MBR100000003&quot;, &quot;name&quot;: &quot;Robert Kim&quot;, &quot;dob&quot;: &quot;1955-11-08&quot; },
+        &quot;notes&quot;: [],
+        &quot;serviceIntents&quot;: [
+          {
+            &quot;name&quot;: &quot;Claim Payment Dispute - EOB006&quot;,
+            &quot;status&quot;: &quot;open&quot;,
+            &quot;lastActivityDate&quot;: &quot;2026-01-22&quot;,
+            &quot;notes&quot;: [
+              &quot;Member reports hemodialysis claim EOB006 was paid at a lower rate than expected.&quot;,
+              &quot;Expected benefit: $1,500; actual benefit: $1,440.&quot;,
+              &quot;MEA reviewed claim and confirmed difference applied to remaining deductible.&quot;,
+              &quot;Member disputes deductible application — case escalated to Claims Resolution.&quot;
+            ],
+            &quot;workBasket&quot;: &quot;Claims-Resolution&quot;,
+            &quot;claims&quot;: [&quot;EOB006&quot;],
+            &quot;memberId&quot;: &quot;MBR100000003&quot;,
+            &quot;legacyId&quot;: &quot;SI-CSD-3317001&quot;,
+            &quot;sourceSystem&quot;: &quot;CSD&quot;,
+            &quot;subject&quot;: &quot;Claim Payment Dispute - EOB006&quot;,
+            &quot;description&quot;: &quot;Member disputes payment calculation on hemodialysis claim EOB006.&quot;
+          }
+        ]
+      }
+    ]
+  },
+  {
+    &quot;subscriberId&quot;: &quot;EPI100000004&quot;,
+    &quot;interactions&quot;: [
+      {
+        &quot;interactionId&quot;: &quot;INT-ENCOMPASS-20250814-0017&quot;,
+        &quot;createdAt&quot;: &quot;2025-08-14T13:20:00&quot;,
+        &quot;closedAt&quot;: &quot;2025-08-14T13:48:00&quot;,
+        &quot;status&quot;: &quot;closed&quot;,
+        &quot;sourceSystem&quot;: &quot;EnCompass&quot;,
+        &quot;meaAoNumber&quot;: &quot;AO-6633&quot;,
+        &quot;meaName&quot;: &quot;Ryan Martinez&quot;,
+        &quot;callerInfo&quot;: { &quot;name&quot;: &quot;Patricia Nguyen&quot;, &quot;relationship&quot;: &quot;Self&quot;, &quot;phone&quot;: &quot;(213) 555-0404&quot; },
+        &quot;memberInfo&quot;: { &quot;memberId&quot;: &quot;MBR100000004&quot;, &quot;name&quot;: &quot;Patricia Nguyen&quot;, &quot;dob&quot;: &quot;1943-05-30&quot; },
+        &quot;notes&quot;: [],
+        &quot;serviceIntents&quot;: [
+          {
+            &quot;name&quot;: &quot;Mental Health Prior Authorization Inquiry&quot;,
+            &quot;status&quot;: &quot;open&quot;,
+            &quot;lastActivityDate&quot;: &quot;2025-08-14&quot;,
+            &quot;notes&quot;: [
+              &quot;Member calling to confirm prior authorization requirements for ongoing psychotherapy.&quot;,
+              &quot;Confirmed that 20 outpatient mental health visits authorized per plan year.&quot;,
+              &quot;Authorization AUTH-20250814-PN001 issued covering EOB009 and EOB010.&quot;,
+              &quot;Remaining authorized visits: 18 as of call date.&quot;
+            ],
+            &quot;workBasket&quot;: &quot;Medical-Management&quot;,
+            &quot;claims&quot;: [&quot;EOB009&quot;],
+            &quot;memberId&quot;: &quot;MBR100000004&quot;,
+            &quot;provider&quot;: { &quot;id&quot;: &quot;NPI1234567894&quot;, &quot;name&quot;: &quot;Dr. Elena Vasquez&quot; },
+            &quot;authorizationReferral&quot;: {
+              &quot;authId&quot;: &quot;AUTH-20250814-PN001&quot;,
+              &quot;type&quot;: &quot;Authorization&quot;,
+              &quot;description&quot;: &quot;Outpatient psychotherapy — 20 visits authorized, plan year 2025-2026&quot;
+            },
+            &quot;legacyId&quot;: &quot;SI-ENCP-4401001&quot;,
+            &quot;sourceSystem&quot;: &quot;EnCompass&quot;,
+            &quot;subject&quot;: &quot;Mental Health Prior Authorization Inquiry&quot;,
+            &quot;description&quot;: &quot;Outpatient psychotherapy authorization confirmed for plan year.&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Mental Health Claim Review - EOB009&quot;,
+            &quot;status&quot;: &quot;closed&quot;,
+            &quot;lastActivityDate&quot;: &quot;2025-08-14&quot;,
+            &quot;notes&quot;: [
+              &quot;Member inquired about claim EOB009 — psychotherapy session 01/25/2026.&quot;,
+              &quot;Claim confirmed processed. Benefit of $240 paid to provider.&quot;,
+              &quot;Call resolved.&quot;
+            ],
+            &quot;workBasket&quot;: &quot;Closed&quot;,
+            &quot;claims&quot;: [&quot;EOB009&quot;],
+            &quot;memberId&quot;: &quot;MBR100000004&quot;,
+            &quot;legacyId&quot;: &quot;SI-ENCP-4401002&quot;,
+            &quot;sourceSystem&quot;: &quot;EnCompass&quot;,
+            &quot;subject&quot;: &quot;Mental Health Claim Review - EOB009&quot;,
+            &quot;description&quot;: &quot;Member confirmed EOB009 claim status — resolved.&quot;
+          }
+        ]
+      },
+      {
+        &quot;interactionId&quot;: &quot;INT-CSD-20251105-0078&quot;,
+        &quot;createdAt&quot;: &quot;2025-11-05T10:05:00&quot;,
+        &quot;closedAt&quot;: &quot;2025-11-05T10:31:00&quot;,
+        &quot;status&quot;: &quot;closed&quot;,
+        &quot;sourceSystem&quot;: &quot;CSD&quot;,
+        &quot;meaAoNumber&quot;: &quot;AO-7748&quot;,
+        &quot;meaName&quot;: &quot;Linda Chen&quot;,
+        &quot;callerInfo&quot;: { &quot;name&quot;: &quot;Patricia Nguyen&quot;, &quot;relationship&quot;: &quot;Self&quot;, &quot;phone&quot;: &quot;(213) 555-0404&quot; },
+        &quot;memberInfo&quot;: { &quot;memberId&quot;: &quot;MBR100000004&quot;, &quot;name&quot;: &quot;Patricia Nguyen&quot;, &quot;dob&quot;: &quot;1943-05-30&quot; },
+        &quot;notes&quot;: [ &quot;Member expressed frustration — second call this month regarding the same denial.&quot; ],
+        &quot;serviceIntents&quot;: [
+          {
+            &quot;name&quot;: &quot;Claim Denial Appeal - EOB009&quot;,
+            &quot;status&quot;: &quot;open&quot;,
+            &quot;lastActivityDate&quot;: &quot;2025-11-05&quot;,
+            &quot;notes&quot;: [
+              &quot;Member appealing denial of psychotherapy claim EOB009.&quot;,
+              &quot;Original denial reason: missing prior authorization number on submitted claim.&quot;,
+              &quot;Member states authorization AUTH-20250814-PN001 was on file at time of service.&quot;,
+              &quot;Appeals team reviewing authorization records. Case open pending outcome.&quot;,
+              &quot;Expected resolution: 30 business days.&quot;
+            ],
+            &quot;workBasket&quot;: &quot;Appeals&quot;,
+            &quot;claims&quot;: [&quot;EOB009&quot;],
+            &quot;memberId&quot;: &quot;MBR100000004&quot;,
+            &quot;legacyId&quot;: &quot;SI-CSD-5503001&quot;,
+            &quot;sourceSystem&quot;: &quot;CSD&quot;,
+            &quot;subject&quot;: &quot;Claim Denial Appeal - EOB009&quot;,
+            &quot;description&quot;: &quot;Member appealing denied psychotherapy claim — authorization reference dispute.&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Behavioral Health Benefit Education&quot;,
+            &quot;status&quot;: &quot;closed&quot;,
+            &quot;lastActivityDate&quot;: &quot;2025-11-05&quot;,
+            &quot;notes&quot;: [
+              &quot;MEA provided overview of behavioral health benefits, mental health parity laws, and appeal rights.&quot;,
+              &quot;Member acknowledged information provided.&quot;,
+              &quot;Call resolved.&quot;
+            ],
+            &quot;workBasket&quot;: &quot;Closed&quot;,
+            &quot;claims&quot;: [],
+            &quot;memberId&quot;: &quot;MBR100000004&quot;,
+            &quot;legacyId&quot;: &quot;SI-CSD-5503002&quot;,
+            &quot;sourceSystem&quot;: &quot;CSD&quot;,
+            &quot;subject&quot;: &quot;Behavioral Health Benefit Education&quot;,
+            &quot;description&quot;: &quot;Member education on mental health parity rights and appeal process.&quot;
+          }
+        ]
+      }
+    ]
+  },
+  {
+    &quot;subscriberId&quot;: &quot;EPI100000005&quot;,
+    &quot;interactions&quot;: [
+      {
+        &quot;interactionId&quot;: &quot;INT-CSD-20251210-0091&quot;,
+        &quot;createdAt&quot;: &quot;2025-12-10T09:00:00&quot;,
+        &quot;closedAt&quot;: &quot;2025-12-10T09:25:00&quot;,
+        &quot;status&quot;: &quot;closed&quot;,
+        &quot;sourceSystem&quot;: &quot;CSD&quot;,
+        &quot;meaAoNumber&quot;: &quot;AO-9921&quot;,
+        &quot;meaName&quot;: &quot;Tom Bradley&quot;,
+        &quot;callerInfo&quot;: { &quot;name&quot;: &quot;David Osei&quot;, &quot;relationship&quot;: &quot;Self&quot;, &quot;phone&quot;: &quot;(510) 555-0505&quot; },
+        &quot;memberInfo&quot;: { &quot;memberId&quot;: &quot;MBR100000005&quot;, &quot;name&quot;: &quot;David Osei&quot;, &quot;dob&quot;: &quot;1989-09-14&quot; },
+        &quot;notes&quot;: [],
+        &quot;serviceIntents&quot;: [
+          {
+            &quot;name&quot;: &quot;Echocardiography Claim Inquiry - EOB011&quot;,
+            &quot;status&quot;: &quot;closed&quot;,
+            &quot;lastActivityDate&quot;: &quot;2025-12-10&quot;,
+            &quot;notes&quot;: [
+              &quot;Member inquired about echocardiography with Doppler claim EOB011.&quot;,
+              &quot;Claim confirmed processed and paid. Benefit of $400 sent to provider.&quot;,
+              &quot;Member satisfied. Call resolved.&quot;
+            ],
+            &quot;workBasket&quot;: &quot;Closed&quot;,
+            &quot;claims&quot;: [&quot;EOB011&quot;],
+            &quot;memberId&quot;: &quot;MBR100000005&quot;,
+            &quot;provider&quot;: { &quot;id&quot;: &quot;NPI1234567890&quot;, &quot;name&quot;: &quot;Dr. Aisha Patel&quot; },
+            &quot;legacyId&quot;: &quot;SI-CSD-6601001&quot;,
+            &quot;sourceSystem&quot;: &quot;CSD&quot;,
+            &quot;subject&quot;: &quot;Echocardiography Claim Inquiry - EOB011&quot;,
+            &quot;description&quot;: &quot;Member confirmed EOB011 echocardiography claim status — resolved.&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Imaging Pre-Authorization Inquiry&quot;,
+            &quot;status&quot;: &quot;open&quot;,
+            &quot;lastActivityDate&quot;: &quot;2025-12-10&quot;,
+            &quot;notes&quot;: [
+              &quot;Member asking whether future chest X-rays require prior authorization.&quot;,
+              &quot;MEA confirmed: single-view X-rays do not require auth; 2-view and multi-view require standard pre-auth submission.&quot;,
+              &quot;Member noted cardiologist may order chest imaging in coming months.&quot;,
+              &quot;Pre-authorization submission instructions provided. Member will call back when order is placed.&quot;
+            ],
+            &quot;workBasket&quot;: &quot;Member-Services&quot;,
+            &quot;claims&quot;: [],
+            &quot;memberId&quot;: &quot;MBR100000005&quot;,
+            &quot;legacyId&quot;: &quot;SI-CSD-6601002&quot;,
+            &quot;sourceSystem&quot;: &quot;CSD&quot;,
+            &quot;subject&quot;: &quot;Imaging Pre-Authorization Inquiry&quot;,
+            &quot;description&quot;: &quot;Member inquired about pre-auth requirements for future chest imaging.&quot;
+          }
+        ]
+      },
+      {
+        &quot;interactionId&quot;: &quot;INT-CSD-20260321-0144&quot;,
+        &quot;createdAt&quot;: &quot;2026-03-21T11:45:00&quot;,
+        &quot;closedAt&quot;: &quot;2026-03-21T12:10:00&quot;,
+        &quot;status&quot;: &quot;closed&quot;,
+        &quot;sourceSystem&quot;: &quot;CSD&quot;,
+        &quot;meaAoNumber&quot;: &quot;AO-8859&quot;,
+        &quot;meaName&quot;: &quot;Karen Williams&quot;,
+        &quot;callerInfo&quot;: { &quot;name&quot;: &quot;David Osei&quot;, &quot;relationship&quot;: &quot;Self&quot;, &quot;phone&quot;: &quot;(510) 555-0505&quot; },
+        &quot;memberInfo&quot;: { &quot;memberId&quot;: &quot;MBR100000005&quot;, &quot;name&quot;: &quot;David Osei&quot;, &quot;dob&quot;: &quot;1989-09-14&quot; },
+        &quot;notes&quot;: [ &quot;Member very upset. Second call this week regarding this denial.&quot; ],
+        &quot;serviceIntents&quot;: [
+          {
+            &quot;name&quot;: &quot;Claim Denial Appeal - EOB012 (Chest X-Ray)&quot;,
+            &quot;status&quot;: &quot;open&quot;,
+            &quot;lastActivityDate&quot;: &quot;2026-03-21&quot;,
+            &quot;notes&quot;: [
+              &quot;Member calling about claim EOB012 — 2-view chest X-ray at Oakland Imaging Center on 03/14/2026.&quot;,
+              &quot;Claim denied: no prior authorization on file. Benefit paid: $0.&quot;,
+              &quot;Member states cardiologist submitted authorization request on 03/10/2026.&quot;,
+              &quot;MEA confirmed no authorization was received in system as of 03/10/2026.&quot;,
+              &quot;Expedited appeal initiated. Authorization records requested from ordering physician.&quot;,
+              &quot;Member advised of 30-day appeal timeline. Case assigned to Appeals team.&quot;
+            ],
+            &quot;workBasket&quot;: &quot;Appeals&quot;,
+            &quot;claims&quot;: [&quot;EOB012&quot;],
+            &quot;memberId&quot;: &quot;MBR100000005&quot;,
+            &quot;provider&quot;: { &quot;id&quot;: &quot;NPI1900000005&quot;, &quot;name&quot;: &quot;Oakland Imaging Center&quot; },
+            &quot;legacyId&quot;: &quot;SI-CSD-7712001&quot;,
+            &quot;sourceSystem&quot;: &quot;CSD&quot;,
+            &quot;subject&quot;: &quot;Claim Denial Appeal - EOB012 (Chest X-Ray)&quot;,
+            &quot;description&quot;: &quot;Member appealing denied X-ray claim — missing prior authorization dispute.&quot;
+          }
+        ]
+      }
+    ]
+  }
+]</value>
+    </values>
+    <values>
+        <field>ObjectType__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>PageSize__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>ParentLookupField__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>ParentSourceField__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>SearchKeyPath__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>TeardownQueryField__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Type__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

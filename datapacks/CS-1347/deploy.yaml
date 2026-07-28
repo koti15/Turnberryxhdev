@@ -1,0 +1,9 @@
+projectPath: ./datapacks/CS-1347-expanded
+expansionPath: .
+buildFile: ./datapacks/CS-1347/Claims_PreMigrationCaseLookup.json
+autoUpdateSettings: false
+activate: true
+continueAfterError: false
+defaultMaxParallel: 1
+manifest:
+  - IntegrationProcedure/Claims_PreMigrationCaseLookup

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>FilteredLookupAction</members>
+        <members>FilteredLookupActionTest</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>MockData.LegacyCases</members>
+        <name>CustomMetadata</name>
+    </types>
+    <version>67.0</version>
+</Package>
