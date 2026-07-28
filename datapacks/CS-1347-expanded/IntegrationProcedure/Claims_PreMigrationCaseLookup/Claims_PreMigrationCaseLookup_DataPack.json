@@ -14,9 +14,7 @@
     "OmniProcessElement": [
         "Claims_PreMigrationCaseLookup_Element_getLegacyCasesMock.json",
         "Claims_PreMigrationCaseLookup_Element_HasLegacyCaseData.json",
-        "Claims_PreMigrationCaseLookup_Element_normalizeLegacyCases.json",
         "Claims_PreMigrationCaseLookup_Element_liftCases.json",
-        "Claims_PreMigrationCaseLookup_Element_ensureCasesArray.json",
         "Claims_PreMigrationCaseLookup_Element_BuildMatchedResponse.json",
         "Claims_PreMigrationCaseLookup_Element_emptyCases.json",
         "Claims_PreMigrationCaseLookup_Element_BuildEmptyResponse.json"

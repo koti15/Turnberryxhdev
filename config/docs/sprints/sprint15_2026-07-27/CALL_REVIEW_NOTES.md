@@ -159,3 +159,27 @@ questions, screenshots, and follow-ups across all Sprint 15 stories.
 - Rebuilt, deployed, and activated the Integration Procedure.
 - Verified the direct transform, one result, multiple results, merged notes,
   and exact empty-array response.
+
+## 2026-07-28 — CS-1347 — Simplified no-new-Apex decision
+
+### Decision
+
+- Restore the original IP structure and avoid new Apex transformation actions.
+- Use `DRTransformPremigrationcasesCompatible` directly with
+  `legacyCaseData`.
+- Keep DataRaptor-only collection limitations visible for Brian's review.
+
+### Completed
+
+- Removed `normalizeLegacyCases` and `ensureCasesArray` from the IP.
+- Removed their Apex classes, tests, and gateway registrations from the org.
+- Rebuilt, deployed, and activated the simplified IP.
+- Verified two cases for `EOB006`, one case for `EOB001`, exact empty output
+  for no match, and four passing lookup regression tests.
+
+### Known limitations
+
+- Claims and notes remain string arrays with current mock data.
+- Parent Interaction notes are not merged.
+- A one-case transform collapses `cases` to an object in the older runtime.
+- `isClosed` and absent history cannot be synthesized by these direct mappings.

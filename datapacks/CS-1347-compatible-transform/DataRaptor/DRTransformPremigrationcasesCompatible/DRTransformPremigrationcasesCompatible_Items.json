@@ -1,7 +1,7 @@
 [
     {
-        "GlobalKey": "e02cf53b-f59b-46f5-a99a-86ba065431c7",
-        "InputFieldName": "normalizedLegacyCaseData:interactions:serviceIntents:legacyId",
+        "GlobalKey": "12446fac-8e26-4ed8-824e-f3b73b23f013",
+        "InputFieldName": "legacyCaseData:interactions:serviceIntents:legacyId",
         "IsDisabled": false,
         "IsRequiredForUpsert": false,
         "IsUpsertKey": false,
@@ -19,8 +19,8 @@
         "VlocityRecordSObjectType": "OmniDataTransformItem"
     },
     {
-        "GlobalKey": "0a81190e-ee7c-4156-9832-f12aa65af4d5",
-        "InputFieldName": "normalizedLegacyCaseData:interactions:serviceIntents:legacyId",
+        "GlobalKey": "d4ee3ace-60e3-461c-bdea-d77fbf53b933",
+        "InputFieldName": "legacyCaseData:interactions:serviceIntents:legacyId",
         "IsDisabled": false,
         "IsRequiredForUpsert": false,
         "IsUpsertKey": false,
@@ -38,8 +38,8 @@
         "VlocityRecordSObjectType": "OmniDataTransformItem"
     },
     {
-        "GlobalKey": "8e568285-213d-4803-a4a6-a6019d9ef611",
-        "InputFieldName": "normalizedLegacyCaseData:interactions:serviceIntents:normalizedClaims",
+        "GlobalKey": "ba533a05-4c8d-4f0f-84ec-fdf5c78bf4af",
+        "InputFieldName": "legacyCaseData:interactions:serviceIntents:claims",
         "IsDisabled": false,
         "IsRequiredForUpsert": false,
         "IsUpsertKey": false,
@@ -57,8 +57,8 @@
         "VlocityRecordSObjectType": "OmniDataTransformItem"
     },
     {
-        "GlobalKey": "0e4cb459-5ae3-41f4-b929-6de56e137caf",
-        "InputFieldName": "normalizedLegacyCaseData:interactions:serviceIntents:description",
+        "GlobalKey": "f747cb20-a4e0-4533-a9a5-1a2c328423da",
+        "InputFieldName": "legacyCaseData:interactions:serviceIntents:description",
         "IsDisabled": false,
         "IsRequiredForUpsert": false,
         "IsUpsertKey": false,
@@ -76,8 +76,8 @@
         "VlocityRecordSObjectType": "OmniDataTransformItem"
     },
     {
-        "GlobalKey": "a271d12e-96cd-4151-83ad-6c989a1adfb4",
-        "InputFieldName": "normalizedLegacyCaseData:interactions:serviceIntents:normalizedHistory",
+        "GlobalKey": "208f001a-05b4-4abb-a7f6-a45da255d1a6",
+        "InputFieldName": "legacyCaseData:interactions:serviceIntents:history",
         "IsDisabled": false,
         "IsRequiredForUpsert": false,
         "IsUpsertKey": false,
@@ -95,8 +95,8 @@
         "VlocityRecordSObjectType": "OmniDataTransformItem"
     },
     {
-        "GlobalKey": "a7b68e9d-7c8b-485c-a95c-11982694a6b5",
-        "InputFieldName": "normalizedLegacyCaseData:interactions:closedAt",
+        "GlobalKey": "a334bcaf-476f-4d0a-bd2e-63ea13943e41",
+        "InputFieldName": "legacyCaseData:interactions:closedAt",
         "IsDisabled": false,
         "IsRequiredForUpsert": false,
         "IsUpsertKey": false,
@@ -114,8 +114,8 @@
         "VlocityRecordSObjectType": "OmniDataTransformItem"
     },
     {
-        "GlobalKey": "24a62af5-f006-44a9-b5ae-c8ff5532d5d6",
-        "InputFieldName": "normalizedLegacyCaseData:interactions:createdAt",
+        "GlobalKey": "83d4bd40-b51b-4e3a-8cfc-45bce574dbf0",
+        "InputFieldName": "legacyCaseData:interactions:createdAt",
         "IsDisabled": false,
         "IsRequiredForUpsert": false,
         "IsUpsertKey": false,
@@ -133,8 +133,8 @@
         "VlocityRecordSObjectType": "OmniDataTransformItem"
     },
     {
-        "GlobalKey": "70c64c48-73f1-4ff8-8e6c-8f054112ae7e",
-        "InputFieldName": "normalizedLegacyCaseData:interactions:interactionId",
+        "GlobalKey": "4536a155-df6d-4bdd-b12b-8f717257081b",
+        "InputFieldName": "legacyCaseData:interactions:interactionId",
         "IsDisabled": false,
         "IsRequiredForUpsert": false,
         "IsUpsertKey": false,
@@ -152,27 +152,8 @@
         "VlocityRecordSObjectType": "OmniDataTransformItem"
     },
     {
-        "GlobalKey": "9c09eb3f-0080-4737-b33b-2b586423c803",
-        "InputFieldName": "normalizedLegacyCaseData:interactions:serviceIntents:derivedIsClosed",
-        "IsDisabled": false,
-        "IsRequiredForUpsert": false,
-        "IsUpsertKey": false,
-        "Name": "DRTransformPremigrationcasesCompatible",
-        "OmniDataTransformationId": {
-            "Name": "DRTransformPremigrationcasesCompatible",
-            "VlocityDataPackType": "VlocityMatchingKeyObject",
-            "VlocityMatchingRecordSourceKey": "OmniDataTransform/DRTransformPremigrationcasesCompatible",
-            "VlocityRecordSObjectType": "OmniDataTransform"
-        },
-        "OutputCreationSequence": 1,
-        "OutputFieldName": "cases:isClosed",
-        "OutputObjectName": "json",
-        "VlocityDataPackType": "SObject",
-        "VlocityRecordSObjectType": "OmniDataTransformItem"
-    },
-    {
-        "GlobalKey": "86c7602f-e51a-4197-b8b5-2027fb339fb9",
-        "InputFieldName": "normalizedLegacyCaseData:interactions:serviceIntents:lastActivityDate",
+        "GlobalKey": "68d6d4b5-1e7e-44bc-8e70-d0f0430e0181",
+        "InputFieldName": "legacyCaseData:interactions:serviceIntents:lastActivityDate",
         "IsDisabled": false,
         "IsRequiredForUpsert": false,
         "IsUpsertKey": false,
@@ -190,8 +171,8 @@
         "VlocityRecordSObjectType": "OmniDataTransformItem"
     },
     {
-        "GlobalKey": "dfe07487-7b4d-45a3-ad8a-524828848c1c",
-        "InputFieldName": "normalizedLegacyCaseData:interactions:serviceIntents:legacyId",
+        "GlobalKey": "f6b4ae67-ec67-46ae-b10e-ef22a0393ced",
+        "InputFieldName": "legacyCaseData:interactions:serviceIntents:legacyId",
         "IsDisabled": false,
         "IsRequiredForUpsert": false,
         "IsUpsertKey": false,
@@ -209,8 +190,8 @@
         "VlocityRecordSObjectType": "OmniDataTransformItem"
     },
     {
-        "GlobalKey": "5cf529b4-5d7a-4c43-ae48-5ea4e26a9c6b",
-        "InputFieldName": "normalizedLegacyCaseData:interactions:meaName",
+        "GlobalKey": "4a95cb4e-5507-4bcf-a51a-e89625d99e0d",
+        "InputFieldName": "legacyCaseData:interactions:meaName",
         "IsDisabled": false,
         "IsRequiredForUpsert": false,
         "IsUpsertKey": false,
@@ -228,8 +209,8 @@
         "VlocityRecordSObjectType": "OmniDataTransformItem"
     },
     {
-        "GlobalKey": "d6390467-ffcd-4efe-b47c-a04f4a15b8b0",
-        "InputFieldName": "normalizedLegacyCaseData:interactions:serviceIntents:memberId",
+        "GlobalKey": "ba411fba-229c-4659-a759-e3ebc411d899",
+        "InputFieldName": "legacyCaseData:interactions:serviceIntents:memberId",
         "IsDisabled": false,
         "IsRequiredForUpsert": false,
         "IsUpsertKey": false,
@@ -247,8 +228,8 @@
         "VlocityRecordSObjectType": "OmniDataTransformItem"
     },
     {
-        "GlobalKey": "0b02a706-748f-4ec0-96a2-fe9ee3c7fa3e",
-        "InputFieldName": "normalizedLegacyCaseData:interactions:serviceIntents:normalizedNotes",
+        "GlobalKey": "7659bcea-19e7-4c70-9022-4a952ed4d30b",
+        "InputFieldName": "legacyCaseData:interactions:serviceIntents:notes",
         "IsDisabled": false,
         "IsRequiredForUpsert": false,
         "IsUpsertKey": false,
@@ -266,8 +247,8 @@
         "VlocityRecordSObjectType": "OmniDataTransformItem"
     },
     {
-        "GlobalKey": "7f5325f3-74c8-40f9-8e52-b0e63cb878fe",
-        "InputFieldName": "normalizedLegacyCaseData:interactions:serviceIntents:providerId",
+        "GlobalKey": "9b3d5cea-75fd-4dc1-8fcd-952e7323ebf5",
+        "InputFieldName": "legacyCaseData:interactions:serviceIntents:provider:id",
         "IsDisabled": false,
         "IsRequiredForUpsert": false,
         "IsUpsertKey": false,
@@ -285,8 +266,8 @@
         "VlocityRecordSObjectType": "OmniDataTransformItem"
     },
     {
-        "GlobalKey": "1791d9f0-41ef-4527-8ac8-a066098f9fe1",
-        "InputFieldName": "normalizedLegacyCaseData:interactions:serviceIntents:sourceSystem",
+        "GlobalKey": "4431c76c-1aed-41c7-ac1e-6bf393aeaf23",
+        "InputFieldName": "legacyCaseData:interactions:serviceIntents:sourceSystem",
         "IsDisabled": false,
         "IsRequiredForUpsert": false,
         "IsUpsertKey": false,
@@ -304,8 +285,8 @@
         "VlocityRecordSObjectType": "OmniDataTransformItem"
     },
     {
-        "GlobalKey": "9e760f95-4cb5-4dbc-b3f2-44c7195a5905",
-        "InputFieldName": "normalizedLegacyCaseData:interactions:serviceIntents:status",
+        "GlobalKey": "29981393-b3ec-4c30-8fc9-1096b0065c95",
+        "InputFieldName": "legacyCaseData:interactions:serviceIntents:status",
         "IsDisabled": false,
         "IsRequiredForUpsert": false,
         "IsUpsertKey": false,
@@ -323,8 +304,8 @@
         "VlocityRecordSObjectType": "OmniDataTransformItem"
     },
     {
-        "GlobalKey": "41f61eda-099c-4189-a056-1f9aa20e7f7a",
-        "InputFieldName": "normalizedLegacyCaseData:interactions:serviceIntents:subject",
+        "GlobalKey": "e1683f40-eeaf-484a-a513-204fddc17f42",
+        "InputFieldName": "legacyCaseData:interactions:serviceIntents:subject",
         "IsDisabled": false,
         "IsRequiredForUpsert": false,
         "IsUpsertKey": false,
@@ -342,8 +323,8 @@
         "VlocityRecordSObjectType": "OmniDataTransformItem"
     },
     {
-        "GlobalKey": "8b627274-6589-4324-97f5-56bfc28d77a9",
-        "InputFieldName": "normalizedLegacyCaseData:interactions:serviceIntents:workBasket",
+        "GlobalKey": "913bd104-3972-41ec-a71f-0aed887e1eb7",
+        "InputFieldName": "legacyCaseData:interactions:serviceIntents:workBasket",
         "IsDisabled": false,
         "IsRequiredForUpsert": false,
         "IsUpsertKey": false,

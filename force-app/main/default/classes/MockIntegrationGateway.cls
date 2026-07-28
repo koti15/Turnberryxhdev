@@ -17,9 +17,7 @@ public with sharing class MockIntegrationGateway extends AbstractCallableGateway
             'getFhirResource' => 'GetFhirResourceAction',
             'memberLookup' => 'MemberLookupAction',
             'claimLookup' =>    'FilteredLookupAction',
-            'getCases' => 'FilteredLookupAction',
-            'normalizeLegacyCases' => 'NormalizeLegacyCasesAction',
-            'ensureCasesArray' => 'EnsureCasesArrayAction'
+            'getCases' => 'FilteredLookupAction'
         };
     }
 }

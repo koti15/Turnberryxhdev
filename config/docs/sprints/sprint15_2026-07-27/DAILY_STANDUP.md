@@ -3,6 +3,14 @@
 Keep this file short. Add the newest update first and retain older entries only
 when they remain useful.
 
+## 2026-07-28 — Simplified IP
+
+- Removed both added Apex transformation actions.
+- Restored `getLegacyCasesMock → liftCases → BuildMatchedResponse`.
+- Existing compatible DataRaptor now reads the filtered legacy result directly.
+- Multiple, one, and no-match Preview-equivalent calls work; four regression
+  tests pass.
+
 ## 2026-07-28 — Existing mapper correction
 
 - Updated `DRTransformPremigrationcasesCompatible` with the unified mappings.

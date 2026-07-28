@@ -24,7 +24,7 @@
     "ParentElementType": "Conditional Block",
     "PropertySetConfig": {
         "additionalOutput": {
-            "cases": "%ensureCasesArray:cases%"
+            "cases": "%liftCases:cases%"
         },
         "disOnTplt": false,
         "executionConditionalFormula": "",
