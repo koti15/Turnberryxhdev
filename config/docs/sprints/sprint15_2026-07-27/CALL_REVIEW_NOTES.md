@@ -104,3 +104,39 @@ questions, screenshots, and follow-ups across all Sprint 15 stories.
 
 - The aliases `myProdOrg` and `turnberryProd` both authenticate the same
   Salesforce Developer Edition org. No separate production org was involved.
+
+## 2026-07-28 — CS-1347 — Unified-contract closure
+
+### Source
+
+- Brian review transcript:
+  `sprints/sprint15_2026-07-27/CALL_REVIEW_NOTES.md`
+- Expected contract:
+  `sprints/sprint15_2026-07-27/CS-1347_EXPECTED_UNIFIED_MODEL.md`
+
+### Confirmed interpretation
+
+- Every matching ServiceIntent becomes one unified case.
+- Root `cases` must always be an array.
+- Parent Interaction scalars repeat on each case.
+- Parent and child notes become one consistently shaped collection.
+- The mapper must use the compatible older/standard designer.
+- A small normalization utility is acceptable because direct Data Mapper
+  mappings did not merge the two note collections correctly.
+- Generic filtered-lookup redesign remains deferred.
+
+### Completed
+
+- Added compatible `DRTransformPremigrationUnifiedCases`.
+- Added preprocessing to normalize claims/notes and append a nonblank parent
+  note to each applicable child case.
+- Added a guard for the older runtime's one-row object collapse.
+- Rebuilt, deployed, and activated `Claims_PreMigrationCaseLookup`.
+- Verified one case, multiple cases, no match, and mixed parent/child notes.
+- Preserved `FilteredLookupAction` and the older Data Mappers in this closure.
+
+### Remaining coordination
+
+- Salesforce-case owners must emit the same unified contract.
+- FlexCard/consolidation owners must confirm Result JSON Path is `cases`.
+- Live API owners must confirm richer claim/note metadata.

@@ -1,7 +1,7 @@
 {
     "IsActive": true,
     "IsOmniScriptEmbeddable": false,
-    "Name": "BuildMatchedResponse",
+    "Name": "ensureCasesArray",
     "OmniProcessId": {
         "Name": "PreMigrationCaseLookup",
         "VlocityDataPackType": "VlocityMatchingKeyObject",
@@ -23,28 +23,34 @@
     "ParentElementName": "HasLegacyCaseData",
     "ParentElementType": "Conditional Block",
     "PropertySetConfig": {
-        "additionalOutput": {
-            "cases": "%ensureCasesArray:cases%"
+        "actionMessage": "",
+        "additionalChainableResponse": {},
+        "additionalInput": {
+            "cases": "=%liftCases:cases%"
         },
+        "additionalOutput": {},
+        "chainOnStep": false,
         "disOnTplt": false,
         "executionConditionalFormula": "",
-        "label": "Build Matched Response",
-        "responseDefaultData": {
-        },
-        "responseFormat": "JSON",
+        "failOnStepError": true,
+        "failureConditionalFormula": "",
+        "failureResponse": {},
+        "label": "Ensure Cases Array",
+        "remoteClass": "MockIntegrationGateway",
+        "remoteMethod": "ensureCasesArray",
+        "remoteOptions": {},
         "responseJSONNode": "",
         "responseJSONPath": "",
-        "returnFullDataJSON": false,
-        "returnOnlyAdditionalOutput": true,
+        "returnOnlyAdditionalOutput": false,
+        "returnOnlyFailureResponse": false,
         "sendJSONNode": "",
         "sendJSONPath": "",
+        "sendOnlyAdditionalInput": true,
         "show": null,
-        "useFormulas": true,
-        "vlcResponseHeaders": {
-        }
+        "useFormulas": true
     },
-    "Type": "Response Action",
+    "Type": "Remote Action",
     "VlocityDataPackType": "SObject",
     "VlocityRecordSObjectType": "OmniProcessElement",
-    "VlocityRecordSourceKey": "OmniProcessElement/OmniProcess/Claims/PreMigrationCaseLookup/Procedure/BuildMatchedResponse"
+    "VlocityRecordSourceKey": "OmniProcessElement/OmniProcess/Claims/PreMigrationCaseLookup/Procedure/ensureCasesArray"
 }

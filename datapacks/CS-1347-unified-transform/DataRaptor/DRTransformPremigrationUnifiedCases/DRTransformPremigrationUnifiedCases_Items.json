@@ -1,0 +1,363 @@
+[
+    {
+        "GlobalKey": "a992f8ae-fb4e-4d39-83db-8d0ba4a00491",
+        "InputFieldName": "normalizedLegacyCaseData:interactions:serviceIntents:legacyId",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "DRTransformPremigrationUnifiedCases",
+        "OmniDataTransformationId": {
+            "Name": "DRTransformPremigrationUnifiedCases",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/DRTransformPremigrationUnifiedCases",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:caseKey",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "acfbe2d5-3288-48bd-9bdd-5eb4e9628e66",
+        "InputFieldName": "normalizedLegacyCaseData:interactions:serviceIntents:legacyId",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "DRTransformPremigrationUnifiedCases",
+        "OmniDataTransformationId": {
+            "Name": "DRTransformPremigrationUnifiedCases",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/DRTransformPremigrationUnifiedCases",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:caseNumber",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "0c9a733e-e375-420e-8695-57fdf48e0fd0",
+        "InputFieldName": "normalizedLegacyCaseData:interactions:serviceIntents:normalizedClaims",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "DRTransformPremigrationUnifiedCases",
+        "OmniDataTransformationId": {
+            "Name": "DRTransformPremigrationUnifiedCases",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/DRTransformPremigrationUnifiedCases",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:claims",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "87c72c68-00ea-426d-9b53-4bb7c333e0a7",
+        "InputFieldName": "normalizedLegacyCaseData:interactions:serviceIntents:description",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "DRTransformPremigrationUnifiedCases",
+        "OmniDataTransformationId": {
+            "Name": "DRTransformPremigrationUnifiedCases",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/DRTransformPremigrationUnifiedCases",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:description",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "0a97cb2e-901b-4bd2-a344-b56bff0d9656",
+        "InputFieldName": "normalizedLegacyCaseData:interactions:serviceIntents:normalizedHistory",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "DRTransformPremigrationUnifiedCases",
+        "OmniDataTransformationId": {
+            "Name": "DRTransformPremigrationUnifiedCases",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/DRTransformPremigrationUnifiedCases",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:history",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "86ce1a9b-3226-49f2-8a80-b57bdbf458ae",
+        "InputFieldName": "normalizedLegacyCaseData:interactions:closedAt",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "DRTransformPremigrationUnifiedCases",
+        "OmniDataTransformationId": {
+            "Name": "DRTransformPremigrationUnifiedCases",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/DRTransformPremigrationUnifiedCases",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:interactionClosedAt",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "614485e2-1416-4619-8112-b9c21817c3cb",
+        "InputFieldName": "normalizedLegacyCaseData:interactions:createdAt",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "DRTransformPremigrationUnifiedCases",
+        "OmniDataTransformationId": {
+            "Name": "DRTransformPremigrationUnifiedCases",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/DRTransformPremigrationUnifiedCases",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:interactionCreatedAt",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "e23eeaf1-6624-4fdb-83a9-e83509aa017f",
+        "InputFieldName": "normalizedLegacyCaseData:interactions:interactionId",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "DRTransformPremigrationUnifiedCases",
+        "OmniDataTransformationId": {
+            "Name": "DRTransformPremigrationUnifiedCases",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/DRTransformPremigrationUnifiedCases",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:interactionId",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "513b5685-a5c1-4d02-a8d6-b92c0f3cafeb",
+        "InputFieldName": "normalizedLegacyCaseData:interactions:serviceIntents:derivedIsClosed",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "DRTransformPremigrationUnifiedCases",
+        "OmniDataTransformationId": {
+            "Name": "DRTransformPremigrationUnifiedCases",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/DRTransformPremigrationUnifiedCases",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:isClosed",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "e62b390d-392b-4f02-8b84-f84256f00161",
+        "InputFieldName": "normalizedLegacyCaseData:interactions:serviceIntents:lastActivityDate",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "DRTransformPremigrationUnifiedCases",
+        "OmniDataTransformationId": {
+            "Name": "DRTransformPremigrationUnifiedCases",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/DRTransformPremigrationUnifiedCases",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:lastActivityDate",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "3e3262a3-7754-4cdd-b3ac-58b13030e6bb",
+        "InputFieldName": "normalizedLegacyCaseData:interactions:serviceIntents:legacyId",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "DRTransformPremigrationUnifiedCases",
+        "OmniDataTransformationId": {
+            "Name": "DRTransformPremigrationUnifiedCases",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/DRTransformPremigrationUnifiedCases",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:legacyId",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "0662b461-96dc-472b-80a2-eed632da68ba",
+        "InputFieldName": "normalizedLegacyCaseData:interactions:meaName",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "DRTransformPremigrationUnifiedCases",
+        "OmniDataTransformationId": {
+            "Name": "DRTransformPremigrationUnifiedCases",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/DRTransformPremigrationUnifiedCases",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:mea",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "58e06570-036b-4794-aa1c-8782debfccfd",
+        "InputFieldName": "normalizedLegacyCaseData:interactions:serviceIntents:memberId",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "DRTransformPremigrationUnifiedCases",
+        "OmniDataTransformationId": {
+            "Name": "DRTransformPremigrationUnifiedCases",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/DRTransformPremigrationUnifiedCases",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:memberId",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "a8efc691-0d85-4146-a9cd-ffeeb16aa66d",
+        "InputFieldName": "normalizedLegacyCaseData:interactions:serviceIntents:normalizedNotes",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "DRTransformPremigrationUnifiedCases",
+        "OmniDataTransformationId": {
+            "Name": "DRTransformPremigrationUnifiedCases",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/DRTransformPremigrationUnifiedCases",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:notes",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "46266d02-9f3e-4c36-83d4-02e442ed7528",
+        "InputFieldName": "normalizedLegacyCaseData:interactions:serviceIntents:providerId",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "DRTransformPremigrationUnifiedCases",
+        "OmniDataTransformationId": {
+            "Name": "DRTransformPremigrationUnifiedCases",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/DRTransformPremigrationUnifiedCases",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:provider",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "4cb1b371-9d6f-41c4-b5e1-f2f8d1ff08b0",
+        "InputFieldName": "normalizedLegacyCaseData:interactions:serviceIntents:sourceSystem",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "DRTransformPremigrationUnifiedCases",
+        "OmniDataTransformationId": {
+            "Name": "DRTransformPremigrationUnifiedCases",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/DRTransformPremigrationUnifiedCases",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:sourceSystem",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "cf31a554-a138-4ebc-a2e0-e7e85f5e31dc",
+        "InputFieldName": "normalizedLegacyCaseData:interactions:serviceIntents:status",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "DRTransformPremigrationUnifiedCases",
+        "OmniDataTransformationId": {
+            "Name": "DRTransformPremigrationUnifiedCases",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/DRTransformPremigrationUnifiedCases",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:status",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "4aabe2d7-14e6-40b2-954f-e5c36f0a182a",
+        "InputFieldName": "normalizedLegacyCaseData:interactions:serviceIntents:subject",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "DRTransformPremigrationUnifiedCases",
+        "OmniDataTransformationId": {
+            "Name": "DRTransformPremigrationUnifiedCases",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/DRTransformPremigrationUnifiedCases",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:subject",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "22b1f245-bd38-4963-a0d5-d884eae87f00",
+        "InputFieldName": "normalizedLegacyCaseData:interactions:serviceIntents:workBasket",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "DRTransformPremigrationUnifiedCases",
+        "OmniDataTransformationId": {
+            "Name": "DRTransformPremigrationUnifiedCases",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/DRTransformPremigrationUnifiedCases",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:workBasket",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    }
+]

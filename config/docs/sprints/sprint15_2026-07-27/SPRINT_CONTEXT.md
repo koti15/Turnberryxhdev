@@ -16,7 +16,7 @@ belongs in each story's implementation record.
 
 | Story | Summary | Status | Technical record |
 |---|---|---|---|
-| CS-1347 | Related pre-migration cases for a Claim | Verified in dev org | [Implementation record](../../CS-1347_IMPLEMENTATION_RECORD.md) |
+| CS-1347 | Related pre-migration cases for a Claim | Unified legacy contract verified in dev org | [Implementation record](../../CS-1347_IMPLEMENTATION_RECORD.md) |
 
 Add every sprint story here, even when no code change is required.
 
@@ -42,9 +42,10 @@ Add every sprint story here, even when no code change is required.
   team-compatible older designer format.
 - `Claims_PreMigrationCaseLookup` returns matching cases or a typed empty
   array.
-- The unified case output now includes the parent `interactionId`.
-- Focused tests and end-to-end assertions pass in the org configured locally as
-  `myProdOrg`.
+- `DRTransformPremigrationUnifiedCases` emits the agreed unified field names in
+  the compatible older-designer format.
+- Narrow pre/post actions merge collections and preserve the array contract.
+- One, multiple, no-match, mixed-note, and Apex checks pass in `myProdOrg`.
 
 ## Sprint references
 
@@ -57,5 +58,5 @@ Add every sprint story here, even when no code change is required.
 Add unresolved cross-story questions here. Story-specific questions should be
 recorded in the call/review notes and linked to the story.
 
-- Confirm the final live-service note-object contract before merging
-  Interaction-level notes into each case's `notes[]`.
+- Confirm richer claim/note metadata with the live-service owners.
+- Confirm Salesforce and FlexCard/consolidation use the same `cases[]` contract.
