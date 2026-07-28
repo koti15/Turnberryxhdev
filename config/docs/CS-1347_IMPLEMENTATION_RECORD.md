@@ -223,6 +223,21 @@ Final result: 4 tests run, 4 passed.
 The compatible-transform verification additionally asserts the two expected
 case identifiers and both parent `interactionId` values.
 
+### Compatibility redeployment verification — July 28, 2026
+
+The exact DataRaptor DataPack exported to Git was redeployed into the shared
+Developer Edition using Vlocity Build `1.17.24`.
+
+- DataPack deployment: 1 success, 0 errors.
+- `IsManagedUsingStdDesigner`: remained `false`.
+- DataRaptor active state: `true`.
+- Direct transform assertions: passed.
+- Strict Integration Procedure match/no-match assertions: passed.
+- `FilteredLookupActionTest`: 4 passed, 0 failed.
+
+This verifies that the Git artifact itself imports and runs without a designer
+compatibility error in the tested org.
+
 The end-to-end verification script also asserts both expected case IDs and the
 typed empty array:
 
