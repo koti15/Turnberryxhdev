@@ -1,25 +1,21 @@
-String targetName = 'DRTransformPremigrationUnifiedCases';
+String targetName = 'DRTransformPremigrationcasesCompatible';
 
-System.assertEquals(
-    0,
-    [SELECT COUNT() FROM OmniDataTransform WHERE Name = :targetName],
-    targetName + ' already exists'
-);
+OmniDataTransform target = [
+    SELECT Id, IsActive, IsManagedUsingStdDesigner
+    FROM OmniDataTransform
+    WHERE Name = :targetName
+    LIMIT 1
+];
+target.IsActive = false;
+target.IsManagedUsingStdDesigner = false;
+update target;
 
-OmniDataTransform target = new OmniDataTransform(
-    Name = targetName,
-    Type = 'Transform',
-    InputType = 'JSON',
-    OutputType = 'JSON',
-    IsActive = false,
-    IsManagedUsingStdDesigner = false,
-    VersionNumber = 1,
-    Description =
-        'CS-1347 older-designer unified case contract transform.'
-);
-insert target;
+delete [
+    SELECT Id FROM OmniDataTransformItem
+    WHERE OmniDataTransformationId = :target.Id
+];
 
-List<List<String>> mappings = new List<List<String>>{
+List<List<String>> intentMappings = new List<List<String>>{
     new List<String>{ 'legacyId', 'caseNumber' },
     new List<String>{ 'legacyId', 'caseKey' },
     new List<String>{ 'sourceSystem', 'sourceSystem' },
@@ -37,11 +33,9 @@ List<List<String>> mappings = new List<List<String>>{
     new List<String>{ 'normalizedHistory', 'history' }
 };
 
-List<OmniDataTransformItem> items =
-    new List<OmniDataTransformItem>();
-String intentPrefix =
-    'normalizedLegacyCaseData:interactions:serviceIntents:';
-for (List<String> mapping : mappings) {
+List<OmniDataTransformItem> items = new List<OmniDataTransformItem>();
+String intentPrefix = 'normalizedLegacyCaseData:interactions:serviceIntents:';
+for (List<String> mapping : intentMappings) {
     items.add(new OmniDataTransformItem(
         Name = targetName,
         OmniDataTransformationId = target.Id,

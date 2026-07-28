@@ -23,7 +23,7 @@ Claims_PreMigrationCaseLookup
   normalizeLegacyCases
     NormalizeLegacyCasesAction
   liftCases
-    DRTransformPremigrationUnifiedCases
+    DRTransformPremigrationcasesCompatible
   ensureCasesArray
     EnsureCasesArrayAction
   BuildMatchedResponse
@@ -71,18 +71,20 @@ generic behavior was not changed in this closure.
 
 | Setting | Value |
 |---|---|
-| Name | `DRTransformPremigrationUnifiedCases` |
+| Name | `DRTransformPremigrationcasesCompatible` |
 | Type | Transform |
 | Active | Yes |
 | Compatible designer | Yes (`IsManagedUsingStdDesigner = false`) |
 | Input node | `normalizedLegacyCaseData` |
 | Output node | `cases` |
 
-The mapper contains 19 unified scalar/collection mappings. The exact active
-artifact exported from the org is under `datapacks/CS-1347-unified-transform`.
+The existing compatible mapper was updated in place with 19 unified
+scalar/collection mappings. The exact active artifact exported from the org is
+under `datapacks/CS-1347-compatible-transform`.
 
-Older mappers, including `DRTransformPremigrationcases` and
-`DRTransformPremigrationcasesCompatible`, remain unchanged.
+`DRTransformPremigrationcases` remains unchanged. The separately created
+`DRTransformPremigrationUnifiedCases` is no longer referenced by this
+Integration Procedure.
 
 ## Verified behavior
 
@@ -101,7 +103,7 @@ Apex Integration Procedure checks compiled and executed successfully.
 1. `MockIntegrationGateway.cls` (two new routing registrations only)
 2. `NormalizeLegacyCasesAction.cls` and its test
 3. `EnsureCasesArrayAction.cls` and its test
-4. DataRaptor `DRTransformPremigrationUnifiedCases`
+4. DataRaptor `DRTransformPremigrationcasesCompatible`
 5. Integration Procedure `Claims_PreMigrationCaseLookup`
 6. Required `LegacyCases` mock Custom Metadata where applicable
 
@@ -114,12 +116,13 @@ copy only individual Data Mapper lines because compiled metadata must align.
 force-app/main/default/classes/NormalizeLegacyCasesAction.cls
 force-app/main/default/classes/EnsureCasesArrayAction.cls
 force-app/main/default/classes/MockIntegrationGateway.cls
-datapacks/CS-1347-unified-transform
+datapacks/CS-1347-compatible-transform
 datapacks/CS-1347-expanded/IntegrationProcedure/Claims_PreMigrationCaseLookup
 datapacks/CS-1347/Claims_PreMigrationCaseLookup.json
 scripts/verify-cs1347-unified-transform.apex
 scripts/verify-cs1347-unified-scenarios.apex
 scripts/verify-cs1347-ip.apex
+scripts/update-cs1347-compatible-transform.apex
 ```
 
 ## Still outside CS-1347

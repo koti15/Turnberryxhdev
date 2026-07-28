@@ -24,7 +24,7 @@ System.assertEquals(true, normalizeSucceeded, JSON.serialize(normalized));
 
 omnistudio.DRProcessResult transformResult = omnistudio.DRGlobal.process(
     normalized,
-    'DRTransformPremigrationUnifiedCases',
+    'DRTransformPremigrationcasesCompatible',
     null
 );
 List<Object> transformRows = (List<Object>) JSON.deserializeUntyped(

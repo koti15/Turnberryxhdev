@@ -28,7 +28,7 @@
             "normalizedLegacyCaseData": "=%normalizeLegacyCases:normalizedLegacyCaseData%"
         },
         "additionalOutput": {},
-        "bundle": "DRTransformPremigrationUnifiedCases",
+        "bundle": "DRTransformPremigrationcasesCompatible",
         "chainOnStep": false,
         "disOnTplt": false,
         "executionConditionalFormula": "",

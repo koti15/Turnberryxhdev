@@ -42,8 +42,8 @@ Add every sprint story here, even when no code change is required.
   team-compatible older designer format.
 - `Claims_PreMigrationCaseLookup` returns matching cases or a typed empty
   array.
-- `DRTransformPremigrationUnifiedCases` emits the agreed unified field names in
-  the compatible older-designer format.
+- `DRTransformPremigrationcasesCompatible` now emits the agreed unified field
+  names in the compatible older-designer format.
 - Narrow pre/post actions merge collections and preserve the array contract.
 - One, multiple, no-match, mixed-note, and Apex checks pass in `myProdOrg`.
 
