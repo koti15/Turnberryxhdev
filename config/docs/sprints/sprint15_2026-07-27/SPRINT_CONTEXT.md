@@ -44,8 +44,11 @@ Add every sprint story here, even when no code change is required.
   array.
 - `DRTransformPremigrationcasesCompatible` now emits the agreed unified field
   names in the compatible older-designer format.
-- Narrow pre/post actions merge collections and preserve the array contract.
-- One, multiple, no-match, mixed-note, and Apex checks pass in `myProdOrg`.
+- The IP uses the original simple lookup, DataRaptor, response structure with no
+  new Apex transformation actions.
+- Multiple, one, no-match, and lookup regression checks pass in `myProdOrg`.
+- DataRaptor-only collection-shape and singleton-array limitations are
+  documented for review.
 
 ## Sprint references
 
