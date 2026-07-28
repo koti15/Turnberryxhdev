@@ -1,0 +1,8 @@
+projectPath: ./datapacks/CS-1347-compatible-transform
+expansionPath: .
+autoUpdateSettings: false
+activate: true
+continueAfterError: false
+defaultMaxParallel: 1
+manifest:
+  - DataRaptor/DRTransformPremigrationcasesCompatible
