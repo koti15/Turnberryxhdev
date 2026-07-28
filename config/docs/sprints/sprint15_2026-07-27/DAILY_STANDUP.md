@@ -3,6 +3,14 @@
 Keep this file short. Add the newest update first and retain older entries only
 when they remain useful.
 
+## 2026-07-28 — Expected mock JSON
+
+- Normalized claims, notes, Interaction notes, `isClosed`, and empty history in
+  LegacyCases mock data.
+- Kept scalar claim IDs for the unchanged lookup filter.
+- Updated and redeployed the existing compatible DataRaptor only.
+- EOB006, EOB004, EOB001, no-match, and four lookup tests pass.
+
 ## 2026-07-28 — Simplified IP
 
 - Removed both added Apex transformation actions.

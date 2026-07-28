@@ -1,6 +1,7 @@
 List<String> claimIds = new List<String>{
     'EOB006',
     'EOB001',
+    'EOB004',
     'EOB-NOT-FOUND'
 };
 for (String claimId : claimIds) {

@@ -183,3 +183,30 @@ questions, screenshots, and follow-ups across all Sprint 15 stories.
 - Parent Interaction notes are not merged.
 - A one-case transform collapses `cases` to an object in the older runtime.
 - `isClosed` and absent history cannot be synthesized by these direct mappings.
+
+## 2026-07-28 — CS-1347 — Normalize mock for expected Preview
+
+### Decision
+
+- Assume the live service will eventually provide the complete collection
+  contract.
+- Make current unavailable mock metadata null and unavailable collections
+  empty.
+- Preserve scalar `claims[]` for lookup filtering and provide
+  `normalizedClaims[]` for DataRaptor output.
+
+### Completed
+
+- Converted claim output to objects with null subtype, status, and received
+  date.
+- Converted notes to `{when, author, text}` objects.
+- Copied nonblank Interaction notes into each applicable ServiceIntent.
+- Added `isClosed` and `history: []` to every ServiceIntent.
+- Added the `isClosed` DataRaptor mapping.
+- Verified EOB006 structured output and the EOB004 parent note.
+- No Apex classes or new IP elements were added.
+
+### Remaining runtime behavior
+
+- A singleton transform is still emitted as an object by the older DataRaptor.
+- Null provider values are omitted by the DataRaptor serializer.
