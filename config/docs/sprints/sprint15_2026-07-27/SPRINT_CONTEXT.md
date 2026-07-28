@@ -38,9 +38,11 @@ Add every sprint story here, even when no code change is required.
 - Nested claim filtering is isolated to
   `FilteredLookupAction.getCases`.
 - Generic filtered-lookup behavior is preserved.
-- `DRTransformPremigrationcases` performs the flattening.
+- `DRTransformPremigrationcasesCompatible` performs the flattening in the
+  team-compatible older designer format.
 - `Claims_PreMigrationCaseLookup` returns matching cases or a typed empty
   array.
+- The unified case output now includes the parent `interactionId`.
 - Focused tests and end-to-end assertions pass in the org configured locally as
   `myProdOrg`.
 
@@ -55,4 +57,5 @@ Add every sprint story here, even when no code change is required.
 Add unresolved cross-story questions here. Story-specific questions should be
 recorded in the call/review notes and linked to the story.
 
-- None currently recorded.
+- Confirm the final live-service note-object contract before merging
+  Interaction-level notes into each case's `notes[]`.

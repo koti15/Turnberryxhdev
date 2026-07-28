@@ -28,7 +28,7 @@
             "legacyCaseData": "=%getLegacyCasesMock:legacyCaseData%"
         },
         "additionalOutput": {},
-        "bundle": "DRTransformPremigrationcases",
+        "bundle": "DRTransformPremigrationcasesCompatible",
         "chainOnStep": false,
         "disOnTplt": false,
         "executionConditionalFormula": "",

@@ -73,3 +73,34 @@ questions, screenshots, and follow-ups across all Sprint 15 stories.
   together.
 - Later reviewer feedback must be added as a new dated entry and reconciled
   with the CS-1347 implementation record after confirmation.
+
+## 2026-07-28 — CS-1347 — Brian review implementation follow-up
+
+### Source
+
+- Brian review notes uploaded to
+  `sprints/sprint15_2026-07-27/CALL_REVIEW_NOTES.md`.
+
+### Confirmed actions completed
+
+- Created `DRTransformPremigrationcasesCompatible` as a separate DataRaptor
+  using the team-compatible older designer format.
+- Preserved the existing `DRTransformPremigrationcases` mapper unchanged.
+- Copied the ten previously verified mappings.
+- Added `interactions:interactionId → cases:interactionId`.
+- Reconnected `liftCases` to the compatible DataRaptor.
+- Rebuilt, deployed, and activated the Integration Procedure.
+- Verified two related cases for `EOB006`, both interaction IDs, and a typed
+  empty array for a nonmatching claim.
+
+### Deferred
+
+- Interaction-level note aggregation remains deferred until the team confirms
+  the final live-service note-object contract.
+- The final unified case model still requires agreement across the transform,
+  Salesforce response, consolidation layer, and FlexCard.
+
+### Environment clarification
+
+- The aliases `myProdOrg` and `turnberryProd` both authenticate the same
+  Salesforce Developer Edition org. No separate production org was involved.

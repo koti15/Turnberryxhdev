@@ -3,6 +3,28 @@
 Keep this file short. Add the newest update first and retain older entries only
 when they remain useful.
 
+## 2026-07-28 — Compatible DataRaptor follow-up
+
+### Completed
+
+- Recreated the pre-migration transform in the team-compatible older designer.
+- Added `interactionId` to the unified case output.
+- Reconnected and redeployed the Integration Procedure.
+- Verified matching and no-match responses end to end.
+- Exported the compatible DataRaptor as a deployable Git DataPack.
+
+### Remaining
+
+- Confirm the final interaction-note object contract before adding
+  Interaction-level notes to `notes[]`.
+- Authenticate a separate production org if deployment outside the Developer
+  Edition is required.
+
+### One-line update
+
+The compatible CS-1347 DataRaptor is active and verified in the shared
+Developer Edition; the unresolved live note contract remains deferred.
+
 ## 2026-07-28
 
 ### Yesterday

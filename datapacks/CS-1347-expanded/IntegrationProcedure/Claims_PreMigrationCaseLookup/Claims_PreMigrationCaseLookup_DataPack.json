@@ -1,0 +1,31 @@
+{
+    "CustomJavaScript": "Claims_PreMigrationCaseLookup_SampleInput.json",
+    "Description": "Integration Procedure to retrieve pre-migration cases related to a Claim using mock data.",
+    "ElementTypeComponentMapping": "{\"ElementTypeToHTMLTemplateList\":[]}",
+    "IsIntegProcdSignatureAvl": false,
+    "IsIntegrationProcedure": true,
+    "IsManagedUsingStdDesigner": false,
+    "IsMetadataCacheDisabled": false,
+    "IsOmniScriptEmbeddable": false,
+    "IsTestProcedure": false,
+    "IsWebCompEnabled": false,
+    "Language": "Procedure",
+    "Name": "PreMigrationCaseLookup",
+    "OmniProcessElement": [
+        "Claims_PreMigrationCaseLookup_Element_getLegacyCasesMock.json",
+        "Claims_PreMigrationCaseLookup_Element_HasLegacyCaseData.json",
+        "Claims_PreMigrationCaseLookup_Element_liftCases.json",
+        "Claims_PreMigrationCaseLookup_Element_BuildMatchedResponse.json",
+        "Claims_PreMigrationCaseLookup_Element_emptyCases.json",
+        "Claims_PreMigrationCaseLookup_Element_BuildEmptyResponse.json"
+    ],
+    "OmniProcessKey": "Claims_PreMigrationCaseLookup",
+    "OmniProcessType": "Integration Procedure",
+    "PropertySetConfig": "Claims_PreMigrationCaseLookup_PropertySetConfig.json",
+    "SubType": "PreMigrationCaseLookup",
+    "Type": "Claims",
+    "UniqueName": "Claims_PreMigrationCaseLookup_Procedure_1",
+    "VlocityDataPackType": "SObject",
+    "VlocityRecordSObjectType": "OmniProcess",
+    "VlocityRecordSourceKey": "OmniProcess/Claims/PreMigrationCaseLookup/Procedure"
+}

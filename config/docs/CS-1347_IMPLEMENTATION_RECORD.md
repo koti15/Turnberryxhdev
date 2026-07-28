@@ -15,8 +15,8 @@ mock payload and return a normalized `cases` array.
 
 ## Final status
 
-Verified working end to end on July 27, 2026, in the Salesforce org configured
-locally as `myProdOrg`.
+Verified working end to end on July 28, 2026, in the Salesforce Developer
+Edition configured locally as both `myProdOrg` and `turnberryProd`.
 
 - A matching claim returns all related transformed cases.
 - A nonmatching or missing claim returns `{"cases":[]}`.
@@ -35,7 +35,7 @@ Claims_PreMigrationCaseLookup
           MockData__mdt.LegacyCases
   HasLegacyCaseData
     liftCases
-      DRTransformPremigrationcases
+      DRTransformPremigrationcasesCompatible
     BuildMatchedResponse
   emptyCases
   BuildEmptyResponse
@@ -88,11 +88,12 @@ the original exact-equality `valuesMatch` behavior is unchanged.
 
 | Setting | Value |
 |---|---|
-| Name | `DRTransformPremigrationcases` |
+| Name | `DRTransformPremigrationcasesCompatible` |
 | Type | Transform |
 | Input | JSON |
 | Output | JSON |
 | Active | Yes |
+| Team-compatible designer | Yes (`IsManagedUsingStdDesigner = false`) |
 
 The Data Mapper converts the filtered nested payload into the final flat
 `cases` contract. It contains these ten mappings:
@@ -109,6 +110,14 @@ The Data Mapper converts the filtered nested payload into the final flat
 | `legacyCaseData:interactions:serviceIntents:description` | `cases:description` |
 | `legacyCaseData:interactions:serviceIntents:claims` | `cases:claims` |
 | `legacyCaseData:interactions:serviceIntents:notes` | `cases:notes` |
+| `legacyCaseData:interactions:interactionId` | `cases:interactionId` |
+
+This mapper is a separate compatible clone. The previous
+`DRTransformPremigrationcases` mapper remains unchanged.
+
+Brian's July 28 review also requested that an Interaction-level note be added
+to the final `notes[]` collection. That enrichment is not marked complete
+because the final live-service note-object contract remains unconfirmed.
 
 ## Integration Procedure
 
@@ -142,7 +151,7 @@ Send Only Additional Input: true
 `liftCases` is a DataRaptor Transform Action, not a Set Values element.
 
 ```text
-bundle = DRTransformPremigrationcases
+bundle = DRTransformPremigrationcasesCompatible
 legacyCaseData = =%getLegacyCasesMock:legacyCaseData%
 Send Only Additional Input = true
 ```
@@ -211,6 +220,9 @@ Verified response:
 
 Final result: 4 tests run, 4 passed.
 
+The compatible-transform verification additionally asserts the two expected
+case identifiers and both parent `interactionId` values.
+
 The end-to-end verification script also asserts both expected case IDs and the
 typed empty array:
 
@@ -222,7 +234,7 @@ scripts/verify-cs1347-ip.apex
 
 1. `FilteredLookupAction.cls`
 2. `FilteredLookupActionTest.cls`
-3. Data Mapper `DRTransformPremigrationcases`
+3. DataRaptor `DRTransformPremigrationcasesCompatible`
 4. Integration Procedure `Claims_PreMigrationCaseLookup`
 5. Required `LegacyCases` mock Custom Metadata, if it is not already present
 
@@ -236,8 +248,10 @@ force-app/main/default/classes/FilteredLookupActionTest.cls
 datapacks/CS-1347-expanded/IntegrationProcedure/Claims_PreMigrationCaseLookup
 datapacks/CS-1347/Claims_PreMigrationCaseLookup.json
 datapacks/CS-1347/deploy.yaml
+datapacks/CS-1347-compatible-transform
 scripts/verify-cs1347-getcases.apex
 scripts/verify-cs1347-transform.apex
+scripts/verify-cs1347-compatible-transform.apex
 scripts/verify-cs1347-ip.apex
 ```
 
