@@ -12,6 +12,8 @@ when they remain useful.
 - Reconnected and redeployed the Integration Procedure.
 - Verified matching and no-match responses end to end.
 - Exported the compatible DataRaptor as a deployable Git DataPack.
+- Redeployed the exact exported DataPack with zero errors and reran the direct
+  transform, full IP, and four Apex regression tests successfully.
 
 ### Remaining
 
