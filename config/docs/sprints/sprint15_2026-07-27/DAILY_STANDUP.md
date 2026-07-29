@@ -3,6 +3,12 @@
 Keep this file short. Add the newest update first and retain older entries only
 when they remain useful.
 
+## 2026-07-29 — Retrieved user DataRaptor
+
+- Exported `DRTransformPremigrationcasesv1` from the shared org.
+- Confirmed its 19 mappings match the existing compatible mapper exactly.
+- Stored it separately for reference; the IP connection was not changed.
+
 ## 2026-07-28 — Expected mock JSON
 
 - Normalized claims, notes, Interaction notes, `isClosed`, and empty history in

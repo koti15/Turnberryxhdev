@@ -210,3 +210,12 @@ questions, screenshots, and follow-ups across all Sprint 15 stories.
 
 - A singleton transform is still emitted as an object by the older DataRaptor.
 - Null provider values are omitted by the DataRaptor serializer.
+
+## 2026-07-29 — CS-1347 — User-created DataRaptor retrieval
+
+- Retrieved active `DRTransformPremigrationcasesv1` from the shared org.
+- Confirmed it uses the compatible older designer.
+- Compared all 19 mappings with `DRTransformPremigrationcasesCompatible`; no
+  input/output mapping differences were found.
+- Stored it separately under `datapacks/CS-1347-user-transform`.
+- No IP connection or org modification was made during retrieval.
