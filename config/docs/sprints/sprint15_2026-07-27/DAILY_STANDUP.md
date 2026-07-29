@@ -23,6 +23,12 @@ when they remain useful.
 - Structured claims, notes, Interaction note, closed flag, and history pass.
 - Four lookup regression tests pass.
 
+## 2026-07-29 — Final mapper name
+
+- Added unique `DRTransformPremigrationcasesv2`; v1 already existed.
+- Active IP version 16 now uses v2.
+- Intent notes and appended Interaction notes remain verified.
+
 ## 2026-07-28 — Expected mock JSON
 
 - Normalized claims, notes, Interaction notes, `isClosed`, and empty history in

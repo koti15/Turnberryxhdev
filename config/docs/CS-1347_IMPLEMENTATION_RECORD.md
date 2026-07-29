@@ -8,7 +8,7 @@ Keep the implementation simple and aligned with Brian's preference:
 
 ```text
 getLegacyCasesMock
-→ liftCases (LegacyTransformCasesV2)
+→ liftCases (DRTransformPremigrationcasesv2)
 → BuildMatchedResponse
 ```
 
@@ -18,7 +18,7 @@ repository on July 28, 2026.
 
 ## What the existing DataRaptor now does
 
-`LegacyTransformCasesV2` reads
+`DRTransformPremigrationcasesv2` reads
 `legacyCaseData:interactions:serviceIntents` directly. Each matching
 ServiceIntent becomes a case and parent Interaction scalars are repeated.
 
@@ -74,7 +74,7 @@ it remains within the Custom Metadata text-field size.
 
 1. Existing `FilteredLookupAction.cls` and test
 2. Existing `MockIntegrationGateway.cls` without normalization registrations
-3. Corrected DataRaptor `LegacyTransformCasesV2`
+3. Active DataRaptor `DRTransformPremigrationcasesv2`
 4. Simplified Integration Procedure `Claims_PreMigrationCaseLookup`
 5. Normalized `LegacyCases` mock Custom Metadata
 
@@ -87,6 +87,7 @@ datapacks/CS-1347/Claims_PreMigrationCaseLookup.json
 scripts/verify-cs1347-simple-ip.apex
 scripts/normalize-legacy-cases-mock.js
 datapacks/CS-1347-user-transform
+datapacks/CS-1347-premigration-v2
 ```
 
 ## User-created transform reference
@@ -112,6 +113,11 @@ inspection found:
 Those issues were corrected on July 29. V2 now contains the validated 19
 unified mappings, uses `legacyCaseData`, has valid sample/expected JSON, is
 active, and is connected to `liftCases` in active IP version 15.
+
+The corrected mapper was then copied to the unique final name
+`DRTransformPremigrationcasesv2` because `DRTransformPremigrationcasesv1`
+already existed. Active IP version 16 uses the final v2 name. The inactive
+`LegacyTransformCasesV2` remains only as rollback/reference.
 
 ## Outside CS-1347
 

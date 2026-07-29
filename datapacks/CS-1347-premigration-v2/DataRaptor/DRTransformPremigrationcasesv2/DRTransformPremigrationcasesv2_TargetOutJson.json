@@ -1,0 +1,38 @@
+{
+    "cases": [
+        {
+            "caseKey": "SI-CSD-7789001",
+            "caseNumber": "SI-CSD-7789001",
+            "claims": [
+                {
+                    "claimReceivedDate": null,
+                    "claimStatus": null,
+                    "claimSubtype": null,
+                    "id": "EOB001"
+                }
+            ],
+            "description": "Member disputes copay amount.",
+            "history": [
+            ],
+            "interactionClosedAt": "2025-10-15T09:58:00",
+            "interactionCreatedAt": "2025-10-15T09:32:00",
+            "isClosed": false,
+            "lastActivityDate": "2025-10-15",
+            "legacyId": "SI-CSD-7789001",
+            "mea": "Sarah Chen",
+            "memberId": "MBR100000001",
+            "notes": [
+                {
+                    "author": "Sarah Chen",
+                    "text": "Member called about EOB001.",
+                    "when": "2025-10-15"
+                }
+            ],
+            "provider": "NPI1234567890",
+            "sourceSystem": "CSD",
+            "status": "open",
+            "subject": "Claim Payment Inquiry - EOB001",
+            "workBasket": "Claims-Review"
+        }
+    ]
+}

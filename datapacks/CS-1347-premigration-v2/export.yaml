@@ -1,0 +1,7 @@
+projectPath: ./datapacks/CS-1347-premigration-v2
+expansionPath: .
+autoUpdateSettings: false
+continueAfterError: false
+defaultMaxParallel: 1
+manifest:
+  - DataRaptor/DRTransformPremigrationcasesv2
