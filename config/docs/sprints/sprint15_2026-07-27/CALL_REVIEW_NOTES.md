@@ -219,3 +219,14 @@ questions, screenshots, and follow-ups across all Sprint 15 stories.
   input/output mapping differences were found.
 - Stored it separately under `datapacks/CS-1347-user-transform`.
 - No IP connection or org modification was made during retrieval.
+
+## 2026-07-29 — CS-1347 — LegacyTransformCasesV2 correction
+
+- Confirmed the intended user-created mapper was `LegacyTransformCasesV2`.
+- Retrieved it exactly from the shared org; it is currently inactive.
+- Export reported malformed Expected Output JSON because of a trailing comma
+  in the notes array.
+- Mapping review found the wrong input root, duplicate mappings, incorrect
+  legacy/key mapping, and missing unified fields.
+- Stored the raw artifact under `datapacks/CS-1347-legacy-transform-v2`.
+- Did not deploy, activate, or connect it to the working IP.

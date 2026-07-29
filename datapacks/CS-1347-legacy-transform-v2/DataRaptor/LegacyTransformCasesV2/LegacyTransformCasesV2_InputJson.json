@@ -1,0 +1,63 @@
+{
+    "legacyCases": [
+        {
+            "__objectType": "LegacyCases",
+            "interactions": [
+                {
+                    "callerInfo": {
+                        "name": "James Thornton",
+                        "phone": "(916) 555-0101",
+                        "relationship": "Self"
+                    },
+                    "closedAt": "2025-10-15T09:58:00",
+                    "createdAt": "2025-10-15T09:32:00",
+                    "interactionId": "INT-CSD-20251015-0047",
+                    "meaAoNumber": "AO-2274",
+                    "meaName": "Sarah Chen",
+                    "memberInfo": {
+                        "dob": "1962-03-15",
+                        "memberId": "MBR100000001",
+                        "name": "James Thornton"
+                    },
+                    "notes": "its a note",
+                    "serviceIntents": [
+                        {
+                            "claims": [
+                                {
+                                    "text": "EOB001"
+                                }
+                            ],
+                            "description": "Member disputes copay amount on professional claim for office visit.",
+                            "lastActivityDate": "2025-10-15",
+                            "legacyId": "SI-CSD-7789001",
+                            "memberId": "MBR100000001",
+                            "name": "Claim Payment Inquiry - EOB001",
+                            "notes": [
+                                {
+                                    "text": "Member called to inquire about EOB for office visit on 01/15/2026 at Sacramento General Hospital."
+                                },
+                                {
+                                    "text": "Member reports copay amount on EOB does not match what was collected at time of service."
+                                },
+                                {
+                                    "text": "Routed to claims review team for reconciliation. Awaiting resolution."
+                                }
+                            ],
+                            "provider": {
+                                "id": "NPI1234567890",
+                                "name": "Dr. Aisha Patel"
+                            },
+                            "sourceSystem": "CSD",
+                            "status": "open",
+                            "subject": "Claim Payment Inquiry - EOB001",
+                            "workBasket": "Claims-Review"
+                        }
+                    ],
+                    "sourceSystem": "CSD",
+                    "status": "closed"
+                }
+            ],
+            "subscriberId": "EPI100000001"
+        }
+    ]
+}
