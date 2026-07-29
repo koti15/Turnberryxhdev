@@ -8,7 +8,7 @@ Keep the implementation simple and aligned with Brian's preference:
 
 ```text
 getLegacyCasesMock
-→ liftCases (DRTransformPremigrationcasesCompatible)
+→ liftCases (LegacyTransformCasesV2)
 → BuildMatchedResponse
 ```
 
@@ -18,7 +18,7 @@ repository on July 28, 2026.
 
 ## What the existing DataRaptor now does
 
-`DRTransformPremigrationcasesCompatible` reads
+`LegacyTransformCasesV2` reads
 `legacyCaseData:interactions:serviceIntents` directly. Each matching
 ServiceIntent becomes a case and parent Interaction scalars are repeated.
 
@@ -32,7 +32,7 @@ claims, notes, history
 ```
 
 `caseNumber`, `caseKey`, and `legacyId` use the ServiceIntent legacy ID.
-The mapper remains active and uses the compatible older designer
+The mapper is active and uses the compatible older designer
 (`IsManagedUsingStdDesigner = false`).
 
 ## Verified output
@@ -74,7 +74,7 @@ it remains within the Custom Metadata text-field size.
 
 1. Existing `FilteredLookupAction.cls` and test
 2. Existing `MockIntegrationGateway.cls` without normalization registrations
-3. Updated DataRaptor `DRTransformPremigrationcasesCompatible`
+3. Corrected DataRaptor `LegacyTransformCasesV2`
 4. Simplified Integration Procedure `Claims_PreMigrationCaseLookup`
 5. Normalized `LegacyCases` mock Custom Metadata
 
@@ -98,8 +98,8 @@ compatible older designer, and its 19 input/output mappings are identical to
 reference and is not connected to the IP by this retrieval.
 
 `LegacyTransformCasesV2`, also modified in the shared org on July 29, was
-exported separately to `datapacks/CS-1347-legacy-transform-v2`. It is inactive
-and was not connected because inspection found:
+exported separately to `datapacks/CS-1347-legacy-transform-v2`. Initial
+inspection found:
 
 - malformed Expected Output JSON caused by a trailing comma in `notes[]`;
 - input root `legacyCases` instead of the IP's `legacyCaseData`;
@@ -109,7 +109,9 @@ and was not connected because inspection found:
 - missing provider, interaction closed date, and direct normalized-collection
   mappings.
 
-The artifact is retained exactly as retrieved for review evidence.
+Those issues were corrected on July 29. V2 now contains the validated 19
+unified mappings, uses `legacyCaseData`, has valid sample/expected JSON, is
+active, and is connected to `liftCases` in active IP version 15.
 
 ## Outside CS-1347
 
