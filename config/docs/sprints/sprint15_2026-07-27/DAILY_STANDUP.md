@@ -3,6 +3,16 @@
 Keep this file short. Add the newest update first and retain older entries only
 when they remain useful.
 
+## 2026-07-29 - Restored original mock payload
+
+- Restored `MockData.LegacyCases` to the original raw API-style JSON.
+- Removed the mock-normalization helper from the repo.
+- Updated active `DRTransformPremigrationcasesv2` so raw `claims[]` is returned
+  instead of depending on `normalizedClaims[]`.
+- Validated the simplified IP with the restored mock. Filtering, flattening,
+  and no-match behavior work; full object-shaped claims/notes remain a known
+  OmniStudio transformation limitation without preprocessing.
+
 ## 2026-07-29 — Retrieved user DataRaptor
 
 - Exported `DRTransformPremigrationcasesv1` from the shared org.

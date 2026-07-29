@@ -16,6 +16,10 @@ The previously added `NormalizeLegacyCasesAction` and
 `EnsureCasesArrayAction` were removed from the IP, Apex, gateway registry, and
 repository on July 28, 2026.
 
+On July 29, 2026, `MockData.LegacyCases` was restored to the original raw
+API-style payload from git commit `865ec61`. The implementation no longer
+depends on changing the mock JSON to make the DataRaptor output look complete.
+
 ## What the existing DataRaptor now does
 
 `DRTransformPremigrationcasesv2` reads
@@ -35,40 +39,36 @@ claims, notes, history
 The mapper is active and uses the compatible older designer
 (`IsManagedUsingStdDesigner = false`).
 
-## Verified output
+## Verified output with original mock payload
 
 - `EOB006`: two cases (`SI-ENCP-2201001`, `SI-CSD-3317001`)
-- `EOB001`: one case
-- `EOB004`: structured child notes plus the Interaction note
+- `EOB001`: one matching ServiceIntent
+- `EOB004`: one matching ServiceIntent
 - unknown claim: exactly `{"cases":[]}`
-- `FilteredLookupActionTest`: 4 passed, 0 failed
-- DataRaptor and IP DataPacks: deployed and activated successfully
+- Parent Interaction scalar fields repeat on each matched case.
+- Raw ServiceIntent `claims[]` is preserved so claim IDs are not lost.
 
-## Normalized mock contract
+## Original mock contract
 
-The LegacyCases mock now supplies the collection shapes that the older
-DataRaptor cannot manufacture:
+The LegacyCases mock now matches the first/source API-style payload:
 
-- `claims[]` remains the scalar search index used by `FilteredLookupAction`.
-- `normalizedClaims[]` contains `{id, claimSubtype, claimStatus,
-  claimReceivedDate}` with unavailable metadata set to null.
-- `notes[]` contains `{when, author, text}`.
-- A nonblank Interaction note is copied into each applicable ServiceIntent's
-  notes collection.
-- `isClosed` is supplied from the mock status.
-- `history` is supplied as an empty array when unavailable.
-- Missing provider objects contain null placeholders.
-
-The mock normalization script is idempotent and compacts the embedded JSON so
-it remains within the Custom Metadata text-field size.
+- `claims[]` is a scalar string array used by `FilteredLookupAction`.
+- `notes[]` is a scalar string array at both Interaction and ServiceIntent
+  levels.
+- `isClosed`, `history`, `normalizedClaims`, and note object fields are not
+  present in the raw mock.
 
 ## Remaining older-runtime behavior
 
 - One transformed case is returned as a `cases` object; multiple cases are an
   array. Guaranteeing a singleton array still requires IP processing or code.
-- The DataRaptor omits a null provider rather than serializing
-  `"provider": null`.
-- These behaviors are not hidden behind unapproved Apex.
+- The older DataRaptor preserves raw `claims[]` and `notes[]` arrays, but it
+  does not reliably convert each string into the unified object shape.
+- Parent Interaction notes are not appended into each ServiceIntent's
+  `notes[]` collection by direct mapping.
+- `isClosed` and empty `history[]` are absent because the raw mock does not
+  provide those fields and the simplified IP has no preprocessing step.
+- These behaviors are not hidden behind unapproved Apex or altered mockdata.
 
 ## Components to promote
 
@@ -76,7 +76,7 @@ it remains within the Custom Metadata text-field size.
 2. Existing `MockIntegrationGateway.cls` without normalization registrations
 3. Active DataRaptor `DRTransformPremigrationcasesv2`
 4. Simplified Integration Procedure `Claims_PreMigrationCaseLookup`
-5. Normalized `LegacyCases` mock Custom Metadata
+5. Original/raw `LegacyCases` mock Custom Metadata
 
 ## Repository references
 
@@ -85,7 +85,6 @@ datapacks/CS-1347-compatible-transform
 datapacks/CS-1347-expanded/IntegrationProcedure/Claims_PreMigrationCaseLookup
 datapacks/CS-1347/Claims_PreMigrationCaseLookup.json
 scripts/verify-cs1347-simple-ip.apex
-scripts/normalize-legacy-cases-mock.js
 datapacks/CS-1347-user-transform
 datapacks/CS-1347-premigration-v2
 ```

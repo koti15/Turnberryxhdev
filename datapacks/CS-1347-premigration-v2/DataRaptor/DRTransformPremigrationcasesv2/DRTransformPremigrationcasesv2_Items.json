@@ -39,7 +39,7 @@
     },
     {
         "GlobalKey": "DRTransformPremigrationcasesv2Unified03",
-        "InputFieldName": "legacyCaseData:interactions:serviceIntents:normalizedClaims",
+        "InputFieldName": "legacyCaseData:interactions:serviceIntents:claims",
         "IsDisabled": false,
         "IsRequiredForUpsert": false,
         "IsUpsertKey": false,

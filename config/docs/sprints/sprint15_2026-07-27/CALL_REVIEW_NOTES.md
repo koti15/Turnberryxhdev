@@ -254,3 +254,20 @@ questions, screenshots, and follow-ups across all Sprint 15 stories.
   direct `cases:notes` mapping.
 - Exact exported artifact redeployed successfully.
 - EOB006, EOB001, EOB004, no-match, and four regression tests pass.
+
+## 2026-07-29 - CS-1347 - Restore original mock contract
+
+- Restored `MockData.LegacyCases` to the original raw API-style payload from
+  git commit `865ec61`.
+- Removed the mock normalization script because CS-1347 must not depend on
+  changing API/mock JSON.
+- Updated active `DRTransformPremigrationcasesv2` to map raw
+  ServiceIntent `claims[]` instead of the removed `normalizedClaims[]`.
+- Verified with the original payload that filtering and flattening still work:
+  `EOB006` returns two cases, `EOB001` and `EOB004` return one case, and a
+  nonmatching claim returns exactly `{"cases":[]}`.
+- Known limitation: direct older DataRaptor mapping does not convert raw claim
+  strings or note strings into the full unified object arrays and does not
+  append Interaction notes into ServiceIntent notes. That requires IP
+  preprocessing/Loop Blocks, a two-step mapper pattern that successfully builds
+  collections, or a service payload that already supplies the unified shape.
