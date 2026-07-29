@@ -344,8 +344,7 @@ interactions[]
   - `Subject` to `subject`
   - owner or queue to `workBasket`
   - status and a formula-derived closed flag to `status` and `isClosed`
-  - `Description` to `description`
-  - member and provider references to their unified fields
+  - description and member/provider identifiers to their common fields
   - related claims to `claims[]`
   - Case Comments, Notes, or the selected related-note source to `notes[]`
   - history records to `history[]`
@@ -449,3 +448,80 @@ Before CS-1347 is considered ready to close, verify all of the following:
   aggregation are completed and end-to-end verified.
 - Add the final unified contract to the Sprint 15 context once all participating
   stories agree on the exact field names and nested object shapes.
+
+## 2026-07-29 — CS-1347 — Brian follow-up on claims detail fields and history
+
+### Claim detail fields in mock data
+
+- Brian agreed that the current mock payload should include the claim-level fields
+  required by the story and unified model, including `claimSubtype`,
+  `claimStatus`, and `claimReceivedDate`.
+- These values can be invented in the mock response for now so QA has complete,
+  testable data and does not encounter missing or `null` fields during validation.
+- The purpose is to demonstrate the expected target shape, not to assert the
+  final live API contract.
+- When the real API is available, the team will compare the actual payload with
+  the mock contract and adjust mappings or remove unsupported fields.
+- Brian's direction was to prioritize a complete working mock response now and
+  avoid unnecessary empty values or visually incomplete UI data.
+
+### History array meaning
+
+- `history` belongs under each unified case item and is an array of objects.
+- Each history object uses the agreed shape:
+
+```json
+{
+  "when": "2026-01-22",
+  "workBasket": "Claims Resolution",
+  "owner": "MEA or assigned owner"
+}
+```
+
+- History represents changes that occurred on the ServiceIntent/case over time,
+  especially transitions between work baskets and the MEA or owner associated
+  with each transition.
+- The current `workBasket` field on the case is the present assignment. Earlier
+  work-basket assignments belong in `history[]`.
+- If a case moved through multiple work baskets, the mock may include multiple
+  history entries. Each entry should identify when the transition occurred,
+  which work basket was involved, and who owned or handled it.
+- The exact source of this history information in the future API is not yet
+  confirmed. The field remains in the notional unified model and may be removed
+  or adjusted if the live service cannot provide it.
+
+### Interaction versus ServiceIntent responsibility
+
+- The Interaction is generally closed as part of the call, while the
+  ServiceIntent is the structure most analogous to a Salesforce Case.
+- Parent Interaction fields that are relevant to the case must be carried down to
+  each ServiceIntent-derived case object.
+- Work-basket movement history is primarily a ServiceIntent/case concept rather
+  than an Interaction-level history concept.
+
+### JSON and transform implementation notes
+
+- `history` must be a valid JSON array with opening and closing square brackets.
+- It is acceptable to place one or more mock history objects directly in each
+  ServiceIntent so the existing Data Mapper can map `serviceIntents:history` to
+  `cases:history`.
+- Brian preferred adding the history structure to the mock source over creating
+  a List/Map formula inside the Data Mapper solely to manufacture the array.
+- The transform should preserve the history objects and their `when`,
+  `workBasket`, and `owner` fields in the final unified output.
+
+### Decisions and actions
+
+- **Confirmed:** Add mock claim detail values for `claimSubtype`, `claimStatus`,
+  and `claimReceivedDate` so QA can validate the expected UI/model.
+- **Confirmed:** Add `history[]` under ServiceIntent records using the agreed
+  `when`, `workBasket`, and `owner` shape.
+- **Confirmed:** Use the final/current work basket on the main case object and
+  prior work-basket transitions in `history[]`.
+- **Assumption:** Mock values are provisional until the actual API contract is
+  available.
+- [ ] Sekhar — update the mock payload with complete claim detail objects.
+- [ ] Sekhar — add one or more valid history entries to representative
+      ServiceIntents and verify the Data Mapper output.
+- [ ] Sekhar — confirm the output no longer returns `null` for the mocked claim
+      subtype, status, and received-date fields.
