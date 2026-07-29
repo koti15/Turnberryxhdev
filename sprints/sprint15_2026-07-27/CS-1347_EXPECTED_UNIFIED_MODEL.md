@@ -124,16 +124,52 @@ Do not add an empty note object when the Interaction note is blank.
 
 The working transform was created or edited in the managed-package/newer OmniStudio runtime. It must be recreated in the deployment-compatible standard/older designer. Use the current mappings and JSON samples as a reference rather than assuming an exported managed-runtime Data Mapper will remain compatible.
 
+## July 29, 2026 implementation validation
+
+### Turnberry Developer Edition reference implementation
+
+The Turnberry Developer Edition Integration Procedure was used as the working reference for the detailed unified model. Validation with Claim ID `EOB001` showed:
+
+- A top-level `cases` response.
+- Core case fields including `status`, `memberId`, `caseKey`, `caseNumber`, `legacyId`, `sourceSystem`, `subject`, `workBasket`, `description`, `provider`, `mea`, and `isClosed`.
+- Parent Interaction fields including `interactionId`, `interactionCreatedAt`, and `interactionClosedAt`.
+- `claims[]` represented as objects with `id`, `claimSubtype`, `claimStatus`, and `claimReceivedDate`.
+- `notes[]` represented as structured objects with `when`, `author`, and `text`.
+- `history[]` present, even when empty.
+
+This org remains the reference for the richer target contract and for validating detailed child-array shapes.
+
+### XHDev1 current implementation
+
+The compatible Data Mapper and Integration Procedure were validated in the main XHDev1 org with Claim ID `EOB006`. The response confirmed:
+
+- A top-level `cases[]` array.
+- Multiple related cases returned for a single Claim ID.
+- One output case per matching ServiceIntent.
+- Parent Interaction values repeated into each related case.
+- Core unified fields populated, including `status`, `memberId`, `caseKey`, `legacyId`, `caseNumber`, `lastActivityDate`, `provider`, `interactionCreatedAt`, `interactionClosedAt`, `workBasket`, `description`, `mea`, `sourceSystem`, `subject`, and `interactionId`.
+- The current XHDev1 `notes[]` output is a string array rather than the structured `{when, author, text}` object array shown in the richer Turnberry reference.
+
+### Source-of-truth guidance
+
+- Use **XHDev1** as the source of truth for the current deployment-compatible CS-1347 implementation.
+- Use **Turnberry Developer Edition** as the reference implementation for the richer unified contract and detailed child-object mappings.
+- Before final consolidation and FlexCard integration, confirm whether `notes[]` must remain a string array or be normalized to structured note objects across all sources.
+- Validate `claims[]`, `history[]`, and the no-match response in XHDev1 separately if they are not covered by the current test payload.
+
 ## CS-1347 completion checks
 
-- [ ] Recreate the legacy Data Mapper in the compatible OmniStudio designer.
-- [ ] Make the output conform to the JSON contract in this file.
-- [ ] Confirm the Integration Procedure and FlexCard both use the root node `cases`.
-- [ ] Ensure each ServiceIntent creates one `cases[]` item.
-- [ ] Ensure parent Interaction fields are repeated on every related case.
-- [ ] Merge the Interaction-level note into each applicable case's `notes[]`.
-- [ ] Preserve ServiceIntent note objects in the same `when`, `author`, `text` shape.
-- [ ] Return multiple case objects for a Claim ID with multiple matching ServiceIntents.
+- [x] Recreate the legacy Data Mapper in the compatible OmniStudio designer.
+- [x] Confirm the Integration Procedure uses the root node `cases`.
+- [x] Ensure each ServiceIntent creates one `cases[]` item.
+- [x] Ensure parent Interaction fields are repeated on every related case.
+- [x] Return multiple case objects for a Claim ID with multiple matching ServiceIntents.
+- [x] Include the Interaction ID in the current legacy output.
+- [ ] Confirm the FlexCard uses the root node `cases`.
+- [ ] Finalize the common `notes[]` contract: string array versus structured `{when, author, text}` objects.
+- [ ] Merge the Interaction-level note into each applicable case's `notes[]` according to the final common contract.
+- [ ] Validate `claims[]` in XHDev1 using a payload that contains claim details.
+- [ ] Validate `history[]` in XHDev1 using a payload that contains history details.
 - [ ] Return exactly `{"cases":[]}` for no match.
 - [ ] Document fields absent from the current mock payload and update mock data where appropriate.
 - [ ] Do not refactor `FilteredLookupAction` as part of this closure unless separately requested; the generic path-based or strategy-pattern redesign is deferred.
