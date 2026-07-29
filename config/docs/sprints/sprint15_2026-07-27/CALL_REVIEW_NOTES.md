@@ -230,3 +230,16 @@ questions, screenshots, and follow-ups across all Sprint 15 stories.
   legacy/key mapping, and missing unified fields.
 - Stored the raw artifact under `datapacks/CS-1347-legacy-transform-v2`.
 - Did not deploy, activate, or connect it to the working IP.
+
+## 2026-07-29 — CS-1347 — Adopt LegacyTransformCasesV2
+
+- Corrected the invalid Expected Output JSON and input root.
+- Removed duplicate and incorrect mappings.
+- Added the complete validated 19-field unified mapping set.
+- Mapped normalized ServiceIntent notes directly, preserving the Interaction
+  note already included by normalized mock data.
+- Activated `LegacyTransformCasesV2`.
+- Connected active IP version 15 `liftCases` to V2.
+- Verified EOB006, EOB001, EOB004 merged notes, and no-match output.
+- Re-exported and redeployed the exact corrected artifact successfully.
+- `FilteredLookupActionTest`: 4 passed, 0 failed.

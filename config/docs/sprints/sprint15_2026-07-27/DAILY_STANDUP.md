@@ -16,6 +16,13 @@ when they remain useful.
   unified mappings.
 - Preserved it for review without connecting it to the IP.
 
+## 2026-07-29 — Activated LegacyTransformCasesV2
+
+- Corrected V2 to the validated unified contract.
+- Activated and connected it to IP version 15.
+- Structured claims, notes, Interaction note, closed flag, and history pass.
+- Four lookup regression tests pass.
+
 ## 2026-07-28 — Expected mock JSON
 
 - Normalized claims, notes, Interaction notes, `isClosed`, and empty history in
