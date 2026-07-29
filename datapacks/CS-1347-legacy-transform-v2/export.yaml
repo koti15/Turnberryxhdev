@@ -1,0 +1,7 @@
+projectPath: ./datapacks/CS-1347-legacy-transform-v2
+expansionPath: .
+autoUpdateSettings: false
+continueAfterError: false
+defaultMaxParallel: 1
+manifest:
+  - DataRaptor/LegacyTransformCasesV2

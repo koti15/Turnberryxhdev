@@ -97,6 +97,20 @@ compatible older designer, and its 19 input/output mappings are identical to
 `DRTransformPremigrationcasesCompatible`. It is retained as a separate
 reference and is not connected to the IP by this retrieval.
 
+`LegacyTransformCasesV2`, also modified in the shared org on July 29, was
+exported separately to `datapacks/CS-1347-legacy-transform-v2`. It is inactive
+and was not connected because inspection found:
+
+- malformed Expected Output JSON caused by a trailing comma in `notes[]`;
+- input root `legacyCases` instead of the IP's `legacyCaseData`;
+- duplicate `caseNumber` and `notes:text` mappings;
+- `interactionId` incorrectly mapped to `legacyId`;
+- output `sfKey` instead of the agreed `caseKey`;
+- missing provider, interaction closed date, and direct normalized-collection
+  mappings.
+
+The artifact is retained exactly as retrieved for review evidence.
+
 ## Outside CS-1347
 
 - Quaser's inactive consolidation IP

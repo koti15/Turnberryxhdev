@@ -1,0 +1,384 @@
+[
+    {
+        "GlobalKey": "LegacyTransformCasesV2Custom7722",
+        "InputFieldName": "legacyCases:interactions:serviceIntents:legacyId",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "LegacyTransformCasesV2",
+        "OmniDataTransformationId": {
+            "Name": "LegacyTransformCasesV2",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/LegacyTransformCasesV2",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:caseNumber",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "LegacyTransformCasesV2Custom8095",
+        "InputFieldName": "legacyCases:interactions:serviceIntents:legacyId",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "LegacyTransformCasesV2",
+        "OmniDataTransformationId": {
+            "Name": "LegacyTransformCasesV2",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/LegacyTransformCasesV2",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:caseNumber",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "LegacyTransformCasesV2Custom9082",
+        "InputFieldName": "legacyCases:interactions:serviceIntents:claims:text",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "LegacyTransformCasesV2",
+        "OmniDataTransformationId": {
+            "Name": "LegacyTransformCasesV2",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/LegacyTransformCasesV2",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:claims:id",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "LegacyTransformCasesV2Custom3630",
+        "InputFieldName": "legacyCases:interactions:serviceIntents:description",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "LegacyTransformCasesV2",
+        "OmniDataTransformationId": {
+            "Name": "LegacyTransformCasesV2",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/LegacyTransformCasesV2",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:description",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "LegacyTransformCasesV2Custom1699",
+        "InputFieldName": "legacyCases:interactions:serviceIntents:history",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "LegacyTransformCasesV2",
+        "OmniDataTransformationId": {
+            "Name": "LegacyTransformCasesV2",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/LegacyTransformCasesV2",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:history",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "LegacyTransformCasesV2Custom9077",
+        "InputFieldName": "legacyCases:interactions:createdAt",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "LegacyTransformCasesV2",
+        "OmniDataTransformationId": {
+            "Name": "LegacyTransformCasesV2",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/LegacyTransformCasesV2",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:interactionCreatedAt",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "LegacyTransformCasesV2Custom3450",
+        "InputFieldName": "legacyCases:interactions:serviceIntents:status",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "LegacyTransformCasesV2",
+        "OmniDataTransformationId": {
+            "Name": "LegacyTransformCasesV2",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/LegacyTransformCasesV2",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldFormat": "Boolean",
+        "OutputFieldName": "cases:isClosed",
+        "OutputObjectName": "json",
+        "TransformValueMappings": "{\"closed\":\"true\"}",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "LegacyTransformCasesV2Custom7250",
+        "InputFieldName": "legacyCases:interactions:serviceIntents:lastActivityDate",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "LegacyTransformCasesV2",
+        "OmniDataTransformationId": {
+            "Name": "LegacyTransformCasesV2",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/LegacyTransformCasesV2",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:lastActivityDate",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "LegacyTransformCasesV2Custom7758",
+        "InputFieldName": "legacyCases:interactions:interactionId",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "LegacyTransformCasesV2",
+        "OmniDataTransformationId": {
+            "Name": "LegacyTransformCasesV2",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/LegacyTransformCasesV2",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:legacyId",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "LegacyTransformCasesV2Custom8470",
+        "InputFieldName": "legacyCases:interactions:meaName",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "LegacyTransformCasesV2",
+        "OmniDataTransformationId": {
+            "Name": "LegacyTransformCasesV2",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/LegacyTransformCasesV2",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:mea",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "LegacyTransformCasesV2Custom8517",
+        "InputFieldName": "legacyCases:interactions:serviceIntents:memberId",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "LegacyTransformCasesV2",
+        "OmniDataTransformationId": {
+            "Name": "LegacyTransformCasesV2",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/LegacyTransformCasesV2",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:memberId",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "LegacyTransformCasesV2Custom8877",
+        "InputFieldName": "legacyCases:interactions:meaName",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "LegacyTransformCasesV2",
+        "OmniDataTransformationId": {
+            "Name": "LegacyTransformCasesV2",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/LegacyTransformCasesV2",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:notes:author",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "LegacyTransformCasesV2Custom5922",
+        "InputFieldName": "legacyCases:interactions:serviceIntents:notes:text",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "LegacyTransformCasesV2",
+        "OmniDataTransformationId": {
+            "Name": "LegacyTransformCasesV2",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/LegacyTransformCasesV2",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:notes:text",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "LegacyTransformCasesV2Custom6538",
+        "InputFieldName": "legacyCases:interactions:serviceIntents:notes:text",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "LegacyTransformCasesV2",
+        "OmniDataTransformationId": {
+            "Name": "LegacyTransformCasesV2",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/LegacyTransformCasesV2",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:notes:text",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "LegacyTransformCasesV2Custom420",
+        "InputFieldName": "legacyCases:interactions:serviceIntents:lastActivityDate",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "LegacyTransformCasesV2",
+        "OmniDataTransformationId": {
+            "Name": "LegacyTransformCasesV2",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/LegacyTransformCasesV2",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:notes:when",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "LegacyTransformCasesV2Custom9978",
+        "InputFieldName": "legacyCases:interactions:serviceIntents:legacyId",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "LegacyTransformCasesV2",
+        "OmniDataTransformationId": {
+            "Name": "LegacyTransformCasesV2",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/LegacyTransformCasesV2",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:sfKey",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "LegacyTransformCasesV2Custom4240",
+        "InputFieldName": "legacyCases:interactions:sourceSystem",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "LegacyTransformCasesV2",
+        "OmniDataTransformationId": {
+            "Name": "LegacyTransformCasesV2",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/LegacyTransformCasesV2",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:sourceSystem",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "LegacyTransformCasesV2Custom917",
+        "InputFieldName": "legacyCases:interactions:serviceIntents:status",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "LegacyTransformCasesV2",
+        "OmniDataTransformationId": {
+            "Name": "LegacyTransformCasesV2",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/LegacyTransformCasesV2",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:status",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "LegacyTransformCasesV2Custom7872",
+        "InputFieldName": "legacyCases:interactions:serviceIntents:subject",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "LegacyTransformCasesV2",
+        "OmniDataTransformationId": {
+            "Name": "LegacyTransformCasesV2",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/LegacyTransformCasesV2",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:subject",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    },
+    {
+        "GlobalKey": "LegacyTransformCasesV2Custom6105",
+        "InputFieldName": "legacyCases:interactions:serviceIntents:workBasket",
+        "IsDisabled": false,
+        "IsRequiredForUpsert": false,
+        "IsUpsertKey": false,
+        "Name": "LegacyTransformCasesV2",
+        "OmniDataTransformationId": {
+            "Name": "LegacyTransformCasesV2",
+            "VlocityDataPackType": "VlocityMatchingKeyObject",
+            "VlocityMatchingRecordSourceKey": "OmniDataTransform/LegacyTransformCasesV2",
+            "VlocityRecordSObjectType": "OmniDataTransform"
+        },
+        "OutputCreationSequence": 1,
+        "OutputFieldName": "cases:workBasket",
+        "OutputObjectName": "json",
+        "VlocityDataPackType": "SObject",
+        "VlocityRecordSObjectType": "OmniDataTransformItem"
+    }
+]
