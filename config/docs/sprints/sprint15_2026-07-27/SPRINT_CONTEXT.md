@@ -51,7 +51,7 @@ Add every sprint story here, even when no code change is required.
   documented for review.
 - LegacyCases mock data now supplies structured claims/notes, merged
   Interaction notes, `isClosed`, and empty history without Apex/IP additions.
-- Active IP version 15 uses corrected `LegacyTransformCasesV2`.
+- Active IP version 16 uses `DRTransformPremigrationcasesv2`.
 
 ## Sprint references
 

@@ -243,3 +243,14 @@ questions, screenshots, and follow-ups across all Sprint 15 stories.
 - Verified EOB006, EOB001, EOB004 merged notes, and no-match output.
 - Re-exported and redeployed the exact corrected artifact successfully.
 - `FilteredLookupActionTest`: 4 passed, 0 failed.
+
+## 2026-07-29 — CS-1347 — Final DataRaptor name
+
+- `DRTransformPremigrationcasesv1` already existed.
+- Created unique `DRTransformPremigrationcasesv2` from the validated corrected
+  V2 mappings.
+- Active IP version 16 now uses `DRTransformPremigrationcasesv2`.
+- Existing ServiceIntent notes and appended Interaction notes remain in the
+  direct `cases:notes` mapping.
+- Exact exported artifact redeployed successfully.
+- EOB006, EOB001, EOB004, no-match, and four regression tests pass.
