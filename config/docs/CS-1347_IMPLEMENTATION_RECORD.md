@@ -86,7 +86,16 @@ datapacks/CS-1347-expanded/IntegrationProcedure/Claims_PreMigrationCaseLookup
 datapacks/CS-1347/Claims_PreMigrationCaseLookup.json
 scripts/verify-cs1347-simple-ip.apex
 scripts/normalize-legacy-cases-mock.js
+datapacks/CS-1347-user-transform
 ```
+
+## User-created transform reference
+
+`DRTransformPremigrationcasesv1`, modified in the shared org on July 29, 2026,
+was exported to `datapacks/CS-1347-user-transform`. It is active, uses the
+compatible older designer, and its 19 input/output mappings are identical to
+`DRTransformPremigrationcasesCompatible`. It is retained as a separate
+reference and is not connected to the IP by this retrieval.
 
 ## Outside CS-1347
 
