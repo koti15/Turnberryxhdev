@@ -96,12 +96,23 @@ public with sharing class FilteredLookupAction implements ICallableAction {
 
     private Boolean containsClaim(Object claimValues, String claimId) {
         for (Object claimValue : asList(claimValues)) {
-            if (claimValue != null &&
-                claimId.equalsIgnoreCase(String.valueOf(claimValue))) {
+            if (claimMatches(claimValue, claimId)) {
                 return true;
             }
         }
         return false;
+    }
+
+    private Boolean claimMatches(Object claimValue, String claimId) {
+        if (claimValue == null) return false;
+
+        Map<String, Object> claim = asMap(claimValue);
+        if (claim != null) {
+            return claimId.equalsIgnoreCase(String.valueOf(claim.get('id'))) ||
+                claimId.equalsIgnoreCase(String.valueOf(claim.get('text')));
+        }
+
+        return claimId.equalsIgnoreCase(String.valueOf(claimValue));
     }
 
     private List<Object> asList(Object value) {

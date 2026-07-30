@@ -3,6 +3,49 @@
 Keep this file short. Add the newest update first and retain older entries only
 when they remain useful.
 
+## 2026-07-29 - Brian-aligned mockdata and active IP validation
+
+- Updated `MockData.LegacyCases` in `turnberryProd` so ServiceIntent
+  `claims[]` is object-shaped and ServiceIntent `history[]` contains
+  `when`, `owner`, and `workBasket`.
+- Changed `LegacyTransformCasesV2` history mapping from the temporary
+  `LIST()` default to direct `serviceIntents:history -> cases:history`.
+- Updated `FilteredLookupAction.getCases` to keep old scalar claim matching
+  and also match claim objects by `id` or `text`.
+- Validated active IP version 19: `EOB006` returns two cases, `EOB001` and
+  `EOB004` return matched cases, and no-match returns `{"cases":[]}`.
+- Notes remain intentionally not over-faked; note aggregation remains a
+  follow-up only if the consuming team requires merged Interaction and
+  ServiceIntent notes.
+
+## 2026-07-29 - LegacyTransformCasesV2 missing fields added
+
+- Updated `LegacyTransformCasesV2` mapper rows used by active
+  `PreMigrationCaseLookup` version 19.
+- Added/fixed `caseKey`, `legacyId`, `claims`, `notes.text`, and default
+  `history`.
+- Validated active IP output for `EOB004`; the output now includes
+  `notes.when`, `notes.author`, `notes.text`, `claims`, `history`, and
+  `caseKey`.
+- Updated `history` from the string `"[]"` to a real empty array `[]` using a
+  Data Mapper formula `LIST()` mapped to `cases:history` with output format
+  `List<Map>`.
+- Remaining caveat: scalar source arrays still produce scalar/list-shaped values
+  inside the mapped objects, not one object per source string.
+
+## 2026-07-29 - DR Preview vs IP runtime validation
+
+- Exported the live active IP and `DRTransformPremigrationcases` from the
+  shared org.
+- Changed `BuildMatchedResponse` to return `cases` instead of `legacycases`.
+- Deployed and activated the IP/DataRaptor package successfully.
+- Validated by Apex that active IP now returns root `cases`.
+- Confirmed the remaining preview difference is caused by runtime scalar
+  `notes[]`/`claims[]` input versus preview object-array input.
+- To get preview-style `notes[{when, author, text}]` from IP, the data before
+  `liftCases` must be object-shaped; direct DR mappings do not wrap scalar
+  string arrays into object arrays.
+
 ## 2026-07-29 - Restored original mock payload
 
 - Restored `MockData.LegacyCases` to the original raw API-style JSON.

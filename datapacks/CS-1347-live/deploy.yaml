@@ -1,0 +1,9 @@
+projectPath: ./datapacks/CS-1347-live
+expansionPath: .
+autoUpdateSettings: false
+activate: true
+continueAfterError: false
+defaultMaxParallel: 1
+manifest:
+  - IntegrationProcedure/Claims_PreMigrationCaseLookup
+  - DataRaptor/LegacyTransformCasesV2

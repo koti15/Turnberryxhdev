@@ -121,6 +121,49 @@ private class FilteredLookupActionTest {
     }
 
     @IsTest
+    static void getCasesSupportsStructuredClaimObjects() {
+        FilteredLookupAction action = new FilteredLookupAction(
+            new StubLoader(
+                '[' +
+                ' {"subscriberId":"SUB-1","interactions":[' +
+                '   {"interactionId":"INT-1","serviceIntents":[' +
+                '     {"legacyId":"SI-1","claims":[{"id":"EOB004"}]},' +
+                '     {"legacyId":"SI-2","claims":[{"text":"EOB005"}]}' +
+                '   ]}' +
+                ' ]}' +
+                ']'
+            )
+        );
+
+        Map<String, Object> response = (Map<String, Object>) action.execute(
+            new Map<String, Object>{
+                '_action' => 'getCases',
+                'source' => 'LegacyCases',
+                'claimId' => 'eob004',
+                'resultKey' => 'legacyCaseData'
+            }
+        );
+
+        List<Object> subscribers =
+            (List<Object>) response.get('legacyCaseData');
+        System.assertEquals(1, subscribers.size());
+
+        Map<String, Object> subscriber =
+            (Map<String, Object>) subscribers[0];
+        List<Object> interactions =
+            (List<Object>) subscriber.get('interactions');
+        List<Object> intents =
+            (List<Object>) ((Map<String, Object>) interactions[0]).get(
+                'serviceIntents'
+            );
+        System.assertEquals(1, intents.size());
+        System.assertEquals(
+            'SI-1',
+            ((Map<String, Object>) intents[0]).get('legacyId')
+        );
+    }
+
+    @IsTest
     static void getCasesReturnsEmptyForNoMatchAndMissingInput() {
         FilteredLookupAction action = new FilteredLookupAction(
             new StubLoader(
