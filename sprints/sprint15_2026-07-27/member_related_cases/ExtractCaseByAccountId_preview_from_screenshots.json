@@ -1,0 +1,105 @@
+{
+  "_extractionNote": "Manually reconstructed from screenshots captured on 2026-08-04. This is sufficient for scoping analysis but is not guaranteed to be a byte-for-byte export of the OmniStudio Preview response. Fields or collection entries that were not clearly visible are marked as omitted.",
+  "input": {
+    "accountId": "001WF000002znxodYAA"
+  },
+  "Cases": [
+    {
+      "status": "Closed",
+      "caseKey": "500WF00000qH8JPYA0",
+      "href": "/500WF00000qH8JPYA0",
+      "interactionClosedAt": "2026-08-04T20:08:09.000Z",
+      "Id": "500WF00000qH8JPYA0",
+      "interactionCreatedAt": "2026-08-04T20:08:09.000Z",
+      "workBasket": "Service-Claims",
+      "mea": "Brian Weers",
+      "sourceSystem": "Salesforce",
+      "caseNumber": "01427769",
+      "subject": "Claim Approved",
+      "_visibleCollections": "No notes or history were visible before this case object closed in the screenshot."
+    },
+    {
+      "status": "Closed",
+      "caseKey": "500WF000000fxFzVYAU",
+      "href": "/500WF000000fxFzVYAU",
+      "interactionClosedAt": "2026-07-21T16:34:26.000Z",
+      "Id": "500WF000000fxFzVYAU",
+      "claims": [
+        {
+          "claimReceivedDate": "03/10/2026"
+        }
+      ],
+      "caseNumber": "01426671",
+      "provider": "Provider name",
+      "history": [
+        {
+          "when": "2026-03-10T15:35:35.000Z",
+          "workBasket": "Brian Weers",
+          "owner": "Vinay Madu"
+        },
+        {
+          "when": "2026-03-10T15:35:35.000Z",
+          "workBasket": "Brian Weers",
+          "owner": "Vinay Madu"
+        },
+        {
+          "when": "2026-03-10T15:34:48.000Z",
+          "workBasket": "Brian Weers",
+          "owner": "Vinay Madu"
+        },
+        {
+          "when": "2026-03-10T15:34:48.000Z",
+          "workBasket": "Brian Weers",
+          "owner": "Vinay Madu"
+        },
+        {
+          "when": "2026-03-10T15:35:24.000Z",
+          "workBasket": "Brian Weers",
+          "owner": "Vinay Madu"
+        },
+        {
+          "_omitted": "Additional history entries were visible but not fully legible in the screenshots."
+        }
+      ],
+      "claimId": "CI-1234",
+      "interactionCreatedAt": "2026-03-10T15:34:48.000Z",
+      "workBasket": "Case Management",
+      "description": "Test data for flex card",
+      "mea": "Brian Weers",
+      "sourceSystem": "Salesforce",
+      "notes": [
+        {
+          "when": "05/20/2026",
+          "text": "TEST 4",
+          "author": "Jefrey Joy"
+        },
+        {
+          "when": "05/20/2026",
+          "text": "TEST 1",
+          "author": "Jefrey Joy"
+        },
+        {
+          "when": "05/20/2026",
+          "text": "TEST 2",
+          "author": "Jefrey Joy"
+        },
+        {
+          "when": "05/20/2026",
+          "text": "TEST 3",
+          "author": "Jefrey Joy"
+        },
+        {
+          "when": "08/04/2026",
+          "text": "tret",
+          "author": "User1 MEA"
+        }
+      ]
+    }
+  ],
+  "analysisHints": [
+    "The first Salesforce case closes before any notes or history are visible.",
+    "The second Salesforce case contains the visible notes and history collections.",
+    "History contains repeated timestamps and repeated workBasket/owner combinations, which supports Brian's collection-scoping concern.",
+    "Codex should compare this reconstructed response with the ExtractCaseByAccountId Data Mapper mappings and the downstream member-related transform/IP."
+  ]
+}
