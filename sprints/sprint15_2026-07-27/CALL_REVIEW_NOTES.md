@@ -451,53 +451,39 @@ Before CS-1347 is considered ready to close, verify all of the following:
 
 ## 2026-07-29 — CS-1347 — Brian follow-up on claims detail fields and history
 
-### Claim detail fields in mock data
+### Source
 
-- Brian agreed that the current mock payload should include the claim-level fields
-  required by the story and unified model, including `claimSubtype`,
-  `claimStatus`, and `claimReceivedDate`.
-- These values can be invented in the mock response for now so QA has complete,
-  testable data and does not encounter missing or `null` fields during validation.
-- The purpose is to demonstrate the expected target shape, not to assert the
-  final live API contract.
-- When the real API is available, the team will compare the actual payload with
-  the mock contract and adjust mappings or remove unsupported fields.
-- Brian's direction was to prioritize a complete working mock response now and
-  avoid unnecessary empty values or visually incomplete UI data.
+- Follow-up working session with Brian on mock claim details and history shape.
 
-### History array meaning
+### Claim details
 
-- `history` belongs under each unified case item and is an array of objects.
-- Each history object uses the agreed shape:
+- Keep `claimSubtype`, `claimStatus`, and `claimReceivedDate` in the unified
+  `claims[]` model.
+- The current mock payload may not contain reliable values for every field.
+- For QA and UI validation, populate representative mock values instead of
+  leaving those fields `null`.
+- These values are provisional and must be replaced by actual API mappings once
+  the live contract is available.
 
-```json
-{
-  "when": "2026-01-22",
-  "workBasket": "Claims Resolution",
-  "owner": "MEA or assigned owner"
-}
+### History meaning
+
+- `history[]` is not claim history.
+- It represents ServiceIntent or case routing through work baskets over time.
+- The current or latest work basket belongs on the main case object.
+- Prior work-basket assignments belong in `history[]`.
+- Each history item uses:
+
+```text
+when
+workBasket
+owner
 ```
 
-- History represents changes that occurred on the ServiceIntent/case over time,
-  especially transitions between work baskets and the MEA or owner associated
-  with each transition.
-- The current `workBasket` field on the case is the present assignment. Earlier
-  work-basket assignments belong in `history[]`.
-- If a case moved through multiple work baskets, the mock may include multiple
-  history entries. Each entry should identify when the transition occurred,
-  which work basket was involved, and who owned or handled it.
-- The exact source of this history information in the future API is not yet
-  confirmed. The field remains in the notional unified model and may be removed
-  or adjusted if the live service cannot provide it.
-
-### Interaction versus ServiceIntent responsibility
-
-- The Interaction is generally closed as part of the call, while the
-  ServiceIntent is the structure most analogous to a Salesforce Case.
-- Parent Interaction fields that are relevant to the case must be carried down to
-  each ServiceIntent-derived case object.
-- Work-basket movement history is primarily a ServiceIntent/case concept rather
-  than an Interaction-level history concept.
+- If a case moves through multiple work baskets, each transition should be a
+  separate history entry showing when it moved, the work basket, and the
+  associated owner or MEA.
+- This is closer to case or ServiceIntent routing history than an
+  Interaction-level history concept.
 
 ### JSON and transform implementation notes
 
@@ -525,3 +511,71 @@ Before CS-1347 is considered ready to close, verify all of the following:
       ServiceIntents and verify the Data Mapper output.
 - [ ] Sekhar — confirm the output no longer returns `null` for the mocked claim
       subtype, status, and received-date fields.
+
+## 2026-08-04 — Brian issue with Member Related Cases FlexCard
+
+### Problem observed
+
+- The Member Related Cases FlexCard shows the same notes and the same routing
+  history on multiple case records.
+- Brian compared two member-related case records and confirmed that the first
+  history timestamp and the complete note/history collections were being
+  repeated across records.
+- The issue is in the Salesforce/member-related Data Mapper path, not the legacy
+  pre-migration path.
+- The member transform was built from the claims-related mapper, so it inherited
+  the same collection-scoping problem.
+
+### Root cause
+
+- The notes and history mappings are scoped from a top-level collection instead
+  of the current case item.
+- When the Data Mapper expands multiple case records, it reads the top-level
+  notes/history collection and applies the same values to every output case.
+- This is a Data Mapper scoping issue rather than duplicate source records.
+
+### Brian's proposed fix
+
+- Scope each repeated child collection to the current case record before mapping
+  the output.
+- Create or use case-scoped nodes such as:
+
+```text
+memberRelatedCaseComments
+memberRelatedHistory
+```
+
+- Map the current case's comments/notes into the case-scoped comments node.
+- Map the current case's history into the case-scoped history node.
+- Update the output mappings so each output case reads from those scoped nodes,
+  rather than directly from the top-level collection.
+- Apply the same scoping approach consistently to every nested/repeated child
+  collection in the member-related transform.
+
+### Validation Brian demonstrated
+
+- With the original mappings restored, every case received the same top-level
+  history and notes.
+- After changing the mappings to case-scoped nodes, the first case retained its
+  own history and the second case no longer inherited that same collection.
+- The source appears to have history on one record and not necessarily on every
+  record, so an empty child array for another case is valid.
+
+### Required work
+
+- [ ] Update the Member Related Cases Data Mapper to scope notes/comments by the
+      current case.
+- [ ] Update the Member Related Cases Data Mapper to scope routing history by the
+      current case.
+- [ ] Review the remaining nested arrays and apply the same case-level scoping
+      where required.
+- [ ] Preview at least two member-related cases and verify they no longer share
+      identical notes/history unless the source data is actually identical.
+- [ ] Verify a case without history returns an empty history collection instead
+      of another case's history.
+- [ ] Send Brian the validation result after the mapper changes are complete.
+
+### Estimate from Brian
+
+- Brian expected the correction to take approximately 30 minutes once the
+  correct scoping mappings are applied.
