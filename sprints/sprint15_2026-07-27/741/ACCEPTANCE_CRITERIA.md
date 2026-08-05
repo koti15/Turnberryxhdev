@@ -1,49 +1,37 @@
-# Story 741 — Acceptance Criteria
+# CS-741 — Acceptance Criteria
 
 ## AC1 — Member Validation heading
 
-**Given** the user is on the Member Validation step of the Call Intake OmniScript  
-**When** the step is displayed  
-**Then** the section heading displays as **Member Validation**.
+**Given** I am an MEA Member, Supervisor, or Leader  
+**When** I am on the Member Validation step of the Call Intake Wizard  
+**Then** the heading reads **Member Validation**.
 
-## AC2 — Initial state
+## AC2 — Search results hidden initially
 
-**Given** the Member Validation step has loaded  
-**When** the user has not yet initiated a search  
-**Then** the search-results section is not displayed.
+**Given** I am an MEA Member, Supervisor, or Leader  
+**When** I am on the Member Validation step of the Call Intake Wizard and I have not yet clicked **Search**  
+**Then** the Search Results section is not visible  
+**And** results only appear after the user clicks the Search button.
 
-## AC3 — Search results visibility
+## AC3 — Selected Member hidden until confirmation
 
-**Given** the user has entered valid search criteria  
-**When** the user initiates the search  
-**Then** the matching member results are displayed.
+**Given** I am an MEA Member, Supervisor, or Leader  
+**When** I am on the Member Validation step of the Call Intake Wizard and I have not confirmed a member selection  
+**Then** the text **Selected Member** does not appear  
+**And** the selected-member details appear only after the selected member has been confirmed  
+**And** the experience is consistent with Provider Validation.
 
-## AC4 — Selected-member visibility
+## AC4 — Create Unlisted Host Member popup
 
-**Given** member search results are displayed  
-**When** the user has not yet confirmed a member selection  
-**Then** the selected-member details section is not displayed.
+**Given** I am an MEA Member, Supervisor, or Leader  
+**When** I am on the Member Validation step of the Call Intake Wizard and I am creating an unlisted member  
+**Then** the popup heading is **Create Unlisted Host Member**  
+**And** the Address field has been removed.
 
-## AC5 — Confirmed member display
+## Regression Validation
 
-**Given** the user selects and confirms a member  
-**When** confirmation is completed  
-**Then** only the confirmed member's details are displayed in the selected-member section.
-
-## AC6 — Address removal
-
-**Given** the confirmed member's details are displayed  
-**When** the selected-member section renders  
-**Then** the Address field is not displayed.
-
-## AC7 — Consistent Provider Validation pattern
-
-**Given** the existing Provider Validation step is the approved interaction pattern  
-**When** Member Validation is updated  
-**Then** its conditional visibility, spacing, and presentation follow the same pattern where applicable.
-
-## AC8 — Regression protection
-
-**Given** the Member Validation UI changes are deployed  
-**When** the existing member search, selection, confirmation, and downstream Call Intake flow are tested  
-**Then** the existing functional behavior continues without regression.
+- Existing member search remains functional.
+- Member selection and confirmation remain functional.
+- Confirmed member information continues into the downstream Call Intake flow.
+- Provider Validation behavior is not changed.
+- Member Validation layout and visibility states remain consistent across supported MEA user roles.
