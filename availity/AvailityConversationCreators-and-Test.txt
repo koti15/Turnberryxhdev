@@ -1,0 +1,691 @@
+\<template>
+
+
+
+\</template>
+
+
+
+
+
+\<!---
+
+
+
+public with sharing class AvailityHostConversationCreator extends AvailityMessageProcessor {
+
+
+
+    private static final String QUEUE_NAME = 'Availity Provider ITS Host';
+
+    private static final String RECORD_TYPE = 'Open Case';
+
+
+
+    /\* =========================
+
+       Owner Resolution
+
+       ========================= \*/
+
+    public override Id getOwner() {
+
+
+
+        List\<Group> queue = [
+
+            SELECT Id FROM Group WHERE Type = 'Queue' AND Name = :QUEUE_NAME LIMIT 1 ];
+
+        if (queue.isEmpty()) {
+
+            throw new IllegalArgumentException('Queue not found: ' + QUEUE_NAME);
+
+        }
+
+        return queue[0].Id;
+
+    }
+
+
+
+
+
+    /\* =========================
+
+       Host Contact Resolution
+
+       ========================= \*/
+
+    public override Contact getOrCreateContact() {
+
+
+
+        String memberId = (String) payload.get('patientId');
+
+        String numericId = memberId.replaceAll('[^0-9]', '');
+
+
+
+        List\<Contact> contacts = [SELECT Id , AccountId FROM Contact WHERE Member_Id__c = :numericId OR AGP_ID__c = :numericId LIMIT 2];
+
+
+
+        if (contacts.size() == 1) {
+
+            return contacts[0];
+
+        }
+
+
+
+        if (contacts.size() > 1) {
+
+            throw new IllegalArgumentException('Multiple Host contacts found for patientId: ' + memberId);
+
+        }
+
+
+
+        throw new IllegalArgumentException('Host member not found for patientId: ' + memberId);
+
+    }
+
+}
+
+
+
+\-->
+
+
+
+
+
+
+
+\<!----
+
+@isTest
+
+private class AvailityConversationCreatorTest {
+
+
+
+    // ─── Constants ────────────────────────────────────────────────────────────
+
+
+
+    private static final String CARE_QUEUE_NAME = 'Availity Provider Message';
+
+    private static final String HOST_QUEUE_NAME = 'Availity Provider ITS Host';
+
+
+
+    // ─── Test Data Setup ──────────────────────────────────────────────────────
+
+
+
+    private static Map\<String, Object> buildPayload(String patientId) {
+
+        return new Map\<String, Object>{ 'patientId' => patientId };
+
+    }
+
+
+
+    private static Id getPersonAccountRecordTypeId() {
+
+        return Schema.SObjectType.Account
+
+            .getRecordTypeInfosByDeveloperName()
+
+            .get('PersonAccount')
+
+            .getRecordTypeId();
+
+    }
+
+
+
+    private static Id getContactRecordTypeId() {
+
+        return Schema.SObjectType.Contact
+
+            .getRecordTypeInfosByDeveloperName()
+
+            .get('Contact') // adjust if your org uses a different developer name
+
+            .getRecordTypeId();
+
+    }
+
+
+
+    // ─── Helpers to build processors ─────────────────────────────────────────
+
+    // Uses @TestVisible setter on parent — see Option 2 fix from prior review
+
+
+
+    private static AvailityCareConversationCreator buildCareProcessor(Map\<String, Object> payload) {
+
+        AvailityCareConversationCreator processor = new AvailityCareConversationCreator();
+
+        processor.setPayloadForTest(payload);
+
+        return processor;
+
+    }
+
+
+
+    private static AvailityHostConversationCreator buildHostProcessor(Map\<String, Object> payload) {
+
+        AvailityHostConversationCreator processor = new AvailityHostConversationCreator();
+
+        processor.setPayloadForTest(payload);
+
+        return processor;
+
+    }
+
+
+
+
+
+    // ══════════════════════════════════════════════════════════════════════════
+
+    //  AvailityCareConversationCreator — getOwner()
+
+    // ══════════════════════════════════════════════════════════════════════════
+
+
+
+    @isTest
+
+    static void care_getOwner_QueueExists_ReturnsQueueId() {
+
+        List\<Group> queues = [SELECT Id FROM Group WHERE Type = 'Queue' AND Name = :CARE_QUEUE_NAME LIMIT 1];
+
+        if (queues.isEmpty()) { return; } // queue not in this org; skip
+
+
+
+        AvailityCareConversationCreator processor = buildCareProcessor(buildPayload('123456'));
+
+
+
+        Test.startTest();
+
+        Id ownerId = processor.getOwner();
+
+        Test.stopTest();
+
+
+
+        System.assertEquals(queues[0].Id, ownerId, 'Care: should return Availity Provider Message queue id');
+
+    }
+
+
+
+    @isTest
+
+    static void care_getOwner_QueueMissing_ThrowsException() {
+
+        List\<Group> queues = [SELECT Id FROM Group WHERE Type = 'Queue' AND Name = :CARE_QUEUE_NAME LIMIT 1];
+
+        if (!queues.isEmpty()) { return; } // queue exists; skip this negative test
+
+
+
+        AvailityCareConversationCreator processor = buildCareProcessor(buildPayload('123456'));
+
+
+
+        Test.startTest();
+
+        try {
+
+            processor.getOwner();
+
+            System.assert(false, 'Expected IllegalArgumentException');
+
+        } catch (IllegalArgumentException e) {
+
+            System.assert(e.getMessage().contains('Queue Not Found'), 'Message mismatch: ' + e.getMessage());
+
+        }
+
+        Test.stopTest();
+
+    }
+
+
+
+
+
+    // ══════════════════════════════════════════════════════════════════════════
+
+    //  AvailityCareConversationCreator — getOrCreateContact()
+
+    // ══════════════════════════════════════════════════════════════════════════
+
+
+
+    @isTest
+
+    static void care_getOrCreateContact_SingleMatch_ReturnsPersonContact() {
+
+        Account pa = new Account(
+
+            FirstName = 'Jane', LastName = 'Doe',
+
+            RecordTypeId = getPersonAccountRecordTypeId(),
+
+            Member_Id__c = '987654'
+
+        );
+
+        insert pa;
+
+
+
+        AvailityCareConversationCreator processor = buildCareProcessor(buildPayload('MBR-987654'));
+
+
+
+        Test.startTest();
+
+        Contact result = processor.getOrCreateContact();
+
+        Test.stopTest();
+
+
+
+        Account refreshed = [SELECT PersonContactId FROM Account WHERE Id = :pa.Id];
+
+        System.assertEquals(refreshed.PersonContactId, result.Id, 'Care: should return PersonContactId');
+
+    }
+
+
+
+    @isTest
+
+    static void care_getOrCreateContact_NoMatch_ThrowsException() {
+
+        AvailityCareConversationCreator processor = buildCareProcessor(buildPayload('MBR-000000'));
+
+
+
+        Test.startTest();
+
+        try {
+
+            processor.getOrCreateContact();
+
+            System.assert(false, 'Expected IllegalArgumentException');
+
+        } catch (IllegalArgumentException e) {
+
+            System.assert(e.getMessage().contains('Host member not found'), 'Message mismatch: ' + e.getMessage());
+
+            System.assert(e.getMessage().contains('000000'), 'Should contain numeric id');
+
+        }
+
+        Test.stopTest();
+
+    }
+
+
+
+    @isTest
+
+    static void care_getOrCreateContact_MultipleMatches_ThrowsException() {
+
+        Account a1 = new Account(FirstName = 'Tom', LastName = 'A',
+
+            RecordTypeId = getPersonAccountRecordTypeId(), Member_Id__c = '111222');
+
+           AvailityCareConversationCreator processor = buildCareProcessor(buildPayload('111222'));
+
+
+
+        Test.startTest();
+
+        try {
+
+            processor.getOrCreateContact();
+
+            System.assert(false, 'Expected IllegalArgumentException');
+
+        } catch (IllegalArgumentException e) {
+
+            System.assert(e.getMessage().contains('Host member not found'), 'Message mismatch: ' + e.getMessage());
+
+        }
+
+        Test.stopTest();
+
+    }
+
+
+
+    @isTest
+
+    static void care_getOrCreateContact_NonNumericId_StripsCorrectly() {
+
+        Account pa = new Account(
+
+            FirstName = 'Alice', LastName = 'Smith',
+
+            RecordTypeId = getPersonAccountRecordTypeId(),
+
+            Member_Id__c = '334455'
+
+        );
+
+        insert pa;
+
+
+
+        // Mixed format — only digits should survive replaceAll
+
+        AvailityCareConversationCreator processor = buildCareProcessor(buildPayload('ABC-33 44-55'));
+
+
+
+        Test.startTest();
+
+        Contact result = processor.getOrCreateContact();
+
+        Test.stopTest();
+
+
+
+        Account refreshed = [SELECT PersonContactId FROM Account WHERE Id = :pa.Id];
+
+        System.assertEquals(refreshed.PersonContactId, result.Id, 'Care: non-numeric chars should be stripped');
+
+    }
+
+
+
+
+
+    // ══════════════════════════════════════════════════════════════════════════
+
+    //  AvailityHostConversationCreator — getOwner()
+
+    // ══════════════════════════════════════════════════════════════════════════
+
+
+
+    @isTest
+
+    static void host_getOwner_QueueExists_ReturnsQueueId() {
+
+        List\<Group> queues = [SELECT Id FROM Group WHERE Type = 'Queue' AND Name = :HOST_QUEUE_NAME LIMIT 1];
+
+        if (queues.isEmpty()) { return; }
+
+
+
+        AvailityHostConversationCreator processor = buildHostProcessor(buildPayload('123456'));
+
+
+
+        Test.startTest();
+
+        Id ownerId = processor.getOwner();
+
+        Test.stopTest();
+
+
+
+        System.assertEquals(queues[0].Id, ownerId, 'Host: should return Availity ITSHost queue id');
+
+    }
+
+
+
+    @isTest
+
+    static void host_getOwner_QueueMissing_ThrowsException() {
+
+        List\<Group> queues = [SELECT Id FROM Group WHERE Type = 'Queue' AND Name = :HOST_QUEUE_NAME LIMIT 1];
+
+        if (!queues.isEmpty()) { return; }
+
+
+
+        AvailityHostConversationCreator processor = buildHostProcessor(buildPayload('123456'));
+
+
+
+        Test.startTest();
+
+        try {
+
+            processor.getOwner();
+
+            System.assert(false, 'Expected IllegalArgumentException');
+
+        } catch (IllegalArgumentException e) {
+
+            System.assert(e.getMessage().contains('Queue not found'), 'Message mismatch: ' + e.getMessage());
+
+            System.assert(e.getMessage().contains(HOST_QUEUE_NAME), 'Should include queue name');
+
+        }
+
+        Test.stopTest();
+
+    }
+
+
+
+
+
+    // ══════════════════════════════════════════════════════════════════════════
+
+    //  AvailityHostConversationCreator — getOrCreateContact()
+
+    // ══════════════════════════════════════════════════════════════════════════
+
+
+
+    @isTest
+
+    static void host_getOrCreateContact_SingleMemberIdMatch_ReturnsContact() {
+
+        Contact c = new Contact(LastName = 'HostPatient', Member_Id__c = '555666');
+
+        insert c;
+
+
+
+        AvailityHostConversationCreator processor = buildHostProcessor(buildPayload('HST-555666'));
+
+
+
+        Test.startTest();
+
+        Contact result = processor.getOrCreateContact();
+
+        Test.stopTest();
+
+
+
+        System.assertEquals(c.Id, result.Id, 'Host: should return contact matched by Member_Id__c');
+
+    }
+
+
+
+    @isTest
+
+    static void host_getOrCreateContact_SingleAgpIdMatch_ReturnsContact() {
+
+        Contact c = new Contact(LastName = 'HostAgp', AGP_ID__c = '777888');
+
+        insert c;
+
+
+
+        AvailityHostConversationCreator processor = buildHostProcessor(buildPayload('777888'));
+
+
+
+        Test.startTest();
+
+        Contact result = processor.getOrCreateContact();
+
+        Test.stopTest();
+
+
+
+        System.assertEquals(c.Id, result.Id, 'Host: should return contact matched by AGP_ID__c');
+
+    }
+
+
+
+    @isTest
+
+    static void host_getOrCreateContact_NoMatch_ThrowsException() {
+
+        AvailityHostConversationCreator processor = buildHostProcessor(buildPayload('999000'));
+
+
+
+        Test.startTest();
+
+        try {
+
+            processor.getOrCreateContact();
+
+            System.assert(false, 'Expected IllegalArgumentException');
+
+        } catch (IllegalArgumentException e) {
+
+            System.assert(e.getMessage().contains('Host member not found'), 'Message mismatch: ' + e.getMessage());
+
+        }
+
+        Test.stopTest();
+
+    }
+
+
+
+    @isTest
+
+    static void host_getOrCreateContact_NonNumericId_StripsCorrectly() {
+
+        Contact c = new Contact(LastName = 'HostStrip', Member_Id__c = '246810');
+
+        insert c;
+
+
+
+        AvailityHostConversationCreator processor = buildHostProcessor(buildPayload('HST-24 68-10'));
+
+
+
+        Test.startTest();
+
+        Contact result = processor.getOrCreateContact();
+
+        Test.stopTest();
+
+
+
+        System.assertEquals(c.Id, result.Id, 'Host: should strip non-numeric chars before lookup');
+
+    }
+
+}
+
+
+
+
+
+\-->
+
+
+
+
+
+
+
+
+
+\<!----
+
+
+
+
+
+public with sharing class AvailityCareConversationCreator extends AvailityMessageProcessor{
+
+
+
+ private static final string QUEUE_NAME = 'Availity Provider Message';
+
+    Private static final String RECORD_TYPE = 'Open Case';
+
+
+
+    Public override id getOwner(){      
+
+        List\<Group> queue = [select id from Group where Type = 'Queue' AND Name =: QUEUE_NAME Limit 1];
+
+        if(queue.isEmpty()){
+
+            throw new IllegalArgumentException('Queue Not Found:');            
+
+        }
+
+        return queue[0].id;
+
+    }
+
+
+
+
+
+    Public override Contact getOrCreateContact(){  &#x20;
+
+
+
+        String memberId = (String) payload.get('patientId');
+
+        String numericId = memberId.replaceAll('[^0-9]', '');
+
+
+
+        List \<Account> accounts = [select id, PersonContactId from account where
+
+                                   IsPersonAccount = true and Member_Id__c = :numericId Limit 2];
+
+        if(accounts.size() == 1){
+
+            return  new Contact(Id = accounts[0].PersonContactId);
+
+        }
+
+
+
+        throw new IllegalArgumentException('Host member not found - Personaccount creation pending:' +numericId);
+
+    }
+
+
+
+}
+
+
+
+\--->
