@@ -1,0 +1,1611 @@
+<template>
+
+</template>
+
+<!---
+/**
+* @File Name : CNC_AvailityMessageService.cls
+* @Description :
+* @Author : keshav.garg@bluecrossmn.com
+* @Last Modified By : keshav.garg@bluecrossmn.com
+* @Last Modified On : July 15, 2025
+* @Last Modified By : megha.lohia@bluecrossmn.com
+* @Last Modified By : May 18, 2026
+* Description : Introduces toggle-driven routing to select Care or Host processors using the inbound URI.
+* @Modification Log :
+*==============================================================================
+* Ver | Date | Author | Modification
+*==============================================================================
+* 1.0 | July 15, 2025 |   | Initial Version
+* 1.1 | August 19, 2026 |   |Updated items including Resolver Reconciled and references Feature Toggle
+**/
+
+@RestResource(urlMapping='/AvailityMessage/*')
+global with sharing class AvailityMessageService {
+    
+    @TestVisible public static final String TOGGLE_USE_NEW_PROCESSOR = 'useNewAvailityProcessor';
+    private static String softSearchMemberId = '';
+    @HttpPost
+    @AuraEnabled
+    @TestVisible
+    global static void handleMessage() 
+    {
+        if (FeatureToggleService.isEnabled(TOGGLE_USE_NEW_PROCESSOR))
+         {
+                
+                dispatchToNewProcessor();
+                return;
+            }
+        
+         handleMessageLegacy();
+    }  
+    
+    private static void dispatchToNewProcessor() {
+        String uri = RestContext.request.requestURI;
+        AvailityMessageProcessor processor;
+        
+        if (uri != null && uri.endsWith('/host')) {
+            processor = new AvailityHostConversationCreator();
+        } else {
+            processor = new AvailityCareConversationCreator();
+        }
+        if (processor != null) {
+            processor.process();
+        }     
+   }
+    
+    
+    private static void handleMessageLegacy() 
+    {
+        // Get request body
+        try{
+            String caseDescription = '';
+            RestRequest req = RestContext.request;
+            String body = req.requestBody.toString();
+            
+            if (body == null || String.isBlank(body)) {
+                JsonResponse.failure('Empty request body');
+                return;
+            }
+           // CNC_HandleCustomException.customExceptionForBedlam('pusher_message_service', 'pusherreqbody', body);
+            // Parse JSON
+            Map<String, Object> payload;
+            try {
+                payload = (Map<String, Object>) JSON.deserializeUntyped(body);
+            } catch (Exception e) {
+                JsonResponse.failure('Invalid JSON format');
+                return;
+            }
+            
+            String createdDate = (String) payload.get('createDate');
+            String conversationId = (String) payload.get('id');
+            List<Object> messages = (List<Object>) payload.get('messages');
+            
+            if(String.isEmpty(createdDate) || String.isEmpty(conversationId) || messages == null || messages.size() == 0){
+                JsonResponse.failure('Hey something went wrong with json request. please check fields such as id, createDate and messages. Thankyou.');
+                return;
+            }
+            
+            
+            // Start main logic
+            Conversation__c conversation;
+            List<Conversation__c> existingConversations = [
+                SELECT Id, Claim_Number__c, Conversation_Status__c, Contact__c FROM Conversation__c WHERE Availity_Unique_ID__c = :conversationId LIMIT 1
+            ];
+            
+            String existingConversationStatus = '';
+            if (existingConversations.isEmpty()) {
+                // No existing Conversation - create new
+                try{
+                    
+                    String memberId = ((String) payload.get('patientId'));
+                    if(String.isEmpty(memberId)){
+                        throw new IllegalArgumentException('Patient Id is Empty');
+                    }
+                    conversation = createConversation(payload, memberId.replaceAll('[^0-9]', ''));
+                    
+                    if(conversation.Claim_Number__c != null){
+                        caseDescription = conversation.Claim_Number__c;
+                        conversation.Claim_Number__c = conversation.Claim_Number__c.split(',')[0];
+                    }
+                    System.debug('------caseDescription--' + caseDescription);
+                    insert conversation;
+                }catch(IllegalArgumentException e){
+                    System.debug('exception message ' + e);
+                    JsonResponse.failure(
+                        e.getMessage()
+                    );
+                    return;
+                }
+            } else {
+                existingConversationStatus = existingConversations[0].Conversation_Status__c;
+                conversation = existingConversations[0];
+                updateInfoOnAconversation(payload,conversation);
+            }
+            
+            // Check for latest Case linked to this Conversation
+            Case targetCase;
+            List<Case> relatedCases = [
+                SELECT Id, Status, ContactId FROM Case
+                WHERE Conversation__c = :conversation.Id
+                ORDER BY CreatedDate DESC
+                LIMIT 1
+            ];
+            
+            if (relatedCases.isEmpty()) {
+            // No Case → create new and passing memberId
+               
+                targetCase = createNewCase(conversation, createdDate,caseDescription );
+            } else {
+                Case existingCase = relatedCases[0];
+                //if (existingCase.Status == 'Closed') {
+                
+                if (conversation.Conversation_Status__c == 'REOPENED' && existingConversationStatus != 'REOPENED' ) {
+                    // Closed → create new
+                    targetCase = cloneClosedCaseAsNew(existingCase.Id,conversation.Claim_Number__c);
+                } else {
+                    // Use existing open Case
+                    targetCase = existingCase;
+                }
+            }
+            
+            // Create new Message
+            List<Id> createdMessageIds = new List<Id>();
+            for(Object messageObject : messages){
+                try{
+                    Map<String,Object> message = (Map<String,Object>) messageObject;
+                    Map<String,Object> user = (Map<String,Object>) message.get('user');
+                    combineTwoMaps(message,user);
+                    Message__c newMessage = createMessage(message,conversationId);
+                    newMessage.Conversation__c = conversation.Id;
+                    insert newMessage;
+                    createdMessageIds.add(newMessage.Id);
+                } catch (Exception e){
+                    JsonResponse.failure('Something went wrong while creating message object, ' + e.getMessage());
+                    return;
+                }
+                
+            }
+            
+            
+            // Return success
+            JsonResponse.success(
+                New Map<String,Object>{
+                    'message' => 'Message processed successfully',
+                        'messageIds' => createdMessageIds,
+                        'caseId' => targetCase.Id,
+                        'conversationId' => conversation.Id
+                        }
+            );
+        } catch (Exception e){
+            JsonResponse.failure(e.getMessage());
+        }
+    }
+    
+    
+    
+    @TestVisible
+    private static void updateInfoOnAconversation( Map<String, Object> payload, Conversation__c conversation){
+        if(payload.containsKey('currentStatus')){
+            conversation.Conversation_Status__c = (String) payload.get('currentStatus');
+            update conversation;
+        }
+    }
+    
+    /**
+* Create new Case and assign to Queue.
+*/
+    @TestVisible
+    private static Case createNewCase(Conversation__c conversation, String createdDate, String caseDescription) {
+        
+        String queueName = System.Label.availity_queue_name;
+        
+        Id queueId = getQueueIdByName(queueName);
+        String RecTypeId = [select Id from RecordType where(Name = 'Open Case') and(SobjectType = 'Case')].Id;
+        
+        List<Contact> contact = [SELECT Id, AccountId From Contact where Id = :conversation.Contact__c limit 1];
+        Case newCase = new Case(
+            Subject = 'Availity Provider Message',
+            Status = 'New',
+            Case_Category__c = 'Availity',
+            Case_Sub_Category__c = 'Triage',
+            Priority = 'Medium',
+            Origin = 'Availity - Service',
+            Conversation__c = conversation.Id,
+            Relationship__c = 'Provider',
+            Source_System__c = 'Availity',
+            OwnerId = queueId,
+            ContactId = contact[0].Id,
+            AccountId = contact[0].AccountId,
+            Caller_Name__c = 'Availity',
+            //CreatedDate = Date.valueOf(createdDate), commented out as created date was being set as the day before -NB
+            // Received_Date__c = Date.valueOf(createdDate), //commented out as the date was incorrect and should system generated
+            Description = caseDescription,
+            RecordTypeID = RecTypeId,
+            Softsearch_MemberId__c = softSearchMemberId
+        );
+        
+        insert newCase;
+        return newCase;
+    }
+    
+    /**
+* Utility: Find Queue Id by name.
+*/
+    @TestVisible
+    private static Id getQueueIdByName(String queueName) {
+        List<Group> groups = [SELECT Id FROM Group WHERE Type = 'Queue' AND Name = :queueName order by createdDate Desc LIMIT 1 ];
+        if (groups.isEmpty()) {
+            throw new AuraHandledException('Queue not found: ' + queueName);
+        }
+        return groups[0].Id;
+    }
+    
+    /**
+* Clone the case as new when ever a message is sent reponse to 
+* case already in closed status.
+*/
+    @TestVisible
+    private static Case cloneClosedCaseAsNew(Id originalCaseId, String description){
+        
+        String queueName = System.Label.availity_queue_name;
+        
+        Id queueId = getQueueIdByName(queueName);
+        String RecTypeId = [select Id from RecordType where(Name = 'Open Case') and(SobjectType = 'Case')].Id;
+        
+        
+        
+        Case originalCase = [
+            SELECT Subject, Description, Priority, Origin, RecordTypeId, AccountId, SuppliedName,
+            SuppliedPhone, OwnerId, Caller_Name__c, Type, Reason, Conversation__c, ContactId, 
+             Received_Date__c, Case_Category__c, Case_Sub_Category__c,Relationship__c,Softsearch_MemberId__c FROM Case 
+            WHERE Id = :originalCaseId
+            LIMIT 1
+        ];
+        
+        Case newCase = new Case(
+            Subject = originalCase.Subject,
+            Status = 'New',
+            Origin = originalCase.Origin,
+            Conversation__c = originalCase.Conversation__c,
+            OwnerId = queueId,
+            ContactId = originalCase.ContactId,
+            AccountId = originalCase.AccountId,
+            Received_Date__c = originalCase.Received_Date__c,
+            Description = description,
+            Case_Category__c = originalCase.Case_Category__c,
+            Case_Sub_Category__c = originalCase.Case_Sub_Category__c,
+            Relationship__c = originalCase.Relationship__c,
+            Priority = originalCase.Priority,
+            Availity_Reopened__c = true
+        );
+        
+        newCase = originalCase;
+        newCase.Source_System__c = 'Availity';
+        newCase.OwnerId = queueId;
+        newCase.Id = null;
+        newCase.Availity_Reopened__c = true;
+        newCase.RecordTypeID = RecTypeId;
+        newCase.Softsearch_MemberId__c = originalCase.Softsearch_MemberId__c;
+        
+        insert newCase;
+        return newCase;
+    }
+    @AuraEnabled
+    public static Conversation__c createConversation(Map<String, Object> payload, String memberId){
+        
+        Conversation__c conv = new Conversation__c();
+        
+        List<String> reqFieldsForConversation = new List<String>{
+            'id','type','subject','reason', 'currentStatus'
+                };
+                    
+                    try{
+                        // define mapping for the conversration objects
+                        Map<String, String> fieldMapping = new Map<String,String>{
+                            'Availity_Unique_ID__c' => 'id',
+                                'Message_Sub_Category__c' => 'type',
+                                'Message_Subject__c' => 'subject',
+                                'Message_Reason__c' => 'reason',
+                                'Conversation_Status__c' => 'currentStatus',
+                                'Provider_NPI__c' => 'providerNPI',
+                                'Provider_TIN__c' => 'providerTIN',
+                                'Provider_Identifier__c' => 'providerPAPI',
+                                'Provider_Name__c' => 'providerName',
+                                'Member_Id__c' => 'patientId',
+                                'Patient_Account_Number__c' => 'patientAcctNum',
+                                'Service_From_Date__c' => 'fromServiceDate',
+                                'Service_To_Date__c' => 'toServiceDate',
+                                'Total_Charge__c' => 'totalClaimChargeAmt',
+                                'Payment_Amount__c' => 'claimPaymentAmt',
+                                'Claim_Number__c' => 'claimControlNum', // put as comma sep into case description //We don't need claims as this will be specific to eligbility. 
+                                'Service_Type_Code__c' => 'serviceTypeCode'
+                                };
+                                    
+            // // first name and last name will do a lookup to contact
+            // List<Contact> contact = [SELECT Id from Contact where Member_Id__c =: memberId OR AGP_ID__c =:memberId ];
+            // System.debug('contact - '+ contact);
+
+            // // --- member -> contact resolution (direct match, else claim-number IP fallback) ---
+            // MNPP-23473 start
+            MemberResolutionContext resolution = new MemberResolutionContext();
+            resolution.memberId    = memberId;
+            resolution.claimNumber = (String) payload.get('claimControlNum');
+
+            new MemberContactResolutionService().resolve(resolution);
+
+            if (resolution.hasError()) {
+                throw new IllegalArgumentException(resolution.error); 
+            }
+            if (!resolution.isResolved()) {
+                throw new IllegalArgumentException(
+                'Contact reference for a matching patient was not found in salesforce database. ' + memberId);
+            }
+            conv.Contact__c = resolution.resolvedContactId;
+            softSearchMemberId = resolution.softMemberId;
+
+            // MNPP-23473
+
+            // if(contact != null && contact.size() == 1){
+            //     conv.Contact__c = contact[0].Id;
+            // } else if (contact != null && contact.size() > 1) {
+            //     throw new IllegalArgumentException('Multiple contact reference for a matching patient Id was found in salesforce database.');
+            // } else {
+            //     throw new IllegalArgumentException('Contact reference for a matching patient was not found in salesforce database.' + memberId);
+            // }
+                        
+                        // define empty field list for error logging
+                        List<String> emptyFields = new List<String>();
+                        
+                        
+                        // extract mappings from json fields
+                        for(String fieldAPi : fieldMapping.keySet()){
+                            if(payload.containsKey(fieldMapping.get(fieldAPi))){
+                                Object val = payload.get(fieldMapping.get(fieldAPi));
+                                
+                                // parse date values to date format as they are sent in a string format from json
+                                if(val != null && String.valueOf(val).trim() != ''){
+                                    if(fieldAPi.contains('Date')){
+                                        val =  Date.valueOf((String) val);
+                                    }
+                                    conv.put(fieldAPi, val);
+                                } else {
+                                    
+                                }
+                            } else {
+                                if(reqFieldsForConversation.contains(fieldMapping.get(fieldAPi))){
+                                    emptyFields.add(fieldMapping.get(fieldAPi));
+                                }
+                            }
+                        }
+                        //System.debug('----claim number--' + conv.Claim_Number__c );
+                        if(payload.containsKey('claimControlNum2')){
+                            conv.Claim_Number__c = conv.Claim_Number__c + ',' + payload.get('claimControlNum2');
+                        }
+                        
+                        if(payload.containsKey('claimControlNum3')){
+                            conv.Claim_Number__c = conv.Claim_Number__c + ',' + payload.get('claimControlNum3');
+                        }
+                        //----Jira: MNPP-16563----
+                        String subject = String.isNotBlank(conv.Message_Subject__c) ? conv.Message_Subject__c : '';
+                        String reason = String.isNotBlank(conv.Message_Reason__c) ? conv.Message_Reason__c : '';
+                        conv.Name = subject + ' - ' + reason;
+                        
+                        // System.debug('----description--' +description );
+                        // process error handeling for empty fields;
+                        String errorMessage = processEmptyFileldNames(emptyFields);
+                        if(errorMessage != ''){
+                            System.debug('---error--' + errorMessage);
+                            throw new IllegalArgumentException(errorMessage);
+                        } else {
+                            return conv;
+                        }
+                        
+                    } catch (Exception e){
+                        if(!e.getMessage().contains('Please check following fields')){
+                            throw new IllegalArgumentException('Conversation was not created due to, ' + e.getMessage());
+                        } else {
+                            throw  new IllegalArgumentException(e.getMessage());
+                        }
+                    }
+        
+    }
+    
+    
+    public static Message__c createMessage(Map<String, Object> payload, String conversationId){
+        Message__c message = new Message__c();
+        try{
+            // define mapping for the conversration objects
+            Map<String, String> fieldMapping = new Map<String,String>{
+                'Availity_Unique_ID__c' => 'id',
+                    'Availity_Conversation_ID__c' => 'conversationId',
+                    'Message_Text__c' => 'message',
+                    'Create_ID__c' => 'createId',
+                    'Create_Date__c' => 'createDate',
+                    'Last_Update_Id__c' => 'lastUpdateId',
+                    'Last_Update_Date__c' => 'lastUpdateDate',
+                    'User_Id__c' => 'user_id',
+                    'User_Type__c' => 'user_type',
+                    'User_First_Name__c' => 'user_firstName',
+                    'User_Last_Name__c' => 'user_lastName'
+                    };
+                        
+                        
+                        // define empty field list for error logging
+                        List<String> emptyFields = new List<String>();
+            
+            message.Message_Source__c = 'Inbound';
+            
+            // extract mappings from json fields
+            for(String fieldAPi : fieldMapping.keySet()){
+                if(payload.containsKey(fieldMapping.get(fieldAPi))){
+                    Object val = payload.get(fieldMapping.get(fieldAPi));
+                    
+                    // parse date values to date format as they are sent in a string format from json
+                    if(val != null && String.valueOf(val).trim() != ''){
+                        if(fieldAPi.contains('Date')){
+                            val =  Date.valueOf((String) val);
+                        }
+                        message.put(fieldAPi, val);
+                    } else {
+                        emptyFields.add(fieldMapping.get(fieldAPi));
+                    }
+                } else {
+                    emptyFields.add(fieldMapping.get(fieldAPi));
+                }
+                
+            }
+            
+            
+            // process error handeling for empty fields;
+            String errorMessage = processEmptyFileldNames(emptyFields);
+            if(errorMessage != ''){
+                System.debug('---error--' + errorMessage);
+                throw new IllegalArgumentException(errorMessage);
+            } else {
+                return message;
+            }
+            
+        } catch (Exception e){
+            throw  new IllegalArgumentException(e.getMessage());
+        }
+    }
+    
+    
+    public static String processEmptyFileldNames(List<String> emptyList){
+        System.debug('---error--' + emptyList);
+        String error = '';
+        if(emptyList != null && emptyList.size() > 1){
+            error = 'Please check following fields, as they are either null or empty : ';
+            String fields = String.join(emptyList, ', ');
+            error = error + ' ' + fields;
+        } else if (emptyList.size() == 1){
+            error = emptyList[0] + ' is null or empty. Please check :-)';
+        }
+        System.debug('---error--' + error);
+        return error;
+    }
+    
+    public static void combineTwoMaps(Map<String,Object> first, Map<String,Object> second){
+        for (String obj : second.keySet()) {
+            first.put('user_' + obj, second.get(obj));
+        }
+    }
+}
+
+-->
+
+<!----
+
+/**
+* @File Name : AvailityMessageServiceTest.cls
+* @Description :
+* @Author :
+* @Last Modified By :
+* @Last Modified On : September 8, 2025
+* @Modification Log :
+*==============================================================================
+* Ver | Date | Author | Modification
+*==============================================================================
+* 1.0 | September 8, 2025 |   | Initial Version
+**/
+@isTest
+private class AvailityMessageServiceTest {
+    static final string TEST_FLAG = AvailityMessageService.TOGGLE_USE_NEW_PROCESSOR;
+    @testSetup
+    static void setupTestData() {
+        // Case RecordType required by createNewCase()
+        
+        String RecTypeId = [
+            SELECT Id
+            FROM RecordType
+            WHERE Name = 'Open Case'
+            AND SobjectType = 'Case'
+        ].Id;        
+        
+        // Queue required by getQueueIdByName()
+        provisionNeededQueue(System.Label.availity_queue_name);
+        
+        Case testCase = new Case(Subject = 'Test Case');
+        insert testCase;
+        Conversation__c convo = new Conversation__c(Conversation_Status__c = 'Open');
+        insert convo;
+        testCase.Conversation__c = convo.Id;
+        update testCase;
+        Message__c msg = new Message__c(
+            Conversation__c = convo.Id,
+            Message_Text__c = 'Test message',
+            Message_Source__c = 'Inbound'
+        );
+        insert msg;
+    }
+    
+    static void provisionNeededQueue(string queueName){
+        Group[] neededQueue = [SELECT Id FROM Group WHERE Type = 'Queue' AND Name = :queueName LIMIT 1];
+        if(neededQueue.isEmpty()){
+            
+        system.runAs(new User(id=userinfo.getUserId())){
+            group availityQueue =  new Group(
+                Name = queueName,
+                Type = 'Queue'
+            );
+            insert availityQueue;
+            // SOBject association needed for queue
+            insert new QueueSObject(queueId = availityQueue.id, sObjectType = 'Case');
+            }
+        }
+    }
+
+    static void setFeatureFlag(string flagname, boolean isEnabled){
+        FeatureToggleService.setTestOverride(flagname,isEnabled);
+    }
+    
+    @isTest
+    static void testMultipleFields() {
+        List<String> emptyFields = new List<String>{'FirstName', 'LastName', 'Email'};
+            String result = AvailityMessageService.processEmptyFileldNames(emptyFields);
+        System.assert(result.contains('Please check following fields'), 'Should contain the standard message');
+        System.assert(result.contains('FirstName') && result.contains('LastName') && result.contains('Email'), 'Should list all fields');
+    }
+    
+    @isTest
+    static void testSingleField() {
+        List<String> emptyFields = new List<String>{'Phone'};
+            String result = AvailityMessageService.processEmptyFileldNames(emptyFields);
+        System.assertEquals('Phone is null or empty. Please check :-)', result, 'Should return single field message');
+    }
+    
+    @isTest
+    static void testEmptyList() {
+        List<String> emptyFields = new List<String>();
+        String result = AvailityMessageService.processEmptyFileldNames(emptyFields);
+        System.assertEquals('', result, 'Should return empty string for empty list');
+    }
+    
+    @isTest
+    static void testCombineMapsWithValues() {
+        Map<String, Object> firstMap = new Map<String, Object>{
+            'Name' => 'John',
+                'Age' => 30
+                };
+                    Map<String, Object> secondMap = new Map<String, Object>{
+                        'Email' => 'john@example.com',
+                            'Phone' => '1234567890'
+                            };
+                                
+                                AvailityMessageService.combineTwoMaps(firstMap, secondMap);
+        
+        System.assertEquals(4, firstMap.size(), 'First map should have 4 entries after merge');
+        System.assertEquals('john@example.com', firstMap.get('user_Email'), 'user_Email key should be added');
+        System.assertEquals('1234567890', firstMap.get('user_Phone'), 'user_Phone key should be added');
+    }
+    
+    
+    
+    @isTest
+    static void testValidMessageCreation() {
+        Conversation__c convo = new Conversation__c(Conversation_Status__c = 'Open');
+        insert convo;
+        
+        Map<String, Object> payload = new Map<String, Object>{
+            'id' => '122121221',
+                'conversationId' => '12345346456',
+                'message' => 'test message',
+                'createId' => '12234546466',
+                'createDate' =>'2020-02-01',
+                'lastUpdateId' => 'test-09812',
+                'lastUpdateDate' => '2022-01-01',
+                'user_id' => 'test_id',
+                'user_type' => 'Provider',
+                'user_firstName' => 'garg',
+                'user_lastName' => 'keshav'
+                };
+                    String conversationId = convo.Id;
+        
+        Test.startTest();
+        Message__c result = AvailityMessageService.createMessage(payload,conversationId);
+        Test.stopTest();
+        
+        System.assertNotEquals(null, result, 'Result should not be null');
+        System.assertEquals('test message', result.Message_Text__c, 'Field should match input');
+    }
+    
+    
+    @isTest
+    static void testInValidMessageCreation() {
+        Conversation__c convo = new Conversation__c(Conversation_Status__c = 'Open');
+        insert convo;
+        
+        Map<String, Object> payload = new Map<String, Object>{
+            'id' => '122121221',
+                'conversationId' => '12345346456',
+                'createId' => '12234546466',
+                'createDate' =>'2020-02-01',
+                'lastUpdateId' => 'test-09812',
+                'lastUpdateDate' => '2022-01-01',
+                'user_id' => 'test_id',
+                'user_type' => 'Provider',
+                'user_firstName' => 'garg',
+                'user_lastName' => 'keshav'
+                };
+                    String conversationId = convo.Id;
+        
+        try{
+            Test.startTest();
+            Message__c result = AvailityMessageService.createMessage(payload,conversationId);
+            Test.stopTest();
+            
+            System.assertEquals(null, result, 'Result should be null');
+        } catch (Exception e){
+            System.debug('------exception-------------'+ e.getMessage());
+            System.assertEquals('message is null or empty. Please check :-)', e.getMessage(), 'Field should match input');
+        }
+    }
+    
+    
+    @isTest
+    static void testValidConversationCreation() {
+        
+        Account newAccount = new Account( Salutation='Mr.', FirstName='Joe', LastName='Schmoe',Member_Id__pc = '22334455',
+                                         Enterprise_Person_Id__pc = '123456'); //RecordTypeId = recordType.id );
+        insert newAccount; 
+        
+        Contact newContact = new Contact( FirstName='Joem', LastName='Schmoem',Member_Id__c = '223344558',
+                                         Enterprise_Person_Id__c = '1234560'); 
+        insert newContact;
+        
+        
+        Map<String, Object> payload = new Map<String, Object>{
+            'id' => 'testingfordemofinallywe',
+                'createdDate' => '2023-07-26T11:39:29.000+0000',
+                'type' => 'Eligibility',
+                'subject' => 'Demo Inquiry',
+                'reason' => 'Need clarification on benefits',
+                'currentStatus' => 'Open',
+                'providerNPI' => '1234567890',
+                'providerTIN' => '987654321',
+                'providerPAPI' => 'PAPI12345',
+                'patientId' => 'PAT-223344599',
+                'patientAcctNum' => 'ACCT98765',
+                'fromServiceDate' => '2023-07-26T11:39:29.000+0000',
+                'toServiceDate' => '2023-07-26T11:39:29.000+0000',
+                'totalClaimChargeAmt' => 1500,
+                'claimControlNum' => 'CLM123456',
+                'claimControlNum2' => 'CLM123457',
+                'claimControlNum3' => 'CLM123458',
+                'claimPaymentAmt' =>1234,
+                'serviceTypeCode' => '30'
+                };
+                    
+                    Test.startTest();
+        Conversation__c result = AvailityMessageService.createConversation(payload, newContact.Member_Id__c);
+        Test.stopTest();
+        
+        System.assertNotEquals(null, result, 'Result should not be null');
+        System.assertEquals('testingfordemofinallywe', result.Availity_Unique_ID__c, 'Field should match input');
+    }
+    
+    static void testInValidConversationCreation() {
+        Account newAccount = new Account( Salutation='Mr.', FirstName='Joe', LastName='Schmoe',Member_Id__pc = '22334455',
+                                         Enterprise_Person_Id__pc = '123456'); //RecordTypeId = recordType.id );
+        insert newAccount; 
+        
+        Contact newContact = new Contact( FirstName='Joem', LastName='Schmoem',Member_Id__c = '223344558',
+                                         Enterprise_Person_Id__c = '1234560'); 
+        insert newContact;
+        
+        Map<String, Object> payload = new Map<String, Object>{
+            'id' => 'testingfordemofinallywe',
+                'createdDate' => '2023-07-26T11:39:29.000+0000',
+                'subject' => 'Demo Inquiry',
+                'reason' => 'Need clarification on benefits',
+                'conversationStatus' => 'Open',
+                'providerNPI' => '1234567890',
+                'providerTIN' => '987654321',
+                'providerPAPI' => 'PAPI12345',
+                'patientId' => 'PAT223344558',
+                'patientAcctNum' => 'ACCT98765',
+                'fromServiceDate' => '2023-07-26T11:39:29.000+0000',
+                'toServiceDate' => '2023-07-26T11:39:29.000+0000',
+                'totalClaimChargeAmt' => 1500,
+                'claimControlNum' => 'CLM123456',
+                'claimControlNum2' => 'CLM123457',
+                'claimControlNum3' => 'CLM123458',
+                'claimPaymentAmt' =>1234,
+                'serviceTypeCode' => '30'
+                };
+                    
+                    
+                    try{
+                        Test.startTest();
+                        Conversation__c result = AvailityMessageService.createConversation(payload,newContact.Member_Id__c);
+                        Test.stopTest();
+                        
+                        System.assertEquals(null, result, 'Result should be null');
+                    } catch (Exception e){
+                        System.debug('------exception-------------'+ e.getMessage());
+                        System.assertEquals('Please check following fields, as they are either null or empty :  type, currentStatus', e.getMessage(), 'Field should match input');
+                    }
+    }
+    
+    @isTest
+    static void checkNewCase() {
+    
+    	Contact newContact = new Contact(
+    		FirstName = 'John',
+    		LastName = 'Smith',
+    		Email = 'john.doe@example.com',
+    		Phone = '123-456-7890'
+    	);
+    
+    	insert newContact;
+    
+    	Conversation__c convo = new Conversation__c(Conversation_Status__c = 'Open');
+    	convo.Contact__c = newContact.Id;
+        insert convo;
+    
+        Test.startTest();
+        Case result = AvailityMessageService.createNewCase(convo,'2020-01-01','conversationId');
+        Test.stopTest();
+    
+        System.assertNotEquals(null, result, 'Result should not be null');
+    }
+    
+    
+    @isTest
+    static void checkClonedCase() {
+        Case testCase = new Case(
+            Subject = 'Test Case',
+            Status = 'New',
+            Origin = 'availity',
+            Description = 'description',
+            Caller_Type__c ='Provider'
+        );
+        insert testCase;
+        Test.startTest();
+        Case result = AvailityMessageService.cloneClosedCaseAsNew(testCase.Id,'conversationId');
+        Test.stopTest();
+        
+        System.assertNotEquals(null, result, 'Result should not be null');
+    }
+    
+    
+    @isTest
+    static void checkNewQueue() {
+        Group newQueue = new Group();
+        newQueue.Name = 'availity support Queue';
+        newQueue.Type = 'Queue';
+        insert newQueue;
+        
+        Test.startTest();
+        Id result = AvailityMessageService.getQueueIdByName('availity support Queue');
+        Test.stopTest();
+        
+        System.assertNotEquals(null, result, 'Result should not be null');
+        System.assertEquals(newQueue.Id, result, 'Field should match input');
+    }
+    
+    @isTest
+    static void checkConversationUpdateInQueue() {
+        
+        Conversation__c convo = new Conversation__c(Conversation_Status__c = 'Open');
+        insert convo;
+        
+        Map<String, Object> payload = new Map<String, Object>{
+            'id' => '122121221',
+                'conversationId' => '12345346456',
+                'message' => 'test message',
+                'createId' => '12234546466',
+                'currentStatus' => 'OPEN',
+                'createDate' =>'2020-02-01',
+                'lastUpdateId' => 'test-09812',
+                'lastUpdateDate' => '2022-01-01',
+                'user_id' => 'test_id',
+                'user_type' => 'Provider',
+                'user_firstName' => 'garg',
+                'user_lastName' => 'keshav'
+                };
+                    String conversationId = convo.Id;
+        
+        Test.startTest();
+        AvailityMessageService.updateInfoOnAconversation(payload,convo);
+        Test.stopTest();
+    }
+    
+    
+    @isTest
+    static void testDoGetInvalidJson() {
+        
+        setFeatureFlag(TEST_FLAG,false);
+        RestRequest req = new RestRequest();
+        RestResponse res = new RestResponse();
+        
+        req.requestUri = '/services/apexrest/AvailityMessage';
+        req.httpMethod = 'POST';
+        req.requestBody = Blob.valueOf('TEST');
+        
+        RestContext.request = req;
+        RestContext.response = res;
+        
+        Test.startTest();
+        AvailityMessageService.handleMessage();
+        Test.stopTest();
+        
+        System.debug(res);
+    }
+    
+    @isTest
+    static void testDoGetValidJson() {
+        
+        setFeatureFlag(TEST_FLAG,false);
+        RestRequest req = new RestRequest();
+        RestResponse res = new RestResponse();
+        
+        req.requestUri = '/services/apexrest/AvailityMessage';
+        req.httpMethod = 'POST';
+        
+        
+        String jsonBody = '{' +
+            '"id": "testingfordemofinallye",' +
+            '"createdDate": "2023-07-26T11:39:29.000+0000",' +
+            '"subject": "Demo Inquiry",' +
+            '"reason": "Need clarification on benefits",' +
+            '"conversationStatus": "Open",' +
+            '"providerNPI": "1234567890",' +
+            '"providerTIN": "987654321",' +
+            '"providerPAPI": "PAPI12345",' +
+            '"providerName": "Dr. John Smith",' +
+            '"patientFirstName": "John",' +
+            '"patientLastName": "Smith",' +
+            '"patientId": "PAT001",' +
+            '"patientAcctNum": "ACCT98765",' +
+            '"fromServiceDate": "2023-07-26T11:39:29.000+0000",' +
+            '"toServiceDate": "2023-07-26T11:39:29.000+0000",' +
+            '"totalClaimChargeAmt": 1500,' +
+            '"claimControlNum": "CLM123456",' +
+            '"claimControlNum2": "CLM123457",' +
+            '"claimControlNum3": "CLM123458",' +
+            '"claimPaymentAmt": 1234,' +
+            '"serviceTypeCode": "30",' +
+            '"messages": [' +
+            '{' +
+            '"id": "bdemofinall1y-adfa-84e0-69301391bd72",' +
+            '"conversationId": "edemofinal1ly-908d-4c17-aa1e-89785e4a1b",' +
+            '"user": {' +
+            '"id": "aka76080748883",' +
+            '"type": "PROVIDER",' +
+            '"firstName": "John",' +
+            '"lastName": "Smith"' +
+            '},' +
+            '"message": "Hey, this is my message from Availity",' +
+            '"createId": "aka76080748883",' +
+            '"createDate": "2023-01-01T15:57:41.000+0000",' +
+            '"lastUpdateId": "aka76080748883",' +
+            '"lastUpdateDate": "2023-01-01T15:57:41.000+0000"' +
+            '}' +
+            ']' +
+            '}';
+        
+        Blob jsonBlob = Blob.valueOf(jsonBody);
+        req.requestBody = jsonBlob;
+        RestContext.request = req;
+        RestContext.response = res;
+        
+        Test.startTest();
+        AvailityMessageService.handleMessage();
+        Test.stopTest();
+        
+        System.debug(res);
+    }
+    
+    @isTest
+    static void testCaseWIthOldConvoJson(){
+        setFeatureFlag(TEST_FLAG,false);
+        Contact newContact = new Contact(
+            FirstName = 'John',
+            LastName = 'Smith',
+            Email = 'john.doe@example.com',
+            Phone = '123-456-7890'
+        );
+        
+        insert newContact;
+        
+        Conversation__c convo = new Conversation__c(
+            Availity_Unique_ID__c = 'testingfordemofinallye',
+            Conversation_Status__c = 'Open'
+        );
+        convo.Contact__c = newContact.Id;
+        insert convo;
+        
+        String jsonBody = '{' +
+            '"id": "testingfordemofinallye",' +
+            '"createDate": "2023-07-26T11:39:29.000+0000",' +
+            '"subject": "Demo Inquiry",' +
+            '"reason": "Need clarification on benefits",' +
+            '"conversationStatus": "Open",' +
+            '"type":"CLAIM",'+'"currentStatus":"OPEN",'+
+            '"providerNPI": "1234567890",' +
+            '"providerTIN": "987654321",' +
+            '"providerPAPI": "PAPI12345",' +
+            '"providerName": "Dr. John Smith",' +
+            '"patientFirstName": "John",' +
+            '"patientLastName": "Smith",' +
+            '"patientId": "PAT001",' +
+            '"patientAcctNum": "ACCT98765",' +
+            '"fromServiceDate": "2023-07-26T11:39:29.000+0000",' +
+            '"toServiceDate": "2023-07-26T11:39:29.000+0000",' +
+            '"totalClaimChargeAmt": 1500,' +
+            '"claimControlNum": "CLM123456",' +
+            '"claimControlNum2": "CLM123457",' +
+            '"claimControlNum3": "CLM123458",' +
+            '"claimPaymentAmt": 1234,' +
+            '"serviceTypeCode": "30",' +
+            '"messages": [' +
+            '{' +
+            '"id": "bdemofinall1y-adfa-84e0-69301391bd72",' +
+            '"conversationId": "edemofinal1ly-908d-4c17-aa1e-89785e4a1b",' +
+            '"user": {' +
+            '"id": "aka76080748883",' +
+            '"type": "PROVIDER",' +
+            '"firstName": "John",' +
+            '"lastName": "Smith"' +
+            '},' +
+            '"message": "Hey, this is my message from Availity",' +
+            '"createId": "aka76080748883",' +
+            '"createDate": "2023-01-01T15:57:41.000+0000",' +
+            '"lastUpdateId": "aka76080748883",' +
+            '"lastUpdateDate": "2023-01-01T15:57:41.000+0000"' +
+            '}' +
+            ']' +
+            '}';
+        
+        RestRequest req = new RestRequest();
+        RestResponse res = new RestResponse();
+        
+        req.requestUri = '/services/apexrest/AvailityMessage/';
+        req.httpMethod = 'POST';
+        //req.addHeader('Content-Type','application/json');
+        req.requestBody = Blob.valueOf(jsonBody);
+        RestContext.request = req;
+        RestContext.response= res;
+        
+        
+        Test.startTest();
+        AvailityMessageService.handleMessage();
+        Test.stopTest();
+        
+        System.debug('response - ' + res.responseBody.toString());
+        
+    }
+    
+    @isTest
+    static void testCaseWithNewConvoJson(){
+        
+        setFeatureFlag(TEST_FLAG,false);
+        Contact newContact = new Contact(
+            FirstName = 'John',
+            LastName = 'Smith',
+            Email = 'john.doe@example.com',
+            Phone = '123-456-7890'
+        );
+        
+        insert newContact;
+        
+        Conversation__c convo = new Conversation__c(
+            Conversation_Status__c = 'Open'
+        );
+        convo.Contact__c = newContact.Id;
+        insert convo;
+        
+        String jsonBody = '{' +
+            '"id": "testingfordemofinallye",' +
+            '"createDate": "2023-07-26T11:39:29.000+0000",' +
+            '"subject": "Demo Inquiry",' +
+            '"reason": "Need clarification on benefits",' +
+            '"conversationStatus": "Open",' +
+            '"type":"CLAIM",'+'"currentStatus":"OPEN",'+
+            '"providerNPI": "1234567890",' +
+            '"providerTIN": "987654321",' +
+            '"providerPAPI": "PAPI12345",' +
+            '"providerName": "Dr. John Smith",' +
+            '"patientFirstName": "John",' +
+            '"patientLastName": "Smith",' +
+            '"patientId": "PAT001",' +
+            '"patientAcctNum": "ACCT98765",' +
+            '"fromServiceDate": "2023-07-26T11:39:29.000+0000",' +
+            '"toServiceDate": "2023-07-26T11:39:29.000+0000",' +
+            '"totalClaimChargeAmt": 1500,' +
+            '"claimControlNum": "CLM123456",' +
+            '"claimControlNum2": "CLM123457",' +
+            '"claimControlNum3": "CLM123458",' +
+            '"claimPaymentAmt": 1234,' +
+            '"serviceTypeCode": "30",' +
+            '"messages": [' +
+            '{' +
+            '"id": "bdemofinall1y-adfa-84e0-69301391bd72",' +
+            '"conversationId": "edemofinal1ly-908d-4c17-aa1e-89785e4a1b",' +
+            '"user": {' +
+            '"id": "aka76080748883",' +
+            '"type": "PROVIDER",' +
+            '"firstName": "John",' +
+            '"lastName": "Smith"' +
+            '},' +
+            '"message": "Hey, this is my message from Availity",' +
+            '"createId": "aka76080748883",' +
+            '"createDate": "2023-01-01T15:57:41.000+0000",' +
+            '"lastUpdateId": "aka76080748883",' +
+            '"lastUpdateDate": "2023-01-01T15:57:41.000+0000"' +
+            '}' +
+            ']' +
+            '}';
+        
+        RestRequest req = new RestRequest();
+        RestResponse res = new RestResponse();
+        
+        req.requestUri = '/services/apexrest/AvailityMessage/';
+        req.httpMethod = 'POST';
+        //req.addHeader('Content-Type','application/json');
+        req.requestBody = Blob.valueOf(jsonBody);
+        RestContext.request = req;
+        RestContext.response= res;
+        
+        
+        Test.startTest();
+        AvailityMessageService.handleMessage();
+        Test.stopTest();
+        
+        System.debug('response - ' + res.responseBody.toString());
+        
+    }
+    
+    @isTest
+    static void testCaseWIthConvoJson(){
+       
+        setFeatureFlag(TEST_FLAG,false); 
+        Contact newContact = new Contact(
+            FirstName = 'John',
+            LastName = 'Smith',
+            Email = 'john.doe@example.com',
+            Phone = '123-456-7890'
+        );
+        
+        insert newContact;
+        
+        Conversation__c convo = new Conversation__c(
+            Availity_Unique_ID__c = 'testingfordemofinallye',
+            Conversation_Status__c = 'Open'
+        );
+        convo.Contact__c = newContact.Id;
+        insert convo;
+        
+        String jsonBody = '{' +
+            '"id": "testingfordemofinallye",' +
+            '"createDate": "2023-07-26T11:39:29.000+0000",' +
+            '"subject": "Demo Inquiry",' +
+            '"reason": "Need clarification on benefits",' +
+            '"conversationStatus": "Open",' +
+            '"type":"CLAIM",'+'"currentStatus":"OPEN",'+
+            '"providerNPI": "1234567890",' +
+            '"providerTIN": "987654321",' +
+            '"providerPAPI": "PAPI12345",' +
+            '"providerName": "Dr. John Smith",' +
+            '"patientFirstName": "John",' +
+            '"patientLastName": "Smith",' +
+            '"patientId": "PAT001",' +
+            '"patientAcctNum": "ACCT98765",' +
+            '"fromServiceDate": "2023-07-26T11:39:29.000+0000",' +
+            '"toServiceDate": "2023-07-26T11:39:29.000+0000",' +
+            '"totalClaimChargeAmt": 1500,' +
+            '"claimControlNum": "CLM123456",' +
+            '"claimControlNum2": "CLM123457",' +
+            '"claimControlNum3": "CLM123458",' +
+            '"claimPaymentAmt": 1234,' +
+            '"serviceTypeCode": "30",' +
+            '"messages": [' +
+            '{' +
+            '"id": "bdemofinall1y-adfa-84e0-69301391bd72",' +
+            '"conversationId": "edemofinal1ly-908d-4c17-aa1e-89785e4a1b",' +
+            '"user": {' +
+            '"id": "aka76080748883",' +
+            '"type": "PROVIDER",' +
+            '"firstName": "John",' +
+            '"lastName": "Smith"' +
+            '},' +
+            '"message": "Hey, this is my message from Availity",' +
+            '"createId": "aka76080748883",' +
+            '"createDate": "2023-01-01T15:57:41.000+0000",' +
+            '"lastUpdateId": "aka76080748883",' +
+            '"lastUpdateDate": "2023-01-01T15:57:41.000+0000"' +
+            '}' +
+            ']' +
+            '}';
+        
+        RestRequest req = new RestRequest();
+        RestResponse res = new RestResponse();
+        
+        req.requestUri = '/services/apexrest/AvailityMessage/';
+        req.httpMethod = 'POST';
+        //req.addHeader('Content-Type','application/json');
+        req.requestBody = Blob.valueOf(jsonBody);
+        RestContext.request = req;
+        RestContext.response= res;
+        
+        
+        Test.startTest();
+        AvailityMessageService.handleMessage();
+        Test.stopTest();
+        
+        System.debug('response - ' + res.responseBody.toString());
+        
+    }
+    
+    @isTest
+    static void testCaseWithEmptyPatientJson(){
+        
+        setFeatureFlag(TEST_FLAG,false);
+        Contact newContact = new Contact(
+            FirstName = 'John',
+            LastName = 'Smith',
+            Email = 'john.doe@example.com',
+            Phone = '123-456-7890'
+        );
+        
+        insert newContact;
+        
+        Conversation__c convo = new Conversation__c(
+            Conversation_Status__c = 'Open'
+        );
+        convo.Contact__c = newContact.Id;
+        insert convo;
+        
+        String jsonBody = '{' +
+            '"id": "testingfordemofinallye",' +
+            '"createDate": "2023-07-26T11:39:29.000+0000",' +
+            '"subject": "Demo Inquiry",' +
+            '"reason": "Need clarification on benefits",' +
+            '"conversationStatus": "Open",' +
+            '"type":"CLAIM",'+'"currentStatus":"OPEN",'+
+            '"providerNPI": "1234567890",' +
+            '"providerTIN": "987654321",' +
+            '"providerPAPI": "PAPI12345",' +
+            '"providerName": "Dr. John Smith",' +
+            '"patientId": "PAT001",' +
+            '"patientAcctNum": "ACCT98765",' +
+            '"fromServiceDate": "2023-07-26T11:39:29.000+0000",' +
+            '"toServiceDate": "2023-07-26T11:39:29.000+0000",' +
+            '"totalClaimChargeAmt": 1500,' +
+            '"claimControlNum": "CLM123456",' +
+            '"claimControlNum2": "CLM123457",' +
+            '"claimControlNum3": "CLM123458",' +
+            '"claimPaymentAmt": 1234,' +
+            '"serviceTypeCode": "30",' +
+            '"messages": [' +
+            '{' +
+            '"id": "bdemofinall1y-adfa-84e0-69301391bd72",' +
+            '"conversationId": "edemofinal1ly-908d-4c17-aa1e-89785e4a1b",' +
+            '"user": {' +
+            '"id": "aka76080748883",' +
+            '"type": "PROVIDER",' +
+            '"firstName": "John",' +
+            '"lastName": "Smith"' +
+            '},' +
+            '"message": "Hey, this is my message from Availity",' +
+            '"createId": "aka76080748883",' +
+            '"createDate": "2023-01-01T15:57:41.000+0000",' +
+            '"lastUpdateId": "aka76080748883",' +
+            '"lastUpdateDate": "2023-01-01T15:57:41.000+0000"' +
+            '}' +
+            ']' +
+            '}';
+        
+        RestRequest req = new RestRequest();
+        RestResponse res = new RestResponse();
+        
+        req.requestUri = '/services/apexrest/AvailityMessage/';
+        req.httpMethod = 'POST';
+        //req.addHeader('Content-Type','application/json');
+        req.requestBody = Blob.valueOf(jsonBody);
+        RestContext.request = req;
+        RestContext.response= res;
+        
+        
+        Test.startTest();
+        AvailityMessageService.handleMessage();
+        Test.stopTest();
+        
+        System.debug('response - ' + res.responseBody.toString());
+        
+    }
+    
+    @isTest
+    static void testCaseWIthJson(){
+        
+        setFeatureFlag(TEST_FLAG,false);
+        Contact newContact = new Contact(
+            FirstName = 'John',
+            LastName = 'Smith',
+            Email = 'john.doe@example.com',
+            Phone = '123-456-7890'
+        );
+        
+        insert newContact;
+        
+        Conversation__c convo = new Conversation__c(
+            Availity_Unique_ID__c = 'testingfordemofinallye',
+            Conversation_Status__c = 'Open'
+        );
+        convo.Contact__c = newContact.Id;
+        insert convo;
+        
+        String jsonBody = '{' +
+            '"id": "testingfordemofinallye",' +
+            '"createDate": "2023-07-26T11:39:29.000+0000",' +
+            '"subject": "Demo Inquiry",' +
+            '"reason": "Need clarification on benefits",' +
+            '"conversationStatus": "Open",' +
+            '"type":"CLAIM",'+'"currentStatus":"OPEN",'+
+            '"providerNPI": "1234567890",' +
+            '"providerTIN": "987654321",' +
+            '"providerPAPI": "PAPI12345",' +
+            '"providerName": "Dr. John Smith",' +
+            '"patientFirstName": "John",' +
+            '"patientLastName": "Smith",' +
+            '"patientId": "PAT001",' +
+            '"patientAcctNum": "ACCT98765",' +
+            '"fromServiceDate": "2023-07-26T11:39:29.000+0000",' +
+            '"toServiceDate": "2023-07-26T11:39:29.000+0000",' +
+            '"totalClaimChargeAmt": 1500,' +
+            '"claimControlNum": "CLM123456",' +
+            '"claimControlNum2": "CLM123457",' +
+            '"claimControlNum3": "CLM123458",' +
+            '"claimPaymentAmt": 1234,' +
+            '"serviceTypeCode": "30",' +
+            '"messages": [' +
+            '{' +
+            '"id": "bdemofinall1y-adfa-84e0-69301391bd72",' +
+            '"conversationId": "edemofinal1ly-908d-4c17-aa1e-89785e4a1b",' +
+            '"user": {' +
+            '"id": "aka76080748883",' +
+            '"type": "PROVIDER",' +
+            '"firstName": "John",' +
+            '"lastName": "Smith"' +
+            '},' +
+            '"message": "Hey, this is my message from Availity",' +
+            '"createId": "aka76080748883",' +
+            '"createDate": "2023-01-01T15:57:41.000+0000",' +
+            '"lastUpdateId": "aka76080748883",' +
+            '"lastUpdateDate": "2023-01-01T15:57:41.000+0000"' +
+            '}' +
+            ']' +
+            '}';
+        
+        RestRequest req = new RestRequest();
+        RestResponse res = new RestResponse();
+        
+        req.requestUri = '/services/apexrest/AvailityMessage/';
+        req.httpMethod = 'POST';
+        //req.addHeader('Content-Type','application/json');
+        req.requestBody = Blob.valueOf(jsonBody);
+        RestContext.request = req;
+        RestContext.response= res;
+        
+        
+        Test.startTest();
+        AvailityMessageService.handleMessage();
+        Test.stopTest();
+        
+        System.debug('response - ' + res.responseBody.toString());
+        
+    }
+    
+@isTest
+    static void testCaseWIthJson_TOGGLE_TRUE(){
+        
+        setFeatureFlag(TEST_FLAG,true);
+        Contact newContact = new Contact(
+            FirstName = 'John',
+            LastName = 'Smith',
+            Email = 'john.doe@example.com',
+            Phone = '123-456-7890'
+        );
+        
+        insert newContact;
+        
+        Conversation__c convo = new Conversation__c(
+            Availity_Unique_ID__c = 'testingfordemofinallye',
+            Conversation_Status__c = 'Open'
+        );
+        convo.Contact__c = newContact.Id;
+        insert convo;
+        
+        String jsonBody = '{' +
+            '"id": "testingfordemofinallye",' +
+            '"createDate": "2023-07-26T11:39:29.000+0000",' +
+            '"subject": "Demo Inquiry",' +
+            '"reason": "Need clarification on benefits",' +
+            '"conversationStatus": "Open",' +
+            '"type":"CLAIM",'+'"currentStatus":"OPEN",'+
+            '"providerNPI": "1234567890",' +
+            '"providerTIN": "987654321",' +
+            '"providerPAPI": "PAPI12345",' +
+            '"providerName": "Dr. John Smith",' +
+            '"patientFirstName": "John",' +
+            '"patientLastName": "Smith",' +
+            '"patientId": "PAT001",' +
+            '"patientAcctNum": "ACCT98765",' +
+            '"fromServiceDate": "2023-07-26T11:39:29.000+0000",' +
+            '"toServiceDate": "2023-07-26T11:39:29.000+0000",' +
+            '"totalClaimChargeAmt": 1500,' +
+            '"claimControlNum": "CLM123456",' +
+            '"claimControlNum2": "CLM123457",' +
+            '"claimControlNum3": "CLM123458",' +
+            '"claimPaymentAmt": 1234,' +
+            '"serviceTypeCode": "30",' +
+            '"messages": [' +
+            '{' +
+            '"id": "bdemofinall1y-adfa-84e0-69301391bd72",' +
+            '"conversationId": "edemofinal1ly-908d-4c17-aa1e-89785e4a1b",' +
+            '"user": {' +
+            '"id": "aka76080748883",' +
+            '"type": "PROVIDER",' +
+            '"firstName": "John",' +
+            '"lastName": "Smith"' +
+            '},' +
+            '"message": "Hey, this is my message from Availity",' +
+            '"createId": "aka76080748883",' +
+            '"createDate": "2023-01-01T15:57:41.000+0000",' +
+            '"lastUpdateId": "aka76080748883",' +
+            '"lastUpdateDate": "2023-01-01T15:57:41.000+0000"' +
+            '}' +
+            ']' +
+            '}';
+        
+        RestRequest req = new RestRequest();
+        RestResponse res = new RestResponse();
+        
+        req.requestUri = '/services/apexrest/AvailityMessage/';
+        req.httpMethod = 'POST';
+        //req.addHeader('Content-Type','application/json');
+        req.requestBody = Blob.valueOf(jsonBody);
+        RestContext.request = req;
+        RestContext.response= res;
+        
+        
+        Test.startTest();
+        AvailityMessageService.handleMessage();
+        Test.stopTest();
+        
+        System.debug('response - ' + res.responseBody.toString());
+        
+    }
+
+@isTest
+    static void testCaseWIthJson_TOGGLE_TRUE_HOST(){
+        
+        setFeatureFlag(TEST_FLAG,true);
+        Contact newContact = new Contact(
+            FirstName = 'John',
+            LastName = 'Smith',
+            Email = 'john.doe@example.com',
+            Phone = '123-456-7890'
+        );
+        
+        insert newContact;
+        
+        Conversation__c convo = new Conversation__c(
+            Availity_Unique_ID__c = 'testingfordemofinallye',
+            Conversation_Status__c = 'Open'
+        );
+        convo.Contact__c = newContact.Id;
+        insert convo;
+        
+        String jsonBody = '{' +
+            '"id": "testingfordemofinallye",' +
+            '"createDate": "2023-07-26T11:39:29.000+0000",' +
+            '"subject": "Demo Inquiry",' +
+            '"reason": "Need clarification on benefits",' +
+            '"conversationStatus": "Open",' +
+            '"type":"CLAIM",'+'"currentStatus":"OPEN",'+
+            '"providerNPI": "1234567890",' +
+            '"providerTIN": "987654321",' +
+            '"providerPAPI": "PAPI12345",' +
+            '"providerName": "Dr. John Smith",' +
+            '"patientFirstName": "John",' +
+            '"patientLastName": "Smith",' +
+            '"patientId": "PAT001",' +
+            '"patientAcctNum": "ACCT98765",' +
+            '"fromServiceDate": "2023-07-26T11:39:29.000+0000",' +
+            '"toServiceDate": "2023-07-26T11:39:29.000+0000",' +
+            '"totalClaimChargeAmt": 1500,' +
+            '"claimControlNum": "CLM123456",' +
+            '"claimControlNum2": "CLM123457",' +
+            '"claimControlNum3": "CLM123458",' +
+            '"claimPaymentAmt": 1234,' +
+            '"serviceTypeCode": "30",' +
+            '"messages": [' +
+            '{' +
+            '"id": "bdemofinall1y-adfa-84e0-69301391bd72",' +
+            '"conversationId": "edemofinal1ly-908d-4c17-aa1e-89785e4a1b",' +
+            '"user": {' +
+            '"id": "aka76080748883",' +
+            '"type": "PROVIDER",' +
+            '"firstName": "John",' +
+            '"lastName": "Smith"' +
+            '},' +
+            '"message": "Hey, this is my message from Availity",' +
+            '"createId": "aka76080748883",' +
+            '"createDate": "2023-01-01T15:57:41.000+0000",' +
+            '"lastUpdateId": "aka76080748883",' +
+            '"lastUpdateDate": "2023-01-01T15:57:41.000+0000"' +
+            '}' +
+            ']' +
+            '}';
+        
+        RestRequest req = new RestRequest();
+        RestResponse res = new RestResponse();
+        
+        req.requestUri = '/services/apexrest/AvailityMessage/host';
+        req.httpMethod = 'POST';
+        //req.addHeader('Content-Type','application/json');
+        req.requestBody = Blob.valueOf(jsonBody);
+        RestContext.request = req;
+        RestContext.response= res;
+        
+        
+        Test.startTest();
+        AvailityMessageService.handleMessage();
+        Test.stopTest();
+        
+        System.debug('response - ' + res.responseBody.toString());
+        
+    }
+
+    @isTest
+    static void testCaseWithEmptyBodyJson(){
+        
+        setFeatureFlag(TEST_FLAG,false);
+        Contact newContact = new Contact(
+            FirstName = 'John',
+            LastName = 'Smith',
+            Email = 'john.doe@example.com',
+            Phone = '123-456-7890'
+        );
+        
+        insert newContact;
+        
+        Conversation__c convo = new Conversation__c(
+            Conversation_Status__c = 'Open'
+        );
+        convo.Contact__c = newContact.Id;
+        insert convo;
+        
+        String jsonBody = '{'+'}';
+        
+        RestRequest req = new RestRequest();
+        RestResponse res = new RestResponse();
+        
+        req.requestUri = '/services/apexrest/AvailityMessage/';
+        req.httpMethod = 'POST';
+        //req.addHeader('Content-Type','application/json');
+        req.requestBody = Blob.valueOf(jsonBody);
+        RestContext.request = req;
+        RestContext.response= res;
+        
+        
+        Test.startTest();
+        AvailityMessageService.handleMessage();
+        Test.stopTest();
+        
+        System.debug('response - ' + res.responseBody.toString());
+        
+        
+    }
+    // ══════════════════════════════════════════════════════════════════════════
+    //  Helpers
+    // ══════════════════════════════════════════════════════════════════════════
+    
+    private static void setRestContext(String jsonBody) {
+        RestRequest req  = new RestRequest();
+        RestResponse res = new RestResponse();
+        req.requestUri   = '/services/apexrest/AvailityMessage/';
+        req.httpMethod   = 'POST';
+        req.requestBody  = Blob.valueOf(jsonBody);
+        RestContext.request  = req;
+        RestContext.response = res;
+    }
+    private static void setHostRestContext(String jsonBody) {
+        RestRequest req  = new RestRequest();
+        RestResponse res = new RestResponse();
+        req.requestUri   = '/services/apexrest/AvailityMessage/host';
+        req.httpMethod   = 'POST';
+        req.requestBody  = Blob.valueOf(jsonBody);
+        RestContext.request  = req;
+        RestContext.response = res;
+    }
+    
+    private static void setRestContextBlob(Blob body) {
+        RestRequest req  = new RestRequest();
+        RestResponse res = new RestResponse();
+        req.requestUri  = '/services/apexrest/AvailityMessage/';
+        req.httpMethod  = 'POST';
+        req.requestBody = body;
+        RestContext.request  = req;
+        RestContext.response = res;
+    }
+    
+    /**
+* Reusable valid JSON builder — callers can override specific fields
+* by doing simple String.replace() on the result.
+*/
+    private static String buildValidJson(String conversationId, String patientId) {
+        return '{'
+            + '"id":"'           + conversationId + '",'
+            + '"createDate":"2024-01-15",'
+            + '"subject":"Test Subject",'
+            + '"reason":"Test Reason",'
+            + '"type":"CLAIM",'
+            + '"currentStatus":"OPEN",'
+            + '"providerNPI":"1234567890",'
+            + '"patientId":"'    + patientId      + '",'
+            + '"claimControlNum":"CLM001",'
+            + '"claimControlNum2":"CLM002",'
+            + '"claimControlNum3":"CLM003",'
+            + '"messages":[{'
+            +   '"id":"msg-001",'
+            +   '"conversationId":"' + conversationId + '",'
+            +   '"message":"Hello",'
+            +   '"createId":"usr-001",'
+            +   '"createDate":"2024-01-15",'
+            +   '"lastUpdateId":"usr-001",'
+            +   '"lastUpdateDate":"2024-01-15",'
+            +   '"claimControlNum":"CLM001",'
+            +   '"user":{"user_id":"usr-001","user_type":"Provider",'
+            +          '"user_firstName":"Jane","user_lastName":"Doe"}'
+            + '}]}';
+    }
+    
+    private static Group insertQueue(String name) {
+        Group q = new Group(Name = name, Type = 'Queue');
+        insert q;
+        return q;
+    }
+    
+    private static Contact insertContact(String memberId) {
+        Contact c = new Contact(LastName = 'TestPatient', Member_Id__c = memberId);
+        insert c;
+        return c;
+    }
+    
+    private static Conversation__c insertConversation(String availityId, String status, Id contactId) {
+        Conversation__c conv = new Conversation__c(
+            Availity_Unique_ID__c  = availityId,
+            Conversation_Status__c = status,
+            Contact__c             = contactId
+        );
+        insert conv;
+        return conv;
+    }
+ 
+}
+
+-->
