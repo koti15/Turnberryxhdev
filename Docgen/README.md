@@ -15,7 +15,7 @@ Complete each step using actual configuration, input/output JSON, or source code
 | Step | Scope | Status | Evidence needed |
 | --- | --- | --- | --- |
 | 1 | User journey from Case to generated output | Pending | Runtime screens, selections, sample output |
-| 2 | IP-GETCaseDetails | Next | Full action properties, configured IP, input/output mappings, IP definition and preview |
+| 2 | IP-GETCaseDetails | Partially verified | CNC_GetCaseInformation and Default invoke mode confirmed; input/output mappings, conditions, IP definition and preview still needed |
 | 3 | SV-InitialMapping and SV-DefaultMapping | Pending | Actual expressions and resulting JSON |
 | 4 | Material/channel, forms, POD and letter selection | Pending | Step contents, conditions, referenced IPs/Data Mappers |
 | 5 | Entity and address selection | Pending | Mappings, validation conditions, runtime JSON |
@@ -61,3 +61,7 @@ Create the additional directories when they contain real files. Keep Salesforce 
 5. Record tests and output evidence before marking development complete.
 6. Deploy only when requested to a specified, authenticated target org using the verified deployment method.
 7. Notes and screenshots alone are not deployable metadata.
+
+## Incremental build handoff (2026-10-01)
+
+See [CODEX_HANDOFF.md](CODEX_HANDOFF.md) and [partial build specification](spec/send-communication.partial.json). The user requires launch from Case. This requirement has been recorded but not implemented or validated. Current commits contain tracking and a partial specification only, not a runnable OmniScript. Obtain the actual exports before building deployable source.
