@@ -5,7 +5,7 @@
   "source": {
     "kind": "user-supplied-designer-screenshots",
     "capturedDate": "2026-10-01",
-    "latestScreenshot": "IMG_7CABAFDD-8FD1-42F9-B32F-92158778A7D8.jpeg"
+    "latestScreenshot": "IMG_D0D11294-E903-4AC7-934C-EAC08EA9C3A0.jpeg"
   },
   "omniScript": {
     "displayName": "Send Communication",
@@ -57,6 +57,33 @@
         "IMG_1F03F5AE-FCFF-4C84-840C-04F207E1D6B4.jpeg",
         "IMG_D335A082-5392-4EA2-A7F9-9B27AE72E1E1.jpeg",
         "IMG_7CABAFDD-8FD1-42F9-B32F-92158778A7D8.jpeg"
+      ]
+    },
+    {
+      "elementName": "IP-GetForms",
+      "elementType": "Integration Procedure Action",
+      "integrationProcedure": null,
+      "complete": false,
+      "captureStatus": "in-progress",
+      "conditionalViewEvidence": {
+        "conditionType": "Show Element if True",
+        "displayedCondition": "(MaterialType = Forms OR MaterialType = Documents)",
+        "context": "IP-GetForms selected in preceding screenshot; selected-element header not visible in condition close-up",
+        "messagingFramework": {
+          "windowPostMessage": false,
+          "pubSub": false,
+          "sessionStorage": false
+        },
+        "lwcComponentOverride": ""
+      },
+      "missing": [
+        "Referenced IP identity",
+        "Action input/output mappings",
+        "Remaining action properties"
+      ],
+      "evidenceScreenshots": [
+        "IMG_70FF597B-607B-4E91-AE8E-7DFD2310FF27.jpeg",
+        "IMG_ECB61E00-ECA1-4281-8303-D3380D236979.jpeg"
       ]
     }
   ],
@@ -355,6 +382,176 @@
         "IMG_D335A082-5392-4EA2-A7F9-9B27AE72E1E1.jpeg",
         "IMG_7CABAFDD-8FD1-42F9-B32F-92158778A7D8.jpeg"
       ]
+    },
+    {
+      "name": "CNCGetHeaderAttributes",
+      "interfaceType": "Extract",
+      "inputType": "JSON",
+      "outputType": "JSON",
+      "extractSteps": [
+        {
+          "object": "CNC_Line_Attributes__mdt",
+          "outputPath": "section",
+          "filter": {
+            "combine": "OR",
+            "conditions": [
+              {
+                "field": "Section_Name__c",
+                "operator": "=",
+                "input": "sectionName"
+              },
+              {
+                "field": "DeveloperName",
+                "operator": "=",
+                "input": "lineAttributeName"
+              }
+            ]
+          },
+          "limit": 1
+        },
+        {
+          "object": "CNC_Header_Attribute__mdt",
+          "outputPath": "columns",
+          "filter": {
+            "field": "CNC_Line_Attributes__c",
+            "operator": "=",
+            "input": "section:Id"
+          },
+          "orderBy": "Column_Order__c"
+        },
+        {
+          "object": "CNC_Button_Attribute__mdt",
+          "outputPath": "buttonattributes",
+          "filter": {
+            "field": "CNC_Line_Attributes__c",
+            "operator": "=",
+            "input": "section:Id"
+          },
+          "orderBy": "Order__c"
+        },
+        {
+          "object": "CNC_Search_Attributes__mdt",
+          "outputPath": "search",
+          "filter": {
+            "field": "CNC_Line_Attributes__c",
+            "operator": "=",
+            "input": "section:Id"
+          },
+          "orderBy": "Order__c"
+        },
+        {
+          "object": "Account",
+          "outputPath": "memberInfo",
+          "filter": {
+            "combine": "OR",
+            "conditions": [
+              {
+                "field": "Id",
+                "operator": "=",
+                "input": "recId"
+              },
+              {
+                "field": "Member_Id__pc",
+                "operator": "=",
+                "input": "memberId"
+              }
+            ]
+          },
+          "limit": 1
+        },
+        {
+          "object": "Case",
+          "outputPath": "caseInfo",
+          "filter": {
+            "field": "Id",
+            "operator": "=",
+            "input": "caseRecordId"
+          }
+        }
+      ],
+      "formulas": [
+        {
+          "observedIndex": 1,
+          "resultPath": "columns:typeAttributeVariant",
+          "expression": "IF(columns:Data_Type__c == \"button\",\"base\",\"\")",
+          "isDisabled": false,
+          "verification": "screenshot transcription; exact casing/syntax to confirm from export"
+        },
+        {
+          "observedIndex": 2,
+          "resultPath": "columns:typeAttributeLabel",
+          "expression": "IF(columns:Data_Type__c == \"button\",columns:API_Response__c,\"\")",
+          "isDisabled": false,
+          "verification": "screenshot transcription; exact casing/syntax to confirm from export"
+        },
+        {
+          "observedIndex": 3,
+          "resultPath": "columns:typeAttributeName",
+          "expression": "IF(columns:Data_Type__c == \"button\",columns:API_Response__c,\"\")",
+          "isDisabled": false,
+          "verification": "screenshot transcription; exact casing/syntax to confirm from export"
+        },
+        {
+          "observedIndex": 4,
+          "resultPath": "columns:typeAttributeDisabled",
+          "expression": "IF(columns:Data_Type__c == \"button\",true,\"\")",
+          "isDisabled": false,
+          "verification": "screenshot transcription; exact casing/syntax to confirm from export"
+        },
+        {
+          "observedIndex": 8,
+          "resultPath": "section:APIRecordLimit",
+          "expression": "IF(isViewAll == \"VIEWALL\",200,10)",
+          "isDisabled": false,
+          "verification": "screenshot transcription; exact casing/syntax to confirm from export"
+        },
+        {
+          "observedIndex": 9,
+          "resultPath": "columns:typeattributesdaymonth",
+          "expression": "IF((columns:Data_Type__c == \"date\" OR columns:Data_Type__c == \"date-local\"),\"2-digit\",\"\")",
+          "isDisabled": false,
+          "verification": "screenshot transcription; exact casing/syntax to confirm from export"
+        },
+        {
+          "observedIndex": 10,
+          "resultPath": "columns:typeattributesyear",
+          "expression": "IF((columns:Data_Type__c == \"date\" OR columns:Data_Type__c == \"date-local\"),\"numeric\",\"\")",
+          "isDisabled": false,
+          "verification": "screenshot transcription; exact casing/syntax to confirm from export"
+        },
+        {
+          "observedIndex": 11,
+          "resultPath": "columns:wrapText",
+          "expression": "IF(columns:Wrap_Text__c, true, \"\")",
+          "isDisabled": false,
+          "verification": "screenshot transcription; exact casing/syntax to confirm from export"
+        }
+      ],
+      "formulaCountObserved": 11,
+      "missingFormulaIndices": [
+        5,
+        6,
+        7
+      ],
+      "outputMappings": null,
+      "options": null,
+      "complete": false,
+      "evidenceScreenshots": [
+        "IMG_1BAC4DC5-FC40-4742-AAB8-A5BD2987AA4A.jpeg",
+        "IMG_BB607193-012A-49A6-9BFB-31ED46B4A509.jpeg",
+        "IMG_6DEB6056-6CC2-42BC-82CD-D5026D874782.jpeg",
+        "IMG_E233A1B5-FBAF-4481-9189-5571277C4FAB.jpeg",
+        "IMG_D0D11294-E903-4AC7-934C-EAC08EA9C3A0.jpeg"
+      ],
+      "dependencies": {
+        "customMetadataTypes": [
+          "CNC_Line_Attributes__mdt",
+          "CNC_Header_Attribute__mdt",
+          "CNC_Button_Attribute__mdt",
+          "CNC_Search_Attributes__mdt"
+        ],
+        "customMetadataRecords": "Required records and their values not supplied"
+      }
     }
   ],
   "setValuesElements": [
@@ -523,7 +720,7 @@
         "type": "Integration Procedure Action",
         "source": "IMG_32747BB1-44F4-4042-B621-D0803ACBBBA5.jpeg",
         "order": 6,
-        "status": "Pending"
+        "status": "In progress"
       },
       {
         "name": "Step1",
@@ -848,5 +1045,59 @@
         "status": "Pending"
       }
     ]
-  }
+  },
+  "procedureDiscovery": [
+    {
+      "discoveryId": "forms-procedure-identity-unconfirmed",
+      "identity": null,
+      "scope": "Integration Procedure designer, not OmniScript",
+      "identityVerification": "Procedure name/type/subtype not visible; do not assume from open tab or OmniScript label",
+      "visibleElements": [
+        {
+          "elementName": "SV-DefaultMapping",
+          "type": "Set Values",
+          "values": [
+            {
+              "name": "sectionName",
+              "expression": null,
+              "visibleExpressionFragment": "IF(%MaterialType% = \"Forms\", \"Send Communication Forms\",",
+              "verification": "expression continues beyond readable capture; do not reconstruct"
+            },
+            {
+              "name": "type",
+              "expression": "IF(%MaterialType% = \"Forms\",\"Email Forms\",\"Email Documents\")",
+              "verification": "readable screenshot transcription; exact export syntax not validated"
+            }
+          ],
+          "responseJsonPath": "",
+          "responseJsonNode": "",
+          "executionConditionalFormula": "",
+          "failOnStepError": false,
+          "complete": false
+        },
+        {
+          "elementName": "DR-E-GetHeaderAttributes",
+          "type": "Data Mapper Extract Action",
+          "dataMapper": "CNCGetHeaderAttributes",
+          "ignoreCache": false,
+          "inputParameters": [
+            {
+              "dataSource": "SV-DefaultMapping:sectionName",
+              "filterValue": "sectionName"
+            }
+          ],
+          "sendJsonPath": "",
+          "sendJsonNode": "",
+          "responseJsonPath": "",
+          "responseJsonNode": "",
+          "sendOnlyAdditionalInput": false,
+          "complete": false
+        }
+      ],
+      "evidenceScreenshots": [
+        "IMG_442D406A-B405-4965-AF08-059D1EBDE932.jpeg",
+        "IMG_B5075B6E-84B4-4C77-876E-0C2C5E5EAEE2.jpeg"
+      ]
+    }
+  ]
 }
