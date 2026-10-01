@@ -5,7 +5,7 @@
   "source": {
     "kind": "user-supplied-designer-screenshots",
     "capturedDate": "2026-10-01",
-    "latestScreenshot": "IMG_D0D11294-E903-4AC7-934C-EAC08EA9C3A0.jpeg"
+    "latestScreenshot": "IMG_AAC4E10A-A045-42EF-96F1-77BD29279D7A.jpeg"
   },
   "omniScript": {
     "displayName": "Send Communication",
@@ -533,7 +533,192 @@
         6,
         7
       ],
-      "outputMappings": null,
+      "outputMappings": [
+        {
+          "extractJsonPath": "buttonattributes:Action_Name__c",
+          "outputJsonPath": "buttons:Name"
+        },
+        {
+          "extractJsonPath": "buttonattributes:Order__c",
+          "outputJsonPath": "buttons:order"
+        },
+        {
+          "extractJsonPath": "caseInfo:CaseNumber",
+          "outputJsonPath": "caseNumber"
+        },
+        {
+          "extractJsonPath": "caseInfo:Id",
+          "outputJsonPath": "caseId"
+        },
+        {
+          "extractJsonPath": "caseInfo:OwnerId",
+          "outputJsonPath": "caseOwnerId"
+        },
+        {
+          "extractJsonPath": "caseInfo:Previous_Owner__c",
+          "outputJsonPath": "previousCaseOwnerId"
+        },
+        {
+          "extractJsonPath": "caseInfo:Source_System_ID__c",
+          "outputJsonPath": "externalId"
+        },
+        {
+          "extractJsonPath": "columns:API_Response__c",
+          "outputJsonPath": "Columns:fieldName"
+        },
+        {
+          "extractJsonPath": "columns:Column_Order__c",
+          "outputJsonPath": "columns:orders"
+        },
+        {
+          "extractJsonPath": "columns:Data_Type__c",
+          "outputJsonPath": "Columns:type"
+        },
+        {
+          "extractJsonPath": "columns:Help_Text__c",
+          "outputJsonPath": "Columns:helpText"
+        },
+        {
+          "extractJsonPath": "columns:Is_Sortable__c",
+          "outputJsonPath": "Columns:sortable"
+        },
+        {
+          "extractJsonPath": "columns:Response_Label__c",
+          "outputJsonPath": "Columns:label"
+        },
+        {
+          "extractJsonPath": "columns:Type_Attribute_Target__c",
+          "outputJsonPath": "Columns:typeAttributes:target"
+        },
+        {
+          "extractJsonPath": "columns:typeAttributeLabel",
+          "outputJsonPath": "Columns:typeAttributes:label:fieldName"
+        },
+        {
+          "extractJsonPath": "columns:typeAttributeName",
+          "outputJsonPath": "Columns:typeAttributes:name"
+        },
+        {
+          "extractJsonPath": "columns:typeattributesdaymonth",
+          "outputJsonPath": "Columns:typeAttributes:day"
+        },
+        {
+          "extractJsonPath": "columns:typeattributesdaymonth",
+          "outputJsonPath": "Columns:typeAttributes:month"
+        },
+        {
+          "extractJsonPath": "columns:typeattributesyear",
+          "outputJsonPath": "Columns:typeAttributes:year"
+        },
+        {
+          "extractJsonPath": "columns:typeAttributeVariant",
+          "outputJsonPath": "Columns:typeAttributes:variant"
+        },
+        {
+          "extractJsonPath": "columns:wrapText",
+          "outputJsonPath": "Columns:wrapText"
+        },
+        {
+          "extractJsonPath": "memberInfo:Blue_Shield_Id__c",
+          "outputJsonPath": "blueShieldId"
+        },
+        {
+          "extractJsonPath": "memberInfo:Enterprise_Person_Id__c",
+          "outputJsonPath": "personId"
+        },
+        {
+          "extractJsonPath": "memberInfo:HIPAA_Flag__pc",
+          "outputJsonPath": "hipaaFlag"
+        },
+        {
+          "extractJsonPath": "memberInfo:Id",
+          "outputJsonPath": "Id"
+        },
+        {
+          "extractJsonPath": "memberInfo:Member_Id__pc",
+          "outputJsonPath": "memberId"
+        },
+        {
+          "extractJsonPath": "memberInfo:Name",
+          "outputJsonPath": "Name"
+        },
+        {
+          "extractJsonPath": "memberInfo:NPI__c",
+          "outputJsonPath": "providerNPI"
+        },
+        {
+          "extractJsonPath": "memberInfo:UMPI__c",
+          "outputJsonPath": "providerUMPI"
+        },
+        {
+          "extractJsonPath": "profileName:Profile.Name",
+          "outputJsonPath": "profName"
+        },
+        {
+          "extractJsonPath": "search:API_Response__c",
+          "outputJsonPath": "search:fieldName"
+        },
+        {
+          "extractJsonPath": "search:Field_Type__c",
+          "outputJsonPath": "search:FieldType"
+        },
+        {
+          "extractJsonPath": "search:Order__c",
+          "outputJsonPath": "search:orderlist"
+        },
+        {
+          "extractJsonPath": "search:Response_Label__c",
+          "outputJsonPath": "search:labelName"
+        },
+        {
+          "extractJsonPath": "section:APIRecordLimit",
+          "outputJsonPath": "apiRecordLimit"
+        },
+        {
+          "extractJsonPath": "section:Component_Name__c",
+          "outputJsonPath": "componentName"
+        },
+        {
+          "extractJsonPath": "section:Is_Selectable__c",
+          "outputJsonPath": "IsSelectable"
+        },
+        {
+          "extractJsonPath": "section:Query_Clause__c",
+          "outputJsonPath": "fieldToFilter"
+        },
+        {
+          "extractJsonPath": "section:Record_Limit_Per_Page__c",
+          "outputJsonPath": "recordLimitPerPage"
+        },
+        {
+          "extractJsonPath": "section:Section_Name__c",
+          "outputJsonPath": "sectionName"
+        },
+        {
+          "extractJsonPath": "section:Selectable_Type__c",
+          "outputJsonPath": "selectableType"
+        },
+        {
+          "extractJsonPath": "section:Show_Filter_By__c",
+          "outputJsonPath": "showFilterBy"
+        },
+        {
+          "extractJsonPath": "section:Show_Pagination__c",
+          "outputJsonPath": "showPagination"
+        },
+        {
+          "extractJsonPath": "section:Show_Row_Number__c",
+          "outputJsonPath": "showRowNumber"
+        },
+        {
+          "extractJsonPath": "section:Show_Search__c",
+          "outputJsonPath": "showSearch"
+        },
+        {
+          "extractJsonPath": "section:Show_ViewAll__c",
+          "outputJsonPath": "showViewAll"
+        }
+      ],
       "options": null,
       "complete": false,
       "evidenceScreenshots": [
@@ -541,7 +726,11 @@
         "IMG_BB607193-012A-49A6-9BFB-31ED46B4A509.jpeg",
         "IMG_6DEB6056-6CC2-42BC-82CD-D5026D874782.jpeg",
         "IMG_E233A1B5-FBAF-4481-9189-5571277C4FAB.jpeg",
-        "IMG_D0D11294-E903-4AC7-934C-EAC08EA9C3A0.jpeg"
+        "IMG_D0D11294-E903-4AC7-934C-EAC08EA9C3A0.jpeg",
+        "IMG_0BFF5C8A-39D1-4135-876D-CAFA3588C477.jpeg",
+        "IMG_8338C9DE-FFCF-40DB-83A8-872406407A35.jpeg",
+        "IMG_24C75048-B01C-4F62-84DF-031521FFB715.jpeg",
+        "IMG_AAC4E10A-A045-42EF-96F1-77BD29279D7A.jpeg"
       ],
       "dependencies": {
         "customMetadataTypes": [
@@ -551,6 +740,27 @@
           "CNC_Search_Attributes__mdt"
         ],
         "customMetadataRecords": "Required records and their values not supplied"
+      },
+      "outputMappingCoverage": {
+        "capturedSourceToTargetRows": 46,
+        "complete": false,
+        "rowDetailPropertiesVerified": false,
+        "visibleRowsWithBlankSource": [
+          {
+            "extractJsonPath": "",
+            "outputJsonPath": "search"
+          },
+          {
+            "extractJsonPath": "",
+            "outputJsonPath": "Columns"
+          }
+        ],
+        "notes": [
+          "Blank source rows are recorded as displayed; their detailed settings and purpose are unknown.",
+          "Preserve Columns versus columns casing and columns:orders spelling; do not normalize.",
+          "profileName:Profile.Name is mapped, but its source extraction step is not captured.",
+          "Output list begins with buttonattributes in this batch; do not assume there are no earlier rows."
+        ]
       }
     }
   ],
