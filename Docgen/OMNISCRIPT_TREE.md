@@ -79,7 +79,7 @@ IP-GetForms — in progress. Visible Forms/Documents condition and discovered IP
 
 ## Step1 capture
 
-Step1 expanded layout and visible component references are saved in [partial specification](spec/send-communication.partial.json), under stepElements. Step and child properties, conditional views, component attributes and unnamed element identities remain pending. Next: Step1 Properties, then CustomLWC4 Properties.
+Step1 expanded layout and visible component references are saved in [partial specification](spec/send-communication.partial.json), under stepElements. Step1 basic settings and visible CustomLWC4/CustomLWC2 input properties are captured in the same entries. Remaining Step/button settings, child conditional views, CustomLWC4 lower properties and unnamed/messaging element properties remain pending. Next: CustomLWC4 lower properties and Conditional View, then CustomLWC2 Conditional View.
 
 ## Visible condition evidence
 
