@@ -5,7 +5,7 @@
   "source": {
     "kind": "user-supplied-designer-screenshots",
     "capturedDate": "2026-10-01",
-    "latestScreenshot": "IMG_8BB5FFE5-E0AB-44C4-B8AF-10E6FD13D929.jpeg"
+    "latestScreenshot": "IMG_52BBECB3-3338-4435-A68C-7D43A4DAA4C2.jpeg"
   },
   "omniScript": {
     "displayName": "Send Communication",
@@ -499,6 +499,27 @@
           "verification": "screenshot transcription; exact casing/syntax to confirm from export"
         },
         {
+          "observedIndex": 5,
+          "resultPath": "section:Show_Pagination__c",
+          "expression": "IF(isViewAll == \"VIEWALL\",true,section:Show_Pagination__c)",
+          "isDisabled": false,
+          "verification": "readable screenshot transcription; runtime not validated"
+        },
+        {
+          "observedIndex": 6,
+          "resultPath": "section:Show_ViewAll__c",
+          "expression": "IF(isViewAll == \"VIEWALL\",false,section:Show_ViewAll__c)",
+          "isDisabled": false,
+          "verification": "readable screenshot transcription; runtime not validated"
+        },
+        {
+          "observedIndex": 7,
+          "resultPath": "section:Record_Limit_Per_Page__c",
+          "expression": "IF(isViewAll == \"VIEWALL\",50,section:Record_Limit_Per_Page__c)",
+          "isDisabled": false,
+          "verification": "readable screenshot transcription; runtime not validated"
+        },
+        {
           "observedIndex": 8,
           "resultPath": "section:APIRecordLimit",
           "expression": "IF(isViewAll == \"VIEWALL\",200,10)",
@@ -528,11 +549,7 @@
         }
       ],
       "formulaCountObserved": 11,
-      "missingFormulaIndices": [
-        5,
-        6,
-        7
-      ],
+      "missingFormulaIndices": [],
       "outputMappings": [
         {
           "extractJsonPath": "buttonattributes:Action_Name__c",
@@ -736,7 +753,8 @@
         "IMG_8338C9DE-FFCF-40DB-83A8-872406407A35.jpeg",
         "IMG_24C75048-B01C-4F62-84DF-031521FFB715.jpeg",
         "IMG_AAC4E10A-A045-42EF-96F1-77BD29279D7A.jpeg",
-        "IMG_8BB5FFE5-E0AB-44C4-B8AF-10E6FD13D929.jpeg"
+        "IMG_8BB5FFE5-E0AB-44C4-B8AF-10E6FD13D929.jpeg",
+        "IMG_52BBECB3-3338-4435-A68C-7D43A4DAA4C2.jpeg"
       ],
       "dependencies": {
         "customMetadataTypes": [
@@ -767,6 +785,12 @@
           "profileName:Profile.Name is mapped, but its source extraction step is not captured.",
           "Output list begins with buttonattributes in this batch; do not assume there are no earlier rows."
         ]
+      },
+      "formulaCapture": {
+        "capturedCount": 11,
+        "observedCount": 11,
+        "allObservedIndicesCaptured": true,
+        "runtimeValidated": false
       }
     }
   ],
