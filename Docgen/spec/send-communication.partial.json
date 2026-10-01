@@ -962,7 +962,7 @@
         }
       ],
       "missing": [
-        "Formulas and Options tabs",
+        "Options tab",
         "Output row-level properties/defaults/types",
         "Verify extract filter grouping and false literal semantics"
       ],
@@ -1042,6 +1042,11 @@
       "outputMappingCoverage": {
         "visibleRows": 8,
         "rowDetailPropertiesVerified": false
+      },
+      "formulas": [],
+      "formulaCoverage": {
+        "count": 0,
+        "verification": "User confirmed no formulas on 2026-10-01"
       }
     }
   ],
