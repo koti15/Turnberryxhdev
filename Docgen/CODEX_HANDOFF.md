@@ -2,6 +2,22 @@
 
 Updated 2026-10-01. This file contains the reconstruction instructions, completed capture work, pending gaps and all structured configuration recorded so far. Codex can start and continue from this file.
 
+## Immediate implementation requirement
+
+The user rejected a draft described as "Partial reconstruction from supplied evidence. Inactive, incomplete actions ..." with only the outer Step/Set Values structure visible. Creating labels or empty Steps does not satisfy this request.
+
+The requested deliverable is actual configured OmniStudio components in the existing new draft, matching the captured reference portion. Do not stop at another tracker, skeleton, plan or documentation commit.
+
+1. Retrieve/inspect the existing draft and its committed source in the connected Codex environment. Reuse that draft; do not create another copy.
+2. Expand each of the first seven captured outer elements and compare its actual nested contents and properties against the detailed configuration below. Do not assume a collapsed step is empty; inspect it.
+3. Implement every confirmed setting that can be implemented from this evidence. Include Set Values assignments, Integration Procedure/Data Mapper definitions and mappings, material/channel controls and captured conditions, and the Step1 custom LWC references/input properties. Use available existing custom components where their source and identity are verified.
+4. Missing fields block only the specific affected configuration. Continue independent confirmed implementation. Do not substitute empty actions or invented defaults for unresolved fields.
+5. For outer elements 8–52, the tree inventory is a reference backlog. An empty Step or action bearing its name is not a completed component. Do not create additional placeholder elements merely to reproduce the tree.
+6. Check the actual draft after writes: expand MaterialAndCommunicationChannel and Step1 and inspect the child controls/properties; inspect each captured action's referenced IP/mapper and input/response settings. Report real component identifiers, source paths and confirmed property matches. This is configuration verification; user-deferred Preview remains deferred.
+7. Mark each component separately: configured from evidence, partially configured with named blockers, or not implemented. Do not describe an inactive draft as a completed runnable replica. Do not activate or perform delivery operations.
+
+The Case launcher and uncaptured settings still need actual source or exact evidence. They do not justify omitting already captured fields, mappings or Step children.
+
 ## Capture progress versus implementation
 
 | Scope | Completed capture | Pending work |
