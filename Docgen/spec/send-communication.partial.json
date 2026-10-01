@@ -148,5 +148,56 @@
         "personalValuesOmitted": true
       }
     }
-  ]
+  ],
+  "setValuesElements": [
+    {
+      "elementName": "SV-InitialMapping",
+      "type": "Set Values",
+      "values": [
+        {
+          "name": "isLoggedInUserSameAsCaseOwner",
+          "useExpression": true,
+          "expression": "IF(%caseOwnerId% = %loggedInUserId%, true, false)"
+        }
+      ],
+      "complete": false
+    },
+    {
+      "elementName": "SV-DefaultMapping",
+      "type": "Set Values",
+      "values": [
+        {
+          "name": "isPrint",
+          "useExpression": true,
+          "expression": "IF(%OutboundChannel% = \"Print\" || %OutboundChannel2% = \"Print\", true, false)"
+        },
+        {
+          "name": "isEmail",
+          "useExpression": true,
+          "expression": "IF(%OutboundChannel% = \"Email\", true, false)"
+        },
+        {
+          "name": "isAsyncLetterGeneration",
+          "useExpression": true,
+          "expression": "IF(%MaterialType% = \"POD Documents\", false, true)"
+        },
+        {
+          "name": "isDocumentUploaded",
+          "useExpression": false,
+          "valueText": "false",
+          "runtimeValueType": "unverified"
+        },
+        {
+          "name": "selectedTemplate",
+          "useExpression": true,
+          "expression": "null"
+        }
+      ],
+      "complete": false
+    }
+  ],
+  "validationPreference": {
+    "preview": "deferred-by-user",
+    "runtimeValidated": false
+  }
 }
