@@ -5,7 +5,7 @@
   "source": {
     "kind": "user-supplied-designer-screenshots",
     "capturedDate": "2026-10-01",
-    "latestScreenshot": "IMG_9ECBF03F-7E51-455D-9A3B-65293944794F.jpeg"
+    "latestScreenshot": "IMG_7CABAFDD-8FD1-42F9-B32F-92158778A7D8.jpeg"
   },
   "omniScript": {
     "displayName": "Send Communication",
@@ -33,6 +33,31 @@
       "inputMapping": null,
       "responseMapping": null,
       "executionCondition": null
+    },
+    {
+      "elementName": "ExtractEmailBodyForMMR",
+      "fieldLabel": "ExtractEmailBodyForMMR",
+      "elementType": "Data Mapper Extract Action",
+      "dataMapper": "GetMMREmailTemplate",
+      "ignoreCache": false,
+      "inputParameters": [
+        {
+          "dataSource": "DeveloperName",
+          "filterValueDisplayed": "MMR_EMAIL_TEMPLATE",
+          "literalQuotingVerified": false
+        }
+      ],
+      "responseTransformations": null,
+      "userMessage": null,
+      "errorMessages": null,
+      "executionCondition": null,
+      "complete": false,
+      "evidenceScreenshots": [
+        "IMG_F2B01301-44F0-407A-A0CF-FF1F66E6AD37.jpeg",
+        "IMG_1F03F5AE-FCFF-4C84-840C-04F207E1D6B4.jpeg",
+        "IMG_D335A082-5392-4EA2-A7F9-9B27AE72E1E1.jpeg",
+        "IMG_7CABAFDD-8FD1-42F9-B32F-92158778A7D8.jpeg"
+      ]
     }
   ],
   "missingForRunnableBuild": [
@@ -286,6 +311,50 @@
           "providerBlueshildId versus providerBlueshieldId"
         ]
       }
+    },
+    {
+      "name": "GetMMREmailTemplate",
+      "interfaceType": "Extract",
+      "inputType": "JSON",
+      "outputType": "JSON",
+      "extractSteps": [
+        {
+          "object": "EmailTemplate",
+          "outputPath": "Email",
+          "filter": {
+            "field": "DeveloperName",
+            "operator": "=",
+            "valueDisplayed": "'MMR_EMAIL_TEMPLATE'",
+            "sourceKind": "displayed-quoted-value",
+            "exactQuoteSemanticsVerified": false
+          }
+        }
+      ],
+      "outputMappings": [
+        {
+          "extractJsonPath": "Email:HtmlValue",
+          "outputJsonPath": "mmrEmailTemplate:selectedTemplate:htmlValue"
+        },
+        {
+          "extractJsonPath": "Email:Subject",
+          "outputJsonPath": "mmrEmailTemplate:selectedTemplate:emailTemplateSubject"
+        }
+      ],
+      "formulas": null,
+      "options": null,
+      "complete": false,
+      "previewEvidence": {
+        "inputKey": "DeveloperName",
+        "inputValue": "MMR_EMAIL_TEMPLATE",
+        "responseVisible": false,
+        "executedSuccessfullyVerified": false
+      },
+      "evidenceScreenshots": [
+        "IMG_F2B01301-44F0-407A-A0CF-FF1F66E6AD37.jpeg",
+        "IMG_1F03F5AE-FCFF-4C84-840C-04F207E1D6B4.jpeg",
+        "IMG_D335A082-5392-4EA2-A7F9-9B27AE72E1E1.jpeg",
+        "IMG_7CABAFDD-8FD1-42F9-B32F-92158778A7D8.jpeg"
+      ]
     }
   ],
   "setValuesElements": [
@@ -447,7 +516,7 @@
         "type": "Data Mapper Extract Action",
         "source": "IMG_32747BB1-44F4-4042-B621-D0803ACBBBA5.jpeg",
         "order": 5,
-        "status": "Pending"
+        "status": "Saved"
       },
       {
         "name": "IP-GetForms",
