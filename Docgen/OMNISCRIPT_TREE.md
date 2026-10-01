@@ -5,7 +5,7 @@ Captured: 2026-10-01.
 
 This is the ordered visible designer tree transcribed from the six supplied screenshots. Step children are collapsed and are not enumerated here.
 
-Saved = supplied configuration evidence recorded for elements 1–5. Pending = element name/type recorded, detailed configuration still to capture. These statuses track documentation progress, not org implementation. Any exact-property gaps in the first four remain in the linked evidence notes.
+Saved = supplied configuration evidence recorded for elements 1–5. Pending = element name/type recorded, detailed configuration still to capture. In progress = some new evidence captured, dependency details still pending. These statuses track documentation progress, not org implementation. Any exact-property gaps in the first four remain in the linked evidence notes.
 
 ## Overall tree and capture status
 
@@ -16,7 +16,7 @@ Saved = supplied configuration evidence recorded for elements 1–5. Pending = e
 | 3 | MaterialAndCommunicationChannel | Step | Saved |
 | 4 | SV-DefaultMapping | Set Values | Saved |
 | 5 | ExtractEmailBodyForMMR | Data Mapper Extract Action | Saved |
-| 6 | IP-GetForms | Integration Procedure Action | Pending |
+| 6 | IP-GetForms | Integration Procedure Action | In progress |
 | 7 | Step1 | Step | Pending |
 | 8 | SV-FormSelectionValues | Set Values | Pending |
 | 9 | SE-FormSelectionError | Set Errors | Pending |
@@ -75,7 +75,7 @@ Saved = supplied configuration evidence recorded for elements 1–5. Pending = e
 
 ## Next element
 
-IP-GetForms — capture its referenced IP, input/output transformations, conditions and other properties.
+IP-GetForms — in progress. Visible Forms/Documents condition and discovered IP/DR properties are saved in the canonical specification. Still needed: referenced IP identity/action mappings, CNCGetHeaderAttributes formulas 5–7, Output mappings and Options. A similarly named SV-DefaultMapping in the IP is stored separately from the OmniScript element.
 
 ## Visible condition evidence
 
