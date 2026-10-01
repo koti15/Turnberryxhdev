@@ -2,6 +2,25 @@
 
 Updated 2026-10-01. This file contains the reconstruction instructions, completed capture work, pending gaps and all structured configuration recorded so far. Codex can start and continue from this file.
 
+## Current user instruction: build and deploy the captured portion
+
+On 2026-10-01 the user explicitly instructed: "Give then what ever you had so codex will deploy to my org".
+This authorizes development and deployment of the captured portion in the user's connected target org. Earlier no-deploy wording in this document and historical safety.deploy=false in the evidence snapshot are superseded for this requested operation. Activation and real document/email delivery remain unrequested.
+
+1. Pull the latest main branch in koti15/Turnberryxhdev. Read this entire file and applicable repository instructions.
+2. Resolve the target org from the existing Codex session's explicit org selection. Verify authentication, identity and installed OmniStudio runtime/namespace without exposing credentials. If there is no unambiguous target, request only the target alias/selection; do not choose an org from screenshots.
+3. Inspect the existing partial draft and source/export format. Reuse and correct it, preserving unrelated work and the photographed reference. Retrieve existing referenced components when available.
+4. Develop real OmniScript elements in the captured outer order: IP-GETCaseDetails, SV-InitialMapping, MaterialAndCommunicationChannel, SV-DefaultMapping, ExtractEmailBodyForMMR, IP-GetForms, Step1. Apply all recorded properties and child configuration below.
+5. Include the dependency chains:
+   - IP-GETCaseDetails → CNC_GetCaseInformation → DR-E-GetCaseInfo → CNCGetCaseInfo.
+   - ExtractEmailBodyForMMR → GetMMREmailTemplate.
+   - IP-GetForms → CNC_GetEmailFormsDetails → its ordered SV-DefaultMapping, DR-E-GetHeaderAttributes, DR-E-GetForms, ResponseAction; mapper references CNCGetHeaderAttributes and CNCGetInternalAndExternalLinks.
+   - Step1 → existing verified cncDynamicTableSections and cncAttachmentsUploadSection, with the recorded input properties.
+6. Convert recorded configuration into the actual supported metadata/DataPack format. These notes and the partial JSON are not deployable source. Do not invent exact expressions from behavior-only descriptions, radio stored values, action mappings, Case wiring or custom LWC source.
+7. Resolve missing exact settings from existing authorized org/source where possible. A specific unresolved setting must not stop independent confirmed development. Deploy only components that pass the required schema/dependency checks. Do not substitute empty executable actions or report partial components as exact replicas.
+8. Validate and deploy the resulting supported source using the verified runtime's deployment method. Keep the new script inactive. Inspect deployed configuration and dependency references; Preview remains deferred.
+9. Commit actual deployable source, the deployment result/identifier, target identity, actual deployed component identifiers and remaining blockers. Update this same MD with configured, deployed, partial and pending statuses. A documentation commit or validation-only result is not deployment success.
+
 ## Immediate implementation requirement
 
 The user rejected a draft described as "Partial reconstruction from supplied evidence. Inactive, incomplete actions ..." with only the outer Step/Set Values structure visible. Creating labels or empty Steps does not satisfy this request.
@@ -107,7 +126,7 @@ Launch from Case is a user requirement. Existing launch mechanism and Case-ID in
 Inspect the actual launcher/action and IP input before choosing ContextId, recordId or caseId. A component property referencing %ContextId% does not by itself prove end-to-end Case wiring.
 Do not invent a Case page, quick action, Apex method, document template, token map, API request or delivery behavior.
 Preview is deferred by the user. Do not claim runtime validation. Source/schema checks may be recorded honestly.
-Do not activate, deploy, generate/send real documents or email, or upload files without the relevant user instruction and known target.
+Deployment of the captured portion is now explicitly requested under Current user instruction above. Do not activate, generate/send real documents or email, or upload files without the relevant user instruction.
 
 ## Current stopping point and next evidence
 
@@ -118,7 +137,7 @@ Full exports of the reference OmniScript, referenced IPs, Data Mappers and custo
 
 ## Prompt to give Codex
 
-Read Docgen/AGENTS.md and Docgen/CODEX_HANDOFF.md first. Use Docgen/spec/send-communication.partial.json as the sole canonical captured configuration and Docgen/OMNISCRIPT_TREE.md for outer order. Audit your existing changes against these files, then reconstruct the verified portion one-to-one in the documented order on a working branch. Preserve exact names, tokens, expressions, mappings and parent scope. Do not guess missing properties, duplicate components, redesign the flow, overwrite the reference, or mark notes as a completed build. Report the mismatch audit and exact blockers. Preview remains deferred; do not activate or deploy.
+Read Docgen/AGENTS.md and Docgen/CODEX_HANDOFF.md first. Use Docgen/spec/send-communication.partial.json as the sole canonical captured configuration and Docgen/OMNISCRIPT_TREE.md for outer order. Audit your existing changes against these files, then reconstruct the verified portion one-to-one in the documented order on a working branch. Preserve exact names, tokens, expressions, mappings and parent scope. Do not guess missing properties, duplicate components, redesign the flow, overwrite the reference, or mark notes as a completed build. Report the mismatch audit and exact blockers. Preview remains deferred; keep the draft inactive and follow the current authorized deployment instructions above.
 
 ## Complete captured configuration
 
