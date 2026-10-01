@@ -5,7 +5,7 @@
   "source": {
     "kind": "user-supplied-designer-screenshots",
     "capturedDate": "2026-10-01",
-    "latestScreenshot": "IMG_301BEC87-F5B9-4FC0-AE52-A5FDEE7C24A3.jpeg"
+    "latestScreenshot": "IMG_47D9238B-0196-455C-BA6C-59114DBCAD23.jpeg"
   },
   "omniScript": {
     "displayName": "Send Communication",
@@ -98,7 +98,137 @@
         }
       ],
       "formulaCountObserved": 13,
-      "outputMappings": null,
+      "outputMappings": [
+        {
+          "extractJsonPath": "caseInfo:Account.Blue_Shield_Id__c",
+          "outputJsonPath": "providerBlueshildId",
+          "verification": "Output spelling appears providerBlueshildId in mapping screenshot; earlier schema transcription was providerBlueshieldId. Confirm exact spelling from export or close-up before executable build."
+        },
+        {
+          "extractJsonPath": "caseInfo:Account.Member_Id__pc",
+          "outputJsonPath": "localMemberId"
+        },
+        {
+          "extractJsonPath": "caseInfo:Account.NPI__c",
+          "outputJsonPath": "providerNPI"
+        },
+        {
+          "extractJsonPath": "caseInfo:Account.PersonBirthdate",
+          "outputJsonPath": "memberDOB"
+        },
+        {
+          "extractJsonPath": "caseInfo:Account.PersonEmail",
+          "outputJsonPath": "memberEmail"
+        },
+        {
+          "extractJsonPath": "caseInfo:Account.PersonMailingCity",
+          "outputJsonPath": "localCity"
+        },
+        {
+          "extractJsonPath": "caseInfo:Account.PersonMailingCountry",
+          "outputJsonPath": "localCountry"
+        },
+        {
+          "extractJsonPath": "caseInfo:Account.PersonMailingPostalCode",
+          "outputJsonPath": "localPostalCode"
+        },
+        {
+          "extractJsonPath": "caseInfo:Account.PersonMailingState",
+          "outputJsonPath": "localState"
+        },
+        {
+          "extractJsonPath": "caseInfo:Account.PersonMailingStreet",
+          "outputJsonPath": "localStreet"
+        },
+        {
+          "extractJsonPath": "caseInfo:Account.Primary_Address__pc",
+          "outputJsonPath": "localFullAddress"
+        },
+        {
+          "extractJsonPath": "caseInfo:Account.Subscriber_Id__pc",
+          "outputJsonPath": "subscriberId"
+        },
+        {
+          "extractJsonPath": "caseInfo:Account.UMPI__c",
+          "outputJsonPath": "providerUMPI"
+        },
+        {
+          "extractJsonPath": "caseInfo:CaseNumber",
+          "outputJsonPath": "caseNumber"
+        },
+        {
+          "extractJsonPath": "caseInfo:Description",
+          "outputJsonPath": "caseDescription"
+        },
+        {
+          "extractJsonPath": "caseInfo:Id",
+          "outputJsonPath": "Id"
+        },
+        {
+          "extractJsonPath": "caseInfo:Owner.Name",
+          "outputJsonPath": "ownerName"
+        },
+        {
+          "extractJsonPath": "caseInfo:OwnerId",
+          "outputJsonPath": "caseOwnerId"
+        },
+        {
+          "extractJsonPath": "caseInfo:relationship",
+          "outputJsonPath": "caseType"
+        },
+        {
+          "extractJsonPath": "caseInfo:Source_System__c",
+          "outputJsonPath": "sourceSystem"
+        },
+        {
+          "extractJsonPath": "createdDate",
+          "outputJsonPath": "createdDate"
+        },
+        {
+          "extractJsonPath": "currentDate",
+          "outputJsonPath": "currentDate"
+        },
+        {
+          "extractJsonPath": "localEnterprisePersonId",
+          "outputJsonPath": "localEnterprisePersonId"
+        },
+        {
+          "extractJsonPath": "localMemberFirstName",
+          "outputJsonPath": "localMemberFirstName"
+        },
+        {
+          "extractJsonPath": "localMemberLastName",
+          "outputJsonPath": "localMemberLastName"
+        },
+        {
+          "extractJsonPath": "localMemberName",
+          "outputJsonPath": "localMemberName"
+        },
+        {
+          "extractJsonPath": "loggedInUserInfo:Id",
+          "outputJsonPath": "loggedInUserId"
+        },
+        {
+          "extractJsonPath": "receivedDate",
+          "outputJsonPath": "receivedDate"
+        },
+        {
+          "extractJsonPath": "relatedEntities",
+          "outputJsonPath": "relatedEntities"
+        },
+        {
+          "extractJsonPath": "relatedEntityCount",
+          "outputJsonPath": "relatedEntityCount"
+        },
+        {
+          "extractJsonPath": "serviceRepName",
+          "outputJsonPath": "serviceRepName"
+        },
+        {
+          "extractJsonPath": "todayDate",
+          "outputJsonPath": "todayDate"
+        }
+      ],
       "evidencePath": "Docgen/evidence/CNC_GetCaseInformation.md",
       "complete": false,
       "visibleOutputSchemaKeys": [
@@ -146,6 +276,14 @@
         "caseQueryResultCount": 0,
         "successfulCaseRetrievalVerified": false,
         "personalValuesOmitted": true
+      },
+      "outputMappingCoverage": {
+        "visibleRows": 32,
+        "allPreviouslyCapturedKeysRepresentedExceptSpellingDiscrepancy": true,
+        "rowDetailPropertiesVerified": false,
+        "spellingDiscrepancies": [
+          "providerBlueshildId versus providerBlueshieldId"
+        ]
       }
     }
   ],
