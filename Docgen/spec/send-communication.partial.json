@@ -5,7 +5,7 @@
   "source": {
     "kind": "user-supplied-designer-screenshots",
     "capturedDate": "2026-10-01",
-    "latestScreenshot": "IMG_29034490-76E5-4170-AD4B-EC3073A16790.jpeg"
+    "latestScreenshot": "IMG_BB1CA589-D991-47C2-8064-76907F69E666.jpeg"
   },
   "omniScript": {
     "displayName": "Send Communication",
@@ -1251,7 +1251,7 @@
         "type": "Step",
         "source": "IMG_32747BB1-44F4-4042-B621-D0803ACBBBA5.jpeg",
         "order": 7,
-        "status": "Pending"
+        "status": "In progress"
       },
       {
         "name": "SV-FormSelectionValues",
@@ -1570,5 +1570,90 @@
       }
     ]
   },
-  "procedureDiscovery": []
+  "procedureDiscovery": [],
+  "stepElements": [
+    {
+      "elementName": "Step1",
+      "elementType": "Step",
+      "captureStatus": "in-progress",
+      "complete": false,
+      "visibleLayoutItems": [
+        {
+          "order": 1,
+          "elementName": null,
+          "displayText": "Select Forms",
+          "elementType": null
+        },
+        {
+          "order": 2,
+          "elementName": null,
+          "displayText": "Select Documents",
+          "elementType": null
+        },
+        {
+          "order": 3,
+          "elementName": "Messaging12",
+          "elementType": null
+        },
+        {
+          "order": 4,
+          "elementName": "Messaging13",
+          "elementType": null
+        },
+        {
+          "order": 5,
+          "elementName": "LineBreak13",
+          "elementType": null
+        },
+        {
+          "order": 6,
+          "elementName": "CustomLWC4",
+          "elementType": "Custom LWC",
+          "componentDisplayed": "c:cncDynamicTableSections"
+        },
+        {
+          "order": 7,
+          "elementName": "LineBreak14",
+          "elementType": null
+        },
+        {
+          "order": 8,
+          "elementName": null,
+          "displayText": "Upload Forms/Documents - PDF documents only\n(If Applicable)",
+          "elementType": null
+        },
+        {
+          "order": 9,
+          "elementName": "CustomLWC2",
+          "elementType": "Custom LWC",
+          "componentDisplayed": "c:cncAttachmentsUploadSection"
+        },
+        {
+          "order": 10,
+          "elementName": null,
+          "displayText": "Ensure Email is selected only for Non-PHI Forms",
+          "elementType": null
+        },
+        {
+          "order": 11,
+          "elementName": null,
+          "displayText": "Ensure Email is selected only for Non-PHI Document",
+          "elementType": null
+        }
+      ],
+      "navigationVisible": [
+        "Previous",
+        "Next"
+      ],
+      "missing": [
+        "Step properties and conditional view",
+        "Unnamed heading/guidance element identities and types",
+        "Child element properties, conditions and component attributes",
+        "Custom component source and dependencies"
+      ],
+      "evidenceScreenshots": [
+        "IMG_BB1CA589-D991-47C2-8064-76907F69E666.jpeg"
+      ]
+    }
+  ]
 }
