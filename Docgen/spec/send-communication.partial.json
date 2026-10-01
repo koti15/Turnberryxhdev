@@ -5,7 +5,7 @@
   "source": {
     "kind": "user-supplied-designer-screenshots",
     "capturedDate": "2026-10-01",
-    "latestScreenshot": "IMG_52BBECB3-3338-4435-A68C-7D43A4DAA4C2.jpeg"
+    "latestScreenshot": "IMG_7ED0B145-6A45-4A1C-A157-8CF97DE80626.jpeg"
   },
   "omniScript": {
     "displayName": "Send Communication",
@@ -77,14 +77,49 @@
         "lwcComponentOverride": ""
       },
       "missing": [
-        "Referenced IP identity",
-        "Action input/output mappings",
-        "Remaining action properties"
+        "Referenced IP identity and invoke mode",
+        "Remaining action properties/user messages/errors",
+        "Confirm selected-element name from top properties"
       ],
       "evidenceScreenshots": [
         "IMG_70FF597B-607B-4E91-AE8E-7DFD2310FF27.jpeg",
-        "IMG_ECB61E00-ECA1-4281-8303-D3380D236979.jpeg"
-      ]
+        "IMG_ECB61E00-ECA1-4281-8303-D3380D236979.jpeg",
+        "IMG_A7EC281B-F3FC-4FCF-BD04-501ED686935E.jpeg",
+        "IMG_7ED0B145-6A45-4A1C-A157-8CF97DE80626.jpeg"
+      ],
+      "preTransformDataMapperInterface": "",
+      "postTransformDataMapperInterface": "",
+      "remoteOptions": [],
+      "extraPayload": [
+        {
+          "key": "MaterialType",
+          "value": "%MaterialType%"
+        },
+        {
+          "key": "OutboundChannel",
+          "value": "%OutboundChannel%"
+        }
+      ],
+      "sendOnlyExtraPayload": true,
+      "sendJsonPath": "",
+      "sendJsonNode": "",
+      "responseJsonPath": "",
+      "responseJsonNode": "formsdata",
+      "inputMapping": {
+        "kind": "extra-payload-only",
+        "keys": [
+          "MaterialType",
+          "OutboundChannel"
+        ]
+      },
+      "responseMapping": {
+        "sendJsonPath": "",
+        "sendJsonNode": "",
+        "responseJsonPath": "",
+        "responseJsonNode": "formsdata"
+      },
+      "lwcComponentOverride": "",
+      "screenshotContext": "Continuation of requested IP-GetForms properties; element name and referenced IP are above the photographed area"
     }
   ],
   "missingForRunnableBuild": [
