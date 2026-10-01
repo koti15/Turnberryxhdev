@@ -1,6 +1,6 @@
 # Send Communication OmniScript overall tree
 
-Observed: English, version 43, Active true. Description: MMR- email go live prep.
+Observed: Type CNC, SubType SendCommunication, English, version 43, Active true. Description: MMR- email go live prep.
 Captured: 2026-10-01.
 
 This is the ordered visible designer tree transcribed from the six supplied screenshots. This outer tree retains the original order. Step1 visible child layout is now captured separately in the canonical specification; other Step children remain uncaptured.
@@ -68,7 +68,7 @@ Saved = supplied configuration evidence recorded for elements 1–5. Pending = e
 
 1. IP-GETCaseDetails: [IP/DR evidence](evidence/CNC_GetCaseInformation.md).
 2. SV-InitialMapping: [Set Values evidence](evidence/OmniScript_SetValues.md).
-3. MaterialAndCommunicationChannel: visible screen/choices recorded in [Set Values evidence](evidence/OmniScript_SetValues.md); detailed control properties remain unverified.
+3. MaterialAndCommunicationChannel: visible layout and four condition tooltips captured once in [partial specification](spec/send-communication.partial.json), under stepElements. Control names/properties, condition types and the guidance condition's blank comparison value remain unverified.
 4. SV-DefaultMapping: 16 assignments recorded in [Set Values evidence](evidence/OmniScript_SetValues.md).
 
 5. ExtractEmailBodyForMMR: canonical properties and GetMMREmailTemplate definition saved in [partial specification](spec/send-communication.partial.json). Response transformations, conditions, error/user messages and Data Mapper Options/Formulas remain unverified.
@@ -83,7 +83,7 @@ Step1 expanded layout and visible component references are saved in [partial spe
 
 ## Visible condition evidence
 
-The RA-updateLinks tooltip shows `(isPOD = true AND isEmail = true)`. This is the only condition exposed by these tree screenshots. Other eye icons do not establish their condition text.
+The RA-updateLinks tooltip shows `(isPOD = true AND isEmail = true)`. The additional MaterialAndCommunicationChannel tooltips are recorded in the canonical specification. Other eye icons do not establish their condition text.
 
 ## Transcription limits
 
