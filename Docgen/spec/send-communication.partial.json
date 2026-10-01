@@ -5,7 +5,7 @@
   "source": {
     "kind": "user-supplied-designer-screenshots",
     "capturedDate": "2026-10-01",
-    "latestScreenshot": "IMG_412EA20C-02BE-4372-9367-69A1AFEA733F.jpeg"
+    "latestScreenshot": "IMG_DE6E1E82-E36E-4E62-B5E8-644C75D8468A.jpeg"
   },
   "omniScript": {
     "displayName": "Send Communication",
@@ -234,8 +234,31 @@
           "elementName": "DR-E-GetForms",
           "type": "Data Mapper Extract Action",
           "order": 3,
-          "dataMapper": null,
-          "complete": false
+          "dataMapper": "CNCGetInternalAndExternalLinks",
+          "complete": false,
+          "ignoreCache": false,
+          "inputParameters": [
+            {
+              "dataSource": "SV-DefaultMapping:type",
+              "filterValue": "type"
+            },
+            {
+              "dataSource": "OutboundChannel",
+              "filterValue": "OutboundChannel"
+            }
+          ],
+          "sendJsonPath": "",
+          "sendJsonNode": "",
+          "responseJsonPath": "",
+          "responseJsonNode": "",
+          "sendOnlyAdditionalInput": false,
+          "missing": [
+            "Additional input/output/failure response settings below photographed area",
+            "Execution conditions and remaining properties"
+          ],
+          "evidenceScreenshots": [
+            "IMG_DE6E1E82-E36E-4E62-B5E8-644C75D8468A.jpeg"
+          ]
         },
         {
           "elementName": "ResponseAction",
@@ -248,11 +271,12 @@
       "evidenceScreenshots": [
         "IMG_442D406A-B405-4965-AF08-059D1EBDE932.jpeg",
         "IMG_B5075B6E-84B4-4C77-876E-0C2C5E5EAEE2.jpeg",
-        "IMG_412EA20C-02BE-4372-9367-69A1AFEA733F.jpeg"
+        "IMG_412EA20C-02BE-4372-9367-69A1AFEA733F.jpeg",
+        "IMG_DE6E1E82-E36E-4E62-B5E8-644C75D8468A.jpeg"
       ],
       "identityVerification": "Procedure Configuration screenshot confirms Type/SubType matching the OmniScript IP-GetForms reference; prior photographed IP element captures linked here.",
       "missing": [
-        "DR-E-GetForms properties and referenced Data Mapper definition",
+        "Remaining DR-E-GetForms properties and CNCGetInternalAndExternalLinks definition",
         "ResponseAction properties",
         "Full SV-DefaultMapping sectionName expression",
         "Any additional procedure settings outside visible area"
@@ -923,6 +947,26 @@
         "allObservedIndicesCaptured": true,
         "runtimeValidated": false
       }
+    },
+    {
+      "name": "CNCGetInternalAndExternalLinks",
+      "interfaceType": null,
+      "inputType": null,
+      "outputType": null,
+      "complete": false,
+      "captureStatus": "reference-only",
+      "referencedBy": [
+        {
+          "integrationProcedure": "CNC_GetEmailFormsDetails",
+          "elementName": "DR-E-GetForms"
+        }
+      ],
+      "missing": [
+        "Extract steps, formulas, output mappings and options"
+      ],
+      "evidenceScreenshots": [
+        "IMG_DE6E1E82-E36E-4E62-B5E8-644C75D8468A.jpeg"
+      ]
     }
   ],
   "setValuesElements": [
