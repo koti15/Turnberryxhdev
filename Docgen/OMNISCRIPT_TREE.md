@@ -3,7 +3,7 @@
 Observed: English, version 43, Active true. Description: MMR- email go live prep.
 Captured: 2026-10-01.
 
-This is the ordered visible designer tree transcribed from the six supplied screenshots. Step children are collapsed and are not enumerated here.
+This is the ordered visible designer tree transcribed from the six supplied screenshots. This outer tree retains the original order. Step1 visible child layout is now captured separately in the canonical specification; other Step children remain uncaptured.
 
 Saved = supplied configuration evidence recorded for elements 1–5. Pending = element name/type recorded, detailed configuration still to capture. In progress = some new evidence captured, dependency details still pending. These statuses track documentation progress, not org implementation. Any exact-property gaps in the first four remain in the linked evidence notes.
 
@@ -17,7 +17,7 @@ Saved = supplied configuration evidence recorded for elements 1–5. Pending = e
 | 4 | SV-DefaultMapping | Set Values | Saved |
 | 5 | ExtractEmailBodyForMMR | Data Mapper Extract Action | Saved |
 | 6 | IP-GetForms | Integration Procedure Action | In progress |
-| 7 | Step1 | Step | Pending |
+| 7 | Step1 | Step | In progress |
 | 8 | SV-FormSelectionValues | Set Values | Pending |
 | 9 | SE-FormSelectionError | Set Errors | Pending |
 | 10 | IP-GetPODDocs | Integration Procedure Action | Pending |
@@ -76,6 +76,10 @@ Saved = supplied configuration evidence recorded for elements 1–5. Pending = e
 ## Next element
 
 IP-GetForms — in progress. Visible Forms/Documents condition and discovered IP/DR properties are saved in the canonical specification. Referenced IP identity/invoke mode and visible remote properties are now captured in the canonical specification. Still needed: remaining user/error-message properties, full referenced IP definition/settings, any earlier CNCGetHeaderAttributes Output rows/row details and missing profileName source step (all 11 formulas, 46 output mapping paths and Options now captured). The IP designer identity and four-element tree are now confirmed and merged into the canonical procedure record. DR-E-GetForms mapper reference, input mappings and visible transformations are captured. CNCGetInternalAndExternalLinks Extract and eight Output mappings are now captured. No formulas or configured options confirmed by user. ResponseAction visible settings, right-side node fields and expanded Additional Output Response are captured. The full IP SV-DefaultMapping sectionName expression is now captured. Next capture: remaining DR action properties. Other dependency gaps above remain tracked. Extract OR/AND grouping remains unverified. A similarly named SV-DefaultMapping in the IP is stored separately from the OmniScript element.
+
+## Step1 capture
+
+Step1 expanded layout and visible component references are saved in [partial specification](spec/send-communication.partial.json), under stepElements. Step and child properties, conditional views, component attributes and unnamed element identities remain pending. Next: Step1 Properties, then CustomLWC4 Properties.
 
 ## Visible condition evidence
 
