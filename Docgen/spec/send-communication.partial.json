@@ -5,7 +5,7 @@
   "source": {
     "kind": "user-supplied-designer-screenshots",
     "capturedDate": "2026-10-01",
-    "latestScreenshot": "IMG_DE6E1E82-E36E-4E62-B5E8-644C75D8468A.jpeg"
+    "latestScreenshot": "IMG_D5CD7D49-B200-4276-8248-5035EE499929.jpeg"
   },
   "omniScript": {
     "displayName": "Send Communication",
@@ -950,11 +950,11 @@
     },
     {
       "name": "CNCGetInternalAndExternalLinks",
-      "interfaceType": null,
-      "inputType": null,
-      "outputType": null,
+      "interfaceType": "Extract",
+      "inputType": "JSON",
+      "outputType": "JSON",
       "complete": false,
-      "captureStatus": "reference-only",
+      "captureStatus": "in-progress",
       "referencedBy": [
         {
           "integrationProcedure": "CNC_GetEmailFormsDetails",
@@ -962,11 +962,87 @@
         }
       ],
       "missing": [
-        "Extract steps, formulas, output mappings and options"
+        "Formulas and Options tabs",
+        "Output row-level properties/defaults/types",
+        "Verify extract filter grouping and false literal semantics"
       ],
       "evidenceScreenshots": [
-        "IMG_DE6E1E82-E36E-4E62-B5E8-644C75D8468A.jpeg"
-      ]
+        "IMG_DE6E1E82-E36E-4E62-B5E8-644C75D8468A.jpeg",
+        "IMG_ECB8E752-3AAA-48FB-8B2E-52BAD3BA8DD7.jpeg",
+        "IMG_D5CD7D49-B200-4276-8248-5035EE499929.jpeg"
+      ],
+      "extractSteps": [
+        {
+          "object": "CNC_Internal_and_External_Website__mdt",
+          "outputPath": "links",
+          "filterRows": [
+            {
+              "field": "Entity_Type__c",
+              "operator": "=",
+              "input": "entityType"
+            },
+            {
+              "join": "OR",
+              "field": "Outbound_Channel_Type__c",
+              "operator": "LIKE",
+              "input": "OutboundChannel"
+            },
+            {
+              "join": "AND",
+              "field": "Type__c",
+              "operator": "=",
+              "input": "type"
+            },
+            {
+              "join": "AND",
+              "field": "Is_Inactive__c",
+              "operator": "=",
+              "valueDisplayed": "'false'"
+            }
+          ],
+          "filterGrouping": null,
+          "filterGroupingVerification": "Rows and join operators transcribed as displayed; explicit grouping and literal semantics not verified from export.",
+          "orderBy": "Order__c"
+        }
+      ],
+      "outputMappings": [
+        {
+          "extractJsonPath": "links:Department__c",
+          "outputJsonPath": "links:department"
+        },
+        {
+          "extractJsonPath": "links:Group__c",
+          "outputJsonPath": "links:group"
+        },
+        {
+          "extractJsonPath": "links:Id",
+          "outputJsonPath": "links:Id"
+        },
+        {
+          "extractJsonPath": "links:Is_Internal__c",
+          "outputJsonPath": "links:isInternal"
+        },
+        {
+          "extractJsonPath": "links:Order__c",
+          "outputJsonPath": "links:order"
+        },
+        {
+          "extractJsonPath": "links:Type__c",
+          "outputJsonPath": "links:type"
+        },
+        {
+          "extractJsonPath": "links:URL__c",
+          "outputJsonPath": "links:url"
+        },
+        {
+          "extractJsonPath": "links:URL_Label__c",
+          "outputJsonPath": "links:label"
+        }
+      ],
+      "outputMappingCoverage": {
+        "visibleRows": 8,
+        "rowDetailPropertiesVerified": false
+      }
     }
   ],
   "setValuesElements": [
