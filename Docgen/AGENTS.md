@@ -10,6 +10,13 @@ Read Docgen/README.md before continuing discovery or development. Follow any app
 - Update the tracker after each completed discovery step.
 - Use sanitized examples. Never commit credentials, session tokens, member/patient information, or production payloads.
 
+## Canonical configuration and duplicate prevention
+
+- Store new exact configuration in Docgen/spec/send-communication.partial.json once. Update existing entries by identity: elementName for actions/Set Values, name for Data Mappers, source/output pair for mappings.
+- Merge repeated screenshot evidence into the same component entry; never append duplicate components or mappings.
+- Other notes and status files should link to the canonical record instead of repeating new property tables.
+- Keep unknown settings null with evidence gaps explicit. Saved status tracks capture progress, not org creation.
+
 ## Development stories
 
 Create Docgen/stories/<story-id>.md when a real story is supplied. Record:
