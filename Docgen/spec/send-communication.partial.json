@@ -5,7 +5,7 @@
   "source": {
     "kind": "user-supplied-designer-screenshots",
     "capturedDate": "2026-10-01",
-    "latestScreenshot": "IMG_A9F862A3-2547-42D2-991A-234FA36FDDB2.jpeg"
+    "latestScreenshot": "IMG_412EA20C-02BE-4372-9367-69A1AFEA733F.jpeg"
   },
   "omniScript": {
     "displayName": "Send Communication",
@@ -172,6 +172,91 @@
         }
       ],
       "complete": false
+    },
+    {
+      "key": "CNC_GetEmailFormsDetails",
+      "name": "Email Forms Details",
+      "type": "CNC",
+      "subType": "GetEmailFormsDetails",
+      "observedVersion": 5,
+      "observedActive": true,
+      "description": "MNPP-3048 - Updated Outbound channel check.",
+      "configuration": {
+        "trackingCustomData": [],
+        "includeAllActionsInResponse": false,
+        "rollbackOnError": false,
+        "requiredPermission": ""
+      },
+      "visibleElements": [
+        {
+          "elementName": "SV-DefaultMapping",
+          "type": "Set Values",
+          "values": [
+            {
+              "name": "sectionName",
+              "expression": null,
+              "visibleExpressionFragment": "IF(%MaterialType% = \"Forms\", \"Send Communication Forms\",",
+              "verification": "expression continues beyond readable capture; do not reconstruct"
+            },
+            {
+              "name": "type",
+              "expression": "IF(%MaterialType% = \"Forms\",\"Email Forms\",\"Email Documents\")",
+              "verification": "readable screenshot transcription; exact export syntax not validated"
+            }
+          ],
+          "responseJsonPath": "",
+          "responseJsonNode": "",
+          "executionConditionalFormula": "",
+          "failOnStepError": false,
+          "complete": false,
+          "order": 1
+        },
+        {
+          "elementName": "DR-E-GetHeaderAttributes",
+          "type": "Data Mapper Extract Action",
+          "dataMapper": "CNCGetHeaderAttributes",
+          "ignoreCache": false,
+          "inputParameters": [
+            {
+              "dataSource": "SV-DefaultMapping:sectionName",
+              "filterValue": "sectionName"
+            }
+          ],
+          "sendJsonPath": "",
+          "sendJsonNode": "",
+          "responseJsonPath": "",
+          "responseJsonNode": "",
+          "sendOnlyAdditionalInput": false,
+          "complete": false,
+          "order": 2
+        },
+        {
+          "elementName": "DR-E-GetForms",
+          "type": "Data Mapper Extract Action",
+          "order": 3,
+          "dataMapper": null,
+          "complete": false
+        },
+        {
+          "elementName": "ResponseAction",
+          "type": "Response Action",
+          "order": 4,
+          "complete": false
+        }
+      ],
+      "complete": false,
+      "evidenceScreenshots": [
+        "IMG_442D406A-B405-4965-AF08-059D1EBDE932.jpeg",
+        "IMG_B5075B6E-84B4-4C77-876E-0C2C5E5EAEE2.jpeg",
+        "IMG_412EA20C-02BE-4372-9367-69A1AFEA733F.jpeg"
+      ],
+      "identityVerification": "Procedure Configuration screenshot confirms Type/SubType matching the OmniScript IP-GetForms reference; prior photographed IP element captures linked here.",
+      "missing": [
+        "DR-E-GetForms properties and referenced Data Mapper definition",
+        "ResponseAction properties",
+        "Full SV-DefaultMapping sectionName expression",
+        "Any additional procedure settings outside visible area"
+      ]
     }
   ],
   "dataMappers": [
@@ -1332,58 +1417,5 @@
       }
     ]
   },
-  "procedureDiscovery": [
-    {
-      "discoveryId": "forms-procedure-identity-unconfirmed",
-      "identity": null,
-      "scope": "Integration Procedure designer, not OmniScript",
-      "identityVerification": "Procedure name/type/subtype not visible; do not assume from open tab or OmniScript label",
-      "visibleElements": [
-        {
-          "elementName": "SV-DefaultMapping",
-          "type": "Set Values",
-          "values": [
-            {
-              "name": "sectionName",
-              "expression": null,
-              "visibleExpressionFragment": "IF(%MaterialType% = \"Forms\", \"Send Communication Forms\",",
-              "verification": "expression continues beyond readable capture; do not reconstruct"
-            },
-            {
-              "name": "type",
-              "expression": "IF(%MaterialType% = \"Forms\",\"Email Forms\",\"Email Documents\")",
-              "verification": "readable screenshot transcription; exact export syntax not validated"
-            }
-          ],
-          "responseJsonPath": "",
-          "responseJsonNode": "",
-          "executionConditionalFormula": "",
-          "failOnStepError": false,
-          "complete": false
-        },
-        {
-          "elementName": "DR-E-GetHeaderAttributes",
-          "type": "Data Mapper Extract Action",
-          "dataMapper": "CNCGetHeaderAttributes",
-          "ignoreCache": false,
-          "inputParameters": [
-            {
-              "dataSource": "SV-DefaultMapping:sectionName",
-              "filterValue": "sectionName"
-            }
-          ],
-          "sendJsonPath": "",
-          "sendJsonNode": "",
-          "responseJsonPath": "",
-          "responseJsonNode": "",
-          "sendOnlyAdditionalInput": false,
-          "complete": false
-        }
-      ],
-      "evidenceScreenshots": [
-        "IMG_442D406A-B405-4965-AF08-059D1EBDE932.jpeg",
-        "IMG_B5075B6E-84B4-4C77-876E-0C2C5E5EAEE2.jpeg"
-      ]
-    }
-  ]
+  "procedureDiscovery": []
 }
