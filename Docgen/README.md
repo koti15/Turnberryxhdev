@@ -16,7 +16,7 @@ Complete each step using actual configuration, input/output JSON, or source code
 | --- | --- | --- | --- |
 | 1 | User journey from Case to generated output | Pending | Runtime screens, selections, sample output |
 | 2 | IP-GETCaseDetails | Partially verified | CNC_GetCaseInformation and Default invoke mode confirmed; IP v3 calls CNCGetCaseInfo; Case filter, response node and 13 formula entries captured. Output mappings, full settings and runtime preview still needed |
-| 3 | SV-InitialMapping and SV-DefaultMapping | Pending | Actual expressions and resulting JSON |
+| 3 | SV-InitialMapping and SV-DefaultMapping | Partially captured | Owner comparison and five defaults recorded; remaining rows/conditions unverified; Preview deferred |
 | 4 | Material/channel, forms, POD and letter selection | Pending | Step contents, conditions, referenced IPs/Data Mappers |
 | 5 | Entity and address selection | Pending | Mappings, validation conditions, runtime JSON |
 | 6 | IP-GETAPITokenData and patient demographics | Pending | Sources, IP elements, request/response and transformations |
@@ -67,3 +67,5 @@ Create the additional directories when they contain real files. Keep Salesforce 
 See [CODEX_HANDOFF.md](CODEX_HANDOFF.md) and [partial build specification](spec/send-communication.partial.json). The user requires launch from Case. This requirement has been recorded but not implemented or validated. Current commits contain tracking and a partial specification only, not a runnable OmniScript. Obtain the actual exports before building deployable source.
 
 Latest evidence: [CNC_GetCaseInformation and CNCGetCaseInfo](evidence/CNC_GetCaseInformation.md). OPTIONS and visible output schema captured. Preview returned 0 Case rows. Next: readable source-to-output mapping columns and a same-org accessible Case preview. Case launcher wiring remains unverified.
+
+See [OmniScript Set Values](evidence/OmniScript_SetValues.md) for exact captured expressions. Preview is deferred by user instruction. Next screenshots: remaining defaults and material/channel properties. Data Mapper Output mappings remain outstanding.
