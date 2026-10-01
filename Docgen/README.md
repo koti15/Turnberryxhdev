@@ -8,6 +8,8 @@ Discovery in progress. No deployable DocGen changes have been created or validat
 The supplied screenshots show the Send Communication OmniScript designer, English, version 43, Active true. This is screenshot evidence only; the current org configuration has not been retrieved.
 Element labels and their visible types are evidence of structure, not proof of behavior. Do not infer behavior from names.
 
+See [OMNISCRIPT_STATUS.md](OMNISCRIPT_STATUS.md) for the element-by-element inventory, every captured Set Values assignment, IP/DR dependencies, and saved/pending implementation status.
+
 ## Step-by-step discovery tracker
 
 Complete each step using actual configuration, input/output JSON, or source code. Record missing evidence explicitly.
