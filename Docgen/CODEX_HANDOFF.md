@@ -37,6 +37,12 @@ The requested deliverable is actual configured OmniStudio components in the exis
 
 The Case launcher and uncaptured settings still need actual source or exact evidence. They do not justify omitting already captured fields, mappings or Step children.
 
+## Latest scope and pending work ? 2026-10-01
+
+The user authorized continued implementation of missing components **except LWC and MDT**, then requested that all remaining items be recorded in Git as pending. LWC source and MDT fields/records remain deferred dependencies, not completed work. Exact missing settings must still come from source or supplied evidence; authorization to create components does not establish their unknown configuration.
+
+[PENDING_WORK.md](PENDING_WORK.md) tracks the non-LWC/non-MDT gaps, nine unresolved default assignments, missing field definitions, deferred dependencies, and the requested MDT record/field-definition screenshots. [deployment/captured-audit.json](deployment/captured-audit.json) retains the detailed verified blockers. No new implementation or deployment occurred in this tracking update. Existing v4 remains inactive and partially configured.
+
 ## Capture progress versus implementation
 
 ### Verified deployment checkpoint — 2026-10-01

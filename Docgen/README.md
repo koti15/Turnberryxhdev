@@ -8,8 +8,10 @@ Start with [CODEX_HANDOFF.md](CODEX_HANDOFF.md) for the one-to-one reconstructio
 
 ## Current status
 
-Discovery in progress. No deployable DocGen changes have been created or validated.
-The supplied screenshots show the Send Communication OmniScript designer, English, version 43, Active true. This is screenshot evidence only; the current org configuration has not been retrieved.
+Supported partial configuration has been deployed and verified in the existing inactive Docgen/SendCommunication/English v4 in myProdOrg. This is not a completed runnable reconstruction. See the verified checkpoint in [CODEX_HANDOFF.md](CODEX_HANDOFF.md) and [deployment/captured-verification.json](deployment/captured-verification.json).
+
+[PENDING_WORK.md](PENDING_WORK.md) records the remaining evidence and implementation gaps. Latest development scope excludes LWC and MDT creation; these remain deferred dependencies. The photographed reference is CNC/SendCommunication/English v43; it is distinct from the inactive target draft.
+
 Element labels and their visible types are evidence of structure, not proof of behavior. Do not infer behavior from names.
 
 See [OMNISCRIPT_STATUS.md](OMNISCRIPT_STATUS.md) for the element-by-element inventory, every captured Set Values assignment, IP/DR dependencies, and saved/pending implementation status.
@@ -31,7 +33,7 @@ Complete each step using actual configuration, input/output JSON, or source code
 | 9 | Generation and review | Pending | IP definition, underlying generation call, template, final payload, sync/async conditions |
 | 10 | File storage, delivery and confirmation | Pending | Actual class/methods, file links, responses, error handling |
 | 11 | Practice development change | Pending | Requirement, affected components, implementation, validation |
-| 12 | Deployment preparation | Pending | Exact source/export files, dependencies, target org, validation evidence |
+| 12 | Deployment preparation | Partial configuration deployed | Supported in-place patch verified; remaining exact settings, dependencies and runtime validation pending |
 
 ## Evidence record for each component
 
