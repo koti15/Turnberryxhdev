@@ -100,7 +100,53 @@
       "formulaCountObserved": 13,
       "outputMappings": null,
       "evidencePath": "Docgen/evidence/CNC_GetCaseInformation.md",
-      "complete": false
+      "complete": false,
+      "visibleOutputSchemaKeys": [
+        "localMemberFirstName",
+        "memberDOB",
+        "providerBlueshieldId",
+        "memberEmail",
+        "localPostalCode",
+        "currentDate",
+        "relatedEntityCount",
+        "localStreet",
+        "loggedInUserId",
+        "localCity",
+        "caseDescription",
+        "ownerName",
+        "sourceSystem",
+        "caseNumber",
+        "todayDate",
+        "providerNPI",
+        "localFullAddress",
+        "localMemberName",
+        "createdDate",
+        "localState",
+        "localEnterprisePersonId",
+        "providerUMPI",
+        "localCountry",
+        "caseType",
+        "subscriberId",
+        "localMemberId",
+        "caseOwnerId",
+        "Id",
+        "localMemberLastName",
+        "serviceRepName",
+        "relatedEntities",
+        "receivedDate"
+      ],
+      "options": {
+        "timeToLiveMinutes": 0,
+        "checkFieldLevelSecurity": false,
+        "platformCacheType": null,
+        "overwriteTargetForAllNullInputs": false
+      },
+      "previewEvidence": {
+        "inputKey": "caseId",
+        "caseQueryResultCount": 0,
+        "successfulCaseRetrievalVerified": false,
+        "personalValuesOmitted": true
+      }
     }
   ]
 }
