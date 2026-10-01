@@ -39,6 +39,30 @@ The Case launcher and uncaptured settings still need actual source or exact evid
 
 ## Capture progress versus implementation
 
+### Verified deployment checkpoint — 2026-10-01
+
+Latest main used: c28071334a02a28306df0bc0a9a32b7c4a9291d6, fetched into isolated branch docgen/captured-development. The primary checkout contains unrelated staged work and was preserved. Full handoff and canonical configuration read before implementation.
+
+Connected target: myProdOrg, verified org 00Dbm00000phCerEAE (displayed alias turnberryProd). Runtime/data model: standard OmniProcess/OmniProcessElement and OmniDataTransform/OmniDataTransformItem. Reference CNC/SendCommunication is absent in this target. Corrected the existing Docgen/SendCommunication/English v4, Id 0jNbm000000gie9EAA, without creating a new skeleton or version. The deliberate Type difference is retained. Script and both selected IPs remain inactive.
+
+Deployment source commit: 9995ad51494a39343e7a520a1f05eac76eb7f137. Source: datapacks/docgen-captured-patch/; builder and deploy/verification scripts: scripts/docgen/. Method: existing-record SObject updates through three anonymous Apex transactions. All three compiled and succeeded; 113 records / 219 written fields independently compared with org queries. This method does not issue a Metadata API deployment job ID; batch identifiers are deploy-1.apex, deploy-2.apex, deploy-3.apex and the exact source commit. Initial over-size anonymous script was rejected before any write and corrected into bounded batches. Result: deployment/captured-deployment-result.json; verification: deployment/captured-verification.json; detailed audit: deployment/captured-audit.json.
+
+| Captured element | Deployed element ID | Actual supported configuration / remaining gap |
+| --- | --- | --- |
+| IP-GETCaseDetails | 0kEbm000002YXWfEAO | Procedure reference configured. Case input/response mapping and execution condition still unknown; action remains disabled. |
+| SV-InitialMapping | 0kEbm000002YXWqEAO | Exact captured owner-comparison expression configured; full list coverage/conditions and navigation behavior unverified. |
+| MaterialAndCommunicationChannel | 0kEbm000002YXX1EAO | Captured Step title stored. Controls NOT implemented: identity/type, stored values/defaults and condition types missing; no genuine source in target/repository to resolve them. Empty existing Step is not completion. |
+| SV-DefaultMapping | 0kEbm000002YXXCEA4 | Seven assignments configured: six captured expressions including exact subscription casing, and literal text false for isDocumentUploaded. Nine summary-only mode/type gaps remain; do not claim all 16 implemented. Subscription input token verification and literal runtime typing remain pending. |
+| ExtractEmailBodyForMMR | 0kEbm000002YXXNEA4 | Mapper reference configured; existing input row preserved. Literal quoting, response transformation/conditions and template definition unresolved; disabled. |
+| IP-GetForms | 0kEbm000002YXXTEA4 | Captured reference, extra payload, extra-only flag, formsdata response node, remote booleans, transformations and Forms/Documents OR rule configured. Full action/dependency validation incomplete; disabled. |
+| Step1 | 0kEbm000002YXXUEA4 | Captured blank labels/instruction, save-for-later and button labels configured. Both existing LWC child input mappings stored exactly; components absent, children disabled. Remaining child identities/types/conditions cannot be inferred. |
+
+Dependency component IDs (existing records corrected): CNC_GetCaseInformation 0jNbm000000giavEAA; CNC_GetEmailFormsDetails 0jNbm000000gicXEAQ; CNCGetCaseInfo 0jIbm000000MlGPEA0; GetMMREmailTemplate 0jIbm000000MlGSEA0; CNCGetHeaderAttributes 0jIbm000000MlGQEA0; CNCGetInternalAndExternalLinks 0jIbm000000MlGREA0. The Forms IP has its four captured elements in order; Case IP has DR-E-GetCaseInfo. Corrected 87 recorded output paths and 11 Header Attributes formula texts in existing mapper items; execution gating preserved because source schema/extraction settings are incomplete. Configuration records exist, but these dependency chains are not executable replicas.
+
+Specific blockers: all 13 CNCGetCaseInfo formulaEvidence.expression values are null; User filter quoting and Blueshield output spelling unresolved; required Account/Case custom fields absent; metadata types are prior-created shells without field/record definitions; Header Attributes profile extraction and two blank-source output rows unresolved; links OR/AND grouping and quoted false semantics unresolved; EmailTemplate filter literal/options and template content unresolved; radio identities/stored values/defaults/types absent; both named LWCs absent from target and source. Nine omitted defaults: selectedEntity, preSelectedLetterTemplate, preSelectedCaseEntity, preSelectedForms, addresseeCommName, mailingAddress, isFormshasAttachments, hasMaximumPOD, isLetterReviewRequired. Case launcher and end-to-end Case context unverified.
+
+No new placeholder elements, guessed field definitions, metadata record values, radio choices or custom LWC implementations created in this operation. Earlier scaffold defaults and backlog placeholders are not validated reference behavior. No Preview, activation, document generation, upload or delivery performed. Continue with CustomLWC4 lower properties/Conditional View, CustomLWC2 Conditional View, and exact earlier configuration gaps. New evidence updates this same record and the canonical JSON; captured evidence is not completed implementation.
+
 | Scope | Completed capture | Pending work |
 | --- | --- | --- |
 | Overall structure | All 52 visible outer element names/types/order; reference identity | Remaining expanded children and detailed properties |
@@ -46,8 +70,8 @@ The Case launcher and uncaptured settings still need actual source or exact evid
 | IP-GetForms and dependencies | Action settings; four IP elements; mapper extracts, formulas/output evidence and response settings | Remaining settings, filter grouping, source dependencies and exact exports |
 | Step1 | Visible child layout, basic Step settings and two LWC input panels | Remaining Step/button settings, child identities/conditions, CustomLWC4 lower properties and LWC source |
 | Outer elements 8–52 | Tree inventory; isolated RA-updateLinks condition evidence | Detailed action/Step configuration and dependencies |
-| Salesforce implementation | No implementation completion established by this record | Verify actual source, draft build, Case launch wiring and validation |
-| Activation/deployment | None recorded | Only after separately requested with a known target |
+| Salesforce implementation | Supported in-place configuration patch deployed and fields verified; see checkpoint above | Controls, exact extraction settings/schema, full assignments, LWC source, Case launch wiring and runtime validation remain incomplete |
+| Activation/deployment | Three configuration-update batches succeeded in myProdOrg; draft remains inactive | Activation/delivery unrequested; Preview deferred |
 
 ## How this file stays current
 

@@ -1,0 +1,23 @@
+﻿[
+    {
+        "file":  "deploy-1.apex",
+        "success":  true,
+        "compiled":  true,
+        "error":  null,
+        "exception":  ""
+    },
+    {
+        "file":  "deploy-2.apex",
+        "success":  true,
+        "compiled":  true,
+        "error":  null,
+        "exception":  ""
+    },
+    {
+        "file":  "deploy-3.apex",
+        "success":  true,
+        "compiled":  true,
+        "error":  null,
+        "exception":  ""
+    }
+]
