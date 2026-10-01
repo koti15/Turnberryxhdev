@@ -2,6 +2,10 @@
 
 Track the verified Document Generation implementation, learning progress, story changes, and deployment evidence.
 
+## Overall OmniScript tree
+
+[OMNISCRIPT_TREE.md](OMNISCRIPT_TREE.md) records the ordered visible elements. First four: Saved. Remaining elements: Pending configuration capture. Next: ExtractEmailBodyForMMR.
+
 ## Current status
 
 Discovery in progress. No deployable DocGen changes have been created or validated.
