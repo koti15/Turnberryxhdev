@@ -5,7 +5,7 @@
   "source": {
     "kind": "user-supplied-designer-screenshots",
     "capturedDate": "2026-10-01",
-    "latestScreenshot": "IMG_D5CD7D49-B200-4276-8248-5035EE499929.jpeg"
+    "latestScreenshot": "IMG_B73A6677-0F30-4A98-BEEF-3584372AE0F9.jpeg"
   },
   "omniScript": {
     "displayName": "Send Communication",
@@ -264,7 +264,23 @@
           "elementName": "ResponseAction",
           "type": "Response Action",
           "order": 4,
-          "complete": false
+          "complete": false,
+          "responseFormat": "JSON",
+          "responseHeaders": [],
+          "sendJsonPath": "DR-E-GetHeaderAttributes",
+          "responseJsonPath": "",
+          "sendJsonNode": null,
+          "responseJsonNode": null,
+          "additionalOutputResponse": null,
+          "executionConditionalFormula": "",
+          "internalNotes": "",
+          "missing": [
+            "Send JSON Node, Response JSON Node and other right-side controls cropped",
+            "Additional Output Response collapsed"
+          ],
+          "evidenceScreenshots": [
+            "IMG_B73A6677-0F30-4A98-BEEF-3584372AE0F9.jpeg"
+          ]
         }
       ],
       "complete": false,
@@ -277,7 +293,7 @@
       "identityVerification": "Procedure Configuration screenshot confirms Type/SubType matching the OmniScript IP-GetForms reference; prior photographed IP element captures linked here.",
       "missing": [
         "Remaining DR-E-GetForms properties and CNCGetInternalAndExternalLinks definition",
-        "ResponseAction properties",
+        "ResponseAction right-side controls and Additional Output Response",
         "Full SV-DefaultMapping sectionName expression",
         "Any additional procedure settings outside visible area"
       ]
@@ -962,7 +978,6 @@
         }
       ],
       "missing": [
-        "Options tab",
         "Output row-level properties/defaults/types",
         "Verify extract filter grouping and false literal semantics"
       ],
@@ -1047,6 +1062,11 @@
       "formulaCoverage": {
         "count": 0,
         "verification": "User confirmed no formulas on 2026-10-01"
+      },
+      "optionsEvidence": {
+        "verification": "User stated no options on 2026-10-01",
+        "customOptionsConfigured": false,
+        "individualDefaultValuesVerified": false
       }
     }
   ],
