@@ -196,12 +196,18 @@ assert len({(o['sobject'],o['id']) for o in patch['operations']})==len(patch['op
 save(OUT/'patch.json',patch)
 save(ROOT/'Docgen/deployment/captured-audit.json',{'components':audit,'blockers':list(dict.fromkeys(blockers)),'targetOrgId':patch['targetOrgId'],'draftId':TARGET})
 def literal(s):return "'"+s.replace('\\','\\\\').replace("'","\\'").replace('\n','\\n').replace('\r','\\r')+"'"
-payload=json.dumps(patch,separators=(',',':'))
-apex="System.assertEquals('00Dbm00000phCerEAE', UserInfo.getOrganizationId());\nSystem.assertEquals(false, [SELECT IsActive FROM OmniProcess WHERE Id='0jNbm000000gie9EAA'].IsActive);\n"
-apex+='Map<String,Object> payload=(Map<String,Object>)JSON.deserializeUntyped('+literal(payload)+');\n'
-apex+='Map<String,List<SObject>> batches=new Map<String,List<SObject>>();\n'
-apex+="for(Object entry:(List<Object>)payload.get('operations')) { Map<String,Object> op=(Map<String,Object>)entry; String kind=(String)op.get('sobject'); SObject row=Schema.getGlobalDescribe().get(kind).newSObject((Id)op.get('id')); Map<String,Object> fields=(Map<String,Object>)op.get('fields'); for(String key:fields.keySet()) { row.put(key,fields.get(key)); } if(!batches.containsKey(kind)) batches.put(kind,new List<SObject>()); batches.get(kind).add(row); }\n"
-apex+='for(String kind:batches.keySet()) update batches.get(kind);\n'
-apex+="System.assertEquals(false, [SELECT IsActive FROM OmniProcess WHERE Id='0jNbm000000gie9EAA'].IsActive);\nSystem.debug('DOCGEN_CAPTURED_PATCH_APPLIED');\n"
-(OUT/'deploy.apex').write_text(apex,encoding='utf-8')
+chunk_files=[]
+for offset in range(0,len(patch['operations']),40):
+    chunk={**patch,'operations':patch['operations'][offset:offset+40]}
+    payload=json.dumps(chunk,separators=(',',':'))
+    apex="System.assertEquals('00Dbm00000phCerEAE', UserInfo.getOrganizationId());\nSystem.assertEquals(false, [SELECT IsActive FROM OmniProcess WHERE Id='0jNbm000000gie9EAA'].IsActive);\n"
+    apex+='Map<String,Object> payload=(Map<String,Object>)JSON.deserializeUntyped('+literal(payload)+');\n'
+    apex+='Map<String,List<SObject>> batches=new Map<String,List<SObject>>();\n'
+    apex+="for(Object entry:(List<Object>)payload.get('operations')) { Map<String,Object> op=(Map<String,Object>)entry; String kind=(String)op.get('sobject'); SObject row=Schema.getGlobalDescribe().get(kind).newSObject((Id)op.get('id')); Map<String,Object> fields=(Map<String,Object>)op.get('fields'); for(String key:fields.keySet()) { row.put(key,fields.get(key)); } if(!batches.containsKey(kind)) batches.put(kind,new List<SObject>()); batches.get(kind).add(row); }\n"
+    apex+='for(String kind:batches.keySet()) update batches.get(kind);\n'
+    apex+="System.assertEquals(false, [SELECT IsActive FROM OmniProcess WHERE Id='0jNbm000000gie9EAA'].IsActive);\nSystem.debug('DOCGEN_CAPTURED_PATCH_APPLIED');\n"
+    assert len(apex.encode('utf-8'))<32000
+    filename=f'deploy-{offset//40+1}.apex'
+    (OUT/filename).write_text(apex,encoding='utf-8');chunk_files.append(filename)
+save(OUT/'deployment-chunks.json',chunk_files)
 print(json.dumps({'operations':len(patch['operations']),'components':audit,'blockerCount':len(set(blockers))}))
