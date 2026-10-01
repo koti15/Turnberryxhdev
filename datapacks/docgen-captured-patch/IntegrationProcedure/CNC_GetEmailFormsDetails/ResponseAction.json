@@ -1,0 +1,22 @@
+{
+  "Id": "0kEbm000002YXV6EAO",
+  "OmniProcessId": "0jNbm000000gicXEAQ",
+  "Name": "ResponseAction",
+  "PropertySetConfig": {
+    "additionalOutput": {
+      "responsedata": "%DR-E-GetForms:links%"
+    },
+    "controlWidth": 12,
+    "executionConditionalFormula": "",
+    "label": "ResponseAction",
+    "responseFormat": "JSON",
+    "responseJSONNode": "",
+    "responseJSONPath": "",
+    "returnOnlyAdditionalOutput": false,
+    "sendJSONNode": "",
+    "sendJSONPath": "DR-E-GetHeaderAttributes",
+    "show": null,
+    "vlcResponseHeaders": {},
+    "internalNotes": ""
+  }
+}

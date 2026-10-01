@@ -1,0 +1,39 @@
+{
+  "Id": "0kEbm000002YXXVEA4",
+  "Name": "CustomLWC4",
+  "OmniProcessId": "0jNbm000000gie9EAA",
+  "ParentElementId": "0kEbm000002YXXUEA4",
+  "PropertySetConfig": {
+    "bStandalone": false,
+    "controlWidth": 12,
+    "customAttributes": [
+      {
+        "name": "recorddata",
+        "source": "%formsdata%"
+      },
+      {
+        "name": "isomniscript",
+        "source": "true"
+      },
+      {
+        "name": "omniscriptname",
+        "source": "SendCommunication"
+      },
+      {
+        "name": "omniscriptstepname",
+        "source": "SelectForms"
+      },
+      {
+        "name": "preselecteddata",
+        "source": "%preSelectedForms%"
+      },
+      {
+        "name": "table-height",
+        "source": "524"
+      }
+    ],
+    "label": "SelectFormsLwc",
+    "lwcName": "cncDynamicTableSections",
+    "show": null
+  }
+}

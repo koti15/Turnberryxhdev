@@ -1,0 +1,99 @@
+{
+  "components": [
+    {
+      "reference": "IP-GETCaseDetails",
+      "id": "0kEbm000002YXWfEAO",
+      "status": "partially configured",
+      "source": "datapacks/docgen-captured-patch/OmniScript/IP-GETCaseDetails.json"
+    },
+    {
+      "reference": "SV-InitialMapping",
+      "id": "0kEbm000002YXWqEAO",
+      "status": "captured assignment configured",
+      "source": "datapacks/docgen-captured-patch/OmniScript/SV-InitialMapping.json"
+    },
+    {
+      "reference": "MaterialAndCommunicationChannel",
+      "id": "0kEbm000002YXX1EAO",
+      "status": "partially configured",
+      "source": "datapacks/docgen-captured-patch/OmniScript/MaterialAndCommunicationChannel.json"
+    },
+    {
+      "reference": "SV-DefaultMapping",
+      "id": "0kEbm000002YXXCEA4",
+      "status": "partially configured",
+      "source": "datapacks/docgen-captured-patch/OmniScript/SV-DefaultMapping.json"
+    },
+    {
+      "reference": "ExtractEmailBodyForMMR",
+      "id": "0kEbm000002YXXNEA4",
+      "status": "partially configured",
+      "source": "datapacks/docgen-captured-patch/OmniScript/ExtractEmailBodyForMMR.json"
+    },
+    {
+      "reference": "IP-GetForms",
+      "id": "0kEbm000002YXXTEA4",
+      "status": "partially configured",
+      "source": "datapacks/docgen-captured-patch/OmniScript/IP-GetForms.json"
+    },
+    {
+      "reference": "Step1",
+      "id": "0kEbm000002YXXUEA4",
+      "status": "partially configured",
+      "source": "datapacks/docgen-captured-patch/OmniScript/Step1.json"
+    }
+  ],
+  "blockers": [
+    "IP-GETCaseDetails: Case input/response mappings and execution condition absent in reference and org source.",
+    "Step properties and remaining child identities/types",
+    "Material Type stored values, defaults and complete radio properties",
+    "Both channel control element names, stored values, defaults and complete properties",
+    "Condition types and exact exported syntax; first comparison value in guidance tooltip",
+    "Case-owner message content and enforcement behavior",
+    "Remaining child properties and conditions",
+    "SV-DefaultMapping.isDocumentUploaded: literal text stored; runtime value type remains unverified.",
+    "SV-DefaultMapping.selectedEntity: expression/literal mode and runtime type unknown; not written.",
+    "SV-DefaultMapping.preSelectedLetterTemplate: expression/literal mode and runtime type unknown; not written.",
+    "SV-DefaultMapping.preSelectedCaseEntity: expression/literal mode and runtime type unknown; not written.",
+    "SV-DefaultMapping.preSelectedForms: expression/literal mode and runtime type unknown; not written.",
+    "SV-DefaultMapping.addresseeCommName: expression/literal mode and runtime type unknown; not written.",
+    "SV-DefaultMapping.mailingAddress: expression/literal mode and runtime type unknown; not written.",
+    "SV-DefaultMapping.isFormshasAttachments: expression/literal mode and runtime type unknown; not written.",
+    "SV-DefaultMapping.hasMaximumPOD: expression/literal mode and runtime type unknown; not written.",
+    "SV-DefaultMapping.isLetterReviewRequired: expression/literal mode and runtime type unknown; not written.",
+    "SV-DefaultMapping.isSubscription: expression stored exactly; token casing remains unverified against source export.",
+    "ExtractEmailBodyForMMR: action literal quoting unverified; preserve existing input row, do not reinterpret.",
+    "Remaining Step/button properties and conditional view",
+    "Unnamed heading/guidance element identities and types",
+    "Messaging, heading and line-break properties/conditions",
+    "CustomLWC4 remaining attributes and both custom component conditional views",
+    "Custom component source and dependencies",
+    "cncDynamicTableSections: no LightningComponentBundle in target org or source; reference mapping configured but child remains disabled.",
+    "cncAttachmentsUploadSection: no LightningComponentBundle in target org or source; reference mapping configured but child remains disabled.",
+    "CNC_GetCaseInformation: inactive; full procedure/execution/failure settings and executable dependencies incomplete.",
+    "CNC_GetEmailFormsDetails: inactive; full procedure/execution/failure settings and executable dependencies incomplete.",
+    "CNCGetCaseInfo: Output spelling appears providerBlueshildId in mapping screenshot; earlier schema transcription was providerBlueshieldId. Confirm exact spelling from export or close-up before executable build.",
+    "CNCGetCaseInfo: all 13 formulaEvidence.expression values are null; exact User filter unresolved. Neither has a genuine source definition in this org.",
+    "CNCGetCaseInfo: referenced Account.Blue_Shield_Id__c is absent from target schema; field definition not supplied.",
+    "CNCGetCaseInfo: referenced Account.Member_Id__pc is absent from target schema; field definition not supplied.",
+    "CNCGetCaseInfo: referenced Account.NPI__c is absent from target schema; field definition not supplied.",
+    "CNCGetCaseInfo: referenced Account.Primary_Address__pc is absent from target schema; field definition not supplied.",
+    "CNCGetCaseInfo: referenced Account.Subscriber_Id__pc is absent from target schema; field definition not supplied.",
+    "CNCGetCaseInfo: referenced Account.UMPI__c is absent from target schema; field definition not supplied.",
+    "CNCGetCaseInfo: referenced Case.Source_System__c is absent from target schema; field definition not supplied.",
+    "GetMMREmailTemplate: literal quoting/semantics, formulas/options and action response transformations unknown; template contents not provided.",
+    "CNCGetHeaderAttributes: CNC_Line_Attributes__mdt is a prior-created type shell without captured field definitions/configuration records; cannot execute extraction.",
+    "CNCGetHeaderAttributes: CNC_Header_Attribute__mdt is a prior-created type shell without captured field definitions/configuration records; cannot execute extraction.",
+    "CNCGetHeaderAttributes: CNC_Button_Attribute__mdt is a prior-created type shell without captured field definitions/configuration records; cannot execute extraction.",
+    "CNCGetHeaderAttributes: CNC_Search_Attributes__mdt is a prior-created type shell without captured field definitions/configuration records; cannot execute extraction.",
+    "Blank source rows are recorded as displayed; their detailed settings and purpose are unknown.",
+    "Preserve Columns versus columns casing and columns:orders spelling; do not normalize.",
+    "profileName:Profile.Name is mapped, but its source extraction step is not captured.",
+    "Output list begins with buttonattributes in this batch; do not assume there are no earlier rows.",
+    "CNCGetInternalAndExternalLinks: CNC_Internal_and_External_Website__mdt is a prior-created type shell without captured field definitions/configuration records; cannot execute extraction.",
+    "Output row-level properties/defaults/types",
+    "Verify extract filter grouping and false literal semantics"
+  ],
+  "targetOrgId": "00Dbm00000phCerEAE",
+  "draftId": "0jNbm000000gie9EAA"
+}

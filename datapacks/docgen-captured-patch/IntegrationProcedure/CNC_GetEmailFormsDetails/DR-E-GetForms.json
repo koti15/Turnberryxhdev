@@ -1,0 +1,58 @@
+{
+  "Id": "0kEbm000002YXV5EAO",
+  "OmniProcessId": "0jNbm000000gicXEAQ",
+  "Name": "DR-E-GetForms",
+  "PropertySetConfig": {
+    "HTMLTemplateId": "",
+    "bundle": "CNCGetInternalAndExternalLinks",
+    "businessCategory": "",
+    "businessEvent": "",
+    "controlWidth": 12,
+    "dataRaptor Input Parameters": [
+      {
+        "element": "SV-DefaultMapping:type",
+        "inputParam": "type"
+      },
+      {
+        "element": "OutboundChannel",
+        "inputParam": "OutboundChannel"
+      }
+    ],
+    "enableActionMessage": false,
+    "enableDefaultAbort": false,
+    "errorMessage": {
+      "custom": [],
+      "default": null
+    },
+    "failureAbortLabel": "Abort",
+    "failureAbortMessage": "Are you sure?",
+    "failureGoBackLabel": "Go Back",
+    "failureNextLabel": "Continue",
+    "ignoreCache": false,
+    "inProgressMessage": "In Progress",
+    "label": "DR-E-GetForms",
+    "message": {},
+    "postMessage": "Done",
+    "pubsub": false,
+    "redirectNextLabel": "Next",
+    "redirectNextWidth": 3,
+    "redirectPageName": "",
+    "redirectPreviousLabel": "Previous",
+    "redirectPreviousWidth": 3,
+    "redirectTemplateUrl": "vlcAcknowledge.html",
+    "remoteTimeout": 30000,
+    "responseJSONNode": "",
+    "responseJSONPath": "",
+    "sendJSONNode": "",
+    "sendJSONPath": "",
+    "sendOnlyAdditionalInput": false,
+    "show": null,
+    "showPersistentComponent": [
+      true,
+      false
+    ],
+    "ssm": false,
+    "validationRequired": "Step",
+    "wpm": false
+  }
+}

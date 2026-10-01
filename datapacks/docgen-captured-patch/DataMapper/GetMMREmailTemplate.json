@@ -1,0 +1,16 @@
+{
+  "Id": "0jIbm000000MlGSEA0",
+  "Name": "GetMMREmailTemplate",
+  "items": [
+    {
+      "Id": "0kdbm000001VNr0AAG",
+      "InputFieldName": "Email:HtmlValue",
+      "OutputFieldName": "mmrEmailTemplate:selectedTemplate:htmlValue"
+    },
+    {
+      "Id": "0kdbm000001VNr1AAG",
+      "InputFieldName": "Email:Subject",
+      "OutputFieldName": "mmrEmailTemplate:selectedTemplate:emailTemplateSubject"
+    }
+  ]
+}

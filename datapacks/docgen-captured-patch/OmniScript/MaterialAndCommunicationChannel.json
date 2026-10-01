@@ -1,0 +1,7 @@
+{
+  "Id": "0kEbm000002YXX1EAO",
+  "Name": "MaterialAndCommunicationChannel",
+  "OmniProcessId": "0jNbm000000gie9EAA",
+  "PropertySetConfig": "{\"HTMLTemplateId\":\"\",\"allowSaveForLater\":false,\"businessCategory\":\"\",\"businessEvent\":\"\",\"cancelLabel\":\"Cancel\",\"cancelMessage\":\"Are you sure?\",\"completeLabel\":\"Complete\",\"completeMessage\":\"Are you sure you want to complete the script?\",\"conditionType\":\"Hide if False\",\"errorMessage\":{\"custom\":[],\"default\":null},\"instruction\":\"\",\"instructionKey\":\"\",\"knowledgeOptions\":{\"dataCategoryCriteria\":\"\",\"keyword\":\"\",\"language\":\"English\",\"publishStatus\":\"Online\",\"remoteTimeout\":30000,\"typeFilter\":\"\"},\"label\":\"Material and Outbound Channel Selection\",\"lwcComponentOverride\":\"\",\"message\":{},\"nextLabel\":\"Next\",\"nextWidth\":3,\"previousLabel\":\"Previous\",\"previousWidth\":3,\"pubsub\":false,\"remoteClass\":\"\",\"remoteMethod\":\"\",\"remoteOptions\":{},\"remoteTimeout\":30000,\"saveLabel\":\"Save for later\",\"saveMessage\":\"Are you sure you want to save it for later?\",\"show\":null,\"showPersistentComponent\":[true,false],\"validationRequired\":true}",
+  "SequenceNumber": 3
+}

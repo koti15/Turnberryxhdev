@@ -1,0 +1,7 @@
+{
+  "Id": "0kEbm000002YXWfEAO",
+  "Name": "IP-GETCaseDetails",
+  "OmniProcessId": "0jNbm000000gie9EAA",
+  "PropertySetConfig": "{\"controlWidth\":12,\"extraPayload\":{},\"integrationProcedureKey\":\"CNC_GetCaseInformation\",\"label\":\"IP-GETCaseDetails\",\"remoteOptions\":{},\"sendOnlyExtraPayload\":false,\"show\":null}",
+  "SequenceNumber": 1
+}

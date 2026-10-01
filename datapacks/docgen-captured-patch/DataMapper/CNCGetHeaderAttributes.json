@@ -1,0 +1,291 @@
+{
+  "Id": "0jIbm000000MlGQEA0",
+  "Name": "CNCGetHeaderAttributes",
+  "items": [
+    {
+      "Id": "0kdbm000001VNqbAAG",
+      "InputFieldName": "buttonattributes:Action_Name__c",
+      "OutputFieldName": "buttons:Name"
+    },
+    {
+      "Id": "0kdbm000001VNqmAAG",
+      "InputFieldName": "buttonattributes:Order__c",
+      "OutputFieldName": "buttons:order"
+    },
+    {
+      "Id": "0kdbm000001VNqpAAG",
+      "InputFieldName": "caseInfo:CaseNumber",
+      "OutputFieldName": "caseNumber"
+    },
+    {
+      "Id": "0kdbm000001VNqqAAG",
+      "InputFieldName": "caseInfo:Id",
+      "OutputFieldName": "caseId"
+    },
+    {
+      "Id": "0kdbm000001VNqrAAG",
+      "InputFieldName": "caseInfo:OwnerId",
+      "OutputFieldName": "caseOwnerId"
+    },
+    {
+      "Id": "0kdbm000001VNpuAAG",
+      "InputFieldName": "caseInfo:Previous_Owner__c",
+      "OutputFieldName": "previousCaseOwnerId"
+    },
+    {
+      "Id": "0kdbm000001VNpvAAG",
+      "InputFieldName": "caseInfo:Source_System_ID__c",
+      "OutputFieldName": "externalId"
+    },
+    {
+      "Id": "0kdbm000001VNpwAAG",
+      "InputFieldName": "columns:API_Response__c",
+      "OutputFieldName": "Columns:fieldName"
+    },
+    {
+      "Id": "0kdbm000001VNpxAAG",
+      "InputFieldName": "columns:Column_Order__c",
+      "OutputFieldName": "columns:orders"
+    },
+    {
+      "Id": "0kdbm000001VNpyAAG",
+      "InputFieldName": "columns:Data_Type__c",
+      "OutputFieldName": "Columns:type"
+    },
+    {
+      "Id": "0kdbm000001VNpzAAG",
+      "InputFieldName": "columns:Help_Text__c",
+      "OutputFieldName": "Columns:helpText"
+    },
+    {
+      "Id": "0kdbm000001VNq0AAG",
+      "InputFieldName": "columns:Is_Sortable__c",
+      "OutputFieldName": "Columns:sortable"
+    },
+    {
+      "Id": "0kdbm000001VNq1AAG",
+      "InputFieldName": "columns:Response_Label__c",
+      "OutputFieldName": "Columns:label"
+    },
+    {
+      "Id": "0kdbm000001VNq2AAG",
+      "InputFieldName": "columns:Type_Attribute_Target__c",
+      "OutputFieldName": "Columns:typeAttributes:target"
+    },
+    {
+      "Id": "0kdbm000001VNq3AAG",
+      "InputFieldName": "columns:typeAttributeLabel",
+      "OutputFieldName": "Columns:typeAttributes:label:fieldName"
+    },
+    {
+      "Id": "0kdbm000001VNq5AAG",
+      "InputFieldName": "columns:typeAttributeName",
+      "OutputFieldName": "Columns:typeAttributes:name"
+    },
+    {
+      "Id": "0kdbm000001VNq6AAG",
+      "InputFieldName": "columns:typeattributesdaymonth",
+      "OutputFieldName": "Columns:typeAttributes:day"
+    },
+    {
+      "Id": "0kdbm000001VNq7AAG",
+      "InputFieldName": "columns:typeattributesdaymonth",
+      "OutputFieldName": "Columns:typeAttributes:month"
+    },
+    {
+      "Id": "0kdbm000001VNq8AAG",
+      "InputFieldName": "columns:typeattributesyear",
+      "OutputFieldName": "Columns:typeAttributes:year"
+    },
+    {
+      "Id": "0kdbm000001VNq9AAG",
+      "InputFieldName": "columns:typeAttributeVariant",
+      "OutputFieldName": "Columns:typeAttributes:variant"
+    },
+    {
+      "Id": "0kdbm000001VNqAAAW",
+      "InputFieldName": "columns:wrapText",
+      "OutputFieldName": "Columns:wrapText"
+    },
+    {
+      "Id": "0kdbm000001VNqBAAW",
+      "InputFieldName": "memberInfo:Blue_Shield_Id__c",
+      "OutputFieldName": "blueShieldId"
+    },
+    {
+      "Id": "0kdbm000001VNqCAAW",
+      "InputFieldName": "memberInfo:Enterprise_Person_Id__c",
+      "OutputFieldName": "personId"
+    },
+    {
+      "Id": "0kdbm000001VNqDAAW",
+      "InputFieldName": "memberInfo:HIPAA_Flag__pc",
+      "OutputFieldName": "hipaaFlag"
+    },
+    {
+      "Id": "0kdbm000001VNqEAAW",
+      "InputFieldName": "memberInfo:Id",
+      "OutputFieldName": "Id"
+    },
+    {
+      "Id": "0kdbm000001VNqGAAW",
+      "InputFieldName": "memberInfo:Member_Id__pc",
+      "OutputFieldName": "memberId"
+    },
+    {
+      "Id": "0kdbm000001VNqHAAW",
+      "InputFieldName": "memberInfo:Name",
+      "OutputFieldName": "Name"
+    },
+    {
+      "Id": "0kdbm000001VNqIAAW",
+      "InputFieldName": "memberInfo:NPI__c",
+      "OutputFieldName": "providerNPI"
+    },
+    {
+      "Id": "0kdbm000001VNqJAAW",
+      "InputFieldName": "memberInfo:UMPI__c",
+      "OutputFieldName": "providerUMPI"
+    },
+    {
+      "Id": "0kdbm000001VNqKAAW",
+      "InputFieldName": "profileName:Profile.Name",
+      "OutputFieldName": "profName"
+    },
+    {
+      "Id": "0kdbm000001VNqLAAW",
+      "InputFieldName": "search:API_Response__c",
+      "OutputFieldName": "search:fieldName"
+    },
+    {
+      "Id": "0kdbm000001VNqMAAW",
+      "InputFieldName": "search:Field_Type__c",
+      "OutputFieldName": "search:FieldType"
+    },
+    {
+      "Id": "0kdbm000001VNqNAAW",
+      "InputFieldName": "search:Order__c",
+      "OutputFieldName": "search:orderlist"
+    },
+    {
+      "Id": "0kdbm000001VNqOAAW",
+      "InputFieldName": "search:Response_Label__c",
+      "OutputFieldName": "search:labelName"
+    },
+    {
+      "Id": "0kdbm000001VNqPAAW",
+      "InputFieldName": "section:APIRecordLimit",
+      "OutputFieldName": "apiRecordLimit"
+    },
+    {
+      "Id": "0kdbm000001VNqRAAW",
+      "InputFieldName": "section:Component_Name__c",
+      "OutputFieldName": "componentName"
+    },
+    {
+      "Id": "0kdbm000001VNqSAAW",
+      "InputFieldName": "section:Is_Selectable__c",
+      "OutputFieldName": "IsSelectable"
+    },
+    {
+      "Id": "0kdbm000001VNqTAAW",
+      "InputFieldName": "section:Query_Clause__c",
+      "OutputFieldName": "fieldToFilter"
+    },
+    {
+      "Id": "0kdbm000001VNqUAAW",
+      "InputFieldName": "section:Record_Limit_Per_Page__c",
+      "OutputFieldName": "recordLimitPerPage"
+    },
+    {
+      "Id": "0kdbm000001VNqVAAW",
+      "InputFieldName": "section:Section_Name__c",
+      "OutputFieldName": "sectionName"
+    },
+    {
+      "Id": "0kdbm000001VNqWAAW",
+      "InputFieldName": "section:Selectable_Type__c",
+      "OutputFieldName": "selectableType"
+    },
+    {
+      "Id": "0kdbm000001VNqXAAW",
+      "InputFieldName": "section:Show_Filter_By__c",
+      "OutputFieldName": "showFilterBy"
+    },
+    {
+      "Id": "0kdbm000001VNqYAAW",
+      "InputFieldName": "section:Show_Pagination__c",
+      "OutputFieldName": "showPagination"
+    },
+    {
+      "Id": "0kdbm000001VNqZAAW",
+      "InputFieldName": "section:Show_Row_Number__c",
+      "OutputFieldName": "showRowNumber"
+    },
+    {
+      "Id": "0kdbm000001VNqaAAG",
+      "InputFieldName": "section:Show_Search__c",
+      "OutputFieldName": "showSearch"
+    },
+    {
+      "Id": "0kdbm000001VNqcAAG",
+      "InputFieldName": "section:Show_ViewAll__c",
+      "OutputFieldName": "showViewAll"
+    },
+    {
+      "Id": "0kdbm000001VNqdAAG",
+      "FormulaExpression": "IF(columns:Data_Type__c == \"button\",\"base\",\"\")",
+      "FormulaResultPath": "columns:typeAttributeVariant"
+    },
+    {
+      "Id": "0kdbm000001VNqeAAG",
+      "FormulaExpression": "IF(columns:Data_Type__c == \"button\",columns:API_Response__c,\"\")",
+      "FormulaResultPath": "columns:typeAttributeLabel"
+    },
+    {
+      "Id": "0kdbm000001VNqfAAG",
+      "FormulaExpression": "IF(columns:Data_Type__c == \"button\",columns:API_Response__c,\"\")",
+      "FormulaResultPath": "columns:typeAttributeName"
+    },
+    {
+      "Id": "0kdbm000001VNqgAAG",
+      "FormulaExpression": "IF(columns:Data_Type__c == \"button\",true,\"\")",
+      "FormulaResultPath": "columns:typeAttributeDisabled"
+    },
+    {
+      "Id": "0kdbm000001VNqhAAG",
+      "FormulaExpression": "IF(isViewAll == \"VIEWALL\",true,section:Show_Pagination__c)",
+      "FormulaResultPath": "section:Show_Pagination__c"
+    },
+    {
+      "Id": "0kdbm000001VNqiAAG",
+      "FormulaExpression": "IF(isViewAll == \"VIEWALL\",false,section:Show_ViewAll__c)",
+      "FormulaResultPath": "section:Show_ViewAll__c"
+    },
+    {
+      "Id": "0kdbm000001VNqjAAG",
+      "FormulaExpression": "IF(isViewAll == \"VIEWALL\",50,section:Record_Limit_Per_Page__c)",
+      "FormulaResultPath": "section:Record_Limit_Per_Page__c"
+    },
+    {
+      "Id": "0kdbm000001VNqkAAG",
+      "FormulaExpression": "IF(isViewAll == \"VIEWALL\",200,10)",
+      "FormulaResultPath": "section:APIRecordLimit"
+    },
+    {
+      "Id": "0kdbm000001VNqlAAG",
+      "FormulaExpression": "IF((columns:Data_Type__c == \"date\" OR columns:Data_Type__c == \"date-local\"),\"2-digit\",\"\")",
+      "FormulaResultPath": "columns:typeattributesdaymonth"
+    },
+    {
+      "Id": "0kdbm000001VNqnAAG",
+      "FormulaExpression": "IF((columns:Data_Type__c == \"date\" OR columns:Data_Type__c == \"date-local\"),\"numeric\",\"\")",
+      "FormulaResultPath": "columns:typeattributesyear"
+    },
+    {
+      "Id": "0kdbm000001VNqoAAG",
+      "FormulaExpression": "IF(columns:Wrap_Text__c, true, \"\")",
+      "FormulaResultPath": "columns:wrapText"
+    }
+  ]
+}

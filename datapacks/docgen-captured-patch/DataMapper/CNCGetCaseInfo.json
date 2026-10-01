@@ -1,0 +1,161 @@
+{
+  "Id": "0jIbm000000MlGPEA0",
+  "Name": "CNCGetCaseInfo",
+  "items": [
+    {
+      "Id": "0kdbm000001VNpYAAW",
+      "InputFieldName": "caseInfo:Account.Member_Id__pc",
+      "OutputFieldName": "localMemberId"
+    },
+    {
+      "Id": "0kdbm000001VNpjAAG",
+      "InputFieldName": "caseInfo:Account.NPI__c",
+      "OutputFieldName": "providerNPI"
+    },
+    {
+      "Id": "0kdbm000001VNpnAAG",
+      "InputFieldName": "caseInfo:Account.PersonBirthdate",
+      "OutputFieldName": "memberDOB"
+    },
+    {
+      "Id": "0kdbm000001VNpoAAG",
+      "InputFieldName": "caseInfo:Account.PersonEmail",
+      "OutputFieldName": "memberEmail"
+    },
+    {
+      "Id": "0kdbm000001VNppAAG",
+      "InputFieldName": "caseInfo:Account.PersonMailingCity",
+      "OutputFieldName": "localCity"
+    },
+    {
+      "Id": "0kdbm000001VNpqAAG",
+      "InputFieldName": "caseInfo:Account.PersonMailingCountry",
+      "OutputFieldName": "localCountry"
+    },
+    {
+      "Id": "0kdbm000001VNprAAG",
+      "InputFieldName": "caseInfo:Account.PersonMailingPostalCode",
+      "OutputFieldName": "localPostalCode"
+    },
+    {
+      "Id": "0kdbm000001VNpsAAG",
+      "InputFieldName": "caseInfo:Account.PersonMailingState",
+      "OutputFieldName": "localState"
+    },
+    {
+      "Id": "0kdbm000001VNpOAAW",
+      "InputFieldName": "caseInfo:Account.PersonMailingStreet",
+      "OutputFieldName": "localStreet"
+    },
+    {
+      "Id": "0kdbm000001VNpPAAW",
+      "InputFieldName": "caseInfo:Account.Primary_Address__pc",
+      "OutputFieldName": "localFullAddress"
+    },
+    {
+      "Id": "0kdbm000001VNpQAAW",
+      "InputFieldName": "caseInfo:Account.Subscriber_Id__pc",
+      "OutputFieldName": "subscriberId"
+    },
+    {
+      "Id": "0kdbm000001VNpRAAW",
+      "InputFieldName": "caseInfo:Account.UMPI__c",
+      "OutputFieldName": "providerUMPI"
+    },
+    {
+      "Id": "0kdbm000001VNpSAAW",
+      "InputFieldName": "caseInfo:CaseNumber",
+      "OutputFieldName": "caseNumber"
+    },
+    {
+      "Id": "0kdbm000001VNpTAAW",
+      "InputFieldName": "caseInfo:Description",
+      "OutputFieldName": "caseDescription"
+    },
+    {
+      "Id": "0kdbm000001VNpUAAW",
+      "InputFieldName": "caseInfo:Id",
+      "OutputFieldName": "Id"
+    },
+    {
+      "Id": "0kdbm000001VNpVAAW",
+      "InputFieldName": "caseInfo:Owner.Name",
+      "OutputFieldName": "ownerName"
+    },
+    {
+      "Id": "0kdbm000001VNpWAAW",
+      "InputFieldName": "caseInfo:OwnerId",
+      "OutputFieldName": "caseOwnerId"
+    },
+    {
+      "Id": "0kdbm000001VNpXAAW",
+      "InputFieldName": "caseInfo:relationship",
+      "OutputFieldName": "caseType"
+    },
+    {
+      "Id": "0kdbm000001VNpZAAW",
+      "InputFieldName": "caseInfo:Source_System__c",
+      "OutputFieldName": "sourceSystem"
+    },
+    {
+      "Id": "0kdbm000001VNpaAAG",
+      "InputFieldName": "createdDate",
+      "OutputFieldName": "createdDate"
+    },
+    {
+      "Id": "0kdbm000001VNpbAAG",
+      "InputFieldName": "currentDate",
+      "OutputFieldName": "currentDate"
+    },
+    {
+      "Id": "0kdbm000001VNpcAAG",
+      "InputFieldName": "localEnterprisePersonId",
+      "OutputFieldName": "localEnterprisePersonId"
+    },
+    {
+      "Id": "0kdbm000001VNpdAAG",
+      "InputFieldName": "localMemberFirstName",
+      "OutputFieldName": "localMemberFirstName"
+    },
+    {
+      "Id": "0kdbm000001VNpeAAG",
+      "InputFieldName": "localMemberLastName",
+      "OutputFieldName": "localMemberLastName"
+    },
+    {
+      "Id": "0kdbm000001VNpfAAG",
+      "InputFieldName": "localMemberName",
+      "OutputFieldName": "localMemberName"
+    },
+    {
+      "Id": "0kdbm000001VNpgAAG",
+      "InputFieldName": "loggedInUserInfo:Id",
+      "OutputFieldName": "loggedInUserId"
+    },
+    {
+      "Id": "0kdbm000001VNphAAG",
+      "InputFieldName": "receivedDate",
+      "OutputFieldName": "receivedDate"
+    },
+    {
+      "Id": "0kdbm000001VNpiAAG",
+      "InputFieldName": "relatedEntities",
+      "OutputFieldName": "relatedEntities"
+    },
+    {
+      "Id": "0kdbm000001VNpkAAG",
+      "InputFieldName": "relatedEntityCount",
+      "OutputFieldName": "relatedEntityCount"
+    },
+    {
+      "Id": "0kdbm000001VNplAAG",
+      "InputFieldName": "serviceRepName",
+      "OutputFieldName": "serviceRepName"
+    },
+    {
+      "Id": "0kdbm000001VNpmAAG",
+      "InputFieldName": "todayDate",
+      "OutputFieldName": "todayDate"
+    }
+  ]
+}

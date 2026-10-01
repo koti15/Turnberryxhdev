@@ -1,0 +1,24 @@
+{
+  "Id": "0kEbm000002YXXWEA4",
+  "Name": "CustomLWC2",
+  "OmniProcessId": "0jNbm000000gie9EAA",
+  "ParentElementId": "0kEbm000002YXXUEA4",
+  "PropertySetConfig": {
+    "bStandalone": false,
+    "controlWidth": 12,
+    "customAttributes": [
+      {
+        "name": "uploadforms",
+        "source": "true"
+      },
+      {
+        "name": "currentrecordid",
+        "source": "%ContextId%"
+      }
+    ],
+    "label": "uploadFormsAndDocuments",
+    "lwcName": "cncAttachmentsUploadSection",
+    "show": null,
+    "internalNotes": ""
+  }
+}

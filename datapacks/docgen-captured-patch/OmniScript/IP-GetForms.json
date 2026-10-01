@@ -1,0 +1,7 @@
+{
+  "Id": "0kEbm000002YXXTEA4",
+  "Name": "IP-GetForms",
+  "OmniProcessId": "0jNbm000000gie9EAA",
+  "PropertySetConfig": "{\"conditionType\":\"Show if True\",\"controlWidth\":12,\"extraPayload\":{\"MaterialType\":\"%MaterialType%\",\"OutboundChannel\":\"%OutboundChannel%\"},\"integrationProcedureKey\":\"CNC_GetEmailFormsDetails\",\"label\":\"IP-GetForms\",\"lwcComponentOverride\":\"\",\"postTransformBundle\":\"\",\"preTransformBundle\":\"\",\"pubsub\":false,\"remoteOptions\":{\"useFuture\":false,\"chainable\":false,\"useQueueable\":false,\"queueableChainable\":false},\"responseJSONNode\":\"formsdata\",\"responseJSONPath\":\"\",\"sendJSONNode\":\"\",\"sendJSONPath\":\"\",\"sendOnlyExtraPayload\":true,\"show\":{\"group\":{\"operator\":\"OR\",\"rules\":[{\"field\":\"MaterialType\",\"condition\":\"=\",\"data\":\"Forms\"},{\"field\":\"MaterialType\",\"condition\":\"=\",\"data\":\"Documents\"}]}},\"showToastOnCompletion\":false,\"ssm\":false,\"useContinuation\":false,\"wpm\":false}",
+  "SequenceNumber": 6
+}

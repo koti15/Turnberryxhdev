@@ -1,0 +1,7 @@
+{
+  "Id": "0kEbm000002YXXCEA4",
+  "Name": "SV-DefaultMapping",
+  "OmniProcessId": "0jNbm000000gie9EAA",
+  "PropertySetConfig": "{\"controlWidth\":12,\"elementValueMap\":{\"isAsyncLetterGeneration\":\"=IF(%MaterialType% = \\\"POD Documents\\\", false, true)\",\"isEmail\":\"=IF(%OutboundChannel% = \\\"Email\\\", true, false)\",\"isPOD\":\"=IF(%MaterialType% = \\\"POD Documents\\\", true, false)\",\"isPrint\":\"=IF(%OutboundChannel% = \\\"Print\\\" || %OutboundChannel2% = \\\"Print\\\", true, false)\",\"selectedTemplate\":\"=null\",\"isDocumentUploaded\":\"false\",\"isSubscription\":\"=IF(%isAMMrSubscription% = \\\"Yes\\\", true, false)\"},\"label\":\"SV-DefaultMapping\",\"show\":null}",
+  "SequenceNumber": 4
+}

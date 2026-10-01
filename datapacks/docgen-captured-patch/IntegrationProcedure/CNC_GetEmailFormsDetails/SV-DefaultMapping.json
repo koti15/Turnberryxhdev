@@ -1,0 +1,18 @@
+{
+  "Id": "0kEbm000002YXV3EAO",
+  "OmniProcessId": "0jNbm000000gicXEAQ",
+  "Name": "SV-DefaultMapping",
+  "PropertySetConfig": {
+    "controlWidth": 12,
+    "elementValueMap": {
+      "sectionName": "=IF(%MaterialType% = \"Forms\",\"Send Communication Forms\",\"Send Communication Documents\")",
+      "type": "=IF(%MaterialType% = \"Forms\",\"Email Forms\",\"Email Documents\")"
+    },
+    "executionConditionalFormula": "",
+    "failOnStepError": false,
+    "label": "SV-DefaultMapping",
+    "responseJSONNode": "",
+    "responseJSONPath": "",
+    "show": null
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "Id": "0jIbm000000MlGREA0",
+  "Name": "CNCGetInternalAndExternalLinks",
+  "items": [
+    {
+      "Id": "0kdbm000001VNqsAAG",
+      "InputFieldName": "links:Department__c",
+      "OutputFieldName": "links:department"
+    },
+    {
+      "Id": "0kdbm000001VNqtAAG",
+      "InputFieldName": "links:Group__c",
+      "OutputFieldName": "links:group"
+    },
+    {
+      "Id": "0kdbm000001VNquAAG",
+      "InputFieldName": "links:Id",
+      "OutputFieldName": "links:Id"
+    },
+    {
+      "Id": "0kdbm000001VNqvAAG",
+      "InputFieldName": "links:Is_Internal__c",
+      "OutputFieldName": "links:isInternal"
+    },
+    {
+      "Id": "0kdbm000001VNqwAAG",
+      "InputFieldName": "links:Order__c",
+      "OutputFieldName": "links:order"
+    },
+    {
+      "Id": "0kdbm000001VNqxAAG",
+      "InputFieldName": "links:Type__c",
+      "OutputFieldName": "links:type"
+    },
+    {
+      "Id": "0kdbm000001VNqyAAG",
+      "InputFieldName": "links:URL__c",
+      "OutputFieldName": "links:url"
+    },
+    {
+      "Id": "0kdbm000001VNqzAAG",
+      "InputFieldName": "links:URL_Label__c",
+      "OutputFieldName": "links:label"
+    }
+  ]
+}

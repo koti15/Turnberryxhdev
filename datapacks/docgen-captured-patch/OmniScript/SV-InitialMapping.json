@@ -1,0 +1,7 @@
+{
+  "Id": "0kEbm000002YXWqEAO",
+  "Name": "SV-InitialMapping",
+  "OmniProcessId": "0jNbm000000gie9EAA",
+  "PropertySetConfig": "{\"controlWidth\":12,\"elementValueMap\":{\"isLoggedInUserSameAsCaseOwner\":\"=IF(%caseOwnerId% = %loggedInUserId%, true, false)\"},\"label\":\"SV-InitialMapping\",\"show\":null}",
+  "SequenceNumber": 2
+}
