@@ -5,7 +5,7 @@ Captured: 2026-10-01.
 
 This is the ordered visible designer tree transcribed from the six supplied screenshots. Step children are collapsed and are not enumerated here.
 
-Saved = configuration evidence already recorded for the first four elements, as requested by the user. Pending = element name/type recorded, detailed configuration still to capture. These statuses track documentation progress, not org implementation. Any exact-property gaps in the first four remain in the linked evidence notes.
+Saved = supplied configuration evidence recorded for elements 1–5. Pending = element name/type recorded, detailed configuration still to capture. These statuses track documentation progress, not org implementation. Any exact-property gaps in the first four remain in the linked evidence notes.
 
 ## Overall tree and capture status
 
@@ -15,7 +15,7 @@ Saved = configuration evidence already recorded for the first four elements, as 
 | 2 | SV-InitialMapping | Set Values | Saved |
 | 3 | MaterialAndCommunicationChannel | Step | Saved |
 | 4 | SV-DefaultMapping | Set Values | Saved |
-| 5 | ExtractEmailBodyForMMR | Data Mapper Extract Action | Pending |
+| 5 | ExtractEmailBodyForMMR | Data Mapper Extract Action | Saved |
 | 6 | IP-GetForms | Integration Procedure Action | Pending |
 | 7 | Step1 | Step | Pending |
 | 8 | SV-FormSelectionValues | Set Values | Pending |
@@ -64,16 +64,18 @@ Saved = configuration evidence already recorded for the first four elements, as 
 | 51 | Confirmation | Step | Pending |
 | 52 | RA-creteATrackCommunicationRecord | Remote Action | Pending |
 
-## First four saved
+## Saved elements
 
 1. IP-GETCaseDetails: [IP/DR evidence](evidence/CNC_GetCaseInformation.md).
 2. SV-InitialMapping: [Set Values evidence](evidence/OmniScript_SetValues.md).
 3. MaterialAndCommunicationChannel: visible screen/choices recorded in [Set Values evidence](evidence/OmniScript_SetValues.md); detailed control properties remain unverified.
 4. SV-DefaultMapping: 16 assignments recorded in [Set Values evidence](evidence/OmniScript_SetValues.md).
 
+5. ExtractEmailBodyForMMR: canonical properties and GetMMREmailTemplate definition saved in [partial specification](spec/send-communication.partial.json). Response transformations, conditions, error/user messages and Data Mapper Options/Formulas remain unverified.
+
 ## Next element
 
-ExtractEmailBodyForMMR — capture its Data Mapper reference, input/output transformations, conditions and other properties.
+IP-GetForms — capture its referenced IP, input/output transformations, conditions and other properties.
 
 ## Visible condition evidence
 
