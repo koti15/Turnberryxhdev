@@ -5,7 +5,7 @@
   "source": {
     "kind": "user-supplied-designer-screenshots",
     "capturedDate": "2026-10-01",
-    "latestScreenshot": "IMG_BB1CA589-D991-47C2-8064-76907F69E666.jpeg"
+    "latestScreenshot": "IMG_826F9DCF-A34C-4E03-B0B2-336B8376D9CE.jpeg"
   },
   "omniScript": {
     "displayName": "Send Communication",
@@ -1609,7 +1609,42 @@
           "order": 6,
           "elementName": "CustomLWC4",
           "elementType": "Custom LWC",
-          "componentDisplayed": "c:cncDynamicTableSections"
+          "componentDisplayed": "c:cncDynamicTableSections",
+          "fieldLabel": "SelectFormsLwc",
+          "componentName": "cncDynamicTableSections",
+          "observedActive": true,
+          "standaloneLwc": false,
+          "propertyMappings": [
+            {
+              "name": "recorddata",
+              "source": "%formsdata%"
+            },
+            {
+              "name": "isomniscript",
+              "source": "true"
+            },
+            {
+              "name": "omniscriptname",
+              "source": "SendCommunication"
+            },
+            {
+              "name": "omniscriptstepname",
+              "source": "SelectForms"
+            },
+            {
+              "name": "preselecteddata",
+              "source": "%preSelectedForms%"
+            },
+            {
+              "name": "table-height",
+              "source": "524"
+            }
+          ],
+          "propertyListComplete": false,
+          "conditionalView": null,
+          "evidenceScreenshots": [
+            "IMG_1568837F-8F59-4017-A58E-18D3356EB1BC.jpeg"
+          ]
         },
         {
           "order": 7,
@@ -1626,7 +1661,27 @@
           "order": 9,
           "elementName": "CustomLWC2",
           "elementType": "Custom LWC",
-          "componentDisplayed": "c:cncAttachmentsUploadSection"
+          "componentDisplayed": "c:cncAttachmentsUploadSection",
+          "fieldLabel": "uploadFormsAndDocuments",
+          "componentName": "cncAttachmentsUploadSection",
+          "observedActive": true,
+          "standaloneLwc": false,
+          "propertyMappings": [
+            {
+              "name": "uploadforms",
+              "source": "true"
+            },
+            {
+              "name": "currentrecordid",
+              "source": "%ContextId%"
+            }
+          ],
+          "propertyListComplete": true,
+          "conditionalView": null,
+          "internalNotes": "",
+          "evidenceScreenshots": [
+            "IMG_826F9DCF-A34C-4E03-B0B2-336B8376D9CE.jpeg"
+          ]
         },
         {
           "order": 10,
@@ -1646,14 +1701,27 @@
         "Next"
       ],
       "missing": [
-        "Step properties and conditional view",
+        "Remaining Step/button properties and conditional view",
         "Unnamed heading/guidance element identities and types",
-        "Child element properties, conditions and component attributes",
+        "Messaging, heading and line-break properties/conditions",
+        "CustomLWC4 remaining attributes and both custom component conditional views",
         "Custom component source and dependencies"
       ],
       "evidenceScreenshots": [
-        "IMG_BB1CA589-D991-47C2-8064-76907F69E666.jpeg"
-      ]
+        "IMG_BB1CA589-D991-47C2-8064-76907F69E666.jpeg",
+        "IMG_AF8E6CC8-D43D-4C47-97F8-C76516956DE7.jpeg",
+        "IMG_1568837F-8F59-4017-A58E-18D3356EB1BC.jpeg",
+        "IMG_826F9DCF-A34C-4E03-B0B2-336B8376D9CE.jpeg"
+      ],
+      "observedActive": true,
+      "fieldLabel": "",
+      "chartLabel": "",
+      "instruction": "",
+      "allowSaveForLater": true,
+      "buttonProperties": {
+        "previousLabel": "Previous",
+        "nextLabel": "Next"
+      }
     }
   ]
 }
