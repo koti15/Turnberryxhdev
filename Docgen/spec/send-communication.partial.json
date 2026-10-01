@@ -46,5 +46,61 @@
     "activate": false,
     "deploy": false,
     "includeSecrets": false
-  }
+  },
+  "integrationProcedures": [
+    {
+      "key": "CNC_GetCaseInformation",
+      "name": "Get Case Information",
+      "type": "CNC",
+      "subType": "GetCaseInformation",
+      "observedVersion": 3,
+      "observedActive": true,
+      "visibleElements": [
+        {
+          "elementName": "DR-E-GetCaseInfo",
+          "type": "Data Mapper Extract Action",
+          "dataMapper": "CNCGetCaseInfo",
+          "inputParameters": [
+            {
+              "dataSource": "caseId",
+              "filterValue": "caseId"
+            }
+          ],
+          "sendJsonPath": "",
+          "sendJsonNode": "",
+          "responseJsonPath": "",
+          "responseJsonNode": "response"
+        }
+      ],
+      "complete": false
+    }
+  ],
+  "dataMappers": [
+    {
+      "name": "CNCGetCaseInfo",
+      "interfaceType": "Extract",
+      "inputType": "JSON",
+      "outputType": "JSON",
+      "extractSteps": [
+        {
+          "object": "Case",
+          "outputPath": "caseInfo",
+          "filter": {
+            "field": "Id",
+            "operator": "=",
+            "input": "caseId"
+          }
+        },
+        {
+          "object": "User",
+          "outputPath": "loggedInUserInfo",
+          "filterExpressionStatus": "UserId expression observed; exact quoting needs verification"
+        }
+      ],
+      "formulaCountObserved": 13,
+      "outputMappings": null,
+      "evidencePath": "Docgen/evidence/CNC_GetCaseInformation.md",
+      "complete": false
+    }
+  ]
 }
