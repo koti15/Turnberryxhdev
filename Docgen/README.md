@@ -66,4 +66,4 @@ Create the additional directories when they contain real files. Keep Salesforce 
 
 See [CODEX_HANDOFF.md](CODEX_HANDOFF.md) and [partial build specification](spec/send-communication.partial.json). The user requires launch from Case. This requirement has been recorded but not implemented or validated. Current commits contain tracking and a partial specification only, not a runnable OmniScript. Obtain the actual exports before building deployable source.
 
-Latest evidence: [CNC_GetCaseInformation and CNCGetCaseInfo](evidence/CNC_GetCaseInformation.md). Next: CNCGetCaseInfo OUTPUT tab, followed by OPTIONS and sanitized Preview. Case launcher wiring remains unverified.
+Latest evidence: [CNC_GetCaseInformation and CNCGetCaseInfo](evidence/CNC_GetCaseInformation.md). OPTIONS and visible output schema captured. Preview returned 0 Case rows. Next: readable source-to-output mapping columns and a same-org accessible Case preview. Case launcher wiring remains unverified.
