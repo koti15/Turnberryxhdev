@@ -75,7 +75,7 @@ Saved = supplied configuration evidence recorded for elements 1–5. Pending = e
 
 ## Next element
 
-IP-GetForms — in progress. Visible Forms/Documents condition and discovered IP/DR properties are saved in the canonical specification. Still needed: referenced IP identity/action mappings, CNCGetHeaderAttributes formulas 5–7, Output mappings and Options. A similarly named SV-DefaultMapping in the IP is stored separately from the OmniScript element.
+IP-GetForms — in progress. Visible Forms/Documents condition and discovered IP/DR properties are saved in the canonical specification. Still needed: referenced IP identity/action mappings, CNCGetHeaderAttributes formulas 5–7, any earlier Output rows/row details, missing profileName source step and Options (46 output mapping paths now captured). A similarly named SV-DefaultMapping in the IP is stored separately from the OmniScript element.
 
 ## Visible condition evidence
 
