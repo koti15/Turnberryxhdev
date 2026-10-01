@@ -14,7 +14,7 @@ Read Docgen/README.md and Docgen/CODEX_HANDOFF.md before continuing discovery or
 
 - Store new exact configuration in Docgen/spec/send-communication.partial.json once. Update existing entries by identity: elementName for actions/Set Values, name for Data Mappers, source/output pair for mappings.
 - Merge repeated screenshot evidence into the same component entry; never append duplicate components or mappings.
-- Other notes and status files should link to the canonical record instead of repeating new property tables.
+- CODEX_HANDOFF.md is the user's single-file working record. After each new image batch, refresh its Complete captured configuration section from the canonical JSON and update completed/pending work and the continuation point. This generated view must not be edited independently. Other notes/status files link to the canonical record instead of repeating property tables.
 - Keep unknown settings null with evidence gaps explicit. Saved status tracks capture progress, not org creation.
 
 ## Development stories
