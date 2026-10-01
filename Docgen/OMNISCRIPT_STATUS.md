@@ -2,6 +2,10 @@
 
 Updated: 2026-10-01. Scope: Send Communication, observed English version 43.
 
+## Overall tree progress
+
+See [OMNISCRIPT_TREE.md](OMNISCRIPT_TREE.md) for the ordered screenshot tree. The first four outer elements are marked Saved for documentation progress; every later element is Pending detailed capture. The tables below retain precise property gaps.
+
 ## Status meaning
 
 - Saved: the stated evidence is committed to Git.
