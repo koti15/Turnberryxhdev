@@ -4,7 +4,7 @@ Updated: 2026-10-01. Scope: Send Communication, observed English version 43.
 
 ## Overall tree progress
 
-See [OMNISCRIPT_TREE.md](OMNISCRIPT_TREE.md) for the ordered screenshot tree. The first four outer elements are marked Saved for documentation progress; every later element is Pending detailed capture. The tables below retain precise property gaps.
+See [OMNISCRIPT_TREE.md](OMNISCRIPT_TREE.md) for the ordered screenshot tree. The first five outer elements are marked Saved for documentation progress; elements 6–52 are Pending detailed capture. The tables below retain precise property gaps.
 
 ## Status meaning
 
@@ -14,6 +14,8 @@ See [OMNISCRIPT_TREE.md](OMNISCRIPT_TREE.md) for the ordered screenshot tree. Th
 - Deferred: user chose to leave Preview for later.
 
 Saved evidence does not mean the element has been created in Salesforce. Implementation, activation and deployment are pending for every component. No runnable OmniScript export is committed. This is the captured inventory, not a claim that the full designer tree or execution order is complete.
+
+ExtractEmailBodyForMMR and GetMMREmailTemplate are captured in the canonical [specification](spec/send-communication.partial.json). Remaining action transformations/conditions and Data Mapper settings are explicit gaps there. Next element: IP-GetForms.
 
 ## Captured OmniScript elements
 
