@@ -4,7 +4,7 @@ Track the verified Document Generation implementation, learning progress, story 
 
 ## Overall OmniScript tree
 
-[OMNISCRIPT_TREE.md](OMNISCRIPT_TREE.md) records the ordered visible elements. First four: Saved. Remaining elements: Pending configuration capture. Next: ExtractEmailBodyForMMR.
+[OMNISCRIPT_TREE.md](OMNISCRIPT_TREE.md) records the ordered visible elements. Elements 1–5: Saved evidence. Elements 6–52: Pending configuration capture. Next: IP-GetForms.
 
 ## Current status
 
@@ -75,3 +75,7 @@ See [CODEX_HANDOFF.md](CODEX_HANDOFF.md) and [partial build specification](spec/
 Latest evidence: [CNC_GetCaseInformation and CNCGetCaseInfo](evidence/CNC_GetCaseInformation.md). 32 Output mapping paths, Options and schema captured. Confirm Blueshield key spelling, exact formulas and row-level properties before executable build. Case launcher wiring remains unverified.
 
 See [OmniScript Set Values](evidence/OmniScript_SetValues.md) for captured expressions and 16 default assignments. Preview is deferred by user instruction. Next: material/channel properties and OmniScript IP action input/response properties.
+
+## Single configuration record
+
+Use spec/send-communication.partial.json as the canonical structured configuration. Update actions by elementName, Data Mappers by name, and mappings by their source/output pair; repeated screenshots must not append duplicates. Track status and link to the canonical record rather than repeating property tables across notes. Saved means evidence capture, not verified complete configuration or org implementation.
