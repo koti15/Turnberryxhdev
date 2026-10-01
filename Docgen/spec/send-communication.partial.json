@@ -168,7 +168,10 @@
           "sendJsonPath": "",
           "sendJsonNode": "",
           "responseJsonPath": "",
-          "responseJsonNode": "response"
+          "responseJsonNode": "response",
+          "ignoreCache": false,
+          "sendOnlyAdditionalInput": false,
+          "returnOnlyAdditionalOutput": false
         }
       ],
       "complete": false
@@ -516,7 +519,101 @@
         "spellingDiscrepancies": [
           "providerBlueshildId versus providerBlueshieldId"
         ]
-      }
+      },
+      "formulaEvidence": [
+        {
+          "order": 1,
+          "resultPath": "relatedEntityCount",
+          "readableBehavior": "COUNTQUERY against Case_Sub_Entity__c filtered by Case__c using caseId",
+          "expression": null,
+          "verification": "Behavior transcribed from screenshots; exact executable expression not captured."
+        },
+        {
+          "order": 2,
+          "resultPath": "currentDate",
+          "readableBehavior": "FORMATDATETIME of NOW(), format MM/dd/yyyy",
+          "expression": null,
+          "verification": "Behavior transcribed from screenshots; exact executable expression not captured."
+        },
+        {
+          "order": 3,
+          "resultPath": "todayDate",
+          "readableBehavior": "FORMATDATETIME of NOW(), format MMMM dd, yyyy",
+          "expression": null,
+          "verification": "Behavior transcribed from screenshots; exact executable expression not captured."
+        },
+        {
+          "order": 4,
+          "resultPath": "serviceRepName",
+          "readableBehavior": "If loggedInUserInfo:FirstName is blank, use the first character of LastName; otherwise concatenate FirstName and the first character of LastName",
+          "expression": null,
+          "verification": "Behavior transcribed from screenshots; exact executable expression not captured."
+        },
+        {
+          "order": 5,
+          "resultPath": "caseInfo:relationship",
+          "readableBehavior": "Account.Record_Type__c Member or Unlisted Member maps to Member; otherwise Provider",
+          "expression": null,
+          "verification": "Behavior transcribed from screenshots; exact executable expression not captured."
+        },
+        {
+          "order": 6,
+          "resultPath": "localMemberName",
+          "readableBehavior": "For Member/Unlisted Member use caseInfo:Account.Name; otherwise caseInfo:Contact.Name",
+          "expression": null,
+          "verification": "Behavior transcribed from screenshots; exact executable expression not captured."
+        },
+        {
+          "order": 7,
+          "resultPath": "localMemberFirstName",
+          "readableBehavior": "For Member/Unlisted Member use caseInfo:Account.FirstName; otherwise empty string",
+          "expression": null,
+          "verification": "Behavior transcribed from screenshots; exact executable expression not captured."
+        },
+        {
+          "order": 8,
+          "resultPath": "localMemberLastName",
+          "readableBehavior": "For Member/Unlisted Member use caseInfo:Account.LastName; otherwise empty string",
+          "expression": null,
+          "verification": "Behavior transcribed from screenshots; exact executable expression not captured."
+        },
+        {
+          "order": 9,
+          "resultPath": "localEnterprisePersonId",
+          "readableBehavior": "For Member/Unlisted Member use caseInfo:Account.Enterprise_Person_Id__c; otherwise empty string",
+          "expression": null,
+          "verification": "Behavior transcribed from screenshots; exact executable expression not captured."
+        },
+        {
+          "order": 10,
+          "resultPath": "createdDate",
+          "readableBehavior": "FORMATDATETIME of caseInfo:CreatedDate, format MM/dd/yyyy",
+          "expression": null,
+          "verification": "Behavior transcribed from screenshots; exact executable expression not captured."
+        },
+        {
+          "order": 11,
+          "resultPath": "receivedDate",
+          "readableBehavior": "FORMATDATETIME of caseInfo:Received_Date__c, format MM/dd/yyyy",
+          "expression": null,
+          "verification": "Behavior transcribed from screenshots; exact executable expression not captured."
+        },
+        {
+          "order": 12,
+          "resultPath": "relatedEntitiesList",
+          "readableBehavior": "QUERY selects Entity_Type__c from Case_Sub_Entity__c filtered by Case__c using caseId",
+          "expression": null,
+          "verification": "Behavior transcribed from screenshots; exact executable expression not captured."
+        },
+        {
+          "order": 13,
+          "resultPath": "relatedEntities",
+          "readableBehavior": "TOSTRING(relatedEntitiesList)",
+          "expression": null,
+          "verification": "Behavior transcribed from screenshots; exact executable expression not captured."
+        }
+      ],
+      "formulaVerification": "Formula 4 concatenation separator and query-string quoting require export/close-up. Preserve Account.Record_Type__c. Runtime validation pending."
     },
     {
       "name": "GetMMREmailTemplate",
