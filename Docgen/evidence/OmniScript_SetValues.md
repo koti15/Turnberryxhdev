@@ -8,16 +8,11 @@ Name and field label: SV-InitialMapping.
 Visible value: isLoggedInUserSameAsCaseOwner.
 Expression: `IF(%caseOwnerId% = %loggedInUserId%, true, false)`.
 
-The expression compares caseOwnerId and loggedInUserId. Its downstream use and behavior with missing values are not verified. MSG_CaseOwnerError is visible in the subsequent step, but its conditions/content have not been inspected; do not assume this flag blocks the user.
+The expression compares caseOwnerId and loggedInUserId. Its downstream use and behavior with missing values are not verified. MSG_CaseOwnerError condition evidence is now captured in the canonical specification; its content and enforcement behavior remain unverified.
 
 ## MaterialAndCommunicationChannel
 
-Visible title: Material and Outbound Channel Selection.
-Visible Material Type choices: Forms, Documents, Letters, Other Communication, Member Materials Request (MMR) Documents.
-Two Outbound Channel controls are visible, each showing Email and Print.
-Visible note: Ensure Email is selected only for Non-PHI Blank Forms and Documents.
-The displayed note alone does not establish enforced validation.
-Radio element properties, stored choice values, defaults, and conditional visibility remain unknown. Do not equate the MMR display label with the expression literal POD Documents without inspecting the stored value.
+Visible layout, choices and condition evidence are maintained once in [the canonical specification](../spec/send-communication.partial.json), under stepElements → MaterialAndCommunicationChannel. Detailed control properties and exact exported conditions remain unverified.
 
 ## SV-DefaultMapping
 
