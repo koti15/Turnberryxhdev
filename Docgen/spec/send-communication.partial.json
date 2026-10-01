@@ -5,7 +5,7 @@
   "source": {
     "kind": "user-supplied-designer-screenshots",
     "capturedDate": "2026-10-01",
-    "latestScreenshot": "IMG_4BED4E5F-62CF-401A-B701-7A367A0B6D0E.jpeg"
+    "latestScreenshot": "IMG_29034490-76E5-4170-AD4B-EC3073A16790.jpeg"
   },
   "omniScript": {
     "displayName": "Send Communication",
@@ -194,9 +194,9 @@
           "values": [
             {
               "name": "sectionName",
-              "expression": null,
-              "visibleExpressionFragment": "IF(%MaterialType% = \"Forms\", \"Send Communication Forms\",",
-              "verification": "expression continues beyond readable capture; do not reconstruct"
+              "expression": "IF(%MaterialType% = \"Forms\",\"Send Communication Forms\",\"Send Communication Documents\")",
+              "verification": "Full expression supplied by user in browser address bar screenshot; runtime/export syntax not validated.",
+              "expressionDisplayed": "=IF(%MaterialType% = \"Forms\",\"Send Communication Forms\",\"Send Communication Documents\")"
             },
             {
               "name": "type",
@@ -209,7 +209,10 @@
           "executionConditionalFormula": "",
           "failOnStepError": false,
           "complete": false,
-          "order": 1
+          "order": 1,
+          "evidenceScreenshots": [
+            "IMG_29034490-76E5-4170-AD4B-EC3073A16790.jpeg"
+          ]
         },
         {
           "elementName": "DR-E-GetHeaderAttributes",
@@ -300,7 +303,6 @@
       "identityVerification": "Procedure Configuration screenshot confirms Type/SubType matching the OmniScript IP-GetForms reference; prior photographed IP element captures linked here.",
       "missing": [
         "Remaining DR-E-GetForms properties and CNCGetInternalAndExternalLinks definition",
-        "Full SV-DefaultMapping sectionName expression",
         "Any additional procedure settings outside visible area"
       ]
     }
