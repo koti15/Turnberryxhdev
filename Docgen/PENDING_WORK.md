@@ -75,6 +75,54 @@ The screenshots above do **not** establish:
 - any formulas beyond formula 13 (none are shown)
 - whether additional extract/filter conditions exist off-screen
 
+
+## Newly captured evidence — Case_Sub_Entity__c field inventory
+
+Salesforce Inspector screenshots show field-definition rows for `Case_Sub_Entity__c`. This evidence supports the schema used by CNCGetCaseInfo formulas 1, 12 and 13.
+
+Visible field definitions captured:
+
+| Label | Qualified API name | Data type | Length | Indexed |
+| --- | --- | --- | ---: | --- |
+| Record ID | Id | Lookup() | 18 | true |
+| Owner | OwnerId | Lookup(User,Group) | 18 | true |
+| Deleted | IsDeleted | Checkbox | 0 | true |
+| Entity Name | Name | Auto Number | 80 | true |
+| Created Date | CreatedDate | Date/Time | 0 | true |
+| Created By | CreatedById | Lookup(User) | 18 | false |
+| Last Modified Date | LastModifiedDate | Date/Time | 0 | false |
+| Last Modified By | LastModifiedById | Lookup(User) | 18 | false |
+| System Modstamp | SystemModstamp | Date/Time | 0 | true |
+| Object Access Level | UserRecordAccessId | Lookup(User Record Access) | 18 | false |
+| Account Name | Account_Name__c | Lookup(Account) | 18 | true |
+| BCBS MN Id | BCBS_MN_Id__c | Text(15) | 15 | false |
+| Billing Provider Name | Billing_Provider_Name__c | Text(255) | 255 | false |
+| Billing Provider PRPR Id | Billing_Provider_PRPR_Id__c | Text(15) | 15 | false |
+| Case | Case__c | Lookup(Case) | 18 | true |
+| Class ID | Class_ID__c | Text(100) | 100 | false |
+| Contact Name | Contact_Case_Name__c | Lookup(Contact) | 18 | true |
+| Entity Service Date End | Entity_Service_Date_End__c | Date | 0 | false |
+| Entity Service Date From | Entity_Service_Date_From__c | Date | 0 | false |
+| Location Vendor BCBS Id | Location_Vendor_BCBS_Id__c | Text(15) | 15 | false |
+| Location Vendor Name | Location_Vendor_Name__c | Text(255) | 255 | false |
+| Plan Code Reference Id | Plan_Code_Reference_Id__c | Text(30) | 30 | false |
+| Plan Resource Id | Plan_Resource_Id__c | Text(100) | 100 | false |
+| Plan Type Code | Plan_Type_Code__c | Text(10) | 10 | false |
+| Plan Type | Plan_Type__c | Text(50) | 50 | false |
+| Prior Authorization | Prior_Authorization__c | Text(30) | 30 | false |
+| Referrals Id | Referrals_Id__c | Text(30) | 30 | false |
+| Prior Authorization Type | Prior_Authorization_Type__c | Text(50) | 50 | false |
+| Servicing Provider Name | Servicing_Provider_Name__c | Text(255) | 255 | false |
+| Servicing Provider bcbsId | Servicing_Provider_bcbsId__c | Text(50) | 50 | false |
+| Is Primary | Is_Primary__c | Checkbox | 0 | false |
+| Entity Total Charge | Entity_Total_Charge__c | Currency(18, 0) | 0 | false |
+| Member Plan | Member_Plan__c | Lookup(Member Plan) | 18 | true |
+| URIText | URIText__c | Formula (Text) | 1300 | false |
+| Billing Provider NPI | Billing_Provider_NPI__c | Text(25) | 25 | false |
+
+Important: `Entity_Type__c` is referenced by the captured Data Mapper query, but its field-definition row is **not visible in this screenshot batch**. Do not infer its type from the query alone.
+
+
 ## Pending non-LWC/non-MDT work
 
 | Component | Required evidence / remaining work | Status |
