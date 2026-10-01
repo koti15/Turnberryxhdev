@@ -5,7 +5,7 @@
   "source": {
     "kind": "user-supplied-designer-screenshots",
     "capturedDate": "2026-10-01",
-    "latestScreenshot": "IMG_47D9238B-0196-455C-BA6C-59114DBCAD23.jpeg"
+    "latestScreenshot": "IMG_9ECBF03F-7E51-455D-9A3B-65293944794F.jpeg"
   },
   "omniScript": {
     "displayName": "Send Communication",
@@ -13,7 +13,8 @@
     "observedVersion": 43,
     "observedActive": true,
     "type": null,
-    "subType": null
+    "subType": null,
+    "description": "MMR- email go live prep"
   },
   "caseIntegration": {
     "requiredByUser": true,
@@ -407,5 +408,376 @@
   "validationPreference": {
     "preview": "deferred-by-user",
     "runtimeValidated": false
+  },
+  "outerTree": {
+    "evidencePath": "Docgen/OMNISCRIPT_TREE.md",
+    "childrenExpanded": false,
+    "statusMeaning": "Saved/Pending indicate documentation capture progress; not org implementation",
+    "elements": [
+      {
+        "name": "IP-GETCaseDetails",
+        "type": "Integration Procedure Action",
+        "source": "IMG_32747BB1-44F4-4042-B621-D0803ACBBBA5.jpeg",
+        "order": 1,
+        "status": "Saved"
+      },
+      {
+        "name": "SV-InitialMapping",
+        "type": "Set Values",
+        "source": "IMG_32747BB1-44F4-4042-B621-D0803ACBBBA5.jpeg",
+        "order": 2,
+        "status": "Saved"
+      },
+      {
+        "name": "MaterialAndCommunicationChannel",
+        "type": "Step",
+        "source": "IMG_32747BB1-44F4-4042-B621-D0803ACBBBA5.jpeg",
+        "order": 3,
+        "status": "Saved"
+      },
+      {
+        "name": "SV-DefaultMapping",
+        "type": "Set Values",
+        "source": "IMG_32747BB1-44F4-4042-B621-D0803ACBBBA5.jpeg",
+        "order": 4,
+        "status": "Saved"
+      },
+      {
+        "name": "ExtractEmailBodyForMMR",
+        "type": "Data Mapper Extract Action",
+        "source": "IMG_32747BB1-44F4-4042-B621-D0803ACBBBA5.jpeg",
+        "order": 5,
+        "status": "Pending"
+      },
+      {
+        "name": "IP-GetForms",
+        "type": "Integration Procedure Action",
+        "source": "IMG_32747BB1-44F4-4042-B621-D0803ACBBBA5.jpeg",
+        "order": 6,
+        "status": "Pending"
+      },
+      {
+        "name": "Step1",
+        "type": "Step",
+        "source": "IMG_32747BB1-44F4-4042-B621-D0803ACBBBA5.jpeg",
+        "order": 7,
+        "status": "Pending"
+      },
+      {
+        "name": "SV-FormSelectionValues",
+        "type": "Set Values",
+        "source": "IMG_32747BB1-44F4-4042-B621-D0803ACBBBA5.jpeg",
+        "order": 8,
+        "status": "Pending"
+      },
+      {
+        "name": "SE-FormSelectionError",
+        "type": "Set Errors",
+        "source": "IMG_32747BB1-44F4-4042-B621-D0803ACBBBA5.jpeg",
+        "order": 9,
+        "status": "Pending"
+      },
+      {
+        "name": "IP-GetPODDocs",
+        "type": "Integration Procedure Action",
+        "source": "IMG_6DEFBD37-5BB5-4656-ABB3-0451ACAFB032.jpeg",
+        "order": 10,
+        "status": "Pending"
+      },
+      {
+        "name": "SelectPODDocs",
+        "type": "Step",
+        "source": "IMG_6DEFBD37-5BB5-4656-ABB3-0451ACAFB032.jpeg",
+        "order": 11,
+        "status": "Pending"
+      },
+      {
+        "name": "SetValues1",
+        "type": "Set Values",
+        "source": "IMG_6DEFBD37-5BB5-4656-ABB3-0451ACAFB032.jpeg",
+        "order": 12,
+        "status": "Pending"
+      },
+      {
+        "name": "SE-PODSelectionError",
+        "type": "Set Errors",
+        "source": "IMG_6DEFBD37-5BB5-4656-ABB3-0451ACAFB032.jpeg",
+        "order": 13,
+        "status": "Pending"
+      },
+      {
+        "name": "SE-PODSelectionCountError",
+        "type": "Set Errors",
+        "source": "IMG_6DEFBD37-5BB5-4656-ABB3-0451ACAFB032.jpeg",
+        "order": 14,
+        "status": "Pending"
+      },
+      {
+        "name": "IP-GetLetterData",
+        "type": "Integration Procedure Action",
+        "source": "IMG_6DEFBD37-5BB5-4656-ABB3-0451ACAFB032.jpeg",
+        "order": 15,
+        "status": "Pending"
+      },
+      {
+        "name": "SelectEmailAndLetters",
+        "type": "Step",
+        "source": "IMG_6DEFBD37-5BB5-4656-ABB3-0451ACAFB032.jpeg",
+        "order": 16,
+        "status": "Pending"
+      },
+      {
+        "name": "SV-LetterSelectionValues",
+        "type": "Set Values",
+        "source": "IMG_6DEFBD37-5BB5-4656-ABB3-0451ACAFB032.jpeg",
+        "order": 17,
+        "status": "Pending"
+      },
+      {
+        "name": "SE-LetterSelectionError",
+        "type": "Set Errors",
+        "source": "IMG_A6047F95-A130-4DF6-B4C8-FC30B2668577.jpeg",
+        "order": 18,
+        "status": "Pending"
+      },
+      {
+        "name": "IP-GetCaseEntityDetails",
+        "type": "Integration Procedure Action",
+        "source": "IMG_A6047F95-A130-4DF6-B4C8-FC30B2668577.jpeg",
+        "order": 19,
+        "status": "Pending"
+      },
+      {
+        "name": "SV-EntityMapping",
+        "type": "Set Values",
+        "source": "IMG_A6047F95-A130-4DF6-B4C8-FC30B2668577.jpeg",
+        "order": 20,
+        "status": "Pending"
+      },
+      {
+        "name": "SelectEntity",
+        "type": "Step",
+        "source": "IMG_A6047F95-A130-4DF6-B4C8-FC30B2668577.jpeg",
+        "order": 21,
+        "status": "Pending"
+      },
+      {
+        "name": "SV-EntitySelection",
+        "type": "Set Values",
+        "source": "IMG_A6047F95-A130-4DF6-B4C8-FC30B2668577.jpeg",
+        "order": 22,
+        "status": "Pending"
+      },
+      {
+        "name": "SE-EntitySelectionError",
+        "type": "Set Errors",
+        "source": "IMG_A6047F95-A130-4DF6-B4C8-FC30B2668577.jpeg",
+        "order": 23,
+        "status": "Pending"
+      },
+      {
+        "name": "IP-GETAPITokenData",
+        "type": "Integration Procedure Action",
+        "source": "IMG_A6047F95-A130-4DF6-B4C8-FC30B2668577.jpeg",
+        "order": 24,
+        "status": "Pending"
+      },
+      {
+        "name": "SV-SetCommAddressData",
+        "type": "Set Values",
+        "source": "IMG_A6047F95-A130-4DF6-B4C8-FC30B2668577.jpeg",
+        "order": 25,
+        "status": "Pending"
+      },
+      {
+        "name": "SelectAddress",
+        "type": "Step",
+        "source": "IMG_A6047F95-A130-4DF6-B4C8-FC30B2668577.jpeg",
+        "order": 26,
+        "status": "Pending"
+      },
+      {
+        "name": "SV-AddressMapping",
+        "type": "Set Values",
+        "source": "IMG_B4D7FFA4-34B2-428C-8F4D-CAE20646F9D7.jpeg",
+        "order": 27,
+        "status": "Pending"
+      },
+      {
+        "name": "SE-CommAddError",
+        "type": "Set Errors",
+        "source": "IMG_B4D7FFA4-34B2-428C-8F4D-CAE20646F9D7.jpeg",
+        "order": 28,
+        "status": "Pending"
+      },
+      {
+        "name": "DR-CheckIfParagraphsExists",
+        "type": "Data Mapper Extract Action",
+        "source": "IMG_B4D7FFA4-34B2-428C-8F4D-CAE20646F9D7.jpeg",
+        "order": 29,
+        "status": "Pending"
+      },
+      {
+        "name": "SelectParagraphs",
+        "type": "Step",
+        "source": "IMG_B4D7FFA4-34B2-428C-8F4D-CAE20646F9D7.jpeg",
+        "order": 30,
+        "status": "Pending"
+      },
+      {
+        "name": "IP-GetPatientDemographics",
+        "type": "Integration Procedure Action",
+        "source": "IMG_B4D7FFA4-34B2-428C-8F4D-CAE20646F9D7.jpeg",
+        "order": 31,
+        "status": "Pending"
+      },
+      {
+        "name": "SV-ResetTokenMapping",
+        "type": "Set Values",
+        "source": "IMG_B4D7FFA4-34B2-428C-8F4D-CAE20646F9D7.jpeg",
+        "order": 32,
+        "status": "Pending"
+      },
+      {
+        "name": "RA-SetDefaultTokenMapping",
+        "type": "Remote Action",
+        "source": "IMG_B4D7FFA4-34B2-428C-8F4D-CAE20646F9D7.jpeg",
+        "order": 33,
+        "status": "Pending"
+      },
+      {
+        "name": "sv-podMappings",
+        "type": "Set Values",
+        "source": "IMG_B4D7FFA4-34B2-428C-8F4D-CAE20646F9D7.jpeg",
+        "order": 34,
+        "status": "Pending"
+      },
+      {
+        "name": "SelectEmail",
+        "type": "Step",
+        "source": "IMG_B4D7FFA4-34B2-428C-8F4D-CAE20646F9D7.jpeg",
+        "order": 35,
+        "status": "Pending"
+      },
+      {
+        "name": "RA-updateLinks",
+        "type": "Remote Action",
+        "source": "IMG_0B8CD2B8-2F3F-4456-8E16-98469A98486F.jpeg",
+        "order": 36,
+        "status": "Pending"
+      },
+      {
+        "name": "AdditionalInformation",
+        "type": "Step",
+        "source": "IMG_0B8CD2B8-2F3F-4456-8E16-98469A98486F.jpeg",
+        "order": 37,
+        "status": "Pending"
+      },
+      {
+        "name": "RA-InsertSelectedForms",
+        "type": "Remote Action",
+        "source": "IMG_0B8CD2B8-2F3F-4456-8E16-98469A98486F.jpeg",
+        "order": 38,
+        "status": "Pending"
+      },
+      {
+        "name": "IP-DeleteLetterData",
+        "type": "Integration Procedure Action",
+        "source": "IMG_0B8CD2B8-2F3F-4456-8E16-98469A98486F.jpeg",
+        "order": 39,
+        "status": "Pending"
+      },
+      {
+        "name": "IP-GenerateLetterinAsync",
+        "type": "Integration Procedure Action",
+        "source": "IMG_0B8CD2B8-2F3F-4456-8E16-98469A98486F.jpeg",
+        "order": 40,
+        "status": "Pending"
+      },
+      {
+        "name": "Set Generation_Options",
+        "type": "Set Values",
+        "source": "IMG_0B8CD2B8-2F3F-4456-8E16-98469A98486F.jpeg",
+        "order": 41,
+        "status": "Pending"
+      },
+      {
+        "name": "ReviewandSubmitAsync",
+        "type": "Step",
+        "source": "IMG_0B8CD2B8-2F3F-4456-8E16-98469A98486F.jpeg",
+        "order": 42,
+        "status": "Pending"
+      },
+      {
+        "name": "ReviewandSubmitSync",
+        "type": "Step",
+        "source": "IMG_0B8CD2B8-2F3F-4456-8E16-98469A98486F.jpeg",
+        "order": 43,
+        "status": "Pending"
+      },
+      {
+        "name": "set-sectionName",
+        "type": "Set Values",
+        "source": "IMG_0B8CD2B8-2F3F-4456-8E16-98469A98486F.jpeg",
+        "order": 44,
+        "status": "Pending"
+      },
+      {
+        "name": "ReviewPOD",
+        "type": "Step",
+        "source": "IMG_9ECBF03F-7E51-455D-9A3B-65293944794F.jpeg",
+        "order": 45,
+        "status": "Pending"
+      },
+      {
+        "name": "SV-BuddyFileMapping",
+        "type": "Set Values",
+        "source": "IMG_9ECBF03F-7E51-455D-9A3B-65293944794F.jpeg",
+        "order": 46,
+        "status": "Pending"
+      },
+      {
+        "name": "RA-SendEFilesToS3",
+        "type": "Remote Action",
+        "source": "IMG_9ECBF03F-7E51-455D-9A3B-65293944794F.jpeg",
+        "order": 47,
+        "status": "Pending"
+      },
+      {
+        "name": "SV-UploadSuccess",
+        "type": "Set Values",
+        "source": "IMG_9ECBF03F-7E51-455D-9A3B-65293944794F.jpeg",
+        "order": 48,
+        "status": "Pending"
+      },
+      {
+        "name": "RA-SendEmail",
+        "type": "Remote Action",
+        "source": "IMG_9ECBF03F-7E51-455D-9A3B-65293944794F.jpeg",
+        "order": 49,
+        "status": "Pending"
+      },
+      {
+        "name": "RA-createContactPoint",
+        "type": "Remote Action",
+        "source": "IMG_9ECBF03F-7E51-455D-9A3B-65293944794F.jpeg",
+        "order": 50,
+        "status": "Pending"
+      },
+      {
+        "name": "Confirmation",
+        "type": "Step",
+        "source": "IMG_9ECBF03F-7E51-455D-9A3B-65293944794F.jpeg",
+        "order": 51,
+        "status": "Pending"
+      },
+      {
+        "name": "RA-creteATrackCommunicationRecord",
+        "type": "Remote Action",
+        "source": "IMG_9ECBF03F-7E51-455D-9A3B-65293944794F.jpeg",
+        "order": 52,
+        "status": "Pending"
+      }
+    ]
   }
 }
