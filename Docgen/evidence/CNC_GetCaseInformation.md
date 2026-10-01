@@ -67,7 +67,7 @@ Member/Provider here is a computed relationship classification; do not assume th
 
 ## Unknowns preventing completion
 
-- Data Mapper Output tab: source fields, output JSON paths, types, defaults and any required mappings.
+- Output mapping paths are now captured below; row-level types/defaults/required settings are not inspected. Confirm the Blueshield output spelling discrepancy.
 - Data Mapper Options captured below; execution/access behavior still unvalidated.
 - Full IP procedure settings, execution conditions and failure behavior.
 - OmniScript IP-GETCaseDetails input/response transformations.
@@ -77,7 +77,7 @@ Member/Provider here is a computed relationship classification; do not assume th
 
 ## Next capture
 
-Stay on CNCGetCaseInfo. Open OUTPUT and capture every mapping row, including both input and output paths. Then capture OPTIONS. Use a sanitized Preview input/output to verify the mapping, without committing real member data.
+Output paths and Options have now been captured. Obtain export/row details for remaining exact settings. Preview is deferred at the user's request.
 
 ## Source screenshots
 
@@ -127,7 +127,7 @@ The right-side designer schema lists these keys with Text placeholders:
 - relatedEntities
 - receivedDate
 
-This is the designer schema, not returned record values or proof of a successful extraction. The source-to-output mapping columns are outside the screenshots. The complete mapping remains Unknown.
+This is the designer schema, not returned record values or proof of a successful extraction. The initial schema screenshots did not show mapping columns; the later mapping screenshots below now supply the paths.
 
 ### Confirmed Options
 
@@ -151,6 +151,45 @@ The cause of the zero-row result is Unknown: inspect whether the input ID exists
 
 ### Updated next step
 
-1. Capture OUTPUT with both source/extract and output JSON path columns visible for every row, or export the Data Mapper.
-2. Preview with a Case ID confirmed to exist and be accessible in this same org. Share sanitized output and the result-count line.
-3. Then inspect the OmniScript action's input/response settings. Do not assume the Data Mapper's caseId key proves the launcher wiring.
+Output path coverage is captured below. Confirm exact formulas, User filter expression and output-row detail settings from export or close-up. Inspect OmniScript IP-GETCaseDetails input/response properties next. Preview remains deferred by user instruction.
+
+## Output mapping paths captured 2026-10-01
+
+| Extract JSON path | Output JSON path |
+| --- | --- |
+| caseInfo:Account.Blue_Shield_Id__c | providerBlueshildId |
+| caseInfo:Account.Member_Id__pc | localMemberId |
+| caseInfo:Account.NPI__c | providerNPI |
+| caseInfo:Account.PersonBirthdate | memberDOB |
+| caseInfo:Account.PersonEmail | memberEmail |
+| caseInfo:Account.PersonMailingCity | localCity |
+| caseInfo:Account.PersonMailingCountry | localCountry |
+| caseInfo:Account.PersonMailingPostalCode | localPostalCode |
+| caseInfo:Account.PersonMailingState | localState |
+| caseInfo:Account.PersonMailingStreet | localStreet |
+| caseInfo:Account.Primary_Address__pc | localFullAddress |
+| caseInfo:Account.Subscriber_Id__pc | subscriberId |
+| caseInfo:Account.UMPI__c | providerUMPI |
+| caseInfo:CaseNumber | caseNumber |
+| caseInfo:Description | caseDescription |
+| caseInfo:Id | Id |
+| caseInfo:Owner.Name | ownerName |
+| caseInfo:OwnerId | caseOwnerId |
+| caseInfo:relationship | caseType |
+| caseInfo:Source_System__c | sourceSystem |
+| createdDate | createdDate |
+| currentDate | currentDate |
+| localEnterprisePersonId | localEnterprisePersonId |
+| localMemberFirstName | localMemberFirstName |
+| localMemberLastName | localMemberLastName |
+| localMemberName | localMemberName |
+| loggedInUserInfo:Id | loggedInUserId |
+| receivedDate | receivedDate |
+| relatedEntities | relatedEntities |
+| relatedEntityCount | relatedEntityCount |
+| serviceRepName | serviceRepName |
+| todayDate | todayDate |
+
+32 distinct mapping rows are visible across three overlapping screenshots. The first output path appears to read providerBlueshildId, while the earlier schema was transcribed as providerBlueshieldId. Confirm this exact spelling before building executable source; do not silently normalize it. Row-detail types, defaults and required settings were not opened. Formula paths map directly where shown; caseInfo:relationship maps to caseType.
+
+Sources: IMG_076800DE-7BFB-4E6B-92D3-DD7C75992E7A.jpeg, IMG_7E291FC0-AD57-4971-843F-2978C9B862EA.jpeg, IMG_47D9238B-0196-455C-BA6C-59114DBCAD23.jpeg.
