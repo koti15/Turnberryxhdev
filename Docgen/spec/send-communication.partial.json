@@ -5,15 +5,15 @@
   "source": {
     "kind": "user-supplied-designer-screenshots",
     "capturedDate": "2026-10-01",
-    "latestScreenshot": "IMG_826F9DCF-A34C-4E03-B0B2-336B8376D9CE.jpeg"
+    "latestScreenshot": "IMG_7ACBD6F4-31F7-4D59-9114-9D0C1195E8F6.jpeg"
   },
   "omniScript": {
     "displayName": "Send Communication",
     "language": "English",
     "observedVersion": 43,
     "observedActive": true,
-    "type": null,
-    "subType": null,
+    "type": "CNC",
+    "subType": "SendCommunication",
     "description": "MMR- email go live prep"
   },
   "caseIntegration": {
@@ -134,7 +134,7 @@
     }
   ],
   "missingForRunnableBuild": [
-    "OmniScript Type/SubType and exported definition",
+    "OmniScript exported definition",
     "Complete IP-GETCaseDetails properties including input/output mappings and conditions",
     "CNC_GetCaseInformation exported definition and dependencies",
     "Case launch component/action configuration",
@@ -1722,6 +1722,83 @@
         "previousLabel": "Previous",
         "nextLabel": "Next"
       }
+    },
+    {
+      "elementName": "MaterialAndCommunicationChannel",
+      "elementType": "Step",
+      "captureStatus": "visible-layout-and-condition-evidence-captured",
+      "complete": false,
+      "visibleTitle": "Material and Outbound Channel Selection",
+      "materialType": {
+        "displayLabel": "Material Type",
+        "elementName": null,
+        "visibleChoices": [
+          "Forms",
+          "Documents",
+          "Letters",
+          "Other Communication",
+          "Member Materials Request (MMR) Documents"
+        ],
+        "storedValuesVerified": false
+      },
+      "conditionalViewEvidence": [
+        {
+          "elementName": "MSG_CaseOwnerError",
+          "displayedCondition": "(isLoggedInUserSameAsCaseOwner = false)",
+          "conditionType": null,
+          "evidenceScreenshot": "IMG_F486DE2B-37F2-4A41-8971-123AFDA8B732.jpeg"
+        },
+        {
+          "elementName": null,
+          "visibleLocation": "First Outbound Channel control",
+          "displayLabel": "Outbound Channel",
+          "visibleChoices": [
+            "Email",
+            "Print"
+          ],
+          "displayedCondition": "(MaterialType <> Letters)",
+          "conditionType": null,
+          "evidenceScreenshot": "IMG_70A81DDB-AC28-42DC-8088-05F8251167CA.jpeg"
+        },
+        {
+          "elementName": null,
+          "visibleLocation": "Second Outbound Channel control",
+          "displayLabel": "Outbound Channel",
+          "visibleChoices": [
+            "Email",
+            "Print"
+          ],
+          "displayedCondition": "(MaterialType = Letters)",
+          "conditionType": null,
+          "evidenceScreenshot": "IMG_A7E26B77-B101-4132-90A9-B8ECE52EC500.jpeg"
+        },
+        {
+          "elementName": null,
+          "visibleLocation": "Email guidance below channel controls",
+          "displayText": "Ensure Email is selected only for Non-PHI Blank Forms and Documents",
+          "displayedCondition": "(MaterialType <>  AND MaterialType <> Letters AND OutboundChannel = Email)",
+          "conditionType": null,
+          "verification": "First MaterialType comparison has no readable right-hand value in the tooltip. Preserve the displayed blank; exact export syntax and empty-value semantics remain unverified.",
+          "evidenceScreenshot": "IMG_7ACBD6F4-31F7-4D59-9114-9D0C1195E8F6.jpeg"
+        }
+      ],
+      "navigationVisible": [
+        "Next"
+      ],
+      "missing": [
+        "Step properties and remaining child identities/types",
+        "Material Type stored values, defaults and complete radio properties",
+        "Both channel control element names, stored values, defaults and complete properties",
+        "Condition types and exact exported syntax; first comparison value in guidance tooltip",
+        "Case-owner message content and enforcement behavior",
+        "Remaining child properties and conditions"
+      ],
+      "evidenceScreenshots": [
+        "IMG_F486DE2B-37F2-4A41-8971-123AFDA8B732.jpeg",
+        "IMG_70A81DDB-AC28-42DC-8088-05F8251167CA.jpeg",
+        "IMG_A7E26B77-B101-4132-90A9-B8ECE52EC500.jpeg",
+        "IMG_7ACBD6F4-31F7-4D59-9114-9D0C1195E8F6.jpeg"
+      ]
     }
   ]
 }
