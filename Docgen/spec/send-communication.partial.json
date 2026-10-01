@@ -5,7 +5,7 @@
   "source": {
     "kind": "user-supplied-designer-screenshots",
     "capturedDate": "2026-10-01",
-    "latestScreenshot": "IMG_E6159448-FA7E-4B4B-9034-F4FB44343C35.jpeg"
+    "latestScreenshot": "IMG_301BEC87-F5B9-4FC0-AE52-A5FDEE7C24A3.jpeg"
   },
   "omniScript": {
     "displayName": "Send Communication",
@@ -191,6 +191,76 @@
           "name": "selectedTemplate",
           "useExpression": true,
           "expression": "null"
+        },
+        {
+          "name": "selectedEntity",
+          "displayedValue": "=null",
+          "useExpression": null,
+          "verification": "summary-only"
+        },
+        {
+          "name": "preSelectedLetterTemplate",
+          "displayedValue": "=null",
+          "useExpression": null,
+          "verification": "summary-only"
+        },
+        {
+          "name": "preSelectedCaseEntity",
+          "displayedValue": "=null",
+          "useExpression": null,
+          "verification": "summary-only"
+        },
+        {
+          "name": "preSelectedForms",
+          "displayedValue": "=null",
+          "useExpression": null,
+          "verification": "summary-only"
+        },
+        {
+          "name": "addresseeCommName",
+          "displayedValue": "=null",
+          "useExpression": null,
+          "verification": "summary-only",
+          "elementType": "Text"
+        },
+        {
+          "name": "mailingAddress",
+          "displayedValue": "=null",
+          "useExpression": null,
+          "verification": "summary-only",
+          "elementType": "Text"
+        },
+        {
+          "name": "isFormshasAttachments",
+          "valueText": "true",
+          "useExpression": null,
+          "runtimeValueType": "unverified",
+          "verification": "summary-only"
+        },
+        {
+          "name": "hasMaximumPOD",
+          "valueText": "false",
+          "useExpression": null,
+          "runtimeValueType": "unverified",
+          "verification": "summary-only"
+        },
+        {
+          "name": "isLetterReviewRequired",
+          "valueText": "false",
+          "useExpression": null,
+          "runtimeValueType": "unverified",
+          "verification": "summary-only"
+        },
+        {
+          "name": "isPOD",
+          "useExpression": true,
+          "expression": "IF(%MaterialType% = \"POD Documents\", true, false)"
+        },
+        {
+          "name": "isSubscription",
+          "useExpression": true,
+          "expression": "IF(%isAMMrSubscription% = \"Yes\", true, false)",
+          "inputTokenVerification": "Confirm exact casing against export"
         }
       ],
       "complete": false
