@@ -6,12 +6,81 @@ Updated 2026-10-01. Status: pending evidence or implementation, not completed. S
 
 The user authorized further development of missing components except LWCs and custom metadata (MDT). Those dependencies remain deferred, not resolved. Correct the existing inactive v4 draft in myProdOrg; do not create another skeleton. This documentation update does not deploy anything. Previously deployed configuration is partial and has not been runtime validated.
 
+## Newly captured evidence — CNCGetCaseInfo Data Mapper
+
+Screenshots captured from OmniStudio Data Mapper `CNCGetCaseInfo` establish the following exact configuration details.
+
+### Extract steps
+
+1. **Case**
+   - Extract Output Path: `caseInfo`
+   - Interface Field API Name: `Id`
+   - Input JSON node used for filter value: `caseId`
+
+2. **User**
+   - Extract Output Path: `loggedInUserInfo`
+   - Interface Field API Name: `Id`
+   - Input JSON node used for filter value: `$Vlocity.UserId`
+
+### Captured formulas 1–13
+
+1. `COUNTQUERY("SELECT COUNT() FROM Case_Sub_Entity__c WHERE Case__c = '{0}'",caseId)`
+   - Formula Result Path: `relatedEntityCount`
+
+2. `FORMATDATETIME(NOW(),"MM/dd/yyyy")`
+   - Formula Result Path: `currentDate`
+
+3. `FORMATDATETIME(NOW(),"MMMM dd, yyyy")`
+   - Formula Result Path: `todayDate`
+
+4. `IF(ISBLANK(loggedInUserInfo:FirstName),SUBSTRING(loggedInUserInfo:LastName,0,1),CONCAT(loggedInUserInfo:FirstName," ",SUBSTRING(loggedInUserInfo:LastName,0,1)))`
+   - Formula Result Path: `serviceRepName`
+
+5. `IF(caseInfo:Account.Record_Type__c = "Member" || caseInfo:Account.Record_Type__c = "Unlisted Member","Member","Provider")`
+   - Formula Result Path: `caseInfo:relationship`
+
+6. `IF(caseInfo:Account.Record_Type__c = "Member" || caseInfo:Account.Record_Type__c = "Unlisted Member",caseInfo:Account.Name,caseInfo:Contact.Name)`
+   - Formula Result Path: `localMemberName`
+
+7. `IF(caseInfo:Account.Record_Type__c = "Member" || caseInfo:Account.Record_Type__c = "Unlisted Member",caseInfo:Account.FirstName,"")`
+   - Formula Result Path: `localMemberFirstName`
+
+8. `IF(caseInfo:Account.Record_Type__c = "Member" || caseInfo:Account.Record_Type__c = "Unlisted Member",caseInfo:Account.LastName,"")`
+   - Formula Result Path: `localMemberLastName`
+
+9. `IF(caseInfo:Account.Record_Type__c = "Member" || caseInfo:Account.Record_Type__c = "Unlisted Member",caseInfo:Account.Enterprise_Person_Id__c,"")`
+   - Formula Result Path: `localEnterprisePersonId`
+
+10. `FORMATDATETIME(caseInfo:CreatedDate,"MM/dd/yyyy")`
+    - Formula Result Path: `createdDate`
+
+11. `FORMATDATETIME(caseInfo:Received_Date__c,"MM/dd/yyyy")`
+    - Formula Result Path: `receivedDate`
+
+12. `QUERY("SELECT Entity_Type__c FROM Case_Sub_Entity__c WHERE Case__c = '{0}'",caseId)`
+    - Formula Result Path: `relatedEntitiesList`
+
+13. `TOSTRING(relatedEntitiesList)`
+    - Formula Result Path: `relatedEntities`
+
+### Still unresolved for CNCGetCaseInfo
+
+The screenshots above do **not** establish:
+- full Case extract field list / relationship traversal configuration
+- full User extract field list beyond the visible Id filter
+- Data Mapper output mappings
+- Data Mapper Options settings
+- Preview/runtime output
+- providerBlueshildId versus providerBlueshieldId output spelling
+- any formulas beyond formula 13 (none are shown)
+- whether additional extract/filter conditions exist off-screen
+
 ## Pending non-LWC/non-MDT work
 
 | Component | Required evidence / remaining work | Status |
 | --- | --- | --- |
 | IP-GETCaseDetails / CNC_GetCaseInformation | Exact Case input and response mappings, execution condition, remaining procedure and error-handling settings, and Case launcher/context wiring | Pending exact evidence |
-| CNCGetCaseInfo | All 13 executable formula expressions; exact User filter; resolve providerBlueshildId versus providerBlueshieldId output spelling | Pending exact evidence |
+| CNCGetCaseInfo | Formula expressions 1–13 and visible Case/User filter inputs are now captured. Still need full extract field coverage, output mappings, options, preview/runtime evidence, and resolve providerBlueshildId versus providerBlueshieldId output spelling | Partially resolved by 2026-10-01 screenshots |
 | MaterialAndCommunicationChannel | Child names/types; Material Type and both channel controls' stored values/defaults/properties; exact conditions and guidance comparison; case-owner message and enforcement | Pending exact evidence and implementation |
 | SV-DefaultMapping | Expression/literal mode and runtime type for the nine assignments listed below; confirm isDocumentUploaded literal type and isSubscription token casing | Pending exact evidence; 7 of 16 assignments configured |
 | ExtractEmailBodyForMMR / GetMMREmailTemplate | Exact input/filter literal quoting, action response transformations/conditions, mapper options and actual email template content | Pending exact evidence and implementation |
