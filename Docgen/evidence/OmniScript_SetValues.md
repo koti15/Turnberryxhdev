@@ -35,7 +35,7 @@ These rows are confirmed, but completeness of the entire value list and lower pr
 
 ## Outstanding work
 
-- Capture any remaining SV-DefaultMapping rows below selectedTemplate and both Set Values elements' conditional properties.
+- Verify full SV-DefaultMapping list coverage and both Set Values elements' conditional properties.
 - Inspect Material Type and both Outbound Channel radio properties, including stored values and conditions.
 - CNCGetCaseInfo still needs readable source-to-output mapping rows or export.
 - IP-GETCaseDetails still needs OmniScript-side input/response mapping.
@@ -46,3 +46,23 @@ These rows are confirmed, but completeness of the entire value list and lower pr
 Initial expression: IMG_5D08EC0C-10B2-4E36-8E54-7B9AD122309D.jpeg and IMG_AE75329B-337B-4591-B4CA-8AE63CC78B8B.jpeg.
 Selection step: IMG_AC4A7924-E78B-4828-AF20-844420F5B8A4.jpeg.
 Default values: IMG_F036D6B1-C5BC-4CA7-B7CC-E1606F0FF972.jpeg through IMG_F8053075-7EC9-4453-9604-42B481182A05.jpeg.
+
+## Additional default values captured 2026-10-01
+
+| Value name | Displayed value / expression | Verification |
+| --- | --- | --- |
+| selectedEntity | `=null` | Summary only; expression checkbox not inspected |
+| preSelectedLetterTemplate | `=null` | Summary only; expression checkbox not inspected |
+| preSelectedCaseEntity | `=null` | Summary only; expression checkbox not inspected |
+| preSelectedForms | `=null` | Summary only; expression checkbox not inspected |
+| addresseeCommName | `=null` | Text element; summary only |
+| mailingAddress | `=null` | Text element; summary only |
+| isFormshasAttachments | `true` | Summary only; mode and runtime type unverified |
+| isPOD | `IF(%MaterialType% = "POD Documents", true, false)` | Use Expression checked in editor |
+| hasMaximumPOD | `false` | Summary only; mode and runtime type unverified |
+| isLetterReviewRequired | `false` | Summary only; mode and runtime type unverified |
+| isSubscription | `IF(%isAMMrSubscription% = "Yes", true, false)` | Use Expression checked in editor; input token casing to confirm against export |
+
+An unnamed cropped row is excluded. These are assignments; downstream behavior is not yet captured. Conditional View is collapsed. The screenshot reaches the end of this panel, but complete list coverage across earlier screenshots remains unverified.
+
+Sources: IMG_7DFCA1A4-7C55-46C3-B654-362011E52892.jpeg, IMG_47BA71CB-70C1-4B37-8C9F-41946A519535.jpeg, IMG_2621C783-D206-4B51-9D9F-AA7C9152FBA2.jpeg, IMG_618FD0B5-B06D-4F47-B8F7-906CAA0CC8CA.jpeg, IMG_301BEC87-F5B9-4FC0-AE52-A5FDEE7C24A3.jpeg.
