@@ -1,6 +1,6 @@
 # Docgen working instructions
 
-Read Docgen/README.md before continuing discovery or development. Follow any applicable repository instructions.
+Read Docgen/README.md and Docgen/CODEX_HANDOFF.md before continuing discovery or development. Follow any applicable repository instructions. The handoff defines the one-to-one reconstruction sequence; Docgen/spec/send-communication.partial.json is the canonical captured configuration. Older status/evidence summaries must not override it.
 
 ## Evidence first
 
