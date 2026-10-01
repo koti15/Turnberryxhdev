@@ -5,7 +5,7 @@
   "source": {
     "kind": "user-supplied-designer-screenshots",
     "capturedDate": "2026-10-01",
-    "latestScreenshot": "IMG_7ED0B145-6A45-4A1C-A157-8CF97DE80626.jpeg"
+    "latestScreenshot": "IMG_A9F862A3-2547-42D2-991A-234FA36FDDB2.jpeg"
   },
   "omniScript": {
     "displayName": "Send Communication",
@@ -62,7 +62,7 @@
     {
       "elementName": "IP-GetForms",
       "elementType": "Integration Procedure Action",
-      "integrationProcedure": null,
+      "integrationProcedure": "CNC_GetEmailFormsDetails",
       "complete": false,
       "captureStatus": "in-progress",
       "conditionalViewEvidence": {
@@ -77,15 +77,15 @@
         "lwcComponentOverride": ""
       },
       "missing": [
-        "Referenced IP identity and invoke mode",
-        "Remaining action properties/user messages/errors",
-        "Confirm selected-element name from top properties"
+        "Remaining user-message/error-message properties",
+        "Referenced Integration Procedure full definition and settings"
       ],
       "evidenceScreenshots": [
         "IMG_70FF597B-607B-4E91-AE8E-7DFD2310FF27.jpeg",
         "IMG_ECB61E00-ECA1-4281-8303-D3380D236979.jpeg",
         "IMG_A7EC281B-F3FC-4FCF-BD04-501ED686935E.jpeg",
-        "IMG_7ED0B145-6A45-4A1C-A157-8CF97DE80626.jpeg"
+        "IMG_7ED0B145-6A45-4A1C-A157-8CF97DE80626.jpeg",
+        "IMG_A9F862A3-2547-42D2-991A-234FA36FDDB2.jpeg"
       ],
       "preTransformDataMapperInterface": "",
       "postTransformDataMapperInterface": "",
@@ -119,7 +119,18 @@
         "responseJsonNode": "formsdata"
       },
       "lwcComponentOverride": "",
-      "screenshotContext": "Continuation of requested IP-GetForms properties; element name and referenced IP are above the photographed area"
+      "screenshotContext": "Top properties confirm IP-GetForms identity; continuation captures stored in this same action entry.",
+      "fieldLabel": "IP-GetForms",
+      "invokeMode": "Default",
+      "observedActive": true,
+      "showToastOnCompletion": false,
+      "remoteProperties": {
+        "useFuture": false,
+        "chainable": false,
+        "useContinuation": false,
+        "useQueueable": false,
+        "queueableChainable": false
+      }
     }
   ],
   "missingForRunnableBuild": [
