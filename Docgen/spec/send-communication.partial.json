@@ -5,7 +5,7 @@
   "source": {
     "kind": "user-supplied-designer-screenshots",
     "capturedDate": "2026-10-01",
-    "latestScreenshot": "IMG_AAC4E10A-A045-42EF-96F1-77BD29279D7A.jpeg"
+    "latestScreenshot": "IMG_8BB5FFE5-E0AB-44C4-B8AF-10E6FD13D929.jpeg"
   },
   "omniScript": {
     "displayName": "Send Communication",
@@ -719,7 +719,12 @@
           "outputJsonPath": "showViewAll"
         }
       ],
-      "options": null,
+      "options": {
+        "timeToLiveMinutes": 0,
+        "checkFieldLevelSecurity": false,
+        "platformCacheType": null,
+        "overwriteTargetForAllNullInputs": false
+      },
       "complete": false,
       "evidenceScreenshots": [
         "IMG_1BAC4DC5-FC40-4742-AAB8-A5BD2987AA4A.jpeg",
@@ -730,7 +735,8 @@
         "IMG_0BFF5C8A-39D1-4135-876D-CAFA3588C477.jpeg",
         "IMG_8338C9DE-FFCF-40DB-83A8-872406407A35.jpeg",
         "IMG_24C75048-B01C-4F62-84DF-031521FFB715.jpeg",
-        "IMG_AAC4E10A-A045-42EF-96F1-77BD29279D7A.jpeg"
+        "IMG_AAC4E10A-A045-42EF-96F1-77BD29279D7A.jpeg",
+        "IMG_8BB5FFE5-E0AB-44C4-B8AF-10E6FD13D929.jpeg"
       ],
       "dependencies": {
         "customMetadataTypes": [
