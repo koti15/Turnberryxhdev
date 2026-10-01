@@ -1,0 +1,50 @@
+{
+  "artifactKind": "evidence-based-build-specification",
+  "deployable": false,
+  "status": "partial-configuration",
+  "source": {
+    "kind": "user-supplied-designer-screenshots",
+    "capturedDate": "2026-10-01",
+    "latestScreenshot": "IMG_E6159448-FA7E-4B4B-9034-F4FB44343C35.jpeg"
+  },
+  "omniScript": {
+    "displayName": "Send Communication",
+    "language": "English",
+    "observedVersion": 43,
+    "observedActive": true,
+    "type": null,
+    "subType": null
+  },
+  "caseIntegration": {
+    "requiredByUser": true,
+    "objectApiName": "Case",
+    "launchMechanism": null,
+    "recordIdInputMapping": null,
+    "status": "required-not-implemented"
+  },
+  "confirmedActions": [
+    {
+      "elementName": "IP-GETCaseDetails",
+      "fieldLabel": "IP-GETCaseDetails",
+      "elementType": "Integration Procedure Action",
+      "integrationProcedure": "CNC_GetCaseInformation",
+      "invokeMode": "Default",
+      "inputMapping": null,
+      "responseMapping": null,
+      "executionCondition": null
+    }
+  ],
+  "missingForRunnableBuild": [
+    "OmniScript Type/SubType and exported definition",
+    "Complete IP-GETCaseDetails properties including input/output mappings and conditions",
+    "CNC_GetCaseInformation exported definition and dependencies",
+    "Case launch component/action configuration",
+    "Remaining elements, nested steps, properties and dependencies",
+    "Generation template and actual generation payload/call"
+  ],
+  "safety": {
+    "activate": false,
+    "deploy": false,
+    "includeSecrets": false
+  }
+}
