@@ -1,0 +1,212 @@
+{
+  "id": "0Afbm00000hoDJ4CAM",
+  "status": "Succeeded",
+  "success": true,
+  "done": true,
+  "checkOnly": false,
+  "numberComponentsDeployed": 27,
+  "numberComponentErrors": 0,
+  "numberComponentsTotal": 27,
+  "completedDate": "2026-10-02T00:05:12.000Z",
+  "components": [
+    {
+      "componentType": "CustomField",
+      "fullName": "Case_Sub_Entity__c.Account_Name__c",
+      "id": "00Nbm00003WwMc5EAF",
+      "created": true,
+      "success": true
+    },
+    {
+      "componentType": "CustomField",
+      "fullName": "Case_Sub_Entity__c.BCBS_MN_Id__c",
+      "id": "00Nbm00003WwMc6EAF",
+      "created": true,
+      "success": true
+    },
+    {
+      "componentType": "CustomField",
+      "fullName": "Case_Sub_Entity__c.Billing_Provider_NPI__c",
+      "id": "00Nbm00003WwMc7EAF",
+      "created": true,
+      "success": true
+    },
+    {
+      "componentType": "CustomField",
+      "fullName": "Case_Sub_Entity__c.Billing_Provider_Name__c",
+      "id": "00Nbm00003WwMc8EAF",
+      "created": true,
+      "success": true
+    },
+    {
+      "componentType": "CustomField",
+      "fullName": "Case_Sub_Entity__c.Billing_Provider_PRPR_Id__c",
+      "id": "00Nbm00003WwMc9EAF",
+      "created": true,
+      "success": true
+    },
+    {
+      "componentType": "CustomField",
+      "fullName": "Case_Sub_Entity__c.Case__c",
+      "id": "00Nbm00003WwMcAEAV",
+      "created": true,
+      "success": true
+    },
+    {
+      "componentType": "CustomField",
+      "fullName": "Case_Sub_Entity__c.Class_ID__c",
+      "id": "00Nbm00003WwMcBEAV",
+      "created": true,
+      "success": true
+    },
+    {
+      "componentType": "CustomField",
+      "fullName": "Case_Sub_Entity__c.Contact_Case_Name__c",
+      "id": "00Nbm00003WwMcCEAV",
+      "created": true,
+      "success": true
+    },
+    {
+      "componentType": "CustomField",
+      "fullName": "Case_Sub_Entity__c.Entity_Service_Date_End__c",
+      "id": "00Nbm00003WwMcDEAV",
+      "created": true,
+      "success": true
+    },
+    {
+      "componentType": "CustomField",
+      "fullName": "Case_Sub_Entity__c.Entity_Service_Date_From__c",
+      "id": "00Nbm00003WwMcEEAV",
+      "created": true,
+      "success": true
+    },
+    {
+      "componentType": "CustomField",
+      "fullName": "Case_Sub_Entity__c.Entity_Total_Charge__c",
+      "id": "00Nbm00003WwMcFEAV",
+      "created": true,
+      "success": true
+    },
+    {
+      "componentType": "CustomField",
+      "fullName": "Case_Sub_Entity__c.Entity_Type__c",
+      "id": "00Nbm00003WwMcGEAV",
+      "created": true,
+      "success": true
+    },
+    {
+      "componentType": "CustomField",
+      "fullName": "Case_Sub_Entity__c.Entity_Value__c",
+      "id": "00Nbm00003WwMcHEAV",
+      "created": true,
+      "success": true
+    },
+    {
+      "componentType": "CustomField",
+      "fullName": "Case_Sub_Entity__c.Is_Primary__c",
+      "id": "00Nbm00003WwMcIEAV",
+      "created": true,
+      "success": true
+    },
+    {
+      "componentType": "CustomField",
+      "fullName": "Case_Sub_Entity__c.Location_Vendor_BCBS_Id__c",
+      "id": "00Nbm00003WwMcJEAV",
+      "created": true,
+      "success": true
+    },
+    {
+      "componentType": "CustomField",
+      "fullName": "Case_Sub_Entity__c.Location_Vendor_Name__c",
+      "id": "00Nbm00003WwMcKEAV",
+      "created": true,
+      "success": true
+    },
+    {
+      "componentType": "CustomField",
+      "fullName": "Case_Sub_Entity__c.Plan_Code_Reference_Id__c",
+      "id": "00Nbm00003WwMcLEAV",
+      "created": true,
+      "success": true
+    },
+    {
+      "componentType": "CustomField",
+      "fullName": "Case_Sub_Entity__c.Plan_Resource_Id__c",
+      "id": "00Nbm00003WwMcMEAV",
+      "created": true,
+      "success": true
+    },
+    {
+      "componentType": "CustomField",
+      "fullName": "Case_Sub_Entity__c.Plan_Type_Code__c",
+      "id": "00Nbm00003WwMcNEAV",
+      "created": true,
+      "success": true
+    },
+    {
+      "componentType": "CustomField",
+      "fullName": "Case_Sub_Entity__c.Plan_Type__c",
+      "id": "00Nbm00003WwMcOEAV",
+      "created": true,
+      "success": true
+    },
+    {
+      "componentType": "CustomField",
+      "fullName": "Case_Sub_Entity__c.Prior_Authorization_Type__c",
+      "id": "00Nbm00003WwMcPEAV",
+      "created": true,
+      "success": true
+    },
+    {
+      "componentType": "CustomField",
+      "fullName": "Case_Sub_Entity__c.Prior_Authorization__c",
+      "id": "00Nbm00003WwMcQEAV",
+      "created": true,
+      "success": true
+    },
+    {
+      "componentType": "CustomField",
+      "fullName": "Case_Sub_Entity__c.Referrals_Id__c",
+      "id": "00Nbm00003WwMcREAV",
+      "created": true,
+      "success": true
+    },
+    {
+      "componentType": "CustomField",
+      "fullName": "Case_Sub_Entity__c.Servicing_Provider_Name__c",
+      "id": "00Nbm00003WwMcSEAV",
+      "created": true,
+      "success": true
+    },
+    {
+      "componentType": "CustomField",
+      "fullName": "Case_Sub_Entity__c.Servicing_Provider_bcbsId__c",
+      "id": "00Nbm00003WwMcTEAV",
+      "created": true,
+      "success": true
+    },
+    {
+      "componentType": "CustomField",
+      "fullName": "Case_Sub_Entity__c.URLText__c",
+      "id": "00Nbm00003WwMcUEAV",
+      "created": true,
+      "success": true
+    },
+    {
+      "componentType": "CustomObject",
+      "fullName": "Case_Sub_Entity__c",
+      "id": "01Ibm00000DBOdpEAH",
+      "created": true,
+      "success": true
+    },
+    {
+      "componentType": "",
+      "fullName": "package.xml",
+      "id": null,
+      "created": false,
+      "success": true
+    }
+  ],
+  "sourceCommit": "807f5a8",
+  "targetAlias": "myProdOrg",
+  "targetOrgId": "00Dbm00000phCerEAE"
+}

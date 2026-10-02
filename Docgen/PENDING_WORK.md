@@ -212,3 +212,7 @@ For later MDT implementation, request screenshots of **Manage Records -> each re
 ## Continuation rules
 
 Use exact authorized org/source or new screenshots to resolve gaps. Keep unknown configuration unresolved; do not invent formulas, control values, field definitions or template content. After each new screenshot batch, merge evidence into the existing canonical JSON and refresh the same handoff's generated configuration section. Mark implementation completed only after actual writes and verification, and record deployment results separately from evidence capture.
+
+## Case Sub Entity implementation checkpoint
+
+Object and 26 captured custom fields deployed successfully to myProdOrg, job `0Afbm00000hoDJ4CAM`. See [CODEX_HANDOFF.md](CODEX_HANDOFF.md) and deployment result. Member Plan lookup and old URIText spelling remain unresolved. Connected-user field access remains pending; automatic review rejected permission-set creation/deployment. No formula/runtime completion is claimed.

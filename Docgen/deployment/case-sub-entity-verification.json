@@ -1,0 +1,11 @@
+{
+  "deploymentSucceeded": true,
+  "deployId": "0Afbm00000hoDJ4CAM",
+  "objectId": "01Ibm00000DBOdpEAH",
+  "createdFields": 26,
+  "componentIdsVerifiedFromDeploymentReport": true,
+  "describeObjectExists": true,
+  "connectedUserCustomFieldsVisible": false,
+  "permissionSetAttempt": "Automatic approval review rejected permission-set creation/deployment command without a specific reason. No permission set created or assigned.",
+  "runtimeVerified": false
+}
