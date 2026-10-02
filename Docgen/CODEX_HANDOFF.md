@@ -37,6 +37,10 @@ The requested deliverable is actual configured OmniStudio components in the exis
 
 The Case launcher and uncaptured settings still need actual source or exact evidence. They do not justify omitting already captured fields, mappings or Step children.
 
+## Additional Case Sub Entity field evidence ? 2026-10-01
+
+Pulled main 0ad9f07. Added source for Entity_Type__c (Picklist: Claim, Prior Authorization, Member, Provider, Plan, Referral, Claim Line), Entity_Value__c (Text 255) and URLText__c (captured CASE formula). Exact formula and values are in the field metadata source; do not duplicate independently edited configuration tables. Picklist restriction/default were not captured: development source uses unrestricted, captured order, no default. URLText__c is the newly captured API spelling; older URIText__c transcription remains unverified and no alias field was invented. Member_Plan__c target label, child relationship and lack of lookup filter are captured, but target object API name remains unknown. Total prepared custom fields: 26. XML parsed; NOT deployed. Previous automatic deployment rejection remains recorded; no deployment retried in this update. Claims_Details_Page navigation dependency is unverified.
+
 ## Case Sub Entity source checkpoint ? 2026-10-01
 
 User explicitly requested creation of missing dependencies. Prepared CustomObject source and captured supported fields under force-app/main/default/objects/Case_Sub_Entity__c. Development defaults: CSE-{000000} auto-number, ReadWrite sharing, false checkbox default, optional SetNull lookups with generated reverse relationship names. These defaults are not claimed as captured reference configuration. Member_Plan__c remains pending exact target identity; URIText__c formula and Entity_Type__c definition remain unknown. See deployment/case-sub-entity-source.json. Source XML parsed successfully. NOT deployed: combined creation/deployment command rejected by automatic approval review without a specific reason. Formula 1 dependency remains absent from the org until successful deployment. No LWC or MDT changes.

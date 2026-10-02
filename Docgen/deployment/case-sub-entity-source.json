@@ -24,13 +24,18 @@
     "Servicing_Provider_bcbsId__c",
     "Is_Primary__c",
     "Entity_Total_Charge__c",
-    "Billing_Provider_NPI__c"
+    "Billing_Provider_NPI__c",
+    "Entity_Type__c",
+    "Entity_Value__c",
+    "URLText__c"
   ],
   "deferred": [
-    "Member_Plan__c",
-    "URIText__c",
-    "Entity_Type__c"
+    "Member_Plan__c: exact target object API name unknown",
+    "URIText__c: earlier inventory spelling differs from newly captured URLText__c; no alias field invented"
   ],
   "defaults": "CSE-{000000} numbering; ReadWrite sharing; checkbox false; optional SetNull lookups with generated reverse relationship names",
-  "deploymentBlock": "Combined creation/deployment command rejected by automatic approval review; no specific reason supplied."
+  "deploymentBlock": "Combined creation/deployment command rejected by automatic approval review; no specific reason supplied.",
+  "newEvidenceCommit": "0ad9f07",
+  "picklistDevelopmentDefaults": "Unrestricted, captured order, no default; restriction/default settings not captured",
+  "formulaNavigationDependency": "Claims_Details_Page Lightning navigation target not verified; formula captured exactly"
 }

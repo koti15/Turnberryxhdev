@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata"><fullName>URLText__c</fullName><formula>CASE(Entity_Type__c, &#x27;Claim&#x27;, &#x27;/lightning/n/Claims_Details_Page?c__claimId=&#x27; &amp; Entity_Value__c, &#x27;&#x27;)</formula><label>URLText</label><type>Text</type></CustomField>
