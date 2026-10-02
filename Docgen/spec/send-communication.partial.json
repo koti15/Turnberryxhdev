@@ -329,7 +329,12 @@
         {
           "object": "User",
           "outputPath": "loggedInUserInfo",
-          "filterExpressionStatus": "UserId expression observed; exact quoting needs verification"
+          "filterExpressionStatus": "Exact displayed input captured in newer PENDING_WORK.md evidence; implementation pending.",
+          "filter": {
+            "field": "Id",
+            "operator": "=",
+            "input": "$Vlocity.UserId"
+          }
         }
       ],
       "formulaCountObserved": 13,
@@ -525,95 +530,95 @@
           "order": 1,
           "resultPath": "relatedEntityCount",
           "readableBehavior": "COUNTQUERY against Case_Sub_Entity__c filtered by Case__c using caseId",
-          "expression": null,
-          "verification": "Behavior transcribed from screenshots; exact executable expression not captured."
+          "expression": "COUNTQUERY(\"SELECT COUNT() FROM Case_Sub_Entity__c WHERE Case__c = '{0}'\",caseId)",
+          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
         },
         {
           "order": 2,
           "resultPath": "currentDate",
           "readableBehavior": "FORMATDATETIME of NOW(), format MM/dd/yyyy",
-          "expression": null,
-          "verification": "Behavior transcribed from screenshots; exact executable expression not captured."
+          "expression": "FORMATDATETIME(NOW(),\"MM/dd/yyyy\")",
+          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
         },
         {
           "order": 3,
           "resultPath": "todayDate",
           "readableBehavior": "FORMATDATETIME of NOW(), format MMMM dd, yyyy",
-          "expression": null,
-          "verification": "Behavior transcribed from screenshots; exact executable expression not captured."
+          "expression": "FORMATDATETIME(NOW(),\"MMMM dd, yyyy\")",
+          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
         },
         {
           "order": 4,
           "resultPath": "serviceRepName",
           "readableBehavior": "If loggedInUserInfo:FirstName is blank, use the first character of LastName; otherwise concatenate FirstName and the first character of LastName",
-          "expression": null,
-          "verification": "Behavior transcribed from screenshots; exact executable expression not captured."
+          "expression": "IF(ISBLANK(loggedInUserInfo:FirstName),SUBSTRING(loggedInUserInfo:LastName,0,1),CONCAT(loggedInUserInfo:FirstName,\" \",SUBSTRING(loggedInUserInfo:LastName,0,1)))",
+          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
         },
         {
           "order": 5,
           "resultPath": "caseInfo:relationship",
           "readableBehavior": "Account.Record_Type__c Member or Unlisted Member maps to Member; otherwise Provider",
-          "expression": null,
-          "verification": "Behavior transcribed from screenshots; exact executable expression not captured."
+          "expression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",\"Member\",\"Provider\")",
+          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
         },
         {
           "order": 6,
           "resultPath": "localMemberName",
           "readableBehavior": "For Member/Unlisted Member use caseInfo:Account.Name; otherwise caseInfo:Contact.Name",
-          "expression": null,
-          "verification": "Behavior transcribed from screenshots; exact executable expression not captured."
+          "expression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",caseInfo:Account.Name,caseInfo:Contact.Name)",
+          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
         },
         {
           "order": 7,
           "resultPath": "localMemberFirstName",
           "readableBehavior": "For Member/Unlisted Member use caseInfo:Account.FirstName; otherwise empty string",
-          "expression": null,
-          "verification": "Behavior transcribed from screenshots; exact executable expression not captured."
+          "expression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",caseInfo:Account.FirstName,\"\")",
+          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
         },
         {
           "order": 8,
           "resultPath": "localMemberLastName",
           "readableBehavior": "For Member/Unlisted Member use caseInfo:Account.LastName; otherwise empty string",
-          "expression": null,
-          "verification": "Behavior transcribed from screenshots; exact executable expression not captured."
+          "expression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",caseInfo:Account.LastName,\"\")",
+          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
         },
         {
           "order": 9,
           "resultPath": "localEnterprisePersonId",
           "readableBehavior": "For Member/Unlisted Member use caseInfo:Account.Enterprise_Person_Id__c; otherwise empty string",
-          "expression": null,
-          "verification": "Behavior transcribed from screenshots; exact executable expression not captured."
+          "expression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",caseInfo:Account.Enterprise_Person_Id__c,\"\")",
+          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
         },
         {
           "order": 10,
           "resultPath": "createdDate",
           "readableBehavior": "FORMATDATETIME of caseInfo:CreatedDate, format MM/dd/yyyy",
-          "expression": null,
-          "verification": "Behavior transcribed from screenshots; exact executable expression not captured."
+          "expression": "FORMATDATETIME(caseInfo:CreatedDate,\"MM/dd/yyyy\")",
+          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
         },
         {
           "order": 11,
           "resultPath": "receivedDate",
           "readableBehavior": "FORMATDATETIME of caseInfo:Received_Date__c, format MM/dd/yyyy",
-          "expression": null,
-          "verification": "Behavior transcribed from screenshots; exact executable expression not captured."
+          "expression": "FORMATDATETIME(caseInfo:Received_Date__c,\"MM/dd/yyyy\")",
+          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
         },
         {
           "order": 12,
           "resultPath": "relatedEntitiesList",
           "readableBehavior": "QUERY selects Entity_Type__c from Case_Sub_Entity__c filtered by Case__c using caseId",
-          "expression": null,
-          "verification": "Behavior transcribed from screenshots; exact executable expression not captured."
+          "expression": "QUERY(\"SELECT Entity_Type__c FROM Case_Sub_Entity__c WHERE Case__c = '{0}'\",caseId)",
+          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
         },
         {
           "order": 13,
           "resultPath": "relatedEntities",
           "readableBehavior": "TOSTRING(relatedEntitiesList)",
-          "expression": null,
-          "verification": "Behavior transcribed from screenshots; exact executable expression not captured."
+          "expression": "TOSTRING(relatedEntitiesList)",
+          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
         }
       ],
-      "formulaVerification": "Formula 4 concatenation separator and query-string quoting require export/close-up. Preserve Account.Record_Type__c. Runtime validation pending."
+      "formulaVerification": "Exact formulas 1–13 now reconciled from newer PENDING_WORK.md evidence. Do not request them again. Runtime validation remains pending."
     },
     {
       "name": "GetMMREmailTemplate",
