@@ -1,0 +1,42 @@
+{
+  "fieldsPrepared": [
+    "CNC_Button_Attribute__mdt.Action_Name__c",
+    "CNC_Button_Attribute__mdt.Button_Label__c",
+    "CNC_Button_Attribute__mdt.Button_Location__c",
+    "CNC_Button_Attribute__mdt.CNC_Line_Attributes__c",
+    "CNC_Button_Attribute__mdt.Disabled__c",
+    "CNC_Button_Attribute__mdt.Order__c",
+    "CNC_Header_Attribute__mdt.API_Response__c",
+    "CNC_Header_Attribute__mdt.CNC_Line_Attributes__c",
+    "CNC_Header_Attribute__mdt.Column_Order__c",
+    "CNC_Header_Attribute__mdt.Data_Type__c",
+    "CNC_Header_Attribute__mdt.Default_Value__c",
+    "CNC_Header_Attribute__mdt.Help_Text__c",
+    "CNC_Header_Attribute__mdt.Is_Sortable__c",
+    "CNC_Header_Attribute__mdt.Response_Label__c",
+    "CNC_Header_Attribute__mdt.Wrap_Text__c",
+    "CNC_Line_Attributes__mdt.Component_Name__c",
+    "CNC_Line_Attributes__mdt.isAccordian__c",
+    "CNC_Line_Attributes__mdt.Is_Selectable__c",
+    "CNC_Line_Attributes__mdt.Order__c",
+    "CNC_Line_Attributes__mdt.Query_Clause__c",
+    "CNC_Line_Attributes__mdt.Record_Limit_Per_Page__c",
+    "CNC_Line_Attributes__mdt.Section_Name__c",
+    "CNC_Line_Attributes__mdt.Show_Filter_By__c",
+    "CNC_Line_Attributes__mdt.Show_Pagination__c",
+    "CNC_Line_Attributes__mdt.Show_Row_Number__c",
+    "CNC_Line_Attributes__mdt.Show_Search__c",
+    "CNC_Line_Attributes__mdt.Show_ViewAll__c",
+    "CNC_Search_Attributes__mdt.API_Response__c",
+    "CNC_Search_Attributes__mdt.CNC_Line_Attributes__c"
+  ],
+  "pendingFields": [
+    "CNC_Button_Attribute__mdt.CNC_Master_Attributes__c: Metadata Relationship(CNC Master Attributes)",
+    "CNC_Line_Attributes__mdt.CNC_Master_Attribute__c: Metadata Relationship(CNC Master Attributes)",
+    "CNC_Line_Attributes__mdt.Component_Type__c: Picklist",
+    "CNC_Line_Attributes__mdt.Selectable_Type__c: Picklist",
+    "CNC_Line_Attributes__mdt.UI_Type__c: Picklist"
+  ],
+  "recordValuesMissing": true,
+  "developmentChoices": "DeveloperControlled fields (reference Upgradable is managed packaging terminology); checkbox false; generated reverse relationship names. Picklist values and Master target not fabricated."
+}

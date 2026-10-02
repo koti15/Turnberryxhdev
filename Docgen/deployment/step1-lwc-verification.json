@@ -1,0 +1,72 @@
+{
+  "draft": {
+    "Id": "0jNbm000000gie9EAA",
+    "VersionNumber": 4,
+    "IsActive": false
+  },
+  "children": [
+    {
+      "Id": "0kEbm000002YXXWEA4",
+      "Name": "CustomLWC2",
+      "IsActive": true,
+      "PropertySetConfig": {
+        "bStandalone": false,
+        "controlWidth": 12,
+        "customAttributes": [
+          {
+            "name": "uploadforms",
+            "source": "true"
+          },
+          {
+            "name": "currentrecordid",
+            "source": "%ContextId%"
+          }
+        ],
+        "label": "uploadFormsAndDocuments",
+        "lwcName": "cncAttachmentsUploadSection",
+        "show": null,
+        "internalNotes": ""
+      }
+    },
+    {
+      "Id": "0kEbm000002YXXVEA4",
+      "Name": "CustomLWC4",
+      "IsActive": true,
+      "PropertySetConfig": {
+        "bStandalone": false,
+        "controlWidth": 12,
+        "customAttributes": [
+          {
+            "name": "recorddata",
+            "source": "%formsdata%"
+          },
+          {
+            "name": "isomniscript",
+            "source": "true"
+          },
+          {
+            "name": "omniscriptname",
+            "source": "SendCommunication"
+          },
+          {
+            "name": "omniscriptstepname",
+            "source": "SelectForms"
+          },
+          {
+            "name": "preselecteddata",
+            "source": "%preSelectedForms%"
+          },
+          {
+            "name": "table-height",
+            "source": "524"
+          }
+        ],
+        "label": "SelectFormsLwc",
+        "lwcName": "cncDynamicTableSections",
+        "show": null
+      }
+    }
+  ],
+  "checks": "Both exact component names and preserved input mappings verified; children enabled; script inactive. Local behavior checks passed for selection across pages, deselection, filter and 4MB boundary. No runtime Preview or actual upload performed.",
+  "scope": "Adapted SelectForms and PDF-upload path only. Full originals retained in Docgen/evidence/lwc-original/. Claims/entity controllers, modal, external-document integrations and telemetry remain unavailable."
+}

@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata"><fullName>CNC_Line_Attributes__c</fullName><fieldManageability>DeveloperControlled</fieldManageability><label>CNC Line Attributes</label><referenceTo>CNC_Line_Attributes__mdt</referenceTo><relationshipLabel>CNC Header Attributes</relationshipLabel><relationshipName>CNC_Header_Attribute_Lines</relationshipName><type>MetadataRelationship</type></CustomField>

@@ -2,6 +2,10 @@
 
 Updated 2026-10-01. Status: pending evidence or implementation, not completed. See [CODEX_HANDOFF.md](CODEX_HANDOFF.md) for the working record and [deployment/captured-audit.json](deployment/captured-audit.json) for the detailed deployment blockers.
 
+## Latest LWC / MDT scope update ? 2026-10-01
+
+User now authorizes LWC and MDT implementation. Previous exclusions below are historical. Both Step1 LWCs deployed as scoped SelectForms/PDF-upload adaptations from source supplied in org comments; full originals preserved, broader missing integrations remain pending. Existing LWC children enabled, script inactive. 29 captured MDT fields deployed across four types. Remaining: Master relationship target/schema, three Line picklist value sets, four uncaptured Search fields, Internal/External Website schema, Header Type_Attribute_Target__c discrepancy and actual MDT record field values (captured names alone are not records). See CODEX_HANDOFF.md latest implementation checkpoint and deployment results. No need to resend either LWC source.
+
 ## Evidence audit before requesting more images
 
 Do not treat implementation pending as evidence missing. Review this file, canonical JSON, handoff and existing evidence/source before asking for a repeat capture. A new request must identify the specific absent property and the existing records checked. Historical captured-audit.json blockers describe an earlier deployment checkpoint and can be superseded by newer evidence.

@@ -1,0 +1,6 @@
+<template>
+    <template lwc:if={showFilterBy}><lightning-input type="search" label="Filter by" onchange={handleSearch}></lightning-input></template>
+    <template lwc:if={noRows}><p>No forms available.</p></template>
+    <div style={tableStyle}><lightning-datatable key-field={keyField} data={visibleRows} columns={columns} selected-rows={selectedKeys} onrowselection={getSelectedRows} hide-checkbox-column={hideCheckbox} show-row-number-column={showRowNumber} sorted-by={sortedBy} sorted-direction={sortDirection} onsort={handleSort}></lightning-datatable></div>
+    <template lwc:if={showPagination}><div class="slds-grid slds-grid_align-center slds-m-top_small"><lightning-button label="Previous Page" onclick={previousPage} disabled={previousDisabled}></lightning-button><span class="slds-p-horizontal_small">Page {pageNumber} of {totalPages}</span><lightning-button label="Next Page" onclick={nextPage} disabled={nextDisabled}></lightning-button></div></template>
+</template>

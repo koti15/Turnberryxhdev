@@ -1,0 +1,61 @@
+[
+  {
+    "sourceBundle": "cncDynamicTableSections",
+    "targetBundle": "cncDynamicTableSections",
+    "jsLines": 3211,
+    "htmlLines": 132,
+    "imports": [
+      "import { LightningElement, api, track, wire } from 'lwc';",
+      "import { EnclosingTabId, getTabInfo, IsConsoleNavigation, getFocusedTabInfo, openSubtab } from 'lightning/platformWorkspaceApi';",
+      "import { OmniscriptBaseMixin } from 'omnistudio/omniscriptBaseMixin';",
+      "import { getDataHandler } from \"omnistudio/utility\";",
+      "import { NavigationMixin } from 'lightning/navigation';",
+      "import pubsub from 'omnistudio/pubsub';",
+      "import { CurrentPageReference } from 'lightning/navigation';",
+      "import lwcCustomStyle from '@salesforce/resourceUrl/cncdatatablecustomstyle';",
+      "import { loadStyle } from 'lightning/platformResourceLoader';",
+      "import { ShowToastEvent } from \"lightning/platformShowToastEvent\";",
+      "import getAccountId from '@salesforce/apex/CNC_AttachEntitiesController.getAccountRecordId';",
+      "import getAccountMemberId from '@salesforce/apex/CNC_AttachEntitiesController.getAccountMemberId';",
+      "import getMemberId from '@salesforce/apex/CNC_AttachEntitiesController.getmemberId';",
+      "import ClaimsAttachEntityMsg from '@salesforce/label/c.cncClaimsAttachEntityErrorMsg';",
+      "import priorAuthAttachEntityMsg from '@salesforce/label/c.CNCPriorAuthAttachEntityMsg';",
+      "import USER_ID from '@salesforce/user/Id';",
+      "import { getRecord } from 'lightning/uiRecordApi';",
+      "import finalizeClaimLoadTime from '@salesforce/apex/ClaimLoadTimeController.finalizeClaimLoadTime';",
+      "import { subscribe, MessageContext, unsubscribe } from 'lightning/messageService';",
+      "import finalizeAllClaimLoadTime from '@salesforce/apex/ClaimLoadTimeController.finalizeAllClaimLoadTime';",
+      "import isToggleEnabled from '@salesforce/apex/FeatureToggleController.isToggleEnabled';"
+    ]
+  },
+  {
+    "sourceBundle": "cncattachments",
+    "targetBundle": "cncAttachmentsUploadSection",
+    "jsLines": 678,
+    "htmlLines": 93,
+    "imports": [
+      "import { LightningElement, track, api, wire } from 'lwc';",
+      "import { getDataHandler } from \"omnistudio/utility\";",
+      "import { getRecord, createRecord, updateRecord } from 'lightning/uiRecordApi';",
+      "import { NavigationMixin } from 'lightning/navigation';",
+      "import { OmniscriptBaseMixin } from 'omnistudio/omniscriptBaseMixin';",
+      "import { ShowToastEvent } from 'lightning/platformShowToastEvent';",
+      "import usrId from '@salesforce/user/Id';",
+      "import getAttachmentDetails from '@salesforce/apex/CNCAttachmentsUploadSectionController.getAttachmentDetails'",
+      "import CONTENTTYPE from '@salesforce/label/c.CNCAlfrescoContentType';",
+      "import DOCUMENTUPDATE from '@salesforce/label/c.CNCAlfrescoDocumentsUpdate';",
+      "import DOCUMENTFAIL from '@salesforce/label/c.CNCAlfrescoDocumentsFailure';",
+      "import MIMETYPE from '@salesforce/label/c.cncAlfrescoDocumentsMimeType';",
+      "import ACCOUNTVALIDATION from '@salesforce/label/c.CNCAccountValidationonDocumentUpdate';",
+      "import CASE_DOCUMENTS from \"@salesforce/schema/Case_Documents__c\";",
+      "import CASE_ID from \"@salesforce/schema/Case_Documents__c.Case__c\";",
+      "import SOURCE_SYSTEM from \"@salesforce/schema/Case_Documents__c.Source_System__c\";",
+      "import SOURCE_SYSTEM_ID from \"@salesforce/schema/Case_Documents__c.Source_System_ID__c\";",
+      "import ID_FIELD from \"@salesforce/schema/Case_Documents__c.Id\";",
+      "import DOCUMENT_UPDATED from \"@salesforce/schema/Case_Documents__c.IsDocumentUpdated__c\";",
+      "import ALFRESCOURL from '@salesforce/label/c.cncAlfrescoURL';",
+      "import DOCUMENTUPLOAD from '@salesforce/label/c.cncAlfrescoUploadSuccessMsg';",
+      "import DOCUMENTUPLOADERRORMSG from '@salesforce/label/c.CNCDocumentUploadErrorMsg';"
+    ]
+  }
+]

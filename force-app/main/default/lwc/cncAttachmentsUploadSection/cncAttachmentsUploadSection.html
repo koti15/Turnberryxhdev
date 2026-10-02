@@ -1,0 +1,6 @@
+<template>
+    <section class="slds-section slds-is-open"><h3 class="slds-section__title slds-theme_shade slds-p-around_small">Attachments ({docCount})</h3>
+    <lightning-file-upload label="Upload PDF" name="fileUploader" accept={acceptedFormats} record-id={currentrecordid} disabled={disabled} onuploadfinished={handleUploadFinish}></lightning-file-upload>
+    <template lwc:if={checking}><lightning-spinner alternative-text="Checking file size" size="small"></lightning-spinner></template>
+    <template lwc:if={errorMessage}><p role="alert" class="slds-text-color_error">{errorMessage}</p></template></section>
+</template>

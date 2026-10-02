@@ -1,0 +1,678 @@
+import { LightningElement, track, api, wire } from 'lwc';
+import { getDataHandler } from "omnistudio/utility";
+import { getRecord, createRecord, updateRecord } from 'lightning/uiRecordApi';
+import { NavigationMixin } from 'lightning/navigation';
+import { OmniscriptBaseMixin } from 'omnistudio/omniscriptBaseMixin';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import usrId from '@salesforce/user/Id';
+import getAttachmentDetails from '@salesforce/apex/CNCAttachmentsUploadSectionController.getAttachmentDetails'
+import CONTENTTYPE from '@salesforce/label/c.CNCAlfrescoContentType';
+import DOCUMENTUPDATE from '@salesforce/label/c.CNCAlfrescoDocumentsUpdate';
+import DOCUMENTFAIL from '@salesforce/label/c.CNCAlfrescoDocumentsFailure';
+import MIMETYPE from '@salesforce/label/c.cncAlfrescoDocumentsMimeType';
+import ACCOUNTVALIDATION from '@salesforce/label/c.CNCAccountValidationonDocumentUpdate';
+import CASE_DOCUMENTS from "@salesforce/schema/Case_Documents__c";
+import CASE_ID from "@salesforce/schema/Case_Documents__c.Case__c";
+import SOURCE_SYSTEM from "@salesforce/schema/Case_Documents__c.Source_System__c";
+import SOURCE_SYSTEM_ID from "@salesforce/schema/Case_Documents__c.Source_System_ID__c";
+import ID_FIELD from "@salesforce/schema/Case_Documents__c.Id";
+import DOCUMENT_UPDATED from "@salesforce/schema/Case_Documents__c.IsDocumentUpdated__c";
+import ALFRESCOURL from '@salesforce/label/c.cncAlfrescoURL';
+import DOCUMENTUPLOAD from '@salesforce/label/c.cncAlfrescoUploadSuccessMsg';
+import DOCUMENTUPLOADERRORMSG from '@salesforce/label/c.CNCDocumentUploadErrorMsg';
+
+
+const FIELDS = ['Case.OwnerId', 'Case.Status', 'Case.CaseNumber', 'Case.AccountId'];
+const MAX_FILE_SIZE = 4194304;
+
+export default class CncAttachmentsUploadSection extends OmniscriptBaseMixin(NavigationMixin(LightningElement)) {
+	@track docCount = '0';
+	@api recordId;
+	@track showViewAll;
+	@api sortedBy;
+	@api sortedDirection;
+	@track disabled;
+	@track documentType;
+	@track isLetterQueueUser;
+
+	@track truthy;
+	@track myData = [];
+	@track dataToFilter = [];
+	@track documentDetails = [];
+	@track columns;
+	@track UserId = usrId;
+	@track _uploadforms = false;
+	@track uploadedDocumentIds = [];
+	@track showSizeError = false;
+	@track allowMultipleFiles = true;
+	@track error;
+	@track activeSections = [];
+
+	showDocumentProperties;
+	filesUploaded = [];
+	caseData;
+	fileName;
+	fileContent;
+	fileType;
+	docProperties = {};
+	loadSpinner;
+	isAlfrescoUpdate;
+	caseDocumentId;
+	showTable;
+	loadTableSpinner;
+	listOfDocumentIds = [];
+	listOfDocumentNames = [];
+	showContent = true;
+	iconName = 'utility:chevrondown';
+
+	handleChevronClick(event) {
+		if (this.showContent) {
+			this.showContent = false;
+			this.iconName = 'utility:chevronright';
+		} else {
+			this.showContent = true;
+			this.iconName = 'utility:chevrondown';
+		}
+	}
+
+	@api
+	get uploadforms() {
+		return this._uploadforms;
+	}
+	set uploadforms(val) {
+		this._uploadforms = val;
+		this.documentType = 'Uploaded Form/Document';
+		this._disabled = false;
+		this.showViewAll = false;
+		this.allowMultipleFiles = false;
+	}
+
+	@api
+	get currentrecordid() {
+		return this.recordId;
+	}
+	set currentrecordid(val) {
+		this.recordId = val;
+	}
+
+	get acceptedFormats() {
+		return ['.pdf'];
+	}
+
+	connectedCallback() {
+		this.getAttachmentsData();
+	}
+
+	// calling IP using omnistudio utility
+	callIp(ipMethod, inputMap) {
+		let datasourcedef = JSON.stringify({
+			"type": "integrationprocedure",
+			"value": {
+				"ipMethod": ipMethod,
+				"inputMap": inputMap,
+				"optionsMap": ""
+			}
+		});
+		return getDataHandler(datasourcedef).then(data => {
+			return JSON.parse(data);
+		}).catch(error => {
+			console.error(`failed at getting IP data => ${JSON.stringify(error)}`);
+		});
+	}
+
+
+	getAttachmentsData() {
+		this.loadTableSpinner = true;
+		var updateJson = {
+			isDocumentUploaded: false
+		};
+		this.omniApplyCallResp(updateJson);
+		let inputMap = {
+			caseId: this.recordId,
+			isMarkAsRead: true,
+			getMessages: false,
+			isUploadForms: this._uploadforms,
+			sectionName: "Case Documents"
+		};
+		this.callIp('CNC_GetAttachmentDetails', inputMap).then(response => {
+			let data = response.IPResult;
+			//console.log('IPdata ', JSON.stringify(data));
+			if (data) {
+				this.isLetterQueueUser = data.isLetterQueueUser;
+				console.log('isLetterQueueUser ', this.isLetterQueueUser);
+				if (data.Attachments) {
+					this.columns = data.Columns;
+					this.myData = data.Attachments;
+					//console.log('data ', JSON.stringify(this.myData));
+					if (data.documentDetails) {
+						this.documentDetails = data.documentDetails;
+					}
+					//this.setUpdateButtonVisibility();
+					if (this.myData.some(obj => Object.keys(obj).length != 0)) {
+						this.myData.forEach(element => {
+							let name = element.fileName.replace("file://", '');
+							name = name.split('.')[0];
+							element.fileName = name;
+						});
+						this.setUpdateButtonVisibility();
+						this.setTableData();
+						this.truthy = true;
+						//console.log('data after filter', JSON.stringify(this.myData));
+						var listsize = this.myData.length;
+						if (listsize > 10 && !this._uploadforms) {
+							this.docCount = '10+'
+							this.myData = this.myData.slice(0, 10);
+							this.showViewAll = true;
+						} else if (listsize > 0 && listsize <= 10 && !this._uploadforms) {
+							this.docCount = listsize;
+							this.showViewAll = true;
+						}
+						if (this._uploadforms && listsize > 0) {
+							this.docCount = listsize;
+							updateJson = {
+								isDocumentUploaded: true
+							};
+							this.omniApplyCallResp(updateJson);
+						} else {
+							updateJson = {
+								isDocumentUploaded: true
+							};
+							this.omniApplyCallResp(updateJson);
+						}
+						this.showTable = true;
+						this.loadTableSpinner = false;
+					} else {
+						this.docCount = '0';
+						this.showViewAll = false;
+						this.truthy = false;
+						this.showTable = false;
+						this.loadTableSpinner = false;
+					}
+				} else {
+					this.showTable = false;
+					this.loadTableSpinner = false;
+				}
+			} else if (error) {
+				this.docCount = '0';
+				this.showViewAll = false;
+				this.truthy = false;
+				this.showTable = false;
+				this.loadTableSpinner = false;
+				let errorResult = 'Error: ' + JSON.stringify(error);
+				console.log(errorResult);
+			}
+		}).catch(error => {
+			this.loadTableSpinner = false;
+			this.showTable = false;
+			console.error(`failed at getting IP data => ${JSON.stringify(error)}`);
+		});
+	}
+
+	setUpdateButtonVisibility() {
+		this.columns.forEach(element => {
+			if (element.fieldName == "Update" && element.type == "button") {
+				element.typeAttributes.disabled = {
+					fieldName: 'disableUpdate'
+				};
+			}
+			if (element.fieldName == "fileName" && element.type == "button") {
+				element.typeAttributes.disabled = {
+					fieldName: 'disableFileName'
+				};
+			}
+		});
+		this.myData.forEach(record => {
+			if (record.sourceSystem === 'Salesforce' || record.sourceSystem === 'Availity') {
+				record.disableUpdate = true;
+			}
+			else if (this.disabled == true) {
+				record.disableUpdate = true;
+			}
+			else {
+				if (this.documentDetails) {
+					this.documentDetails.forEach(docRec => {
+						if (record.sourceSystemId === docRec.sourceSystemId) {
+							record.disableUpdate = docRec.documentUpdated;
+						}
+					})
+				}
+			}
+
+			if (record.Update === 'Review' && (record.type === 'Letter' || record.type === 'Cover Letter') && this.disabled == false && this.isLetterQueueUser == true && record.documentReviewStatus === 'In Review') {
+				record.disableUpdate = false;
+			} else if (record.Update === 'Review' && (record.type !== 'Letter' || this.disabled == true || this.isLetterQueueUser == false || record.documentReviewStatus !== 'In Review')) {
+				record.disableUpdate = true;
+			}
+			if (record.documentStatus) {
+				if (record.documentStatus === 'SUBMITTED' && !record.documentId && !record.sourceSystemId) {
+					record.disableFileName = true;
+				}
+			} else {
+				record.disableFileName = false;
+			}
+			if (record.documentId && !record.documentStatus) {
+				this.listOfDocumentIds.push(record.documentId);
+				let name = record.fileName;
+				name = name.split('-')[0];
+				this.listOfDocumentNames.push(name);
+			}
+		});
+	}
+
+	setTableData() {
+		let itemsToRemove = [];
+		this.myData.forEach(record => {
+			if (this.listOfDocumentIds && record.documentId && record.documentStatus) {
+				if (this.listOfDocumentIds.includes(record.documentId)) {
+					itemsToRemove.push(record);
+				}
+			}
+			// if (this.listOfDocumentNames && !record.documentId && record.documentUploadedBy == 'PAYER') {
+			// 	if (this.listOfDocumentNames.includes(record.fileName)) {					
+			// 		itemsToRemove.push(record);
+			// 	}
+			// }
+		});
+		this.myData = this.myData.filter(v => {
+			return !itemsToRemove.includes(v);
+		});
+	}
+
+	@wire(getRecord, { recordId: "$recordId", fields: FIELDS })
+	case({ data, error }) {
+		if (data && this._uploadforms == false) {
+			this.caseData = data;
+			if (this.UserId != data.fields.OwnerId.value) {
+				this.disabled = true;
+				this.template.querySelector('.heading').classList.add('dynamic')
+			} else if (data.fields.Status.value === "Closed") {
+				this.disabled = true;
+				this.template.querySelector('.heading').classList.add('dynamic')
+			} else {
+				this.disabled = false;
+			}
+		}
+	}
+
+	handleRowAction(event) {
+		var row = event.detail.row;
+		var actionName = event.detail.action.name;
+
+		console.log('row--' + JSON.stringify(row));
+		console.log('actionName--' + actionName);
+
+		if (row) {
+			switch (actionName) {
+				case 'fileName':
+
+					if (row.Id) {
+						this[NavigationMixin.Navigate]({
+							type: 'standard__namedPage',
+							attributes: {
+								pageName: 'filePreview'
+							},
+							state: {
+								selectedRecordId: row.Id
+							}
+						})
+					} else {
+						let urlToNavigate = ALFRESCOURL;
+						urlToNavigate = urlToNavigate.replace('parentId', row.parentId);
+						urlToNavigate = urlToNavigate.replace('documentId', row.documentId);
+						window.open(urlToNavigate, '_blank', "height=1000,width=1500");
+
+					}
+
+					break;
+				case 'Update':
+
+					if (row.Update === 'Update') {
+						if (!this.caseData.fields.AccountId.value) {
+							const event = new ShowToastEvent({
+								title: 'ERROR',
+								message: ACCOUNTVALIDATION,
+								variant: 'error',
+								mode: 'dismissable'
+							});
+							this.dispatchEvent(event);
+						} else {
+							//console.log('testing test');
+							this.documentDetails.forEach(record => {
+								if (row.sourceSystemId === record.sourceSystemId) {
+									this.caseDocumentId = record.docId;
+								}
+							});
+							this.docProperties.isUpdate = true;
+							this.docProperties.documentId = row.documentId;
+							this.docProperties.systemCategory = row.systemCategory;
+							//this.docProperties.caseNumber = this.caseData.fields.CaseNumber.value;
+							this.showDocumentProperties = true;
+						}
+					} else if (row.Update === 'Review') {
+						this[NavigationMixin.Navigate]({
+							type: 'standard__component',
+							attributes: {
+								componentName: 'omnistudio__vlocityLWCOmniWrapper'
+							},
+							state: {
+								c__target: 'c:cNCSendCommunicationCaseLetterReviewEnglish',
+								c__layout: 'lightning',
+								c__tabIcon: 'custom:custom18',
+								c__tabLabel: 'Send Communication',
+								c__ContextId: this.recordId
+							}
+						})
+					}
+
+					break;
+				default:
+			}
+		}
+	}
+
+	handleViewAll(event) {
+		this[NavigationMixin.Navigate]({
+			type: 'standard__component',
+			attributes: {
+				componentName: 'omnistudio__vlocityLWCOmniWrapper'
+			},
+			state: {
+				c__target: 'c:cfCNCCaseAttachmentsSectionViewAll',
+				c__tabLabel: 'Attachments',
+				c__uploadforms: this._uploadforms,
+				uid: this.recordId
+			}
+		})
+	}
+
+	handleColumnSorting(event) {
+		this.sortedBy = event.detail.fieldName;
+		this.sortedDirection = event.detail.sortDirection;
+		this.sortData(this.sortedBy, this.sortedDirection);
+	}
+
+	sortData(fieldName, direction) {
+		//console.log('here in sort');
+		let result = Object.assign([], this.myData);
+		this.myData = result.sort((a, b) => {
+			if (a[fieldName] < b[fieldName])
+				return direction === 'asc' ? -1 : 1;
+			else if (a[fieldName] > b[fieldName])
+				return direction === 'asc' ? 1 : -1;
+			else
+				return 0;
+		})
+		//console.log('sort dtaa ', JSON.stringify(this.myData));
+	}
+
+	handleUploadFinish(event) {
+		if (this._uploadforms) {
+			const uploadedFiles = event.detail.files;
+			let selectedDoc = {
+				contentDocumentId: uploadedFiles[0].documentId,
+			};
+			this.uploadedDocumentIds.push(selectedDoc);
+			getAttachmentDetails({ documentId: uploadedFiles[0].documentId }).then(result => {
+				this.showSizeError = result;
+				if (this.showSizeError === true) {
+					const event = new ShowToastEvent({
+						title: 'ERROR',
+						message: 'Your attached file exceeds 4MB. Attach another file or send it using email',
+						variant: 'error',
+						mode: 'sticky'
+					});
+					this.dispatchEvent(event);
+				}
+				else {
+					var updateJson = {
+						isDocumentUploaded: true,
+						uploadedDocumentIds: this.uploadedDocumentIds
+					};
+					this.omniApplyCallResp(updateJson);
+				}
+			}).catch(error => {
+				console.log('Error----' + error);
+			});
+		}
+		this.getAttachmentsData();
+	}
+
+	hideModalBox() {
+		this.showDocumentProperties = false;
+	}
+	closeModal() {
+		this.showDocumentProperties = false;
+	}
+
+	handleFilesChange(event) {
+		if (event.target.files.length > 0) {
+			this.filesUploaded = event.target.files;
+			//console.log('file ', this.filesUploaded);
+			this.fileName = event.target.files[0].name;
+			var fileCon = this.filesUploaded[0];
+			if (fileCon.size > MAX_FILE_SIZE) {
+				let message = 'File larger than 4MB cannot be uploaded';
+				const event = new ShowToastEvent({
+					title: 'Error',
+					message: message,
+					variant: 'error',
+					mode: 'dismissable'
+				});
+				this.dispatchEvent(event);
+			} else {
+				var reader = new FileReader();
+				var self = this;
+				reader.onload = function () {
+					var fileContents = reader.result;
+					var base64Mark = 'base64,';
+					var dataStart = fileContents.indexOf(base64Mark) + base64Mark.length;
+					fileContents = fileContents.substring(dataStart);
+					self.showProperties(fileCon, fileContents);
+				};
+				reader.readAsDataURL(fileCon);
+			}
+		}
+	}
+	showProperties(file, fileContents) {
+		//get content type	
+		console.log('actual content type ', file.type);
+		let contentTypeOptions = [];
+		let docContentType;
+		let contentTypes = CONTENTTYPE.split(',');
+		let fileExtension;
+		if (file.name !== null && file.name !== undefined && file.name.endsWith(".msg")) {
+			fileExtension = "msg";
+		}
+		contentTypes.forEach(element => {
+			contentTypeOptions.push({ 'label': element.split(':')[0], 'value': element.split(':')[1] })
+		});
+		contentTypeOptions.forEach(element => {
+			if (element.label === file.type) {
+				docContentType = element.value;
+			}
+		});
+		//get mime type
+		let mimetypes = MIMETYPE.split(',');
+		let mimeTypeOptions = [];
+		let docMimeType;
+		mimetypes.forEach(element => {
+			mimeTypeOptions.push({ 'label': element.split(':')[0], 'value': element.split(':')[1] })
+		});
+		mimeTypeOptions.forEach(element => {
+			if (element.label === docContentType || element.label === file.type) {
+				docMimeType = element.value;
+			}
+		});
+
+		this.fileName = file.name.split('.')[0];
+		this.fileName = this.fileName.replace(/[^a-zA-Z0-9 ]/g, ' ');
+		this.docProperties.fileContent = fileContents;
+		this.docProperties.caseNumber = this.caseData.fields.CaseNumber.value
+		if (docContentType) {
+			this.docProperties.contentType = docContentType;
+		} else {
+			this.docProperties.contentType = file.type;
+		}
+		this.docProperties.mimeType = docMimeType;
+		//console.log('mime type : ', docMimeType);
+		//console.log('content type : ', docContentType);
+		if (!this.docProperties.contentType && fileExtension) {
+			this.docProperties.contentType = fileExtension;
+			this.docProperties.mimeType = 'msg';
+		}
+		this.docProperties.fileName = this.fileName;
+		this.docProperties.isUpdate = false;
+		this.showDocumentProperties = true;
+	}
+
+	uploadDocuments(event) {
+		let documentProperties = event.detail.values;
+		//console.log('type ', JSON.stringify(event.detail));
+		let inputMap = {
+			docProperties: documentProperties,
+			isUpdate: this.docProperties.isUpdate,
+			documentId: this.docProperties.documentId,
+			type: event.detail.type
+		};
+		console.log('dddd ', JSON.stringify(inputMap));
+		this.loadSpinner = true;
+		let promise = new Promise((resolve, reject) => {
+			this.callIp('CNC_uploadCaseDocumentsToAlfresco', inputMap).then(response => {
+				var result = response.IPResult;
+				resolve(result);
+			}).catch(error => {
+				console.error(`failed at getting IP data => ${JSON.stringify(error)}`);
+				reject(JSON.stringify(error));
+			});
+		})
+		promise.then(
+			(result) => {
+				if (result.issue) {
+					if (this.docProperties.isUpdate) {
+						//console.log('results ', JSON.stringify(result));
+						if (result.issue[0].diagnostics.startsWith("No patient found /")) {
+							const event = new ShowToastEvent({
+								title: 'Error',
+								message: result.issue[0].diagnostics,
+								variant: 'error',
+								mode: 'dismissable'
+							});
+							this.dispatchEvent(event);
+						} else if (result.issue[0].diagnostics.startsWith("Duplicate members found")) {
+							var formatcompleteErrorMsg = result.issue[0].diagnostics.replace(/{/g, ' (').replace(/}/g, ')');
+							const event = new ShowToastEvent({
+								title: 'Error',
+								message: formatcompleteErrorMsg,
+								variant: 'error',
+								mode: 'dismissable'
+							});
+							this.dispatchEvent(event);
+						} else if (result.issue[0].diagnostics.startsWith("No member found")) {
+							const event = new ShowToastEvent({
+								title: 'Error',
+								message: result.issue[0].diagnostics,
+								variant: 'error',
+								mode: 'dismissable'
+							});
+							this.dispatchEvent(event);
+						} else {
+							const event = new ShowToastEvent({
+								title: 'Error',
+								message: DOCUMENTFAIL,
+								variant: 'error',
+								mode: 'dismissable'
+							});
+							this.dispatchEvent(event);
+						}
+					} else {
+						if (result.issue[0].diagnostics) {
+							let errorMsg = result.issue[0].diagnostics.replace(/{/g, ' (').replace(/}/g, ')');
+							const event = new ShowToastEvent({
+								title: 'Error Message',
+								message: errorMsg,
+								variant: 'error',
+								mode: 'dismissable'
+							});
+							this.dispatchEvent(event);
+						} else {
+							const event = new ShowToastEvent({
+								title: 'Error',
+								message: DOCUMENTUPLOADERRORMSG,
+								variant: 'error',
+								mode: 'dismissable'
+							});
+							this.dispatchEvent(event);
+						}
+					}
+					this.showDocumentProperties = false;
+					this.loadSpinner = false;
+				} else if (result.id) {
+					this.showDocumentProperties = false;
+					this.loadSpinner = false;
+					// this.getAttachmentsData();
+					if (!this.docProperties.isUpdate) {
+						const caseDocumentFields = {};
+						caseDocumentFields[CASE_ID.fieldApiName] = this.recordId;
+						caseDocumentFields[SOURCE_SYSTEM.fieldApiName] = 'Salesforce'
+						caseDocumentFields[SOURCE_SYSTEM_ID.fieldApiName] = event.detail.sourceSystemId;
+						const recordInput = { apiName: CASE_DOCUMENTS.objectApiName, fields: caseDocumentFields };
+						createRecord(recordInput)
+							.then((caseDocument) => {
+								console.log(`Case Document record was created with Id ${caseDocument.id}`);
+							})
+							.catch((error) => {
+								console.log(`error in creating a Case Document record ${error.body.message}`);
+							});
+						const successEvent = new ShowToastEvent({
+							title: 'Success',
+							message: DOCUMENTUPLOAD,
+							variant: 'success',
+							mode: 'dismissable'
+						});
+						this.dispatchEvent(successEvent);
+					} else {
+						const fields = {};
+						fields[ID_FIELD.fieldApiName] = this.caseDocumentId;
+						fields[DOCUMENT_UPDATED.fieldApiName] = true;
+						const recordInput = {
+							fields: fields
+						};
+						updateRecord(recordInput).then((record) => {
+							console.log(`Case_Document__c object updated ${record}`);
+						});
+						const event = new ShowToastEvent({
+							title: 'Success',
+							message: DOCUMENTUPDATE,
+							variant: 'success',
+							mode: 'dismissable'
+						});
+						this.dispatchEvent(event);
+					}
+					this.getAttachmentsData();
+				} else {
+					this.showDocumentProperties = false;
+					this.loadSpinner = false;
+					const event = new ShowToastEvent({
+						title: 'Error',
+						message: DOCUMENTUPLOADERRORMSG,
+						variant: 'error',
+						mode: 'dismissable'
+					});
+					this.dispatchEvent(event);
+				}
+			},
+			(error) => {
+				console.log('promise error ', error)
+				this.showDocumentProperties = false;
+				this.loadSpinner = false;
+				const event = new ShowToastEvent({
+					title: 'Error',
+					message: DOCUMENTUPLOADERRORMSG,
+					variant: 'error',
+					mode: 'dismissable'
+				});
+				this.dispatchEvent(event);
+			}
+		)
+	}
+}

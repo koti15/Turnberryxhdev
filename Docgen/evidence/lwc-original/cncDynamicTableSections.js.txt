@@ -1,0 +1,3211 @@
+import { LightningElement, api, track, wire } from 'lwc';
+import { EnclosingTabId, getTabInfo, IsConsoleNavigation, getFocusedTabInfo, openSubtab } from 'lightning/platformWorkspaceApi';
+import { OmniscriptBaseMixin } from 'omnistudio/omniscriptBaseMixin';
+import { getDataHandler } from "omnistudio/utility";
+import { NavigationMixin } from 'lightning/navigation';
+import pubsub from 'omnistudio/pubsub';
+import { CurrentPageReference } from 'lightning/navigation';
+import lwcCustomStyle from '@salesforce/resourceUrl/cncdatatablecustomstyle';
+import { loadStyle } from 'lightning/platformResourceLoader';
+import { ShowToastEvent } from "lightning/platformShowToastEvent";
+import getAccountId from '@salesforce/apex/CNC_AttachEntitiesController.getAccountRecordId';
+import getAccountMemberId from '@salesforce/apex/CNC_AttachEntitiesController.getAccountMemberId';
+import getMemberId from '@salesforce/apex/CNC_AttachEntitiesController.getmemberId';
+import ClaimsAttachEntityMsg from '@salesforce/label/c.cncClaimsAttachEntityErrorMsg';
+import priorAuthAttachEntityMsg from '@salesforce/label/c.CNCPriorAuthAttachEntityMsg';
+import USER_ID from '@salesforce/user/Id';
+import { getRecord } from 'lightning/uiRecordApi';
+//import START_TIME_CHANNEL from '@salesforce/messageChannel/sendCurrectTime__c';
+//import CLAIM_LOAD_TIME from '@salesforce/messageChannel/ClaimLoadTime__c';
+import finalizeClaimLoadTime from '@salesforce/apex/ClaimLoadTimeController.finalizeClaimLoadTime';
+import { subscribe, MessageContext, unsubscribe } from 'lightning/messageService';
+//import LOAD_TIME_RECORD_CHANNEL from '@salesforce/messageChannel/claimLoadTimeRecordId__c';
+import finalizeAllClaimLoadTime from '@salesforce/apex/ClaimLoadTimeController.finalizeAllClaimLoadTime';
+
+///Changges
+import isToggleEnabled from '@salesforce/apex/FeatureToggleController.isToggleEnabled';
+const CLAIMS_PAGE_TOGGLE = 'New_Claims_Detail_Page';
+
+const FIELDS = ['Case.OwnerId', 'Case.Status'];
+const DELAY = 300;
+const pageNumber = 1;
+const SHOWDIV = 'visibility:visible';
+const HIDEDIV = 'visibility:hidden';
+
+export default class CncDynamicTableSections extends OmniscriptBaseMixin(NavigationMixin(LightningElement)) {
+
+    @api keyField = "Id";
+    @api showFilterBy = false;
+    @api showPagination = false;
+    @api isOmniscript = false;
+    @api omniscriptName = "";
+    @api showViewAllInSummary = false;
+    @api showRowNumber = false;
+    @api recordId;
+    @api accordionName;
+    @track columns = [];
+    @track isDisableAttach = true;
+    @track planDesc;
+    @track lineAttrName;
+    @api availableEntities;
+    @api selectedTemplate
+    showTable = false;
+    _headerName;
+    _subHeaderName;
+    _recId;
+    urlStates;
+    _planDesc;
+    _lineAttrName;
+    //profileDet;
+    currentPageReference = null;
+    isOnlyAccum = false;
+    currentRecordId;
+    _recordIdTime;//here
+    
+    _lastMouse = { x: 16, y: 16 };
+    _mouseTracked = false;
+
+
+    @wire(MessageContext)
+    messageContext;  
+    claimLoadTimeId = null; 
+    subscription = null;
+    isDataProcessed = false;
+    isReadyToFinalize = false;
+    hasLoadTimeId = false;
+    finalLogTriggered = false;
+    finalTimeLogged = false;
+    
+    @wire(EnclosingTabId) enclosingTabId;
+    @wire(IsConsoleNavigation) isConsoleNavigation;
+    //@wire(getCurrentExactTime) wiredTime;
+    //subscription = null;
+    //@track receivedRecordId = null;
+    //@track isLoadComplete = false; 
+    //@wire(MessageContext) messageContext;
+
+
+    @wire(CurrentPageReference)
+    getPageReferenceParameters(currentPageReference) {
+        let states;
+        if (currentPageReference) {
+            if (currentPageReference.state) {
+                this.urlStates = currentPageReference.state;
+                if (currentPageReference.state.recordId) {
+                    this.currentRecordId = currentPageReference.state.recordId;
+                } 
+            }
+        }
+    }
+
+
+    @api
+    get recorddata() {
+        return this._recordData;
+    }
+    set recorddata(val) {
+        this._recordData = JSON.parse(JSON.stringify(val));
+        //console.log('this.recdata ', JSON.parse(JSON.stringify(this._recordData)));
+        if (this._recordData) {
+            this.showTable = true;
+            this.initilizeRecordData();
+        }
+    }
+
+    @api
+    get headerName() {
+        return this._headerName;
+    }
+    set headerName(val) {
+        console.log('val %%%%%%' + val);
+        this._headerName = val;
+    }
+    @api
+    get subHeaderName() {
+        return this._subHeaderName;
+    }
+    set subHeaderName(val) {
+        this._subHeaderName = val;
+        //console.log('_subHeaderName' + this.__subHeaderName);
+    }
+    @api
+    get tableHeight() {
+        return this.tableHeightValue;
+    }
+    set tableHeight(value) {
+        this.tableHeightValue = value;
+    }
+
+    @api
+    get isomniscript() {
+        return this.isOmniscript;
+    }
+    set isomniscript(val) {
+        this.isOmniscript = val;
+    }
+
+    @api
+    get omniscriptname() {
+        return this.omniscriptName;
+    }
+    set omniscriptname(val) {
+        this.omniscriptName = val;
+    }
+
+    @api
+    get omniscriptstepname() {
+        return this.omniscriptStepName;
+    }
+    set omniscriptstepname(val) {
+        this.omniscriptStepName = val;
+    }
+
+    @api
+    get planDescDetails() {
+        return this._planDesc;
+    }
+    set planDescDetails(val) {
+        this._planDesc = JSON.parse(JSON.stringify(val));
+        this.getplanDescDetails();
+    }
+    getplanDescDetails() {
+        this.planDesc = this._planDesc;
+    }
+
+    @api
+    get lineAttributeName() {
+        return this._lineAttrName;
+    }
+    set lineAttributeName(val) {
+        this._lineAttrName = JSON.parse(JSON.stringify(val));
+        this.getlineAttributeName();
+    }
+    getlineAttributeName() {
+        this.lineAttrName = this._lineAttrName;
+        if (this.lineAttrName && this.lineAttrName == 'Accumulation_History_Detail') {
+            this.isOnlyAccum = true;
+        }
+    }
+
+    @api
+    get columndetails() {
+        return this._columnList;
+    }
+    set columndetails(val) {
+        this._columnList = JSON.parse(JSON.stringify(val));
+        this.columns = this._columnList;
+    }
+
+    @api
+    get recordsdata() {
+        return this.records;
+    }
+    set recordsdata(val) {
+        this.records = JSON.parse(JSON.stringify(val));
+        this.initilizeRecordData();
+    }
+
+    @api
+    get preselecteddata() {
+        return this.defaultselecteddata;
+    }
+    set preselecteddata(val) {
+        this.recordSelectedRow = JSON.parse(JSON.stringify(val));
+        if (Array.isArray(this.recordSelectedRow) && this.recordSelectedRow.length > 0) {
+            this.hasPreselectedData = true;
+        } else {
+            this.hasPreselectedData = false;
+        }
+    }
+
+    @api
+    get searchLocation() {
+        return this._searchLocation;
+    }
+
+    set searchLocation(val) {
+        this._searchLocation = val;
+        //console.log('LWC B SETTER: Search Location set to:', val); // Added log
+    //if (this._searchLocation === "ClaimSearchViewAll"){
+    //    this.logCurrentTime();
+    // }
+    }
+    
+    // @wire(CurrentPageReference) pageRef;
+
+    totalRecords
+    _columnList = [];
+    _recordData = {};
+    apiRecordData;
+    _errorMessage = 'No Records Found';
+    hideCheckBox = true;
+    maxRowSelection = 2000;
+    maxLineForWrap = 20;
+    defaultPageSize = 10;
+    tableHeightStyle;
+    pageSize;
+    totalPages;
+    pageNumber = pageNumber;
+    searchKey;
+    filterByVisibility = false;
+    paginationVisibility = false;
+    rowNumberOffset;
+    preSelected = [];
+    recordsToDisplay = [];
+    records = [];
+    selectedRows = [];
+    filteredRecords = [];
+    selectedRecords = [];
+    pageSelectedRecords = [];
+    filtredNum;
+    totalSelected = 0;
+    refreshCurrentData;
+    recordSelectedRow = [];
+    hasPreselectedData = false;
+    targetComponent;
+    isSummaryPage = true;
+    showViewAllVisibility = false;
+    sectionName;
+    showModalComponent = false;
+    modalAction;
+    currentRecordId;
+    showErrorMessage = false;
+    showUniversalClaimSearch = false;//----AlphaDelta----
+    fieldsToFilter = [];
+    priorAuthNotesData = [];
+    linediagnosisDetailsData = [];
+    caseNum;
+    caseRecordId;
+    claimSeacrhFromAttachEntityObj;
+    claimSeacrhFromEntityObj;
+    referralSeacrhFromAttachEntityObj;
+    plansearchFromAttachEntityobj;//26584
+    priAuthSeacrhFromAttachEntityObj;
+    claimSearchSummaryLoadElementObj;
+    claimSeacrhFromTabObj;
+    plansearchFromTabobj;//26584
+    planentityLoadElementobj;
+    plansearchLoadElementObj;
+    entityLoadElementObj;
+    refEntityLoadElementObj;
+    authEntityLoadElementObj;
+    claimSearchLoadElementObj;
+    claimSummaryAttachSearchLoadElementObj;
+    isLoading = false;
+    inputData = {};
+    //selectedClaim;
+    _searchLocation;
+    _refsearchloaction;
+    omniscriptStepName;
+
+    showAttachButton;
+    locationsSelectedRows;
+    claimSearchRowData = {};
+    claimSearchMemberId;
+    showAttachCaseModal;
+    loadSpinner;
+
+    //SORT
+    defaultSortDirection = 'asc';
+    sortDirection = 'asc';
+    sortedBy;
+    /*Refferal and Authorization Search Location*/
+
+    @api
+    get refsearchloaction() {
+        return this._refsearchloaction;
+    }
+    set refsearchloaction(val) {
+        this._refsearchloaction = JSON.parse(JSON.stringify(val));
+    }
+
+
+    connectedCallback() {
+        //console.log('table result ', JSON.stringify(this.recordsToDisplay));
+        const url = new URL(window.location.href);
+        const params = url.searchParams;
+        if (params.has('c__recordId')) {
+            this.recordId = params.get('c__recordId');
+            console.log('@@@@@@@@@@@@@@@@@@@@@@@Record Id:', this.recordId);
+        } else {
+            console.log('No recordId found in URL');
+        }
+        console.log('serch Location ', this._searchLocation);
+        console.log('LWC B: Component connected. RECORD ID', this.currentRecordId);
+        console.log('LWC B: Component connected. RECORD ID', this.recordId);
+        //this.subscribeToLoadTimeChannel();
+        console.log('SUB LWC CLAIM LOAD TIME IN CONNECTED CALLBACK ', this.claimLoadTimeId);
+        console.log(`Subscriber LWC: Connected. claimLoadTimeId is currently CONNECTED CALLBACK : ${this.claimLoadTimeId}`);
+        
+        //Add Resolver for FeatureToggle New UI -CS-1773
+        isToggleEnabled({ toggleName: CLAIMS_PAGE_TOGGLE }).then(result => {
+        this._newClaimPage = result;
+    });
+
+
+        //this.subscribeToMessageChannel();
+        //this.handleStartAllClaim();
+        if (this._searchLocation === "ClaimSearchViewAll"){
+           if (this.currentRecordId) {
+             this.handleStart();
+            }
+        }                        
+
+        //    this.isConnected = true;
+        //   this.startLMSListener();
+
+        // If message already received, act on it now
+        /*
+        if (this.receivedTime) {
+            this.calculateTimeGap(this.receivedTime);
+        }
+        */
+              
+        //if (this.wiredTime && this.wiredTime.data) {
+        //           console.log(`----ALPHADELTA----Wired Time: ${this.wiredTime.data}`);
+        //      }
+        if (this._searchLocation === "Attach Claims Entity") {
+            this.claimSeacrhFromAttachEntityObj = {
+                searchParameterValue: this.setRecordDataFromEvent.bind(this),
+            };
+            this.entityLoadElementObj = {
+                setEntityLoadingElement: this.setSpinner.bind(this),
+            };
+            pubsub.register('claimSearchFromAttachEntity', this.claimSeacrhFromAttachEntityObj, this);
+            pubsub.register('entityLoadEvent', this.entityLoadElementObj);
+
+        }
+        else if (this._searchLocation === "Claim Search") {
+            this.claimSeacrhFromTabObj = {
+                parameterValue: this.setRecordDataFromEvent.bind(this),
+            };
+            this.claimSearchLoadElementObj = {
+                setClaimSearchLoadingElement: this.setSpinner.bind(this),
+            };
+            pubsub.register('claimSearchFromTab', this.claimSeacrhFromTabObj, this);
+            pubsub.register('claimSearchLoadEvent', this.claimSearchLoadElementObj);
+        }
+        //26584 ----------------------------------
+        else if (this._searchLocation === "AttachPlanEntity") {
+            this.plansearchFromAttachEntityobj = {
+                plansearchParameterValue: this.setRecordDataFromEvent.bind(this),
+            };
+            this.planentityLoadElementobj = {
+                setPlanEntityLoadingElement: this.setSpinner.bind(this),
+            };
+            pubsub.register('planSearchFromAttachEntity', this.plansearchFromAttachEntityobj, this);
+            pubsub.register('planentityLoadEvent', this.planentityLoadElementobj);
+        }
+        else if (this._searchLocation === "PriorAuthAttachEntity") {
+            //console.log('url states table', this.urlStates);
+            this.priorAuthSearchFromAttachEntityObj = {
+                priroAuthSearchParameterValue: this.setRecordDataFromEvent.bind(this),
+            };
+            this.priorAuthEntityLoadElementObj = {
+                setPriorAuthEntityLoadingElement: this.setSpinner.bind(this),
+            };
+            pubsub.register('priorAuthFromAttachEntity' + this.urlStates.c__recordId, this.priorAuthSearchFromAttachEntityObj, this);
+            pubsub.register('priorAuthEntityLoadEvent' + this.urlStates.c__recordId, this.priorAuthEntityLoadElementObj);
+        }
+        else if (this._searchLocation === "Prior Authorizations/Referrals") {
+            this.priAuthSeacrhFromAttachEntityObj = {
+                parameterValue: this.setRecordDataFromEvent.bind(this),
+            };
+            this.authEntityLoadElementObj = {
+                setAuthEntityLoadingElement: this.setSpinner.bind(this),
+            };
+            pubsub.register('PriorAuthReferralSearchFromTab', this.priAuthSeacrhFromAttachEntityObj, this);
+            pubsub.register('authEntityLoadEvent', this.authEntityLoadElementObj);
+        }
+        else if (this._searchLocation === "priorAuthSearchFromViewAll") {
+            this.priAuthSeacrhFromViewAllObj = {
+                parameterValue: this.setRecordDataFromEvent.bind(this),
+            };
+            this.setPriorAuthViewAllLoadElementObj = {
+                priorAuthViewAllLoadingElement: this.setSpinner.bind(this),
+            };
+            pubsub.register("PriorAuthReferralSearchFromViewAll" + this.urlStates.c__viewAllRecordId, this.priAuthSeacrhFromViewAllObj, this);
+            pubsub.register('PriorAuthViewAllLoadElement' + this.urlStates.c__viewAllRecordId, this.setPriorAuthViewAllLoadElementObj);
+        }
+        else if (this._searchLocation === "ClaimSearchViewAll" && (this.urlStates) && this.urlStates.c__isViewAll) {
+            this.claimSummaryAttachSearchLoadElementObj = {
+                parameterValueSummary: this.setRecordDataFromEvent.bind(this),
+
+            };
+            pubsub.register('claimSummarySearch', this.claimSummaryAttachSearchLoadElementObj, this);
+        }
+        else if (this._searchLocation === "providerLocations") {
+            this.setProviderLocationsSearchdata = {
+                providerLocationsSearchData: this.setRecordDataFromEvent.bind(this)
+            };
+            this.setProviderLocationsSearchLoadElementObj = {
+                providerLocationsSearchLoadElement: this.setSpinner.bind(this)
+            };
+            this.setProviderLocationsButtonData = {
+                locationsButtonDisableData: this.setButtonVisibility.bind(this)
+            };
+            pubsub.register('providerLocationsSearchSpinner' + this.urlStates.c__caseId, this.setProviderLocationsSearchLoadElementObj);
+            pubsub.register('providerLocationsSearch' + this.urlStates.c__caseId, this.setProviderLocationsSearchdata);
+            pubsub.register('locationsButtonDisable' + this.urlStates.c__caseId, this.setProviderLocationsButtonData);
+        }
+        else if (this._searchLocation === "LocationsEntity") {
+            this.setLocationsLoaddata = {
+                providerLocationsSnipper: this.setSpinner.bind(this)
+            };
+            this.setProviderLocationsElementObj = {
+                providerLocationsData: this.setRecordDataFromEvent.bind(this)
+            };
+            this.setProviderLocationsButtonData = {
+                locationsButtonDisableData: this.setButtonVisibility.bind(this)
+            };
+            pubsub.register('providerLocations' + this.urlStates.c__caseId, this.setProviderLocationsElementObj);
+            pubsub.register('providerLocationsLoad' + this.urlStates.c__caseId, this.setLocationsLoaddata);
+            pubsub.register('locationsButtonDisable' + this.urlStates.c__caseId, this.setProviderLocationsButtonData);
+        }
+        isToggleEnabled({ toggleName: CLAIMS_PAGE_TOGGLE }).then(result => {
+        this._newClaimPage = result;
+    });
+
+    }
+
+    disconnectedCallback() {
+        pubsub.unregister('locationsButtonDisable' + this.urlStates.c__caseId, this.setProviderLocationsButtonData);
+        pubsub.unregister('claimSearchFromAttachEntity', this.claimSeacrhFromAttachEntityObj);
+        pubsub.unregister('claimSearchFromEntity', this.claimSeacrhFromEntityObj);
+        pubsub.unregister('claimSearchFromTab', this.claimSeacrhFromTabObj);
+        pubsub.unregister('entityLoadEvent', this.setEntityLoadingElement);
+        pubsub.unregister('claimSearchLoadEvent', this.claimSearchLoadElementObj);
+        pubsub.unregister('priorAuthFromAttachEntity' + this.urlStates.c__recordId, this.priorAuthSearchFromAttachEntityObj);
+        pubsub.unregister('priorAuthEntityLoadEvent' + this.urlStates.c__recordId, this.priorAuthEntityLoadElementObj);
+        pubsub.unregister('PriorAuthReferralSearchFromTab', this.priAuthSeacrhFromAttachEntityObj);
+        pubsub.unregister('authEntityLoadEvent', this.authEntityLoadElementObj);
+        pubsub.unregister('planSearchFromAttachEntity', this.plansearchFromAttachEntityobj);
+        pubsub.unregister('planentityLoadEvent', this.planentityLoadElementobj);
+        pubsub.unregister('claimSummarySearch', this.claimSummaryAttachSearchLoadElementObj);
+        pubsub.unregister("PriorAuthReferralSearchFromViewAll" + this.urlStates.c__viewAllRecordId, this.priAuthSeacrhFromViewAllObj);
+        pubsub.unregister('PriorAuthViewAllLoadElement' + this.urlStates.c__viewAllRecordId, this.setPriorAuthViewAllLoadElementObj);
+        pubsub.unregister('providerLocationsSearchSpinner' + this.urlStates.c__caseId, this.setProviderLocationsSearchLoadElementObj);
+        pubsub.unregister('providerLocationsSearch' + this.urlStates.c__caseId, this.setProviderLocationsSearchdata);
+        pubsub.unregister('providerLocations' + this.urlStates.c__caseId, this.setProviderLocationsElementObj);
+        pubsub.unregister('providerLocationsLoad' + this.urlStates.c__caseId, this.setLocationsLoaddata);
+        //this.unsubscribeFromMessageChannel();
+        //this.unsubscribeFromLoadTimeChannel();
+        // Cleanup mouse tracking
+        /////
+            if (this._mouseTracked) {
+                window.removeEventListener('mousemove', this._trackMouse);
+                this._mouseTracked = false;
+            }
+            /////
+    }
+
+    setRecordDataFromEvent(data) {
+        this._recordData = data.searchResult;
+        if (this._recordData) {
+            //console.log('entity name', this._recordData.sectionName);
+            //This condition needs to be removed from code.It was addedto handle the duplicate data issue.
+            if (this._recordData.sectionName === 'Attach Claims EntityNotValid') {
+                if (this._recordData.responsedata && (Array.isArray(this._recordData.responsedata) && this._recordData.responsedata.length > 0 && this._recordData.responsedata.some(obj => Object.keys(obj).length != 0))) {
+                    let caseId = this._recordData.caseId;
+                    let data = [];
+                    let filteredData = [];
+                    data = this._recordData.responsedata;
+                    getMemberId({ recordId: caseId }).then(result => {
+                        let memberId = result;
+                        data.forEach(element => {
+                            if (element.memberId === memberId) {
+                                filteredData = [element];
+                            }
+                        });
+                        // console.log('filterdata ', JSON.stringify(this._recordData.responsedata));
+                        if (filteredData.length > 0 && filteredData.some(obj => Object.keys(obj).length != 0)) {
+                            // console.log('dss ', JSON.stringify(filteredData));
+                            this._recordData.responsedata = filteredData;
+                            //console.log('ddddd ', JSON.stringify(this._recordData.responsedata));
+                            this.showTable = true;
+                            this.initilizeRecordData();
+                        } else {
+                            this.isLoading = false;
+                            this.showTable = false;
+                            const event = new ShowToastEvent({
+                                title: 'Error',
+                                message: ClaimsAttachEntityMsg,
+                                variant: 'error',
+                                mode: 'dismissable'
+                            });
+                            this.dispatchEvent(event);
+                        }
+                    }).catch(error => {
+                        console.log('Error----' + error);
+                    });
+                    //console.log(`caseid ${caseId} and data = ${JSON.stringify(data)}`);
+                } else {
+                    this.showTable = true;
+                    this.initilizeRecordData();
+                }
+            }
+            else {
+                this.showTable = true;
+                this.initilizeRecordData();
+            }
+        }
+    }
+
+    setSpinner(data) {
+        this.isLoading = data.setLoadSpinner;
+    }
+
+    setButtonVisibility(data) {
+        this.isDisableAttach = false;
+    }
+
+    renderedCallback() {
+        if (this.hasPreselectedData) {
+            this.recordSelectedRow.forEach((item) => {
+                var row = new Object();
+                row.Id = item.Id;
+                row.selected = true;
+                this.selectedRecords.push(row);
+            });
+            this.setRecordsOnPage();
+            this.omniscriptUpdate();
+        }
+        if ((this.tableHeightValue != null && this.tableHeightValue != '') && (this.filtredNum != null && this.filtredNum > 10)) {
+            this.tableHeightStyle = 'height: ' + this.tableHeightValue + 'px;';
+        } else {
+            this.tableHeightStyle = 'height: auto;';
+        }
+        this.loadStaticResource();
+        // this.logCurrentTime();     
+        // console.log('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq---585');   
+        // const isReadyForLog = this.hasLoadTimeId;
+        // console.log('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq---585', isReadyForLog);
+        // Check 2: Has the time already been logged?
+        // if (isReadyForLog && !this.finalTimeLogged) {
+        //     // Lock the gate immediately to prevent other concurrent render cycles from also setting a timeout.
+        //     this.finalTimeLogged = true; 
+        //     console.log('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq');
+        //     // Use a timeout. This releases the UI thread and ensures the final rendering is complete.
+        //     // This is necessary because the LWC property updates are instantaneous, 
+        //     // but the actual visual painting takes time.
+        //     window.setTimeout(() => {
+        //         console.log('sssssssssssssssssssssssssssssssssss');
+        //         // Final check on the ID before calling the logging method
+        //         if (this.claimLoadTimeId) {
+        //             console.log('TRACE: RENDERED CALLBACK: Final execution trigger after DOM paint.');
+        //             this.handleStartAllClaim();
+        //         } else {
+        //             // If ID is somehow missing even after the flag check, log the failure.
+        //             console.error('CRITICAL ERROR: ID missing during final logging timeout.');
+        //         }
+        //     }, 50); // 50ms pause to catch the user-perceived render time
+        // }
+        //this.handleStart();
+        //this.checkAndFinalizeLoadTime();
+        //this.subscribeToLoadTimeChannel();
+        //----Jira: MNPP-15862----
+        this.logCurrentTime();
+        this.handleStartAllClaim();
+        // Start global mouse tracking once (for inline "Copied" chip placement)
+            if (!this._mouseTracked) {
+                window.addEventListener('mousemove', this._trackMouse, { passive: true });
+                this._mouseTracked = true;
+            }
+    }
+
+    loadStaticResource() {
+        if (!this.resourceLoaded) {
+            Promise.all([
+                loadStyle(this, lwcCustomStyle)
+            ])
+                .then(() => {
+                    this.resourceLoaded = true;
+                })
+                .catch(error => {
+                    console.log("failed to load the css");
+                });
+        }
+    }
+
+    initilizeRecordData() {
+        var responseAttributes;
+        responseAttributes = this._recordData;
+        //console.log('resposeAtt ' + JSON.stringify(responseAttributes));
+        if (responseAttributes !== null) {
+            if (responseAttributes.sectionName) {
+                this.sectionName = responseAttributes.sectionName;
+            }
+            if (responseAttributes.Columns) {
+                this.columndata = responseAttributes.Columns;
+                //console.log('513--calling dynamicColumns');
+                this.dynamicColumns();
+                this.columns = this.columndata;
+            } else {
+                this.columns = [];
+            }
+            if (responseAttributes.recordLimitPerPage) {
+                this.defaultPageSize = responseAttributes.recordLimitPerPage;
+            }
+
+            if (responseAttributes.showPagination) {
+                this.showPagination = true;
+            }
+
+            if (responseAttributes.showFilterBy) {
+                this.showFilterBy = true;
+            }
+
+            if (responseAttributes.responsedata && (Array.isArray(responseAttributes.responsedata) && responseAttributes.responsedata.length > 0 && responseAttributes.responsedata.some(obj => Object.keys(obj).length != 0))) {
+                this.records = [];
+                this.selectedRecords = [];
+                this.records = responseAttributes.responsedata;
+                console.log('--- CHECKING CLAIM END TIME ---2');//----AlphaDelta----
+                //console.log('--records---' + JSON.stringify(this.records));
+                if (this.sectionName == 'Associated Claims') {
+                    console.log('--- CHECKING CLAIM END TIME ---21');//----AlphaDelta----
+                    for (let i = 0; i < this.records.length; i++) {
+                        const cnIndex = this.records.findIndex(
+                            (cIn) => cIn.claimNumberAssociated == undefined
+                        );
+                        if (cnIndex != -1) {
+                            this.records = this.records.splice(cnIndex, 0);
+                        }
+                    }
+                    if (this.records.length == 0) {
+//                        console.log('INCOMING ERROR -- 1');//----AlphaDelta----
+                        this.showErrorMessage = true;
+                        return;
+                    }
+                }
+                //MNPP-6170 Filterring out entered-in-error plans
+                /**if (this.sectionName == 'Plans, Benefits and Accumulators' || this.sectionName == 'Attach Plan Entity') {                     
+                    for (let i = 0; i<= this.records.length; i++) {
+                            const cnIndex = this.records.findIndex(
+                                (cIn) => (cIn.status === 'entered-in-error')
+                            );
+                            if (cnIndex != -1) {
+                                 this.records.splice(cnIndex,1);                                                           
+                        }
+                   }
+                    if (this.records.length == 0) {
+                            this.showErrorMessage = true;
+                            return;
+                        }                   
+                }**/
+                if (this.sectionName == "Affiliations") {
+                    console.log('--- CHECKING CLAIM END TIME ---22');//----AlphaDelta----
+                    this.records.sort((a, b) => a.affiliatedName.localeCompare(b.affiliatedName));
+                    this.sortedBy = "affiliatedName";
+                }
+                if (this.sectionName == "Prior Authorizations/Referrals") {
+                    console.log('--- CHECKING CLAIM END TIME ---23');//----AlphaDelta----
+                    this.apiRecordData = responseAttributes.apiResponse;
+                }
+
+                if (this.sectionName == "Location Entity") {
+                    console.log('--- CHECKING CLAIM END TIME ---24');//----AlphaDelta----
+                    this.showAttachButton = true;
+                    this.isDisableAttach = true;
+                    var data = [];
+                    var int = 1;
+                    data = this.records;
+                    data.forEach(item => {
+                        item.Id = int;
+                        int++;
+                    });
+                    this.records = data;
+                }
+//                console.log('INCOMING ERROR -- 2');//----AlphaDelta----
+                this.showErrorMessage = false;
+                this.isLoading = false;
+                console.log('--- CHECKING CLAIM END TIME ---25');//----AlphaDelta----
+                this.dynamicRows();
+                if (this.sectionName == "Notes") {
+                    console.log('--- CHECKING CLAIM END TIME ---26');//----AlphaDelta----
+                    this.records = this.priorAuthNotesData;
+                    this.priorAuthNotesData = [];
+                    //console.log('notes daytes ', JSON.stringify(this.records));
+                }
+                if (this.sectionName == "Line Diagnosis Details") {
+                    console.log('--- CHECKING CLAIM END TIME ---27');//----AlphaDelta----
+                    this.records = this.linediagnosisDetailsData;
+                    this.linediagnosisDetailsData = [];
+                }
+            }
+            else {
+                console.log('--- CHECKING CLAIM END TIME ---28');//----AlphaDelta----
+                this.records = [];
+                this.isLoading = false;
+                console.log('INCOMING ERROR -- 3');//----AlphaDelta----
+                this.logCurrentTime();
+//                if (this.wiredTime && this.wiredTime.data) {
+  //                  console.log(`----ALPHADELTA----Wired Time: ${this.wiredTime.data}`);
+    //            }
+                this.showErrorMessage = true;
+                this.showUniversalClaimSearch = true;//----AlphaDelta----
+            }
+            if (responseAttributes.isSelectable) {
+                console.log('--- CHECKING CLAIM END TIME ---29');//----AlphaDelta----
+                //this.resetrowdata();
+                this.hideCheckBox = false;
+                if (responseAttributes.selectableType == "Radio") {
+                    this.maxRowSelection = 1;
+                } else {
+                    this.maxRowSelection = this.records.length;
+                }
+            }
+
+            if (responseAttributes.componentName) {
+                this.targetComponent = responseAttributes.componentName;
+            }
+
+            if (responseAttributes.showRowNumber) {
+                this.showRowNumber = true;
+            }
+
+            if (responseAttributes.showViewAll) {
+                this.showViewAllInSummary = true;
+            }
+
+            if (responseAttributes.Id && responseAttributes.Id != "REC0") {
+                this.currentRecordId = responseAttributes.Id;
+            }
+            if (responseAttributes.caseNumber) {
+                this.caseNum = responseAttributes.caseNumber;
+            }
+            if (responseAttributes.caseId) {
+                this.caseRecordId = responseAttributes.caseId
+            }
+            if (responseAttributes.inputdata != null) {
+                this.inputData = responseAttributes.inputdata;
+            }
+            if (responseAttributes.Name != null) {
+                this.memberName = responseAttributes.Name;
+            }
+        }
+        this.totalRecords = this.records.length;
+        this.filteredRecords = this.records;
+        this.filtredNum = this.totalRecords;
+        this.recordsToDisplay = this.records;
+        this.recId = this.records.Id;
+
+        if (this.showViewAllInSummary) {
+            console.log('--- CHECKING CLAIM END TIME ---30');//----AlphaDelta----
+            this.showViewAllVisibility = true;
+            this.paginationVisibility = false;
+            this.filterByVisibility = false;
+            this.pageSize = this.defaultPageSize;
+            this.recordsToDisplay = (this.records.length > this.defaultPageSize) ? [...this.records].splice(0, this.defaultPageSize) : this.records;
+            //this.checkAndFinalizeLoadTime();//----here
+        } else {
+            console.log('--- CHECKING CLAIM END TIME ---31');//----AlphaDelta----
+            if (this.showPagination && this.defaultPageSize == 10 && (this.filtredNum && this.filtredNum > 10)) {
+                this.pageSize = this.defaultPageSize;
+                this.paginationVisibility = true;
+            } else if (this.showPagination && this.defaultPageSize == 50 && (this.filtredNum && this.filtredNum > 50)) {
+                this.pageSize = 50;
+                this.paginationVisibility = true;
+            } else {
+                this.pageSize = this.filtredNum;
+                this.paginationVisibility = false;
+            }
+
+            if (this.filtredNum <= 1) {
+                this.filterByVisibility = false;
+            } else {
+                if (this.showFilterBy) {
+                    this.filterByVisibility = true;
+                }
+            }
+        }
+
+        if (this.paginationVisibility) {
+            console.log('--- CHECKING CLAIM END TIME ---32');//----AlphaDelta----
+            this.setRecordsOnPage();
+        }
+    }
+
+    resetrowdata() {
+        this.template.querySelector('lightning-datatable').selectedRows = [];
+    }
+
+    dynamicRows() {
+        console.log('--- CHECKING CLAIM END TIME ---100');//----AlphaDelta----
+        //console.log('dddd ', JSON.stringify(this.records));
+        if (this.sectionName == "Plans, Benefits and Accumulators") {
+            console.log('--- CHECKING CLAIM END TIME ---101');//----AlphaDelta----
+            this.records.forEach(record => {
+                record.isOrderButtonDisabled = record.profName == "Read Only" || record.profileName == "Read Only" || record.status != "active" || record.planDescription == "Hospice"
+            });
+        }
+        if (this.sectionName == "Coordination of Benefits/Other Insurance") {
+            console.log('--- CHECKING CLAIM END TIME ---102');//----AlphaDelta----
+            this.records.forEach(record => {
+                record.isViewButtonDisabled = record.type != "insurance";
+            });
+        }
+        if (this.sectionName == "Related Entities") {
+            this.records.forEach(record => {
+                record.isClaimNumberLinkDisabled = record.routeCode?.toLowerCase().includes('engen');
+            });
+        }
+        let summaryCode = '';
+        if (this.sectionName == "Request/Review - Service Detail") {
+            console.log('--- CHECKING CLAIM END TIME ---103');//----AlphaDelta----
+            this.records.forEach(record => {
+                record.item.forEach(item => {
+                    if (record.Unique_Id === item.sequence) {
+                        item.productOrService.coding.forEach(serviceCode => {
+                            if (serviceCode.system.endsWith("CodeSystem-CPT.html")) {
+                                // record.SDSummaryCode = serviceCode.code;
+                                summaryCode = serviceCode.code;
+                            }
+                        })
+                    }
+                })
+                record.supportingInfo.forEach(info => {
+                    if (info.valueString != undefined) {
+                        if (info.valueString.startsWith('(' + summaryCode + ')')) {
+                            //let newCodeDescription = info.valueString.replace(summaryCode, '').replace('()', '');
+                            // let newCodeDescriptionAfterTrip = newCodeDescription.replace('(', '').replace(')', '');
+                            record.SDSummaryCodeDescription = info.valueString;
+                        }
+                    }
+                })
+            })
+        }
+        if (this.sectionName == "Request/Review - Stay Detail") {
+            console.log('--- CHECKING CLAIM END TIME ---104');//----AlphaDelta----
+            this.records.forEach(record => {
+                if (record.extension != undefined) {
+                    record.extension.forEach(item => {
+                        if (item.url.endsWith('authorization-request-lineStatus')) {
+                            record.stayDetermination = item.valueString;
+                        }
+                    })
+                }
+            })
+        }
+        if (this.sectionName == "Prior Authorizations/Referrals") {
+            console.log('--- CHECKING CLAIM END TIME ---105');//----AlphaDelta----
+            this.records.forEach(record => {
+                if (record.referenceId != undefined) {
+                    let referenceId = record.referenceId.split('/')[1];
+                    if (record.provider != undefined) {
+                        if (!Array.isArray(record.provider)) {
+                            if (record.provider.id == referenceId) {
+                                record.providerInfoName = record.provider.name;
+                                record.providerName = record.provider.name;
+                                record.provider.identifier.forEach(item => {
+                                    item.type.coding.forEach(info => {
+                                        if (info.display === "Tax ID number") {
+                                            record.taxId = item.value;
+                                        }
+                                        if (info.display === "Provider number") {
+                                            record.bcbsmnId = item.value;
+                                        }
+                                    })
+                                })
+                            }
+                        } else {
+                            record.provider.forEach(item => {
+                                if (item.id == referenceId) {
+                                    record.providerInfoName = item.name;
+                                    record.providerName = item.name;
+                                    item.identifier.forEach(identity => {
+                                        identity.type.coding.forEach(info => {
+                                            if (info.display === "Tax ID number") {
+                                                record.taxId = identity.value;
+                                            }
+                                            if (info.display === "Provider number") {
+                                                record.bcbsmnId = identity.value;
+                                            }
+                                        })
+                                    })
+                                }
+                            })
+                        }
+                    }
+                }
+                if (record.identifier != undefined) {
+                    record.identifier.forEach(item => {
+                        if (item.extension != undefined) {
+                            item.extension.forEach(refIds => {
+                                if (refIds.url.endsWith('authorization-header-externalID')) {
+                                    record.referenceNumber = refIds.valueString;
+                                } else if (refIds.url.endsWith('subscriberId')) {
+                                    record.memberId = refIds.valueString;
+                                }
+                            })
+                        }
+                    })
+                }
+                if (record.providerInfo != undefined) {
+                    record.providerInfo.forEach(item => {
+                        if (item.careTeam != undefined) {
+                            item.careTeam.forEach(providerReferenceId => {
+                                if (providerReferenceId.provider.reference != undefined) {
+                                    if (providerReferenceId.provider.reference.split('/')[0] == "Organization") {
+                                        record.referenceId = providerReferenceId.provider.reference.split('/')[1];
+                                    }
+                                }
+                            })
+                        }
+                    })
+                    record.providerInfo.forEach(info => {
+                        if (info.resourceType == "Organization") {
+                            if (info.id == record.referenceId) {
+                                record.providerName = info.name;
+                                info.identifier.forEach(providerNumber => {
+                                    providerNumber.type.coding.forEach(item => {
+                                        if (item.display === "Provider number") {
+                                            record.bcbsmnId = providerNumber.value;
+                                        }
+                                    })
+                                })
+                            }
+                        }
+                    })
+                }
+                if (record.supportingInfo != undefined && record.code != undefined) {
+                    record.supportingInfo.forEach(info => {
+                        if (info.valueString != undefined) {
+                            if (info.valueString.startsWith('(' + record.code + ')')) {
+                                record.codeDescription = info.valueString;
+                            }
+                        }
+                    })
+                }
+            })
+        }
+        if (this.sectionName == "Provider Information") {
+            console.log('--- CHECKING CLAIM END TIME ---106');//----AlphaDelta----
+            this.records.forEach(record => {
+                if (record.referenceId != undefined) {
+                    let referenceId = record.referenceId.split('/')[1];
+                    if (record.provider != undefined) {
+                        record.provider.forEach(item => {
+                            if (item.id == referenceId) {
+                                if (Array.isArray(item.name)) {
+                                    record.providerInfoName = item.name[0].family + ", " + item.name[0].given[0];
+                                    record.providerName = item.name[0].family + ", " + item.name[0].given[0];
+                                } else {
+                                    record.providerInfoName = item.name;
+                                    record.providerName = item.name;
+                                }
+                                item.identifier.forEach(identity => {
+                                    identity.type.coding.forEach(info => {
+                                        if (info.display === "Tax ID number") {
+                                            record.taxId = identity.value;
+                                        }
+                                        if (info.display === "Provider number") {
+                                            record.bcbsmnId = identity.value;
+                                        }
+                                    })
+                                })
+                            }
+                        })
+                    }
+                }
+            })
+        }
+        if (this.sectionName == "Notes") {
+            console.log('--- CHECKING CLAIM END TIME ---107');//----AlphaDelta----
+            this.records.forEach(record => {
+                record.supportingInfo.forEach(info => {
+                    if (info.category.coding != undefined) {
+                        info.category.coding.forEach(item => {
+                            if (item.code == 'note' && item.system.endsWith('StructureDefinition/authorization')) {
+                                if (info.reason != undefined) {
+                                    info.reason.coding.forEach(codeValue => {
+                                        if (codeValue.system.endsWith('authorization-notes-overallDetermination')) {
+                                            this.priorAuthNotesData.push({
+                                                'note': info.valueString != undefined || info.valueString != "" ? info.valueString : "",
+                                                'dateCreated': info.timingDate != undefined || info.timingDate != "" ? info.timingDate : "",
+                                                'determination': codeValue.code
+                                            });
+                                        }
+                                    })
+                                }
+                            }
+                        })
+                    }
+                })
+            })
+        }
+        if (this.sectionName == "Line Diagnosis Details") {
+            console.log('--- CHECKING CLAIM END TIME ---108');//----AlphaDelta----
+            var lineDiagnosisData = []
+            this.records.forEach(record => {
+                record.sequences.forEach(item => {
+                    record.headerDiagnosisDetails.forEach(info => {
+                        if (item == info.sequence) {
+                            lineDiagnosisData.push(info);
+                        }
+                    })
+                })
+            })
+            lineDiagnosisData.forEach(record => {
+                if (record.diagnosisCodeableConcept.coding != undefined) {
+                    record.diagnosisCodeableConcept.coding.forEach(code => {
+                        if (record.type != undefined) {
+                            record.type.forEach(type => {
+                                type.coding.forEach(coding => {
+                                    this.linediagnosisDetailsData.push({
+                                        "diagnosisCode": code.code,
+                                        "diagnosisCodeDescription": code.display,
+                                        "qualifierCode": coding.code,
+                                        "qualifierCodeDescription": coding.display
+                                    });
+                                })
+
+                            })
+                        }
+                    })
+                }
+            })
+        }
+    }
+
+    @wire(getRecord, { recordId: '$caseRecordId', fields: FIELDS })
+    case;
+
+    changeDateFormat(dateString) {
+        const date = new Date(dateString);
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const day = date.getDate().toString().padStart(2, '0');
+        const year = date.getFullYear().toString();
+        const formattedDate = `${month}/${day}/${year}`;
+        return formattedDate;
+    }
+
+
+    dynamicColumns() {
+        console.log('inside dynamic columns', this.sectionName);
+        if (this.sectionName == "Plans, Benefits and Accumulators") {
+            this.columndata.forEach(element => {
+                if ((element.fieldName == "View" || element.fieldName == "Order") && element.type == "button") {
+                    element.typeAttributes.disabled = {
+                        fieldName: 'isOrderButtonDisabled'
+                    };
+                }
+            });
+        } else if (this.sectionName == "Benefits" || this.sectionName == "Accumulations and Limits") {
+            this.columndata.forEach(element => {
+                if ((element.fieldName == "serviceTypeDescription" || element.fieldName == "accumDescription") && element.type == "button") {
+                    element.typeAttributes.class = "text-button";
+                    element.initialWidth = 250;
+                }
+            });
+        }
+
+        // this.fieldsToFilter = this.columndata.map(column => column.fieldName);
+        if (this.sectionName == "Related Entities") {
+            var actions = [
+                { label: 'Delete', name: 'delete' }
+            ]
+            var actionsObj = {
+                "type": "action",
+                "variant": 'base',
+                "typeAttributes": {
+                    "rowActions": actions
+                }
+            };
+            this.columndata.push(actionsObj);
+
+            this.columndata.forEach(element => {
+                if (element.fieldName == "entityValue" && element.type == "button") {
+                    element.typeAttributes.disabled = {
+                        fieldName: 'isClaimNumberLinkDisabled'
+                    };
+                }
+            });
+        }
+        if (this.sectionName == "Attach Claims Entity" || this.sectionName == "Claim Search") {
+            console.log('--- CHECKING CLAIM END TIME ---3');//----AlphaDelta----
+            this.columndata.forEach(element => {
+                if (element.fieldName == "paid") {
+                    element.cellAttributes = { alignment: 'right' }
+                }
+            });
+        }
+        if (this.sectionName == "Coordination of Benefits/Other Insurance") {
+            this.columndata.forEach(element => {
+                if (element.fieldName == "View" && element.type == "button") {
+                    element.typeAttributes.disabled = {
+                        fieldName: 'isViewButtonDisabled'
+                    };
+                }
+            });
+        }
+        if (this.sectionName == "Line Details") {
+            //console.log('insdie line details');
+            this.columndata.forEach(element => {
+                //console.log('element.fieldName' + element.fieldName);
+                if (element.fieldName == "cptDescription") {
+                    //console.log('insdie line details');
+                    element.cellAttributes = { wrapText: true }
+                    // element.typeAttributes.wrapText = true;
+                }
+            });
+        }
+         // /* =======================
+        // CLAIMS – ADD COPY ICON MNPP-21147 starts here SS
+        // ======================= */
+        
+            /////if (this.sectionName === 'Claims') {///// MNPP-22823 commented
+                if (this.sectionName && this.sectionName.toLowerCase().includes('claim')) {///// MNPP-22823 added
+                // 1) Ensure the Copy column exists (keep your push behavior)
+                let copyColIndex = this.columndata.findIndex(function (c) {
+                    return (
+                        c.type === 'button-icon' &&
+                        c.typeAttributes &&
+                        c.typeAttributes.name === 'copy_claim'
+                    );
+                });
+                if (copyColIndex === -1) {
+                    this.columndata.push({
+                        label: 'Copy',
+                        type: 'button-icon',
+                        initialWidth: 60,
+                        typeAttributes: {
+                            iconName: 'utility:copy', // or 'utility:copy_to_clipboard'
+                            name: 'copy_claim',
+                            title: 'Copy Claim Number',
+                            alternativeText: 'Copy Claim Number',
+                            variant: 'bare'
+                        },
+                        cellAttributes: { class: 'copy-cell' }
+                    });
+                    copyColIndex = this.columndata.length - 1;
+                }
+
+                // 2) Find the Claim # column (strict match on fieldName/type; fallback on label)
+                const claimColIndex = this.columndata.findIndex(function (col) {
+                    const isUrlClaim =
+                        col.type === 'url' &&
+                        col.fieldName === 'claimUrl';
+
+                    const isLabelClaim =
+                        typeof col.label === 'string' &&
+                        col.label.trim().toLowerCase() === 'claim #';
+
+                    // If your label is exactly 'Claim #' this fallback will also work
+                    return isUrlClaim || isLabelClaim;
+                });
+
+                // 3) If both exist and not adjacent, move Copy right after Claim
+                if (claimColIndex !== -1 && copyColIndex !== -1) {
+                    const desiredIndex = claimColIndex + 1;
+                    if (copyColIndex !== desiredIndex) {
+                        const removed = this.columndata.splice(copyColIndex, 1);
+                        const copyCol = removed[0];
+                        const adjustedIndex = copyColIndex < desiredIndex ? desiredIndex - 1 : desiredIndex;
+                        this.columndata.splice(adjustedIndex, 0, copyCol);
+                    }
+                }
+            }
+
+
+        //     // MNPP-21147 ends here 
+        // MNPP-20635 start
+        console.log('Send Communication Email POD Preview'+this.sectionName);
+        if(this.sectionName == 'Send Communication Email POD Preview'){
+            this.columndata = this.columndata.filter(
+                element => element.fieldName != 'remove'
+            );
+        }
+        // MNPP-20635 end
+        this.columns = [...this.columndata];///// MNPP-22823 added
+    }
+
+    handleRecordsPerPage(event) {
+        this.pageSize = event.target.value;
+        this.setRecordsOnPage();
+    }
+
+    handlePageNumberChange(event) {
+        if (event.keyCode === 13) {
+            this.pageNumber = event.target.value;
+            this.setRecordsOnPage();
+        }
+    }
+
+    hideModalBox() {
+		this.showAttachCaseModal = false;
+	}
+
+    closeModal() {
+		this.showAttachCaseModal = false;
+	}
+
+    previousPage() {
+        this.pageNumber = this.pageNumber - 1;
+        this.setRecordsOnPage();
+    }
+    nextPage() {
+        this.pageNumber = this.pageNumber + 1;
+        this.setRecordsOnPage();
+    }
+
+    @api
+    setRecordsOnPage() {
+        this.recordsToDisplay = [];
+        if (!this.pageSize)
+            this.pageSize = 10;
+
+        this.totalPages = Math.ceil(this.filtredNum / this.pageSize);
+        this.setPaginationControls();
+        for (let i = (this.pageNumber - 1) * this.pageSize; i < this.pageNumber * this.pageSize; i++) {
+            if (i === this.filtredNum) break;
+            this.recordsToDisplay.push(this.filteredRecords[i]);
+        }
+
+        if (this.maxRowSelection === '1') {
+            this.totalSelected = 0;
+        }
+
+        this.preSelected = [];
+        if (this.selectedRecords && this.selectedRecords.length > 0) {
+            this.selectedRecords.forEach((item) => {
+                if (item.selected)
+                    this.preSelected.push(item.Id);
+            })
+            this.refreshCurrentData = true;
+            this.hasPreselectedData = false;
+        }
+    }
+
+    setPaginationControls() {
+        // Previous/Next buttons visibility by Total pages
+        if (this.totalPages === 1) {
+            this.showPrevious = HIDEDIV;
+            this.showNext = HIDEDIV;
+        } else if (this.totalPages > 1) {
+            this.showPrevious = SHOWDIV;
+            this.showNext = SHOWDIV;
+        }
+        // Previous/Next buttons visibility by Page number
+        if (this.pageNumber <= 1) {
+            this.pageNumber = 1;
+            this.showPrevious = HIDEDIV;
+        } else if (this.pageNumber >= this.totalPages) {
+            this.pageNumber = this.totalPages;
+            this.showNext = HIDEDIV;
+        }
+        // Previous/Next buttons visibility by Pagination visibility
+        if (this.paginationVisibility === false) {
+            this.showPrevious = HIDEDIV;
+            this.showNext = HIDEDIV;
+        }
+    }
+
+    handleKeyChange(event) {
+        window.clearTimeout(this.delayTimeout);
+        const searchKey = event.target.value;
+        if (searchKey) {
+            this.delayTimeout = setTimeout(() => {
+                this.setPaginationControls();
+                this.searchKey = searchKey;
+                this.filteredRecords = this.records.filter((rec) => {
+                    for (const column of this.columns) {
+                        const fieldValue = rec[column.fieldName];
+                        if (fieldValue && fieldValue.toString().toLowerCase().includes(searchKey.toLowerCase())) {
+                            return true;
+
+                        }
+                    }
+                    return false;
+                });
+                this.filtredNum = this.filteredRecords.length;
+                this.handlefilteredRows();
+                this.setRecordsOnPage();
+            }, DELAY);
+        } else {
+            this.initilizeRecordData();
+        }
+    }
+
+    handlefilteredRows() {
+        if (this.sectionName == "Plans, Benefits and Accumulators") {
+            this.filteredRecords.forEach(record => {
+                record.isOrderButtonDisabled = record.profName == "Read Only" || record.profileName == "Read Only" || record.status != "active" || record.planDescription == "Hospice"
+            });
+        }
+    }
+
+    handelRowsSelected(selectedRows) {
+        this.totalSelected = 0;
+        this.pageSelectedRecords = [];
+        if (this.maxRowSelection != 1 && this.recordsToDisplay &&
+            this.recordsToDisplay.length > 0 &&
+            ((selectedRows.length === 0 && !this.refreshCurrentData) || selectedRows.length > 0)) {
+            this.recordsToDisplay.forEach((item) => {
+                var row = new Object();
+                row.Id = item.Id;
+                if (selectedRows.includes(item.Id)) {
+                    row.selected = true;
+                } else {
+                    row.selected = false;
+                }
+                this.pageSelectedRecords.push(row);
+            });
+        } else if (this.maxRowSelection === 1 && this.recordsToDisplay &&
+            this.recordsToDisplay.length > 0 &&
+            ((selectedRows.length === 0 && !this.refreshCurrentData) || selectedRows.length > 0)) {
+            this.selectedRecords = [];
+            this.recordsToDisplay.forEach((item) => {
+                var row = new Object();
+                row.Id = item.Id;
+                if (selectedRows.includes(item.Id)) {
+                    row.selected = true;
+                } else {
+                    row.selected = false;
+                }
+                this.pageSelectedRecords.push(row);
+            });
+        }
+
+        // To store previous row Selection
+        if (this.selectedRecords.length == 0) {
+            this.selectedRecords = this.pageSelectedRecords;
+        }
+        this.selectedRecords = this.mergeObjectArray(this.selectedRecords, this.pageSelectedRecords, "Id");
+
+        const filterSelected = this.selectedRecords.filter(({
+            selected
+        }) => selected === true);
+
+        if (this.maxRowSelection === 1 && selectedRows && selectedRows.length > 0) {
+            this.totalSelected = 1;
+        } else {
+            let i = 0;
+            this.selectedRecords.forEach(item => {
+                if (item.selected) {
+                    i++;
+                    this.totalSelected = i;
+                }
+            })
+        }
+        this.refreshCurrentData = false;
+    }
+
+    mergeObjectArray(firstArray, secondArray, prop) {
+        var reduced = firstArray.filter(aitem => !secondArray.find(bitem => aitem[prop] === bitem[prop]))
+        return reduced.concat(secondArray);
+    }
+
+    getSelectedRows(event) {
+        const selectedRows = event.detail.selectedRows;
+        this.recordSelectedRow = event.detail.selectedRows;
+        this.locationsSelectedRows = selectedRows;
+        if (selectedRows.length > 0) {
+            this.isSelected = true;
+            let selectedRecordIds = [];
+            for (let i = 0; i < selectedRows.length; i++) {
+                selectedRecordIds.push(selectedRows[i].Id);
+                selectedRows[i].randomString = parseInt(Math.random() * 100000000).toString();;
+            }
+            this.recordSelectedRow = selectedRows;
+            this.handelRowsSelected(selectedRecordIds);
+            if (this.sectionName == 'Location Entity') {
+                this.isDisableAttach = false;
+            }
+            if (this.sectionName == 'Provider Location Entity') {
+                pubsub.fire("CNCProviderLocationAttachEntity" + this.urlStates.c__caseId, "CNCProviderLocationAttachEntityRecords", {
+                    rowData: selectedRows
+                });
+            }
+            if (this.sectionName == 'Previous Owner Details') {
+                pubsub.fire("CNCReturnCaseToPreviousOwner" + this.urlStates.c__recordId, "CNCReturnCaseToPreviousOwnerEvent", {
+                    rowData: selectedRows
+                });
+            }
+            if (this.sectionName == 'Case Info') {
+                console.log('--- CHECKING CLAIM END TIME ---4');//----AlphaDelta----
+                pubsub.fire("CNCAttachCaseFromClaimSearch", "CNCAttachCaseFromClaimSearchEvent", {
+                    rowData: selectedRows
+                });
+            }
+            pubsub.fire("setselectedrow", "selectedrecords", {
+                filterSelected: this.recordSelectedRow
+            });
+            this.omniscriptUpdate();
+            this.recordSelectedRow = [];
+        } else {
+            this.recordSelectedRow = [];
+            this.omniscriptUpdate();
+        }
+    }
+
+    handelSort(event) {
+        const {
+            fieldName: sortedBy,
+            sortDirection
+        } = event.detail;
+        const cloneData = [...this.filteredRecords];
+        // if (this.sectionName == "COB Claim Adjudication Reason" && sortedBy== "adjReasonCd") {
+        //           cloneData.sort((a, b) => {
+        //             const codeA = a.adjReasonCd?.toString().trim();
+        //             const codeB = b.adjReasonCd?.toString().trim();
+        //             if (!isNaN(codeA) && !isNaN(codeB)) {
+        //                 return Number(codeA) - Number(codeB);
+        //             }
+        //             return codeA.localeCompare(codeB, undefined, {
+        //             numeric: true,
+        //             sensitivity: 'base'
+        //             });
+        //     });
+        // }
+        if (this.sectionName == "Claims" && sortedBy == "totalPaidAmount") {
+            let claimsWhichAreNotAccepted = [];
+            let claimsWhichAreAccepted = [];
+            let claimsAfterSorting = [];
+            cloneData.forEach(item => {
+                item.totalPaidAmount || item.totalPaidAmount == 0 ? claimsWhichAreAccepted.push(item) : claimsWhichAreNotAccepted.push(item);
+            })
+            claimsWhichAreAccepted.sort(this.sortBy(sortedBy, sortDirection === 'asc' ? 1 : -1));
+            sortDirection === 'asc' ? claimsAfterSorting = [...claimsWhichAreNotAccepted, ...claimsWhichAreAccepted] : claimsAfterSorting = [...claimsWhichAreAccepted, ...claimsWhichAreNotAccepted];
+            this.filteredRecords = claimsAfterSorting;
+        } else {
+            cloneData.sort(this.sortBy(sortedBy, sortDirection === 'asc' ? 1 : -1));
+            this.filteredRecords = cloneData;
+        }
+        this.sortDirection = sortDirection;
+        this.sortedBy = sortedBy;
+        this.setRecordsOnPage();
+
+    }
+
+    sortBy(field, reverse, primer) {
+        const key = primer ?
+            function (x) {
+                return primer(x[field]);
+            } :
+            function (x) {
+                return x[field];
+            };
+        return function (a, b) {
+            a = key(a) ? key(a) : '';
+            b = key(b) ? key(b) : '';
+            return reverse * ((a > b) - (b > a));
+        };
+    }
+
+    omniscriptUpdate() {
+        var updateJson;
+        var omniscriptJsonData = this.omniJsonData;
+        if (this.isOmniscript) {
+            if (this.omniscriptName == "Authentication") {
+                var isAuthentication = true;
+                var unlistedRecordId = "";
+                var recordContextId = "";
+                var providerNPIId = "";
+                var providerbcbsmnId = "";
+                var callerName = "";
+                var searchParam = "";
+                var relationShip = "";
+                // console.log('this.recordSelectedRow----' + JSON.stringify(this.recordSelectedRow));
+                if (this.recordSelectedRow.length > 0) {
+                    if (this.recordSelectedRow[0].Record_Type__c == "Member") {
+                        relationShip = "Member";
+                        if (this.recordSelectedRow[0].Member_Id__pc == undefined) {
+                            isAuthentication = false;
+                            unlistedRecordId = this.recordSelectedRow[0].Id;
+                            searchParam = this.recordSelectedRow[0].Id;
+                        } else {
+                            recordContextId = this.recordSelectedRow[0].Member_Id__pc;
+                            searchParam = this.recordSelectedRow[0].Member_Id__pc;
+                        }
+                    } else if (this.recordSelectedRow[0].Record_Type__c == "Vendor" || this.recordSelectedRow[0].Record_Type__c == "Practitioner") {
+                        isAuthentication = false;
+                        unlistedRecordId = this.recordSelectedRow[0].Id;
+                        providerNPIId = this.recordSelectedRow[0].NPI__c;
+                        providerbcbsmnId = this.recordSelectedRow[0].Blue_Shield_Id__c;
+                        callerName = this.recordSelectedRow[0].Name;
+                        relationShip = "Provider";
+                        searchParam =  this.recordSelectedRow[0].Member_Id__pc;
+                    } else {
+                        isAuthentication = false;
+                        unlistedRecordId = this.recordSelectedRow[0].Id;
+                    }
+
+                    updateJson = {
+                        ContextId: recordContextId,
+                        showAuthentication: isAuthentication,
+                        recId: unlistedRecordId,
+                        selectedNPIId: providerNPIId,
+                        selectedBCBSMNId: providerbcbsmnId,
+                        providercallerName: callerName,
+                        selectedRelationship: relationShip,
+                        searchParam : searchParam,
+                        search: {
+                            authenticationSearch: {
+                                showDOBError: 'No',
+                                showRecordError: this.recordSelectedRow.length > 0 ? 'No' : 'Yes',
+                                showUnlisted: 'No',
+                                showUnlistedProvider: 'No',
+                                selectedRecord: this.recordSelectedRow.length > 0 ? this.recordSelectedRow[0] : null,
+                            }
+                        }
+                    };
+                }
+            } else if (this.omniscriptName == "SendCommunication") {
+                if (this.omniscriptStepName == "SelectLetter") {
+                    if (this.recordSelectedRow.length > 0) {
+                        this.availableEntities = omniscriptJsonData.relatedEntities
+                        updateJson = {
+                            selectedTemplate: this.recordSelectedRow[0],
+                            selectedLetterEntity: this.recordSelectedRow[0].letterEntity,
+                            isLetterTemplateSelected: true,
+                            isEntityValid: true,
+                            isLetterEntityAvailable: this.recordSelectedRow[0].requiredEntityType != null && this.availableEntities != null ? this.availableEntities.includes(this.recordSelectedRow[0].requiredEntityType) ? true : false : this.recordSelectedRow[0].requiredEntityType != null && this.availableEntities == null ? false : true,
+                            preSelectedLetterTemplate: [{
+                                Id: this.recordSelectedRow[0].Id
+                            }]
+                        };
+                    }
+                }
+                else if (this.omniscriptStepName == "SelectEmailTemplate") {
+                    if (this.recordSelectedRow.length > 0) {
+                        updateJson = {
+                            selectedTemplate: this.recordSelectedRow[0],
+                            isEmailTemplateSelected: true,
+                            preSelectedEmailTemplate: [{
+                                Id: this.recordSelectedRow[0].Id
+                            }]
+                        };
+
+                    }
+                } else if (this.omniscriptStepName == "SelectEntity") {
+                    if (this.recordSelectedRow.length > 0) {
+                        var selectedEntityType;
+                        var preSelectedRow;
+                        if (this.recordSelectedRow[0].entityType == undefined) {
+                            const entityIds = this.recordSelectedRow.map(item => item.Id);
+                            const preSelectedEntity = this.recordsToDisplay.filter(item => entityIds.includes(item.Id));;
+                            preSelectedEntity.forEach(item => {
+                                preSelectedRow = item
+                            });
+                            selectedEntityType = preSelectedRow.entityType;
+                        } else {
+                            selectedEntityType = this.recordSelectedRow[0].entityType;
+                        }
+                        updateJson = {
+                            selectedEntity: this.recordSelectedRow[0],
+                            isCaseEntitySelected: true,
+                            isEntityValid: omniscriptJsonData.selectedTemplate.entityRequired == true ? omniscriptJsonData.selectedTemplate.requiredEntityType == selectedEntityType ? true : false : true,
+                            preSelectedCaseEntity: [{
+                                Id: this.recordSelectedRow[0].Id
+                            }]
+                        };
+                    }
+                }
+                else if (this.omniscriptStepName == "SelectForms") {
+                    if (this.recordSelectedRow.length > 0) {
+                        updateJson = {
+                            selectedForms: this.recordSelectedRow,
+                            isFormSelected: true,
+                            isFormshasAttachments: true,
+                            preSelectedForms: this.recordSelectedRow
+                        };
+                    } else {
+                        updateJson = {
+                            selectedForms: [],
+                            isFormSelected: false,
+                            // isFormshasAttachments: false,
+                            preSelectedForms: []
+                        };
+
+                    }
+                }
+                else if (this.omniscriptStepName == "SelectPODdocuments") {
+                    //console.log("this.recordSelectedRow.length", this.recordSelectedRow.length);
+
+                    if (this.recordSelectedRow.length > 0) {
+                        //console.log("in.if.length")
+                        updateJson = {
+                            selectedPODDocuments: this.recordSelectedRow,
+                            isPODSelected: true,
+                            preSelectedPOD: this.recordSelectedRow
+                        };
+                    } else {
+                        //console.log("in.else.length")
+                        updateJson = {
+                            selectedPODDocuments: [],
+                            preSelectedPOD: []
+                        };
+
+                    }
+                }
+            }
+            this.omniApplyCallResp(updateJson);
+            this.omniUpdateDataJson(updateJson);
+        }
+    }
+
+    handleViewAll() {
+        //console.log('this.targetComponent :' + this.targetComponent);
+        //console.log('this.inputData :' + JSON.stringify(this.inputData));
+        if (this.targetComponent) {
+            console.log('--- CHECKING CLAIM END TIME ---5');//----AlphaDelta----
+            //console.log('this._headerName :' + this._headerName);
+            let tabLabel = this.sectionName;
+            var dynamicState = {
+                c__target: this.targetComponent,
+                c__tabLabel: this.sectionName,
+                c__viewAllRecordId: this.currentRecordId,
+                c__headerName: this._headerName,
+                c__subHeaderName: this._subHeaderName,
+                c__isViewAll: 'VIEWALL',
+                uid: 'VIEWALL'
+            }
+
+            if (this.inputData.typeofComp === "VendorLocationDetail" || this.inputData.typeofComp === "NetworkParticipation"
+                || this.inputData.typeofComp === "ExternalID" || this.inputData.typeofComp === "Affiliations") {
+                dynamicState.c__prprId = this.inputData.prprId;
+                dynamicState.c__locId = this.inputData.pradType;
+                dynamicState.uid = this.sectionName;
+            }
+            else if (this.inputData.typeofComp === "benefitsAccumsAndLimits") {
+                dynamicState.c__Id = this.inputData.resourceId;
+                dynamicState.c__childIdentifier = this.inputData.planCode;
+                dynamicState.c__Section = this.accordionName;
+                dynamicState.c__subscriberId = this.inputData.subscriberId;
+                dynamicState.c__planEffectiveDate = this.inputData.planEffectiveDate;
+                dynamicState.uid = this.accordionName;
+            }
+            else if (this.inputData.typeofComp === "networkInfo") {
+                dynamicState.c__Id = this.inputData.resourceId;
+                dynamicState.uid = this.sectionName;
+            }
+            else if (this.inputData.typeofComp === "idCardOrderInfo") {
+                dynamicState.c__Id = this.inputData.coverageId;
+                dynamicState.uid = this.sectionName;
+            }
+            else if (this.inputData.typeofComp === 'associatedClaims') {
+                dynamicState.uid = this.sectionName;
+                dynamicState.c__entityValue = this.inputData.claimNumber;
+            }
+            else if (this.inputData.typeofComp === 'eftcheck') {
+                dynamicState.uid = this.sectionName;
+                dynamicState.c__entityValue = this.inputData.claimNumber;
+            }
+            else if (this.inputData.typeofComp === 'paymentStatusDetails') {
+                dynamicState.uid = this.sectionName;
+                dynamicState.c__entityValue = this.inputData.claimNumber;
+                dynamicState.c__paymentStatusId = this.inputData.paymentStatusId;
+            }
+            else if (this.inputData.typeofComp === 'lineDetails') {
+                dynamicState.uid = this.sectionName;
+                dynamicState.c__entityValue = this.inputData.claimNumber;
+            }
+            else if (this.inputData.typeofComp === 'diagnosis') {
+                dynamicState.uid = this.sectionName;
+                dynamicState.c__entityValue = this.inputData.claimNumber;
+            }
+            else if (this.inputData.typeofComp === 'procedureCodes') {
+                dynamicState.uid = this.sectionName;
+                dynamicState.c__entityValue = this.inputData.claimNumber;
+            }
+            else if (this.inputData.typeofComp === 'claimAccumulationDetails') {
+                dynamicState.uid = this.sectionName;
+                dynamicState.c__entityValue = this.inputData.claimNumber;
+            }
+            else if (this.inputData.typeofComp === 'COBDetails') {
+                dynamicState.uid = this.sectionName;
+                dynamicState.c__entityValue = this.inputData.claimNumber;
+                dynamicState.c__lineNumber = this.inputData.line;
+            }
+            else if (this.inputData.typeofComp === 'DenialCodes') {
+                dynamicState.uid = this.sectionName;
+                dynamicState.c__entityValue = this.inputData.claimNumber;
+                dynamicState.c__lineNumber = this.inputData.line;
+            }//MNPP-5841
+            else if (this.inputData.typeofComp === 'ClaimLineCobAdjudicationReasonCodes') {
+                dynamicState.uid = this.sectionName;
+                dynamicState.c__entityValue = this.inputData.claimNumber;
+                dynamicState.c__lineNumber = this.inputData.line;
+            }
+            else if (this.inputData.typeofComp === 'ClinicalEdits') {
+                dynamicState.uid = this.sectionName;
+                dynamicState.c__entityValue = this.inputData.claimNumber;
+                dynamicState.c__lineNumber = this.inputData.line;
+            }
+            else if (this.inputData.typeofComp === 'OccurenceCode') {
+                dynamicState.uid = this.sectionName;
+                dynamicState.c__entityValue = this.inputData.claimNumber;
+            }
+            else if (this.inputData.typeofComp === 'ConditionCode') {
+                dynamicState.uid = this.sectionName;
+                dynamicState.c__entityValue = this.inputData.claimNumber;
+            }
+            else if (this.inputData.typeofComp === 'ValueCode') {
+                dynamicState.uid = this.sectionName;
+                dynamicState.c__entityValue = this.inputData.claimNumber;
+            }
+            else if (this.inputData.typeofComp === 'CobClaimAdjudicationReasonCodes') {
+                dynamicState.uid = this.sectionName;
+                dynamicState.c__entityValue = this.inputData.claimNumber;
+            }
+            else if (this.inputData.typeofComp === "cases") {
+                dynamicState.c__lineAttributeName = this.inputData.lineAttributeName;
+                dynamicState.c__entityValue = this.inputData.entityValue;
+                dynamicState.c__bcbsmnId = this.inputData.bcbsmnId;
+                dynamicState.c__recordId = this.inputData.accountRecId;
+                dynamicState.uid = this.inputData.entityValue + this.inputData.typeofComp;
+            } else if (this.sectionName === 'Related Entities') {
+                dynamicState.c__viewAllRecordId = this.caseRecordId
+            }
+            else if (this.sectionName === 'Notes') {
+                dynamicState.c__entity = "Prior Authorizations";
+                dynamicState.c__entityValue = this.inputData.referenceNumber;
+                dynamicState.uid = this.sectionName;
+            }
+            else if (this.inputData.typeofComp === 'stayDetail') {
+                dynamicState.uid = this.sectionName;
+                dynamicState.c__entityValue = this.inputData.referenceNumber;
+            }
+            else if (this.inputData.typeofComp === 'serviceDetail') {
+                dynamicState.uid = this.sectionName;
+                dynamicState.c__entityValue = this.inputData.referenceNumber;
+            }
+            else if (this.inputData.typeofComp === 'serviceDetail') {
+                dynamicState.c__lineAttributeName = this.inputData.lineAttributeName;
+            }
+            else if (this.inputData.typeofComp === 'AccumHistory') {
+                dynamicState.c__accumCode = this.inputData.accumCode;
+                dynamicState.c__subscriberId = this.inputData.subscriberId;
+            }
+            var tabDetails;
+            let promise = new Promise((resolve, reject) => {
+                getFocusedTabInfo().then(response => {
+                    var result = JSON.parse(JSON.stringify(response));
+                    resolve(result);
+                }).catch(error => {
+                    console.error(`failed getting tab data => ${JSON.stringify(error)}`);
+                    reject(JSON.stringify(error));
+                });
+            })
+            promise.then(
+                (result) => {
+                    tabDetails = result;
+                    this.navigatetoPage(dynamicState, tabDetails)
+                },
+                (error) => {
+                    console.log('promise error ', error);
+                }
+            )
+            /*} else {
+                console.log('inside else--'+JSON.stringify(tabInfo));
+                this[NavigationMixin.Navigate]({
+                    type: 'standard__component',
+                    attributes: {
+                        componentName: 'omnistudio__vlocityLWCOmniWrapper'
+                    },
+                    state: dynamicState
+                })
+            }
+        }).catch((error) => {
+            console.log(error);
+        });
+    }*/
+        }
+    }
+
+    handleAttach() {
+
+        if (this.locationsSelectedRows) {
+
+            let rowData;
+
+            this.isDisableAttach = true;
+
+            this.locationsSelectedRows.forEach(item => {
+
+                rowData = item;
+
+            })
+
+            pubsub.fire("selectedLocationList" + this.urlStates.c__caseId, "selectedLocation", {
+
+                locationId: rowData.locationId,
+
+                entity: "Provider",
+
+                locationbcbsmnId: rowData.blueshieldId,
+
+                vendorName: rowData.vendorName,
+
+                prprId: rowData.prprId,
+
+                caseNumber: this.caseNum,
+
+                caseId: this.caseRecordId,
+
+                bcbsmnId: this._recordData.blueShieldId,
+
+                providerName: this._recordData.providerName,
+
+                accountId: this.currentRecordId
+
+            });
+
+        }
+
+    }
+
+    handleRowAction(event) {
+        console.log('--- CHECKING CLAIM END TIME ---1');//----AlphaDelta----
+        var actionName = event.detail.action.name;
+        var row = event.detail.row;
+        //console.log('Row ' + JSON.stringify(row));
+        // console.log('row.planId:-REF-' + row.planId);
+        //console.log('recId ' + this.currentRecordId);
+        //console.log('actionName---' + actionName);
+        var dynamicState = {}
+        var recordPageNavigation;
+        var recordPageId;
+        var tabLabel;
+        var providerName = actionName == 'providerName' ? 'providerName' : 'providerInfoName';
+        this.showModalComponent = false;
+        if (row) {
+            switch (actionName) {
+                //MNPP-21147 starts here SS
+                    /* =======================
+                    COPY CLAIM NUMBER ONLY
+                    ======================= */
+                    case 'copy_claim': {
+                        const text =
+                            row.claimNumber ??
+                            row.claimNumberAssociated ??
+                            row.Claim_Number__c ??
+                            row.claimNo ??
+                            '';
+
+                        if (!text) break;
+
+                        const done = () => this._showInlineCopiedChip('Copied');
+
+                        if (navigator?.clipboard?.writeText) {
+                            navigator.clipboard.writeText(String(text))
+                            .then(done)
+                            .catch(() => {
+                                try {
+                                const input = document.createElement('input');
+                                input.type = 'text';
+                                input.value = String(text);
+                                input.setAttribute('readonly', '');
+                                input.style.position = 'fixed';
+                                input.style.left = '-10000px';
+                                document.body.appendChild(input);
+                                input.select();
+                                try { document.execCommand('copy'); } catch {}
+                                document.body.removeChild(input);
+                                } finally {
+                                done();
+                                }
+                            });
+                        } else {
+                            const input = document.createElement('input');
+                            input.type = 'text';
+                            input.value = String(text);
+                            input.setAttribute('readonly', '');
+                            input.style.position = 'fixed';
+                            input.style.left = '-10000px';
+                            document.body.appendChild(input);
+                            input.select();
+                            try { document.execCommand('copy'); } catch {}
+                            document.body.removeChild(input);
+                            done();
+                        }
+                        break;
+                        }
+                //MNPP-21147 ends here SS
+                case 'locationId':
+                    dynamicState = {
+                        c__target: 'c:cfCNCFacilityLocationsDetailsPage',
+                        c__tabLabel: row.locationId,
+                        c__prprId: row.prprId,
+                        c__locId: row.locationId,
+                        c__entity: "Provider",
+                        c__entityValue: row.locationId,
+                        c__bcbsmnId: row.blueshieldId,
+                        c__locationVendorName: row.vendorName,
+                        uid: row.locationId + '_' + row.prprId,
+                        c__recordId: this.currentRecordId,
+                        c__header: row.vendorName + ' (' + row.locationId + ')'
+                    }
+                    break;
+                case providerName:
+                    if (this.sectionName == "Prior Authorizations/Referrals" || this.sectionName == "Provider Information") {
+                        let inputMap = { bcbsmnId: row.bcbsmnId };
+                        let IPName = "CNC_GetProviderRecordDetails";
+                        this.callIp(IPName, inputMap).then(response => {
+                            if (response.IPResult != null && response.IPResult != '') {
+                                this[NavigationMixin.Navigate]({
+                                    type: 'standard__recordPage',
+                                    attributes: {
+                                        recordId: response.IPResult.recordId,
+                                        actionName: 'view'
+                                    }
+                                });
+                            }
+                            else {
+                                const event = new ShowToastEvent({
+                                    title: 'ERROR',
+                                    message: 'No Records Found',
+                                    variant: 'error',
+                                    mode: 'dismissible'
+                                });
+                                this.dispatchEvent(event);
+                            }
+                        }).catch(error => {
+                            console.error(`Failed at getting IP data => ${JSON.stringify(error)}`);
+                        });
+                    } else {
+                        dynamicState = {
+                            c__target: 'c:cfCNCFacilityLocationsDetailsPage',
+                            c__tabLabel: row.pradType,
+                            c__prprId: row.prprId,
+                            c__locId: row.pradType,
+                            c__entity: "Provider",
+                            c__entityValue: row.pradType,
+                            c__bcbsmnId: row.blueshieldId,
+                            c__locationVendorName: row.providerName,
+                            uid: row.pradType,
+                            c__recordId: this.currentRecordId,
+                            c__header: row.providerName + ' (' + row.pradType + ')'
+                        }
+                    }
+                    break;
+                //RRP Code - MOMT-3629
+                case 'rrpCode':
+                    // let rrpEffective = row.rrpEffective.substring(5, 7) + '/' + row.rrpEffective.substring(8, 10) + '/' + row.rrpEffective.substring(0, 4);
+                    // let rrpTerm = row.rrpTerm.substring(5, 7) + '/' + row.rrpTerm.substring(8, 10) + '/' + row.rrpTerm.substring(0, 4);
+                    // console.log('row.requestDate' + JSON.stringify(row));
+                    dynamicState = {
+                        c__target: 'c:cfCNCRRPDetailPage',
+                        c__tabLabel: row.rrpCode,
+                        c__rrpCode: row.rrpCode,
+                        c__entity: "rrpCode",
+                        uid: row.rrpCode,
+                        c__recordId: this.currentRecordId,
+                        c__prprId: row.prprId,
+                        c__entityValue: row.rrpCode,
+                        c__childIdentifier: row.referenceNumber,
+                        c__Id: row.resourceId,
+
+                        c__serviceEndDate: row.rrpEffective,
+                        c__serviceStartDate: row.rrpTerm,
+                        c__header: 'RRP Provider Details - ' + row.rrpCode + ' : ' + row.rrpEffective + ' - ' + row.rrpTerm
+                    }
+                    //console.log('dynamicState@@' + JSON.stringify(dynamicState));
+                    break;
+
+                case 'affiliatedName':
+                    var providerBCBSMNId = row.prpr_id.substring(0, row.prpr_id.length - 3);
+                    //console.log('providerBCBSMNId----' + providerBCBSMNId);
+                    let inputMap = { bcbsmnId: providerBCBSMNId };
+                    let IPName = "CNC_GetProviderRecordDetails";
+
+                    this.callIp(IPName, inputMap).then(response => {
+                        if (response.IPResult != null && response.IPResult != '') {
+                            this[NavigationMixin.Navigate]({
+                                type: 'standard__recordPage',
+                                attributes: {
+                                    recordId: response.IPResult.recordId,
+                                    actionName: 'view'
+                                }
+                            });
+                        }
+                        else {
+                            const event = new ShowToastEvent({
+                                title: 'ERROR',
+                                message: 'No Records Found',
+                                variant: 'error',
+                                mode: 'dismissible'
+                            });
+                            this.dispatchEvent(event);
+                        }
+                    }).catch(error => {
+                        console.error(`Failed at getting IP data => ${JSON.stringify(error)}`);
+                    });
+                    break;
+                case 'planId':
+                    var planEffectiveDate = row.planEffectiveDate.substring(0, 4) + '-' + row.planEffectiveDate.substring(5, 7) + '-' + row.planEffectiveDate.substring(8, 10);
+                    dynamicState = {
+                        c__target: 'c:cfCNCPlanDetailPage',
+                        c__tabLabel: row.planId,
+                        c__Id: row.resourceId,
+                        c__recordId: this.currentRecordId,
+                        c__viewAllRecordId: this.currentRecordId,
+                        c__entity: "Plan",
+                        c__header: 'Plan: ' + row.groupDescription,
+                        c__groupName: row.groupDescription,
+                        c__childIdentifier: row.planCodeReferenceId,
+                        c__entityValue: row.planId,
+                        c__classId: row.classId,
+                        c__status: row.status,
+                        c__subscriberId: row.subscriberID,
+                        c__planEffectiveDate: planEffectiveDate,
+                        uid: row.planId
+                    }
+
+                    break;
+
+                case 'claimNumberAssociated':
+                    dynamicState = {
+                        c__target: 'c:cfCNCClaimDetailsPage',
+                        c__tabLabel: row.claimNumberAssociated,
+                        c__serviceEndDate: row.serviceDateThru,
+                        c__serviceStartDate: row.serviceDateFrom,
+                        c__entity: "Claim",
+                        c__entityValue: row.claimNumber,
+                        c__providerPRPRId: row.billingProviderPRPR,
+                        c__providerName: row.provider,
+                        c__memberId: row.memberId,
+                        uid: row.claimNumberAssociated,
+                        c__header: 'Claim: ' + row.claimNumberAssociated + ' Service Start Date: ' + servFromDate
+                    }
+                    break;
+
+                case 'Order':
+                    if (this.sectionName == "Plans, Benefits and Accumulators") {
+                        this[NavigationMixin.Navigate]({
+                            type: 'standard__component',
+                            attributes: {
+                                componentName: 'omnistudio__vlocityLWCOmniWrapper'
+                            },
+                            state: {
+                                c__target: 'c:cNCOrderIdCardEnglish',
+                                c__layout: 'lightning',
+                                c__tabIcon: 'custom:custom18',
+                                c__tabLabel: 'ID Card Order',
+                                c__ContextId: this.currentRecordId,
+                                c__ResourceId: row.resourceId
+                            }
+                        });
+                    } else {
+                        this.showModalComponent = true;
+                        this.modalAction = actionName;
+                    }
+                    break;
+                //console.log('before attach');
+
+                case 'Attach':
+                    if (row.referenceNumber != null && row.referenceNumber != '') {
+                        pubsub.fire("selectedAuthList" + this.urlStates.c__recordId, "selectedauth", {
+                            Authorization: row.referenceNumber,
+                            recordId: this.caseRecordId,
+                            caseNumber: this.caseNum,
+                            entity: "Prior Authorization/Referrals",
+                            type: row.intakeType,
+                            bcbsmnId: row.bcbsmnId,
+                            providerName: row.providerName,
+                            serviceDateFrom: row.startDate,
+                            serviceDateEnd: row.endDate
+                        });
+                    } else if (row.Referral != null && row.Referral != '') {
+                        pubsub.fire("selectedRefList", "selectedreff", {
+                            Referral: row.Referral,
+                            recordId: this.caseRecordId,
+                            caseNumber: this.caseNum,
+                            entity: "Referrals",
+                            serviceDateFrom: row.ServiceDateFrom,
+                            serviceDateEnd: row.ServiceDateTo
+                        });
+                    } else if (row.planId != null && row.planId != '') {
+                        pubsub.fire("selectedPlansList", "selectedPlan", {
+                            plan: row.planId,
+                            classId: row.classId,
+                            recordId: this.caseRecordId,
+                            caseNumber: this.caseNum,
+                            entity: "Plan",
+                            groupDescription: row.groupDescription,
+                            accountRecID: row.accountRecID,
+                            planUniqueKey: row.uniqueKey
+                        });
+                    }
+                    else {
+                        let billingProviderPRPR;
+                        if (row.billingProviderPRPR) {
+                            billingProviderPRPR = row.billingProviderPRPR.substring(0, 9);
+                        }
+                        if (this.sectionName == "Claim Search") {
+                            this.claimSearchRowData = row;
+                            this.claimSearchMemberId = row.memberId;
+                            this.showAttachCaseModal = true;
+                        } else {
+                            pubsub.fire("selectedClaimsList", "selectedClaim", {
+                                claimValue: row.claimNumber,
+                                recordId: this.caseRecordId,
+                                caseNumber: this.caseNum,
+                                entity: "Claim",
+                                serviceDateFrom: row.serviceDateFrom,
+                                serviceDateEnd: row.serviceDateThru,
+                                billingProviderPRPR: billingProviderPRPR,
+                                billingProviderName: row.providerName,
+                                billingProviderNPI: row.billingProviderNpi,
+                                totalCharge: row.billed
+                            });
+                        }
+                    }
+                    break;
+
+                case 'claimNumber':
+                
+                    if (this._newClaimPage) {
+                        this[NavigationMixin.Navigate]({
+                            type: 'standard__navItemPage',
+                            attributes: { apiName: 'Claims_Details_Page' },
+                            state: { c__claimId: row.claimNumber }
+                        });
+                    } else {
+                    
+                    if (row.memberId) {
+                        var servFromDate = row.serviceDateFrom.substring(5, 7) + '/' + row.serviceDateFrom.substring(8, 10) + '/' + row.serviceDateFrom.substring(0, 4);
+                        getAccountId({ memberId: row.memberId }).then(result => {
+                            if (result) {
+                                this[NavigationMixin.Navigate]({
+                                    type: 'standard__component',
+                                    attributes: {
+                                        componentName: 'omnistudio__vlocityLWCOmniWrapper'
+                                    },
+                                    state: {
+                                        c__target: 'c:cfCNCClaimDetailsPage',
+                                        c__tabLabel: row.claimNumber,
+                                        c__recordId: result,
+                                        c__serviceEndDate: row.serviceDateThru,
+                                        c__serviceStartDate: row.serviceDateFrom,
+                                        c__entity: "Claim",
+                                        c__entityValue: row.claimNumber,
+                                        c__providerPRPRId: row.billingProviderPRPR,
+                                        //c__providerNPI: row.billingProviderNpi,
+                                        c__providerName: row.provider,
+                                        c__memberId: row.memberId,
+                                        c__totalCharge: row.billed,
+                                        uid: row.claimNumber,
+                                        c__header: 'Claim: ' + row.claimNumber + ' Service Start Date: ' + servFromDate
+                                    }
+                                })
+                            } else {
+                                this[NavigationMixin.Navigate]({
+                                    type: 'standard__component',
+                                    attributes: {
+                                        componentName: 'omnistudio__vlocityLWCOmniWrapper'
+                                    },
+                                    state: {
+                                        c__target: 'c:cfCNCClaimDetailsPage',
+                                        c__tabLabel: row.claimNumber,
+                                        c__serviceEndDate: row.serviceDateThru,
+                                        c__serviceStartDate: row.serviceDateFrom,
+                                        c__entity: "Claim",
+                                        c__entityValue: row.claimNumber,
+                                        c__providerPRPRId: row.billingProviderPRPR,
+                                        //c__providerNPI: row.billingProviderNpi,
+                                        c__providerName: row.provider,
+                                        c__memberId: row.memberId,
+                                        c__totalCharge: row.billed,
+                                        uid: row.claimNumber,
+                                        c__header: 'Claim: ' + row.claimNumber + ' Service Start Date: ' + servFromDate
+                                    }
+                                })
+                            }
+                        }).catch(error => {
+                            console.log('Error----' + JSON.stringify(error));
+                        });
+                    } else {
+                        var servFromDate = row.serviceDateFrom.substring(5, 7) + '/' + row.serviceDateFrom.substring(8, 10) + '/' + row.serviceDateFrom.substring(0, 4);
+                        getAccountMemberId({ recordId: this.currentRecordId }).then(result => {
+                            if (result) {
+                                this[NavigationMixin.Navigate]({
+                                    type: 'standard__component',
+                                    attributes: {
+                                        componentName: 'omnistudio__vlocityLWCOmniWrapper'
+                                    },
+                                    state: {
+                                        c__target: 'c:cfCNCClaimDetailsPage',
+                                        c__tabLabel: row.claimNumber,
+                                        c__recordId: this.currentRecordId,
+                                        c__serviceEndDate: row.serviceDateTo,
+                                        c__serviceStartDate: row.serviceDateFrom,
+                                        c__entity: "Claim",
+                                        c__entityValue: row.claimNumber,
+                                        c__providerPRPRId: row.billingProviderPRPR,
+                                        //c__providerNPI: row.billingProviderNpi,
+                                        c__providerName: row.provider,
+                                        c__memberId: result,
+                                        c__totalCharge: row.billed,
+                                        uid: row.claimNumber,
+                                        c__header: 'Claim: ' + row.claimNumber + ' Service Start Date: ' + servFromDate
+                                    }
+                                })
+                            } else {
+                                this[NavigationMixin.Navigate]({
+                                    type: 'standard__component',
+                                    attributes: {
+                                        componentName: 'omnistudio__vlocityLWCOmniWrapper'
+                                    },
+                                    state: {
+                                        c__target: 'c:cfCNCClaimDetailsPage',
+                                        c__tabLabel: row.claimNumber,
+                                        c__recordId: this.currentRecordId,
+                                        c__serviceEndDate: row.serviceDateTo,
+                                        c__serviceStartDate: row.serviceDateFrom,
+                                        c__entity: "Claim",
+                                        c__entityValue: row.claimNumber,
+                                        c__providerPRPRId: row.billingProviderPRPR,
+                                        //c__providerNPI: row.billingProviderNpi,
+                                        c__providerName: row.provider,
+                                        c__memberId: row.memberId,
+                                        c__totalCharge: row.billed,
+                                        uid: row.claimNumber,
+                                        c__header: 'Claim: ' + row.claimNumber + ' Service Start Date: ' + servFromDate
+                                    }
+                                })
+                            }
+                        }).catch(error => {
+                            console.log('Error----' + JSON.stringify(error));
+                        });
+                    }
+                }
+                break;
+                
+                case 'lineNumber':
+                    var servFromDate = row.serviceBeginDate.substring(5, 7) + '/' + row.serviceBeginDate.substring(8, 10) + '/' + row.serviceBeginDate.substring(0, 4);
+                    tabLabel = row.lineNumber.toString();
+                    dynamicState = {
+                        c__target: 'c:cfCNCClaimLineDetailsPage',
+                        c__tabLabel: tabLabel,
+                        c__recordId: this.currentRecordId,
+                        c__serviceEndDate: row.serviceDateTo,
+                        c__serviceStartDate: row.serviceBeginDate,
+                        c__entity: "Claim Line",
+                        c__entityValue: row.claimNumber,
+                        c__providerPRPRId: row.billingProviderPRPR,
+                        c__providerName: row.provider,
+                        c__claim: row.claimNumber,
+                        c__lineNumber: row.lineNumber,
+                        c__diagnosisSequence: row.diagnosisSequence,
+                        uid: row.lineNumber + '_' + row.claimNumber,
+                        c__header: 'Claim: ' + row.claimNumber + ' (Line <' + row.lineNumber + '>)' + ' Service Start Date: ' + servFromDate
+                    }
+                    break;
+
+                //Accum story MOMT-36220
+                case 'met':
+                    //console.log('this.urlStates.c__planEffectiveDate---' + this.urlStates.c__planEffectiveDate);
+                    dynamicState = {
+                        c__target: 'c:cfCNCAccumulationHistoryDetailPage',
+                        c__tabLabel: "Accumulation History",
+                        c__headerName: this.memberName,
+                        c__subHeaderName: "Accumulation History",
+                        c__accumCode: row.accumCode,
+                        c__accumDescription: row.accumDescription,
+                        c__isViewAll: "VIEWALL",
+                        c__accumBeginDate: this.urlStates.c__planEffectiveDate,
+                        c__subscriberId: this.urlStates.c__subscriberId
+                    }
+                    break;
+
+                case 'paymentRefId':
+                    tabLabel = row.paymentRefId.toString();
+                    var checkNum = row.checkNumber === '' || row.checkNumber === undefined ? '' : row.checkNumber;
+                    //console.log('Row ' + JSON.stringify(row));
+                    dynamicState = {
+                        c__target: 'c:cfCNCClaimEFTCheckPaymentStatusDetailsPage',
+                        c__tabLabel: tabLabel,
+                        c__recordId: this.currentRecordId,
+                        c__entity: "Claim EFT/Check Payment Status",
+                        c__entityValue: row.claimNumber,
+                        c__paymentStatusId: row.paymentStatusId,
+                        uid: row.paymentStatusId,
+                        c__header: 'Payment Ref Id: ' + row.paymentRefId + ' Check#: ' + checkNum
+                    }
+                    break;
+
+                case 'referenceNumber':
+                    var startDate = row.startDate === '' || row.startDate === undefined ? '' : row.startDate.substring(5, 7) + '/' + row.startDate.substring(8, 10) + '/' + row.startDate.substring(0, 4);
+                    if (row.memberId) {
+                        getAccountId({ memberId: row.memberId }).then(result => {
+                            if (result) {
+                                this[NavigationMixin.Navigate]({
+                                    type: 'standard__component',
+                                    attributes: {
+                                        componentName: 'omnistudio__vlocityLWCOmniWrapper'
+                                    },
+                                    state: {
+                                        c__target: 'c:cfCNCAuthorizationDetailPage',
+                                        c__tabLabel: row.referenceNumber,
+                                        c__recordId: result,
+                                        c__bcbsmnId: row.bcbsmnId,
+                                        c__servicingProvider: row.providerName,
+                                        c__entity: "Prior Authorization",
+                                        c__entityValue: row.referenceNumber,
+                                        c__type: row.intakeType,
+                                        c__serviceStartDate: startDate,
+                                        uid: row.referenceNumber,
+                                        c__header: 'Reference # : ' + row.referenceNumber + ' Service Start Date: ' + startDate
+                                    }
+                                })
+                                pubsub.fire("priorAuthorizations", "priorAuthorizationsAPIData", {
+                                    result: this.apiRecordData
+                                });
+                            } else {
+                                this[NavigationMixin.Navigate]({
+                                    type: 'standard__component',
+                                    attributes: {
+                                        componentName: 'omnistudio__vlocityLWCOmniWrapper'
+                                    },
+                                    state: {
+                                        c__target: 'c:cfCNCAuthorizationDetailPage',
+                                        c__tabLabel: row.referenceNumber,
+                                        c__bcbsmnId: row.bcbsmnId,
+                                        c__servicingProvider: row.providerName,
+                                        c__entity: "Prior Authorization",
+                                        c__entityValue: row.referenceNumber,
+                                        c__serviceStartDate: startDate,
+                                        c__type: row.intakeType,
+                                        uid: row.referenceNumber,
+                                        c__header: 'Reference # : ' + row.referenceNumber + ' Service Start Date: ' + startDate
+                                    }
+                                })
+                            }
+                        }).catch(error => {
+                            console.log('Error----' + JSON.stringify(error));
+                        });
+                    }
+                    break;
+
+                /**case 'priorMemberRef':
+                    var startDate = row.startDate === '' || row.startDate === undefined ? '' : row.startDate.substring(5, 7) + '/' + row.startDate.substring(8, 10) + '/' + row.startDate.substring(0, 4);
+                    // if (row.memberId) {
+                    getAccountId({ memberId: row.memberId }).then(result => {
+                        if (result) {
+                            this[NavigationMixin.Navigate]({
+                                type: 'standard__component',
+                                attributes: {
+                                    componentName: 'omnistudio__vlocityLWCOmniWrapper'
+                                },
+                                state: {
+                                    c__target: 'c:cfCNCAuthorizationDetailPage',
+                                    c__tabLabel: row.priorMemberRef,
+                                    c__recordId: result,
+                                    c__bcbsmnId: row.bcbsmnId,
+                                    c__servicingProvider: row.providerName,
+                                    c__entity: "Prior Authorization",
+                                    c__entityValue: row.priorMemberRef,
+                                    c__type: row.intakeType,
+                                    c__serviceStartDate: startDate,
+                                    uid: row.priorMemberRef,
+                                    c__header: 'Reference # : ' + row.priorMemberRef + ' Service Start Date: ' + startDate
+                                }
+                            })
+                            pubsub.fire("priorAuthorizations", "priorAuthorizationsAPIData", {
+                                result: this.apiRecordData
+                            });
+                        } else {
+                            console.log('inside else');
+                            this[NavigationMixin.Navigate]({
+                                type: 'standard__component',
+                                attributes: {
+                                    componentName: 'omnistudio__vlocityLWCOmniWrapper'
+                                },
+                                state: {
+                                    c__target: 'c:cfCNCAuthorizationDetailPage',
+                                    c__tabLabel: row.priorMemberRef,
+                                    c__bcbsmnId: row.bcbsmnId,
+                                    c__servicingProvider: row.providerName,
+                                    c__entity: "Prior Authorization",
+                                    c__entityValue: row.priorMemberRef,
+                                    c__serviceStartDate: startDate,
+                                    c__type: row.intakeType,
+                                    uid: row.priorMemberRef,
+                                    c__header: 'Reference # : ' + row.priorMemberRef + ' Service Start Date: ' + startDate
+                                }
+                            })
+                        }
+                    }).catch(error => {
+                        console.log('Error----' + JSON.stringify(error));
+                    });
+                    // }
+                    break;**/
+
+                case 'Unique_Id':
+                    var startDate = row.SDSummaryStartDate === '' || row.SDSummaryStartDate === undefined ? '' : row.SDSummaryStartDate.substring(5, 7) + '/' + row.SDSummaryStartDate.substring(8, 10) + '/' + row.SDSummaryStartDate.substring(0, 4);
+                    var endDate = row.SDSummaryEndDate === '' || row.SDSummaryEndDate === undefined ? '' : row.SDSummaryEndDate.substring(5, 7) + '/' + row.SDSummaryEndDate.substring(8, 10) + '/' + row.SDSummaryEndDate.substring(0, 4);
+                    dynamicState = {
+                        c__target: 'c:cfCNCAuthRequestServiceDetailPage',
+                        c__tabLabel: 'Line ' + row.Unique_Id,
+                        c__entity: "Request/Review-Service Detail",
+                        c__entityValue: this.urlStates.c__entityValue,
+                        c__serviceLine: row.Unique_Id,
+                        c__codeDescription: row.SDSummaryCodeDescription,
+                        uid: row.Unique_Id + 'serviceDetail',
+                        c__header: 'Request/Review - Service Detail line ' + row.Unique_Id + ' : ' + startDate + '-' + endDate
+                    }
+                    break;
+
+                case 'stayItemId':
+                    var startDate = row.stayStartDate === '' || row.stayStartDate === undefined ? '' : row.stayStartDate.substring(5, 7) + '/' + row.stayStartDate.substring(8, 10) + '/' + row.stayStartDate.substring(0, 4);
+                    var endDate = row.stayEndDate === '' || row.stayEndDate === undefined ? '' : row.stayEndDate.substring(5, 7) + '/' + row.stayEndDate.substring(8, 10) + '/' + row.stayEndDate.substring(0, 4);
+                    dynamicState = {
+                        c__target: 'c:cfCNCAuthRequestStayDetailPage',
+                        c__tabLabel: 'Line ' + row.stayItemId,
+                        c__entity: "Line View Request/Review-Stay Detail",
+                        c__entityValue: this.urlStates.c__entityValue,
+                        c__stayLine: row.stayItemId,
+                        uid: row.stayItemId + 'stayDetail',
+                        c__header: 'Request/Review - Stay Detail Line ' + row.stayItemId + ': ' + startDate + '-' + endDate
+                    }
+                    break;
+
+                case 'Blue_Shield_Id__c':
+                    this.showModalComponent = false;
+                    this.isConsoleNavigation = true;
+                    this.invokeWorkspaceAPI('isConsoleNavigation').then(isConsole => {
+                        if (isConsole) {
+                            this.invokeWorkspaceAPI('openTab', {
+                                recordId: row.Id,
+                                focus: true
+                            }).then(tabId => { });
+                        }
+                    });
+                    break;
+                case 'provider':
+                    this.showModalComponent = true;
+                    this.modalAction = actionName;
+                    break;
+                case 'patientName': // this switch case is for navigating to member 360 page from case related entity MOMT-9040
+                    recordPageNavigation = true;
+                    recordPageId = row.providerId;
+                    break;
+                case 'Authorization':
+                    // this switch case is for navigating to provider page from case related entity MOMT-9040
+                    if (row.entityType === 'Prior Authorization') {
+                        //console.log('row.entityType====' + row.entityType);
+                    }
+                case 'providerBCBSMN':
+                    // this switch case is for navigating to provider page from case related entity MOMT-9040
+                    if (row.entityType === 'Claim' || row.providerBCBSMN != '') {
+                        var providerBCBSMNId = row.providerBCBSMN;
+                        //console.log('providerBCBSMNId----' + providerBCBSMNId);
+                        let inputMap = { bcbsmnId: providerBCBSMNId };
+                        let IPName = "CNC_GetProviderRecordDetails";
+
+                        this.callIp(IPName, inputMap).then(response => {
+                            //console.log('IPresponse----' + JSON.stringify(response.IPResult));
+                            if (response.IPResult.recordId != null && response.IPResult.recordId != '') {
+                                //  console.log('Inside If--IPresult123----');
+                                this[NavigationMixin.Navigate]({
+                                    type: 'standard__recordPage',
+                                    attributes: {
+                                        recordId: response.IPResult.recordId,
+                                        actionName: 'view'
+                                    }
+                                });
+                            }
+                            else {
+                                // console.log('Inside Else---Error123----');
+                                const event = new ShowToastEvent({
+                                    title: 'ERROR',
+                                    message: 'No Records Found',
+                                    variant: 'error',
+                                    mode: 'dismissible'
+                                });
+                                this.dispatchEvent(event);
+                                //console.log('After event1----' + JSON.stringify(event));
+                            }
+                        }).catch(error => {
+                            console.error(`Failed at getting IP data => ${JSON.stringify(error)}`);
+                        });
+                    } else {
+                        //console.log('navigate to page1----');
+                        recordPageNavigation = true;
+                        recordPageId = row.providerId;
+                    }
+                    break;
+                case 'delete':
+                    // this switch case is for deleting the case sub entity records from case related entities list MOMT-9040    
+                    var caseOwnerId = this.case.data.fields.OwnerId.value;
+                    var caseStatus = this.case.data.fields.Status.value;
+                    if (USER_ID != caseOwnerId && caseStatus != 'Closed') {
+                        const event = new ShowToastEvent({
+                            title: 'Error',
+                            message: 'Please contact case owner to delete the Entity',
+                            variant: 'error'
+                        });
+                        this.dispatchEvent(event);
+                    } else
+                        if (caseStatus == 'Closed') {
+                            const event = new ShowToastEvent({
+                                title: 'Error',
+                                message: 'Cannot delete Entity from a closed case',
+                                variant: 'error'
+                            });
+                            this.dispatchEvent(event);
+                        }
+                        else {
+                            if (this.urlStates.uid === 'VIEWALL') {
+                                pubsub.fire("entitiesRelatedEvent", "deleteFunctionalityViewAll", {
+                                    entityId: row.Id,
+                                    caseId: this.currentRecordId,
+                                    isViewAll: this.urlStates.uid
+                                });
+                            } else {
+                                pubsub.fire("entitiesRelatedEvent", "deleteFunctionality", {
+                                    entityId: row.Id,
+                                    caseId: this.currentRecordId,
+                                });
+                            }
+                            const event = new ShowToastEvent({
+                                title: 'Success',
+                                message: 'Entity deleted successfully from the case',
+                                variant: 'success'
+                            });
+                            this.dispatchEvent(event);
+                        }
+                    break;
+                case 'caseNumber':
+                    //this switch case is for navigating to case page from entity detail page MOMT-9040 
+                    recordPageNavigation = true;
+                    recordPageId = row.Id;
+                    break;
+                case 'memberId':
+                    //this switch case is for navigating to case page from entity detail page MOMT-16267
+                    if (row.memberId) {
+                        getAccountId({ memberId: row.memberId }).then(result => {
+                            if (result) {
+                                //console.log('result ', result);
+                                this[NavigationMixin.Navigate]({
+                                    type: 'standard__recordPage',
+                                    attributes: {
+                                        recordId: result,
+                                        actionName: 'view'
+                                    }
+                                });
+                            } else {
+                                const event = new ShowToastEvent({
+                                    title: 'Error',
+                                    message: 'No Record Found',
+                                    variant: 'error',
+                                    mode: 'dismissable'
+                                });
+                                this.dispatchEvent(event);
+                            }
+                        }).catch(error => {
+                            console.log('Error----' + JSON.stringify(error));
+                        });
+                    }
+                    break;
+                case 'view':
+                    this[NavigationMixin.Navigate]({
+                        type: 'standard__namedPage',
+                        attributes: {
+                            pageName: 'filePreview'
+                        },
+                        state: {
+                            selectedRecordId: row.documentId
+                        }
+                    })
+                    break;
+                case 'Name':
+                    this[NavigationMixin.Navigate]({
+                        type: 'standard__namedPage',
+                        attributes: {
+                            pageName: 'filePreview'
+                        },
+                        state: {
+                            selectedRecordId: row.documentId
+                        }
+                    })
+                    break;
+                case 'remove':
+                    var documentId = row.documentId;
+                    pubsub.fire("removeDocumentEvent", "deletedocument", {
+                        documentIdToDelete: documentId,
+                        typeofDocument: row.isPODReview ? "POD Review" : "Generic Review"
+                    });
+                    break;
+
+
+                case 'entityValue':
+                    //this switch case is for navigating to claim detail page from entity related list MOMT-9040 
+                    if (row.entityType === "Claim") {
+                        var FromDate = this.changeDateFormat(row.serviceFromDate)
+                        dynamicState = {
+                            c__target: 'c:cfCNCClaimDetailsPage',
+                            c__tabLabel: row.entityValue,
+                            c__serviceEndDate: row.serviceEndDate,
+                            c__serviceStartDate: row.serviceFromDate,
+                            c__entity: "Claim",
+                            c__entityValue: row.entityValue,
+                            c__recordId: row.providerId,
+                            c__memberId: row.patientId,
+                            c__providerPRPRId: row.providerBCBSMN,
+                            c__providerName: row.providerName,
+                            uid: row.entityValue,
+                            c__header: 'Claim: ' + row.entityValue + ' Service Start Date: ' + FromDate
+                        }
+                    } else if (row.entityType === "Plan") {
+                        this.isLoading = true;
+                        let inputMap = { subscriberId: row.patientId };
+                        let IPName = "CNC_MemberPlan";
+                        var resourceId;
+                        var planCodeReferenceId;
+                        var groupDescription;
+                        var planstatus;
+                        var hasRecords = false;
+                        let filteredPlan = [];
+                        //var planInfo = [];
+
+                        this.callIp(IPName, inputMap).then(response => {
+                            var respData = {};
+                            respData = response.IPResult;
+                            if (Array.isArray(respData.planInfo) && respData.planInfo.length > 0) {
+                                //console.log('inside fi');
+                                hasRecords = true;
+                                //const planInfo = respData.planInfo;
+                                // const filteredPlan = respData.planInfo.map(rec => {
+                                //     if (rec.planId != null && rec.planId == row.entityValue) {
+                                //         return rec;
+                                //     }
+                                // }); 
+                                respData.planInfo.forEach(element => {
+                                    if (element.planId != null && element.planId == row.entityValue) {
+                                        filteredPlan = [element];
+                                    }
+                                });
+                                planCodeReferenceId = filteredPlan[0].planCodeReferenceId != null ? filteredPlan[0].planCodeReferenceId : "";
+                                resourceId = filteredPlan[0].resourceId != null ? filteredPlan[0].resourceId : "";
+                                groupDescription = filteredPlan[0].groupDescription != null ? filteredPlan[0].groupDescription : "";
+                                planstatus = filteredPlan[0].status != null ? filteredPlan[0].status : "";
+                            } else {
+                                hasRecords = false;
+                            }
+                            this.isLoading = false;
+                            if (hasRecords == true) {
+                                this[NavigationMixin.Navigate]({
+                                    type: 'standard__component',
+                                    attributes: {
+                                        componentName: 'omnistudio__vlocityLWCOmniWrapper'
+                                    },
+                                    state: {
+                                        c__target: 'c:cfCNCPlanDetailPage',
+                                        c__tabLabel: row.entityValue,
+                                        c__Id: resourceId,
+                                        c__entity: "Plan",
+                                        c__header: 'Plan: ' + groupDescription,
+                                        c__groupName: groupDescription,
+                                        c__entityValue: row.entityValue,
+                                        c__childIdentifier: planCodeReferenceId,
+                                        uid: row.entityValue,
+                                        c__recordId: row.providerId,
+                                        c__status: planstatus
+                                    }
+                                })
+                            } else {
+                                const event = new ShowToastEvent({
+                                    title: 'ERROR',
+                                    message: 'No Records Found',
+                                    variant: 'error',
+                                    mode: 'dismissible'
+                                });
+                                this.dispatchEvent(event);
+                            }
+                        }).catch(error => {
+                            this.isLoading = false;
+                            console.error(`Failed at getting IP data => ${JSON.stringify(error)}`);
+                        });
+                    } else if (row.entityType === "Provider") {
+                        dynamicState = {
+                            c__target: 'c:cfCNCFacilityLocationsDetailsPage',
+                            c__tabLabel: row.locationId,
+                            c__prprId: row.locationPRPRId,
+                            c__locId: row.locationId,
+                            c__entity: "Provider",
+                            c__entityValue: row.locationId,
+                            c__bcbsmnId: row.bcbsmnId,
+                            c__locationVendorName: row.locationVendorName,
+                            uid: row.locationId,
+                            c__header: row.entityValue
+                        }
+                    } else if (row.entityType === "Referral") {
+                        //console.log('Test for Row ' + JSON.stringify(row))
+                        dynamicState = {
+                            c__target: 'c:cfCNCReferralDetailPage',
+                            c__tabLabel: row.entityValue,
+                            c__recordId: this.currentRecordId,
+                            c__serviceEndDate: row.serviceDateTo,
+                            c__serviceStartDate: row.serviceDateFrom,
+                            uid: row.entityValue,
+                            c__entity: "Referral",
+                            c__entityValue: row.entityValue,
+                            c__header: 'Referral #: ' + row.entityValue + ' Service Start Date: ' + '10/05/2023'
+                        }
+                    }
+                    else {
+                        //console.log('Row Data:-test me---' + JSON.stringify(row));
+                        var startDate = row.serviceFromDate === '' || row.serviceFromDate === undefined ? '' : row.serviceFromDate.substring(5, 7) + '/' + row.serviceFromDate.substring(8, 10) + '/' + row.serviceFromDate.substring(0, 4);
+                        //let startDate = row.serviceFromDate.substring(5, 7) + '/' + row.serviceFromDate.substring(8, 10) + '/' + row.serviceFromDate.substring(0, 4);
+                        dynamicState = {
+                            c__target: 'c:cfCNCAuthorizationDetailPage',
+                            c__tabLabel: row.entityValue,
+                            c__recordId: row.providerId,
+                            c__bcbsmnId: row.providerBCBSMN,
+                            c__servicingProvider: row.providerName,
+                            c__entity: "Prior Authorization",
+                            c__type: row.entityType,
+                            c__entityValue: row.entityValue,
+                            c__serviceStartDate: startDate,
+                            uid: row.entityValue,
+                            c__header: 'Reference # : ' + row.entityValue + ' Service Start Date: ' + startDate
+                        }
+                    }
+
+                    break;
+                case 'View':
+                    //this switch case is implemented as per MOMT-24092, "view" swith case at line 1149 is not used because the action name coming at this is in small case and the action name coming at 
+                    //this current switch case is with capital "V" in "View" in order to change this either i have to change it in metadata or get it changed in user story or apply a logic to convert all 
+                    //actions with toLower() method and do changes in all cases. In order to avoid this changes writing this another swtich case with capital "V" in view 
+                    //20908   Coordination of Benefits for Member 
+                    if (this.sectionName === "Coordination of Benefits/Other Insurance") {
+                        let effectiveDate = row.EffectiveDate.substring(5, 7) + '/' + row.EffectiveDate.substring(8, 10) + '/' + row.EffectiveDate.substring(0, 4);
+                        let terminationDate = row.TermDate.substring(5, 7) + '/' + row.TermDate.substring(8, 10) + '/' + row.TermDate.substring(0, 4);
+                        //console.log('row.requestDate' + JSON.stringify(row));
+                        dynamicState = {
+                            c__target: 'c:cfCNCCOBDetailPages',
+                            c__tabLabel: row.CarrierName,
+                            c__recordId: this.currentRecordId,
+                            c__serviceEndDate: row.EffectiveDate,
+                            c__entity: "CarrierName",
+                            c__entityValue: row.CarrierName,
+                            c__uniqueId: row.uniqueId,
+                            //c__memberId:row.memberId,
+                            uid: row.referenceNumber,
+                            c__header: row.CarrierName + ' : ' + effectiveDate + ' - ' + terminationDate
+                        }
+                    } else {
+                        dynamicState = {
+                            c__target: 'c:cfCNCRenderIDCardImages',
+                            c__tabLabel: 'ID Cards',
+                            c__recordId: this.currentRecordId,
+                            c__Id: row.resourceId,
+                            uid: row.resourceId
+                        }
+                    }
+
+                    break;
+
+                default:
+            }
+            if (!this.showModalComponent && Object.keys(dynamicState).length != 0 && !recordPageNavigation) {
+                var tabDetails;
+                let promise = new Promise((resolve, reject) => {
+                    getFocusedTabInfo().then(response => {
+                        var result = JSON.parse(JSON.stringify(response));
+                        resolve(result);
+                    }).catch(error => {
+                        console.error(`failed getting tab data => ${JSON.stringify(error)}`);
+                        reject(JSON.stringify(error));
+                    });
+                })
+                promise.then(
+                    (result) => {
+                        tabDetails = result;
+                        this.navigatetoPage(dynamicState, tabDetails)
+                    },
+                    (error) => {
+                        console.log('promise error ', error);
+                    }
+                )
+            } // below else condition is for navigating to record pages using record Id MOMT-9040
+            else if (recordPageNavigation) {
+                this[NavigationMixin.Navigate]({
+                    type: 'standard__recordPage',
+                    attributes: {
+                        recordId: recordPageId,
+                        actionName: 'view'
+                    }
+                });
+            }
+        }
+    }
+
+    /////
+        // --- Helpers for inline "Copied" chip (Option A) ---
+            _trackMouse = (e) => {
+                // Store the last mouse position so we can pop the chip near the cursor
+                this._lastMouse = { x: e?.clientX ?? 16, y: e?.clientY ?? 16 };
+            };
+
+            _showInlineCopiedChip(text = 'Copied') {
+                // Small floating chip near the cursor for exactly 3 seconds
+                const chip = document.createElement('div');
+                chip.textContent = text;
+                chip.setAttribute('role', 'status');
+
+                // Place near cursor, but never too close to edges
+                const x = (this._lastMouse?.x ?? 16) + 12;
+                const y = (this._lastMouse?.y ?? 16) - 8;
+
+                chip.style.position = 'fixed';
+                chip.style.left = `${Math.max(8, x)}px`;
+                chip.style.top  = `${Math.max(8, y)}px`;
+                chip.style.zIndex = '9999';
+                chip.style.background = '#04844B';   // SLDS success green
+                chip.style.color = '#fff';
+                chip.style.padding = '4px 8px';
+                chip.style.borderRadius = '12px';
+                chip.style.fontSize = '12px';
+                chip.style.boxShadow = '0 2px 6px rgba(0,0,0,0.2)';
+                chip.style.pointerEvents = 'none';
+
+                document.body.appendChild(chip);
+                setTimeout(() => {
+                if (chip && chip.parentNode) chip.parentNode.removeChild(chip);
+                }, 3000); // 3 seconds per AC
+            }
+    /////
+
+    navigatetoPage(dynamicState, tabDetails) {
+        var tabId = tabDetails.parentTabId != null ? tabDetails.parentTabId : tabDetails.tabId
+        openSubtab(tabId, {
+            pageReference: {
+                type: 'standard__component',
+                attributes: {
+                    componentName: 'omnistudio__vlocityLWCOmniWrapper'
+                },
+                state: dynamicState
+            }
+        });
+    }
+
+    deleteAttachment(contentDocumentId, caseId) {
+        //console.log('contentDocumentId-----' + contentDocumentId + 'caseId----' + caseId);
+        let inputMap = { documentId: contentDocumentId, entityId: caseId };
+        let IPName = "CNC_DeleteCaseAttachments";
+
+        this.callIp(IPName, inputMap).then(response => {
+            //console.log('response @@@@' + JSON.stringify(response.IPResult));
+            this._recordData = response.IPResult;
+            // console.log('this._recordData----' + JSON.stringify(this._recordData));
+            var updateJson = {
+                insertedPdfFiles: response.IPResult.responsedata
+            };
+            this.omniApplyCallResp(updateJson);
+
+            if (this._recordData) {
+                this.showTable = true;
+                this.initilizeRecordData();
+            }
+        }).catch(error => {
+            console.error(`Failed at getting IP data => ${JSON.stringify(error)}`);
+        });
+
+    }
+
+
+    callIp(ipMethod, inputMap) {
+        let datasourcedef = JSON.stringify({
+            "type": "integrationprocedure",
+            "value": {
+                "ipMethod": ipMethod,
+                "inputMap": inputMap,
+                "optionsMap": ""
+            }
+        });
+        return getDataHandler(datasourcedef).then(data => {
+            return JSON.parse(data);
+        }).catch(error => {
+            console.error(`failed at getting IP data => ${JSON.stringify(error)}`);
+        });
+    }
+
+    callDR(name, input) {
+        let datasourcedef = JSON.stringify({
+            "type": "DataRaptor",
+            "value": {
+                "bundleName": name,
+                "inputMap": input,
+                "optionsMap": ""
+            }
+        });
+        return getDataHandler(datasourcedef).then(data => {
+            return JSON.parse(data);
+        }).catch(error => {
+            console.error(`failed at getting IP data => ${JSON.stringify(error)}`);
+        });
+    }
+
+    invokeWorkspaceAPI(methodName, methodArgs) {
+        return new Promise((resolve, reject) => {
+            const apiEvent = new CustomEvent("internalapievent", {
+                bubbles: true,
+                composed: true,
+                cancelable: false,
+                detail: {
+                    category: "workspaceAPI",
+                    methodName: methodName,
+                    methodArgs: methodArgs,
+                    callback: (err, response) => {
+                        if (err) {
+                            return reject(err);
+                        } else {
+                            return resolve(response);
+                        }
+                    }
+                }
+            });
+
+            window.dispatchEvent(apiEvent);
+        });
+    }
+
+    logCurrentTime() {
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const seconds = now.getSeconds();
+        const milliseconds = now.getMilliseconds();
+        const paddedHours = String(hours).padStart(2, '0');
+        const paddedMinutes = String(minutes).padStart(2, '0');
+        const paddedSeconds = String(seconds).padStart(2, '0');
+        const paddedMilliseconds = String(milliseconds).padStart(3, '0');
+        const formattedTime = `${paddedHours}:${paddedMinutes}:${paddedSeconds}.${paddedMilliseconds}`;
+        console.log('IP CALL DONE ----ALPHADELTA----Claim END Time');//----AlphaDelta----
+        console.log(`Current Exact Time########: ${formattedTime}`);
+        this.formattedTime = formattedTime;
+        return formattedTime; 
+    }
+
+    handleStart() {
+        const claimEndTimeString = this.logCurrentTime();
+        const accountId = this.currentRecordId; 
+        if (!accountId) {
+            console.error('Account ID (this.currentRecordId) is missing. Cannot finalize time.');
+            return;
+        }
+        console.log('Account ID being used for ClaimLoadTime:', accountId);
+        window.setTimeout(() => {
+        finalizeClaimLoadTime({ 
+                accountId: accountId, 
+                claimEndTime: claimEndTimeString 
+            })
+            .then(()=> {
+                //this.claimLoadTimeId = updatedRecordId;
+                console.log('SUCCESS: Latest record updated with ID:', updatedRecordId);
+            })
+            .catch(error => {
+                console.error('Error finalizing record:', JSON.stringify(error));
+            });
+        }, 300); 
+    }
+
+    // subscribeToLoadTimeChannel() {
+    //     // ... (Your existing subscription logic remains here) ...
+    //     if (!this.subscription) {
+    //          this.subscription = subscribe(
+    //             this.messageContext,
+    //             LOAD_TIME_RECORD_CHANNEL,
+    //             (message) => this.handleLoadTimeId(message)
+    //         );
+    //     }
+    // }
+
+    // unsubscribeFromLoadTimeChannel() {
+    //     if (this.subscription) {
+    //         unsubscribe(this.subscription);
+    //         this.subscription = null;
+    //         console.log('TRACE: Unsubscribed from channel. Subscription cleared.');
+    //     }
+    // }
+
+    // handleLoadTimeId(message) {
+    //     console.log('TRACE: - ENTERED handleLoadTimeId FUNCTION <---');
+    //     console.log('TRACE: Raw Incoming Message:', JSON.stringify(message));
+    //     if (message) {
+    //         //this.handleStartAllClaim();
+    //         //this.claimLoadTimeId = message.loadTimeRecordId;
+    //         //this.hasLoadTimeId = true;
+    //         console.log(`Subscriber LWC: Stored Claim Load Time ID: ${this.claimLoadTimeId}`);
+    //         /*
+    //         if (this.isDataProcessed) { 
+    //             console.log('TRACE: LMC ID received, Data was already processed. Logging End Time now.');
+    //             this.checkAndFinalizeLoadTime();
+    //         } 
+    //         */
+    //         //this.checkAndFinalizeLoadTime();
+    //     } else {
+    //         console.error('TRACE: Message received, but the expected field (loadTimeRecordId) is missing or empty.');
+    //     }
+    // }
+    //----Jira: MNPP-15862----
+    handleStartAllClaim() {
+        const omniEndTimeString = this.logCurrentTime();
+        //const loadTimeIdToUse = this.recordId; 
+        const loadTimeIdToUse = this.currentRecordId;
+        if (!loadTimeIdToUse) {
+            console.error('CRITICAL ERROR: Claim Load Time ID is missing. Cannot finalize OmniStudio time.');
+            return;
+        }
+        console.log('TRACE: Finalizing OmniStudio Time for ID:', loadTimeIdToUse);
+        finalizeAllClaimLoadTime({ 
+            loadTimeRecordId: loadTimeIdToUse,
+            claimEndTimeAll: omniEndTimeString
+        })
+        .then(result => {
+            console.log(`SUCCESS: OmniStudio Load Time Record updated with end time. Returned ID: ${result}`);
+            this.claimLoadTimeId = null; 
+        })
+        .catch(error => {
+            console.error('Error finalizing OmniStudio load time:', JSON.stringify(error));
+        });
+    }
+}
+//     checkAndFinalizeLoadTime() {
+//         // 1. Check if both dependencies are met
+//         if (this.claimLoadTimeId && !this.finalLogTriggered) {
+            
+//             // 2. We use a single-use flag to prevent the multiple renderedCallback calls from logging
+//             this.finalLogTriggered = true; 
+            
+//             // 3. Since you insist on using the final render timing: 
+//             // We use a small timeout to ensure the UI thread is free for the final DOM paint.
+//             window.setTimeout(() => {
+//                 console.log('TRACE: Handshake complete. Calling final logging function.');
+//                 this.handleStartAllClaim(); // This is called ONLY once, after all waits.
+//             }, 50); 
+//         }
+// }
+
+/*    backgroundProcessFinished() {
+        this.isLoadComplete = true;
+        console.log('LWC B: COMPLETION SIGNAL RECEIVED. Load is now complete (isLoadComplete=true).');
+        
+        if (this.receivedRecordId) {
+            console.log('LWC B: Load complete AND ID is present. Calling finalizeTime().');
+            this.finalizeTime();
+        } else {
+            console.log('LWC B: Load complete, but WAITING FOR ID via LMS.');
+        }
+    }
+   /*
+
+   startLMSListener() {
+        if (!this.subscription && this.messageContext) {
+            this.subscription = subscribe(
+                this.messageContext,
+                START_TIME_CHANNEL,
+                (message) => {
+                 const receivedTime = message.formattedTimeString;
+                    console.log('++++ LWC B received message:'+ receivedTime);
+                    if (this.isConnected) {
+                        this.calculateTimeGap(this.receivedTime);
+                    }
+                    //this.receivedTime = receivedTime;
+                }
+            );
+        }
+    }
+
+    calculateTimeGap(time) {
+
+        this.startLMSListener();
+
+        console.log('receivedTime:', this.receivedTime);
+        console.log('receivedTime:', time);
+console.log('formattedTime:', this.formattedTime);
+
+    const timeA = this.receivedTime;
+    const timeB = this.formattedTime;
+
+    const today = new Date().toISOString().split('T')[0];
+    const dateA = new Date(`${today}T${timeA}`);
+    const dateB = new Date(`${today}T${timeB}`);
+
+    const diffMs = dateB - dateA;
+
+    const hours = Math.floor(diffMs / (1000 * 60 * 60));
+    const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diffMs % (1000 * 60)) / 1000);
+    const milliseconds = diffMs % 1000;
+
+    console.log(`Time difference: ${hours}h ${minutes}m ${seconds}s ${milliseconds}ms`);
+}
+
+subscribeToMessageChannel() {
+        if (!this.subscription) {
+            this.subscription = subscribe(
+                this.messageContext,
+                CLAIM_LOAD_TIME,
+                (message) => this.handleClaimTimeMessage(message)
+            );
+            console.log('LWC B: Unsubscribed from LMS channel.')
+        }
+    }
+
+backgroundProcessFinished() {
+        // ⭐ FINAL CRITICAL FIX: Defer the completion logic as well
+        // This ensures the completion check runs *after* any component re-initialization 
+        // and after the deferred LMS message has been processed.
+        Promise.resolve().then(() => {
+            
+            this.isLoadComplete = true;
+            console.log('LWC B (Deferred): COMPLETION SIGNAL RECEIVED. Load is now complete (isLoadComplete=true).');
+            
+            // Handshake Check 2: If the ID is already present, finalize now.
+            if (this.receivedRecordId) {
+                console.log('LWC B (Deferred): Handshake 2 complete (Load done, ID was present). Calling finalizeTime().');
+                this.finalizeTime();
+            } else {
+                // This state should now be impossible, as the LMS message handler is also deferred.
+                console.log('LWC B (Deferred): Load complete, but WAITING FOR ID via LMS.');
+            }
+        });
+    }
+
+    backgroundProcessFinished() {
+        this.isLoadComplete = true;
+        console.log('LWC B: COMPLETION SIGNAL RECEIVED. Load is now complete (isLoadComplete=true).');
+        
+        // Handshake Check 2: If the ID is already present, finalize now.
+        if (this.receivedRecordId) {
+            console.log('LWC B: Handshake 2 complete (Load done, ID was present). Calling finalizeTime().');
+            this.finalizeTime();
+        } else {
+            console.log('LWC B: Load complete, but WAITING FOR ID via LMS.');
+        }
+    }
+
+finalizeTime() {
+        if (!this.receivedRecordId) {
+            console.error('LWC B: CRITICAL ERROR - Cannot finalize. Record ID is null.');
+            return;
+        }
+        
+        console.log('LWC B: FINALIZING TIME CAPTURE. Sending recordId:', this.receivedRecordId); 
+
+        const claimEndTimeISO = new Date().toISOString(); 
+        
+        finalizeClaimLoadTime({ recordId: this.receivedRecordId, claimEndTime: claimEndTimeISO })
+            .then(() => {
+                console.log('LWC B: SUCCESS! Load time finalized and record updated.');
+                // Only unsubscribe ONCE the Apex update is confirmed successful.
+                this.unsubscribeFromMessageChannel(); 
+            })
+            .catch(error => {
+                console.error('LWC B ERROR: Finalizing Apex call failed. Full Error:', JSON.stringify(error));
+            });
+    }
+
+
+    unsubscribeFromMessageChannel() {
+        if (this.subscription) {
+            unsubscribe(this.subscription);
+            this.subscription = null;
+            console.log('LWC B: Unsubscribed from LMS channel.');
+        }
+    }
+*/
