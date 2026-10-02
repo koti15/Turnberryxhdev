@@ -39,6 +39,11 @@ The user confirmed the final two queried values for both Forms and Letters. All 
 
 Seven of sixteen Documents custom field values are captured from IMG_CC79B120-66C2-42C0-B5ED-BF2E4CC418D7.jpeg and IMG_280CA63E-6012-4FF6-AA7D-BCF3533D27CA.jpeg. See canonical recordInventories and generated configuration below. Nine fields remain unresolved, including the portable Master DeveloperName and clipped Selectable_Type__c. Forms and Letters remain 16/16 complete. No deployment.
 
+
+## Documents remaining columns captured — 2026-10-01, 8:03 PM CT
+
+IMG_78BFB5BB-59D1-4320-ADE7-4E874E9BB1A6.jpeg resolves eight more Documents field values in the canonical record. Documents is now 15/16; only CNC_Master_Attribute__c referenced DeveloperName remains pending. Do not request the other fifteen values again. Forms and Letters remain complete. No deployment.
+
 ## Evidence reconciliation — 2026-10-01, 7:14 PM CT
 
 The prior pending lists mixed uncaptured evidence with implementation work. Exact CNCGetCaseInfo formulas 1–13 and the User filter were already supplied in PENDING_WORK.md but had not been copied into the canonical specification. They are now reconciled in the canonical record and the complete configuration below. The 32 Output mapping paths, Options and prior zero-row Preview observation were already captured; do not request them again. Case Sub Entity and development Member Plan deployment checkpoints above remain valid; formula implementation is separate pending work.
@@ -2048,13 +2053,13 @@ Reconciled exact record, including newer captured formulas and User filter:
 
 ### customMetadataEvidence.recordInventories · CNC_Line_Attributes__mdt
 
-Forms and Letters: 16/16 custom field values captured; Documents: 7/16. Other records remain identity-only. Field schema editor settings and deployment are separate work.
+Forms and Letters: 16/16 custom field values captured; Documents: 15/16. Other records remain identity-only. Field schema editor settings and deployment are separate work.
 
 | DeveloperName | MasterLabel | Custom field capture |
 | --- | --- | --- |
 | Send_Communication_Case_Review | Send Communication Case Review | null — off-screen |
 | Send_Communication_Cover_Letter | Send Communication Cover Letter | null — off-screen |
-| Send_Communication_Documents | Send Communication Documents | 7/16 fields |
+| Send_Communication_Documents | Send Communication Documents | 15/16 fields |
 | Send_Communication_Email_Template | Send Communication Email Template | null — off-screen |
 | Send_Communication_Forms | Send Communication Forms | 16/16 fields |
 | Send_Communication_Letters | Send Communication Letters | 16/16 fields |
@@ -2069,18 +2074,18 @@ Forms and Letters: 16/16 custom field values captured; Documents: 7/16. Other re
 | CNC_Master_Attribute__c | {"referencedType":"CNC_Master_Attributes__mdt","developerName":"Send_Communication"} | {"referencedType":"CNC_Master_Attributes__mdt","developerName":"Send_Communication"} | null — unresolved |
 | Component_Name__c | "" — captured blank | "" — captured blank | "" — captured blank |
 | Component_Type__c | FlexCards | FlexCards | FlexCards |
-| isAccordian__c | false | false | null — unresolved |
+| isAccordian__c | false | false | false |
 | Is_Selectable__c | true | true | true |
 | Order__c | 1 | 1 | 7 |
 | Query_Clause__c | "" — captured blank | "" — captured blank | "" — captured blank |
 | Record_Limit_Per_Page__c | 50 | 50 | 50 |
 | Section_Name__c | Send Communication Forms | Send Communication Letters | Send Communication Documents |
-| Selectable_Type__c | Check Box | Radio | null — unresolved |
-| Show_Filter_By__c | true | true | null — unresolved |
-| Show_Pagination__c | true | true | null — unresolved |
-| Show_Row_Number__c | false | false | null — unresolved |
-| Show_Search__c | false | false | null — unresolved |
-| Show_ViewAll__c | false | false | null — unresolved |
-| UI_Type__c | Datatable | Datatable | null — unresolved |
+| Selectable_Type__c | Check Box | Radio | Check Box |
+| Show_Filter_By__c | true | true | true |
+| Show_Pagination__c | true | true | true |
+| Show_Row_Number__c | false | false | false |
+| Show_Search__c | false | false | false |
+| Show_ViewAll__c | false | false | false |
+| UI_Type__c | Datatable | Datatable | Datatable |
 
-Documents remaining: CNC_Master_Attribute__c, isAccordian__c, Selectable_Type__c, Show_Filter_By__c, Show_Pagination__c, Show_Row_Number__c, Show_Search__c, Show_ViewAll__c, UI_Type__c. Master DeveloperName must be verified; the displayed org ID alone is not a portable relationship definition. Selectable_Type__c is clipped. Forms/Letters final two values were user-confirmed as true and 50. Do not request completed fields again. No deployment claimed.
+Documents remaining: CNC_Master_Attribute__c referenced DeveloperName. Org ID shown in an earlier screenshot does not resolve portable relationship identity. Latest screenshot resolves the prior clipped Selectable_Type__c and seven off-screen fields. No deployment claimed.
