@@ -5,7 +5,7 @@
   "source": {
     "kind": "user-supplied-designer-screenshots",
     "capturedDate": "2026-10-01",
-    "latestScreenshot": "IMG_FFE73573-C622-4D49-A8AC-05A5CF638927.jpeg"
+    "latestScreenshot": "IMG_FF76DE60-C085-4B1E-BEB0-9F7A9707D0C3.jpeg"
   },
   "omniScript": {
     "displayName": "Send Communication",
@@ -2795,6 +2795,30 @@
       "Header/search record lists show names only and do not establish Send Communication membership or any field values.",
       "Record inventories are partial: clipped rows excluded; repeated visible rows deduplicated by DeveloperName.",
       "No LWC source received in this batch. MDT/LWC implementation remains deferred under existing scope."
+    ],
+    "unassignedQueryObservations": [
+      {
+        "evidenceScreenshot": "IMG_FF76DE60-C085-4B1E-BEB0-9F7A9707D0C3.jpeg",
+        "typeName": "CNC_Line_Attributes__mdt",
+        "visibleRowCount": 2,
+        "developerNameNotSelected": true,
+        "whereClauseCropped": true,
+        "recordAssociationVerified": false,
+        "commonVisibleValues": {
+          "Component_Name__c": "",
+          "Component_Type__c": "FlexCards",
+          "Order__c": 1,
+          "Query_Clause__c": ""
+        },
+        "masterRelationshipObservation": "Both rows show same reference ID; exact ID transcription and referenced DeveloperName unresolved",
+        "remainingRequestedFields": [
+          "DeveloperName",
+          "Is_Selectable__c",
+          "Record_Limit_Per_Page__c",
+          "CNC_Master_Attribute__r.DeveloperName"
+        ],
+        "captureDate": "2026-10-01"
+      }
     ]
   }
 }
