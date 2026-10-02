@@ -5,7 +5,7 @@
   "source": {
     "kind": "user-supplied-designer-screenshots",
     "capturedDate": "2026-10-01",
-    "latestScreenshot": "IMG_FF76DE60-C085-4B1E-BEB0-9F7A9707D0C3.jpeg"
+    "latestScreenshot": "IMG_54F0625D-D0F5-4CF5-8FB0-87CAA9385FAE.jpeg"
   },
   "omniScript": {
     "displayName": "Send Communication",
@@ -2687,24 +2687,28 @@
               "Show_Search__c": false,
               "Show_ViewAll__c": false,
               "UI_Type__c": "Datatable",
-              "isAccordian__c": false
+              "isAccordian__c": false,
+              "Component_Name__c": "",
+              "Component_Type__c": "FlexCards",
+              "Order__c": 1,
+              "Query_Clause__c": "",
+              "CNC_Master_Attribute__c": {
+                "referencedType": "CNC_Master_Attributes__mdt",
+                "developerName": "Send_Communication"
+              }
             },
             "qualifiedApiName": "Send_Communication_Forms",
             "evidenceScreenshots": [
               "IMG_2C1CBB84-957D-4F1F-9D80-B1395831EEB5.jpeg",
-              "IMG_FFE73573-C622-4D49-A8AC-05A5CF638927.jpeg"
+              "IMG_FFE73573-C622-4D49-A8AC-05A5CF638927.jpeg",
+              "IMG_54F0625D-D0F5-4CF5-8FB0-87CAA9385FAE.jpeg"
             ],
             "customFieldValuesComplete": false,
             "remainingCustomFields": [
-              "CNC_Master_Attribute__c",
-              "Component_Name__c",
-              "Component_Type__c",
               "Is_Selectable__c",
-              "Order__c",
-              "Query_Clause__c",
               "Record_Limit_Per_Page__c"
             ],
-            "captureNotes": "Record_Limit_Per_Page__c column is cut off at the left edge; visible trailing 0 does not establish its full value. This query selected Forms and Letters, not Documents."
+            "captureNotes": "Visible WHERE selects Forms and Letters; all shown scalar values and Master DeveloperName are identical in both rows, establishing association without row-order inference. 14/16 custom fields captured. Record_Limit_Per_Page__c and Is_Selectable__c remain absent."
           },
           {
             "developerName": "Send_Communication_Letters",
@@ -2720,24 +2724,28 @@
               "Show_Search__c": false,
               "Show_ViewAll__c": false,
               "UI_Type__c": "Datatable",
-              "isAccordian__c": false
+              "isAccordian__c": false,
+              "Component_Name__c": "",
+              "Component_Type__c": "FlexCards",
+              "Order__c": 1,
+              "Query_Clause__c": "",
+              "CNC_Master_Attribute__c": {
+                "referencedType": "CNC_Master_Attributes__mdt",
+                "developerName": "Send_Communication"
+              }
             },
             "qualifiedApiName": "Send_Communication_Letters",
             "evidenceScreenshots": [
               "IMG_2C1CBB84-957D-4F1F-9D80-B1395831EEB5.jpeg",
-              "IMG_FFE73573-C622-4D49-A8AC-05A5CF638927.jpeg"
+              "IMG_FFE73573-C622-4D49-A8AC-05A5CF638927.jpeg",
+              "IMG_54F0625D-D0F5-4CF5-8FB0-87CAA9385FAE.jpeg"
             ],
             "customFieldValuesComplete": false,
             "remainingCustomFields": [
-              "CNC_Master_Attribute__c",
-              "Component_Name__c",
-              "Component_Type__c",
               "Is_Selectable__c",
-              "Order__c",
-              "Query_Clause__c",
               "Record_Limit_Per_Page__c"
             ],
-            "captureNotes": "Record_Limit_Per_Page__c column is cut off at the left edge; visible trailing 0 does not establish its full value. This query selected Forms and Letters, not Documents."
+            "captureNotes": "Visible WHERE selects Forms and Letters; all shown scalar values and Master DeveloperName are identical in both rows, establishing association without row-order inference. 14/16 custom fields captured. Record_Limit_Per_Page__c and Is_Selectable__c remain absent."
           },
           {
             "developerName": "Send_Communication_POD",
@@ -2817,7 +2825,9 @@
           "Record_Limit_Per_Page__c",
           "CNC_Master_Attribute__r.DeveloperName"
         ],
-        "captureDate": "2026-10-01"
+        "captureDate": "2026-10-01",
+        "resolvedByScreenshot": "IMG_54F0625D-D0F5-4CF5-8FB0-87CAA9385FAE.jpeg",
+        "resolution": "Same query's visible Forms/Letters filter and identical values in both rows establish common values for both records. Master DeveloperName=Send_Communication; original reference ID not needed."
       }
     ]
   }
