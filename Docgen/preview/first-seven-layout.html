@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Send Communication ? captured seven-element layout</title>
+<style>
+*{box-sizing:border-box}body{font:15px system-ui,sans-serif;margin:0;background:#f3f5f7;color:#181818}header{background:white;border-bottom:1px solid #ddd;padding:20px 28px}h1{font-size:23px;margin:0 0 8px}header p{margin:0;color:#555}.layout{display:grid;grid-template-columns:310px 1fr;gap:24px;max-width:1280px;margin:28px auto;padding:0 24px}aside,.panel{background:#fff;border:1px solid #d8dde6;border-radius:6px;padding:24px}aside{align-self:start}h2{font-size:19px;margin:0 0 24px}h3{font-size:16px;margin:22px 0 12px}.tree{padding-left:24px}.tree li{padding:10px 0;font-size:14px}.tree small{display:block;color:#666;margin-top:5px}fieldset{border:0;padding:0;margin:0 0 25px}legend{font-weight:600;margin-bottom:12px}.choices{display:flex;gap:12px 26px;flex-wrap:wrap}.choices label{display:flex;align-items:center;gap:7px}.vertical{display:grid;gap:12px}.panel{margin-bottom:24px}.guidance{color:#555;margin:20px 0}.nav{display:flex;justify-content:flex-end;gap:10px;border-top:1px solid #ddd;margin-top:28px;padding-top:16px}button{border:1px solid #0176d3;border-radius:4px;background:white;color:#0176d3;padding:8px 18px;font:inherit}button.primary{background:#0176d3;color:white}button:disabled{opacity:.5;cursor:not-allowed}table{border-collapse:collapse;width:100%;margin:18px 0;border:1px solid #ddd}th,td{text-align:left;border-bottom:1px solid #ddd;padding:12px}th{background:#f3f3f3;font-size:13px}td.empty{text-align:center;color:#666;height:100px}.technical{font-size:13px;line-height:1.6;color:#555}.notice{background:#fff4ce;border-left:4px solid #d9a400;padding:14px 20px;max-width:1232px;margin:24px auto 0}.channel-note{font-size:12px;color:#666;margin:7px 0 18px}.upload{border:1px dashed #aaa;border-radius:4px;padding:22px;text-align:center}.placeholder{font-size:13px;color:#777;border-left:3px solid #ddd;padding:10px;margin:10px 0}.panel[hidden]{display:none}@media(max-width:800px){.layout{grid-template-columns:1fr}.notice{margin:20px 24px}}
+</style></head><body>
+<header><h1>Send Communication</h1><p>Captured layout for the first seven OmniScript elements</p></header>
+<div class="notice"><strong>Visual review only.</strong> This page is not a Salesforce Preview or a deployed OmniScript. It shows supplied display labels and layout; it does not infer stored values, defaults or execution settings. No Case data, uploads or actions run.</div>
+<div class="layout"><aside><h2>First seven elements</h2><ol class="tree">
+<li>IP-GETCaseDetails<small>CNC_GetCaseInformation ? CNCGetCaseInfo</small></li>
+<li>SV-InitialMapping</li>
+<li>MaterialAndCommunicationChannel</li>
+<li>SV-DefaultMapping</li>
+<li>ExtractEmailBodyForMMR<small>GetMMREmailTemplate</small></li>
+<li>IP-GetForms<small>CNC_GetEmailFormsDetails</small></li>
+<li>Step1<small>Forms / documents and upload layout</small></li>
+</ol><p class="technical">Actions and Set Values belong in the designer tree. The captured user-facing screens are elements 3 and 7.</p><button id="show-all">Show both screens</button></aside>
+<main><section class="panel" id="material"><h2>Material and Outbound Channel Selection</h2>
+<fieldset><legend>Material Type</legend><div class="vertical">
+<label><input type="radio" name="material"> Forms</label>
+<label><input type="radio" name="material"> Documents</label>
+<label><input type="radio" name="material"> Letters</label>
+<label><input type="radio" name="material"> Other Communication</label>
+<label><input type="radio" name="material"> Member Materials Request (MMR) Documents</label>
+</div></fieldset>
+<fieldset><legend>Outbound Channel</legend><div class="choices"><label><input type="radio" name="channel1"> Email</label><label><input type="radio" name="channel1"> Print</label></div><p class="channel-note">Captured condition: MaterialType &lt;&gt; Letters</p></fieldset>
+<fieldset><legend>Outbound Channel</legend><div class="choices"><label><input type="radio" name="channel2"> Email</label><label><input type="radio" name="channel2"> Print</label></div><p class="channel-note">Captured condition: MaterialType = Letters</p></fieldset>
+<p class="guidance">Ensure Email is selected only for Non-PHI Blank Forms and Documents</p>
+<p class="technical">Both channel controls are shown for evidence review. Original visibility configuration and stored values remain unresolved. The case-owner message text is not captured and is not invented here.</p>
+<div class="nav"><button class="primary" id="next">Next</button></div></section>
+<section class="panel" id="forms"><h2>Select Forms</h2><h3>Select Documents</h3>
+<div class="placeholder">Messaging12 ? Messaging13 ? LineBreak13 ? positions captured; content/type still unverified.</div>
+<div><table aria-label="Captured forms-table columns"><thead><tr><th>Department</th><th>Group</th><th>Form / Document</th></tr></thead><tbody><tr><td colspan="3" class="empty">No runtime data loaded in this visual review.</td></tr></tbody></table></div>
+<div class="placeholder">LineBreak14 ? position captured; type still unverified.</div>
+<h3>Upload Forms/Documents - PDF documents only<br>(If Applicable)</h3>
+<div class="upload"><button disabled>Upload PDF</button></div>
+<p class="guidance">Ensure Email is selected only for Non-PHI Forms</p>
+<p class="guidance">Ensure Email is selected only for Non-PHI Document</p>
+<p class="technical">This combines captured Forms/Documents labels to review order. Exact heading identities/types and visibility are unresolved; this is not proof both headings appear together at runtime.</p>
+<div class="nav"><button id="previous">Previous</button><button class="primary" disabled>Next</button></div></section></main></div>
+<script>const material=document.getElementById('material'),forms=document.getElementById('forms');document.getElementById('next').onclick=()=>{material.hidden=true;forms.hidden=false;forms.scrollIntoView({behavior:'smooth'})};document.getElementById('previous').onclick=()=>{material.hidden=false;forms.hidden=true;material.scrollIntoView({behavior:'smooth'})};document.getElementById('show-all').onclick=()=>{material.hidden=false;forms.hidden=false};</script>
+</body></html>
