@@ -216,3 +216,7 @@ Use exact authorized org/source or new screenshots to resolve gaps. Keep unknown
 ## Case Sub Entity implementation checkpoint
 
 Object and 26 captured custom fields deployed successfully to myProdOrg, job `0Afbm00000hoDJ4CAM`. See [CODEX_HANDOFF.md](CODEX_HANDOFF.md) and deployment result. Member Plan lookup and old URIText spelling remain unresolved. Connected-user field access remains pending; automatic review rejected permission-set creation/deployment. No formula/runtime completion is claimed.
+
+## Member Plan checkpoint
+
+Created development Member_Plan__c target and Case_Sub_Entity__c.Member_Plan__c lookup in myProdOrg; deployment `0Afbm00000hr962CAA` succeeded, 2/2 components. Missing target/lookup blocker resolved for development. Original Member Plan schema is still uncaptured; development choices are recorded in the handoff. Case Sub Entity has 27 deployed custom fields. Field access and all unrelated OmniScript gaps remain pending.

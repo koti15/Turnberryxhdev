@@ -1,0 +1,23 @@
+{
+  "status": "Succeeded",
+  "deployId": "0Afbm00000hr962CAA",
+  "targetAlias": "myProdOrg",
+  "targetOrgId": "00Dbm00000phCerEAE",
+  "components": [
+    {
+      "name": "Member_Plan__c",
+      "id": "01Ibm00000DBOltEAH"
+    },
+    {
+      "name": "Case_Sub_Entity__c.Member_Plan__c",
+      "id": "00Nbm00003WwMozEAF"
+    }
+  ],
+  "numberComponentsDeployed": 2,
+  "numberComponentErrors": 0,
+  "referenceTo": "Member_Plan__c",
+  "relationshipName": "Case_Sub_Entity",
+  "relationshipLabel": "Case Sub Entity",
+  "developmentChoices": "Original target schema/API absent. User authorized creation. New Member_Plan__c object, Text name field, ReadWrite sharing; optional SetNull lookup. No additional business fields fabricated.",
+  "runtimeVerified": false
+}
