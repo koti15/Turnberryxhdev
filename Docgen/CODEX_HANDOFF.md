@@ -54,6 +54,11 @@ Seven of sixteen Documents custom field values are captured from IMG_CC79B120-66
 
 IMG_78BFB5BB-59D1-4320-ADE7-4E874E9BB1A6.jpeg resolves eight more Documents field values in the canonical record. Documents is now 15/16; only CNC_Master_Attribute__c referenced DeveloperName remains pending. Do not request the other fifteen values again. Forms and Letters remain complete. No deployment.
 
+
+## Forms, Letters and Documents record values complete — 2026-10-01, 8:05 PM CT
+
+IMG_1DEB262E-FB1F-4515-9017-91CB1384832F.jpeg confirms Documents references CNC_Master_Attributes__mdt.Send_Communication. All sixteen custom field values for each of Forms, Letters and Documents are now captured. This supersedes earlier pending lists for these three records. Do not request these values again. Remaining MDT work includes linked Header/Button/Search records, Master record settings/schema, missing Search and Website schema details and required field editor settings. No deployment claimed.
+
 ## Evidence reconciliation — 2026-10-01, 7:14 PM CT
 
 The prior pending lists mixed uncaptured evidence with implementation work. Exact CNCGetCaseInfo formulas 1–13 and the User filter were already supplied in PENDING_WORK.md but had not been copied into the canonical specification. They are now reconciled in the canonical record and the complete configuration below. The 32 Output mapping paths, Options and prior zero-row Preview observation were already captured; do not request them again. Case Sub Entity and development Member Plan deployment checkpoints above remain valid; formula implementation is separate pending work.
@@ -2063,13 +2068,13 @@ Reconciled exact record, including newer captured formulas and User filter:
 
 ### customMetadataEvidence.recordInventories · CNC_Line_Attributes__mdt
 
-Forms and Letters: 16/16 custom field values captured; Documents: 15/16. Other records remain identity-only. Field schema editor settings and deployment are separate work.
+Forms, Letters and Documents: 16/16 custom field values captured for each. Other records remain identity-only. Field schema editor settings and deployment are separate work.
 
 | DeveloperName | MasterLabel | Custom field capture |
 | --- | --- | --- |
 | Send_Communication_Case_Review | Send Communication Case Review | null — off-screen |
 | Send_Communication_Cover_Letter | Send Communication Cover Letter | null — off-screen |
-| Send_Communication_Documents | Send Communication Documents | 15/16 fields |
+| Send_Communication_Documents | Send Communication Documents | 16/16 fields |
 | Send_Communication_Email_Template | Send Communication Email Template | null — off-screen |
 | Send_Communication_Forms | Send Communication Forms | 16/16 fields |
 | Send_Communication_Letters | Send Communication Letters | 16/16 fields |
@@ -2081,7 +2086,7 @@ Forms and Letters: 16/16 custom field values captured; Documents: 15/16. Other r
 
 | Field | Forms | Letters | Documents |
 | --- | --- | --- | --- |
-| CNC_Master_Attribute__c | {"referencedType":"CNC_Master_Attributes__mdt","developerName":"Send_Communication"} | {"referencedType":"CNC_Master_Attributes__mdt","developerName":"Send_Communication"} | null — unresolved |
+| CNC_Master_Attribute__c | {"referencedType":"CNC_Master_Attributes__mdt","developerName":"Send_Communication"} | {"referencedType":"CNC_Master_Attributes__mdt","developerName":"Send_Communication"} | {"referencedType":"CNC_Master_Attributes__mdt","developerName":"Send_Communication"} |
 | Component_Name__c | "" — captured blank | "" — captured blank | "" — captured blank |
 | Component_Type__c | FlexCards | FlexCards | FlexCards |
 | isAccordian__c | false | false | false |
@@ -2098,4 +2103,4 @@ Forms and Letters: 16/16 custom field values captured; Documents: 15/16. Other r
 | Show_ViewAll__c | false | false | false |
 | UI_Type__c | Datatable | Datatable | Datatable |
 
-Documents remaining: CNC_Master_Attribute__c referenced DeveloperName. Org ID shown in an earlier screenshot does not resolve portable relationship identity. Latest screenshot resolves the prior clipped Selectable_Type__c and seven off-screen fields. No deployment claimed.
+Remaining custom field values for these three records: none. All reference Master DeveloperName Send_Communication. Documents relationship explicitly verified by IMG_1DEB262E-FB1F-4515-9017-91CB1384832F.jpeg. Forms/Letters final selectable/page-limit values were user-confirmed. Do not request completed values again. No deployment claimed.
