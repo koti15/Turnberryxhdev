@@ -8,6 +8,24 @@ The prior pending lists mixed uncaptured evidence with implementation work. Exac
 
 Historical statements below that all formula expressions are null or User filter quoting is missing describe the earlier checkpoint and are superseded by this reconciliation. Before any further screenshot request, audit existing evidence and name the exact absent property. Do not mark captured-but-unimplemented work as missing evidence.
 
+## Audit of all seven requested areas — 2026-10-01, 7:16 PM CT
+
+Checked canonical JSON, PENDING_WORK.md, CODEX_HANDOFF.md, OMNISCRIPT_STATUS.md and OmniScript_SetValues.md. This audit concerns existing recorded evidence, not a claim of complete screenshot coverage or runtime behavior.
+
+| # | Area | Already captured; do not request again | Specific remaining evidence / work |
+| --- | --- | --- | --- |
+| 1 | IP-GETCaseDetails | Action name/label, CNC_GetCaseInformation reference, Default invoke mode; IP DR action's caseId input and response node | OmniScript action input/response wiring and execution condition are still null. IP DR response settings do not establish OmniScript action settings. Case launcher also unresolved. |
+| 2 | SV-InitialMapping | Owner-comparison assignment, exact expression and Use Expression=true | Assignment is recorded as configured. No specific missing assignment identified. Verify implementation from source; only element-level conditions/list coverage remain unverified. Do not request the assignment again. |
+| 3 | MaterialAndCommunicationChannel | Title, display choices, both Email/Print rows and four condition tooltip texts | Child control names/types, option stored values/defaults, condition types and blank first comparison value of guidance remain unverified. Message condition is captured; message content/enforcement is not. Request only the absent properties, not all choices/conditions again. |
+| 4 | SV-DefaultMapping | All 16 assignment names/displayed values; seven have captured mode settings and are recorded as configured | Nine summary-only assignments still have useExpression=null; verify their editor modes, not their values again. Runtime type of literal false and subscription token source verification are separate gaps. |
+| 5 | MMR email | Action/mapper names, DeveloperName input, displayed MMR_EMAIL_TEMPLATE literal; EmailTemplate extraction and HtmlValue/Subject output paths | Actual template content, exact literal interpretation, action response/conditions and mapper options remain uncaptured. Do not request already captured output paths. |
+| 6 | Forms dependencies | IP four-element order, action settings/response, Header mapper 11 formulas/46 mappings/Options, links eight mappings and displayed filter sequence | Profile source step, details/purpose of two blank-source output rows and links OR/AND grouping/false literal semantics remain unresolved. MDT/LWC implementation deferred. |
+| 7 | Step1 | Eleven visible layout items, known child names, Step basic settings, both LWC names and captured input properties | Unnamed headings/guidance identities/types, messaging/line-break properties, remaining Step settings and conditions remain absent. LWC inputs must not be requested again; source/dependencies are deferred. |
+
+CNCGetCaseInfo formulas 1–13, User filter, 32 Output mappings and Options are captured and reconciled. Formula implementation is separate pending work. Case Sub Entity and development Member Plan have recorded successful deployment checkpoints. Neither should be requested again as missing captures.
+
+Before requesting images, name the absent field and its existing evidence path. Generic "complete=false", unvalidated behavior or historical blockers alone do not justify another capture request.
+
 ## Current user instruction: build and deploy the captured portion
 
 On 2026-10-01 the user explicitly instructed: "Give then what ever you had so codex will deploy to my org".
