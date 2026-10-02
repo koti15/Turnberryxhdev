@@ -99,6 +99,11 @@ Nine Header records (three each for Forms/Documents/Letters) are captured from t
 
 New Header screenshots used CNC_Line_Attributes__r.DeveloperName IN ('Documents_Department','Forms_Department','Letters_Department'), rather than filtering Header DeveloperName directly. Six different Header identities returned; their relationship cells are blank, and they do not resolve the three pending Department labels. Preserve the scoped observation in canonical queryResults; do not apply these rows to Forms/Documents/Letters. Correct query: SELECT DeveloperName, Response_Label__c FROM CNC_Header_Attribute__mdt WHERE DeveloperName IN ('Documents_Department','Forms_Department','Letters_Department'). Master query confirms Send_Communication identity, label Send Communication, en_US and blank namespace; custom fields remain off-screen. Continue by scrolling its result right. No deployment.
 
+
+## All nine section Header records complete — 2026-10-01, 8:19 PM CT
+
+IMG_E72A1B8D-3153-4D59-AE16-CA98F13660EB.jpeg directly queries Header DeveloperName and confirms Response_Label__c=Department for Documents_Department, Forms_Department and Letters_Department. All nine Header records linked to Forms/Documents/Letters now have all nine custom field values captured. Prior clipped-label and incorrect-filter checkpoints are superseded for these labels. Do not request these values again. Forms/Documents/Letters Line records remain 16/16 complete; scoped Button/Search zero results remain captured. Next: Master Send_Communication custom settings, still off-screen. No deployment claimed.
+
 ## Current scope
 
 The user authorized further development of missing components except LWCs and custom metadata (MDT). Those dependencies remain deferred, not resolved. Correct the existing inactive v4 draft in myProdOrg; do not create another skeleton. This documentation update does not deploy anything. Previously deployed configuration is partial and has not been runtime validated.
