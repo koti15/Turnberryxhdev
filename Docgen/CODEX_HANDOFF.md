@@ -44,6 +44,10 @@ Two Inspector result screenshots identify 11 Send Communication Line records, in
 
 New Inspector screenshots query Send_Communication_Forms and Send_Communication_Letters, not Documents. Nine custom fields per record are now captured in the canonical record. Forms uses Selectable_Type__c="Check Box"; Letters uses "Radio"; both show Filter By and Pagination=true, Row Number/Search/ViewAll=false, UI_Type__c="Datatable", isAccordian__c=false and matching Section_Name__c values. Seven other custom fields remain off-screen or clipped. Record_Limit_Per_Page__c's trailing visible 0 must not be treated as its complete value. Documents custom values are still uncaptured. No records are deployed by this update.
 
+## Unassigned Line query observation — 2026-10-01, 7:53 PM CT
+
+IMG_FF76DE60-C085-4B1E-BEB0-9F7A9707D0C3.jpeg shows two rows with Component_Name__c and Query_Clause__c blank, Component_Type__c=FlexCards and Order__c=1. Both share a Master reference. DeveloperName is omitted and WHERE clause is cropped, so do not merge these values into specific records yet. Next capture must include DeveloperName plus Is_Selectable__c, Record_Limit_Per_Page__c and the Master's DeveloperName. Observation preserved in canonical customMetadataEvidence.unassignedQueryObservations; no deployment.
+
 ## Current user instruction: build and deploy the captured portion
 
 On 2026-10-01 the user explicitly instructed: "Give then what ever you had so codex will deploy to my org".
@@ -2032,3 +2036,16 @@ Partial record inventory; namespace blank and language en_US are captured. `null
 | isAccordian__c | false | false |
 
 Remaining custom fields for each: CNC_Master_Attribute__c, Component_Name__c, Component_Type__c, Is_Selectable__c, Order__c, Query_Clause__c, Record_Limit_Per_Page__c. Record_Limit_Per_Page__c is clipped; exact value unresolved. Source screenshots: IMG_2C1CBB84-957D-4F1F-9D80-B1395831EEB5.jpeg; IMG_FFE73573-C622-4D49-A8AC-05A5CF638927.jpeg. QualifiedApiName equals captured DeveloperName for both records. Inventory and custom value coverage remain incomplete.
+
+### customMetadataEvidence.unassignedQueryObservations
+
+Source: IMG_FF76DE60-C085-4B1E-BEB0-9F7A9707D0C3.jpeg. Two visible rows; DeveloperName absent; WHERE cropped; record association unverified. Same Master reference visible but exact ID/name unresolved.
+
+| Field | Value in both rows |
+| --- | --- |
+| Component_Name__c | captured blank |
+| Component_Type__c | FlexCards |
+| Order__c | 1 |
+| Query_Clause__c | captured blank |
+
+Do not assign to Forms/Letters until record identity is captured. Missing: DeveloperName, Is_Selectable__c, Record_Limit_Per_Page__c and CNC_Master_Attribute__r.DeveloperName.
