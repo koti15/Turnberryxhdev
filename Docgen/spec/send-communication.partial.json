@@ -2633,6 +2633,246 @@
             "developerName": "Auth_CaseNumber",
             "label": "Auth_CaseNumber",
             "fieldValues": null
+          },
+          {
+            "developerName": "Documents_Department",
+            "label": "Documents Department",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": {
+              "API_Response__c": "department",
+              "CNC_Line_Attributes__c": {
+                "referencedType": "CNC_Line_Attributes__mdt",
+                "developerName": "Send_Communication_Documents"
+              },
+              "Column_Order__c": 1,
+              "Data_Type__c": "text",
+              "Default_Value__c": "",
+              "Help_Text__c": "",
+              "Is_Sortable__c": true,
+              "Response_Label__c": null,
+              "Wrap_Text__c": false
+            },
+            "customFieldValuesComplete": false,
+            "remainingCustomFields": [
+              "Response_Label__c"
+            ],
+            "evidenceScreenshots": [
+              "IMG_DEC6A101-0268-49B2-9E71-1A4F3C201D88.jpeg"
+            ],
+            "captureNotes": "Response_Label__c text is clipped; preserve null until exact full value is captured."
+          },
+          {
+            "developerName": "Documents_Group",
+            "label": "Documents Group",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": {
+              "API_Response__c": "group",
+              "CNC_Line_Attributes__c": {
+                "referencedType": "CNC_Line_Attributes__mdt",
+                "developerName": "Send_Communication_Documents"
+              },
+              "Column_Order__c": 2,
+              "Data_Type__c": "text",
+              "Default_Value__c": "",
+              "Help_Text__c": "",
+              "Is_Sortable__c": true,
+              "Response_Label__c": "Group",
+              "Wrap_Text__c": false
+            },
+            "customFieldValuesComplete": true,
+            "remainingCustomFields": [],
+            "evidenceScreenshots": [
+              "IMG_DEC6A101-0268-49B2-9E71-1A4F3C201D88.jpeg"
+            ],
+            "captureNotes": "All nine custom field values visible. Exact casing preserved."
+          },
+          {
+            "developerName": "Documents_Name",
+            "label": "Documents Name",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": {
+              "API_Response__c": "label",
+              "CNC_Line_Attributes__c": {
+                "referencedType": "CNC_Line_Attributes__mdt",
+                "developerName": "Send_Communication_Documents"
+              },
+              "Column_Order__c": 3,
+              "Data_Type__c": "text",
+              "Default_Value__c": "",
+              "Help_Text__c": "",
+              "Is_Sortable__c": true,
+              "Response_Label__c": "Document",
+              "Wrap_Text__c": false
+            },
+            "customFieldValuesComplete": true,
+            "remainingCustomFields": [],
+            "evidenceScreenshots": [
+              "IMG_DEC6A101-0268-49B2-9E71-1A4F3C201D88.jpeg"
+            ],
+            "captureNotes": "All nine custom field values visible. Exact casing preserved."
+          },
+          {
+            "developerName": "Forms_Department",
+            "label": "Forms Department",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": {
+              "API_Response__c": "department",
+              "CNC_Line_Attributes__c": {
+                "referencedType": "CNC_Line_Attributes__mdt",
+                "developerName": "Send_Communication_Forms"
+              },
+              "Column_Order__c": 1,
+              "Data_Type__c": "text",
+              "Default_Value__c": "",
+              "Help_Text__c": "",
+              "Is_Sortable__c": true,
+              "Response_Label__c": null,
+              "Wrap_Text__c": false
+            },
+            "customFieldValuesComplete": false,
+            "remainingCustomFields": [
+              "Response_Label__c"
+            ],
+            "evidenceScreenshots": [
+              "IMG_DEC6A101-0268-49B2-9E71-1A4F3C201D88.jpeg"
+            ],
+            "captureNotes": "Response_Label__c text is clipped; preserve null until exact full value is captured."
+          },
+          {
+            "developerName": "Forms_Group",
+            "label": "Forms Group",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": {
+              "API_Response__c": "group",
+              "CNC_Line_Attributes__c": {
+                "referencedType": "CNC_Line_Attributes__mdt",
+                "developerName": "Send_Communication_Forms"
+              },
+              "Column_Order__c": 2,
+              "Data_Type__c": "text",
+              "Default_Value__c": "",
+              "Help_Text__c": "",
+              "Is_Sortable__c": true,
+              "Response_Label__c": "Group",
+              "Wrap_Text__c": false
+            },
+            "customFieldValuesComplete": true,
+            "remainingCustomFields": [],
+            "evidenceScreenshots": [
+              "IMG_DEC6A101-0268-49B2-9E71-1A4F3C201D88.jpeg"
+            ],
+            "captureNotes": "All nine custom field values visible. Exact casing preserved."
+          },
+          {
+            "developerName": "Forms_Name",
+            "label": "Forms Name",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": {
+              "API_Response__c": "label",
+              "CNC_Line_Attributes__c": {
+                "referencedType": "CNC_Line_Attributes__mdt",
+                "developerName": "Send_Communication_Forms"
+              },
+              "Column_Order__c": 3,
+              "Data_Type__c": "text",
+              "Default_Value__c": "",
+              "Help_Text__c": "",
+              "Is_Sortable__c": true,
+              "Response_Label__c": "Form",
+              "Wrap_Text__c": false
+            },
+            "customFieldValuesComplete": true,
+            "remainingCustomFields": [],
+            "evidenceScreenshots": [
+              "IMG_DEC6A101-0268-49B2-9E71-1A4F3C201D88.jpeg"
+            ],
+            "captureNotes": "All nine custom field values visible. Exact casing preserved."
+          },
+          {
+            "developerName": "Letters_Department",
+            "label": "Letters Department",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": {
+              "API_Response__c": "department",
+              "CNC_Line_Attributes__c": {
+                "referencedType": "CNC_Line_Attributes__mdt",
+                "developerName": "Send_Communication_Letters"
+              },
+              "Column_Order__c": 1,
+              "Data_Type__c": "text",
+              "Default_Value__c": "",
+              "Help_Text__c": "",
+              "Is_Sortable__c": true,
+              "Response_Label__c": null,
+              "Wrap_Text__c": false
+            },
+            "customFieldValuesComplete": false,
+            "remainingCustomFields": [
+              "Response_Label__c"
+            ],
+            "evidenceScreenshots": [
+              "IMG_DEC6A101-0268-49B2-9E71-1A4F3C201D88.jpeg"
+            ],
+            "captureNotes": "Response_Label__c text is clipped; preserve null until exact full value is captured."
+          },
+          {
+            "developerName": "Letters_Group",
+            "label": "Letters Group",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": {
+              "API_Response__c": "group",
+              "CNC_Line_Attributes__c": {
+                "referencedType": "CNC_Line_Attributes__mdt",
+                "developerName": "Send_Communication_Letters"
+              },
+              "Column_Order__c": 2,
+              "Data_Type__c": "text",
+              "Default_Value__c": "",
+              "Help_Text__c": "",
+              "Is_Sortable__c": true,
+              "Response_Label__c": "Group",
+              "Wrap_Text__c": false
+            },
+            "customFieldValuesComplete": true,
+            "remainingCustomFields": [],
+            "evidenceScreenshots": [
+              "IMG_DEC6A101-0268-49B2-9E71-1A4F3C201D88.jpeg"
+            ],
+            "captureNotes": "All nine custom field values visible. Exact casing preserved."
+          },
+          {
+            "developerName": "Letters_Name",
+            "label": "Letters Name",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": {
+              "API_Response__c": "Name",
+              "CNC_Line_Attributes__c": {
+                "referencedType": "CNC_Line_Attributes__mdt",
+                "developerName": "Send_Communication_Letters"
+              },
+              "Column_Order__c": 3,
+              "Data_Type__c": "text",
+              "Default_Value__c": "",
+              "Help_Text__c": "",
+              "Is_Sortable__c": true,
+              "Response_Label__c": "Letter",
+              "Wrap_Text__c": false
+            },
+            "customFieldValuesComplete": true,
+            "remainingCustomFields": [],
+            "evidenceScreenshots": [
+              "IMG_DEC6A101-0268-49B2-9E71-1A4F3C201D88.jpeg"
+            ],
+            "captureNotes": "All nine custom field values visible. Exact casing preserved."
           }
         ],
         "evidenceScreenshots": [
@@ -2873,6 +3113,48 @@
         "captureDate": "2026-10-01",
         "resolvedByScreenshot": "IMG_54F0625D-D0F5-4CF5-8FB0-87CAA9385FAE.jpeg",
         "resolution": "Same query's visible Forms/Letters filter and identical values in both rows establish common values for both records. Master DeveloperName=Send_Communication; original reference ID not needed."
+      }
+    ],
+    "queryResults": [
+      {
+        "key": "CNC_Button_Attribute__mdt:Forms/Documents/Letters",
+        "typeName": "CNC_Button_Attribute__mdt",
+        "filter": {
+          "relationship": "CNC_Line_Attributes__r.DeveloperName",
+          "values": [
+            "Send_Communication_Forms",
+            "Send_Communication_Documents",
+            "Send_Communication_Letters"
+          ]
+        },
+        "limit": 150,
+        "returnedRecordCount": 0,
+        "observedMessage": "No data exported.",
+        "evidenceScreenshots": [
+          "IMG_64680B13-27CC-4331-9C13-B8AD9C04A18A.jpeg"
+        ],
+        "captureCompleteForQuery": true,
+        "scopeNote": "Zero rows for this exact query in the photographed source org. Does not imply no records globally or no Master-level Button records."
+      },
+      {
+        "key": "CNC_Search_Attributes__mdt:Forms/Documents/Letters",
+        "typeName": "CNC_Search_Attributes__mdt",
+        "filter": {
+          "relationship": "CNC_Line_Attributes__r.DeveloperName",
+          "values": [
+            "Send_Communication_Forms",
+            "Send_Communication_Documents",
+            "Send_Communication_Letters"
+          ]
+        },
+        "limit": 150,
+        "returnedRecordCount": 0,
+        "observedMessage": "No data exported.",
+        "evidenceScreenshots": [
+          "IMG_86C6FFA9-9D4A-49B2-B4F7-6C3BA24B8DE3.jpeg"
+        ],
+        "captureCompleteForQuery": true,
+        "scopeNote": "Zero rows for this exact query in the photographed source org. Does not imply no records globally or no Master-level Button records."
       }
     ]
   }
