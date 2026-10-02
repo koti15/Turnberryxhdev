@@ -2,6 +2,11 @@
 
 Updated 2026-10-01. Status: pending evidence or implementation, not completed. See [CODEX_HANDOFF.md](CODEX_HANDOFF.md) for the working record and [deployment/captured-audit.json](deployment/captured-audit.json) for the detailed deployment blockers.
 
+## Forms/Letters all captured values deployed ? 2026-10-01
+
+Applied user-confirmed Is_Selectable__c=true and Record_Limit_Per_Page__c=50 to both records, deployment 0Afbm00000hrVuXCAU Succeeded, 2/2, zero errors. Independently queried both values and retained prior 14-value verification: all 16 captured custom values now verified. Forms ID m07bm00001KldNeAAJ; Letters ID m07bm00001KldNfAAJ. Prior two-field-missing statements below are historical and superseded; do not request these values again. Result: deployment/mdt-forms-letters-completion.json. Documents and Header/Button/Search record values, Search four remaining fields, Website schema/records, full original Master schema and Header Type_Attribute_Target__c mismatch remain pending. Script inactive; both scoped Step1 LWCs enabled. Full original LWC integrations remain pending.
+
+
 ## Latest LWC / MDT scope update ? 2026-10-01
 
 User now authorizes LWC and MDT implementation. Previous exclusions below are historical. Both Step1 LWCs deployed as scoped SelectForms/PDF-upload adaptations from source supplied in org comments; full originals preserved, broader missing integrations remain pending. Existing LWC children enabled, script inactive. 29 captured MDT fields deployed across four types. Remaining: Master relationship target/schema, three Line picklist value sets, four uncaptured Search fields, Internal/External Website schema, Header Type_Attribute_Target__c discrepancy and actual MDT record field values (captured names alone are not records). See CODEX_HANDOFF.md latest implementation checkpoint and deployment results. No need to resend either LWC source.

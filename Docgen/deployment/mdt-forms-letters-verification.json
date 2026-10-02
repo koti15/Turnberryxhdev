@@ -19,7 +19,9 @@
       "Query_Clause__c": null,
       "CNC_Master_Attribute__r": {
         "DeveloperName": "Send_Communication"
-      }
+      },
+      "Is_Selectable__c": true,
+      "Record_Limit_Per_Page__c": 50
     },
     {
       "Id": "m07bm00001KldNfAAJ",
@@ -39,13 +41,13 @@
       "Query_Clause__c": null,
       "CNC_Master_Attribute__r": {
         "DeveloperName": "Send_Communication"
-      }
+      },
+      "Is_Selectable__c": true,
+      "Record_Limit_Per_Page__c": 50
     }
   ],
-  "verifiedCustomValuesPerRecord": 14,
-  "unknownFields": [
-    "Is_Selectable__c",
-    "Record_Limit_Per_Page__c"
-  ],
-  "fullMasterSchemaUncaptured": true
+  "verifiedCustomValuesPerRecord": 16,
+  "unknownFields": [],
+  "fullMasterSchemaUncaptured": true,
+  "lastDeploymentId": "0Afbm00000hrVuXCAU"
 }

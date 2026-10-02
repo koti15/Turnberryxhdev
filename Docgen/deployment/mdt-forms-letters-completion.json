@@ -1,0 +1,18 @@
+{
+  "id": "0Afbm00000hrVuXCAU",
+  "status": "Succeeded",
+  "numberComponentsDeployed": 2,
+  "numberComponentErrors": 0,
+  "targetOrgId": "00Dbm00000phCerEAE",
+  "updatedRecords": [
+    {
+      "name": "Send_Communication_Forms",
+      "id": "m07bm00001KldNeAAJ"
+    },
+    {
+      "name": "Send_Communication_Letters",
+      "id": "m07bm00001KldNfAAJ"
+    }
+  ],
+  "verification": "Both Is_Selectable__c=true and Record_Limit_Per_Page__c=50 independently queried; combined with prior 14-value verification, all 16 captured fields verified."
+}
