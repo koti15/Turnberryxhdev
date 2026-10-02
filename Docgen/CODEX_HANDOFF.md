@@ -36,6 +36,10 @@ Remaining MDT evidence: Search's other four fields; Internal/External Website fi
 
 No LWC source is supplied in this batch. LWC/MDT implementation remains deferred under the existing scope.
 
+## Send Communication Line record identities — 2026-10-01, 7:48 PM CT
+
+Two Inspector result screenshots identify 11 Send Communication Line records, including exact DeveloperNames Send_Communication_Forms and Send_Communication_Documents. These identities are now recorded under canonical customMetadataEvidence.recordInventories. Visible language is en_US and namespace column is blank. Custom configuration columns are off-screen, so fieldValues remain null. This batch does not resolve record settings or deploy records. Next query can restrict DeveloperName to those two records and capture custom fields without repeating the unrelated rows.
+
 ## Current user instruction: build and deploy the captured portion
 
 On 2026-10-01 the user explicitly instructed: "Give then what ever you had so codex will deploy to my org".
@@ -1992,3 +1996,21 @@ Reconciled exact record, including newer captured formulas and User filter:
 5. Record inventories are partial: clipped rows excluded; repeated visible rows deduplicated by DeveloperName.
 6. No LWC source received in this batch. MDT/LWC implementation remains deferred under existing scope.
 
+
+### customMetadataEvidence.recordInventories · CNC_Line_Attributes__mdt
+
+Visible filtered record identities only; custom field values remain unresolved. Source: IMG_7B24DFE5-CA6C-4596-AC0B-580DC6B72D07.jpeg and IMG_49C41762-E981-441C-BD19-A5F17D4BCC28.jpeg. Inventory completeness=false; language=en_US; NamespacePrefix=captured blank for visible rows.
+
+| DeveloperName | MasterLabel | Custom field values |
+| --- | --- | --- |
+| Send_Communication_Case_Review | Send Communication Case Review | null — off-screen |
+| Send_Communication_Cover_Letter | Send Communication Cover Letter | null — off-screen |
+| Send_Communication_Documents | Send Communication Documents | null — off-screen |
+| Send_Communication_Email_Template | Send Communication Email Template | null — off-screen |
+| Send_Communication_Forms | Send Communication Forms | null — off-screen |
+| Send_Communication_Letters | Send Communication Letters | null — off-screen |
+| Send_Communication_POD | Send Communication POD | null — off-screen |
+| Send_Communication_Paragraph | Send Communication Paragraph | null — off-screen |
+| Send_Communication_Review | Send Communication Review | null — off-screen |
+| Send_Communication_Review_POD | Send Communication Review POD | null — off-screen |
+| Send_Communication_Select_Entity | Send Communication Select Entity | null — off-screen |
