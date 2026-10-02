@@ -2,6 +2,11 @@
 
 Updated 2026-10-01. Status: pending evidence or implementation, not completed. See [CODEX_HANDOFF.md](CODEX_HANDOFF.md) for the working record and [deployment/captured-audit.json](deployment/captured-audit.json) for the detailed deployment blockers.
 
+## Documents 15 captured values deployed ? 2026-10-01
+
+Applied latest 8eb3c22 evidence to the same Documents record. Deployment 0Afbm00000hr02kCAA Succeeded; independently verified all 15 captured scalar values. Only CNC_Master_Attribute__c portable reference remains uncaptured. Prior seven-value/nine-missing checkpoint is superseded. Other Header/Button/Search record values and uncaptured schema/full original LWC dependencies remain pending. Both scoped Step1 LWCs deployed and enabled; script inactive.
+
+
 ## Documents partial record deployed ? 2026-10-01
 
 Merged latest Documents evidence (main 4d31ba9). Created CNC_Line_Attributes.Send_Communication_Documents with seven captured values only; independently verified all seven. Job 0Afbm00000hrWDtCAM Succeeded, record ID m07bm00001Km1sXAAR. Nine fields remain uncaptured, including portable Master reference, selectable/UI type and display flags; no Forms/Letters settings copied into Documents. This is partial configuration and does not unblock the full chain. See deployment/mdt-documents-deployment.json. Prior statements that no Documents values are available are historical and superseded for those seven values.

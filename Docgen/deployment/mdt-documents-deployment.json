@@ -1,18 +1,10 @@
 {
   "status": "Succeeded",
-  "deployId": "0Afbm00000hrWDtCAM",
+  "deployId": "0Afbm00000hr02kCAA",
   "recordId": "m07bm00001Km1sXAAR",
-  "verifiedCapturedValues": 7,
+  "verifiedCapturedValues": 15,
   "remainingFields": [
-    "CNC_Master_Attribute__c",
-    "isAccordian__c",
-    "Selectable_Type__c",
-    "Show_Filter_By__c",
-    "Show_Pagination__c",
-    "Show_Row_Number__c",
-    "Show_Search__c",
-    "Show_ViewAll__c",
-    "UI_Type__c"
+    "CNC_Master_Attribute__c"
   ],
   "runtimeVerified": false
 }
