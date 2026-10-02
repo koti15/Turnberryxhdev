@@ -5,7 +5,7 @@
   "source": {
     "kind": "user-supplied-designer-screenshots",
     "capturedDate": "2026-10-01",
-    "latestScreenshot": "IMG_E84F76EB-303E-4C4C-9C63-D4F0BD7BDEA0.jpeg"
+    "latestScreenshot": "IMG_49C41762-E981-441C-BD19-A5F17D4BCC28.jpeg"
   },
   "omniScript": {
     "displayName": "Send Communication",
@@ -2641,6 +2641,95 @@
           "IMG_5B44D25C-5BC3-4159-9B34-6CADBB1FEEDB.jpeg"
         ],
         "inventoryComplete": false
+      },
+      {
+        "typeName": "CNC_Line_Attributes__mdt",
+        "records": [
+          {
+            "developerName": "Send_Communication_Case_Review",
+            "label": "Send Communication Case Review",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Send_Communication_Cover_Letter",
+            "label": "Send Communication Cover Letter",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Send_Communication_Documents",
+            "label": "Send Communication Documents",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Send_Communication_Email_Template",
+            "label": "Send Communication Email Template",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Send_Communication_Forms",
+            "label": "Send Communication Forms",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Send_Communication_Letters",
+            "label": "Send Communication Letters",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Send_Communication_POD",
+            "label": "Send Communication POD",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Send_Communication_Paragraph",
+            "label": "Send Communication Paragraph",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Send_Communication_Review",
+            "label": "Send Communication Review",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Send_Communication_Review_POD",
+            "label": "Send Communication Review POD",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Send_Communication_Select_Entity",
+            "label": "Send Communication Select Entity",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": null
+          }
+        ],
+        "evidenceScreenshots": [
+          "IMG_7B24DFE5-CA6C-4596-AC0B-580DC6B72D07.jpeg",
+          "IMG_49C41762-E981-441C-BD19-A5F17D4BCC28.jpeg"
+        ],
+        "inventoryComplete": false,
+        "scope": "Visible rows after result filter send; not complete type inventory",
+        "customFieldValuesCaptured": false
       }
     ],
     "captureDate": "2026-10-01",
