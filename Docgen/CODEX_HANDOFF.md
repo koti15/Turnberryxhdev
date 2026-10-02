@@ -2,6 +2,11 @@
 
 Updated 2026-10-01. This file contains the reconstruction instructions, completed capture work, pending gaps and all structured configuration recorded so far. Codex can start and continue from this file.
 
+## Documents partial record deployed ? 2026-10-01
+
+Merged latest Documents evidence (main 4d31ba9). Created CNC_Line_Attributes.Send_Communication_Documents with seven captured values only; independently verified all seven. Job 0Afbm00000hrWDtCAM Succeeded, record ID m07bm00001Km1sXAAR. Nine fields remain uncaptured, including portable Master reference, selectable/UI type and display flags; no Forms/Letters settings copied into Documents. This is partial configuration and does not unblock the full chain. See deployment/mdt-documents-deployment.json. Prior statements that no Documents values are available are historical and superseded for those seven values.
+
+
 ## Forms/Letters all captured values deployed ? 2026-10-01
 
 Applied user-confirmed Is_Selectable__c=true and Record_Limit_Per_Page__c=50 to both records, deployment 0Afbm00000hrVuXCAU Succeeded, 2/2, zero errors. Independently queried both values and retained prior 14-value verification: all 16 captured custom values now verified. Forms ID m07bm00001KldNeAAJ; Letters ID m07bm00001KldNfAAJ. Prior two-field-missing statements below are historical and superseded; do not request these values again. Result: deployment/mdt-forms-letters-completion.json. Documents and Header/Button/Search record values, Search four remaining fields, Website schema/records, full original Master schema and Header Type_Attribute_Target__c mismatch remain pending. Script inactive; both scoped Step1 LWCs enabled. Full original LWC integrations remain pending.
