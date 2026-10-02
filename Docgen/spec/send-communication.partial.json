@@ -3085,11 +3085,14 @@
             "language": "en_US",
             "namespacePrefix": "",
             "qualifiedApiName": "Send_Communication",
-            "fieldValues": null,
+            "fieldValues": {
+              "Entity_Type__c": "Member"
+            },
             "customFieldValuesComplete": false,
-            "captureNotes": "Identity columns captured by FIELDS(ALL) query restricted to DeveloperName Send_Communication. Custom settings are off-screen; record value completion not established.",
+            "captureNotes": "FIELDS(ALL) result confirms identity and Entity_Type__c=Member. This screenshot reaches the Entity_Type__c column. Full Master schema/field count is not yet captured, so do not assume additional custom fields or record completeness; no repeated query is needed for this captured value.",
             "evidenceScreenshots": [
-              "IMG_F3EB90FE-A0BA-4A8A-876D-8D8174409AB5.jpeg"
+              "IMG_F3EB90FE-A0BA-4A8A-876D-8D8174409AB5.jpeg",
+              "IMG_7C2826C2-8ECB-46C9-B934-45E719D76483.jpeg"
             ]
           }
         ],
