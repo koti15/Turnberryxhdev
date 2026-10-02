@@ -89,6 +89,11 @@ IMG_78BFB5BB-59D1-4320-ADE7-4E874E9BB1A6.jpeg resolves eight more Documents fiel
 
 IMG_1DEB262E-FB1F-4515-9017-91CB1384832F.jpeg confirms Documents references CNC_Master_Attributes__mdt.Send_Communication. All sixteen custom field values for each of Forms, Letters and Documents are now captured. This supersedes earlier pending lists for these three records. Do not request these values again. Remaining MDT work includes linked Header/Button/Search records, Master record settings/schema, missing Search and Website schema details and required field editor settings. No deployment claimed.
 
+
+## Header records and empty Button/Search results — 2026-10-01, 8:11 PM CT
+
+Nine Header records (three each for Forms/Documents/Letters) are captured from the Excel result screenshot. Six have all nine custom fields captured; three Department records have clipped Response_Label__c text and only that value remains unresolved. Button and Search relationship-filtered queries each returned zero rows; those scoped results are captured, not missing evidence. Master-level Buttons and the Master record settings are not resolved by these zero results. No deployment claimed.
+
 ## Current scope
 
 The user authorized further development of missing components except LWCs and custom metadata (MDT). Those dependencies remain deferred, not resolved. Correct the existing inactive v4 draft in myProdOrg; do not create another skeleton. This documentation update does not deploy anything. Previously deployed configuration is partial and has not been runtime validated.
