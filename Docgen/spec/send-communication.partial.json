@@ -2650,17 +2650,16 @@
               "Default_Value__c": "",
               "Help_Text__c": "",
               "Is_Sortable__c": true,
-              "Response_Label__c": null,
+              "Response_Label__c": "Department",
               "Wrap_Text__c": false
             },
-            "customFieldValuesComplete": false,
-            "remainingCustomFields": [
-              "Response_Label__c"
-            ],
+            "customFieldValuesComplete": true,
+            "remainingCustomFields": [],
             "evidenceScreenshots": [
-              "IMG_DEC6A101-0268-49B2-9E71-1A4F3C201D88.jpeg"
+              "IMG_DEC6A101-0268-49B2-9E71-1A4F3C201D88.jpeg",
+              "IMG_E72A1B8D-3153-4D59-AE16-CA98F13660EB.jpeg"
             ],
-            "captureNotes": "Response_Label__c text is clipped; preserve null until exact full value is captured."
+            "captureNotes": "All nine custom field values captured. Previously clipped Response_Label__c explicitly verified as Department by the direct Header DeveloperName query."
           },
           {
             "developerName": "Documents_Group",
@@ -2730,17 +2729,16 @@
               "Default_Value__c": "",
               "Help_Text__c": "",
               "Is_Sortable__c": true,
-              "Response_Label__c": null,
+              "Response_Label__c": "Department",
               "Wrap_Text__c": false
             },
-            "customFieldValuesComplete": false,
-            "remainingCustomFields": [
-              "Response_Label__c"
-            ],
+            "customFieldValuesComplete": true,
+            "remainingCustomFields": [],
             "evidenceScreenshots": [
-              "IMG_DEC6A101-0268-49B2-9E71-1A4F3C201D88.jpeg"
+              "IMG_DEC6A101-0268-49B2-9E71-1A4F3C201D88.jpeg",
+              "IMG_E72A1B8D-3153-4D59-AE16-CA98F13660EB.jpeg"
             ],
-            "captureNotes": "Response_Label__c text is clipped; preserve null until exact full value is captured."
+            "captureNotes": "All nine custom field values captured. Previously clipped Response_Label__c explicitly verified as Department by the direct Header DeveloperName query."
           },
           {
             "developerName": "Forms_Group",
@@ -2810,17 +2808,16 @@
               "Default_Value__c": "",
               "Help_Text__c": "",
               "Is_Sortable__c": true,
-              "Response_Label__c": null,
+              "Response_Label__c": "Department",
               "Wrap_Text__c": false
             },
-            "customFieldValuesComplete": false,
-            "remainingCustomFields": [
-              "Response_Label__c"
-            ],
+            "customFieldValuesComplete": true,
+            "remainingCustomFields": [],
             "evidenceScreenshots": [
-              "IMG_DEC6A101-0268-49B2-9E71-1A4F3C201D88.jpeg"
+              "IMG_DEC6A101-0268-49B2-9E71-1A4F3C201D88.jpeg",
+              "IMG_E72A1B8D-3153-4D59-AE16-CA98F13660EB.jpeg"
             ],
-            "captureNotes": "Response_Label__c text is clipped; preserve null until exact full value is captured."
+            "captureNotes": "All nine custom field values captured. Previously clipped Response_Label__c explicitly verified as Department by the direct Header DeveloperName query."
           },
           {
             "developerName": "Letters_Group",
