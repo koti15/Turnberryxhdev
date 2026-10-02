@@ -5,7 +5,7 @@
   "source": {
     "kind": "user-supplied-designer-screenshots",
     "capturedDate": "2026-10-01",
-    "latestScreenshot": "IMG_49C41762-E981-441C-BD19-A5F17D4BCC28.jpeg"
+    "latestScreenshot": "IMG_FFE73573-C622-4D49-A8AC-05A5CF638927.jpeg"
   },
   "omniScript": {
     "displayName": "Send Communication",
@@ -2678,14 +2678,66 @@
             "label": "Send Communication Forms",
             "language": "en_US",
             "namespacePrefix": "",
-            "fieldValues": null
+            "fieldValues": {
+              "Section_Name__c": "Send Communication Forms",
+              "Selectable_Type__c": "Check Box",
+              "Show_Filter_By__c": true,
+              "Show_Pagination__c": true,
+              "Show_Row_Number__c": false,
+              "Show_Search__c": false,
+              "Show_ViewAll__c": false,
+              "UI_Type__c": "Datatable",
+              "isAccordian__c": false
+            },
+            "qualifiedApiName": "Send_Communication_Forms",
+            "evidenceScreenshots": [
+              "IMG_2C1CBB84-957D-4F1F-9D80-B1395831EEB5.jpeg",
+              "IMG_FFE73573-C622-4D49-A8AC-05A5CF638927.jpeg"
+            ],
+            "customFieldValuesComplete": false,
+            "remainingCustomFields": [
+              "CNC_Master_Attribute__c",
+              "Component_Name__c",
+              "Component_Type__c",
+              "Is_Selectable__c",
+              "Order__c",
+              "Query_Clause__c",
+              "Record_Limit_Per_Page__c"
+            ],
+            "captureNotes": "Record_Limit_Per_Page__c column is cut off at the left edge; visible trailing 0 does not establish its full value. This query selected Forms and Letters, not Documents."
           },
           {
             "developerName": "Send_Communication_Letters",
             "label": "Send Communication Letters",
             "language": "en_US",
             "namespacePrefix": "",
-            "fieldValues": null
+            "fieldValues": {
+              "Section_Name__c": "Send Communication Letters",
+              "Selectable_Type__c": "Radio",
+              "Show_Filter_By__c": true,
+              "Show_Pagination__c": true,
+              "Show_Row_Number__c": false,
+              "Show_Search__c": false,
+              "Show_ViewAll__c": false,
+              "UI_Type__c": "Datatable",
+              "isAccordian__c": false
+            },
+            "qualifiedApiName": "Send_Communication_Letters",
+            "evidenceScreenshots": [
+              "IMG_2C1CBB84-957D-4F1F-9D80-B1395831EEB5.jpeg",
+              "IMG_FFE73573-C622-4D49-A8AC-05A5CF638927.jpeg"
+            ],
+            "customFieldValuesComplete": false,
+            "remainingCustomFields": [
+              "CNC_Master_Attribute__c",
+              "Component_Name__c",
+              "Component_Type__c",
+              "Is_Selectable__c",
+              "Order__c",
+              "Query_Clause__c",
+              "Record_Limit_Per_Page__c"
+            ],
+            "captureNotes": "Record_Limit_Per_Page__c column is cut off at the left edge; visible trailing 0 does not establish its full value. This query selected Forms and Letters, not Documents."
           },
           {
             "developerName": "Send_Communication_POD",
@@ -2725,11 +2777,14 @@
         ],
         "evidenceScreenshots": [
           "IMG_7B24DFE5-CA6C-4596-AC0B-580DC6B72D07.jpeg",
-          "IMG_49C41762-E981-441C-BD19-A5F17D4BCC28.jpeg"
+          "IMG_49C41762-E981-441C-BD19-A5F17D4BCC28.jpeg",
+          "IMG_2C1CBB84-957D-4F1F-9D80-B1395831EEB5.jpeg",
+          "IMG_FFE73573-C622-4D49-A8AC-05A5CF638927.jpeg"
         ],
         "inventoryComplete": false,
         "scope": "Visible rows after result filter send; not complete type inventory",
-        "customFieldValuesCaptured": false
+        "customFieldValuesCaptured": true,
+        "customFieldValuesComplete": false
       }
     ],
     "captureDate": "2026-10-01",
