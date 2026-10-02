@@ -2,6 +2,15 @@
 
 Updated 2026-10-01. This file contains the reconstruction instructions, completed capture work, pending gaps and all structured configuration recorded so far. Codex can start and continue from this file.
 
+## Latest seven-step updates and timestamp verification ? 2026-10-01, 8:24 PM CT
+
+Pulled main 7bb80c3 and read the newer completed Documents relationship and nine Header record definitions. Deployed all nine Headers (Forms/Documents/Letters Department, Group, Name) and Documents Master reference. Metadata job 0Afbm00000hrcw1CAA Succeeded, 10/10 components, zero errors. Independently compared all nine fields for each Header and confirmed Documents Master DeveloperName Send_Communication. All 16 captured Documents values are now deployed; prior Master-reference-missing statements below are historical. Header record values supplied in this batch must not be requested again.
+
+Applied the already-captured 13 exact CNCGetCaseInfo formula expressions/result paths/order and User extract filter $Vlocity.UserId to existing mapper 0jIbm000000MlGPEA0 using idempotent scripts/docgen/apply_case_formulas.apex. Created 13 missing formula rows and one User extraction row; existing output rows preserved. New rows remain IsDisabled=true because dependent Account/Case fields/extraction validation remains unresolved; stored configuration is not executable completion. Script remains inactive. Initial Apex transaction rolled back on Description length, corrected to under 255 chars and successfully applied.
+
+User reported seeing parent Last Modified at 4:18 PM. Direct query confirmed previous parent timestamp 2026-10-01T21:18:39Z (4:18 PM CT). Prior child/LWC/MDT updates did not modify that parent record. Updated the actual draft Description to reflect deployed scope and remaining gaps; parent LastModifiedDate now 2026-10-02T01:24:22Z (October 1, 8:24 PM CT). Same existing Docgen/SendCommunication/English v4 ID 0jNbm000000gie9EAA; no new script/version created. Independent verification, IDs and exact stored formulas: deployment/latest-seven-step-verification.json. This timestamp update is a status-description update, not proof all seven steps are complete. Step tree/control gaps remain as previously audited, runtime Preview deferred, no upload/generation/delivery.
+
+
 ## Documents 15 captured values deployed ? 2026-10-01
 
 Applied latest 8eb3c22 evidence to the same Documents record. Deployment 0Afbm00000hr02kCAA Succeeded; independently verified all 15 captured scalar values. Only CNC_Master_Attribute__c portable reference remains uncaptured. Prior seven-value/nine-missing checkpoint is superseded. Other Header/Button/Search record values and uncaptured schema/full original LWC dependencies remain pending. Both scoped Step1 LWCs deployed and enabled; script inactive.

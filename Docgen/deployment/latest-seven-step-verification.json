@@ -1,0 +1,259 @@
+{
+  "success": true,
+  "draft": {
+    "Id": "0jNbm000000gie9EAA",
+    "VersionNumber": 4,
+    "IsActive": false,
+    "Description": "Captured draft: Step1 scoped LWCs enabled; Forms/Letters/Documents Line and nine Header records deployed; Case mapper 13 formulas and User filter stored. Remaining dependencies/settings unresolved. Inactive; runtime not validated.",
+    "LastModifiedDate": "2026-10-02T01:24:22.000+0000"
+  },
+  "formulas": [
+    {
+      "Id": "0kdbm000001VZaPAAW",
+      "FormulaResultPath": "relatedEntityCount",
+      "FormulaExpression": "COUNTQUERY(\"SELECT COUNT() FROM Case_Sub_Entity__c WHERE Case__c = '{0}'\",caseId)",
+      "FormulaSequence": 1,
+      "IsDisabled": true
+    },
+    {
+      "Id": "0kdbm000001VZaQAAW",
+      "FormulaResultPath": "currentDate",
+      "FormulaExpression": "FORMATDATETIME(NOW(),\"MM/dd/yyyy\")",
+      "FormulaSequence": 2,
+      "IsDisabled": true
+    },
+    {
+      "Id": "0kdbm000001VZaRAAW",
+      "FormulaResultPath": "todayDate",
+      "FormulaExpression": "FORMATDATETIME(NOW(),\"MMMM dd, yyyy\")",
+      "FormulaSequence": 3,
+      "IsDisabled": true
+    },
+    {
+      "Id": "0kdbm000001VZaSAAW",
+      "FormulaResultPath": "serviceRepName",
+      "FormulaExpression": "IF(ISBLANK(loggedInUserInfo:FirstName),SUBSTRING(loggedInUserInfo:LastName,0,1),CONCAT(loggedInUserInfo:FirstName,\" \",SUBSTRING(loggedInUserInfo:LastName,0,1)))",
+      "FormulaSequence": 4,
+      "IsDisabled": true
+    },
+    {
+      "Id": "0kdbm000001VZaTAAW",
+      "FormulaResultPath": "caseInfo:relationship",
+      "FormulaExpression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",\"Member\",\"Provider\")",
+      "FormulaSequence": 5,
+      "IsDisabled": true
+    },
+    {
+      "Id": "0kdbm000001VZaUAAW",
+      "FormulaResultPath": "localMemberName",
+      "FormulaExpression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",caseInfo:Account.Name,caseInfo:Contact.Name)",
+      "FormulaSequence": 6,
+      "IsDisabled": true
+    },
+    {
+      "Id": "0kdbm000001VZaVAAW",
+      "FormulaResultPath": "localMemberFirstName",
+      "FormulaExpression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",caseInfo:Account.FirstName,\"\")",
+      "FormulaSequence": 7,
+      "IsDisabled": true
+    },
+    {
+      "Id": "0kdbm000001VZaWAAW",
+      "FormulaResultPath": "localMemberLastName",
+      "FormulaExpression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",caseInfo:Account.LastName,\"\")",
+      "FormulaSequence": 8,
+      "IsDisabled": true
+    },
+    {
+      "Id": "0kdbm000001VZaXAAW",
+      "FormulaResultPath": "localEnterprisePersonId",
+      "FormulaExpression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",caseInfo:Account.Enterprise_Person_Id__c,\"\")",
+      "FormulaSequence": 9,
+      "IsDisabled": true
+    },
+    {
+      "Id": "0kdbm000001VZaYAAW",
+      "FormulaResultPath": "createdDate",
+      "FormulaExpression": "FORMATDATETIME(caseInfo:CreatedDate,\"MM/dd/yyyy\")",
+      "FormulaSequence": 10,
+      "IsDisabled": true
+    },
+    {
+      "Id": "0kdbm000001VZaZAAW",
+      "FormulaResultPath": "receivedDate",
+      "FormulaExpression": "FORMATDATETIME(caseInfo:Received_Date__c,\"MM/dd/yyyy\")",
+      "FormulaSequence": 11,
+      "IsDisabled": true
+    },
+    {
+      "Id": "0kdbm000001VZaaAAG",
+      "FormulaResultPath": "relatedEntitiesList",
+      "FormulaExpression": "QUERY(\"SELECT Entity_Type__c FROM Case_Sub_Entity__c WHERE Case__c = '{0}'\",caseId)",
+      "FormulaSequence": 12,
+      "IsDisabled": true
+    },
+    {
+      "Id": "0kdbm000001VZabAAG",
+      "FormulaResultPath": "relatedEntities",
+      "FormulaExpression": "TOSTRING(relatedEntitiesList)",
+      "FormulaSequence": 13,
+      "IsDisabled": true
+    }
+  ],
+  "userExtract": [
+    {
+      "Id": "0kdbm000001VZacAAG",
+      "FilterValue": "$Vlocity.UserId",
+      "OutputFieldName": "loggedInUserInfo",
+      "IsDisabled": true
+    }
+  ],
+  "headerRecords": [
+    {
+      "Id": "m05bm00000YfShVAAV",
+      "DeveloperName": "Documents_Department",
+      "API_Response__c": "department",
+      "Column_Order__c": 1,
+      "Data_Type__c": "text",
+      "Default_Value__c": null,
+      "Help_Text__c": null,
+      "Is_Sortable__c": true,
+      "Response_Label__c": "Department",
+      "Wrap_Text__c": false,
+      "CNC_Line_Attributes__r": {
+        "DeveloperName": "Send_Communication_Documents"
+      }
+    },
+    {
+      "Id": "m05bm00000YfShWAAV",
+      "DeveloperName": "Documents_Group",
+      "API_Response__c": "group",
+      "Column_Order__c": 2,
+      "Data_Type__c": "text",
+      "Default_Value__c": null,
+      "Help_Text__c": null,
+      "Is_Sortable__c": true,
+      "Response_Label__c": "Group",
+      "Wrap_Text__c": false,
+      "CNC_Line_Attributes__r": {
+        "DeveloperName": "Send_Communication_Documents"
+      }
+    },
+    {
+      "Id": "m05bm00000YfShXAAV",
+      "DeveloperName": "Documents_Name",
+      "API_Response__c": "label",
+      "Column_Order__c": 3,
+      "Data_Type__c": "text",
+      "Default_Value__c": null,
+      "Help_Text__c": null,
+      "Is_Sortable__c": true,
+      "Response_Label__c": "Document",
+      "Wrap_Text__c": false,
+      "CNC_Line_Attributes__r": {
+        "DeveloperName": "Send_Communication_Documents"
+      }
+    },
+    {
+      "Id": "m05bm00000YfShYAAV",
+      "DeveloperName": "Forms_Department",
+      "API_Response__c": "department",
+      "Column_Order__c": 1,
+      "Data_Type__c": "text",
+      "Default_Value__c": null,
+      "Help_Text__c": null,
+      "Is_Sortable__c": true,
+      "Response_Label__c": "Department",
+      "Wrap_Text__c": false,
+      "CNC_Line_Attributes__r": {
+        "DeveloperName": "Send_Communication_Forms"
+      }
+    },
+    {
+      "Id": "m05bm00000YfShZAAV",
+      "DeveloperName": "Forms_Group",
+      "API_Response__c": "group",
+      "Column_Order__c": 2,
+      "Data_Type__c": "text",
+      "Default_Value__c": null,
+      "Help_Text__c": null,
+      "Is_Sortable__c": true,
+      "Response_Label__c": "Group",
+      "Wrap_Text__c": false,
+      "CNC_Line_Attributes__r": {
+        "DeveloperName": "Send_Communication_Forms"
+      }
+    },
+    {
+      "Id": "m05bm00000YfShaAAF",
+      "DeveloperName": "Forms_Name",
+      "API_Response__c": "label",
+      "Column_Order__c": 3,
+      "Data_Type__c": "text",
+      "Default_Value__c": null,
+      "Help_Text__c": null,
+      "Is_Sortable__c": true,
+      "Response_Label__c": "Form",
+      "Wrap_Text__c": false,
+      "CNC_Line_Attributes__r": {
+        "DeveloperName": "Send_Communication_Forms"
+      }
+    },
+    {
+      "Id": "m05bm00000YfShbAAF",
+      "DeveloperName": "Letters_Department",
+      "API_Response__c": "department",
+      "Column_Order__c": 1,
+      "Data_Type__c": "text",
+      "Default_Value__c": null,
+      "Help_Text__c": null,
+      "Is_Sortable__c": true,
+      "Response_Label__c": "Department",
+      "Wrap_Text__c": false,
+      "CNC_Line_Attributes__r": {
+        "DeveloperName": "Send_Communication_Letters"
+      }
+    },
+    {
+      "Id": "m05bm00000YfShcAAF",
+      "DeveloperName": "Letters_Group",
+      "API_Response__c": "group",
+      "Column_Order__c": 2,
+      "Data_Type__c": "text",
+      "Default_Value__c": null,
+      "Help_Text__c": null,
+      "Is_Sortable__c": true,
+      "Response_Label__c": "Group",
+      "Wrap_Text__c": false,
+      "CNC_Line_Attributes__r": {
+        "DeveloperName": "Send_Communication_Letters"
+      }
+    },
+    {
+      "Id": "m05bm00000YfShdAAF",
+      "DeveloperName": "Letters_Name",
+      "API_Response__c": "Name",
+      "Column_Order__c": 3,
+      "Data_Type__c": "text",
+      "Default_Value__c": null,
+      "Help_Text__c": null,
+      "Is_Sortable__c": true,
+      "Response_Label__c": "Letter",
+      "Wrap_Text__c": false,
+      "CNC_Line_Attributes__r": {
+        "DeveloperName": "Send_Communication_Letters"
+      }
+    }
+  ],
+  "documentsMaster": {
+    "Id": "m07bm00001Km1sXAAR",
+    "CNC_Master_Attribute__r": {
+      "DeveloperName": "Send_Communication"
+    }
+  },
+  "metadataDeploymentId": "0Afbm00000hrcw1CAA",
+  "caseMapperMethod": "Anonymous Apex; scripts/docgen/apply_case_formulas.apex",
+  "formulaRuntimeEnabled": false,
+  "initialApexAttempt": "Description exceeded 255 characters; transaction rolled back. Shortened description and subsequent transaction succeeded.",
+  "parentTimestampReason": "Previous parent timestamp stayed unchanged when child elements and separate dependencies were updated; actual parent description now updated."
+}

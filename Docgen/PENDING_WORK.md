@@ -319,3 +319,7 @@ Created development Member_Plan__c target and Case_Sub_Entity__c.Member_Plan__c 
 ## Forms/Letters follow-up deployment
 
 Five previously pending MDT fields are now deployed; 34 captured fields total across Button/Header/Line/Search. Master type and Send_Communication identity reference record created, full original Master schema still unknown. Forms/Letters records deployed with 14 captured values each and independently verified; Is_Selectable__c and Record_Limit_Per_Page__c remain uncaptured. Documents configuration, Header/Button/Search record values, Search four remaining fields, Website schema/records and Header Type_Attribute_Target__c discrepancy remain pending. See latest handoff checkpoint and deployment result `0Afbm00000hqeS2CAI`.
+
+## Latest applied evidence ? October 1, 8:24 PM CT
+
+Nine Header records deployed and verified; Documents Master reference now deployed and verified. All captured Documents values are complete to evidence. Thirteen CNCGetCaseInfo formulas and User filter now stored in existing mapper, still disabled pending field/schema validation. Parent draft description now reflects actual scope and Last Modified is 8:24 PM CT. See latest handoff checkpoint and latest-seven-step-verification.json. Prior Header-values-missing, Documents-Master-missing and formulas-not-stored statements are superseded for this scope.

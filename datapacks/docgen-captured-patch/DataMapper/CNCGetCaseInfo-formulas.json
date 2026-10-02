@@ -1,0 +1,80 @@
+{
+  "mapperId": "0jIbm000000MlGPEA0",
+  "formulas": [
+    {
+      "resultPath": "relatedEntityCount",
+      "expression": "COUNTQUERY(\"SELECT COUNT() FROM Case_Sub_Entity__c WHERE Case__c = '{0}'\",caseId)",
+      "sequence": 1
+    },
+    {
+      "resultPath": "currentDate",
+      "expression": "FORMATDATETIME(NOW(),\"MM/dd/yyyy\")",
+      "sequence": 2
+    },
+    {
+      "resultPath": "todayDate",
+      "expression": "FORMATDATETIME(NOW(),\"MMMM dd, yyyy\")",
+      "sequence": 3
+    },
+    {
+      "resultPath": "serviceRepName",
+      "expression": "IF(ISBLANK(loggedInUserInfo:FirstName),SUBSTRING(loggedInUserInfo:LastName,0,1),CONCAT(loggedInUserInfo:FirstName,\" \",SUBSTRING(loggedInUserInfo:LastName,0,1)))",
+      "sequence": 4
+    },
+    {
+      "resultPath": "caseInfo:relationship",
+      "expression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",\"Member\",\"Provider\")",
+      "sequence": 5
+    },
+    {
+      "resultPath": "localMemberName",
+      "expression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",caseInfo:Account.Name,caseInfo:Contact.Name)",
+      "sequence": 6
+    },
+    {
+      "resultPath": "localMemberFirstName",
+      "expression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",caseInfo:Account.FirstName,\"\")",
+      "sequence": 7
+    },
+    {
+      "resultPath": "localMemberLastName",
+      "expression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",caseInfo:Account.LastName,\"\")",
+      "sequence": 8
+    },
+    {
+      "resultPath": "localEnterprisePersonId",
+      "expression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",caseInfo:Account.Enterprise_Person_Id__c,\"\")",
+      "sequence": 9
+    },
+    {
+      "resultPath": "createdDate",
+      "expression": "FORMATDATETIME(caseInfo:CreatedDate,\"MM/dd/yyyy\")",
+      "sequence": 10
+    },
+    {
+      "resultPath": "receivedDate",
+      "expression": "FORMATDATETIME(caseInfo:Received_Date__c,\"MM/dd/yyyy\")",
+      "sequence": 11
+    },
+    {
+      "resultPath": "relatedEntitiesList",
+      "expression": "QUERY(\"SELECT Entity_Type__c FROM Case_Sub_Entity__c WHERE Case__c = '{0}'\",caseId)",
+      "sequence": 12
+    },
+    {
+      "resultPath": "relatedEntities",
+      "expression": "TOSTRING(relatedEntitiesList)",
+      "sequence": 13
+    }
+  ],
+  "userExtract": {
+    "object": "User",
+    "outputPath": "loggedInUserInfo",
+    "filterExpressionStatus": "Exact displayed input captured in newer PENDING_WORK.md evidence; implementation pending.",
+    "filter": {
+      "field": "Id",
+      "operator": "=",
+      "input": "$Vlocity.UserId"
+    }
+  }
+}

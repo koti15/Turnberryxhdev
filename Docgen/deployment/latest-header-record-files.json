@@ -1,0 +1,12 @@
+[
+  "force-app\\main\\default\\customMetadata\\CNC_Header_Attribute.Documents_Department.md-meta.xml",
+  "force-app\\main\\default\\customMetadata\\CNC_Header_Attribute.Documents_Group.md-meta.xml",
+  "force-app\\main\\default\\customMetadata\\CNC_Header_Attribute.Documents_Name.md-meta.xml",
+  "force-app\\main\\default\\customMetadata\\CNC_Header_Attribute.Forms_Department.md-meta.xml",
+  "force-app\\main\\default\\customMetadata\\CNC_Header_Attribute.Forms_Group.md-meta.xml",
+  "force-app\\main\\default\\customMetadata\\CNC_Header_Attribute.Forms_Name.md-meta.xml",
+  "force-app\\main\\default\\customMetadata\\CNC_Header_Attribute.Letters_Department.md-meta.xml",
+  "force-app\\main\\default\\customMetadata\\CNC_Header_Attribute.Letters_Group.md-meta.xml",
+  "force-app\\main\\default\\customMetadata\\CNC_Header_Attribute.Letters_Name.md-meta.xml",
+  "force-app\\main\\default\\customMetadata\\CNC_Line_Attributes.Send_Communication_Documents.md-meta.xml"
+]
