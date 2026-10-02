@@ -64,6 +64,11 @@ IMG_1DEB262E-FB1F-4515-9017-91CB1384832F.jpeg confirms Documents references CNC_
 
 Nine Header records (three each for Forms/Documents/Letters) are captured from the Excel result screenshot. Six have all nine custom fields captured; three Department records have clipped Response_Label__c text and only that value remains unresolved. Button and Search relationship-filtered queries each returned zero rows; those scoped results are captured, not missing evidence. Master-level Buttons and the Master record settings are not resolved by these zero results. No deployment claimed.
 
+
+## Department query mismatch and Master identity — 2026-10-01, 8:14 PM CT
+
+New Header screenshots used CNC_Line_Attributes__r.DeveloperName IN ('Documents_Department','Forms_Department','Letters_Department'), rather than filtering Header DeveloperName directly. Six different Header identities returned; their relationship cells are blank, and they do not resolve the three pending Department labels. Preserve the scoped observation in canonical queryResults; do not apply these rows to Forms/Documents/Letters. Correct query: SELECT DeveloperName, Response_Label__c FROM CNC_Header_Attribute__mdt WHERE DeveloperName IN ('Documents_Department','Forms_Department','Letters_Department'). Master query confirms Send_Communication identity, label Send Communication, en_US and blank namespace; custom fields remain off-screen. Continue by scrolling its result right. No deployment.
+
 ## Evidence reconciliation — 2026-10-01, 7:14 PM CT
 
 The prior pending lists mixed uncaptured evidence with implementation work. Exact CNCGetCaseInfo formulas 1–13 and the User filter were already supplied in PENDING_WORK.md but had not been copied into the canonical specification. They are now reconciled in the canonical record and the complete configuration below. The 32 Output mapping paths, Options and prior zero-row Preview observation were already captured; do not request them again. Case Sub Entity and development Member Plan deployment checkpoints above remain valid; formula implementation is separate pending work.
@@ -2134,3 +2139,53 @@ Source: IMG_DEC6A101-0268-49B2-9E71-1A4F3C201D88.jpeg. Nine records, preserved b
 | CNC_Search_Attributes__mdt | Send_Communication_Forms, Send_Communication_Documents, Send_Communication_Letters | 0 rows; No data exported. |
 
 Continuation: verify full Response_Label__c for Documents_Department, Forms_Department and Letters_Department; then capture CNC_Master_Attributes__mdt.Send_Communication settings. Button/Search empty results apply only to these Line relationship filters.
+
+### customMetadataEvidence · Master identity and Department query correction
+
+```json
+{
+  "master": {
+    "developerName": "Send_Communication",
+    "label": "Send Communication",
+    "language": "en_US",
+    "namespacePrefix": "",
+    "qualifiedApiName": "Send_Communication",
+    "fieldValues": null,
+    "customFieldValuesComplete": false,
+    "captureNotes": "Identity columns captured by FIELDS(ALL) query restricted to DeveloperName Send_Communication. Custom settings are off-screen; record value completion not established.",
+    "evidenceScreenshots": [
+      "IMG_F3EB90FE-A0BA-4A8A-876D-8D8174409AB5.jpeg"
+    ]
+  },
+  "headerQueryObservation": {
+    "key": "CNC_Header_Attribute__mdt:Department-header-names-applied-to-Line-filter",
+    "typeName": "CNC_Header_Attribute__mdt",
+    "filter": {
+      "relationship": "CNC_Line_Attributes__r.DeveloperName",
+      "values": [
+        "Documents_Department",
+        "Forms_Department",
+        "Letters_Department"
+      ]
+    },
+    "limit": 150,
+    "returnedRecordCount": 6,
+    "evidenceScreenshots": [
+      "IMG_E5299535-7ECC-430E-939A-87A8F83498FE.jpeg",
+      "IMG_01F24BF6-C852-4763-8888-7E88D5AA094A.jpeg"
+    ],
+    "requestedCaptureResolved": false,
+    "scopeNote": "Screenshot query filters Line relationship DeveloperName using Header record names, instead of WHERE DeveloperName. Returned rows are Account_Name, Contact_Name, Referral_Account_Name, Referral_Case_CreatedDate, Referral_Subject and Subject; they do not resolve requested Documents/Forms/Letters Department labels. Line relationship cells are visibly blank; no association to Send Communication inferred.",
+    "returnedDeveloperNames": [
+      "Account_Name",
+      "Contact_Name",
+      "Referral_Account_Name",
+      "Referral_Case_CreatedDate",
+      "Referral_Subject",
+      "Subject"
+    ]
+  }
+}
+```
+
+Continuation: three Header Response_Label__c values still pending; filter Header DeveloperName directly. Master custom settings remain off-screen; capture the right-side columns of the existing result. Forms/Documents/Letters Line values remain complete.
