@@ -1,0 +1,48 @@
+{
+  "MaterialAndCommunicationChannel": {
+    "parentId": "0kEbm000002YXX1EAO",
+    "actualChildren": [],
+    "exactReconstructionComplete": false,
+    "capturedUnknowns": [
+      "Step properties and remaining child identities/types",
+      "Material Type stored values, defaults and complete radio properties",
+      "Both channel control element names, stored values, defaults and complete properties",
+      "Condition types and exact exported syntax; first comparison value in guidance tooltip",
+      "Case-owner message content and enforcement behavior",
+      "Remaining child properties and conditions"
+    ]
+  },
+  "Step1": {
+    "parentId": "0kEbm000002YXXUEA4",
+    "actualChildren": [
+      {
+        "id": "0kEbm000002YXXVEA4",
+        "name": "CustomLWC4",
+        "type": "Custom Lightning Web Component",
+        "order": 6,
+        "enabled": true
+      },
+      {
+        "id": "0kEbm000002YXXWEA4",
+        "name": "CustomLWC2",
+        "type": "Custom Lightning Web Component",
+        "order": 9,
+        "enabled": true
+      }
+    ],
+    "exactReconstructionComplete": false,
+    "capturedUnknowns": [
+      "Remaining Step/button properties and conditional view",
+      "Unnamed heading/guidance element identities and types",
+      "Messaging, heading and line-break properties/conditions",
+      "CustomLWC4 remaining attributes and both custom component conditional views",
+      "Custom component source and dependencies"
+    ]
+  },
+  "findings": [
+    "MaterialAndCommunicationChannel has zero child controls.",
+    "Step1 has two of eleven captured layout items; both LWC parent IDs, orders 6/9 and mappings are correct.",
+    "No invented child names/types/option values or destructive removal of backlog placeholders performed.",
+    "Dependency deployments and parent Description updates did not complete the visible tree."
+  ]
+}

@@ -2,6 +2,13 @@
 
 Updated 2026-10-01. This file contains the reconstruction instructions, completed capture work, pending gaps and all structured configuration recorded so far. Codex can start and continue from this file.
 
+## Visible-tree implementation failure confirmed ? 2026-10-01
+
+User reports visible OmniScript still does not match supplied reference. Direct org hierarchy audit confirms MaterialAndCommunicationChannel has ZERO child elements; Step1 has only CustomLWC4 and CustomLWC2 out of 11 captured layout items. Existing Step1 LWC parents/orders 6 and 9 and exact input mappings are correct. Both Steps and LWC children enabled, script inactive. Dependency deployments, formula storage and parent Description updates do not solve the missing visible tree and must not be presented as seven-step completion. See deployment/visible-tree-audit.json.
+
+Canonical Step records still have null names/types for headings/guidance and messaging/line-break types, null radio identities, unverified stored option values/defaults and condition types. These are actual capture gaps, not deployment errors. No further configuration writes made in this audit because no exact new evidence arrived; no invented components or destructive removal of prior backlog placeholders. Remaining blocker for visible reconstruction is original Step child definitions/export or exact evidence for these specific properties. Preserve all already captured layout labels, choices, tooltip text and LWC mappings; do not request them again.
+
+
 ## Latest seven-step updates and timestamp verification ? 2026-10-01, 8:24 PM CT
 
 Pulled main 7bb80c3 and read the newer completed Documents relationship and nine Header record definitions. Deployed all nine Headers (Forms/Documents/Letters Department, Group, Name) and Documents Master reference. Metadata job 0Afbm00000hrcw1CAA Succeeded, 10/10 components, zero errors. Independently compared all nine fields for each Header and confirmed Documents Master DeveloperName Send_Communication. All 16 captured Documents values are now deployed; prior Master-reference-missing statements below are historical. Header record values supplied in this batch must not be requested again.
