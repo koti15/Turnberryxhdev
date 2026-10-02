@@ -69,6 +69,11 @@ Nine Header records (three each for Forms/Documents/Letters) are captured from t
 
 New Header screenshots used CNC_Line_Attributes__r.DeveloperName IN ('Documents_Department','Forms_Department','Letters_Department'), rather than filtering Header DeveloperName directly. Six different Header identities returned; their relationship cells are blank, and they do not resolve the three pending Department labels. Preserve the scoped observation in canonical queryResults; do not apply these rows to Forms/Documents/Letters. Correct query: SELECT DeveloperName, Response_Label__c FROM CNC_Header_Attribute__mdt WHERE DeveloperName IN ('Documents_Department','Forms_Department','Letters_Department'). Master query confirms Send_Communication identity, label Send Communication, en_US and blank namespace; custom fields remain off-screen. Continue by scrolling its result right. No deployment.
 
+
+## All nine section Header records complete — 2026-10-01, 8:19 PM CT
+
+IMG_E72A1B8D-3153-4D59-AE16-CA98F13660EB.jpeg directly queries Header DeveloperName and confirms Response_Label__c=Department for Documents_Department, Forms_Department and Letters_Department. All nine Header records linked to Forms/Documents/Letters now have all nine custom field values captured. Prior clipped-label and incorrect-filter checkpoints are superseded for these labels. Do not request these values again. Forms/Documents/Letters Line records remain 16/16 complete; scoped Button/Search zero results remain captured. Next: Master Send_Communication custom settings, still off-screen. No deployment claimed.
+
 ## Evidence reconciliation — 2026-10-01, 7:14 PM CT
 
 The prior pending lists mixed uncaptured evidence with implementation work. Exact CNCGetCaseInfo formulas 1–13 and the User filter were already supplied in PENDING_WORK.md but had not been copied into the canonical specification. They are now reconciled in the canonical record and the complete configuration below. The 32 Output mapping paths, Options and prior zero-row Preview observation were already captured; do not request them again. Case Sub Entity and development Member Plan deployment checkpoints above remain valid; formula implementation is separate pending work.
@@ -2117,17 +2122,17 @@ Remaining custom field values for these three records: none. All reference Maste
 
 ### customMetadataEvidence · Forms/Documents/Letters Header details
 
-Source: IMG_DEC6A101-0268-49B2-9E71-1A4F3C201D88.jpeg. Nine records, preserved by DeveloperName. No deployment.
+All nine records have all nine custom field values captured. Sources: IMG_DEC6A101-0268-49B2-9E71-1A4F3C201D88.jpeg and IMG_E72A1B8D-3153-4D59-AE16-CA98F13660EB.jpeg. No deployment.
 
 | DeveloperName | API_Response__c | CNC_Line_Attributes__c | Column_Order__c | Data_Type__c | Default_Value__c | Help_Text__c | Is_Sortable__c | Response_Label__c | Wrap_Text__c |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Documents_Department | department | Send_Communication_Documents | 1 | text | "" — blank | "" — blank | true | null — clipped | false |
+| Documents_Department | department | Send_Communication_Documents | 1 | text | "" — blank | "" — blank | true | Department | false |
 | Documents_Group | group | Send_Communication_Documents | 2 | text | "" — blank | "" — blank | true | Group | false |
 | Documents_Name | label | Send_Communication_Documents | 3 | text | "" — blank | "" — blank | true | Document | false |
-| Forms_Department | department | Send_Communication_Forms | 1 | text | "" — blank | "" — blank | true | null — clipped | false |
+| Forms_Department | department | Send_Communication_Forms | 1 | text | "" — blank | "" — blank | true | Department | false |
 | Forms_Group | group | Send_Communication_Forms | 2 | text | "" — blank | "" — blank | true | Group | false |
 | Forms_Name | label | Send_Communication_Forms | 3 | text | "" — blank | "" — blank | true | Form | false |
-| Letters_Department | department | Send_Communication_Letters | 1 | text | "" — blank | "" — blank | true | null — clipped | false |
+| Letters_Department | department | Send_Communication_Letters | 1 | text | "" — blank | "" — blank | true | Department | false |
 | Letters_Group | group | Send_Communication_Letters | 2 | text | "" — blank | "" — blank | true | Group | false |
 | Letters_Name | Name | Send_Communication_Letters | 3 | text | "" — blank | "" — blank | true | Letter | false |
 
@@ -2138,7 +2143,7 @@ Source: IMG_DEC6A101-0268-49B2-9E71-1A4F3C201D88.jpeg. Nine records, preserved b
 | CNC_Button_Attribute__mdt | Send_Communication_Forms, Send_Communication_Documents, Send_Communication_Letters | 0 rows; No data exported. |
 | CNC_Search_Attributes__mdt | Send_Communication_Forms, Send_Communication_Documents, Send_Communication_Letters | 0 rows; No data exported. |
 
-Continuation: verify full Response_Label__c for Documents_Department, Forms_Department and Letters_Department; then capture CNC_Master_Attributes__mdt.Send_Communication settings. Button/Search empty results apply only to these Line relationship filters.
+Continuation: Header values complete; capture CNC_Master_Attributes__mdt.Send_Communication settings. Button/Search empty results apply only to these Line relationship filters.
 
 ### customMetadataEvidence · Master identity and Department query correction
 
@@ -2188,4 +2193,4 @@ Continuation: verify full Response_Label__c for Documents_Department, Forms_Depa
 }
 ```
 
-Continuation: three Header Response_Label__c values still pending; filter Header DeveloperName directly. Master custom settings remain off-screen; capture the right-side columns of the existing result. Forms/Documents/Letters Line values remain complete.
+Continuation: Header labels now resolved by the 8:19 PM checkpoint. Master custom settings remain off-screen; capture the right-side columns of the existing result. Forms/Documents/Letters Line values remain complete.
