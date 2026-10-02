@@ -94,6 +94,11 @@ IMG_1DEB262E-FB1F-4515-9017-91CB1384832F.jpeg confirms Documents references CNC_
 
 Nine Header records (three each for Forms/Documents/Letters) are captured from the Excel result screenshot. Six have all nine custom fields captured; three Department records have clipped Response_Label__c text and only that value remains unresolved. Button and Search relationship-filtered queries each returned zero rows; those scoped results are captured, not missing evidence. Master-level Buttons and the Master record settings are not resolved by these zero results. No deployment claimed.
 
+
+## Department query mismatch and Master identity — 2026-10-01, 8:14 PM CT
+
+New Header screenshots used CNC_Line_Attributes__r.DeveloperName IN ('Documents_Department','Forms_Department','Letters_Department'), rather than filtering Header DeveloperName directly. Six different Header identities returned; their relationship cells are blank, and they do not resolve the three pending Department labels. Preserve the scoped observation in canonical queryResults; do not apply these rows to Forms/Documents/Letters. Correct query: SELECT DeveloperName, Response_Label__c FROM CNC_Header_Attribute__mdt WHERE DeveloperName IN ('Documents_Department','Forms_Department','Letters_Department'). Master query confirms Send_Communication identity, label Send Communication, en_US and blank namespace; custom fields remain off-screen. Continue by scrolling its result right. No deployment.
+
 ## Current scope
 
 The user authorized further development of missing components except LWCs and custom metadata (MDT). Those dependencies remain deferred, not resolved. Correct the existing inactive v4 draft in myProdOrg; do not create another skeleton. This documentation update does not deploy anything. Previously deployed configuration is partial and has not been runtime validated.
