@@ -3078,6 +3078,25 @@
         "scope": "Visible rows after result filter send; not complete type inventory",
         "customFieldValuesCaptured": true,
         "customFieldValuesComplete": false
+      },
+      {
+        "typeName": "CNC_Master_Attributes__mdt",
+        "records": [
+          {
+            "developerName": "Send_Communication",
+            "label": "Send Communication",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "qualifiedApiName": "Send_Communication",
+            "fieldValues": null,
+            "customFieldValuesComplete": false,
+            "captureNotes": "Identity columns captured by FIELDS(ALL) query restricted to DeveloperName Send_Communication. Custom settings are off-screen; record value completion not established.",
+            "evidenceScreenshots": [
+              "IMG_F3EB90FE-A0BA-4A8A-876D-8D8174409AB5.jpeg"
+            ]
+          }
+        ],
+        "inventoryComplete": false
       }
     ],
     "captureDate": "2026-10-01",
@@ -3155,6 +3174,34 @@
         ],
         "captureCompleteForQuery": true,
         "scopeNote": "Zero rows for this exact query in the photographed source org. Does not imply no records globally or no Master-level Button records."
+      },
+      {
+        "key": "CNC_Header_Attribute__mdt:Department-header-names-applied-to-Line-filter",
+        "typeName": "CNC_Header_Attribute__mdt",
+        "filter": {
+          "relationship": "CNC_Line_Attributes__r.DeveloperName",
+          "values": [
+            "Documents_Department",
+            "Forms_Department",
+            "Letters_Department"
+          ]
+        },
+        "limit": 150,
+        "returnedRecordCount": 6,
+        "evidenceScreenshots": [
+          "IMG_E5299535-7ECC-430E-939A-87A8F83498FE.jpeg",
+          "IMG_01F24BF6-C852-4763-8888-7E88D5AA094A.jpeg"
+        ],
+        "requestedCaptureResolved": false,
+        "scopeNote": "Screenshot query filters Line relationship DeveloperName using Header record names, instead of WHERE DeveloperName. Returned rows are Account_Name, Contact_Name, Referral_Account_Name, Referral_Case_CreatedDate, Referral_Subject and Subject; they do not resolve requested Documents/Forms/Letters Department labels. Line relationship cells are visibly blank; no association to Send Communication inferred.",
+        "returnedDeveloperNames": [
+          "Account_Name",
+          "Contact_Name",
+          "Referral_Account_Name",
+          "Referral_Case_CreatedDate",
+          "Referral_Subject",
+          "Subject"
+        ]
       }
     ]
   }
