@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata"><fullName>Contact_Case_Name__c</fullName><label>Contact Name</label><deleteConstraint>SetNull</deleteConstraint><referenceTo>Contact</referenceTo><relationshipLabel>Case Sub Entities</relationshipLabel><relationshipName>Case_Sub_Entities_Contact_Case_Name</relationshipName><required>false</required><type>Lookup</type></CustomField>

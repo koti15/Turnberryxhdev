@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata"><fullName>Location_Vendor_BCBS_Id__c</fullName><label>Location Vendor BCBS Id</label><length>15</length><type>Text</type></CustomField>

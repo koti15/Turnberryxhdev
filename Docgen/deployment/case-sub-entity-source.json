@@ -1,0 +1,36 @@
+{
+  "status": "source prepared; NOT deployed",
+  "object": "Case_Sub_Entity__c",
+  "fields": [
+    "Case__c",
+    "Account_Name__c",
+    "BCBS_MN_Id__c",
+    "Billing_Provider_Name__c",
+    "Billing_Provider_PRPR_Id__c",
+    "Class_ID__c",
+    "Contact_Case_Name__c",
+    "Entity_Service_Date_End__c",
+    "Entity_Service_Date_From__c",
+    "Location_Vendor_BCBS_Id__c",
+    "Location_Vendor_Name__c",
+    "Plan_Code_Reference_Id__c",
+    "Plan_Resource_Id__c",
+    "Plan_Type_Code__c",
+    "Plan_Type__c",
+    "Prior_Authorization__c",
+    "Referrals_Id__c",
+    "Prior_Authorization_Type__c",
+    "Servicing_Provider_Name__c",
+    "Servicing_Provider_bcbsId__c",
+    "Is_Primary__c",
+    "Entity_Total_Charge__c",
+    "Billing_Provider_NPI__c"
+  ],
+  "deferred": [
+    "Member_Plan__c",
+    "URIText__c",
+    "Entity_Type__c"
+  ],
+  "defaults": "CSE-{000000} numbering; ReadWrite sharing; checkbox false; optional SetNull lookups with generated reverse relationship names",
+  "deploymentBlock": "Combined creation/deployment command rejected by automatic approval review; no specific reason supplied."
+}

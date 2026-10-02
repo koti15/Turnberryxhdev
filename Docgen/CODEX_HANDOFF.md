@@ -37,6 +37,10 @@ The requested deliverable is actual configured OmniStudio components in the exis
 
 The Case launcher and uncaptured settings still need actual source or exact evidence. They do not justify omitting already captured fields, mappings or Step children.
 
+## Case Sub Entity source checkpoint ? 2026-10-01
+
+User explicitly requested creation of missing dependencies. Prepared CustomObject source and captured supported fields under force-app/main/default/objects/Case_Sub_Entity__c. Development defaults: CSE-{000000} auto-number, ReadWrite sharing, false checkbox default, optional SetNull lookups with generated reverse relationship names. These defaults are not claimed as captured reference configuration. Member_Plan__c remains pending exact target identity; URIText__c formula and Entity_Type__c definition remain unknown. See deployment/case-sub-entity-source.json. Source XML parsed successfully. NOT deployed: combined creation/deployment command rejected by automatic approval review without a specific reason. Formula 1 dependency remains absent from the org until successful deployment. No LWC or MDT changes.
+
 ## Latest scope and pending work ? 2026-10-01
 
 The user authorized continued implementation of missing components **except LWC and MDT**, then requested that all remaining items be recorded in Git as pending. LWC source and MDT fields/records remain deferred dependencies, not completed work. Exact missing settings must still come from source or supplied evidence; authorization to create components does not establish their unknown configuration.
