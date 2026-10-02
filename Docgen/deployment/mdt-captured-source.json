@@ -28,15 +28,14 @@
     "CNC_Line_Attributes__mdt.Show_Search__c",
     "CNC_Line_Attributes__mdt.Show_ViewAll__c",
     "CNC_Search_Attributes__mdt.API_Response__c",
-    "CNC_Search_Attributes__mdt.CNC_Line_Attributes__c"
+    "CNC_Search_Attributes__mdt.CNC_Line_Attributes__c",
+    "CNC_Button_Attribute__mdt.CNC_Master_Attributes__c",
+    "CNC_Line_Attributes__mdt.CNC_Master_Attribute__c",
+    "CNC_Line_Attributes__mdt.Component_Type__c",
+    "CNC_Line_Attributes__mdt.Selectable_Type__c",
+    "CNC_Line_Attributes__mdt.UI_Type__c"
   ],
-  "pendingFields": [
-    "CNC_Button_Attribute__mdt.CNC_Master_Attributes__c: Metadata Relationship(CNC Master Attributes)",
-    "CNC_Line_Attributes__mdt.CNC_Master_Attribute__c: Metadata Relationship(CNC Master Attributes)",
-    "CNC_Line_Attributes__mdt.Component_Type__c: Picklist",
-    "CNC_Line_Attributes__mdt.Selectable_Type__c: Picklist",
-    "CNC_Line_Attributes__mdt.UI_Type__c: Picklist"
-  ],
-  "recordValuesMissing": true,
-  "developmentChoices": "DeveloperControlled fields (reference Upgradable is managed packaging terminology); checkbox false; generated reverse relationship names. Picklist values and Master target not fabricated."
+  "pendingFields": [],
+  "recordValuesMissing": "Most record values missing; Forms/Letters 14 of 16 captured values now deployed and independently verified.",
+  "developmentChoices": "DeveloperControlled fields (reference Upgradable is managed packaging terminology); checkbox false; generated reverse relationship names. Picklist values and Master target not fabricated. Master type and identity record created to satisfy captured references; full Master configuration remains absent. MDT picklists restricted as required by Salesforce, containing captured values only; no default."
 }

@@ -265,3 +265,7 @@ Object and 26 captured custom fields deployed successfully to myProdOrg, job `0A
 ## Member Plan checkpoint
 
 Created development Member_Plan__c target and Case_Sub_Entity__c.Member_Plan__c lookup in myProdOrg; deployment `0Afbm00000hr962CAA` succeeded, 2/2 components. Missing target/lookup blocker resolved for development. Original Member Plan schema is still uncaptured; development choices are recorded in the handoff. Case Sub Entity has 27 deployed custom fields. Field access and all unrelated OmniScript gaps remain pending.
+
+## Forms/Letters follow-up deployment
+
+Five previously pending MDT fields are now deployed; 34 captured fields total across Button/Header/Line/Search. Master type and Send_Communication identity reference record created, full original Master schema still unknown. Forms/Letters records deployed with 14 captured values each and independently verified; Is_Selectable__c and Record_Limit_Per_Page__c remain uncaptured. Documents configuration, Header/Button/Search record values, Search four remaining fields, Website schema/records and Header Type_Attribute_Target__c discrepancy remain pending. See latest handoff checkpoint and deployment result `0Afbm00000hqeS2CAI`.

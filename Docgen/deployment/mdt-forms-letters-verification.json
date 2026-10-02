@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "records": [
+    {
+      "Id": "m07bm00001KldNeAAJ",
+      "DeveloperName": "Send_Communication_Forms",
+      "Section_Name__c": "Send Communication Forms",
+      "Selectable_Type__c": "Check Box",
+      "Show_Filter_By__c": true,
+      "Show_Pagination__c": true,
+      "Show_Row_Number__c": false,
+      "Show_Search__c": false,
+      "Show_ViewAll__c": false,
+      "UI_Type__c": "Datatable",
+      "isAccordian__c": false,
+      "Component_Name__c": null,
+      "Component_Type__c": "FlexCards",
+      "Order__c": 1,
+      "Query_Clause__c": null,
+      "CNC_Master_Attribute__r": {
+        "DeveloperName": "Send_Communication"
+      }
+    },
+    {
+      "Id": "m07bm00001KldNfAAJ",
+      "DeveloperName": "Send_Communication_Letters",
+      "Section_Name__c": "Send Communication Letters",
+      "Selectable_Type__c": "Radio",
+      "Show_Filter_By__c": true,
+      "Show_Pagination__c": true,
+      "Show_Row_Number__c": false,
+      "Show_Search__c": false,
+      "Show_ViewAll__c": false,
+      "UI_Type__c": "Datatable",
+      "isAccordian__c": false,
+      "Component_Name__c": null,
+      "Component_Type__c": "FlexCards",
+      "Order__c": 1,
+      "Query_Clause__c": null,
+      "CNC_Master_Attribute__r": {
+        "DeveloperName": "Send_Communication"
+      }
+    }
+  ],
+  "verifiedCustomValuesPerRecord": 14,
+  "unknownFields": [
+    "Is_Selectable__c",
+    "Record_Limit_Per_Page__c"
+  ],
+  "fullMasterSchemaUncaptured": true
+}
