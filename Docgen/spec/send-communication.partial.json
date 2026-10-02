@@ -2679,18 +2679,21 @@
               "Show_Search__c": false,
               "Show_ViewAll__c": false,
               "UI_Type__c": "Datatable",
-              "isAccordian__c": false
+              "isAccordian__c": false,
+              "CNC_Master_Attribute__c": {
+                "referencedType": "CNC_Master_Attributes__mdt",
+                "developerName": "Send_Communication"
+              }
             },
             "evidenceScreenshots": [
               "IMG_CC79B120-66C2-42C0-B5ED-BF2E4CC418D7.jpeg",
               "IMG_280CA63E-6012-4FF6-AA7D-BCF3533D27CA.jpeg",
-              "IMG_78BFB5BB-59D1-4320-ADE7-4E874E9BB1A6.jpeg"
+              "IMG_78BFB5BB-59D1-4320-ADE7-4E874E9BB1A6.jpeg",
+              "IMG_1DEB262E-FB1F-4515-9017-91CB1384832F.jpeg"
             ],
-            "customFieldValuesComplete": false,
-            "remainingCustomFields": [
-              "CNC_Master_Attribute__c"
-            ],
-            "captureNotes": "15/16 custom field values captured across Documents-filtered screenshots. Only portable Master referenced DeveloperName remains unresolved; its org ID was shown previously."
+            "customFieldValuesComplete": true,
+            "remainingCustomFields": [],
+            "captureNotes": "16/16 custom field values captured. Latest relationship query explicitly pairs Send_Communication_Documents with Master DeveloperName Send_Communication. No field values remain unresolved; schema editor details and deployment are separate."
           },
           {
             "developerName": "Send_Communication_Email_Template",
