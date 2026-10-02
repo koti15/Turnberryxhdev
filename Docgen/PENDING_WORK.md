@@ -2,6 +2,10 @@
 
 Updated 2026-10-01. Status: pending evidence or implementation, not completed. See [CODEX_HANDOFF.md](CODEX_HANDOFF.md) for the working record and [deployment/captured-audit.json](deployment/captured-audit.json) for the detailed deployment blockers.
 
+## Evidence audit before requesting more images
+
+Do not treat implementation pending as evidence missing. Review this file, canonical JSON, handoff and existing evidence/source before asking for a repeat capture. A new request must identify the specific absent property and the existing records checked. Historical captured-audit.json blockers describe an earlier deployment checkpoint and can be superseded by newer evidence.
+
 ## Current scope
 
 The user authorized further development of missing components except LWCs and custom metadata (MDT). Those dependencies remain deferred, not resolved. Correct the existing inactive v4 draft in myProdOrg; do not create another skeleton. This documentation update does not deploy anything. Previously deployed configuration is partial and has not been runtime validated.
@@ -63,18 +67,11 @@ Screenshots captured from OmniStudio Data Mapper `CNCGetCaseInfo` establish the 
 13. `TOSTRING(relatedEntitiesList)`
     - Formula Result Path: `relatedEntities`
 
-### Still unresolved for CNCGetCaseInfo
+### Reconciled capture status for CNCGetCaseInfo
 
-The screenshots above do **not** establish:
-- full Case extract field list / relationship traversal configuration
-- full User extract field list beyond the visible Id filter
-- Data Mapper output mappings
-- Data Mapper Options settings
-- Preview/runtime output
-- providerBlueshildId versus providerBlueshieldId output spelling
-- any formulas beyond formula 13 (none are shown)
-- whether additional extract/filter conditions exist off-screen
+Already captured: exact formulas 1–13, visible Case/User filters, 32 output mapping paths, Options, and a prior Preview observation returning zero Case rows. These are implementation/verification work, not requests to resend evidence. Exact formulas and User filter are now merged into the canonical JSON.
 
+Remaining evidence gaps: output spelling providerBlueshildId versus providerBlueshieldId, row-level output settings where required, and any actual additional extraction settings identified during implementation. Existing capture does not prove successful runtime retrieval. Preview remains deferred; do not request it again as missing capture.
 
 ## Newly captured evidence — Case_Sub_Entity__c field inventory
 
@@ -159,7 +156,7 @@ Additional visible field:
 | Component | Required evidence / remaining work | Status |
 | --- | --- | --- |
 | IP-GETCaseDetails / CNC_GetCaseInformation | Exact Case input and response mappings, execution condition, remaining procedure and error-handling settings, and Case launcher/context wiring | Pending exact evidence |
-| CNCGetCaseInfo | Formula expressions 1–13 and visible Case/User filter inputs are now captured. Still need full extract field coverage, output mappings, options, preview/runtime evidence, and resolve providerBlueshildId versus providerBlueshieldId output spelling | Partially resolved by 2026-10-01 screenshots |
+| CNCGetCaseInfo | Exact formulas 1–13, visible Case/User filters, 32 output paths, Options and prior zero-row Preview observation are captured. Implement from existing evidence. Remaining exact gaps: output spelling and row-level/extraction details actually required by implementation; successful runtime retrieval unverified and Preview deferred | Partially resolved by 2026-10-01 screenshots |
 | MaterialAndCommunicationChannel | Child names/types; Material Type and both channel controls' stored values/defaults/properties; exact conditions and guidance comparison; case-owner message and enforcement | Pending exact evidence and implementation |
 | SV-DefaultMapping | Expression/literal mode and runtime type for the nine assignments listed below; confirm isDocumentUploaded literal type and isSubscription token casing | Pending exact evidence; 7 of 16 assignments configured |
 | ExtractEmailBodyForMMR / GetMMREmailTemplate | Exact input/filter literal quoting, action response transformations/conditions, mapper options and actual email template content | Pending exact evidence and implementation |
