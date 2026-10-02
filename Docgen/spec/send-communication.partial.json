@@ -5,7 +5,7 @@
   "source": {
     "kind": "user-supplied-designer-screenshots",
     "capturedDate": "2026-10-01",
-    "latestScreenshot": "IMG_E84F76EB-303E-4C4C-9C63-D4F0BD7BDEA0.jpeg"
+    "latestScreenshot": "IMG_54F0625D-D0F5-4CF5-8FB0-87CAA9385FAE.jpeg"
   },
   "omniScript": {
     "displayName": "Send Communication",
@@ -2641,6 +2641,158 @@
           "IMG_5B44D25C-5BC3-4159-9B34-6CADBB1FEEDB.jpeg"
         ],
         "inventoryComplete": false
+      },
+      {
+        "typeName": "CNC_Line_Attributes__mdt",
+        "records": [
+          {
+            "developerName": "Send_Communication_Case_Review",
+            "label": "Send Communication Case Review",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Send_Communication_Cover_Letter",
+            "label": "Send Communication Cover Letter",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Send_Communication_Documents",
+            "label": "Send Communication Documents",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Send_Communication_Email_Template",
+            "label": "Send Communication Email Template",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Send_Communication_Forms",
+            "label": "Send Communication Forms",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": {
+              "Section_Name__c": "Send Communication Forms",
+              "Selectable_Type__c": "Check Box",
+              "Show_Filter_By__c": true,
+              "Show_Pagination__c": true,
+              "Show_Row_Number__c": false,
+              "Show_Search__c": false,
+              "Show_ViewAll__c": false,
+              "UI_Type__c": "Datatable",
+              "isAccordian__c": false,
+              "Component_Name__c": "",
+              "Component_Type__c": "FlexCards",
+              "Order__c": 1,
+              "Query_Clause__c": "",
+              "CNC_Master_Attribute__c": {
+                "referencedType": "CNC_Master_Attributes__mdt",
+                "developerName": "Send_Communication"
+              }
+            },
+            "qualifiedApiName": "Send_Communication_Forms",
+            "evidenceScreenshots": [
+              "IMG_2C1CBB84-957D-4F1F-9D80-B1395831EEB5.jpeg",
+              "IMG_FFE73573-C622-4D49-A8AC-05A5CF638927.jpeg",
+              "IMG_54F0625D-D0F5-4CF5-8FB0-87CAA9385FAE.jpeg"
+            ],
+            "customFieldValuesComplete": false,
+            "remainingCustomFields": [
+              "Is_Selectable__c",
+              "Record_Limit_Per_Page__c"
+            ],
+            "captureNotes": "Visible WHERE selects Forms and Letters; all shown scalar values and Master DeveloperName are identical in both rows, establishing association without row-order inference. 14/16 custom fields captured. Record_Limit_Per_Page__c and Is_Selectable__c remain absent."
+          },
+          {
+            "developerName": "Send_Communication_Letters",
+            "label": "Send Communication Letters",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": {
+              "Section_Name__c": "Send Communication Letters",
+              "Selectable_Type__c": "Radio",
+              "Show_Filter_By__c": true,
+              "Show_Pagination__c": true,
+              "Show_Row_Number__c": false,
+              "Show_Search__c": false,
+              "Show_ViewAll__c": false,
+              "UI_Type__c": "Datatable",
+              "isAccordian__c": false,
+              "Component_Name__c": "",
+              "Component_Type__c": "FlexCards",
+              "Order__c": 1,
+              "Query_Clause__c": "",
+              "CNC_Master_Attribute__c": {
+                "referencedType": "CNC_Master_Attributes__mdt",
+                "developerName": "Send_Communication"
+              }
+            },
+            "qualifiedApiName": "Send_Communication_Letters",
+            "evidenceScreenshots": [
+              "IMG_2C1CBB84-957D-4F1F-9D80-B1395831EEB5.jpeg",
+              "IMG_FFE73573-C622-4D49-A8AC-05A5CF638927.jpeg",
+              "IMG_54F0625D-D0F5-4CF5-8FB0-87CAA9385FAE.jpeg"
+            ],
+            "customFieldValuesComplete": false,
+            "remainingCustomFields": [
+              "Is_Selectable__c",
+              "Record_Limit_Per_Page__c"
+            ],
+            "captureNotes": "Visible WHERE selects Forms and Letters; all shown scalar values and Master DeveloperName are identical in both rows, establishing association without row-order inference. 14/16 custom fields captured. Record_Limit_Per_Page__c and Is_Selectable__c remain absent."
+          },
+          {
+            "developerName": "Send_Communication_POD",
+            "label": "Send Communication POD",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Send_Communication_Paragraph",
+            "label": "Send Communication Paragraph",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Send_Communication_Review",
+            "label": "Send Communication Review",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Send_Communication_Review_POD",
+            "label": "Send Communication Review POD",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Send_Communication_Select_Entity",
+            "label": "Send Communication Select Entity",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": null
+          }
+        ],
+        "evidenceScreenshots": [
+          "IMG_7B24DFE5-CA6C-4596-AC0B-580DC6B72D07.jpeg",
+          "IMG_49C41762-E981-441C-BD19-A5F17D4BCC28.jpeg",
+          "IMG_2C1CBB84-957D-4F1F-9D80-B1395831EEB5.jpeg",
+          "IMG_FFE73573-C622-4D49-A8AC-05A5CF638927.jpeg"
+        ],
+        "inventoryComplete": false,
+        "scope": "Visible rows after result filter send; not complete type inventory",
+        "customFieldValuesCaptured": true,
+        "customFieldValuesComplete": false
       }
     ],
     "captureDate": "2026-10-01",
@@ -2651,6 +2803,32 @@
       "Header/search record lists show names only and do not establish Send Communication membership or any field values.",
       "Record inventories are partial: clipped rows excluded; repeated visible rows deduplicated by DeveloperName.",
       "No LWC source received in this batch. MDT/LWC implementation remains deferred under existing scope."
+    ],
+    "unassignedQueryObservations": [
+      {
+        "evidenceScreenshot": "IMG_FF76DE60-C085-4B1E-BEB0-9F7A9707D0C3.jpeg",
+        "typeName": "CNC_Line_Attributes__mdt",
+        "visibleRowCount": 2,
+        "developerNameNotSelected": true,
+        "whereClauseCropped": true,
+        "recordAssociationVerified": false,
+        "commonVisibleValues": {
+          "Component_Name__c": "",
+          "Component_Type__c": "FlexCards",
+          "Order__c": 1,
+          "Query_Clause__c": ""
+        },
+        "masterRelationshipObservation": "Both rows show same reference ID; exact ID transcription and referenced DeveloperName unresolved",
+        "remainingRequestedFields": [
+          "DeveloperName",
+          "Is_Selectable__c",
+          "Record_Limit_Per_Page__c",
+          "CNC_Master_Attribute__r.DeveloperName"
+        ],
+        "captureDate": "2026-10-01",
+        "resolvedByScreenshot": "IMG_54F0625D-D0F5-4CF5-8FB0-87CAA9385FAE.jpeg",
+        "resolution": "Same query's visible Forms/Letters filter and identical values in both rows establish common values for both records. Master DeveloperName=Send_Communication; original reference ID not needed."
+      }
     ]
   }
 }

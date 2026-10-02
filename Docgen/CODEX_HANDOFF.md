@@ -48,6 +48,22 @@ Remaining MDT evidence: Search's other four fields; Internal/External Website fi
 
 No LWC source is supplied in this batch. LWC/MDT implementation remains deferred under the existing scope.
 
+## Send Communication Line record identities — 2026-10-01, 7:48 PM CT
+
+Two Inspector result screenshots identify 11 Send Communication Line records, including exact DeveloperNames Send_Communication_Forms and Send_Communication_Documents. These identities are now recorded under canonical customMetadataEvidence.recordInventories. Visible language is en_US and namespace column is blank. Custom configuration columns are off-screen, so fieldValues remain null. This batch does not resolve record settings or deploy records. Next query can restrict DeveloperName to those two records and capture custom fields without repeating the unrelated rows.
+
+## Forms and Letters Line values — 2026-10-01, 7:51 PM CT
+
+New Inspector screenshots query Send_Communication_Forms and Send_Communication_Letters, not Documents. Nine custom fields per record are now captured in the canonical record. Forms uses Selectable_Type__c="Check Box"; Letters uses "Radio"; both show Filter By and Pagination=true, Row Number/Search/ViewAll=false, UI_Type__c="Datatable", isAccordian__c=false and matching Section_Name__c values. Seven other custom fields remain off-screen or clipped. Record_Limit_Per_Page__c's trailing visible 0 must not be treated as its complete value. Documents custom values are still uncaptured. No records are deployed by this update.
+
+## Unassigned Line query observation — 2026-10-01, 7:53 PM CT
+
+IMG_FF76DE60-C085-4B1E-BEB0-9F7A9707D0C3.jpeg shows two rows with Component_Name__c and Query_Clause__c blank, Component_Type__c=FlexCards and Order__c=1. Both share a Master reference. DeveloperName is omitted and WHERE clause is cropped, so do not merge these values into specific records yet. Next capture must include DeveloperName plus Is_Selectable__c, Record_Limit_Per_Page__c and the Master's DeveloperName. Observation preserved in canonical customMetadataEvidence.unassignedQueryObservations; no deployment.
+
+## Forms/Letters Master and component settings resolved — 2026-10-01, 7:55 PM CT
+
+IMG_54F0625D-D0F5-4CF5-8FB0-87CAA9385FAE.jpeg shows the Forms/Letters WHERE filter and identical values in both rows: blank Component_Name__c, Component_Type__c=FlexCards, Order__c=1, blank Query_Clause__c and Master DeveloperName=Send_Communication. These are merged into both canonical records, resolving the earlier unassigned query observation without relying on row order or org IDs. Capture now covers 14/16 custom fields per record. Only Is_Selectable__c and Record_Limit_Per_Page__c remain absent for Forms/Letters. Documents still pending. No deployment.
+
 ## Current user instruction: build and deploy the captured portion
 
 On 2026-10-01 the user explicitly instructed: "Give then what ever you had so codex will deploy to my org".
@@ -2004,3 +2020,40 @@ Reconciled exact record, including newer captured formulas and User filter:
 5. Record inventories are partial: clipped rows excluded; repeated visible rows deduplicated by DeveloperName.
 6. No LWC source received in this batch. MDT/LWC implementation remains deferred under existing scope.
 
+
+### customMetadataEvidence.recordInventories · CNC_Line_Attributes__mdt
+
+Partial record inventory; namespace blank/language en_US captured. Forms and Letters each have 14/16 custom field values captured; other rows remain identity-only. Sources include IMG_54F0625D-D0F5-4CF5-8FB0-87CAA9385FAE.jpeg and prior result images.
+
+| DeveloperName | MasterLabel | Custom field capture |
+| --- | --- | --- |
+| Send_Communication_Case_Review | Send Communication Case Review | null — off-screen |
+| Send_Communication_Cover_Letter | Send Communication Cover Letter | null — off-screen |
+| Send_Communication_Documents | Send Communication Documents | null — off-screen |
+| Send_Communication_Email_Template | Send Communication Email Template | null — off-screen |
+| Send_Communication_Forms | Send Communication Forms | 14/16 fields; partial |
+| Send_Communication_Letters | Send Communication Letters | 14/16 fields; partial |
+| Send_Communication_POD | Send Communication POD | null — off-screen |
+| Send_Communication_Paragraph | Send Communication Paragraph | null — off-screen |
+| Send_Communication_Review | Send Communication Review | null — off-screen |
+| Send_Communication_Review_POD | Send Communication Review POD | null — off-screen |
+| Send_Communication_Select_Entity | Send Communication Select Entity | null — off-screen |
+
+| Field | Send_Communication_Forms | Send_Communication_Letters |
+| --- | --- | --- |
+| Section_Name__c | Send Communication Forms | Send Communication Letters |
+| Selectable_Type__c | Check Box | Radio |
+| Show_Filter_By__c | true | true |
+| Show_Pagination__c | true | true |
+| Show_Row_Number__c | false | false |
+| Show_Search__c | false | false |
+| Show_ViewAll__c | false | false |
+| UI_Type__c | Datatable | Datatable |
+| isAccordian__c | false | false |
+| Component_Name__c | "" — captured blank | "" — captured blank |
+| Component_Type__c | FlexCards | FlexCards |
+| Order__c | 1 | 1 |
+| Query_Clause__c | "" — captured blank | "" — captured blank |
+| CNC_Master_Attribute__c | {"referencedType":"CNC_Master_Attributes__mdt","developerName":"Send_Communication"} | {"referencedType":"CNC_Master_Attributes__mdt","developerName":"Send_Communication"} |
+
+Remaining: Is_Selectable__c and Record_Limit_Per_Page__c for each. Both records have QualifiedApiName matching DeveloperName. Prior unassigned observation IMG_FF76DE60-C085-4B1E-BEB0-9F7A9707D0C3.jpeg is resolved by the visible Forms/Letters filter and identical values in both rows of IMG_54F0625D-D0F5-4CF5-8FB0-87CAA9385FAE.jpeg. Master reference DeveloperName=Send_Communication; exact original org ID not needed. Records are not deployed by this capture.
