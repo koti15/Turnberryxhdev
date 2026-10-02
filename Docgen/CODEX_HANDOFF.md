@@ -59,6 +59,11 @@ IMG_78BFB5BB-59D1-4320-ADE7-4E874E9BB1A6.jpeg resolves eight more Documents fiel
 
 IMG_1DEB262E-FB1F-4515-9017-91CB1384832F.jpeg confirms Documents references CNC_Master_Attributes__mdt.Send_Communication. All sixteen custom field values for each of Forms, Letters and Documents are now captured. This supersedes earlier pending lists for these three records. Do not request these values again. Remaining MDT work includes linked Header/Button/Search records, Master record settings/schema, missing Search and Website schema details and required field editor settings. No deployment claimed.
 
+
+## Header records and empty Button/Search results — 2026-10-01, 8:11 PM CT
+
+Nine Header records (three each for Forms/Documents/Letters) are captured from the Excel result screenshot. Six have all nine custom fields captured; three Department records have clipped Response_Label__c text and only that value remains unresolved. Button and Search relationship-filtered queries each returned zero rows; those scoped results are captured, not missing evidence. Master-level Buttons and the Master record settings are not resolved by these zero results. No deployment claimed.
+
 ## Evidence reconciliation — 2026-10-01, 7:14 PM CT
 
 The prior pending lists mixed uncaptured evidence with implementation work. Exact CNCGetCaseInfo formulas 1–13 and the User filter were already supplied in PENDING_WORK.md but had not been copied into the canonical specification. They are now reconciled in the canonical record and the complete configuration below. The 32 Output mapping paths, Options and prior zero-row Preview observation were already captured; do not request them again. Case Sub Entity and development Member Plan deployment checkpoints above remain valid; formula implementation is separate pending work.
@@ -2104,3 +2109,28 @@ Forms, Letters and Documents: 16/16 custom field values captured for each. Other
 | UI_Type__c | Datatable | Datatable | Datatable |
 
 Remaining custom field values for these three records: none. All reference Master DeveloperName Send_Communication. Documents relationship explicitly verified by IMG_1DEB262E-FB1F-4515-9017-91CB1384832F.jpeg. Forms/Letters final selectable/page-limit values were user-confirmed. Do not request completed values again. No deployment claimed.
+
+### customMetadataEvidence · Forms/Documents/Letters Header details
+
+Source: IMG_DEC6A101-0268-49B2-9E71-1A4F3C201D88.jpeg. Nine records, preserved by DeveloperName. No deployment.
+
+| DeveloperName | API_Response__c | CNC_Line_Attributes__c | Column_Order__c | Data_Type__c | Default_Value__c | Help_Text__c | Is_Sortable__c | Response_Label__c | Wrap_Text__c |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Documents_Department | department | Send_Communication_Documents | 1 | text | "" — blank | "" — blank | true | null — clipped | false |
+| Documents_Group | group | Send_Communication_Documents | 2 | text | "" — blank | "" — blank | true | Group | false |
+| Documents_Name | label | Send_Communication_Documents | 3 | text | "" — blank | "" — blank | true | Document | false |
+| Forms_Department | department | Send_Communication_Forms | 1 | text | "" — blank | "" — blank | true | null — clipped | false |
+| Forms_Group | group | Send_Communication_Forms | 2 | text | "" — blank | "" — blank | true | Group | false |
+| Forms_Name | label | Send_Communication_Forms | 3 | text | "" — blank | "" — blank | true | Form | false |
+| Letters_Department | department | Send_Communication_Letters | 1 | text | "" — blank | "" — blank | true | null — clipped | false |
+| Letters_Group | group | Send_Communication_Letters | 2 | text | "" — blank | "" — blank | true | Group | false |
+| Letters_Name | Name | Send_Communication_Letters | 3 | text | "" — blank | "" — blank | true | Letter | false |
+
+### customMetadataEvidence · Scoped empty queries
+
+| Type | Line filter | Result |
+| --- | --- | --- |
+| CNC_Button_Attribute__mdt | Send_Communication_Forms, Send_Communication_Documents, Send_Communication_Letters | 0 rows; No data exported. |
+| CNC_Search_Attributes__mdt | Send_Communication_Forms, Send_Communication_Documents, Send_Communication_Letters | 0 rows; No data exported. |
+
+Continuation: verify full Response_Label__c for Documents_Department, Forms_Department and Letters_Department; then capture CNC_Master_Attributes__mdt.Send_Communication settings. Button/Search empty results apply only to these Line relationship filters.
