@@ -24,6 +24,16 @@ CNCGetCaseInfo formulas 1–13, User filter, 32 Output mappings and Options are 
 
 Before requesting images, name the absent field and its existing evidence path. Generic "complete=false", unvalidated behavior or historical blockers alone do not justify another capture request.
 
+## Custom Metadata capture — 2026-10-01, 7:36 PM CT
+
+New screenshots establish complete field inventories for CNC_Button_Attribute__mdt (7/7), CNC_Header_Attribute__mdt (9/9) and CNC_Line_Attributes__mdt (16/16), and 2/6 fields for CNC_Search_Attributes__mdt. Exact API names, visible types/lengths, indexed flags and metadata relationship targets are merged into the canonical JSON and CODEX_HANDOFF.md. This is captured evidence, not deployment.
+
+Partial Manage Records inventories contain 12 Button record identities and 54 Header record identities, deduplicated by DeveloperName. No record detail values are shown; none of these names alone proves that it belongs to Send Communication. Do not request these same field-list captures again.
+
+Remaining MDT evidence: Search's other four fields; Internal/External Website field inventory; CNC_Master_Attributes__mdt relationship-target schema; field editor details/defaults/picklist values where required; and actual values for the records used by Forms/Documents. Preserve the Header mismatch: its captured 9-field list has no Type_Attribute_Target__c, while the recorded mapper references that field. Verify rather than inventing it.
+
+No LWC source is supplied in this batch. LWC/MDT implementation remains deferred under the existing scope.
+
 ## Current scope
 
 The user authorized further development of missing components except LWCs and custom metadata (MDT). Those dependencies remain deferred, not resolved. Correct the existing inactive v4 draft in myProdOrg; do not create another skeleton. This documentation update does not deploy anything. Previously deployed configuration is partial and has not been runtime validated.
@@ -214,7 +224,7 @@ Do not infer field types from names. Person Account __pc field backing definitio
 
 LWCs cncDynamicTableSections and cncAttachmentsUploadSection are absent from target/source. Their captured input mappings exist, but source, dependencies and remaining component conditions are pending. Do not replace them with invented components.
 
-These five MDT types currently exist only as shells with no captured field definitions or configuration records:
+The target's earlier MDT checkpoint records shells only. New evidence now captures Button 7/7, Header 9/9, Line 16/16 and Search 2/6 field inventories; actual record detail values remain uncaptured. See canonical customMetadataEvidence. Five original dependencies are:
 
 - CNC_Line_Attributes__mdt
 - CNC_Header_Attribute__mdt
