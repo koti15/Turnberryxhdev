@@ -2671,25 +2671,26 @@
               "Order__c": 7,
               "Query_Clause__c": "",
               "Record_Limit_Per_Page__c": 50,
-              "Section_Name__c": "Send Communication Documents"
+              "Section_Name__c": "Send Communication Documents",
+              "Selectable_Type__c": "Check Box",
+              "Show_Filter_By__c": true,
+              "Show_Pagination__c": true,
+              "Show_Row_Number__c": false,
+              "Show_Search__c": false,
+              "Show_ViewAll__c": false,
+              "UI_Type__c": "Datatable",
+              "isAccordian__c": false
             },
             "evidenceScreenshots": [
               "IMG_CC79B120-66C2-42C0-B5ED-BF2E4CC418D7.jpeg",
-              "IMG_280CA63E-6012-4FF6-AA7D-BCF3533D27CA.jpeg"
+              "IMG_280CA63E-6012-4FF6-AA7D-BCF3533D27CA.jpeg",
+              "IMG_78BFB5BB-59D1-4320-ADE7-4E874E9BB1A6.jpeg"
             ],
             "customFieldValuesComplete": false,
             "remainingCustomFields": [
-              "CNC_Master_Attribute__c",
-              "isAccordian__c",
-              "Selectable_Type__c",
-              "Show_Filter_By__c",
-              "Show_Pagination__c",
-              "Show_Row_Number__c",
-              "Show_Search__c",
-              "Show_ViewAll__c",
-              "UI_Type__c"
+              "CNC_Master_Attribute__c"
             ],
-            "captureNotes": "7/16 custom field values visible across two Documents-filtered screenshots. Master reference is shown only as an org ID; portable referenced DeveloperName remains unresolved. Selectable_Type__c is clipped at the right edge; do not infer full value. Other nine fields require remaining columns."
+            "captureNotes": "15/16 custom field values captured across Documents-filtered screenshots. Only portable Master referenced DeveloperName remains unresolved; its org ID was shown previously."
           },
           {
             "developerName": "Send_Communication_Email_Template",

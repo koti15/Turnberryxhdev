@@ -74,6 +74,11 @@ The user confirmed the final two queried values for both Forms and Letters. All 
 
 Seven of sixteen Documents custom field values are captured from IMG_CC79B120-66C2-42C0-B5ED-BF2E4CC418D7.jpeg and IMG_280CA63E-6012-4FF6-AA7D-BCF3533D27CA.jpeg. See canonical recordInventories and generated configuration below. Nine fields remain unresolved, including the portable Master DeveloperName and clipped Selectable_Type__c. Forms and Letters remain 16/16 complete. No deployment.
 
+
+## Documents remaining columns captured — 2026-10-01, 8:03 PM CT
+
+IMG_78BFB5BB-59D1-4320-ADE7-4E874E9BB1A6.jpeg resolves eight more Documents field values in the canonical record. Documents is now 15/16; only CNC_Master_Attribute__c referenced DeveloperName remains pending. Do not request the other fifteen values again. Forms and Letters remain complete. No deployment.
+
 ## Current scope
 
 The user authorized further development of missing components except LWCs and custom metadata (MDT). Those dependencies remain deferred, not resolved. Correct the existing inactive v4 draft in myProdOrg; do not create another skeleton. This documentation update does not deploy anything. Previously deployed configuration is partial and has not been runtime validated.
