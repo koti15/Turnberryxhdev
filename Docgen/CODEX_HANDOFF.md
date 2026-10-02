@@ -48,6 +48,10 @@ New Inspector screenshots query Send_Communication_Forms and Send_Communication_
 
 IMG_FF76DE60-C085-4B1E-BEB0-9F7A9707D0C3.jpeg shows two rows with Component_Name__c and Query_Clause__c blank, Component_Type__c=FlexCards and Order__c=1. Both share a Master reference. DeveloperName is omitted and WHERE clause is cropped, so do not merge these values into specific records yet. Next capture must include DeveloperName plus Is_Selectable__c, Record_Limit_Per_Page__c and the Master's DeveloperName. Observation preserved in canonical customMetadataEvidence.unassignedQueryObservations; no deployment.
 
+## Forms/Letters Master and component settings resolved — 2026-10-01, 7:55 PM CT
+
+IMG_54F0625D-D0F5-4CF5-8FB0-87CAA9385FAE.jpeg shows the Forms/Letters WHERE filter and identical values in both rows: blank Component_Name__c, Component_Type__c=FlexCards, Order__c=1, blank Query_Clause__c and Master DeveloperName=Send_Communication. These are merged into both canonical records, resolving the earlier unassigned query observation without relying on row order or org IDs. Capture now covers 14/16 custom fields per record. Only Is_Selectable__c and Record_Limit_Per_Page__c remain absent for Forms/Letters. Documents still pending. No deployment.
+
 ## Current user instruction: build and deploy the captured portion
 
 On 2026-10-01 the user explicitly instructed: "Give then what ever you had so codex will deploy to my org".
@@ -2007,7 +2011,7 @@ Reconciled exact record, including newer captured formulas and User filter:
 
 ### customMetadataEvidence.recordInventories · CNC_Line_Attributes__mdt
 
-Partial record inventory; namespace blank and language en_US are captured. `null` custom values mean off-screen, not blank Salesforce values.
+Partial record inventory; namespace blank/language en_US captured. Forms and Letters each have 14/16 custom field values captured; other rows remain identity-only. Sources include IMG_54F0625D-D0F5-4CF5-8FB0-87CAA9385FAE.jpeg and prior result images.
 
 | DeveloperName | MasterLabel | Custom field capture |
 | --- | --- | --- |
@@ -2015,8 +2019,8 @@ Partial record inventory; namespace blank and language en_US are captured. `null
 | Send_Communication_Cover_Letter | Send Communication Cover Letter | null — off-screen |
 | Send_Communication_Documents | Send Communication Documents | null — off-screen |
 | Send_Communication_Email_Template | Send Communication Email Template | null — off-screen |
-| Send_Communication_Forms | Send Communication Forms | 9/16 fields; partial |
-| Send_Communication_Letters | Send Communication Letters | 9/16 fields; partial |
+| Send_Communication_Forms | Send Communication Forms | 14/16 fields; partial |
+| Send_Communication_Letters | Send Communication Letters | 14/16 fields; partial |
 | Send_Communication_POD | Send Communication POD | null — off-screen |
 | Send_Communication_Paragraph | Send Communication Paragraph | null — off-screen |
 | Send_Communication_Review | Send Communication Review | null — off-screen |
@@ -2034,18 +2038,10 @@ Partial record inventory; namespace blank and language en_US are captured. `null
 | Show_ViewAll__c | false | false |
 | UI_Type__c | Datatable | Datatable |
 | isAccordian__c | false | false |
+| Component_Name__c | "" — captured blank | "" — captured blank |
+| Component_Type__c | FlexCards | FlexCards |
+| Order__c | 1 | 1 |
+| Query_Clause__c | "" — captured blank | "" — captured blank |
+| CNC_Master_Attribute__c | {"referencedType":"CNC_Master_Attributes__mdt","developerName":"Send_Communication"} | {"referencedType":"CNC_Master_Attributes__mdt","developerName":"Send_Communication"} |
 
-Remaining custom fields for each: CNC_Master_Attribute__c, Component_Name__c, Component_Type__c, Is_Selectable__c, Order__c, Query_Clause__c, Record_Limit_Per_Page__c. Record_Limit_Per_Page__c is clipped; exact value unresolved. Source screenshots: IMG_2C1CBB84-957D-4F1F-9D80-B1395831EEB5.jpeg; IMG_FFE73573-C622-4D49-A8AC-05A5CF638927.jpeg. QualifiedApiName equals captured DeveloperName for both records. Inventory and custom value coverage remain incomplete.
-
-### customMetadataEvidence.unassignedQueryObservations
-
-Source: IMG_FF76DE60-C085-4B1E-BEB0-9F7A9707D0C3.jpeg. Two visible rows; DeveloperName absent; WHERE cropped; record association unverified. Same Master reference visible but exact ID/name unresolved.
-
-| Field | Value in both rows |
-| --- | --- |
-| Component_Name__c | captured blank |
-| Component_Type__c | FlexCards |
-| Order__c | 1 |
-| Query_Clause__c | captured blank |
-
-Do not assign to Forms/Letters until record identity is captured. Missing: DeveloperName, Is_Selectable__c, Record_Limit_Per_Page__c and CNC_Master_Attribute__r.DeveloperName.
+Remaining: Is_Selectable__c and Record_Limit_Per_Page__c for each. Both records have QualifiedApiName matching DeveloperName. Prior unassigned observation IMG_FF76DE60-C085-4B1E-BEB0-9F7A9707D0C3.jpeg is resolved by the visible Forms/Letters filter and identical values in both rows of IMG_54F0625D-D0F5-4CF5-8FB0-87CAA9385FAE.jpeg. Master reference DeveloperName=Send_Communication; exact original org ID not needed. Records are not deployed by this capture.
