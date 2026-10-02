@@ -2,6 +2,12 @@
 
 Updated 2026-10-01. This file contains the reconstruction instructions, completed capture work, pending gaps and all structured configuration recorded so far. Codex can start and continue from this file.
 
+## Evidence reconciliation — 2026-10-01, 7:14 PM CT
+
+The prior pending lists mixed uncaptured evidence with implementation work. Exact CNCGetCaseInfo formulas 1–13 and the User filter were already supplied in PENDING_WORK.md but had not been copied into the canonical specification. They are now reconciled in the canonical record and the complete configuration below. The 32 Output mapping paths, Options and prior zero-row Preview observation were already captured; do not request them again. Case Sub Entity and development Member Plan deployment checkpoints above remain valid; formula implementation is separate pending work.
+
+Historical statements below that all formula expressions are null or User filter quoting is missing describe the earlier checkpoint and are superseded by this reconciliation. Before any further screenshot request, audit existing evidence and name the exact absent property. Do not mark captured-but-unimplemented work as missing evidence.
+
 ## Current user instruction: build and deploy the captured portion
 
 On 2026-10-01 the user explicitly instructed: "Give then what ever you had so codex will deploy to my org".
@@ -586,161 +592,319 @@ partial-configuration
 
 #### dataMappers[0] · CNCGetCaseInfo
 
-| Property | Captured value |
-| --- | --- |
-| name | CNCGetCaseInfo |
-| interfaceType | Extract |
-| inputType | JSON |
-| outputType | JSON |
-| formulaCountObserved | 13 |
-| evidencePath | Docgen/evidence/CNC_GetCaseInformation.md |
-| complete | false |
-| formulaVerification | Formula 4 concatenation separator and query-string quoting require export/close-up. Preserve Account.Record_Type__c. Runtime validation pending. |
+Reconciled exact record, including newer captured formulas and User filter:
 
-##### dataMappers[0] · CNCGetCaseInfo.extractSteps
-
-###### dataMappers[0] · CNCGetCaseInfo.extractSteps[0]
-
-| Property | Captured value |
-| --- | --- |
-| object | Case |
-| outputPath | caseInfo |
-
-**dataMappers[0] · CNCGetCaseInfo.extractSteps[0].filter**
-
-| Property | Captured value |
-| --- | --- |
-| field | Id |
-| operator | = |
-| input | caseId |
-
-###### dataMappers[0] · CNCGetCaseInfo.extractSteps[1]
-
-| Property | Captured value |
-| --- | --- |
-| object | User |
-| outputPath | loggedInUserInfo |
-| filterExpressionStatus | UserId expression observed; exact quoting needs verification |
-
-##### dataMappers[0] · CNCGetCaseInfo.outputMappings
-
-| extractJsonPath | outputJsonPath | verification |
-| --- | --- | --- |
-| caseInfo:Account.Blue_Shield_Id__c | providerBlueshildId | Output spelling appears providerBlueshildId in mapping screenshot; earlier schema transcription was providerBlueshieldId. Confirm exact spelling from export or close-up before executable build. |
-| caseInfo:Account.Member_Id__pc | localMemberId | — not recorded |
-| caseInfo:Account.NPI__c | providerNPI | — not recorded |
-| caseInfo:Account.PersonBirthdate | memberDOB | — not recorded |
-| caseInfo:Account.PersonEmail | memberEmail | — not recorded |
-| caseInfo:Account.PersonMailingCity | localCity | — not recorded |
-| caseInfo:Account.PersonMailingCountry | localCountry | — not recorded |
-| caseInfo:Account.PersonMailingPostalCode | localPostalCode | — not recorded |
-| caseInfo:Account.PersonMailingState | localState | — not recorded |
-| caseInfo:Account.PersonMailingStreet | localStreet | — not recorded |
-| caseInfo:Account.Primary_Address__pc | localFullAddress | — not recorded |
-| caseInfo:Account.Subscriber_Id__pc | subscriberId | — not recorded |
-| caseInfo:Account.UMPI__c | providerUMPI | — not recorded |
-| caseInfo:CaseNumber | caseNumber | — not recorded |
-| caseInfo:Description | caseDescription | — not recorded |
-| caseInfo:Id | Id | — not recorded |
-| caseInfo:Owner.Name | ownerName | — not recorded |
-| caseInfo:OwnerId | caseOwnerId | — not recorded |
-| caseInfo:relationship | caseType | — not recorded |
-| caseInfo:Source_System__c | sourceSystem | — not recorded |
-| createdDate | createdDate | — not recorded |
-| currentDate | currentDate | — not recorded |
-| localEnterprisePersonId | localEnterprisePersonId | — not recorded |
-| localMemberFirstName | localMemberFirstName | — not recorded |
-| localMemberLastName | localMemberLastName | — not recorded |
-| localMemberName | localMemberName | — not recorded |
-| loggedInUserInfo:Id | loggedInUserId | — not recorded |
-| receivedDate | receivedDate | — not recorded |
-| relatedEntities | relatedEntities | — not recorded |
-| relatedEntityCount | relatedEntityCount | — not recorded |
-| serviceRepName | serviceRepName | — not recorded |
-| todayDate | todayDate | — not recorded |
-
-##### dataMappers[0] · CNCGetCaseInfo.visibleOutputSchemaKeys
-
-1. localMemberFirstName
-2. memberDOB
-3. providerBlueshieldId
-4. memberEmail
-5. localPostalCode
-6. currentDate
-7. relatedEntityCount
-8. localStreet
-9. loggedInUserId
-10. localCity
-11. caseDescription
-12. ownerName
-13. sourceSystem
-14. caseNumber
-15. todayDate
-16. providerNPI
-17. localFullAddress
-18. localMemberName
-19. createdDate
-20. localState
-21. localEnterprisePersonId
-22. providerUMPI
-23. localCountry
-24. caseType
-25. subscriberId
-26. localMemberId
-27. caseOwnerId
-28. Id
-29. localMemberLastName
-30. serviceRepName
-31. relatedEntities
-32. receivedDate
-
-##### dataMappers[0] · CNCGetCaseInfo.options
-
-| Property | Captured value |
-| --- | --- |
-| timeToLiveMinutes | 0 |
-| checkFieldLevelSecurity | false |
-| platformCacheType | `null` — unresolved/unset; see context |
-| overwriteTargetForAllNullInputs | false |
-
-##### dataMappers[0] · CNCGetCaseInfo.previewEvidence
-
-| Property | Captured value |
-| --- | --- |
-| inputKey | caseId |
-| caseQueryResultCount | 0 |
-| successfulCaseRetrievalVerified | false |
-| personalValuesOmitted | true |
-
-##### dataMappers[0] · CNCGetCaseInfo.outputMappingCoverage
-
-| Property | Captured value |
-| --- | --- |
-| visibleRows | 32 |
-| allPreviouslyCapturedKeysRepresentedExceptSpellingDiscrepancy | true |
-| rowDetailPropertiesVerified | false |
-
-###### dataMappers[0] · CNCGetCaseInfo.outputMappingCoverage.spellingDiscrepancies
-
-1. providerBlueshildId versus providerBlueshieldId
-
-##### dataMappers[0] · CNCGetCaseInfo.formulaEvidence
-
-| order | resultPath | readableBehavior | expression | verification |
-| --- | --- | --- | --- | --- |
-| 1 | relatedEntityCount | COUNTQUERY against Case_Sub_Entity__c filtered by Case__c using caseId | `null` — unresolved/unset; see context | Behavior transcribed from screenshots; exact executable expression not captured. |
-| 2 | currentDate | FORMATDATETIME of NOW(), format MM/dd/yyyy | `null` — unresolved/unset; see context | Behavior transcribed from screenshots; exact executable expression not captured. |
-| 3 | todayDate | FORMATDATETIME of NOW(), format MMMM dd, yyyy | `null` — unresolved/unset; see context | Behavior transcribed from screenshots; exact executable expression not captured. |
-| 4 | serviceRepName | If loggedInUserInfo:FirstName is blank, use the first character of LastName; otherwise concatenate FirstName and the first character of LastName | `null` — unresolved/unset; see context | Behavior transcribed from screenshots; exact executable expression not captured. |
-| 5 | caseInfo:relationship | Account.Record_Type__c Member or Unlisted Member maps to Member; otherwise Provider | `null` — unresolved/unset; see context | Behavior transcribed from screenshots; exact executable expression not captured. |
-| 6 | localMemberName | For Member/Unlisted Member use caseInfo:Account.Name; otherwise caseInfo:Contact.Name | `null` — unresolved/unset; see context | Behavior transcribed from screenshots; exact executable expression not captured. |
-| 7 | localMemberFirstName | For Member/Unlisted Member use caseInfo:Account.FirstName; otherwise empty string | `null` — unresolved/unset; see context | Behavior transcribed from screenshots; exact executable expression not captured. |
-| 8 | localMemberLastName | For Member/Unlisted Member use caseInfo:Account.LastName; otherwise empty string | `null` — unresolved/unset; see context | Behavior transcribed from screenshots; exact executable expression not captured. |
-| 9 | localEnterprisePersonId | For Member/Unlisted Member use caseInfo:Account.Enterprise_Person_Id__c; otherwise empty string | `null` — unresolved/unset; see context | Behavior transcribed from screenshots; exact executable expression not captured. |
-| 10 | createdDate | FORMATDATETIME of caseInfo:CreatedDate, format MM/dd/yyyy | `null` — unresolved/unset; see context | Behavior transcribed from screenshots; exact executable expression not captured. |
-| 11 | receivedDate | FORMATDATETIME of caseInfo:Received_Date__c, format MM/dd/yyyy | `null` — unresolved/unset; see context | Behavior transcribed from screenshots; exact executable expression not captured. |
-| 12 | relatedEntitiesList | QUERY selects Entity_Type__c from Case_Sub_Entity__c filtered by Case__c using caseId | `null` — unresolved/unset; see context | Behavior transcribed from screenshots; exact executable expression not captured. |
-| 13 | relatedEntities | TOSTRING(relatedEntitiesList) | `null` — unresolved/unset; see context | Behavior transcribed from screenshots; exact executable expression not captured. |
+```json
+{
+  "name": "CNCGetCaseInfo",
+  "interfaceType": "Extract",
+  "inputType": "JSON",
+  "outputType": "JSON",
+  "extractSteps": [
+    {
+      "object": "Case",
+      "outputPath": "caseInfo",
+      "filter": {
+        "field": "Id",
+        "operator": "=",
+        "input": "caseId"
+      }
+    },
+    {
+      "object": "User",
+      "outputPath": "loggedInUserInfo",
+      "filterExpressionStatus": "Exact displayed input captured in newer PENDING_WORK.md evidence; implementation pending.",
+      "filter": {
+        "field": "Id",
+        "operator": "=",
+        "input": "$Vlocity.UserId"
+      }
+    }
+  ],
+  "formulaCountObserved": 13,
+  "outputMappings": [
+    {
+      "extractJsonPath": "caseInfo:Account.Blue_Shield_Id__c",
+      "outputJsonPath": "providerBlueshildId",
+      "verification": "Output spelling appears providerBlueshildId in mapping screenshot; earlier schema transcription was providerBlueshieldId. Confirm exact spelling from export or close-up before executable build."
+    },
+    {
+      "extractJsonPath": "caseInfo:Account.Member_Id__pc",
+      "outputJsonPath": "localMemberId"
+    },
+    {
+      "extractJsonPath": "caseInfo:Account.NPI__c",
+      "outputJsonPath": "providerNPI"
+    },
+    {
+      "extractJsonPath": "caseInfo:Account.PersonBirthdate",
+      "outputJsonPath": "memberDOB"
+    },
+    {
+      "extractJsonPath": "caseInfo:Account.PersonEmail",
+      "outputJsonPath": "memberEmail"
+    },
+    {
+      "extractJsonPath": "caseInfo:Account.PersonMailingCity",
+      "outputJsonPath": "localCity"
+    },
+    {
+      "extractJsonPath": "caseInfo:Account.PersonMailingCountry",
+      "outputJsonPath": "localCountry"
+    },
+    {
+      "extractJsonPath": "caseInfo:Account.PersonMailingPostalCode",
+      "outputJsonPath": "localPostalCode"
+    },
+    {
+      "extractJsonPath": "caseInfo:Account.PersonMailingState",
+      "outputJsonPath": "localState"
+    },
+    {
+      "extractJsonPath": "caseInfo:Account.PersonMailingStreet",
+      "outputJsonPath": "localStreet"
+    },
+    {
+      "extractJsonPath": "caseInfo:Account.Primary_Address__pc",
+      "outputJsonPath": "localFullAddress"
+    },
+    {
+      "extractJsonPath": "caseInfo:Account.Subscriber_Id__pc",
+      "outputJsonPath": "subscriberId"
+    },
+    {
+      "extractJsonPath": "caseInfo:Account.UMPI__c",
+      "outputJsonPath": "providerUMPI"
+    },
+    {
+      "extractJsonPath": "caseInfo:CaseNumber",
+      "outputJsonPath": "caseNumber"
+    },
+    {
+      "extractJsonPath": "caseInfo:Description",
+      "outputJsonPath": "caseDescription"
+    },
+    {
+      "extractJsonPath": "caseInfo:Id",
+      "outputJsonPath": "Id"
+    },
+    {
+      "extractJsonPath": "caseInfo:Owner.Name",
+      "outputJsonPath": "ownerName"
+    },
+    {
+      "extractJsonPath": "caseInfo:OwnerId",
+      "outputJsonPath": "caseOwnerId"
+    },
+    {
+      "extractJsonPath": "caseInfo:relationship",
+      "outputJsonPath": "caseType"
+    },
+    {
+      "extractJsonPath": "caseInfo:Source_System__c",
+      "outputJsonPath": "sourceSystem"
+    },
+    {
+      "extractJsonPath": "createdDate",
+      "outputJsonPath": "createdDate"
+    },
+    {
+      "extractJsonPath": "currentDate",
+      "outputJsonPath": "currentDate"
+    },
+    {
+      "extractJsonPath": "localEnterprisePersonId",
+      "outputJsonPath": "localEnterprisePersonId"
+    },
+    {
+      "extractJsonPath": "localMemberFirstName",
+      "outputJsonPath": "localMemberFirstName"
+    },
+    {
+      "extractJsonPath": "localMemberLastName",
+      "outputJsonPath": "localMemberLastName"
+    },
+    {
+      "extractJsonPath": "localMemberName",
+      "outputJsonPath": "localMemberName"
+    },
+    {
+      "extractJsonPath": "loggedInUserInfo:Id",
+      "outputJsonPath": "loggedInUserId"
+    },
+    {
+      "extractJsonPath": "receivedDate",
+      "outputJsonPath": "receivedDate"
+    },
+    {
+      "extractJsonPath": "relatedEntities",
+      "outputJsonPath": "relatedEntities"
+    },
+    {
+      "extractJsonPath": "relatedEntityCount",
+      "outputJsonPath": "relatedEntityCount"
+    },
+    {
+      "extractJsonPath": "serviceRepName",
+      "outputJsonPath": "serviceRepName"
+    },
+    {
+      "extractJsonPath": "todayDate",
+      "outputJsonPath": "todayDate"
+    }
+  ],
+  "evidencePath": "Docgen/evidence/CNC_GetCaseInformation.md",
+  "complete": false,
+  "visibleOutputSchemaKeys": [
+    "localMemberFirstName",
+    "memberDOB",
+    "providerBlueshieldId",
+    "memberEmail",
+    "localPostalCode",
+    "currentDate",
+    "relatedEntityCount",
+    "localStreet",
+    "loggedInUserId",
+    "localCity",
+    "caseDescription",
+    "ownerName",
+    "sourceSystem",
+    "caseNumber",
+    "todayDate",
+    "providerNPI",
+    "localFullAddress",
+    "localMemberName",
+    "createdDate",
+    "localState",
+    "localEnterprisePersonId",
+    "providerUMPI",
+    "localCountry",
+    "caseType",
+    "subscriberId",
+    "localMemberId",
+    "caseOwnerId",
+    "Id",
+    "localMemberLastName",
+    "serviceRepName",
+    "relatedEntities",
+    "receivedDate"
+  ],
+  "options": {
+    "timeToLiveMinutes": 0,
+    "checkFieldLevelSecurity": false,
+    "platformCacheType": null,
+    "overwriteTargetForAllNullInputs": false
+  },
+  "previewEvidence": {
+    "inputKey": "caseId",
+    "caseQueryResultCount": 0,
+    "successfulCaseRetrievalVerified": false,
+    "personalValuesOmitted": true
+  },
+  "outputMappingCoverage": {
+    "visibleRows": 32,
+    "allPreviouslyCapturedKeysRepresentedExceptSpellingDiscrepancy": true,
+    "rowDetailPropertiesVerified": false,
+    "spellingDiscrepancies": [
+      "providerBlueshildId versus providerBlueshieldId"
+    ]
+  },
+  "formulaEvidence": [
+    {
+      "order": 1,
+      "resultPath": "relatedEntityCount",
+      "readableBehavior": "COUNTQUERY against Case_Sub_Entity__c filtered by Case__c using caseId",
+      "expression": "COUNTQUERY(\"SELECT COUNT() FROM Case_Sub_Entity__c WHERE Case__c = '{0}'\",caseId)",
+      "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+    },
+    {
+      "order": 2,
+      "resultPath": "currentDate",
+      "readableBehavior": "FORMATDATETIME of NOW(), format MM/dd/yyyy",
+      "expression": "FORMATDATETIME(NOW(),\"MM/dd/yyyy\")",
+      "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+    },
+    {
+      "order": 3,
+      "resultPath": "todayDate",
+      "readableBehavior": "FORMATDATETIME of NOW(), format MMMM dd, yyyy",
+      "expression": "FORMATDATETIME(NOW(),\"MMMM dd, yyyy\")",
+      "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+    },
+    {
+      "order": 4,
+      "resultPath": "serviceRepName",
+      "readableBehavior": "If loggedInUserInfo:FirstName is blank, use the first character of LastName; otherwise concatenate FirstName and the first character of LastName",
+      "expression": "IF(ISBLANK(loggedInUserInfo:FirstName),SUBSTRING(loggedInUserInfo:LastName,0,1),CONCAT(loggedInUserInfo:FirstName,\" \",SUBSTRING(loggedInUserInfo:LastName,0,1)))",
+      "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+    },
+    {
+      "order": 5,
+      "resultPath": "caseInfo:relationship",
+      "readableBehavior": "Account.Record_Type__c Member or Unlisted Member maps to Member; otherwise Provider",
+      "expression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",\"Member\",\"Provider\")",
+      "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+    },
+    {
+      "order": 6,
+      "resultPath": "localMemberName",
+      "readableBehavior": "For Member/Unlisted Member use caseInfo:Account.Name; otherwise caseInfo:Contact.Name",
+      "expression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",caseInfo:Account.Name,caseInfo:Contact.Name)",
+      "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+    },
+    {
+      "order": 7,
+      "resultPath": "localMemberFirstName",
+      "readableBehavior": "For Member/Unlisted Member use caseInfo:Account.FirstName; otherwise empty string",
+      "expression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",caseInfo:Account.FirstName,\"\")",
+      "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+    },
+    {
+      "order": 8,
+      "resultPath": "localMemberLastName",
+      "readableBehavior": "For Member/Unlisted Member use caseInfo:Account.LastName; otherwise empty string",
+      "expression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",caseInfo:Account.LastName,\"\")",
+      "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+    },
+    {
+      "order": 9,
+      "resultPath": "localEnterprisePersonId",
+      "readableBehavior": "For Member/Unlisted Member use caseInfo:Account.Enterprise_Person_Id__c; otherwise empty string",
+      "expression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",caseInfo:Account.Enterprise_Person_Id__c,\"\")",
+      "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+    },
+    {
+      "order": 10,
+      "resultPath": "createdDate",
+      "readableBehavior": "FORMATDATETIME of caseInfo:CreatedDate, format MM/dd/yyyy",
+      "expression": "FORMATDATETIME(caseInfo:CreatedDate,\"MM/dd/yyyy\")",
+      "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+    },
+    {
+      "order": 11,
+      "resultPath": "receivedDate",
+      "readableBehavior": "FORMATDATETIME of caseInfo:Received_Date__c, format MM/dd/yyyy",
+      "expression": "FORMATDATETIME(caseInfo:Received_Date__c,\"MM/dd/yyyy\")",
+      "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+    },
+    {
+      "order": 12,
+      "resultPath": "relatedEntitiesList",
+      "readableBehavior": "QUERY selects Entity_Type__c from Case_Sub_Entity__c filtered by Case__c using caseId",
+      "expression": "QUERY(\"SELECT Entity_Type__c FROM Case_Sub_Entity__c WHERE Case__c = '{0}'\",caseId)",
+      "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+    },
+    {
+      "order": 13,
+      "resultPath": "relatedEntities",
+      "readableBehavior": "TOSTRING(relatedEntitiesList)",
+      "expression": "TOSTRING(relatedEntitiesList)",
+      "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+    }
+  ],
+  "formulaVerification": "Exact formulas 1–13 now reconciled from newer PENDING_WORK.md evidence. Do not request them again. Runtime validation remains pending."
+}
+```
 
 #### dataMappers[1] · GetMMREmailTemplate
 
