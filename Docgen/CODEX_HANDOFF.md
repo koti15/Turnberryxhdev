@@ -24,6 +24,11 @@ MDT deployment 0Afbm00000hrTO5CAM Succeeded: 29 captured field definitions acros
 
 Historical absent-LWC/MDT-shell statements are superseded only for the above deployed scope. Captured CNCGetCaseInfo formulas and other seven-element gaps remain separate pending implementation; no completed runnable OmniScript claim.
 
+
+## Forms/Letters record values complete — user confirmation, 2026-10-01
+
+The user confirmed the final two queried values for both Forms and Letters. All 16 custom field values for these two records are now captured in the canonical specification. Do not request their record values again. Documents record values and other previously recorded dependency gaps remain pending. Capture completion does not establish deployment or runtime verification.
+
 ## Evidence reconciliation — 2026-10-01, 7:14 PM CT
 
 The prior pending lists mixed uncaptured evidence with implementation work. Exact CNCGetCaseInfo formulas 1–13 and the User filter were already supplied in PENDING_WORK.md but had not been copied into the canonical specification. They are now reconciled in the canonical record and the complete configuration below. The 32 Output mapping paths, Options and prior zero-row Preview observation were already captured; do not request them again. Case Sub Entity and development Member Plan deployment checkpoints above remain valid; formula implementation is separate pending work.
@@ -2033,7 +2038,7 @@ Reconciled exact record, including newer captured formulas and User filter:
 
 ### customMetadataEvidence.recordInventories · CNC_Line_Attributes__mdt
 
-Partial record inventory; namespace blank/language en_US captured. Forms and Letters each have 14/16 custom field values captured; other rows remain identity-only. Sources include IMG_54F0625D-D0F5-4CF5-8FB0-87CAA9385FAE.jpeg and prior result images.
+Partial record inventory; namespace blank/language en_US captured. Forms and Letters each have 16/16 custom field values captured. Other rows remain identity-only. Final two values confirmed by the user's “True and 50” response to the query for both records; other values are supported by the recorded screenshots.
 
 | DeveloperName | MasterLabel | Custom field capture |
 | --- | --- | --- |
@@ -2041,8 +2046,8 @@ Partial record inventory; namespace blank/language en_US captured. Forms and Let
 | Send_Communication_Cover_Letter | Send Communication Cover Letter | null — off-screen |
 | Send_Communication_Documents | Send Communication Documents | null — off-screen |
 | Send_Communication_Email_Template | Send Communication Email Template | null — off-screen |
-| Send_Communication_Forms | Send Communication Forms | 14/16 fields; partial |
-| Send_Communication_Letters | Send Communication Letters | 14/16 fields; partial |
+| Send_Communication_Forms | Send Communication Forms | 16/16 fields; complete capture |
+| Send_Communication_Letters | Send Communication Letters | 16/16 fields; complete capture |
 | Send_Communication_POD | Send Communication POD | null — off-screen |
 | Send_Communication_Paragraph | Send Communication Paragraph | null — off-screen |
 | Send_Communication_Review | Send Communication Review | null — off-screen |
@@ -2065,5 +2070,7 @@ Partial record inventory; namespace blank/language en_US captured. Forms and Let
 | Order__c | 1 | 1 |
 | Query_Clause__c | "" — captured blank | "" — captured blank |
 | CNC_Master_Attribute__c | {"referencedType":"CNC_Master_Attributes__mdt","developerName":"Send_Communication"} | {"referencedType":"CNC_Master_Attributes__mdt","developerName":"Send_Communication"} |
+| Is_Selectable__c | true | true |
+| Record_Limit_Per_Page__c | 50 | 50 |
 
-Remaining: Is_Selectable__c and Record_Limit_Per_Page__c for each. Both records have QualifiedApiName matching DeveloperName. Prior unassigned observation IMG_FF76DE60-C085-4B1E-BEB0-9F7A9707D0C3.jpeg is resolved by the visible Forms/Letters filter and identical values in both rows of IMG_54F0625D-D0F5-4CF5-8FB0-87CAA9385FAE.jpeg. Master reference DeveloperName=Send_Communication; exact original org ID not needed. Records are not deployed by this capture.
+Remaining custom field values for these two records: none. Both have QualifiedApiName matching DeveloperName. The earlier unassigned observation is resolved by IMG_54F0625D-D0F5-4CF5-8FB0-87CAA9385FAE.jpeg. Field editor defaults/picklist definitions and other dependencies are separate gaps. No deployment is claimed.

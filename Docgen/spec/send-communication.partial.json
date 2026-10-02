@@ -2695,7 +2695,9 @@
               "CNC_Master_Attribute__c": {
                 "referencedType": "CNC_Master_Attributes__mdt",
                 "developerName": "Send_Communication"
-              }
+              },
+              "Is_Selectable__c": true,
+              "Record_Limit_Per_Page__c": 50
             },
             "qualifiedApiName": "Send_Communication_Forms",
             "evidenceScreenshots": [
@@ -2703,12 +2705,18 @@
               "IMG_FFE73573-C622-4D49-A8AC-05A5CF638927.jpeg",
               "IMG_54F0625D-D0F5-4CF5-8FB0-87CAA9385FAE.jpeg"
             ],
-            "customFieldValuesComplete": false,
-            "remainingCustomFields": [
-              "Is_Selectable__c",
-              "Record_Limit_Per_Page__c"
-            ],
-            "captureNotes": "Visible WHERE selects Forms and Letters; all shown scalar values and Master DeveloperName are identical in both rows, establishing association without row-order inference. 14/16 custom fields captured. Record_Limit_Per_Page__c and Is_Selectable__c remain absent."
+            "customFieldValuesComplete": true,
+            "remainingCustomFields": [],
+            "captureNotes": "Visible WHERE selects Forms and Letters; all shown scalar values and Master DeveloperName are identical in both rows, establishing association without row-order inference. 16/16 custom field values captured; final Is_Selectable__c=true and Record_Limit_Per_Page__c=50 confirmed by user in follow-up to the query for both Forms and Letters.",
+            "userConfirmedEvidence": {
+              "date": "2026-10-01",
+              "statement": "True and 50",
+              "appliesTo": [
+                "Is_Selectable__c",
+                "Record_Limit_Per_Page__c"
+              ],
+              "scope": "Both Forms and Letters, in response to the preceding two-record query."
+            }
           },
           {
             "developerName": "Send_Communication_Letters",
@@ -2732,7 +2740,9 @@
               "CNC_Master_Attribute__c": {
                 "referencedType": "CNC_Master_Attributes__mdt",
                 "developerName": "Send_Communication"
-              }
+              },
+              "Is_Selectable__c": true,
+              "Record_Limit_Per_Page__c": 50
             },
             "qualifiedApiName": "Send_Communication_Letters",
             "evidenceScreenshots": [
@@ -2740,12 +2750,18 @@
               "IMG_FFE73573-C622-4D49-A8AC-05A5CF638927.jpeg",
               "IMG_54F0625D-D0F5-4CF5-8FB0-87CAA9385FAE.jpeg"
             ],
-            "customFieldValuesComplete": false,
-            "remainingCustomFields": [
-              "Is_Selectable__c",
-              "Record_Limit_Per_Page__c"
-            ],
-            "captureNotes": "Visible WHERE selects Forms and Letters; all shown scalar values and Master DeveloperName are identical in both rows, establishing association without row-order inference. 14/16 custom fields captured. Record_Limit_Per_Page__c and Is_Selectable__c remain absent."
+            "customFieldValuesComplete": true,
+            "remainingCustomFields": [],
+            "captureNotes": "Visible WHERE selects Forms and Letters; all shown scalar values and Master DeveloperName are identical in both rows, establishing association without row-order inference. 16/16 custom field values captured; final Is_Selectable__c=true and Record_Limit_Per_Page__c=50 confirmed by user in follow-up to the query for both Forms and Letters.",
+            "userConfirmedEvidence": {
+              "date": "2026-10-01",
+              "statement": "True and 50",
+              "appliesTo": [
+                "Is_Selectable__c",
+                "Record_Limit_Per_Page__c"
+              ],
+              "scope": "Both Forms and Letters, in response to the preceding two-record query."
+            }
           },
           {
             "developerName": "Send_Communication_POD",

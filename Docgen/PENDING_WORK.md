@@ -54,6 +54,11 @@ IMG_FF76DE60-C085-4B1E-BEB0-9F7A9707D0C3.jpeg shows two rows with Component_Name
 
 IMG_54F0625D-D0F5-4CF5-8FB0-87CAA9385FAE.jpeg shows the Forms/Letters WHERE filter and identical values in both rows: blank Component_Name__c, Component_Type__c=FlexCards, Order__c=1, blank Query_Clause__c and Master DeveloperName=Send_Communication. These are merged into both canonical records, resolving the earlier unassigned query observation without relying on row order or org IDs. Capture now covers 14/16 custom fields per record. Only Is_Selectable__c and Record_Limit_Per_Page__c remain absent for Forms/Letters. Documents still pending. No deployment.
 
+
+## Forms/Letters record values complete — user confirmation, 2026-10-01
+
+The user confirmed the final two queried values for both Forms and Letters. All 16 custom field values for these two records are now captured in the canonical specification. Do not request their record values again. Documents record values and other previously recorded dependency gaps remain pending. Capture completion does not establish deployment or runtime verification.
+
 ## Current scope
 
 The user authorized further development of missing components except LWCs and custom metadata (MDT). Those dependencies remain deferred, not resolved. Correct the existing inactive v4 draft in myProdOrg; do not create another skeleton. This documentation update does not deploy anything. Previously deployed configuration is partial and has not been runtime validated.
