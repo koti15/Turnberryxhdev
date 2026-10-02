@@ -120,7 +120,38 @@ Visible field definitions captured:
 | URIText | URIText__c | Formula (Text) | 1300 | false |
 | Billing Provider NPI | Billing_Provider_NPI__c | Text(25) | 25 | false |
 
-Important: `Entity_Type__c` is referenced by the captured Data Mapper query, but its field-definition row is **not visible in this screenshot batch**. Do not infer its type from the query alone.
+Additional screenshots resolve this schema gap.
+
+**Entity Type**
+- Label: Entity Type
+- API: `Entity_Type__c`
+- Type: Picklist
+- Displayed length: 255
+- Indexed: false
+- Description: stores entity type such as plan, claim or prior authorization
+- Visible active values: Claim, Prior Authorization, Member, Provider, Plan, Referral, Claim Line
+- No field dependencies or validation rules are shown
+
+**Member Plan**
+- API: `Member_Plan__c`
+- Type: Lookup(Member Plan)
+- Length: 18
+- Indexed: true
+- Related To: Member Plan
+- Related List Label: Case Sub Entity
+- Child Relationship Name: Case_Sub_Entity
+- No lookup filter is defined
+
+**URLText**
+- Label: URLText
+- API: `URLText__c`
+- Type: Formula (Text)
+- Captured formula:
+  `CASE(Entity_Type__c, 'Claim', '/lightning/n/Claims_Details_Page?c__claimId=' & Entity_Value__c, '')`
+- Meaning: only Claim entities receive a URL; the Claims Details Lightning page is opened with `Entity_Value__c` supplied as `c__claimId`.
+
+Additional visible field:
+- Entity Value — `Entity_Value__c` — Text(255) — length 255 — indexed false.
 
 
 ## Pending non-LWC/non-MDT work
