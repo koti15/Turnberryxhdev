@@ -7,7 +7,7 @@ const OmniscriptBaseMixin = Base => class extends Base { omniApplyCallResp(value
 class ShowToastEvent { constructor(value) { this.value = value; } }
 function load(name, className) {
     const file = path.resolve(__dirname, '../../force-app/main/default/lwc', name, `${name}.js`);
-    const source = fs.readFileSync(file, 'utf8').replace(/^import .*\n/gm, '').replace('export default class', 'class').replace(/@api /g, '').replace(/^\s*@wire\([^\n]+\)\n/gm, '\n');
+    const source = fs.readFileSync(file, 'utf8').replace(/\r/g, '').replace(/^import .*\n/gm, '').replace('export default class', 'class').replace(/@api /g, '').replace(/^\s*@wire\([^\n]+\)\n/gm, '\n');
     return new Function('LightningElement', 'OmniscriptBaseMixin', 'ShowToastEvent', source + `;return ${className};`)(LightningElement, OmniscriptBaseMixin, ShowToastEvent);
 }
 const CncDynamicTableSections = load('cncDynamicTableSections', 'CncDynamicTableSections');
