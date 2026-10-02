@@ -1,5 +1,7 @@
 # OmniScript elements and work status
 
+> Historical capture inventory. Current implementation/deployment and seven-area evidence audit are in [CODEX_HANDOFF.md](CODEX_HANDOFF.md) and [PENDING_WORK.md](PENDING_WORK.md). Statements below that all deployment is pending, exact Case formulas/User filter are missing, or all material/channel conditions are missing are superseded. Do not use this inventory alone to request repeated screenshots.
+
 Updated: 2026-10-01. Scope: Send Communication, observed English version 43.
 
 ## Overall tree progress
