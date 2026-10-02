@@ -26,6 +26,16 @@ CNCGetCaseInfo formulas 1–13, User filter, 32 Output mappings and Options are 
 
 Before requesting images, name the absent field and its existing evidence path. Generic "complete=false", unvalidated behavior or historical blockers alone do not justify another capture request.
 
+## Custom Metadata capture — 2026-10-01, 7:36 PM CT
+
+New screenshots establish complete field inventories for CNC_Button_Attribute__mdt (7/7), CNC_Header_Attribute__mdt (9/9) and CNC_Line_Attributes__mdt (16/16), and 2/6 fields for CNC_Search_Attributes__mdt. Exact API names, visible types/lengths, indexed flags and metadata relationship targets are merged into the canonical JSON and the generated configuration below. This is captured evidence, not deployment.
+
+Partial Manage Records inventories contain 12 Button record identities and 54 Header record identities, deduplicated by DeveloperName. No record detail values are shown; none of these names alone proves that it belongs to Send Communication. Do not request these same field-list captures again.
+
+Remaining MDT evidence: Search's other four fields; Internal/External Website field inventory; CNC_Master_Attributes__mdt relationship-target schema; field editor details/defaults/picklist values where required; and actual values for the records used by Forms/Documents. Preserve the Header mismatch: its captured 9-field list has no Type_Attribute_Target__c, while the recorded mapper references that field. Verify rather than inventing it.
+
+No LWC source is supplied in this batch. LWC/MDT implementation remains deferred under the existing scope.
+
 ## Current user instruction: build and deploy the captured portion
 
 On 2026-10-01 the user explicitly instructed: "Give then what ever you had so codex will deploy to my org".
@@ -1722,4 +1732,263 @@ Reconciled exact record, including newer captured formulas and User filter:
 2. IMG_70A81DDB-AC28-42DC-8088-05F8251167CA.jpeg
 3. IMG_A7E26B77-B101-4132-90A9-B8ECE52EC500.jpeg
 4. IMG_7ACBD6F4-31F7-4D59-9114-9D0C1195E8F6.jpeg
+
+
+### customMetadataEvidence
+
+| Property | Captured value |
+| --- | --- |
+| captureDate | 2026-10-01 |
+
+#### customMetadataEvidence.types
+
+##### customMetadataEvidence.types[0]
+
+| Property | Captured value |
+| --- | --- |
+| name | CNC_Button_Attribute__mdt |
+| singularLabel | CNC Button Attribute |
+| pluralLabel | CNC Button Attributes |
+| visibility | Public |
+| reportedCustomFieldCount | 7 |
+| fieldInventoryComplete | true |
+| fieldDefinitionDetailsComplete | false |
+| recordDetailsCaptured | false |
+| recordValues | `null` — unresolved |
+| status | captured-schema-inventory-only-not-deployed |
+
+###### customMetadataEvidence.types[0].fields
+
+| apiName | label | dataType | indexed | fieldManageability | settingsDetailCaptured | defaultValue |
+| --- | --- | --- | --- | --- | --- | --- |
+| Action_Name__c | Action Name | Text(15) | false | Upgradable | false | `null` — unresolved |
+| Button_Label__c | Button Label | Text(15) | false | Upgradable | false | `null` — unresolved |
+| Button_Location__c | Button Location | Text(20) | false | Upgradable | false | `null` — unresolved |
+| CNC_Line_Attributes__c | CNC Line Attributes | Metadata Relationship(CNC Line Attributes) | true | Upgradable | false | `null` — unresolved |
+| CNC_Master_Attributes__c | CNC Master Attributes | Metadata Relationship(CNC Master Attributes) | true | Upgradable | false | `null` — unresolved |
+| Disabled__c | Disabled | Text(5) | false | Upgradable | false | `null` — unresolved |
+| Order__c | Order | Number(18, 0) | false | Upgradable | false | `null` — unresolved |
+
+###### customMetadataEvidence.types[0].evidenceScreenshots
+
+1. IMG_CC9BD776-A527-446E-9DC0-4E749B63CA5C.jpeg
+2. IMG_F5902140-0A3B-4558-BE50-A6A444CD04FD.jpeg
+
+##### customMetadataEvidence.types[1]
+
+| Property | Captured value |
+| --- | --- |
+| name | CNC_Header_Attribute__mdt |
+| singularLabel | CNC Header Attribute |
+| pluralLabel | CNC Header Attributes |
+| visibility | Public |
+| reportedCustomFieldCount | 9 |
+| fieldInventoryComplete | true |
+| fieldDefinitionDetailsComplete | false |
+| recordDetailsCaptured | false |
+| recordValues | `null` — unresolved |
+| status | captured-schema-inventory-only-not-deployed |
+
+###### customMetadataEvidence.types[1].fields
+
+| apiName | label | dataType | indexed | fieldManageability | settingsDetailCaptured | defaultValue |
+| --- | --- | --- | --- | --- | --- | --- |
+| API_Response__c | API Response | Text(50) | false | Upgradable | false | `null` — unresolved |
+| CNC_Line_Attributes__c | CNC Line Attributes | Metadata Relationship(CNC Line Attributes) | true | Upgradable | false | `null` — unresolved |
+| Column_Order__c | Column Order | Number(18, 0) | false | Upgradable | false | `null` — unresolved |
+| Data_Type__c | Data Type | Text(15) | false | Upgradable | false | `null` — unresolved |
+| Default_Value__c | Default Value | Text(255) | false | Upgradable | false | `null` — unresolved |
+| Help_Text__c | Help Text | Text(255) | false | Upgradable | false | `null` — unresolved |
+| Is_Sortable__c | Is Sortable | Checkbox | false | Upgradable | false | `null` — unresolved |
+| Response_Label__c | Response Label | Text(70) | false | Upgradable | false | `null` — unresolved |
+| Wrap_Text__c | Wrap Text | Checkbox | false | Upgradable | false | `null` — unresolved |
+
+###### customMetadataEvidence.types[1].evidenceScreenshots
+
+1. IMG_4A5C39F9-F33E-4410-AC3F-275FDCEDE138.jpeg
+2. IMG_3AB333F1-2CBF-45E5-9485-9190914BB6B3.jpeg
+
+##### customMetadataEvidence.types[2]
+
+| Property | Captured value |
+| --- | --- |
+| name | CNC_Line_Attributes__mdt |
+| singularLabel | CNC Line Attributes |
+| pluralLabel | CNC Line Attributes |
+| visibility | Public |
+| reportedCustomFieldCount | 16 |
+| fieldInventoryComplete | true |
+| fieldDefinitionDetailsComplete | false |
+| recordDetailsCaptured | false |
+| recordValues | `null` — unresolved |
+| status | captured-schema-inventory-only-not-deployed |
+
+###### customMetadataEvidence.types[2].fields
+
+| apiName | label | dataType | indexed | fieldManageability | settingsDetailCaptured | defaultValue |
+| --- | --- | --- | --- | --- | --- | --- |
+| CNC_Master_Attribute__c | CNC Master Attribute | Metadata Relationship(CNC Master Attributes) | true | Upgradable | false | `null` — unresolved |
+| Component_Name__c | Component Name | Text(255) | false | Upgradable | false | `null` — unresolved |
+| Component_Type__c | Component Type | Picklist | false | Upgradable | false | `null` — unresolved |
+| isAccordian__c | isAccordian | Checkbox | false | Upgradable | false | `null` — unresolved |
+| Is_Selectable__c | Is Selectable | Checkbox | false | Upgradable | false | `null` — unresolved |
+| Order__c | Order | Number(18, 0) | false | Upgradable | false | `null` — unresolved |
+| Query_Clause__c | Query Clause | Text(20) | false | Upgradable | false | `null` — unresolved |
+| Record_Limit_Per_Page__c | Record Limit Per Page | Number(18, 0) | false | Upgradable | false | `null` — unresolved |
+| Section_Name__c | Section Name | Text(255) | false | Upgradable | false | `null` — unresolved |
+| Selectable_Type__c | Selectable Type | Picklist | false | Upgradable | false | `null` — unresolved |
+| Show_Filter_By__c | Show Filter By | Checkbox | false | Upgradable | false | `null` — unresolved |
+| Show_Pagination__c | Show Pagination | Checkbox | false | Upgradable | false | `null` — unresolved |
+| Show_Row_Number__c | Show Row Number | Checkbox | false | Upgradable | false | `null` — unresolved |
+| Show_Search__c | Show Search | Checkbox | false | Upgradable | false | `null` — unresolved |
+| Show_ViewAll__c | Show ViewAll | Checkbox | false | Upgradable | false | `null` — unresolved |
+| UI_Type__c | UI Type | Picklist | false | Upgradable | false | `null` — unresolved |
+
+###### customMetadataEvidence.types[2].evidenceScreenshots
+
+1. IMG_7F84F67A-F3A5-4B04-A3E0-FEFA2840BBD7.jpeg
+2. IMG_29048FA2-7C9D-4557-8D4C-9ADFE1EA1A20.jpeg
+
+##### customMetadataEvidence.types[3]
+
+| Property | Captured value |
+| --- | --- |
+| name | CNC_Search_Attributes__mdt |
+| singularLabel | CNC Search Attributes |
+| pluralLabel | CNC Search Attributes |
+| visibility | Public |
+| reportedCustomFieldCount | 6 |
+| fieldInventoryComplete | false |
+| fieldDefinitionDetailsComplete | false |
+| recordDetailsCaptured | false |
+| recordValues | `null` — unresolved |
+| status | captured-schema-inventory-only-not-deployed |
+
+###### customMetadataEvidence.types[3].fields
+
+| apiName | label | dataType | indexed | fieldManageability | settingsDetailCaptured | defaultValue |
+| --- | --- | --- | --- | --- | --- | --- |
+| API_Response__c | API Response | Text(255) | false | Upgradable | false | `null` — unresolved |
+| CNC_Line_Attributes__c | CNC Line Attributes | Metadata Relationship(CNC Line Attributes) | true | Upgradable | false | `null` — unresolved |
+
+###### customMetadataEvidence.types[3].evidenceScreenshots
+
+1. IMG_E84F76EB-303E-4C4C-9C63-D4F0BD7BDEA0.jpeg
+
+#### customMetadataEvidence.dependencies
+
+| name | reason | schemaCaptured | recordsCaptured |
+| --- | --- | --- | --- |
+| CNC_Master_Attributes__mdt | Metadata relationship targets in Button and Line inventories | false | false |
+
+#### customMetadataEvidence.recordInventories
+
+##### customMetadataEvidence.recordInventories[0]
+
+| Property | Captured value |
+| --- | --- |
+| typeName | CNC_Button_Attribute__mdt |
+| inventoryComplete | false |
+
+###### customMetadataEvidence.recordInventories[0].records
+
+| label | developerName | fieldValues |
+| --- | --- | --- |
+| Case Comments | Ref_Case_Comments | `null` — unresolved |
+| New Case | Auth_New_Case | `null` — unresolved |
+| New Case | Claims_New_Case | `null` — unresolved |
+| New Case | External_New_Case | `null` — unresolved |
+| New Case | New_Case | `null` — unresolved |
+| New Case | Ref_New_Case | `null` — unresolved |
+| Provider Search | Provider_Search | `null` — unresolved |
+| View Documents | Auth_View_Documents | `null` — unresolved |
+| View Documents | Plan_Documents | `null` — unresolved |
+| View Documents | Ref_View_Documents | `null` — unresolved |
+| View Documents | View_Documents | `null` — unresolved |
+| View ID Card | View_ID_Card | `null` — unresolved |
+
+###### customMetadataEvidence.recordInventories[0].evidenceScreenshots
+
+1. IMG_37767B2B-AAC2-44A5-9A22-E23515C10137.jpeg
+
+##### customMetadataEvidence.recordInventories[1]
+
+| Property | Captured value |
+| --- | --- |
+| typeName | CNC_Header_Attribute__mdt |
+| inventoryComplete | false |
+
+###### customMetadataEvidence.recordInventories[1].records
+
+| developerName | label | fieldValues |
+| --- | --- | --- |
+| Accum_Name | Account Name | `null` — unresolved |
+| Accum_Billed | Accum Billed | `null` — unresolved |
+| Accum_Claim_Number | Accum Claim Number | `null` — unresolved |
+| Accum_ClaimSubtype | Accum ClaimSubtype | `null` — unresolved |
+| Accum_Date_Claim_Paid | Accum Date Claim Paid | `null` — unresolved |
+| Accum_ProviderName | Accum ProviderName | `null` — unresolved |
+| Accum_ServiceDateFrom | Accum ServiceDateFrom | `null` — unresolved |
+| Accum_ServiceDateThru | Accum ServiceDateThru | `null` — unresolved |
+| Accum_Status | Accum Status | `null` — unresolved |
+| Accums_Limits_Accumulator_Description | Accums Limits Accumulator Description | `null` — unresolved |
+| Accums_Limits_Total_Amount_Limit | Accums Limits Total AmountLimit | `null` — unresolved |
+| Accumulation_Details_Accum_Number | Accumulation_Details_Accum_Number | `null` — unresolved |
+| Accumulation_Details_Accum_Type | Accumulation_Details_Accum_Type | `null` — unresolved |
+| Accumulation_Details_Amt1 | Accumulation_Details_Amt1 | `null` — unresolved |
+| Accumulation_Details_Ctr1 | Accumulation_Details_Ctr1 | `null` — unresolved |
+| Accumulation_Details_Trans_Amt1 | Accumulation_Details_Trans_Amt1 | `null` — unresolved |
+| Accumulation_Details_Trans_Ctr1 | Accumulation_Details_Trans_Ctr1 | `null` — unresolved |
+| Action | Action | `null` — unresolved |
+| Accums_Limits_Carry_Over_Amount_Limit | Accums Limits Carry Over AmountLimit | `null` — unresolved |
+| Accums_Limits_Met_Amount_Limit | Accums Limits Met AmountLimit | `null` — unresolved |
+| Accums_Limits_Period | Accums Limits Period | `null` — unresolved |
+| Accums_Limits_Remaining_Amount_Limit | Accums Limits Remaining AmountLimit | `null` — unresolved |
+| Address | Address | `null` — unresolved |
+| Address1 | Address1 | `null` — unresolved |
+| Address1_POD | Address1_POD | `null` — unresolved |
+| Address2 | Address2 | `null` — unresolved |
+| Address2_POD | Address2_POD | `null` — unresolved |
+| Admission_Date | Admission Date | `null` — unresolved |
+| Admit_Date | Admit Date | `null` — unresolved |
+| Attach_Entity_Member_Id | Attach Entity Member Id | `null` — unresolved |
+| Attach_Entity_Paid | Attach Entity Paid | `null` — unresolved |
+| Attach_Entity_Plan_Description | Attach Entity Plan Description | `null` — unresolved |
+| Attach_Entity_Plan_Effective | Attach Entity Plan Effective | `null` — unresolved |
+| Attach_Entity_Plan_Elderly_Waiver | Attach Entity Plan Elderly Waiver | `null` — unresolved |
+| Attach_Entity_Plan_Group_ID | Attach Entity Plan Group ID | `null` — unresolved |
+| Attach_Entity_Plan_ID | Attach Entity Plan ID | `null` — unresolved |
+| Attach_Entity_Plan_Status | Attach Entity Plan Status | `null` — unresolved |
+| Attach_Entity_Plan_Term | Attach Entity Plan Term | `null` — unresolved |
+| Attach_Entity_Provider | Attach Entity Provider | `null` — unresolved |
+| Attach_Entity_Referral | Attach Entity Referral | `null` — unresolved |
+| Attach_Entity_Relative | Attach Entity Relative | `null` — unresolved |
+| Attach_Entity_Review_Determination | Attach Entity Review Determination | `null` — unresolved |
+| Attach_Entity_Service_Date_From | Attach Entity Service Date From | `null` — unresolved |
+| Attach_Entity_Service_Date_Thru | Attach Entity Service Date Thru | `null` — unresolved |
+| Attach_Entity_Service_Date_To | Attach Entity Service Date To | `null` — unresolved |
+| Attach_Entity_Status | Attach Entity Status | `null` — unresolved |
+| AttachmentControlNbr | AttachmentControlNbr | `null` — unresolved |
+| Auth_Case_Category | Auth_Case_Category | `null` — unresolved |
+| Auth_Case_CreateDate | Auth_Case_CreateDate | `null` — unresolved |
+| Auth_Case_LineOfBusiness | Auth_Case_LineOfBusiness | `null` — unresolved |
+| Auth_Case_Status | Auth_Case_Status | `null` — unresolved |
+| Auth_Case_Subcategory | Auth_Case_Subcategory | `null` — unresolved |
+| Auth_Case_SubSubcategory | Auth_Case_SubSubcategory | `null` — unresolved |
+| Auth_CaseNumber | Auth_CaseNumber | `null` — unresolved |
+
+###### customMetadataEvidence.recordInventories[1].evidenceScreenshots
+
+1. IMG_0491389E-AA15-4741-B2DF-066942D4A06F.jpeg
+2. IMG_0D04879D-90FC-46E8-8852-96DF832B8824.jpeg
+3. IMG_5B44D25C-5BC3-4159-9B34-6CADBB1FEEDB.jpeg
+
+#### customMetadataEvidence.coverageNotes
+
+1. Inventory screenshots show field types/lengths, indexed flags and metadata relationship targets; they do not show field editor defaults, picklist values or relationship settings.
+2. Button 7/7, Header 9/9 and Line 16/16 custom fields inventoried; Search 2/6 visible. Internal/External Website schema is absent from this batch.
+3. Header current inventory has no Type_Attribute_Target__c although captured mapper uses it. Preserve this source mismatch for verification; do not invent a field.
+4. Header/search record lists show names only and do not establish Send Communication membership or any field values.
+5. Record inventories are partial: clipped rows excluded; repeated visible rows deduplicated by DeveloperName.
+6. No LWC source received in this batch. MDT/LWC implementation remains deferred under existing scope.
 
