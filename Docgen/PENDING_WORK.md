@@ -2,6 +2,11 @@
 
 Updated 2026-10-01. Status: pending evidence or implementation, not completed. See [CODEX_HANDOFF.md](CODEX_HANDOFF.md) for the working record and [deployment/captured-audit.json](deployment/captured-audit.json) for the detailed deployment blockers.
 
+
+## Master Entity Type captured — 2026-10-01, 8:24 PM CT
+
+Latest screenshot confirms CNC_Master_Attributes__mdt.Send_Communication → Entity_Type__c = Member. The prior statement that all Master custom values were off-screen is superseded. Master schema/field count remains unverified; do not assume additional fields or ask to repeat this value. Forms/Documents/Letters Line values and nine Header records remain capture-complete. This checkpoint records evidence, not deployment.
+
 ## Documents 15 captured values deployed ? 2026-10-01
 
 Applied latest 8eb3c22 evidence to the same Documents record. Deployment 0Afbm00000hr02kCAA Succeeded; independently verified all 15 captured scalar values. Only CNC_Master_Attribute__c portable reference remains uncaptured. Prior seven-value/nine-missing checkpoint is superseded. Other Header/Button/Search record values and uncaptured schema/full original LWC dependencies remain pending. Both scoped Step1 LWCs deployed and enabled; script inactive.

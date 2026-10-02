@@ -11,6 +11,11 @@ Applied the already-captured 13 exact CNCGetCaseInfo formula expressions/result 
 User reported seeing parent Last Modified at 4:18 PM. Direct query confirmed previous parent timestamp 2026-10-01T21:18:39Z (4:18 PM CT). Prior child/LWC/MDT updates did not modify that parent record. Updated the actual draft Description to reflect deployed scope and remaining gaps; parent LastModifiedDate now 2026-10-02T01:24:22Z (October 1, 8:24 PM CT). Same existing Docgen/SendCommunication/English v4 ID 0jNbm000000gie9EAA; no new script/version created. Independent verification, IDs and exact stored formulas: deployment/latest-seven-step-verification.json. This timestamp update is a status-description update, not proof all seven steps are complete. Step tree/control gaps remain as previously audited, runtime Preview deferred, no upload/generation/delivery.
 
 
+
+## Master Entity Type captured — 2026-10-01, 8:24 PM CT
+
+Latest screenshot confirms CNC_Master_Attributes__mdt.Send_Communication → Entity_Type__c = Member. The prior statement that all Master custom values were off-screen is superseded. Master schema/field count remains unverified; do not assume additional fields or ask to repeat this value. Forms/Documents/Letters Line values and nine Header records remain capture-complete. This checkpoint records evidence, not deployment.
+
 ## Documents 15 captured values deployed ? 2026-10-01
 
 Applied latest 8eb3c22 evidence to the same Documents record. Deployment 0Afbm00000hr02kCAA Succeeded; independently verified all 15 captured scalar values. Only CNC_Master_Attribute__c portable reference remains uncaptured. Prior seven-value/nine-missing checkpoint is superseded. Other Header/Button/Search record values and uncaptured schema/full original LWC dependencies remain pending. Both scoped Step1 LWCs deployed and enabled; script inactive.
@@ -2164,11 +2169,14 @@ Continuation: Header values complete; capture CNC_Master_Attributes__mdt.Send_Co
     "language": "en_US",
     "namespacePrefix": "",
     "qualifiedApiName": "Send_Communication",
-    "fieldValues": null,
+    "fieldValues": {
+      "Entity_Type__c": "Member"
+    },
     "customFieldValuesComplete": false,
-    "captureNotes": "Identity columns captured by FIELDS(ALL) query restricted to DeveloperName Send_Communication. Custom settings are off-screen; record value completion not established.",
+    "captureNotes": "FIELDS(ALL) result confirms identity and Entity_Type__c=Member. This screenshot reaches the Entity_Type__c column. Full Master schema/field count is not yet captured, so do not assume additional custom fields or record completeness; no repeated query is needed for this captured value.",
     "evidenceScreenshots": [
-      "IMG_F3EB90FE-A0BA-4A8A-876D-8D8174409AB5.jpeg"
+      "IMG_F3EB90FE-A0BA-4A8A-876D-8D8174409AB5.jpeg",
+      "IMG_7C2826C2-8ECB-46C9-B934-45E719D76483.jpeg"
     ]
   },
   "headerQueryObservation": {
@@ -2202,4 +2210,4 @@ Continuation: Header values complete; capture CNC_Master_Attributes__mdt.Send_Co
 }
 ```
 
-Continuation: Header labels now resolved by the 8:19 PM checkpoint. Master custom settings remain off-screen; capture the right-side columns of the existing result. Forms/Documents/Letters Line values remain complete.
+Continuation: Master Entity_Type__c=Member is now captured. Verify the Master schema/field count before claiming full record completion. Do not repeat captured values. Forms/Documents/Letters Line and nine Header records remain complete.
