@@ -2664,7 +2664,32 @@
             "label": "Send Communication Documents",
             "language": "en_US",
             "namespacePrefix": "",
-            "fieldValues": null
+            "fieldValues": {
+              "Component_Name__c": "",
+              "Component_Type__c": "FlexCards",
+              "Is_Selectable__c": true,
+              "Order__c": 7,
+              "Query_Clause__c": "",
+              "Record_Limit_Per_Page__c": 50,
+              "Section_Name__c": "Send Communication Documents"
+            },
+            "evidenceScreenshots": [
+              "IMG_CC79B120-66C2-42C0-B5ED-BF2E4CC418D7.jpeg",
+              "IMG_280CA63E-6012-4FF6-AA7D-BCF3533D27CA.jpeg"
+            ],
+            "customFieldValuesComplete": false,
+            "remainingCustomFields": [
+              "CNC_Master_Attribute__c",
+              "isAccordian__c",
+              "Selectable_Type__c",
+              "Show_Filter_By__c",
+              "Show_Pagination__c",
+              "Show_Row_Number__c",
+              "Show_Search__c",
+              "Show_ViewAll__c",
+              "UI_Type__c"
+            ],
+            "captureNotes": "7/16 custom field values visible across two Documents-filtered screenshots. Master reference is shown only as an org ID; portable referenced DeveloperName remains unresolved. Selectable_Type__c is clipped at the right edge; do not infer full value. Other nine fields require remaining columns."
           },
           {
             "developerName": "Send_Communication_Email_Template",

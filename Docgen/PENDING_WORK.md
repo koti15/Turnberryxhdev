@@ -64,6 +64,11 @@ IMG_54F0625D-D0F5-4CF5-8FB0-87CAA9385FAE.jpeg shows the Forms/Letters WHERE filt
 
 The user confirmed the final two queried values for both Forms and Letters. All 16 custom field values for these two records are now captured in the canonical specification. Do not request their record values again. Documents record values and other previously recorded dependency gaps remain pending. Capture completion does not establish deployment or runtime verification.
 
+
+## Documents record capture — 2026-10-01, 8:02 PM CT
+
+Seven of sixteen Documents custom field values are captured from IMG_CC79B120-66C2-42C0-B5ED-BF2E4CC418D7.jpeg and IMG_280CA63E-6012-4FF6-AA7D-BCF3533D27CA.jpeg. See canonical recordInventories and generated configuration below. Nine fields remain unresolved, including the portable Master DeveloperName and clipped Selectable_Type__c. Forms and Letters remain 16/16 complete. No deployment.
+
 ## Current scope
 
 The user authorized further development of missing components except LWCs and custom metadata (MDT). Those dependencies remain deferred, not resolved. Correct the existing inactive v4 draft in myProdOrg; do not create another skeleton. This documentation update does not deploy anything. Previously deployed configuration is partial and has not been runtime validated.

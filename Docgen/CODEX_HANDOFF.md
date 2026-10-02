@@ -34,6 +34,11 @@ Historical absent-LWC/MDT-shell statements are superseded only for the above dep
 
 The user confirmed the final two queried values for both Forms and Letters. All 16 custom field values for these two records are now captured in the canonical specification. Do not request their record values again. Documents record values and other previously recorded dependency gaps remain pending. Capture completion does not establish deployment or runtime verification.
 
+
+## Documents record capture — 2026-10-01, 8:02 PM CT
+
+Seven of sixteen Documents custom field values are captured from IMG_CC79B120-66C2-42C0-B5ED-BF2E4CC418D7.jpeg and IMG_280CA63E-6012-4FF6-AA7D-BCF3533D27CA.jpeg. See canonical recordInventories and generated configuration below. Nine fields remain unresolved, including the portable Master DeveloperName and clipped Selectable_Type__c. Forms and Letters remain 16/16 complete. No deployment.
+
 ## Evidence reconciliation — 2026-10-01, 7:14 PM CT
 
 The prior pending lists mixed uncaptured evidence with implementation work. Exact CNCGetCaseInfo formulas 1–13 and the User filter were already supplied in PENDING_WORK.md but had not been copied into the canonical specification. They are now reconciled in the canonical record and the complete configuration below. The 32 Output mapping paths, Options and prior zero-row Preview observation were already captured; do not request them again. Case Sub Entity and development Member Plan deployment checkpoints above remain valid; formula implementation is separate pending work.
@@ -2043,39 +2048,39 @@ Reconciled exact record, including newer captured formulas and User filter:
 
 ### customMetadataEvidence.recordInventories · CNC_Line_Attributes__mdt
 
-Partial record inventory; namespace blank/language en_US captured. Forms and Letters each have 16/16 custom field values captured. Other rows remain identity-only. Final two values confirmed by the user's “True and 50” response to the query for both records; other values are supported by the recorded screenshots.
+Forms and Letters: 16/16 custom field values captured; Documents: 7/16. Other records remain identity-only. Field schema editor settings and deployment are separate work.
 
 | DeveloperName | MasterLabel | Custom field capture |
 | --- | --- | --- |
 | Send_Communication_Case_Review | Send Communication Case Review | null — off-screen |
 | Send_Communication_Cover_Letter | Send Communication Cover Letter | null — off-screen |
-| Send_Communication_Documents | Send Communication Documents | null — off-screen |
+| Send_Communication_Documents | Send Communication Documents | 7/16 fields |
 | Send_Communication_Email_Template | Send Communication Email Template | null — off-screen |
-| Send_Communication_Forms | Send Communication Forms | 16/16 fields; complete capture |
-| Send_Communication_Letters | Send Communication Letters | 16/16 fields; complete capture |
+| Send_Communication_Forms | Send Communication Forms | 16/16 fields |
+| Send_Communication_Letters | Send Communication Letters | 16/16 fields |
 | Send_Communication_POD | Send Communication POD | null — off-screen |
 | Send_Communication_Paragraph | Send Communication Paragraph | null — off-screen |
 | Send_Communication_Review | Send Communication Review | null — off-screen |
 | Send_Communication_Review_POD | Send Communication Review POD | null — off-screen |
 | Send_Communication_Select_Entity | Send Communication Select Entity | null — off-screen |
 
-| Field | Send_Communication_Forms | Send_Communication_Letters |
-| --- | --- | --- |
-| Section_Name__c | Send Communication Forms | Send Communication Letters |
-| Selectable_Type__c | Check Box | Radio |
-| Show_Filter_By__c | true | true |
-| Show_Pagination__c | true | true |
-| Show_Row_Number__c | false | false |
-| Show_Search__c | false | false |
-| Show_ViewAll__c | false | false |
-| UI_Type__c | Datatable | Datatable |
-| isAccordian__c | false | false |
-| Component_Name__c | "" — captured blank | "" — captured blank |
-| Component_Type__c | FlexCards | FlexCards |
-| Order__c | 1 | 1 |
-| Query_Clause__c | "" — captured blank | "" — captured blank |
-| CNC_Master_Attribute__c | {"referencedType":"CNC_Master_Attributes__mdt","developerName":"Send_Communication"} | {"referencedType":"CNC_Master_Attributes__mdt","developerName":"Send_Communication"} |
-| Is_Selectable__c | true | true |
-| Record_Limit_Per_Page__c | 50 | 50 |
+| Field | Forms | Letters | Documents |
+| --- | --- | --- | --- |
+| CNC_Master_Attribute__c | {"referencedType":"CNC_Master_Attributes__mdt","developerName":"Send_Communication"} | {"referencedType":"CNC_Master_Attributes__mdt","developerName":"Send_Communication"} | null — unresolved |
+| Component_Name__c | "" — captured blank | "" — captured blank | "" — captured blank |
+| Component_Type__c | FlexCards | FlexCards | FlexCards |
+| isAccordian__c | false | false | null — unresolved |
+| Is_Selectable__c | true | true | true |
+| Order__c | 1 | 1 | 7 |
+| Query_Clause__c | "" — captured blank | "" — captured blank | "" — captured blank |
+| Record_Limit_Per_Page__c | 50 | 50 | 50 |
+| Section_Name__c | Send Communication Forms | Send Communication Letters | Send Communication Documents |
+| Selectable_Type__c | Check Box | Radio | null — unresolved |
+| Show_Filter_By__c | true | true | null — unresolved |
+| Show_Pagination__c | true | true | null — unresolved |
+| Show_Row_Number__c | false | false | null — unresolved |
+| Show_Search__c | false | false | null — unresolved |
+| Show_ViewAll__c | false | false | null — unresolved |
+| UI_Type__c | Datatable | Datatable | null — unresolved |
 
-Remaining custom field values for these two records: none. Both have QualifiedApiName matching DeveloperName. The earlier unassigned observation is resolved by IMG_54F0625D-D0F5-4CF5-8FB0-87CAA9385FAE.jpeg. Field editor defaults/picklist definitions and other dependencies are separate gaps. No deployment is claimed.
+Documents remaining: CNC_Master_Attribute__c, isAccordian__c, Selectable_Type__c, Show_Filter_By__c, Show_Pagination__c, Show_Row_Number__c, Show_Search__c, Show_ViewAll__c, UI_Type__c. Master DeveloperName must be verified; the displayed org ID alone is not a portable relationship definition. Selectable_Type__c is clipped. Forms/Letters final two values were user-confirmed as true and 50. Do not request completed fields again. No deployment claimed.
