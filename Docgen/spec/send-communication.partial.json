@@ -5,7 +5,7 @@
   "source": {
     "kind": "user-supplied-designer-screenshots",
     "capturedDate": "2026-10-01",
-    "latestScreenshot": "IMG_7ACBD6F4-31F7-4D59-9114-9D0C1195E8F6.jpeg"
+    "latestScreenshot": "IMG_E84F76EB-303E-4C4C-9C63-D4F0BD7BDEA0.jpeg"
   },
   "omniScript": {
     "displayName": "Send Communication",
@@ -1902,5 +1902,755 @@
         "IMG_7ACBD6F4-31F7-4D59-9114-9D0C1195E8F6.jpeg"
       ]
     }
-  ]
+  ],
+  "customMetadataEvidence": {
+    "types": [
+      {
+        "name": "CNC_Button_Attribute__mdt",
+        "singularLabel": "CNC Button Attribute",
+        "pluralLabel": "CNC Button Attributes",
+        "visibility": "Public",
+        "reportedCustomFieldCount": 7,
+        "fieldInventoryComplete": true,
+        "fields": [
+          {
+            "apiName": "Action_Name__c",
+            "label": "Action Name",
+            "dataType": "Text(15)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Button_Label__c",
+            "label": "Button Label",
+            "dataType": "Text(15)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Button_Location__c",
+            "label": "Button Location",
+            "dataType": "Text(20)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "CNC_Line_Attributes__c",
+            "label": "CNC Line Attributes",
+            "dataType": "Metadata Relationship(CNC Line Attributes)",
+            "indexed": true,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "CNC_Master_Attributes__c",
+            "label": "CNC Master Attributes",
+            "dataType": "Metadata Relationship(CNC Master Attributes)",
+            "indexed": true,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Disabled__c",
+            "label": "Disabled",
+            "dataType": "Text(5)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Order__c",
+            "label": "Order",
+            "dataType": "Number(18, 0)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          }
+        ],
+        "fieldDefinitionDetailsComplete": false,
+        "recordDetailsCaptured": false,
+        "recordValues": null,
+        "evidenceScreenshots": [
+          "IMG_CC9BD776-A527-446E-9DC0-4E749B63CA5C.jpeg",
+          "IMG_F5902140-0A3B-4558-BE50-A6A444CD04FD.jpeg"
+        ],
+        "status": "captured-schema-inventory-only-not-deployed"
+      },
+      {
+        "name": "CNC_Header_Attribute__mdt",
+        "singularLabel": "CNC Header Attribute",
+        "pluralLabel": "CNC Header Attributes",
+        "visibility": "Public",
+        "reportedCustomFieldCount": 9,
+        "fieldInventoryComplete": true,
+        "fields": [
+          {
+            "apiName": "API_Response__c",
+            "label": "API Response",
+            "dataType": "Text(50)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "CNC_Line_Attributes__c",
+            "label": "CNC Line Attributes",
+            "dataType": "Metadata Relationship(CNC Line Attributes)",
+            "indexed": true,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Column_Order__c",
+            "label": "Column Order",
+            "dataType": "Number(18, 0)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Data_Type__c",
+            "label": "Data Type",
+            "dataType": "Text(15)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Default_Value__c",
+            "label": "Default Value",
+            "dataType": "Text(255)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Help_Text__c",
+            "label": "Help Text",
+            "dataType": "Text(255)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Is_Sortable__c",
+            "label": "Is Sortable",
+            "dataType": "Checkbox",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Response_Label__c",
+            "label": "Response Label",
+            "dataType": "Text(70)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Wrap_Text__c",
+            "label": "Wrap Text",
+            "dataType": "Checkbox",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          }
+        ],
+        "fieldDefinitionDetailsComplete": false,
+        "recordDetailsCaptured": false,
+        "recordValues": null,
+        "evidenceScreenshots": [
+          "IMG_4A5C39F9-F33E-4410-AC3F-275FDCEDE138.jpeg",
+          "IMG_3AB333F1-2CBF-45E5-9485-9190914BB6B3.jpeg"
+        ],
+        "status": "captured-schema-inventory-only-not-deployed"
+      },
+      {
+        "name": "CNC_Line_Attributes__mdt",
+        "singularLabel": "CNC Line Attributes",
+        "pluralLabel": "CNC Line Attributes",
+        "visibility": "Public",
+        "reportedCustomFieldCount": 16,
+        "fieldInventoryComplete": true,
+        "fields": [
+          {
+            "apiName": "CNC_Master_Attribute__c",
+            "label": "CNC Master Attribute",
+            "dataType": "Metadata Relationship(CNC Master Attributes)",
+            "indexed": true,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Component_Name__c",
+            "label": "Component Name",
+            "dataType": "Text(255)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Component_Type__c",
+            "label": "Component Type",
+            "dataType": "Picklist",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "isAccordian__c",
+            "label": "isAccordian",
+            "dataType": "Checkbox",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Is_Selectable__c",
+            "label": "Is Selectable",
+            "dataType": "Checkbox",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Order__c",
+            "label": "Order",
+            "dataType": "Number(18, 0)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Query_Clause__c",
+            "label": "Query Clause",
+            "dataType": "Text(20)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Record_Limit_Per_Page__c",
+            "label": "Record Limit Per Page",
+            "dataType": "Number(18, 0)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Section_Name__c",
+            "label": "Section Name",
+            "dataType": "Text(255)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Selectable_Type__c",
+            "label": "Selectable Type",
+            "dataType": "Picklist",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Show_Filter_By__c",
+            "label": "Show Filter By",
+            "dataType": "Checkbox",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Show_Pagination__c",
+            "label": "Show Pagination",
+            "dataType": "Checkbox",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Show_Row_Number__c",
+            "label": "Show Row Number",
+            "dataType": "Checkbox",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Show_Search__c",
+            "label": "Show Search",
+            "dataType": "Checkbox",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Show_ViewAll__c",
+            "label": "Show ViewAll",
+            "dataType": "Checkbox",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "UI_Type__c",
+            "label": "UI Type",
+            "dataType": "Picklist",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          }
+        ],
+        "fieldDefinitionDetailsComplete": false,
+        "recordDetailsCaptured": false,
+        "recordValues": null,
+        "evidenceScreenshots": [
+          "IMG_7F84F67A-F3A5-4B04-A3E0-FEFA2840BBD7.jpeg",
+          "IMG_29048FA2-7C9D-4557-8D4C-9ADFE1EA1A20.jpeg"
+        ],
+        "status": "captured-schema-inventory-only-not-deployed"
+      },
+      {
+        "name": "CNC_Search_Attributes__mdt",
+        "singularLabel": "CNC Search Attributes",
+        "pluralLabel": "CNC Search Attributes",
+        "visibility": "Public",
+        "reportedCustomFieldCount": 6,
+        "fieldInventoryComplete": false,
+        "fields": [
+          {
+            "apiName": "API_Response__c",
+            "label": "API Response",
+            "dataType": "Text(255)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "CNC_Line_Attributes__c",
+            "label": "CNC Line Attributes",
+            "dataType": "Metadata Relationship(CNC Line Attributes)",
+            "indexed": true,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          }
+        ],
+        "fieldDefinitionDetailsComplete": false,
+        "recordDetailsCaptured": false,
+        "recordValues": null,
+        "evidenceScreenshots": [
+          "IMG_E84F76EB-303E-4C4C-9C63-D4F0BD7BDEA0.jpeg"
+        ],
+        "status": "captured-schema-inventory-only-not-deployed"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "CNC_Master_Attributes__mdt",
+        "reason": "Metadata relationship targets in Button and Line inventories",
+        "schemaCaptured": false,
+        "recordsCaptured": false
+      }
+    ],
+    "recordInventories": [
+      {
+        "typeName": "CNC_Button_Attribute__mdt",
+        "records": [
+          {
+            "label": "Case Comments",
+            "developerName": "Ref_Case_Comments",
+            "fieldValues": null
+          },
+          {
+            "label": "New Case",
+            "developerName": "Auth_New_Case",
+            "fieldValues": null
+          },
+          {
+            "label": "New Case",
+            "developerName": "Claims_New_Case",
+            "fieldValues": null
+          },
+          {
+            "label": "New Case",
+            "developerName": "External_New_Case",
+            "fieldValues": null
+          },
+          {
+            "label": "New Case",
+            "developerName": "New_Case",
+            "fieldValues": null
+          },
+          {
+            "label": "New Case",
+            "developerName": "Ref_New_Case",
+            "fieldValues": null
+          },
+          {
+            "label": "Provider Search",
+            "developerName": "Provider_Search",
+            "fieldValues": null
+          },
+          {
+            "label": "View Documents",
+            "developerName": "Auth_View_Documents",
+            "fieldValues": null
+          },
+          {
+            "label": "View Documents",
+            "developerName": "Plan_Documents",
+            "fieldValues": null
+          },
+          {
+            "label": "View Documents",
+            "developerName": "Ref_View_Documents",
+            "fieldValues": null
+          },
+          {
+            "label": "View Documents",
+            "developerName": "View_Documents",
+            "fieldValues": null
+          },
+          {
+            "label": "View ID Card",
+            "developerName": "View_ID_Card",
+            "fieldValues": null
+          }
+        ],
+        "evidenceScreenshots": [
+          "IMG_37767B2B-AAC2-44A5-9A22-E23515C10137.jpeg"
+        ],
+        "inventoryComplete": false
+      },
+      {
+        "typeName": "CNC_Header_Attribute__mdt",
+        "records": [
+          {
+            "developerName": "Accum_Name",
+            "label": "Account Name",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accum_Billed",
+            "label": "Accum Billed",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accum_Claim_Number",
+            "label": "Accum Claim Number",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accum_ClaimSubtype",
+            "label": "Accum ClaimSubtype",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accum_Date_Claim_Paid",
+            "label": "Accum Date Claim Paid",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accum_ProviderName",
+            "label": "Accum ProviderName",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accum_ServiceDateFrom",
+            "label": "Accum ServiceDateFrom",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accum_ServiceDateThru",
+            "label": "Accum ServiceDateThru",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accum_Status",
+            "label": "Accum Status",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accums_Limits_Accumulator_Description",
+            "label": "Accums Limits Accumulator Description",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accums_Limits_Total_Amount_Limit",
+            "label": "Accums Limits Total AmountLimit",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accumulation_Details_Accum_Number",
+            "label": "Accumulation_Details_Accum_Number",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accumulation_Details_Accum_Type",
+            "label": "Accumulation_Details_Accum_Type",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accumulation_Details_Amt1",
+            "label": "Accumulation_Details_Amt1",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accumulation_Details_Ctr1",
+            "label": "Accumulation_Details_Ctr1",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accumulation_Details_Trans_Amt1",
+            "label": "Accumulation_Details_Trans_Amt1",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accumulation_Details_Trans_Ctr1",
+            "label": "Accumulation_Details_Trans_Ctr1",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Action",
+            "label": "Action",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accums_Limits_Carry_Over_Amount_Limit",
+            "label": "Accums Limits Carry Over AmountLimit",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accums_Limits_Met_Amount_Limit",
+            "label": "Accums Limits Met AmountLimit",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accums_Limits_Period",
+            "label": "Accums Limits Period",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accums_Limits_Remaining_Amount_Limit",
+            "label": "Accums Limits Remaining AmountLimit",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Address",
+            "label": "Address",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Address1",
+            "label": "Address1",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Address1_POD",
+            "label": "Address1_POD",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Address2",
+            "label": "Address2",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Address2_POD",
+            "label": "Address2_POD",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Admission_Date",
+            "label": "Admission Date",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Admit_Date",
+            "label": "Admit Date",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Member_Id",
+            "label": "Attach Entity Member Id",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Paid",
+            "label": "Attach Entity Paid",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Plan_Description",
+            "label": "Attach Entity Plan Description",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Plan_Effective",
+            "label": "Attach Entity Plan Effective",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Plan_Elderly_Waiver",
+            "label": "Attach Entity Plan Elderly Waiver",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Plan_Group_ID",
+            "label": "Attach Entity Plan Group ID",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Plan_ID",
+            "label": "Attach Entity Plan ID",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Plan_Status",
+            "label": "Attach Entity Plan Status",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Plan_Term",
+            "label": "Attach Entity Plan Term",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Provider",
+            "label": "Attach Entity Provider",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Referral",
+            "label": "Attach Entity Referral",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Relative",
+            "label": "Attach Entity Relative",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Review_Determination",
+            "label": "Attach Entity Review Determination",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Service_Date_From",
+            "label": "Attach Entity Service Date From",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Service_Date_Thru",
+            "label": "Attach Entity Service Date Thru",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Service_Date_To",
+            "label": "Attach Entity Service Date To",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Status",
+            "label": "Attach Entity Status",
+            "fieldValues": null
+          },
+          {
+            "developerName": "AttachmentControlNbr",
+            "label": "AttachmentControlNbr",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Auth_Case_Category",
+            "label": "Auth_Case_Category",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Auth_Case_CreateDate",
+            "label": "Auth_Case_CreateDate",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Auth_Case_LineOfBusiness",
+            "label": "Auth_Case_LineOfBusiness",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Auth_Case_Status",
+            "label": "Auth_Case_Status",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Auth_Case_Subcategory",
+            "label": "Auth_Case_Subcategory",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Auth_Case_SubSubcategory",
+            "label": "Auth_Case_SubSubcategory",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Auth_CaseNumber",
+            "label": "Auth_CaseNumber",
+            "fieldValues": null
+          }
+        ],
+        "evidenceScreenshots": [
+          "IMG_0491389E-AA15-4741-B2DF-066942D4A06F.jpeg",
+          "IMG_0D04879D-90FC-46E8-8852-96DF832B8824.jpeg",
+          "IMG_5B44D25C-5BC3-4159-9B34-6CADBB1FEEDB.jpeg"
+        ],
+        "inventoryComplete": false
+      }
+    ],
+    "captureDate": "2026-10-01",
+    "coverageNotes": [
+      "Inventory screenshots show field types/lengths, indexed flags and metadata relationship targets; they do not show field editor defaults, picklist values or relationship settings.",
+      "Button 7/7, Header 9/9 and Line 16/16 custom fields inventoried; Search 2/6 visible. Internal/External Website schema is absent from this batch.",
+      "Header current inventory has no Type_Attribute_Target__c although captured mapper uses it. Preserve this source mismatch for verification; do not invent a field.",
+      "Header/search record lists show names only and do not establish Send Communication membership or any field values.",
+      "Record inventories are partial: clipped rows excluded; repeated visible rows deduplicated by DeveloperName.",
+      "No LWC source received in this batch. MDT/LWC implementation remains deferred under existing scope."
+    ]
+  }
 }
