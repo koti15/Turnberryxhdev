@@ -1,0 +1,23 @@
+{
+  "orgId": "00Dbm00000phCerEAE",
+  "targetAlias": "myProdOrg",
+  "retrievedDate": "2026-10-05",
+  "sources": [
+    {
+      "name": "caseTrigger",
+      "id": "01qbm00000AemwDAAR",
+      "sha256": "b56e5b3e8722ddcd4f5162c3566515eb468501f02ae70b59571cec868135efbc"
+    },
+    {
+      "name": "caseTriggerHandler",
+      "id": "01pbm00000WHdNVAA1",
+      "sha256": "84542b2279aba5d47c8f5fcf8697faea5f0e722bec0edeb8057baeb10e79d5d7"
+    }
+  ],
+  "changes": [
+    "Recovered original CNC names; excluded empty org wrappers.",
+    "Repaired broken documentation and disabled-block comment delimiters, preserving dormant blocks.",
+    "handleBeforeUpdate: null-safe value comparison, empty-input guard, use supplied oldMap, bulk old-parent query; removed unused Account query.",
+    "Trigger metadata Inactive. No Salesforce writes."
+  ]
+}

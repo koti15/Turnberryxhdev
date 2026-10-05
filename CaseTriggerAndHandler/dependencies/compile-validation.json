@@ -1,0 +1,1459 @@
+{
+  "id": "0Afbm00000iCbiQCAS",
+  "status": "Failed",
+  "checkOnly": true,
+  "success": false,
+  "numberComponentErrors": 207,
+  "numberComponentsDeployed": 0,
+  "failures": [
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 18,
+      "columnNumber": 96,
+      "problem": "Variable does not exist: CNC_Constants"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 57,
+      "columnNumber": 34,
+      "problem": "External string does not exist: CNC_NonParentCaseOwner_ErrorMessage"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 62,
+      "columnNumber": 34,
+      "problem": "External string does not exist: CNC_NonParentCaseOwner_ErrorMessage"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 69,
+      "columnNumber": 34,
+      "problem": "External string does not exist: CNC_NonCaseOwner_ErrorMessage"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 74,
+      "columnNumber": 34,
+      "problem": "External string does not exist: CNC_NonParentCaseOwner_ErrorMessage"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 80,
+      "columnNumber": 34,
+      "problem": "External string does not exist: CNC_NonParentCaseOwner_ErrorMessage"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 85,
+      "columnNumber": 174,
+      "problem": "Variable does not exist: CNC_Constants"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 87,
+      "columnNumber": 65,
+      "problem": "Variable does not exist: CNC_Constants"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 91,
+      "columnNumber": 43,
+      "problem": "Variable does not exist: Is_A_Batch_Automation__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 92,
+      "columnNumber": 38,
+      "problem": "External string does not exist: CNC_NonCaseOwner_ErrorMessage"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 98,
+      "columnNumber": 38,
+      "problem": "Variable does not exist: CNC_Constants"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 98,
+      "columnNumber": 86,
+      "problem": "Variable does not exist: recordTypeId"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 102,
+      "columnNumber": 28,
+      "problem": "Variable does not exist: Follow_up_Date__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 102,
+      "columnNumber": 72,
+      "problem": "Variable does not exist: Follow_up_Date__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 103,
+      "columnNumber": 46,
+      "problem": "Variable does not exist: Follow_up_Date__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 104,
+      "columnNumber": 69,
+      "problem": "Variable does not exist: CNC_Constants"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 126,
+      "columnNumber": 85,
+      "problem": "Variable does not exist: CNC_Constants"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 126,
+      "columnNumber": 133,
+      "problem": "Variable does not exist: Case_Closure_Reason__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 143,
+      "columnNumber": 34,
+      "problem": "External string does not exist: CNC_Pending_Task_errorMessage"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 150,
+      "columnNumber": 89,
+      "problem": "Variable does not exist: CNC_Constants"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 184,
+      "columnNumber": 7,
+      "problem": "Invalid type: Authentication__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 190,
+      "columnNumber": 54,
+      "problem": "Variable does not exist: Case_Closure_Reason__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 191,
+      "columnNumber": 25,
+      "problem": "Variable does not exist: Case_Closure_Reason__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 193,
+      "columnNumber": 51,
+      "problem": "Variable does not exist: On_Hold_Reason__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 194,
+      "columnNumber": 25,
+      "problem": "Variable does not exist: On_Hold_Reason__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 198,
+      "columnNumber": 30,
+      "problem": "Variable does not exist: Attachment_Control_Number__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 198,
+      "columnNumber": 106,
+      "problem": "Variable does not exist: Signature_Date__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 198,
+      "columnNumber": 143,
+      "problem": "Variable does not exist: Call_Outcome__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 198,
+      "columnNumber": 177,
+      "problem": "Variable does not exist: Amount_at_issue__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 200,
+      "columnNumber": 30,
+      "problem": "Variable does not exist: Attachment_Control_Number__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 202,
+      "columnNumber": 30,
+      "problem": "Variable does not exist: Signature_Date__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 204,
+      "columnNumber": 34,
+      "problem": "Variable does not exist: Call_Outcome__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 206,
+      "columnNumber": 30,
+      "problem": "Variable does not exist: Amount_at_issue__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 209,
+      "columnNumber": 30,
+      "problem": "Variable does not exist: Case_Category__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 209,
+      "columnNumber": 79,
+      "problem": "Variable does not exist: Case_Category__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 210,
+      "columnNumber": 33,
+      "problem": "Variable does not exist: Case_Category__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 210,
+      "columnNumber": 90,
+      "problem": "Variable does not exist: Case_Category__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 211,
+      "columnNumber": 33,
+      "problem": "Variable does not exist: Case_Category__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 211,
+      "columnNumber": 89,
+      "problem": "Variable does not exist: Provider_Appeal_Outcome__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 212,
+      "columnNumber": 37,
+      "problem": "Variable does not exist: Provider_Appeal_Outcome__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 214,
+      "columnNumber": 32,
+      "problem": "Variable does not exist: Helios_Task_ID__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 215,
+      "columnNumber": 33,
+      "problem": "Variable does not exist: Helios_Task_ID__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 217,
+      "columnNumber": 32,
+      "problem": "Variable does not exist: Source_System__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 218,
+      "columnNumber": 42,
+      "problem": "External string does not exist: CNCCloneCaseIVRError"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 220,
+      "columnNumber": 21,
+      "problem": "Variable does not exist: authDetails"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 220,
+      "columnNumber": 46,
+      "problem": "Variable does not exist: authDetails"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 221,
+      "columnNumber": 65,
+      "problem": "Variable does not exist: Account_Name__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 221,
+      "columnNumber": 123,
+      "problem": "Variable does not exist: OwnerId"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 222,
+      "columnNumber": 73,
+      "problem": "Variable does not exist: Contact_Id__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 222,
+      "columnNumber": 37,
+      "problem": "Variable does not exist: Call_Contact_ID__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 223,
+      "columnNumber": 71,
+      "problem": "Variable does not exist: Master_Contact_Id__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 223,
+      "columnNumber": 37,
+      "problem": "Variable does not exist: Call_Master_ID__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 228,
+      "columnNumber": 44,
+      "problem": "select id,Subject,Received_Date__c,Amount_at_issue__c\n                    ^\nERROR at Row:1:Column:21\nNo such column 'Received_Date__c' on entity 'Case'. If you are attempting to use a custom field, be sure to append the '__c' after the custom field name. Please reference your WSDL or the describe call for the appropriate names."
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 230,
+      "columnNumber": 29,
+      "problem": "Variable does not exist: Received_Date__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 230,
+      "columnNumber": 74,
+      "problem": "Variable does not exist: Received_Date__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 230,
+      "columnNumber": 101,
+      "problem": "Variable does not exist: Received_Date__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 231,
+      "columnNumber": 30,
+      "problem": "Variable does not exist: Received_Date__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 254,
+      "columnNumber": 43,
+      "problem": "Variable does not exist: Case_Category__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 255,
+      "columnNumber": 45,
+      "problem": "Variable does not exist: Case_Sub_Category__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 256,
+      "columnNumber": 54,
+      "problem": "Variable does not exist: Case_Category__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 257,
+      "columnNumber": 57,
+      "problem": "Variable does not exist: Case_Sub_Category__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 258,
+      "columnNumber": 31,
+      "problem": "Variable does not exist: Case_Sub_SubCategory__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 259,
+      "columnNumber": 64,
+      "problem": "Variable does not exist: Case_Sub_SubCategory__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 267,
+      "columnNumber": 118,
+      "problem": "Variable does not exist: CNC_Constants"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 272,
+      "columnNumber": 63,
+      "problem": "Variable does not exist: CNC_Constants"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 275,
+      "columnNumber": 33,
+      "problem": "Variable does not exist: Case_Article_Subject__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 278,
+      "columnNumber": 33,
+      "problem": "Variable does not exist: Case_Article_Subject__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 291,
+      "columnNumber": 55,
+      "problem": "select Id,Line_Of_Business__pc from Account\n           ^\nERROR at Row:1:Column:12\nNo such column 'Line_Of_Business__pc' on entity 'Account'. If you are attempting to use a custom field, be sure to append the '__c' after the custom field name. Please reference your WSDL or the describe call for the appropriate names."
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 295,
+      "columnNumber": 55,
+      "problem": "Variable does not exist: LOB__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 296,
+      "columnNumber": 39,
+      "problem": "Variable does not exist: Line_of_Business__pc"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 297,
+      "columnNumber": 57,
+      "problem": "Variable does not exist: Line_of_Business__pc"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 297,
+      "columnNumber": 33,
+      "problem": "Variable does not exist: LOB__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 300,
+      "columnNumber": 33,
+      "problem": "Variable does not exist: LOB__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 306,
+      "columnNumber": 77,
+      "problem": "Variable does not exist: LOB__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 306,
+      "columnNumber": 153,
+      "problem": "Variable does not exist: LOB__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 311,
+      "columnNumber": 57,
+      "problem": "Variable does not exist: Line_of_Business__pc"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 311,
+      "columnNumber": 33,
+      "problem": "Variable does not exist: LOB__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 316,
+      "columnNumber": 53,
+      "problem": "Variable does not exist: Line_of_Business__pc"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 316,
+      "columnNumber": 29,
+      "problem": "Variable does not exist: LOB__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 331,
+      "columnNumber": 9,
+      "problem": "Invalid type: CNC_Grievance_Code_Mapping__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 332,
+      "columnNumber": 13,
+      "problem": "Invalid type: CNC_Grievance_Code_Mapping__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 333,
+      "columnNumber": 26,
+      "problem": "Variable does not exist: objGrievance"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 336,
+      "columnNumber": 59,
+      "problem": "Variable does not exist: CNC_Constants"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 337,
+      "columnNumber": 38,
+      "problem": "Variable does not exist: objGrievance"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 337,
+      "columnNumber": 63,
+      "problem": "Variable does not exist: objGrievance"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 342,
+      "columnNumber": 9,
+      "problem": "Invalid type: CNC_Grievance_Code_Mapping__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 343,
+      "columnNumber": 13,
+      "problem": "Invalid type: CNC_Grievance_Code_Mapping__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 344,
+      "columnNumber": 35,
+      "problem": "Variable does not exist: objGrievance"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 344,
+      "columnNumber": 60,
+      "problem": "Variable does not exist: objGrievance"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 351,
+      "columnNumber": 56,
+      "problem": "Variable does not exist: CNC_Constants"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 352,
+      "columnNumber": 53,
+      "problem": "Variable does not exist: Oral_Grievance_Outcome__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 353,
+      "columnNumber": 72,
+      "problem": "Variable does not exist: Oral_Grievance_Outcome__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 353,
+      "columnNumber": 29,
+      "problem": "Variable does not exist: Outcome_Code__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 357,
+      "columnNumber": 54,
+      "problem": "Variable does not exist: Issue__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 358,
+      "columnNumber": 71,
+      "problem": "Variable does not exist: Issue__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 358,
+      "columnNumber": 25,
+      "problem": "Variable does not exist: Issue_Code__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 360,
+      "columnNumber": 54,
+      "problem": "Variable does not exist: Service__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 361,
+      "columnNumber": 73,
+      "problem": "Variable does not exist: Service__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 361,
+      "columnNumber": 25,
+      "problem": "Variable does not exist: Service_Code__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 368,
+      "columnNumber": 55,
+      "problem": "select Id,Line_Of_Business__pc,Name from Account\n           ^\nERROR at Row:1:Column:12\nNo such column 'Line_Of_Business__pc' on entity 'Account'. If you are attempting to use a custom field, be sure to append the '__c' after the custom field name. Please reference your WSDL or the describe call for the appropriate names."
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 369,
+      "columnNumber": 58,
+      "problem": "select Id,Line_Of_Business__pc,Name from Account\n           ^\nERROR at Row:1:Column:12\nNo such column 'Line_Of_Business__pc' on entity 'Account'. If you are attempting to use a custom field, be sure to append the '__c' after the custom field name. Please reference your WSDL or the describe call for the appropriate names."
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 374,
+      "columnNumber": 36,
+      "problem": "External string does not exist: CNC_Case_ISC_Categories"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 376,
+      "columnNumber": 34,
+      "problem": "Variable does not exist: Case_Category__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 376,
+      "columnNumber": 60,
+      "problem": "Variable does not exist: Case_Sub_Category__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 379,
+      "columnNumber": 27,
+      "problem": "select Id, OwnerId, CaseNumber, Previous_Owner__c,Case_Category__c\n                                ^\nERROR at Row:1:Column:33\nNo such column 'Previous_Owner__c' on entity 'Case'. If you are attempting to use a custom field, be sure to append the '__c' after the custom field name. Please reference your WSDL or the describe call for the appropriate names."
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 380,
+      "columnNumber": 27,
+      "problem": "External string does not exist: CNC_Case_Required_Fields_Error"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 390,
+      "columnNumber": 29,
+      "problem": "Variable does not exist: Case_Category__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 390,
+      "columnNumber": 75,
+      "problem": "Variable does not exist: Case_Sub_Category__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 390,
+      "columnNumber": 122,
+      "problem": "Variable does not exist: Source_System__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 390,
+      "columnNumber": 142,
+      "problem": "Variable does not exist: CNC_Constants"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 395,
+      "columnNumber": 33,
+      "problem": "Variable does not exist: Source_Category__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 395,
+      "columnNumber": 74,
+      "problem": "Variable does not exist: Source_Category__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 395,
+      "columnNumber": 113,
+      "problem": "Variable does not exist: Source_Category__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 395,
+      "columnNumber": 157,
+      "problem": "Variable does not exist: Signature_Date__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 399,
+      "columnNumber": 32,
+      "problem": "Variable does not exist: Source_Category__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 399,
+      "columnNumber": 74,
+      "problem": "Variable does not exist: Attachment_Control_Number__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 426,
+      "columnNumber": 31,
+      "problem": "SELECT Id, RecordType.Name, Record_Type__c, PersonContact.Name\n                            ^\nERROR at Row:1:Column:29\nNo such column 'Record_Type__c' on entity 'Account'. If you are attempting to use a custom field, be sure to append the '__c' after the custom field name. Please reference your WSDL or the describe call for the appropriate names."
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 440,
+      "columnNumber": 37,
+      "problem": "Variable does not exist: Relationship__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 440,
+      "columnNumber": 56,
+      "problem": "Variable does not exist: CNC_Constants"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 441,
+      "columnNumber": 63,
+      "problem": "Variable does not exist: CNC_Constants"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 441,
+      "columnNumber": 141,
+      "problem": "Variable does not exist: CNC_Constants"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 441,
+      "columnNumber": 203,
+      "problem": "Variable does not exist: LOB__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 446,
+      "columnNumber": 60,
+      "problem": "Variable does not exist: Caller_Name__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 447,
+      "columnNumber": 45,
+      "problem": "Variable does not exist: Caller_Name__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 451,
+      "columnNumber": 42,
+      "problem": "Variable does not exist: Relationship__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 451,
+      "columnNumber": 61,
+      "problem": "Variable does not exist: CNC_Constants"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 452,
+      "columnNumber": 68,
+      "problem": "Variable does not exist: CNC_Constants"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 452,
+      "columnNumber": 156,
+      "problem": "Variable does not exist: CNC_Constants"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 452,
+      "columnNumber": 212,
+      "problem": "Variable does not exist: LOB__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 454,
+      "columnNumber": 65,
+      "problem": "Variable does not exist: Caller_Name__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 455,
+      "columnNumber": 50,
+      "problem": "Variable does not exist: Caller_Name__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 459,
+      "columnNumber": 57,
+      "problem": "Variable does not exist: Caller_Name__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 460,
+      "columnNumber": 46,
+      "problem": "External string does not exist: CNC_InquirerName_Required_Error"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 467,
+      "columnNumber": 13,
+      "problem": "Variable does not exist: CNC_HandleCustomException"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 477,
+      "columnNumber": 72,
+      "problem": "Variable does not exist: Follow_up_Date__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 477,
+      "columnNumber": 124,
+      "problem": "Variable does not exist: Task_Comment__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 478,
+      "columnNumber": 42,
+      "problem": "External string does not exist: CNC_FollowUpDate_Empty"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 487,
+      "columnNumber": 40,
+      "problem": "Select Id, OwnerId, BypassTask__c From Task Where WhatId\n                    ^\nERROR at Row:1:Column:21\nNo such column 'BypassTask__c' on entity 'Task'. If you are attempting to use a custom field, be sure to append the '__c' after the custom field name. Please reference your WSDL or the describe call for the appropriate names."
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 488,
+      "columnNumber": 36,
+      "problem": "Variable does not exist: BypassTask__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 489,
+      "columnNumber": 37,
+      "problem": "Variable does not exist: BypassTask__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 492,
+      "columnNumber": 37,
+      "problem": "Variable does not exist: BypassTask__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 508,
+      "columnNumber": 13,
+      "problem": "Variable does not exist: CNC_HandleCustomException"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 540,
+      "columnNumber": 32,
+      "problem": "Variable does not exist: CNC_Constants"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 540,
+      "columnNumber": 80,
+      "problem": "Variable does not exist: CNC_Constants"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 541,
+      "columnNumber": 21,
+      "problem": "Invalid type: Case_Routing_And_Category_Assignments__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 546,
+      "columnNumber": 55,
+      "problem": "Variable does not exist: caseRule"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 546,
+      "columnNumber": 36,
+      "problem": "Variable does not exist: Case_Owner_BU__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 552,
+      "columnNumber": 29,
+      "problem": "Select Id, Business_Value__c, Name from User\n           ^\nERROR at Row:1:Column:12\nNo such column 'Business_Value__c' on entity 'User'. If you are attempting to use a custom field, be sure to append the '__c' after the custom field name. Please reference your WSDL or the describe call for the appropriate names."
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 555,
+      "columnNumber": 56,
+      "problem": "Variable does not exist: Business_Value__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 555,
+      "columnNumber": 32,
+      "problem": "Variable does not exist: Case_Owner_BU__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 562,
+      "columnNumber": 13,
+      "problem": "Variable does not exist: CNC_HandleCustomException"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 569,
+      "columnNumber": 9,
+      "problem": "Invalid type: Case_Documents__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 573,
+      "columnNumber": 9,
+      "problem": "Invalid type: Case_Documents__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 575,
+      "columnNumber": 84,
+      "problem": "Variable does not exist: Case_Closure_Reason__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 576,
+      "columnNumber": 21,
+      "problem": "Variable does not exist: caseDocuments"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 577,
+      "columnNumber": 25,
+      "problem": "Invalid type: Case_Documents__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 578,
+      "columnNumber": 37,
+      "problem": "Variable does not exist: doc"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 578,
+      "columnNumber": 52,
+      "problem": "Variable does not exist: doc"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 579,
+      "columnNumber": 41,
+      "problem": "External string does not exist: CNCDocumentPropertiesValidationMessage"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 595,
+      "columnNumber": 25,
+      "problem": "Select Id, Record_Type__c from Account where\n           ^\nERROR at Row:1:Column:12\nNo such column 'Record_Type__c' on entity 'Account'. If you are attempting to use a custom field, be sure to append the '__c' after the custom field name. Please reference your WSDL or the describe call for the appropriate names."
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 596,
+      "columnNumber": 42,
+      "problem": "Variable does not exist: Record_Type__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 604,
+      "columnNumber": 41,
+      "problem": "External string does not exist: CNCProviderEntityErrorMessage"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 606,
+      "columnNumber": 41,
+      "problem": "External string does not exist: CNCMemberEntityErrorMessage"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 617,
+      "columnNumber": 30,
+      "problem": "External string does not exist: CNCPreventCaseDeletion"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 624,
+      "columnNumber": 85,
+      "problem": "Variable does not exist: Source_System__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 637,
+      "columnNumber": 43,
+      "problem": "Invalid type: Schema.Case_Documents__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 637,
+      "columnNumber": 13,
+      "problem": "Invalid type: Case_Documents__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 638,
+      "columnNumber": 30,
+      "problem": "Variable does not exist: payerDocs"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 645,
+      "columnNumber": 9,
+      "problem": "Invalid type: Case_Documents__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 647,
+      "columnNumber": 12,
+      "problem": "Variable does not exist: allCaseDocumetsDetails"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 650,
+      "columnNumber": 13,
+      "problem": "Variable does not exist: CNC_AppealsUpdateController"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 652,
+      "columnNumber": 40,
+      "problem": "Variable does not exist: allCaseDocumetsDetails"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 653,
+      "columnNumber": 13,
+      "problem": "Variable does not exist: CNC_AppealsUpdateController"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 662,
+      "columnNumber": 9,
+      "problem": "Invalid type: Case_Documents__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 663,
+      "columnNumber": 45,
+      "problem": "Invalid type: Schema.Case_Documents__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 663,
+      "columnNumber": 13,
+      "problem": "Invalid type: Case_Documents__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 664,
+      "columnNumber": 13,
+      "problem": "Variable does not exist: caseIdDocumentsMap"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 664,
+      "columnNumber": 36,
+      "problem": "Variable does not exist: objCaseDocs"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 669,
+      "columnNumber": 53,
+      "problem": "Variable does not exist: caseIdDocumentsMap"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 673,
+      "columnNumber": 43,
+      "problem": "Variable does not exist: caseIdDocumentsMap"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 722,
+      "columnNumber": 130,
+      "problem": "Variable does not exist: CNC_Constants"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 724,
+      "columnNumber": 74,
+      "problem": "Variable does not exist: CNC_Constants"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 725,
+      "columnNumber": 34,
+      "problem": "External string does not exist: CNCPreventCaseClosure"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 735,
+      "columnNumber": 13,
+      "problem": "Invalid type: OutOfOffice"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 736,
+      "columnNumber": 37,
+      "problem": "Variable does not exist: CNC_CaseAutoReassignmentHandler"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 742,
+      "columnNumber": 43,
+      "problem": "Invalid type: Schema.OutOfOffice"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 742,
+      "columnNumber": 17,
+      "problem": "Invalid type: OutOfOffice"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 745,
+      "columnNumber": 20,
+      "problem": "Variable does not exist: OutOfOffice"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 745,
+      "columnNumber": 46,
+      "problem": "Variable does not exist: OutOfOffice.StartDate"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 745,
+      "columnNumber": 110,
+      "problem": "Variable does not exist: OutOfOffice.EndDate"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 748,
+      "columnNumber": 36,
+      "problem": "Variable does not exist: Is_Routed__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 749,
+      "columnNumber": 53,
+      "problem": "External string does not exist: outOfOfficeDepartment"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 749,
+      "columnNumber": 36,
+      "problem": "Variable does not exist: Case_Owner_BU__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 756,
+      "columnNumber": 13,
+      "problem": "Variable does not exist: CNC_HandleCustomException"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 897,
+      "columnNumber": 19,
+      "problem": "Variable does not exist: Source_System__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 897,
+      "columnNumber": 55,
+      "problem": "Variable does not exist: Conversation__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 901,
+      "columnNumber": 41,
+      "problem": "Variable does not exist: SCCF_Number__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 901,
+      "columnNumber": 62,
+      "problem": "Variable does not exist: SCCF_Number__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 904,
+      "columnNumber": 40,
+      "problem": "Variable does not exist: SCCF_Number__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 922,
+      "columnNumber": 27,
+      "problem": "Variable does not exist: Primary_Claim_Number__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 951,
+      "columnNumber": 30,
+      "problem": "SELECT Primary_Claim_Number__c \n       ^\nERROR at Row:1:Column:8\nNo such column 'Primary_Claim_Number__c' on entity 'Case'. If you are attempting to use a custom field, be sure to append the '__c' after the custom field name. Please reference your WSDL or the describe call for the appropriate names."
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 956,
+      "columnNumber": 26,
+      "problem": "Variable does not exist: Primary_Claim_Number__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 957,
+      "columnNumber": 51,
+      "problem": "Variable does not exist: Primary_Claim_Number__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 961,
+      "columnNumber": 49,
+      "problem": "Variable does not exist: Primary_Claim_Number__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 962,
+      "columnNumber": 19,
+      "problem": "Variable does not exist: Appeal_Iteration__c"
+    },
+    {
+      "componentType": "ApexClass",
+      "fullName": "CNC_caseTriggerHandler",
+      "lineNumber": 964,
+      "columnNumber": 19,
+      "problem": "Variable does not exist: Appeal_Iteration__c"
+    },
+    {
+      "componentType": "ApexTrigger",
+      "fullName": "CNC_CaseTrigger",
+      "lineNumber": 3,
+      "columnNumber": 33,
+      "problem": "Variable does not exist: BCBSMN_Ignore_Rules__c"
+    }
+  ]
+}

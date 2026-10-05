@@ -1,0 +1,1182 @@
+/**
+ * Recovered from myProdOrg caseTriggerHandler comment container on 2026-10-05.
+ * Main class only; transferred documentation delimiters repaired.
+ * Dormant decision/SLA/child-case alternatives remain disabled/preserved.
+ * Not deployment-ready until dependency and behavior review is complete.
+ */
+public class CNC_caseTriggerHandler{
+    
+    //public static Boolean hasExecuted = false;//ANSHUL's CHANGES    
+    // This Method is used to handle all business logic for Before Update 
+    private static Id cachedCotivitiQueueId; 
+    public static Boolean isBatchExecuting = false;
+    private static Id cachedCotivitiInProcessQueueId; //MNPP-16288
+    private static Id cachedCotivitiOutBasketQueueId; //MNPP-25543
+
+    public static void handleBeforeUpdate(List<case> lstNewCase, Map<ID, case> oldMap){
+        if (lstNewCase == null || lstNewCase.isEmpty() || oldMap == null) return;
+        ID openCaseRecTypeID = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get(CNC_Constants.CONS_Open_Case_RecType).getRecordTypeId();
+        set<ID> closedCaseIdsSet = new set<ID>();
+        set<ID> followUpCaseIdsSet = new set<ID>();
+
+        User loggedInUserDetails = [select id,userRole.developerName from user where id=: userInfo.getUserId()];
+        Boolean parentfiledchange = false; 
+        Boolean otherfiledchange = false;
+        Set<Id> parentIds = new Set<Id>();
+        for (Case candidate : lstNewCase) {
+            Case prior = oldMap.get(candidate.Id);
+            if (prior != null && prior.ParentId != null) parentIds.add(prior.ParentId);
+        }
+        Map<Id, Case> parentsById = new Map<Id, Case>([SELECT Id, OwnerId FROM Case WHERE Id IN :parentIds]);
+        for(Case objCase : lstNewCase){
+            Case parentOwnerId = new Case();
+            sObject olCase = oldMap.get(objCase.Id);
+            String objectOwner =  oldMap.get(objCase.Id).parentId;
+            Boolean isFieldUpdate = false;
+            for(String filedName : objCase.getPopulatedFieldsAsMap().keySet()){
+                object newVal = objCase.get(filedName);
+                object oldVal = olCase.get(filedName);
+                if(newVal != oldVal){
+                    system.debug('Inside update ====');
+                    isFieldUpdate = True;
+                }
+            }
+            if(objectOwner != null){
+                parentOwnerId = parentsById.containsKey((Id)objectOwner) ? parentsById.get((Id)objectOwner) : new Case();
+            }
+            System.debug('current user : '+ UserInfo.getUserId());
+            System.debug('objCase : '+ oldMap.get(objCase.Id).parentId);
+            System.debug('current User  : '+ UserInfo.getUserId());
+            System.debug('old parent : '+ objCase.ParentId);
+            System.debug('current parent  : '+ objectOwner);
+            System.debug('parentOwnerId : '+ parentOwnerId.ownerId);
+            System.debug('case owener id : '+  objCase.OwnerId);
+            if(objCase.ParentId != objectOwner){
+                if(parentOwnerId.ownerId != null && parentOwnerId.ownerId != UserInfo.getUserId()){
+                System.debug('***1***Contact Case Owner Validation');
+                objCase.addError(system.label.CNC_NonParentCaseOwner_ErrorMessage);
+                
+                }
+                if(parentOwnerId.ownerId != null && parentOwnerId.ownerId != objCase.OwnerId && parentOwnerId.ownerId != UserInfo.getUserId()){
+                System.debug('***2***Contact Case Owner Validation');
+                objCase.addError(system.label.CNC_NonParentCaseOwner_ErrorMessage);
+                            
+                }
+                System.debug('isFieldUpdate======='+  isFieldUpdate);
+               if(isFieldUpdate && parentOwnerId.ownerId != null && parentOwnerId.ownerId != objCase.OwnerId)
+               {
+                System.debug('***3***Contact Case Owner Validation');
+                objCase.addError(system.label.CNC_NonCaseOwner_ErrorMessage);
+                }
+               if(parentOwnerId.ownerId != objCase.OwnerId && parentOwnerId.ownerId != UserInfo.getUserId() && objCase.OwnerId !=  UserInfo.getUserId())
+               {
+                System.debug('***4***Contact Case Owner Validation');
+                objCase.addError(system.label.CNC_NonParentCaseOwner_ErrorMessage);
+                            
+                }
+                if(parentOwnerId.ownerId != null && parentOwnerId.ownerId != objCase.OwnerId && parentOwnerId.ownerId != UserInfo.getUserId() && objCase.OwnerId !=  UserInfo.getUserId())
+               {
+                System.debug('***4***Contact Case Owner Validation');
+                objCase.addError(system.label.CNC_NonParentCaseOwner_ErrorMessage);
+                            
+                }
+            }
+            else if((objCase.OwnerId == oldMap.get(objCase.Id).OwnerId && objCase.OwnerId != userInfo.getUserId()) || 
+               (String.valueOf(oldMap.get(objCase.Id).OwnerId).startsWith('00G') && objCase.OwnerId != userInfo.getUserId() && loggedInUserDetails.UserRole.DeveloperName == CNC_Constants.CONS_Medicaid_MEA) || 
+               (String.valueOf(oldMap.get(objCase.Id).OwnerId).startsWith('005') && objCase.OwnerId != oldMap.get(objCase.Id).OwnerId && oldMap.get(objCase.Id).OwnerId != userInfo.getUserId()) 
+               && loggedInUserDetails.UserRole.DeveloperName == CNC_Constants.CONS_Medicaid_MEA)
+                
+              {
+                System.debug('******Contact Case Owner Validation');
+                if(oldMap.get(objCase.Id).Is_A_Batch_Automation__c != true){
+                    objCase.addError(system.label.CNC_NonCaseOwner_ErrorMessage);
+             }
+            }
+            else
+            {
+                //find all the cases that are being closed with "Open case" record type
+                if(objCase.Status == CNC_Constants.CONS_Case_Close_Status && objCase.recordTypeId == openCaseRecTypeID){
+                    closedCaseIdsSet.add(objCase.Id);
+                }
+                // Filter case records where folloUpDate is modified
+                if(objCase.Follow_up_Date__c != oldMap.get(objCase.Id).Follow_up_Date__c 
+                   && oldMap.get(objCase.Id).Follow_up_Date__c != Null 
+                   && loggedInUserDetails.UserRole.DeveloperName == CNC_Constants.CONS_Medicaid_MEA)
+                {
+                    followUpCaseIdsSet.add(objCase.Id);
+                } 
+            }
+            
+        }
+        if(!closedCaseIdsSet.isEmpty()){
+            checkForOpenTasks(closedCaseIdsSet,lstNewCase);
+        }
+        /*if(!followUpCaseIdsSet.isEmpty()){
+showFollowUpErrMessage(followUpCaseIdsSet,lstNewCase);
+}
+    */
+        
+    }
+    
+    // This Method is used to handle all business logic for After Update 
+    public static void handleAfterUpdate(Map<ID, case> newMap, Map<ID, case> oldMap){
+        Map<String,String> closedCasesIdNumberMap = new Map<String,String>();
+        Map<String,String> caseDocsIdSourceSysIdMap = new Map<String,String>();
+        for(Case objCase : newMap.values()){
+            if(objCase.Status != oldMap.get(objCase.Id).Status && objCase.Status == CNC_Constants.CONS_Case_Close_Status && objCase.Case_Closure_Reason__c == 'Invalid Case'){
+                closedCasesIdNumberMap.put(objCase.Id, objCase.CaseNumber);
+            }
+        }
+        if(!closedCasesIdNumberMap.isEmpty()){
+            handleInvalidCases(closedCasesIdNumberMap);
+        }  
+    }
+    
+    // User Story : MOMT-2740 
+    public static void checkForOpenTasks(Set<ID> setCaseId, List<Case> caseList){
+        Map<String, Task> Map_Of_Case_To_Task = new Map<String, Task>();
+        // find all the tasks related to cases that are being closed
+        Map_Of_Case_To_Task = getOpenTasks(setCaseId);
+        //add the error message to the page messaged that get displayed on the page
+        for(Case objCase : caseList){
+            if(Map_Of_Case_To_Task.containsKey(objCase.Id) ){
+                objCase.addError(system.label.CNC_Pending_Task_errorMessage);
+            }
+        }
+    }
+    
+    // below logic is for auto population of contact Id based on account Id when ever a case is updated or inserted
+    public static void updateContactOnCase(List<Case> caseList){ 
+        ID accountRecTypeID = Schema.SObjectType.Account.getRecordTypeInfosByName().get(CNC_Constants.CONS_Account_Member_RecType).getRecordTypeId();
+        Map<Id, Id> personAccountsMap = new Map<Id, Id>();
+        set<ID> accountIds = new set<ID>();
+        for(Case objCase : caseList){
+            if(!String.isBlank(objCase.AccountId) ){  //&& String.isBlank(objCase.ContactId)                  
+                accountIds.add(objCase.AccountId);                    
+            }
+        }        
+        if(!accountIds.isEmpty()){            
+            for(Account accountObj : [Select Id, personContactId from Account where Id=:accountIds AND RecordTypeId =:accountRecTypeID ]){               
+                personAccountsMap.put(accountObj.Id, accountObj.PersonContactId);
+            }
+            for(Case objCase : caseList){  
+                if(!personAccountsMap.isEmpty()){
+                    objCase.ContactId = personAccountsMap.get(objCase.AccountId);  
+                }                
+            }
+        }
+    }
+    
+    // Get all open Tasks related to case 
+    
+    public static map<String, Task> getOpenTasks(Set<ID> caseIdsSet){
+        map<String, Task> taskDetailsMap = new Map<String, Task>();
+        for(Task objTask : [SELECT Id, WhatId FROM Task WHERE IsClosed=false AND WhatId IN : caseIdsSet]){
+            taskDetailsMap.put(objTask.WhatId, objTask);
+        }
+        return taskDetailsMap;
+    }
+    
+   
+    
+    public static void handleCaseClone(List<Case> lstNewCase){
+        
+      List<Authentication__c> authDetails = [SELECT Id, OwnerId, Name, Account_Name__c,CreatedDate, Contact_Id__c, Caller_Name__c, 
+                                               Master_Contact_Id__c FROM Authentication__c where Account_Name__c =: lstNewCase[0].AccountId AND OwnerId =: userInfo.getUserId() order by CreatedDate DESC];
+        
+        
+        for(Case objCase : lstNewCase){
+            
+            if(objCase.Status != 'Closed' && objCase.Case_Closure_Reason__c != ''){
+                objCase.Case_Closure_Reason__c = '';
+            }
+            if(objCase.Status == 'Open'&& objCase.On_Hold_Reason__c != ''){
+                objCase.On_Hold_Reason__c = '';
+            }
+            // Implemented as part of Clone story MOMT-35944
+             if(objCase.isclone() && objCase.getCloneSourceId() !=null) {
+                 if((objCase.Attachment_Control_Number__c != null)||(objCase.ParentId != null)||(objCase.Signature_Date__c != null)||(objCase.Call_Outcome__c!= null)||(objCase.Amount_at_issue__c != null)){
+                     
+                     objCase.Attachment_Control_Number__c = '';
+                     objCase.ParentId = null;
+                     objCase.Signature_Date__c = null;
+                     if(objCase.Status != 'Closed'){
+                         objCase.Call_Outcome__c = '';
+                     }
+                     objCase.Amount_at_issue__c = null;
+                     
+                 }
+                if(((objCase.Case_Category__c == 'Provider Appeal')||(objCase.Case_Category__c == 'Provider Appeal - Coding')||
+                       (objCase.Case_Category__c == 'Provider Appeal - Other')||(objCase.Case_Category__c == 'Provider Appeal - Pricing')||
+                       (objCase.Case_Category__c == 'Provider Appeal - SIU'))&& objCase.Provider_Appeal_Outcome__c != null){
+                            objCase.Provider_Appeal_Outcome__c = null;
+                    }
+                    if(objCase.Helios_Task_ID__c != null){
+                        objCase.Helios_Task_ID__c = null;
+                    }
+                    if(objCase.Source_System__c == 'IVR'){
+                        objCase.addError(System.label.CNCCloneCaseIVRError);
+                    }
+                 if(authDetails.size()>0 && !authDetails.isEmpty()){
+                        if((objCase.AccountId == authDetails[0].Account_Name__c) && (userInfo.getUserId()==authDetails[0].OwnerId)){
+                            objCase.Call_Contact_ID__c = authDetails[0].Contact_Id__c;
+                            objCase.Call_Master_ID__c =authDetails[0].Master_Contact_Id__c;
+                        }
+                 }
+               
+                
+                 List<Case> caseListUpdate=[select id,Subject,Received_Date__c,Amount_at_issue__c,Call_Outcome__c,Attachment_Control_Number__c,ParentId,Signature_Date__c,Description from case where id= :objCase.getCloneSourceId()];
+                 
+                 if(objCase.Received_Date__c !=null && caseListUpdate[0].Received_Date__c ==objCase.Received_Date__c){
+                     objCase.Received_Date__c =system.now();
+                 }
+                 if((objCase.Subject !=null && caseListUpdate[0].Subject==objCase.Subject && objCase.Status != 'Closed')){
+                     objCase.Subject='';
+                     
+                 }
+                 if((objCase.Description !=null && caseListUpdate[0].Description==objCase.Description && objCase.Status != 'Closed')){
+                     objCase.Description='';   
+                 }
+             }
+        }   
+    }    
+    
+    //** Method to update Case article Subject based on Decision Matrix.
+    public static void autoPopulateArticleSubject(List<Case> caseList) {          
+        Map<String,Object> input = new Map<String,Object>();
+        Map<String,Object> inputMap = new Map<String,Object>();
+        string caseCategory='';
+        string caseSubCategory='';
+        string caseSubSubCategory='';
+        object empty ='Empty';
+        if(caseList !=null && !caseList.isEmpty()){
+            for(Case caseRecord :caseList){
+                caseCategory = caseRecord.Case_Category__c;
+                caseSubCategory =caseRecord.Case_Sub_Category__c;
+                input.put('CaseCategory', caseRecord.Case_Category__c); 
+                input.put('CaseSubCategory', caseRecord.Case_Sub_Category__c);              
+                if(caseRecord.Case_Sub_SubCategory__c != null){
+                    input.put('CaseSubSubCategory', caseRecord.Case_Sub_SubCategory__c);                 
+                }
+                else{
+                    input.put('CaseSubSubCategory', empty);
+                }          
+            }
+        }
+        // system.debug('input :: '+input);
+        map<string,object> oOutput= (map<string,object>)omnistudio.IntegrationProcedureService.runIntegrationService(CNC_Constants.CONS_DATA_CAT_IP,input,null);
+        
+        string ArticleSubject='';   
+        // system.debug('oOutput :: '+oOutput);        
+        if(oOutput !=null){
+            string  caseArticleSubject = (string) oOutput.get(CNC_Constants.CONS_DATA_CATEGORY);
+            if(caseList[0] !=null){
+                if(caseArticleSubject !=null){
+                    caseList[0].Case_Article_Subject__c= caseArticleSubject;  
+                }
+                else{
+                    caseList[0].Case_Article_Subject__c=''; 
+                }   
+            }                       
+
+        }         
+                    
+    }
+    //Method to update Case LOB with Account LOB
+    public static void autoPopulateLOB(List<Case> newCases,Map<Id,Case> oldCaseMap){
+        Set<Id> caseIds = new Set<Id>();
+        for(case objCase : newCases){
+            caseIds.add(objCase.AccountId);
+        }
+        List<Account> accountList = new List<Account>([select Id,Line_Of_Business__pc from Account where Id =: caseIds]);
+        Id caseId;
+        for(Case objCase : newCases){
+            if(accountList.size()>0 && !accountList.isEmpty() && oldCaseMap == null){
+              if(objCase.AccountId != null && objCase.LOB__c == null){
+                    if(accountList[0].Line_of_Business__pc != null){
+                        objCase.LOB__c = accountList[0].Line_of_Business__pc;
+                    }
+                    else{
+                        objCase.LOB__c = '';
+                    }
+                }
+                
+            }
+            else if(oldCaseMap != null && oldCaseMap.get(objCase.Id).OwnerId == objCase.OwnerId){
+                if((oldCaseMap.get(objCase.Id).AccountId == null && objCase.LOB__c == null) || (oldCaseMap.get(objCase.Id).AccountId != null && objCase.LOB__c == null)){
+               // if(accountList.size()>0){
+               
+                    if (!accountList.isEmpty()) {  //Rekha-added null check for accountList
+                        
+                        objCase.LOB__c = accountList[0].Line_of_Business__pc;
+                          }
+                    }
+                
+                else if(oldCaseMap.get(objCase.Id).AccountId != objCase.AccountId &&!accountList.isEmpty()){ //Rekha-added null check for accountList
+                    objCase.LOB__c = accountList[0].Line_of_Business__pc;
+                } 
+            }
+        }
+        
+        
+    }
+    //Method to update Greivance fields related codes in Accounts
+    public static void populateGrievanceCode(List<Case> newCases){
+        //Assign Issue/Service/Outcome codes based on Issue/Service/Outcome Category
+        //Query on Custom settings
+        Map<String,String> grievanceMap = new Map<String,String>();
+        List<String> fieldMap = new List<String>();
+        Map<String,String> issueGrievanceMap = new Map<String,String>();
+        
+        CNC_Grievance_Code_Mapping__c[] outcomeGrievanceCodeMapping = [select Id, Name, Category__c, Mapping_Code__c, Field_Type__c FROM CNC_Grievance_Code_Mapping__c where Field_Type__c =: CNC_Constants.CONS_Outcome_Category];
+        for(CNC_Grievance_Code_Mapping__c objGrievance : outcomeGrievanceCodeMapping){
+            fieldMap.add(objGrievance.Field_Type__c);
+            if(fieldMap.size() > 0 && !fieldMap.isEmpty()){ 
+                //if(fieldMap[0] == CNC_Constants.CONS_Outcome_Category){
+                if (!fieldMap.isEmpty() && fieldMap[0] == CNC_Constants.CONS_Outcome_Category){  //Rekha-added null check for fieldMap
+                    grievanceMap.put(objGrievance.Category__c,objGrievance.Mapping_Code__c); 
+                }
+            }
+        }
+        
+        CNC_Grievance_Code_Mapping__c[] otherCategoryCodeMapping = [select Id, Name, Category__c, Mapping_Code__c, Field_Type__c FROM CNC_Grievance_Code_Mapping__c where Field_Type__c !=:  CNC_Constants.CONS_Outcome_Category];
+        for(CNC_Grievance_Code_Mapping__c objGrievance : otherCategoryCodeMapping){
+            issueGrievanceMap.put(objGrievance.Category__c,objGrievance.Mapping_Code__c); 
+        }
+        
+        for(Case objCase : newCases){
+            //if(fieldMap.size() > 0 && !fieldMap.isEmpty()){
+            //if(objCase.Case_Category__c == CNC_Constants.CONS_Case_Category && objCase.Case_Sub_Category__c == CNC_Constants.CONS_Case_Sub_Category && objCase.Case_Sub_SubCategory__c == CNC_Constants.CONS_Case_Sub_Sub_Category){
+            //if(fieldMap[0] == CNC_Constants.CONS_Outcome_Category){
+             if (!fieldMap.isEmpty() && fieldMap[0] == CNC_Constants.CONS_Outcome_Category){  //Rekha-added null check for fieldMap
+                if(grievanceMap.containsKey(objCase.Oral_Grievance_Outcome__c)){
+                    objCase.Outcome_Code__c = grievanceMap.get(objCase.Oral_Grievance_Outcome__c);
+                }
+            }
+            // }
+            if(issueGrievanceMap.containsKey(objCase.Issue__c)){
+                objCase.Issue_Code__c = issueGrievanceMap.get(objCase.Issue__c);
+            } 
+            if(issueGrievanceMap.containsKey(objCase.Service__c)){
+                objCase.Service_Code__c = issueGrievanceMap.get(objCase.Service__c);
+            }
+            
+        }
+    }
+    //Method to check if source system is DataCap and all required fields are filled
+    public static void updateCaseInfo(List<Case> newCaseList,List<Case> oldCaseList){
+        List<Account> accountList = new List<Account>([select Id,Line_Of_Business__pc,Name from Account where Id =: newCaseList[0].AccountId]);
+        List<Account> oldAccountList = new List<Account>([select Id,Line_Of_Business__pc,Name from Account where Id =: oldCaseList[0].AccountId]);        
+        Map<String,String> caseMap = new Map<String,String>();
+        Id caseId;
+        String accName;
+        String preAccName;
+        List<String> categoryVal = system.label.CNC_Case_ISC_Categories.split(',');
+        for(Case objCases : newCaseList){
+            caseMap.put(objCases.Case_Category__c,objCases.Case_Sub_Category__c);
+            caseId = objCases.Id;
+        }
+        Case caseObject = [select Id, OwnerId, CaseNumber, Previous_Owner__c,Case_Category__c, Case_Sub_Category__c, Origin, Priority, Case_Sub_SubCategory__c, LOB__c, Caller_Name__c, Relationship__c, Status, CreatedById, AccountId from Case where Id =: caseId LIMIT 1];           
+        string errorMsg = system.label.CNC_Case_Required_Fields_Error;
+        if(AccountList.size() > 0 && !AccountList.isEmpty()){
+            accName = AccountList[0].Name;
+        }
+        if(oldAccountList.size() > 0 && !oldAccountList.isEmpty()){
+            preAccName = oldAccountList[0].Name;
+        }
+        for(Case objCase : newCaseList){
+            if(oldCaseList[0].OwnerId == newCaseList[0].OwnerId){
+                
+                if((objCase.Case_Category__c != 'ISC Research' && objCase.Case_Sub_Category__c != 'Research') && objCase.Source_System__c == CNC_Constants.CONS_DataCap){
+                    if(accName == null){
+                        String accountErrorMsg = errorMsg.replace('{Label}','Account Name');
+                        objCase.addError(accountErrorMsg);
+                    }
+                    if((objCase.Source_Category__c == 'PAMEM' || objCase.Source_Category__c == 'AOR' || objCase.Source_Category__c == 'AORREV' ) && objCase.Signature_Date__c == null){
+                        String signatureDateErrorMsg = errorMsg.replace('{Label}','Signature Date');
+                        objCase.addError(signatureDateErrorMsg); 
+                    }
+                    if(objCase.Source_Category__c == 'CLMATT' && objCase.Attachment_Control_Number__c == null){
+                        String signatureDateErrorMsg = errorMsg.replace('{Label}','Attachment Control Number');
+                        objCase.addError(signatureDateErrorMsg); 
+                    }
+                    
+                }
+            }
+        } 
+    }    
+    
+    // Method to update Inquier Name*
+    public static void updateInquirerName(List<Case> newCases, Map<ID, case> oldCaseMap) {
+        try {
+            Set<Id> accountIds = new Set<Id>();
+            Map<Id, Account> accountMap = new Map<Id, Account>();
+            List<Account> lstAccounts = new List<Account>();
+            List<Case> caseToUpdate = new List<Case>();
+            Id currentUserId = UserInfo.getUserId();
+            
+            if (newCases != null && !newCases.isEmpty()) {
+                for (Case caseRecord : newCases) {
+                    if(caseRecord.AccountId != null){
+                        accountIds.add(caseRecord.AccountId);
+                    }
+                }
+            }
+            if(accountIds != null){
+                lstAccounts = [SELECT Id, RecordType.Name, Record_Type__c, PersonContact.Name, Name FROM Account WHERE Id IN :accountIds];
+                for (Account lstacc : lstAccounts) {
+                    accountMap.put(lstacc.Id,lstacc);                  
+                }  
+            }
+            
+            // CS-1896: iterate newCases directly. This used to walk mapofNewCase.values(), a map
+            // keyed on Case.Id - null for every record on before insert - so a batch collapsed to
+            // one entry and only its last record was processed.
+            if (newCases != null && !newCases.isEmpty()) {
+                for (Case caseObj : newCases) {
+                    Account accountRecord = accountMap.get(caseObj.AccountId);
+                    if (currentUserId == caseObj.OwnerId || (oldCaseMap != null && oldCaseMap.get(caseObj.Id).OwnerId == caseObj.OwnerId)){
+                        //If relationship is Memeber and Account Record Type is Member/Unlisted 
+                        if (caseObj.Relationship__c == CNC_Constants.CONS_Case_Member_Relationship && accountRecord != null &&
+                            (accountRecord.RecordType.Name == CNC_Constants.CONS_Account_Member_RecType || accountRecord.RecordType.Name == CNC_Constants.CONS_Account_UnlistedMember_RecType) && caseObj.LOB__c != 'ITS Host') {                                  
+                                // CS-1896: default only. The caller name the agent typed on the intake
+                                // wizard reaches this as a populated field; overwriting it unconditionally
+                                // replaced "Inquirer Name" with the account name on every case, and on
+                                // every later edit, so it could not be corrected in the UI either.
+                                if (String.isBlank(caseObj.Caller_Name__c)) {
+                                    caseObj.Caller_Name__c = accountRecord.Name;
+                                }
+                            } 
+                        //If relationship is Provider and Account Record Type is Provider 
+                        else if (caseObj.Relationship__c == CNC_Constants.CONS_Case_Provider_Relationship && accountRecord != null &&
+                                 (accountRecord.RecordType.Name == CNC_Constants.CONS_Account_UnlistedProvider_RecType || accountRecord.RecordType.Name == CNC_Constants.CONS_Account_Provider_RecType) && caseObj.LOB__c != 'ITS Host') {
+                                     // CS-1896: default only, as above.
+                                     if (String.isBlank(caseObj.Caller_Name__c)) {
+                                         caseObj.Caller_Name__c = accountRecord.Name;
+                                     }
+                                 } 
+                        //For other Relationships,if caller name is blank
+                        else if (String.isBlank(caseObj.Caller_Name__c) && accountRecord != null){
+                            caseObj.addError(System.label.CNC_InquirerName_Required_Error);
+                        }
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            // Save the exception in error logs.
+            CNC_HandleCustomException.LogException(ex);
+        }
+    }
+    //Method to check Follow Up date
+    public static void handleFollowUpDate(List<Case> newCaseList,List<Case> oldCaseList){
+        try{
+            List<Task> allTasks = new List<Task>();
+            Group queueName = [Select Id, DeveloperName from Group where DeveloperName = 'On_Hold_Queue'];
+            for(Case objCase : newCaseList){
+                if(oldCaseList[0].OwnerId == newCaseList[0].OwnerId){
+                    if(objCase.Status == 'On-Hold External'&& (objCase.Follow_up_Date__c == null || String.isBlank(objCase.Task_Comment__c))){
+                        objCase.addError(system.label.CNC_FollowUpDate_Empty);
+                    }
+                }
+                if(oldCaseList[0].OwnerId == queueName.Id && (String.valueOf(newCaseList[0].OwnerId).startsWith('005'))){
+                    objCase.Status ='Open';
+                }
+                
+                if(oldCaseList[0].OwnerId != newCaseList[0].OwnerId && (String.valueOf(newCaseList[0].OwnerId).startsWith('005')) ){
+                    
+                    for(Task objTask : [Select Id, OwnerId, BypassTask__c From Task Where WhatId =: objCase.Id AND (Status = 'Open' OR Status = 'Not Started')]){
+                        if(objTask.BypassTask__c == false){
+                            objTask.BypassTask__c = true;  
+                        }
+                        else{
+                            objTask.BypassTask__c = false;
+                        }
+                        
+                        objTask.OwnerId = objCase.OwnerId;
+                        allTasks.add(objTask);
+                    }
+                    if(!allTasks.isEmpty()){
+                        update allTasks;
+                    }
+                    
+                }
+                
+            }
+            
+        }catch(Exception ex){           
+            //save the exception in error logs.
+            CNC_HandleCustomException.LogException(ex);
+        } 
+        
+    }
+    
+    // Method to update Case Owner BU field based on Case Owner
+    public static void autoPopulateOwnerDepartment(List<Case> caseList, Map<ID, case> oldMap){
+        try{
+            Set<Id> queueId = new Set<Id>();
+            Set<Id> userId = new Set<Id>();
+            Map<Id,Case> mapCase = new Map<Id,Case>();
+            List<Case> caseToUpdate =new List<Case>();
+            system.debug('oldMap:'+oldMap);
+            if(caseList !=null && !caseList.isEmpty()){
+                for(Case caseObj :caseList){
+                     system.debug('caseObj:'+caseObj.OwnerId);
+                    if(oldMap!=null && caseObj.OwnerId != oldMap.get(caseObj.Id).OwnerId && String.valueOf(caseObj.OwnerId).startsWith('00G')){
+                        queueId.add(caseObj.OwnerId);
+                        mapCase.put(caseObj.Id,caseObj);
+                        system.debug('queueId:'+queueId);
+                    }
+                    if(String.valueOf(caseObj.OwnerId).startsWith('005')){
+                        userId.add(caseObj.OwnerId);
+                        mapCase.put(caseObj.Id,caseObj);
+                         system.debug('UserId:'+userId);
+                        
+                    }
+                }
+            } 
+            if(mapCase !=null && !queueId.isEmpty()){                
+                Group queue = [Select Id, DeveloperName, Name from Group where Type = 'Queue'  AND Id =: queueId];
+                system.debug('queuename:'+queue);
+                if(queue.Name!=CNC_Constants.CONS_On_Hold_Queue && queue.Name!=CNC_Constants.CONS_Error_Queue){
+                    Case_Routing_And_Category_Assignments__c caseRule = [Select Id, Case_Queue_Name__c, Department__c from Case_Routing_And_Category_Assignments__c 
+                                                                         where Case_Queue_Name__c =:queue.Name limit 1];
+                    
+                    System.debug('CaseRule=='+caseRule);                    
+                    for(Case CaseRecord:mapCase.values()){
+                        CaseRecord.Case_Owner_BU__c = caseRule.Department__c;
+                         //caseToUpdate.add(CaseRecord);                        
+                    }       
+                }
+            }            
+            if(mapCase !=null && !userId.isEmpty()){                
+                User user = [Select Id, Business_Value__c, Name from User where Id =: userId];
+                system.debug('User:'+user);                
+                for(Case CaseRecord:mapCase.values()){
+                    CaseRecord.Case_Owner_BU__c = user.Business_Value__c;
+                    //caseToUpdate.add(CaseRecord);                    
+                }       
+            } 
+          
+        }catch(Exception ex){           
+            //save the exception in error logs.
+            CNC_HandleCustomException.LogException(ex);
+        }
+    }
+    
+    //developed as part of 33524 to prevent users from closing the case if the document properties are not updated
+    public static void checkForDocumentUpdation(List<Case> caseList, Map<ID, case> oldMap){        
+        set<Id> caseIds = new set<Id>();
+        map<Id,Case_Documents__c> caseDocument = new map<Id,Case_Documents__c>();
+        for(Case cs : caseList){
+            caseIds.add(cs.Id);
+        }
+        List<Case_Documents__c> caseDocuments = [Select Id, Case__c, isDocumentUpdated__c from Case_Documents__c where Case__c IN : caseIds AND Source_System__c !=: CNC_Constants.CONS_Source_System AND IsDocumentUpdated__c = false];            
+        for(Case cs : caseList){
+            if(oldMap.get(cs.Id).Status != 'Closed' && cs.Status == 'Closed' && cs.Case_Closure_Reason__c != 'Invalid Case'){ 
+                if(!caseDocuments.isEmpty()){
+                    for(Case_Documents__c doc : caseDocuments){
+                        if(cs.Id == doc.Case__c && doc.isDocumentUpdated__c == false){
+                            cs.addError(system.Label.CNCDocumentPropertiesValidationMessage);
+                        }
+                    }   
+                }                
+            }
+        }
+    }
+    // below method is added as part of MOMT - 37097 to prevent used for changing the account when an entity is tagged
+    public static void accountChangeValidation(List<Case> caseList, Map<ID, case> oldMap){        
+        set<Id> caseIds = new set<Id>();
+        set<Id> accIds = new set<Id>();       
+        for(Case cs : caseList){
+            caseIds.add(cs.Id);
+            accIds.add(oldMap.get(cs.Id).AccountId);
+        }        
+        map<Id, String> accountDetails = new map<Id,string>();
+        for(Account ac :[Select Id, Record_Type__c from Account where Id IN : accIds]){
+            accountDetails.put(ac.Id, ac.Record_Type__c);
+        }       
+        List<Case_Sub_Entity__c> caseSubEntities = [Select Id, Case__c, Account_Name__c, Entity_Type__c, Entity_Value__c from Case_Sub_Entity__c where Case__c IN : caseIds];        
+        for(Case cs : caseList){
+            if(cs.AccountId != oldMap.get(cs.Id).AccountId){
+                if(!caseSubEntities.isEmpty()){
+                    for(Case_Sub_Entity__c entity : caseSubEntities){                        
+                        if((accountDetails.get(oldMap.get(cs.Id).AccountId) == 'Vendor' || accountDetails.get(oldMap.get(cs.Id).AccountId) == 'Practitioner') && (entity.Entity_Type__c == 'Provider' && entity.Account_Name__c == oldMap.get(cs.Id).AccountId)){
+                            cs.addError(system.Label.CNCProviderEntityErrorMessage);
+                        }else if(accountDetails.get(oldMap.get(cs.Id).AccountId) == 'Member'){
+                            cs.addError(system.Label.CNCMemberEntityErrorMessage);
+                        }
+                    }
+                }
+            }            
+        }        
+    }
+    
+    //Method to restrict users from deleting Cases
+    public static void restrictCaseDeletion(List<Case> caseList){
+        for(Case objCase : caseList){
+            objCase.addError(system.label.CNCPreventCaseDeletion);
+        }        
+    }
+    
+    public static void updateAppealsDetails(List<Case> caseList, Map<ID, case> oldMap){
+        set<Id> caseIds = new set<Id>();
+        for(Case cs: caseList){
+            if(cs.Status != oldMap.get(cs.Id).Status && cs.Status == 'Closed' && cs.Source_System__c == 'Availity'){
+                caseIds.add(cs.Id);
+            }
+        }
+        if(caseIds.size() > 0){
+            updateAppealsDetailsCallout(caseIds);
+        }
+    }
+    
+    @future(callout = true)
+    public static void updateAppealsDetailsCallout(Set<Id> caseIds){
+        Set<Id> payerCaseIds = new Set<Id>();
+        Set<Id> newCaseIds = new Set<Id>();
+        for(Case_Documents__c payerDocs : [Select Id, Case__c from Case_Documents__c where Case__c =: caseIds AND DocumentUploadedBy__c = 'PAYER']){            
+            payerCaseIds.add(payerDocs.Case__c);          
+        }        
+        for(Id caseId : caseIds){
+            if(!payerCaseIds.contains(caseId)){
+                newCaseIds.add(caseId);
+            }
+        }        
+        List<Case_Documents__c> allCaseDocumetsDetails = new List<Case_Documents__c>([Select Id, Case__c, DocumentId__c, DocumentName__c, Source_System_ID__c, DocumentType__c, DocumentSize__c, AttachmentStatus__c, DocumentUploadedBy__c from
+                                                                                      Case_Documents__c where Case__c =:newCaseIds AND DocumentId__c <> null AND Source_System_ID__c <> null AND AttachmentStatus__c = 'RECEIVED' AND DocumentUploadedBy__c = 'Provider']);
+        if(allCaseDocumetsDetails.size() > 0){
+            Map<String, String> fileNameToDocId;
+            Map<String, String> fileNameToSystemId;            
+            CNC_AppealsUpdateController.updateAppealsFromSF(allCaseDocumetsDetails, false, fileNameToDocId, fileNameToSystemId);
+        }        
+        if(payerCaseIds.size() == 0 && allCaseDocumetsDetails.size() == 0){
+            CNC_AppealsUpdateController.updateCaseInfoFromSF(caseIds);
+        }        
+    }
+    
+    @future(callout = true)
+    public static void handleInvalidCases(Map<String,String> closedCasesIdNumberMap){
+        Map <String, Object> ipInput = new Map <String, Object> ();
+        Map <String, Object> ipOutput = new Map <String, Object> ();
+        Map <String, Object> ipOptions = new Map <String, Object> ();
+        Map <String, Case_Documents__c> caseIdDocumentsMap = new Map <String, Case_Documents__c> ();
+        for(Case_Documents__c objCaseDocs : [select id,Source_System_ID__c,Case__c from Case_Documents__c where Case__c IN :closedCasesIdNumberMap.keySet() and Source_System__c = 'Datacap']){
+            caseIdDocumentsMap.put(objCaseDocs.Case__c, objCaseDocs);
+        }
+        for(String caseIdStr : closedCasesIdNumberMap.keySet()){
+            List<Map<String,String>> documentDetailsListMap =  new List<Map<String, String>>();
+            Map<String, String> sourceSystemIdMap = new Map<String,String>();
+            sourceSystemIdMap.put('sourceSystemId', caseIdDocumentsMap.get(caseIdStr).Source_System_ID__c);
+            documentDetailsListMap.add(sourceSystemIdMap);
+            ipInput.put('caseNumber', closedCasesIdNumberMap.get(caseIdStr));
+            ipInput.put('documentDetails', documentdetailsListMap);
+            ipInput.put('caseDocumentId', caseIdDocumentsMap.get(caseIdStr).Id);
+            system.debug('ipInput-----'+JSON.serialize(ipInput));
+            ipOutput = (Map <String, Object>) omnistudio.IntegrationProcedureService.runIntegrationService('CNC_updateInvalidCaseDetails', ipInput, ipOptions);
+            system.debug('Output----'+ipOutput);
+        }
+    }
+
+    //Method to update Decision Reason
+    //Code Commented as part of user story SFFOCS-37
+   /* public static void populateDecisionReason(List<Case> caseList, Map<ID, case> oldMap){
+        Map<String,String> decisionReasonMap = new Map<String,String>();
+        
+        CNC_Decision_Reason_Mapping__c[] decisionReasonMapping = [select Id, Name, Availity_Decision_Reason__c, Decision_Reason__c FROM CNC_Decision_Reason_Mapping__c];
+        for(CNC_Decision_Reason_Mapping__c objdecisionReason : decisionReasonMapping){   
+            if(!decisionReasonMapping.isEmpty()){
+                decisionReasonMap.put(objdecisionReason.Decision_Reason__c,objdecisionReason.Availity_Decision_Reason__c); 
+            }
+        }
+        
+        if(caseList !=null && !caseList.isEmpty()){
+            for(Case caseObj :caseList){
+                if(oldMap!=null && caseObj.Decision_Reason_Picklist__c != oldMap.get(caseObj.Id).Decision_Reason_Picklist__c){
+                    if(decisionReasonMap.containsKey(caseObj.Decision_Reason_Picklist__c)){
+                        caseObj.Decision_Reason__c = decisionReasonMap.get(caseObj.Decision_Reason_Picklist__c);
+                    }
+                } 
+            }
+        }
+    }
+    */
+    //MNPP-2131 -User should not be able to Close the case while a Letter is in the Review process
+    public static void letterReviewValidation(List<Case> caseList, Map<ID, case> oldMap){
+        Set<Id> caseId= new Set<Id>();
+        set<Id> contDocumentIds =new Set<Id>(); 
+        If(caseList !=null && !caseList.isEmpty()){
+          for(Case cs: caseList){
+                caseId.add(cs.Id);
+            }  
+        }        
+        for(ContentDocumentLink objContDocLink : [SELECT Id, LinkedEntityId, ContentDocumentId 
+                                                  FROM ContentDocumentLink
+                                                  where LinkedEntityId =: caseId]){
+            contDocumentIds.add(objContDocLink.ContentDocumentId);
+        }
+        
+        if(contDocumentIds != Null && !contDocumentIds.isEmpty()){
+            List<ContentVersion> listContVersion =[SELECT VersionData,Title,ContentDocumentId,FileExtension,Document_Type_fileupload__c,
+                                                   Document_Review_Status__c,JobId__c 
+                                                   FROM ContentVersion
+                                                   WHERE ContentDocumentId IN : contDocumentIds AND Document_Review_Status__c =: CNC_Constants.CONS_ReviewInProgress];
+            for(Case cs: caseList){
+                if(cs.Status != oldMap.get(cs.Id).Status && cs.Status == CNC_Constants.CONS_Case_Close_Status && listContVersion.size()> 0 ){
+                     cs.addError(system.label.CNCPreventCaseClosure);
+                }
+            }
+                                                    
+        }        
+    } 
+    
+    //MNPP-5242 Method to reassign cases to outOfOffice queue if user is set OutOfOffice
+    public static void autoCaseReassignment(List<Case> caseList){
+        try{
+            List <OutOfOffice> outOfOfficeUsers = new List <OutOfOffice>();
+            string finalTodayDate = CNC_CaseAutoReassignmentHandler.checkDates();
+            set<ID> userIdSet = new set<Id>();
+            for(Case caseObj:caseList){
+                userIdSet.Add(caseObj.OwnerId);               
+            }  
+            Group queueId = [Select Id from Group where Type = 'Queue'  AND NAME ='CS - Out of Office' LIMIT 1];                               
+            for(OutOfOffice OutOfOffice : [SELECT Id, UserId, IsEnabled, StartDate,EndDate FROM OutOfOffice where UserId IN :userIdSet ]){
+                //system.debug('OutOfOffice :'+OutOfOffice);
+                //if(OutOfOffice.IsEnabled && OutOfOffice.StartDate.format('MM/dd/yyyy') == finalTodayDate){
+                if(OutOfOffice.IsEnabled && (OutOfOffice.StartDate.format('MM/dd/yyyy') == finalTodayDate || OutOfOffice.EndDate.format('MM/dd/yyyy') > finalTodayDate)){           
+                    for(Case caseObject:caseList){
+                        caseObject.ownerId = queueId.Id;
+                        caseObject.Is_Routed__c = true;
+                        caseObject.Case_Owner_BU__c=System.label.outOfOfficeDepartment;                         
+                    }                   
+                }
+            }  
+            
+        }catch(Exception ex){
+            system.debug('in catch');
+            CNC_HandleCustomException.LogException(ex);
+          //  CNC_HandleCustomException.customDMLException('CNC_caseTriggerHandler', 'autoCaseReassignment','failed on outOffOffice queue assignment',ex);
+                   
+        }
+        
+    }
+
+    
+//  Story no: MNPP-14545 Case owner on case creation is the 'Original Case Queue', and when a Case is transferred from
+// one owner to another, the previous owner is updated on the field 'Last Case Queue
+// 
+// 
+    public static void processCases(List<Case> newCases, Map<Id, Case> oldMap, Boolean isInsert) {
+        Set<Id> ownerIds = new Set<Id>();
+        for (Case c : newCases) {
+            if (c.OwnerId != null) {
+                ownerIds.add(c.OwnerId);
+            }
+            if (!isInsert && oldMap.containsKey(c.Id) && oldMap.get(c.Id).OwnerId != null) {
+                ownerIds.add(oldMap.get(c.Id).OwnerId);
+            }
+        }
+        Map<Id, String> ownerNames = new Map<Id, String>();
+        List<User> users = [SELECT Id, Name FROM User WHERE Id IN :ownerIds];
+        for (User u : users) {
+            ownerNames.put(u.Id, u.Name);
+        }
+        List<Group> groups = [SELECT Id, Name FROM Group WHERE Id IN :ownerIds AND Type = 'Queue'];
+        for (Group g : groups) {
+            ownerNames.put(g.Id, g.Name);
+        }
+       /* for (Case c : newCases) {
+            if (isInsert) {
+                String ownerName = ownerNames.get(c.OwnerId);
+                if (ownerName != null) {
+                    c.Original_Case_Queue__c = ownerName;
+                }
+            } else {
+                Case oldCase = oldMap.get(c.Id);
+                if (oldCase != null && c.OwnerId != oldCase.OwnerId) {
+                    String oldOwnerName = ownerNames.get(oldCase.OwnerId);
+                    if (oldOwnerName != null) {
+                        c.Last_Case_Queue__c = oldOwnerName;
+                    }
+                }
+            }
+        }  
+    */
+    }
+    
+    //----Bug Fix: MNPP-25543----Starts here // added logic for Cotiviti Out Basket queue with already existing 'Cotiviti In Process' queue.
+       //----Jira: MNPP-16288---- as part of this story added logic only for Cotivity In Process Queue
+        
+
+    public static void enforceCotivitiOwnerLock(List<Case> newRecords, Map<Id, Case> oldMap) {
+        if (isSystemUser()) {
+            return;
+        }
+
+            initializeCotivitiQueues();
+
+        for (Case newCase : newRecords) {
+            Case oldCase = oldMap.get(newCase.Id);
+
+                if (oldCase == null || newCase.OwnerId == oldCase.OwnerId) {
+                    continue;
+                }
+
+                if (cachedCotivitiInProcessQueueId != null &&
+                    oldCase.OwnerId == cachedCotivitiInProcessQueueId) {
+
+                    newCase.OwnerId.addError(
+                        'The Case Owner cannot be modified while the Case is owned by the \'Cotiviti In Process\' queue.'
+                    );
+                }
+
+                if (cachedCotivitiOutBasketQueueId != null &&
+                    oldCase.OwnerId == cachedCotivitiOutBasketQueueId) {
+
+                    newCase.OwnerId.addError(
+                        'The Case Owner cannot be modified while the Case is owned by the \'Cotiviti Out Basket\' queue.'
+                    );
+            }
+        }
+    }
+
+        private static void initializeCotivitiQueues() {
+            if (cachedCotivitiInProcessQueueId != null ||
+                cachedCotivitiOutBasketQueueId != null) {
+                return;
+            }
+
+            for (Group queue : [
+                SELECT Id, Name
+                FROM Group 
+                WHERE Name IN ('Cotiviti In Process', 'Cotiviti Out Basket')
+                AND Type = 'Queue' 
+            ]) {
+                if (queue.Name == 'Cotiviti In Process') {
+                    cachedCotivitiInProcessQueueId = queue.Id;
+                } else if (queue.Name == 'Cotiviti Out Basket') {
+                    cachedCotivitiOutBasketQueueId = queue.Id;
+            }
+        }
+
+            if (cachedCotivitiInProcessQueueId == null) {
+                System.debug(
+                    LoggingLevel.ERROR,
+                    'Cotiviti Queue "Cotiviti In Process" not found. Owner lock logic will be skipped.'
+                );
+            }
+
+            if (cachedCotivitiOutBasketQueueId == null) {
+                System.debug(
+                    LoggingLevel.ERROR,
+                    'Cotiviti Queue "Cotiviti Out Basket" not found. Owner lock logic will be skipped.'
+                );
+            }
+        }
+     
+    //----Bug Fix: MNPP-25543---- ends here
+    //----Jira: MNPP-16288----
+    private static Boolean isSystemUser() {
+        String profileName = [
+            SELECT Profile.Name 
+            FROM User 
+            WHERE Id = :UserInfo.getUserId()
+            LIMIT 1
+        ].Profile.Name;
+        
+        return profileName == 'System Administrator' || profileName.contains('API');
+    }
+    //----Jira: MNPP-17897----
+    public static void checkAppealIteration(List<Case> newCases) {
+        // ---1---- logic to iterate through case and store claim number from description into Primary_Claim_Number__c
+        List<Case> availityCasesToCheck = new List<Case>();
+        Set<String> claimNumbersToSearch = new Set<String>();
+        String searchToken = 'Additional Claims: ';
+        for (Case c : newCases) 
+        {
+               // MNPP- 24210 Change for pulling Claim from  Source_System__c else previous logic for Description 
+            if (c.Source_System__c == 'Availity' && c.Conversation__c == null) 
+                {
+                   String extractedClaim;
+
+                if (String.isNotBlank(c.SCCF_Number__c) && c.SCCF_Number__c.length() >= 8) 
+                    {
+                
+                    extractedClaim = c.SCCF_Number__c.substring(0, 8);
+
+                    }
+                 Else if (String.isNotBlank(c.Description) && c.Description.contains(searchToken))
+                    {
+                        Integer startIndex = c.Description.indexOf(searchToken) + searchToken.length();
+                        String remainingText = c.Description.substring(startIndex);
+                        String cleanText = remainingText.trim();
+
+                        if (cleanText.length() >= 8) 
+                        {
+                            extractedClaim = cleanText.substring(0, 8);
+                        }
+                                                
+                    }
+
+                    if (String.isNotBlank(extractedClaim)) 
+                    {
+                        c.Primary_Claim_Number__c = extractedClaim;
+                        availityCasesToCheck.add(c);
+                        claimNumbersToSearch.add(extractedClaim);
+
+                    }
+
+
+          //  if (c.Source_System__c == 'Availity' && c.Conversation__c == null && String.isNotBlank(c.Description)) {
+          //      if (c.Description.contains(searchToken)) {
+          //          Integer startIndex = c.Description.indexOf(searchToken) + searchToken.length();
+          //          String remainingText = c.Description.substring(startIndex);
+          //          String cleanText = remainingText.trim();
+          //          if (cleanText.length() >= 8) {
+          //              String extractedClaim = cleanText.substring(0, 8);
+          //              c.Primary_Claim_Number__c = extractedClaim;
+          //              availityCasesToCheck.add(c);
+          //              claimNumbersToSearch.add(extractedClaim);
+          //          }
+          //      }
+            }
+        }
+
+
+        if (availityCasesToCheck.isEmpty()) return;
+        // ---1--- at the end we should have a list of claim numbers that came in for prosessing
+        
+        //---------2------------ this logic iterate on the claims that came in and check if any previous case have same claim listed , 
+        // or not and on that bases it defines appeal iteration to either first or second
+        Set<String> existingClaimMatches = new Set<String>();
+        for (Case existing : [SELECT Primary_Claim_Number__c 
+                            FROM Case 
+                            WHERE Source_System__c = 'Availity' 
+                            AND Conversation__c = null
+                            AND Primary_Claim_Number__c IN :claimNumbersToSearch]) {
+            if (existing.Primary_Claim_Number__c != null) {
+                existingClaimMatches.add(existing.Primary_Claim_Number__c);
+            }
+        }
+        for (Case c : availityCasesToCheck) {
+            if (existingClaimMatches.contains(c.Primary_Claim_Number__c)) {
+                c.Appeal_Iteration__c = 'Second Time Appeal';
+            } else {
+                c.Appeal_Iteration__c = 'First Time Appeal';
+            }
+        }
+    }
+//---------------------------***************************************************************************---------------------------//
+    /*public static void populateCaseSLA(List<Case> newList, Map<Id, Case> oldMap) {
+        List<Case> casesToProcess = new List<Case>();
+        Set<String> categories = new Set<String>();
+        Set<String> subCategories = new Set<String>();
+        Set<String> subSubCategories = new Set<String>();
+
+        for (Case c : newList) {
+            if (c.Status != 'Closed') {
+                Boolean isNew = (oldMap == null);
+                Boolean changed = !isNew && (
+                    c.Case_Category__c != oldMap.get(c.Id).Case_Category__c ||
+                    c.Case_Sub_Category__c != oldMap.get(c.Id).Case_Sub_Category__c ||
+                     c.Case_Sub_SubCategory__c != oldMap.get(c.Id).Case_Sub_SubCategory__c// ||
+                    // // MNPP-20870 c.Origin != oldMap.get(c.Id).Origin ||
+                    // c.Source_System__c != oldMap.get(c.Id).Source_System__c ||
+                    // c.Source_Category__c != oldMap.get(c.Id).Source_Category__c ||
+                    // c.Document_Type__c != oldMap.get(c.Id).Document_Type__c
+                );
+
+                if (isNew || changed) {
+                    casesToProcess.add(c);
+                    if (c.Case_Category__c != null) categories.add(c.Case_Category__c);
+                    if (c.Case_Sub_Category__c != null) subCategories.add(c.Case_Sub_Category__c);
+                    if (c.Case_Sub_SubCategory__c != null) subSubCategories.add(c.Case_Sub_SubCategory__c);
+                }
+            }
+        }
+
+        if (!casesToProcess.isEmpty()) {
+            Map<String, Id> slaMap = new Map<String, Id>();
+            
+            for (Case_SLA__c sla : [SELECT Id, Case_Category__c, Case_Sub_Category__c, Case_Sub_Sub_Category__c
+                                   
+                                    FROM Case_SLA__c 
+                                    WHERE Case_Category__c IN :categories
+                                    AND Case_Sub_Category__c IN : subCategories
+                                    AND Case_Sub_Sub_Category__c IN :subSubCategories
+                                    AND Active__c = true ]) {
+                
+                String key = generateSLAKey(sla.Case_Category__c, sla.Case_Sub_Category__c, sla.Case_Sub_Sub_Category__c); 
+                                           //MNPP-20870 sla.Case_Origin__c, sla.Source__c, sla.Source_Category__c, sla.Document_Type__c
+                slaMap.put(key, sla.Id);
+            }
+
+            for (Case c : casesToProcess) {
+                String caseKey = generateSLAKey(c.Case_Category__c, c.Case_Sub_Category__c, c.Case_Sub_SubCategory__c); 
+                                               //MNPP-20870 c.Origin, c.Source_System__c, c.Source_Category__c, c.Document_Type__c
+                
+                if (slaMap.containsKey(caseKey)) {
+                    Id newSlaId = slaMap.get(caseKey);
+                    if (c.SLA__c != newSlaId) {
+                        c.SLA__c = newSlaId;
+                        c.SLA_Mapping_DateTime__c = Datetime.now();
+                        c.Case_SLA_percentage__c = 0;
+                        c.SLA_Paused_Hours__c = 0;
+                    }
+                } else {
+                    c.SLA__c = null;
+                    c.SLA_Mapping_DateTime__c = null;
+                    c.Case_SLA_percentage__c = null;
+                    c.SLA_Paused_Hours__c = null;
+                    c.SLA_Last_Pause_Start_Time__c = null;
+                }
+            }
+        }
+    }
+//---------------------------
+    private static String generateSLAKey(Object cat, Object sub, Object subsub    ) {
+        return (String.valueOf(cat) + '|' + String.valueOf(sub) + '|' + String.valueOf(subsub) //+ '|' + 
+            //MNPP-20870    String.valueOf(origin) + '|' + String.valueOf(src) + '|' + String.valueOf(srcCat) + '|' + String.valueOf(doc)//
+            ).toLowerCase();
+    }
+// ----- MNPP-20870
+    public static void populateSLAMappingDateTimeOnOwnerChange(
+        List<Case> newList,
+        Map<Id, Case> oldMap
+    ) {
+        List<Case> casesToProcess = new List<Case>();
+
+        for (Case c : newList) {
+            Case oldCase = oldMap.get(c.Id);
+
+            if (oldCase != null && c.OwnerId != oldCase.OwnerId && c.SLA__c != null ) {
+                casesToProcess.add(c);
+            }
+        }
+
+        for (Case c : casesToProcess) {
+            c.SLA_Mapping_DateTime__c = Datetime.now();
+            c.Case_SLA_percentage__c = 0;
+            c.SLA_Paused_Hours__c = 0;
+        }
+    }
+
+    public static void handleSLAPauseLogic(List<Case> newList, Map<Id, Case> oldMap) {
+        for (Case c : newList) {
+            if (oldMap == null) continue; 
+
+            Case oldCase = oldMap.get(c.Id);
+            Datetime currentTime = Datetime.now();
+
+            if (c.Status != oldCase.Status) {
+                System.debug('#### Status Change Detected for ' + c.CaseNumber + ': ' + oldCase.Status + ' -> ' + c.Status);
+
+                if (c.Status == 'On-Hold External' || c.Status == 'On-Hold Internal') {
+                    c.SLA_Last_Pause_Start_Time__c = currentTime;
+                    System.debug('#### Case Entered On-Hold. Setting Pause Start Time: ' + c.SLA_Last_Pause_Start_Time__c);
+                } 
+                else if (oldCase.Status == 'On-Hold External' || oldCase.Status == 'On-Hold Internal') {
+                    System.debug('#### Case Exited On-Hold. Calculating Duration...');
+
+                    if (oldCase.SLA_Last_Pause_Start_Time__c != null) {
+                        Long durationMs = currentTime.getTime() - oldCase.SLA_Last_Pause_Start_Time__c.getTime();
+                        Decimal hoursPaused = Decimal.valueOf(durationMs) / (1000 * 60 * 60);
+                        
+                        System.debug('#### Pause Duration (MS): ' + durationMs);
+                        System.debug('#### Pause Duration (Hours): ' + hoursPaused);
+
+                        if (c.SLA_Paused_Hours__c == null) {
+                            c.SLA_Paused_Hours__c = 0;
+                        }
+                        
+                        Decimal previousTotal = c.SLA_Paused_Hours__c;
+                        c.SLA_Paused_Hours__c += hoursPaused;
+                        
+                        System.debug('#### Paused Hours Bank Updated: ' + previousTotal + ' -> ' + c.SLA_Paused_Hours__c);
+                    } else {
+                        System.debug('#### Warning: Case exited On-Hold but SLA_Last_Pause_Start_Time__c was null');
+                    }
+                    
+                    c.SLA_Last_Pause_Start_Time__c = null; 
+                    System.debug('#### SLA_Last_Pause_Start_Time__c reset to null');
+                }
+            }
+        }
+    }
+
+    public static void calculateSLAPercentage(List<Case> newList) {
+        Set<Id> slaIds = new Set<Id>();
+        for (Case c : newList) {
+            if (c.SLA__c != null) {
+                slaIds.add(c.SLA__c);
+            }
+        }
+        System.debug('#### slaIds to query: ' + slaIds);
+
+        if (slaIds.isEmpty()) {
+            System.debug('#### No SLA IDs found, exiting calculateSLAPercentage');
+            return;
+        }
+
+        Map<Id, Case_SLA__c> slaSettings = new Map<Id, Case_SLA__c>([
+            SELECT Id, Resolution_Time__c, Resolution_Time_Unit__c 
+            FROM Case_SLA__c WHERE Id IN :slaIds
+        ]);
+        System.debug('#### slaSettings Map: ' + slaSettings);
+
+        for (Case c : newList) {
+            System.debug('#### Processing Case for % Calculation: ' + c.CaseNumber);
+            
+            if (c.SLA__c != null && c.SLA_Mapping_DateTime__c != null && slaSettings.containsKey(c.SLA__c)) {
+                Case_SLA__c sla = slaSettings.get(c.SLA__c);
+                System.debug('#### Case SLA mapping found. Mapping DateTime: ' + c.SLA_Mapping_DateTime__c);
+                
+                c.Case_SLA_percentage__c = getLivePercentage(c, sla.Resolution_Time__c, sla.Resolution_Time_Unit__c);
+                System.debug('#### Updated Case_SLA_percentage__c to: ' + c.Case_SLA_percentage__c);
+            } else {
+                System.debug('#### Skipping Case % calculation. SLA__c: ' + c.SLA__c + ', MappingDate: ' + c.SLA_Mapping_DateTime__c);
+            }
+        }
+    }
+
+    // This is the core logic that the Batch should also call
+    public static Decimal getLivePercentage(Case c, Decimal resTime, String resUnit) {
+        if (resTime == null || resTime <= 0 || c.SLA_Mapping_DateTime__c == null) {
+            System.debug('#### getLivePercentage Exit: Missing Data. resTime: ' + resTime + ', MappingDate: ' + c.SLA_Mapping_DateTime__c);
+            return 0.00;
+        }
+
+        Datetime now = Datetime.now();
+        System.debug('#### Now Time: ' + now);
+        System.debug('#### SLA Mapping DateTime: ' + c.SLA_Mapping_DateTime__c);
+
+        Decimal totalHours = Decimal.valueOf(now.getTime() - c.SLA_Mapping_DateTime__c.getTime()) / (1000 * 60 * 60);
+        System.debug('#### Total Hours Are: ' + totalHours);
+
+        Decimal pausedHours = c.SLA_Paused_Hours__c != null ? c.SLA_Paused_Hours__c : 0;
+        System.debug('#### Initial Paused Hours (Bank): ' + pausedHours);
+
+        if ((c.Status == 'On-Hold External' || c.Status == 'On-Hold Internal') && c.SLA_Last_Pause_Start_Time__c != null) {
+            Decimal runningPause = Decimal.valueOf(now.getTime() - c.SLA_Last_Pause_Start_Time__c.getTime()) / (1000 * 60 * 60);
+            pausedHours += runningPause;
+            System.debug('#### Running Pause To Add: ' + runningPause);
+            System.debug('#### Total Paused Hours Adjusted: ' + pausedHours);
+        }
+
+        Decimal resHours = (resUnit == 'Days') ? resTime * 24 : resTime;
+        System.debug('#### Resolution Hours: ' + resHours);
+
+        Decimal netActiveHours = totalHours - pausedHours;
+        System.debug('#### Net Active Hours (Total - Paused): ' + netActiveHours);
+
+        Decimal percentage = (netActiveHours / resHours) * 100;
+        System.debug('#### Raw Percentage: ' + percentage);
+
+        Decimal finalPercentage = percentage > 100 ? 100.00 : (percentage < 0 ? 0.00 : percentage.setScale(2));
+        System.debug('#### Final Calculated Percentage: ' + finalPercentage);
+
+        return finalPercentage;
+    }
+
+//---------------------------***************************************************************************---------------------------//
+    */
+}

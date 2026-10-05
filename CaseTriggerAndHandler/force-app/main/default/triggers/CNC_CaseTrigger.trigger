@@ -1,0 +1,91 @@
+// Recovered source candidate. Inactive metadata; no org deployment performed.
+trigger CNC_CaseTrigger on Case (before insert, before update, after insert,after update,before delete) {
+        if(Trigger.isBefore && !BCBSMN_Ignore_Rules__c.getInstance(UserInfo.getUserId()).Mute_Triggers__c){         
+            if(Trigger.isInsert && CNC_Utils.bypassCaseBeforeInsertTrigger){
+                //CNC_caseTriggerHandler.populateCaseSLA(Trigger.new, null);//SLAflowToTrigger// MNPP-20870##
+               // CNC_caseTriggerHandler.populateSLAMappingDateTimeOnOwnerChange(Trigger.new, null);//SLAResetDateAssign//##
+                CNC_caseTriggerHandler.handleCaseClone(trigger.new);
+                CNC_caseTriggerHandler.autoPopulateArticleSubject(trigger.new);
+                CNC_caseTriggerHandler.updateInquirerName(Trigger.new,Trigger.oldMap);
+                CNC_caseTriggerHandler.autoPopulateLOB(Trigger.New,Trigger.oldMap);
+                CNC_caseTriggerHandler.populateGrievanceCode(Trigger.new);
+                CNC_caseTriggerHandler.autoPopulateOwnerDepartment(Trigger.new,Trigger.oldMap);
+                CNC_caseTriggerHandler.updateContactOnCase(Trigger.new);
+                //CNC_caseTriggerHandler.updateChildCaseRecord(Trigger.new,Trigger.oldMap);
+                CNC_caseTriggerHandler.checkAppealIteration(Trigger.new);//----Jira: MNPP-17897----
+                CNC_Utils.bypassCaseBeforeInsertTrigger = false;           
+            }
+            if(Trigger.isUpdate && CNC_Utils.bypassCaseBeforeUpdateTrigger){
+                //CNC_caseTriggerHandler.populateCaseSLA(Trigger.new, Trigger.oldMap);//SLAflowToTrigger// // MNPP-20870##
+               // CNC_caseTriggerHandler.populateSLAMappingDateTimeOnOwnerChange(Trigger.new,  Trigger.oldMap);//SLAResetDateAssign// // MNPP-20870##
+               /* CNC_caseTriggerHandler.handleSLAPauseLogic(Trigger.new, Trigger.oldMap);//SLAflowToTrigger
+                if (!CNC_caseTriggerHandler.isBatchExecuting) {
+                    CNC_caseTriggerHandler.calculateSLAPercentage(Trigger.new);//SLAflowToTrigger
+                }
+                */
+                CNC_caseTriggerHandler.enforceCotivitiOwnerLock(Trigger.new, Trigger.oldMap);//----Jira: MNPP-16288----
+                CNC_caseTriggerHandler.handleBeforeUpdate(trigger.new, trigger.oldMap);
+                CNC_caseTriggerHandler.autoPopulateArticleSubject(trigger.new);
+                CNC_caseTriggerHandler.updateInquirerName(Trigger.new,Trigger.oldMap);
+                CNC_caseTriggerHandler.autoPopulateLOB(Trigger.New,Trigger.oldMap);
+                CNC_caseTriggerHandler.updateCaseInfo(Trigger.new,trigger.old);
+                CNC_caseTriggerHandler.handleFollowUpDate(Trigger.new,trigger.old);
+                CNC_caseTriggerHandler.populateGrievanceCode(Trigger.new);//23397
+                CNC_caseTriggerHandler.autoPopulateOwnerDepartment(Trigger.new,Trigger.oldMap);
+                CNC_caseTriggerHandler.updateContactOnCase(Trigger.new);
+                CNC_caseTriggerHandler.checkForDocumentUpdation(Trigger.new,Trigger.oldMap);
+                CNC_caseTriggerHandler.accountChangeValidation(Trigger.new,Trigger.oldMap);
+                CNC_caseTriggerHandler.updateAppealsDetails(Trigger.new,Trigger.oldMap);
+               // CNC_caseTriggerHandler.populateDecisionReason(Trigger.new,Trigger.oldMap); //line Commented as part of user story SFFOCS-37.
+                CNC_caseTriggerHandler.letterReviewValidation(Trigger.new,Trigger.oldMap);
+                CNC_caseTriggerHandler.autoCaseReassignment(Trigger.new);
+                //CNC_caseTriggerHandler.updateChildCaseRecord(Trigger.new, Trigger.oldMap);
+                CNC_Utils.bypassCaseBeforeUpdateTrigger = false;
+            }
+            if(Trigger.isDelete && CNC_Utils.bypassCaseBeforeDeleteTrigger){
+                CNC_caseTriggerHandler.restrictCaseDeletion(Trigger.Old);
+                //CNC_caseTriggerHandler.updateChildCaseRecord(Trigger.old, null);
+                CNC_Utils.bypassCaseBeforeDeleteTrigger = false;
+            }
+        }  
+        
+        
+        if(Trigger.isAfter && !BCBSMN_Ignore_Rules__c.getInstance(UserInfo.getUserId()).Mute_Triggers__c){
+            if(Trigger.isInsert && CNC_Utils.bypassCaseAfterInsertTrigger){
+                //CNC_caseTriggerHandler.populateGrievanceCode(Trigger.new);
+                //CNC_caseTriggerHandler.updateChildCaseRecord(Trigger.new, Trigger.oldMap); //comment as per MNPP-17155 
+                CNC_Utils.bypassCaseAfterInsertTrigger = false;   
+            }
+            if(Trigger.isUpdate && CNC_Utils.bypassCaseAfterUpdateTrigger){
+                CNC_caseTriggerHandler.handleAfterUpdate(trigger.newMap, trigger.oldMap);
+            // CNC_caseTriggerHandler.autoCaseReassignment(Trigger.new);
+            // CNC_caseTriggerHandler.autoPopulateOwnerDepartment(Trigger.new,Trigger.oldMap);
+                CNC_Utils.bypassCaseAfterUpdateTrigger = false;  
+            // CNC_caseTriggerHandler.updateChildCaseRecord(Trigger.new, Trigger.oldMap); //comment as per MNPP-17155 
+            // CNC_caseTriggerHandler.deleteChildCaseRecord(Trigger.new, Trigger.oldMap); //comment as per MNPP-17155 
+            }
+        }
+        
+        if(Trigger.isAfter && Trigger.isUpdate && CNC_Utils.bypassCaseAfterUpdateTrigger){
+                //CNC_caseTriggerHandler.updateChildCaseRecord(Trigger.new, Trigger.oldMap);
+                CNC_Utils.bypassCaseAfterUpdateTrigger = false; 
+        } 
+        
+        //Story no: MNPP-14545
+        if (Trigger.isInsert && Trigger.isBefore && CNC_Utils.bypassCaseBeforeDeleteTrigger 
+        || Trigger.isUpdate && Trigger.isBefore && CNC_Utils.bypassCaseBeforeDeleteTrigger) {
+            CNC_caseTriggerHandler.processCases(Trigger.new, Trigger.oldMap, Trigger.isInsert);
+            CNC_Utils.bypassCaseBeforeDeleteTrigger = false;
+        }
+        
+        /*  if (Trigger.isInsert && Trigger.isBefore|| Trigger.isUpdate && Trigger.isBefore) {
+            CNC_caseTriggerHandler1.processCases(Trigger.new, Trigger.oldMap, Trigger.isInsert);
+        }
+        
+        
+    
+        
+
+        
+            */
+}
