@@ -73,3 +73,14 @@ Case `LOB__c = ITS Host` still requires the separate `BuildCaseData`/Case load m
 Together with the prior preview (no lob input, Host output), this confirms exactly where the transform supplies Host when lob is missing. The captured `BuildHostMemberData` action references this mapper and sends only its additional inputs, which omit lob. Thus the captured intake configuration explains creation of a Host-valued payload before the upsert. This is a verified configuration mechanism, not a complete runtime trace of the Account write.
 
 The OOS/FlexCard path still needs `TransformHostMemberInput` and `upsertAction` properties to establish whether that path uses the same mapper/default. Case `ITS Host` is a distinct value whose assignment is still unverified; capture `BuildCaseData` and its Case load mapping. Do not remove the shared default without confirming the intended business behavior and other mapper callers. No changes were deployed.
+
+## OOS path has its own Host default (screenshot commit f41e39b)
+
+The latest evidence supersedes the hypothesis that both paths necessarily share one mapper:
+
+- `IMG_84EB7FEA-D2E6-4DDD-8098-55A660B1AE93.jpeg`: OOS action `TransformHostMemberInput` references **`DRTransformOOSMember`**, not `DRTransformToHostModel`. The Additional Input section is below the captured view, so its complete contents are not verified.
+- `IMG_A4A0BB0A-CD3B-46A0-8019-AFED533DD5E3.jpeg`: `DRTransformOOSMember` has input path `lob`, output path `hostMemberData:Line_of_Business__pc`, and **Default Value `Host`**, with Is Disabled appearing unchecked.
+
+Thus both captured mapper configurations have a Host default: `DRTransformToHostModel` in Case intake and `DRTransformOOSMember` in the OOS creation procedure. The latter is the identified configuration source that can supply Host to the Unlisted Member creation payload if lob is absent. This does not yet prove the OOS transaction's actual input or persistence logic.
+
+Next check `IPCreateOOSMember` `SetInputs` and the lower Additional Input section of `TransformHostMemberInput` to see whether lob is supplied; inspect `upsertAction` to verify how hostMemberData is persisted. The Case ITS Host assignment remains separate and unresolved. No Salesforce settings changed.
