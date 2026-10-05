@@ -60,3 +60,16 @@ The evidence now proves Host can be introduced in `DRTransformToHostModel` itsel
 3. Capture the complete FlexCard button Input Map and the OOS procedure SubType/endpoint to confirm the call link.
 
 Case `LOB__c = ITS Host` still requires the separate `BuildCaseData`/Case load mapping evidence. No Salesforce configuration was changed.
+
+## Confirmed Host default (screenshot commit 8db821b)
+
+`IMG_8BDA7A09-8F6F-469A-A7F7-6653891E2B63.jpeg` shows the expanded `DRTransformToHostModel` transform row:
+
+- Input JSON Path: `lob`.
+- Output JSON Path: `hostMemberData:Line_of_Business__pc`.
+- Default Value: **`Host`**.
+- Is Disabled appears unchecked.
+
+Together with the prior preview (no lob input, Host output), this confirms exactly where the transform supplies Host when lob is missing. The captured `BuildHostMemberData` action references this mapper and sends only its additional inputs, which omit lob. Thus the captured intake configuration explains creation of a Host-valued payload before the upsert. This is a verified configuration mechanism, not a complete runtime trace of the Account write.
+
+The OOS/FlexCard path still needs `TransformHostMemberInput` and `upsertAction` properties to establish whether that path uses the same mapper/default. Case `ITS Host` is a distinct value whose assignment is still unverified; capture `BuildCaseData` and its Case load mapping. Do not remove the shared default without confirming the intended business behavior and other mapper callers. No changes were deployed.
