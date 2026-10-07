@@ -70,8 +70,12 @@ Story relationship: all three use this shared entry point. CS-1474 explicitly re
 
 Still unknown: first runtime screen after launch, active source OmniScript version, working template selection and generation path. Button visibility alone does not prove ITS Host restrictions inside the flow. Target recreation remains separate.
 
+## First runtime screen captured — 2026-10-06, 10:37 PM CT
+
+Confirmed: the original Case launch reaches Material and Outbound Channel Selection. Both fields show required indicators; Other Communication and Print are visible choices. No Recipient control or selected values are visible. Exact display observations and evidence reference are in canonical runtimeReview and the handoff supplement.
+
+Relation to the stories: all three require Other Communication / Print. The Provider recipient handling and template eligibility are still to be traced after these selections. This screen confirms launch only; template-only scope and generation are not established.
+
 ## Next item to send
 
-Click Send Communication on the existing suitable test Case and send the first screen that opens, with sensitive details hidden. Include any error displayed instead of a screen. Do not change the launcher or submit a print request.
-
-After reviewing that screen, continue toward Provider → Other Communication → Print and capture template selection. No need to resend the launch code or all 52 elements.
+Select Other Communication and Print. Send the resulting screen; if Next appears, use it to reach the next selection screen. Hide sensitive details. Do not submit a communication. Do not resend this first screen unless its behavior changes.
