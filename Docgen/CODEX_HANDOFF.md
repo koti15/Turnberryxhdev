@@ -3568,3 +3568,27 @@ Generated from canonical confirmedActions and integrationProcedures. Replaces th
 ```
 
 Next: outer IP-GenerateLetterinAsync Conditional View and Send/Response Transformations. Then use Edit as JSON for clipped internal formulas/remote transformations. Do not claim this async branch actually executed, or that job completion/print success occurred.
+
+
+## Async branch condition checkpoint — 2026-10-06, 11:14 PM CT
+
+Generated from canonical confirmedActions. Supersedes previous missing outer condition/transformation requests.
+
+```json
+{
+  "elementName": "IP-GenerateLetterinAsync",
+  "responseMapping": {
+    "sendJsonPath": "",
+    "sendJsonNode": "",
+    "responseJsonPath": "",
+    "responseJsonNode": ""
+  },
+  "executionCondition": {
+    "conditionType": "Show Element if True",
+    "displayedCondition": "(isAsyncLetterGeneration = true AND isPOD <> true)"
+  },
+  "interpretation": "Async branch is gated by isAsyncLetterGeneration=true and isPOD<>true. The reviewed LWC initializes async true and sets it false for RTB_ manual tokens; the displayed HOSTProviderFreeformLetter token JSON has no RTB_ names. This makes async routing consistent with reviewed configuration, but actual runtime flag values/execution remain unverified. No send/response path or node override is configured in the displayed transformation fields."
+}
+```
+
+Next: review upstream RA-SetDefaultTokenMapping properties (class/method, extra payload and condition) to identify where automatic token values enter tokenMapping. Exact internal async formulas remain an outstanding capture item, not a reason to review every OmniScript action.
