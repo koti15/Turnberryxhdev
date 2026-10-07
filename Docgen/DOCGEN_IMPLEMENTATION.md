@@ -76,6 +76,14 @@ Confirmed: the original Case launch reaches Material and Outbound Channel Select
 
 Relation to the stories: all three require Other Communication / Print. The Provider recipient handling and template eligibility are still to be traced after these selections. This screen confirms launch only; template-only scope and generation are not established.
 
+## Select Letter captured — 2026-10-06, 10:39 PM CT
+
+Confirmed: Other Communication / Print leads to Select Letter. A visible row displays HOSTProviderFreeformLetter under Service / ITS Host. The screen also offers an upload section described as PDF documents only, if applicable. No letter is visibly selected yet.
+
+Story relationship: an existing free-form letter is now the concrete candidate baseline. We should follow it first even though the initial proposed story order began with CS-1831. This may reveal reusable behavior for CS-1474 and a generation path for CS-1831/1832. The matching label does not establish that CS-1474 is complete. Registration, token mapping, editable content, recipient handling and successful generation remain unverified.
+
+Exact screen observations and evidence references remain in canonical runtimeReview and the handoff supplement. No deployment or print submission.
+
 ## Next item to send
 
-Select Other Communication and Print. Send the resulting screen; if Next appears, use it to reach the next selection screen. Hide sensitive details. Do not submit a communication. Do not resend this first screen unless its behavior changes.
+Select HOSTProviderFreeformLetter using its radio button, click Next and send the following screen with sensitive details hidden. No attachments are needed for this initial review unless the process explicitly requires one. Do not submit a communication.
