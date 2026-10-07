@@ -84,6 +84,12 @@ Story relationship: an existing free-form letter is now the concrete candidate b
 
 Exact screen observations and evidence references remain in canonical runtimeReview and the handoff supplement. No deployment or print submission.
 
+## Communication Address captured — 2026-10-06, 10:42 PM CT
+
+Confirmed: the runtime journey now displays Communication Address, a checked One time Communication Address checkbox, blank addressee/address inputs and an Addressee Name required error. Exact labels, required indicators and runtime state are recorded in canonical runtimeReview and the generated handoff. No address input or successful navigation is yet captured.
+
+Story relationship: this establishes an existing address-entry screen relevant to CS-1474's recipient/address requirement. It does not yet prove Provider-specific prepopulation, edits on the later review screen or persistence behavior. Those mappings and conditions remain unknown; no new address component can be declared necessary or unnecessary yet.
+
 ## Next item to send
 
-Select HOSTProviderFreeformLetter using its radio button, click Next and send the following screen with sensitive details hidden. No attachments are needed for this initial review unless the process explicitly requires one. Do not submit a communication.
+Use approved sandbox test addressee/address details, click Next and send the following screen with entered details hidden. Do not submit a print request. We will inspect one-time address behavior and source mappings after tracing the screens.
