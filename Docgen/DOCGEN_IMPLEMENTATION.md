@@ -134,6 +134,12 @@ The LWC's tokenMapping output matches this extractor's input key, establishing a
 
 The getTokenData helper initializes and returns false; invokeMethod ignores that return and returns true unless an exception is caught. Record this behavior without treating it as the cause of the observed send failure.
 
+## Selected forms action checkpoint — 2026-10-06, 11:08 PM CT
+
+RA-InsertSelectedForms calls CNC_SendCommunication.createAttachments with selectedForms and the Case ContextId. Its displayed condition is Forms OR Documents, excluding our Other Communication selection. Exact configuration is stored in canonical confirmedActions and reproduced in the generated handoff. The method source and response transformations remain unreviewed.
+
+For CS-1474/1831/1832's Other Communication / Print path, this action is not currently a required implementation dependency based on the displayed condition. The visible tree continues through IP-DeleteLetterData and IP-GenerateLetterinAsync, followed by generation options and review; their names alone do not prove behavior.
+
 ## Next item to send
 
-Send the OmniScript action or Integration Procedure that prepares tokenMapping and passes it to document generation, including its input mappings. Start with the action immediately after AdditionalInformation and follow the relevant generation path. We need to locate where Current_Date_system, Case_Number, Claim_DOS and Patient_Acct_Num are populated. The Word template content is still needed later to verify Brief Description and Free Form Content placement.
+Open IP-GenerateLetterinAsync. Send its target Integration Procedure, Extra Payload, Send/Response Transformations and Conditional View. We will use its actual mappings to trace the generation input. For automatic-token population, the earlier IP-GETAPITokenData and RA-SetDefaultTokenMapping are also candidates, but their behavior is not yet established.
