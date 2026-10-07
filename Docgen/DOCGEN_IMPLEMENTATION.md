@@ -140,6 +140,14 @@ RA-InsertSelectedForms calls CNC_SendCommunication.createAttachments with select
 
 For CS-1474/1831/1832's Other Communication / Print path, this action is not currently a required implementation dependency based on the displayed condition. The visible tree continues through IP-DeleteLetterData and IP-GenerateLetterinAsync, followed by generation options and review; their names alone do not prove behavior.
 
+## Async generation checkpoint — 2026-10-06, 11:10 PM CT
+
+IP-GenerateLetterinAsync passes selected template ID, Case ContextId and tokenMapping as tokenDataMap to CNC_AsyncLetterGeneration. PDF output is requested. The active version 3 IP contains parameter setup, an omnistudio.DocumentServiceGateway.generateDocumentWithTokenData remote action and a JSON response exposing jobId and asyncErrorMessage. Exact readable mappings are in the canonical specification and generated handoff.
+
+This provides a generation mechanism that may be reusable across the three stories. It does not establish that the observed runtime used this route. The template has ClientSide configuration while this IP describes server-side generation; inspect the outer condition and synchronous branch before concluding which route applies. No automatic merge-field lookup appears in the supplied internal configuration.
+
+The parameter formulas and output formulas are clipped. Their defaults and success/error logic remain unknown. The actual runtime response, job completion, personalized PDF, print delivery and storage are still unverified.
+
 ## Next item to send
 
-Open IP-GenerateLetterinAsync. Send its target Integration Procedure, Extra Payload, Send/Response Transformations and Conditional View. We will use its actual mappings to trace the generation input. For automatic-token population, the earlier IP-GETAPITokenData and RA-SetDefaultTokenMapping are also candidates, but their behavior is not yet established.
+Stay on the OmniScript IP-GenerateLetterinAsync action and send Conditional View plus Send/Response Transformations. This tells us whether the current free-form letter uses this branch and where its result is stored. After that, use Edit as JSON for the IP's clipped parameter/output formulas and remote action transformations if needed; no need to resend the already captured payload.
