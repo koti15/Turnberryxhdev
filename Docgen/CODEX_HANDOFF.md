@@ -2727,3 +2727,196 @@ Generated from canonical stepElements by elementName. Step and embedded LWC iden
 ```
 
 Next: select EnterAdditionalInformation inside the Step and capture its Custom LWC properties, including input parameters and conditional settings. Do not collect all outer elements.
+
+
+## Complete captured configuration supplement: AdditionalInfo LWC partial source — 2026-10-06, 10:53 PM CT
+
+Generated from canonical lwcSourceEvidence by component name. Active and commented code distinguished. Print token definition/rendering branch remains uncaptured; email implementation must not be assumed to apply to Print.
+
+```json
+{
+  "name": "cncSendCommunicationAdditionalInfo",
+  "environment": "xhdev1 sandbox",
+  "sourceFile": "cncSendCommunicationAdditionalInfo.js",
+  "baseClass": "OmniscriptBaseMixin(NavigationMixin(LightningElement))",
+  "captureDate": "2026-10-06",
+  "sourceCaptureComplete": false,
+  "evidenceScreenshots": [
+    "IMG_F9575910-5641-49FE-A3BA-47CFE7E90DEB.jpeg",
+    "IMG_58F3F8D4-852C-4A6F-BE15-5F142F7DE38D.jpeg",
+    "IMG_03A12AD0-02EB-4951-9D81-DBDF216F595E.jpeg",
+    "IMG_6EED452C-61BF-4AA7-B314-89EC764ADE16.jpeg",
+    "IMG_D8559AFD-CE92-4138-B379-B2C851E35F4A.jpeg",
+    "IMG_0552C7DD-107F-47C8-ABDD-4D296CF82BEA.jpeg",
+    "IMG_28BF83F9-71F6-4DDA-9CE6-65E261C33184.jpeg",
+    "IMG_B1931D0D-ADCC-476F-AA63-282C4044D671.jpeg",
+    "IMG_1DB37A4D-15A5-4A9B-A9FA-B1890ABEC983.jpeg",
+    "IMG_499C774D-9BD7-43EA-A39C-F17D4A8FADF9.jpeg"
+  ],
+  "initialProperties": {
+    "tokenMapping": [],
+    "tokenInputFields": [],
+    "selectedLetterHeader": "To Review Letter selected in previous step, ",
+    "selectedLetterPreviewText": "Preview here.",
+    "isPOD": false,
+    "showSubHeader": true,
+    "isEmail": false,
+    "isAsyncLetterGeneration": true,
+    "today": "1970-01-01"
+  },
+  "richTextFormats": [
+    "font",
+    "size",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "list",
+    "indent",
+    "align",
+    "link",
+    "image",
+    "clean",
+    "table",
+    "header"
+  ],
+  "lifecycle": {
+    "connectedCallback": [
+      "this.initilizeTokenData();",
+      "this.initializeMinDate();"
+    ],
+    "initializeMinDate": "this.today = new Date().toISOString().slice(0,10);"
+  },
+  "tokenInitialization": {
+    "method": "initilizeTokenData",
+    "jsonSource": "this.omniJsonData",
+    "flags": {
+      "isEmail": "When JSON has isEmail and it is truthy: showSubHeader=false, setEmailBody(), isEmail=true.",
+      "isPOD": "When JSON has isPOD and it is truthy: isPOD=true."
+    },
+    "memberEmailResolution": {
+      "oneTimeFlag": "SelectEmail.SelectOneTimeEmail === true",
+      "oneTimeValue": "SelectEmail.EmailAddressOneTime",
+      "podValue": "SelectEmail.podEmailAddress",
+      "fallbacks": [
+        "memberEmail",
+        "memberInfo.memberEmailAddress",
+        null
+      ],
+      "priority": "If SelectEmail exists: one-time flag plus populated one-time email, otherwise populated POD email, otherwise fallbacks. Without SelectEmail use fallbacks."
+    },
+    "templateSelection": {
+      "source": "selectedTemplate",
+      "additionalInfoTokenDataId": "selectedTemplate.Id",
+      "previewContentDocumentId": "selectedTemplate.documentInfo.ContentDocumentId when documentInfo exists and ContentDocumentId != null"
+    },
+    "templateChangedBranch": {
+      "condition": "JSON has additionalInfoTokenDataId && additionalInfoTokenDataId != selectedTemplate.Id",
+      "actions": [
+        "tokenInputFields=[]",
+        "tokenMapping=[]",
+        "getTokenDetails(selectedTemplate)"
+      ]
+    },
+    "existingTokensBranch": {
+      "condition": "Otherwise JSON has tokenInputs",
+      "source": "tokenInputs",
+      "refreshCondition": "item.mappingName != null && JSON has item.mappingName && isRefreshTokens",
+      "refreshedValue": "omniscriptJsonData[item.mappingName]",
+      "actions": [
+        "Assign mapped list to tokenInputFields",
+        "setToEmail()"
+      ],
+      "fallback": "Without tokenInputs call getTokenDetails(selectedTemplate)."
+    },
+    "finalJsonUpdate": {
+      "method": "omniApplyCallResp",
+      "payload": {
+        "isRefreshTokens": false
+      }
+    }
+  },
+  "setToEmail": {
+    "tokenMatch": "t.name === 'To'",
+    "value": "this.memberEmail",
+    "jsonUpdate": {
+      "tokenInputs": "this.tokenInputFields"
+    },
+    "method": "omniApplyCallResp"
+  },
+  "emailBody": {
+    "source": "selectedTemplate.HtmlValue",
+    "placeholderPattern": "/{{\\s*\\b\\w+\\b\\s*}}/gi",
+    "placeholderKey": "Remove braces and trim whitespace.",
+    "lookup": "jsonData[variableName]",
+    "currentYearFallback": "If undefined and variableName === 'currentYear', use new Date().getFullYear().toString().",
+    "substitution": "Replace placeholder when value !== undefined; otherwise remove placeholder if match.includes('manual').",
+    "memberInfoAssignment": "If memberInfo exists and memberEmailAddress != null, assign both memberEmail and memberName from memberInfo.memberEmailAddress.",
+    "subject": "selectedTemplate.emailTemplateSubject when truthy",
+    "jsonUpdate": {
+      "customBody": "this.emailBody",
+      "memberEmail": "this.memberEmail",
+      "memberName": "this.memberName",
+      "subject": "this.subject"
+    },
+    "notes": "Email path captured for completeness; do not apply these substitutions to Print generation."
+  },
+  "getTokenDetails": {
+    "method": "getTokenDetails(selectedTemplate)",
+    "emailBranchCondition": "this.isEmail",
+    "emailTokens": [
+      {
+        "name": "To",
+        "label": "To",
+        "errorMessage": "Error: To is required.",
+        "showTA": false,
+        "showRTA": false,
+        "showEmail": true,
+        "showPicklist": false,
+        "isRequired": true,
+        "showText": false,
+        "value": "this.memberEmail",
+        "isReadOnly": true
+      },
+      {
+        "name": "Subject",
+        "label": "Subject",
+        "errorMessage": "Error: Subject is required.",
+        "showTA": false,
+        "showRTA": false,
+        "showEmail": false,
+        "showPicklist": true,
+        "isRequired": true,
+        "showText": false,
+        "value": "this.subject"
+      }
+    ],
+    "emailAssignment": "this.tokenInputFields = emailTokens;",
+    "printBranchCaptured": false
+  },
+  "commentedCode": {
+    "notes": "Alternative initialization beginning around line 56, subscription sections, alternate setToEmail around line 299 and earlier getTokenDetails around line 364 are visibly block-commented. Do not treat them as active behavior.",
+    "subscriptionTokensObserved": [
+      "effectiveFrom",
+      "effectiveTo",
+      "frequency",
+      "AssociatedCase",
+      "Member",
+      "Type"
+    ],
+    "activeSubscriptionBehaviorVerified": false
+  },
+  "remainingEvidence": [
+    "getTokenDetails continuation after approximately line 523, especially non-email/Print branch",
+    "Token definition source and exact API/manual classification",
+    "Input handlers and OmniScript updates for manual Print values",
+    "HTML rendering and validation",
+    "Preview navigation and generation calls",
+    "Complete file coverage and js-meta.xml",
+    "OmniScript Custom LWC element input mappings"
+  ],
+  "notes": "Partial source observations only; no executable file reconstructed, no deployment. Directly seen tokenInputs state flow confirms token list reuse/refresh. It does not yet establish the source of Print field definitions or required CS-1474 tokens."
+}
+```
+
+Next: continue getTokenDetails below approximately line 523, capturing the non-email branch and token-source call. Earlier request for Custom LWC element properties remains a later gap; do not interrupt this source review to repeat captured sections.
