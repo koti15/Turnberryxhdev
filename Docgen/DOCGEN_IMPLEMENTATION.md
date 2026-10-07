@@ -98,6 +98,12 @@ Story relationship: CS-1474 already has a candidate manual-content/address UI to
 
 Do not diagnose the failure from test address values alone. The failing generation/storage/delivery action and its request/response are not yet captured. A row in the review table is not proof of a valid generated PDF.
 
+## AdditionalInformation designer checkpoint — 2026-10-06, 10:50 PM CT
+
+Confirmed: AdditionalInformation hosts EnterAdditionalInformation with visible custom component cncSendCommunicationAdditionalInfo. The designer contains multiple headings for letter, cover letter, email and subscription; their conditions remain uncaptured. Exact Step observations are in the canonical specification and generated handoff.
+
+Story relationship: inspect this existing custom component for the Free Form Text/manual token behavior relevant to CS-1474. The designer identity alone does not prove token-driven rendering or establish a required code change. Input parameters, JSON updates and source are the next dependency to trace.
+
 ## Next item to send
 
-Open the original OmniScript designer and select AdditionalInformation. Send its properties and visible child/component list. This lets us identify the input-rendering and token component before reviewing the relevant IP/Apex dependency. If the runtime View link is still accessible, a sanitized letter preview would also establish whether the document contains the entered values; no further print submission is required.
+Click EnterAdditionalInformation, the custom component inside the Step, and send its Custom LWC properties. Include the component name, input parameters and conditions. The current screenshot shows parent Step properties, not the embedded component's configuration.
