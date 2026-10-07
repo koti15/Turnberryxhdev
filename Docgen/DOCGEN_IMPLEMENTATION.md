@@ -126,6 +126,14 @@ CS-1474 relationship: Free_Form_Text_apimanual is present and matches the existi
 
 This confirms an existing template and custom mapping dependency, but does not verify all automatic merge fields or resolve the observed send failure. Successful generation, print processing, case association and storage remain unverified.
 
+## Custom extractor checkpoint — 2026-10-06, 11:05 PM CT
+
+CNC_CustomTokenDataExtractor copies input.tokenMapping into output.tokenMap. No automatic field retrieval or IP call appears in the displayed class. The declared IP-name constants are unused in the visible methods. Exact contract and dispatch details are stored in canonical apexSourceEvidence and the generated handoff.
+
+The LWC's tokenMapping output matches this extractor's input key, establishing a compatible contract; the actual generation call and automatic-token enrichment still need tracing. CS-1474's manual content has an existing path to reuse, but the full set of merge values is not yet verified.
+
+The getTokenData helper initializes and returns false; invokeMethod ignores that return and returns true unless an exception is caught. Record this behavior without treating it as the cause of the observed send failure.
+
 ## Next item to send
 
-Open the Apex class CNC_CustomTokenDataExtractor and send its entry method and the section that builds/maps token values. Start with those sections; no need to send all OmniScript steps. After that, inspect the actual Host Provider Free Form Letter.docx content for the Brief Description and Free Form Content sections.
+Send the OmniScript action or Integration Procedure that prepares tokenMapping and passes it to document generation, including its input mappings. Start with the action immediately after AdditionalInformation and follow the relevant generation path. We need to locate where Current_Date_system, Case_Number, Claim_DOS and Patient_Acct_Num are populated. The Word template content is still needed later to verify Brief Description and Free Form Content placement.
