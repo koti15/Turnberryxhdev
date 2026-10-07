@@ -320,20 +320,28 @@
         }
       ],
       "sendOnlyExtraPayload": true,
-      "responseMapping": null,
-      "executionCondition": null,
+      "responseMapping": {
+        "sendJsonPath": "",
+        "sendJsonNode": "",
+        "responseJsonPath": "",
+        "responseJsonNode": ""
+      },
+      "executionCondition": {
+        "conditionType": "Show Element if True",
+        "displayedCondition": "(isAsyncLetterGeneration = true AND isPOD <> true)"
+      },
       "remoteProperties": null,
       "complete": false,
       "evidenceScreenshots": [
         "IMG_2589F3C1-EDEB-4B1F-92E9-13013F9E8AA9.jpeg",
-        "IMG_C37F5649-2C1B-4ADD-ACB9-51B618B1231A.jpeg"
+        "IMG_C37F5649-2C1B-4ADD-ACB9-51B618B1231A.jpeg",
+        "IMG_FC652828-4342-4FA3-A38E-DD7E5199E8F1.jpeg",
+        "IMG_621353BF-9610-4053-BC10-06B10CA8C4B0.jpeg"
       ],
       "missing": [
-        "Outer action send/response transformations",
-        "Outer action conditional view",
         "Remote properties"
       ],
-      "interpretation": "Configured to supply tokenMapping directly as tokenDataMap for server generation. Whether this branch executes for the observed runtime selection is not yet established."
+      "interpretation": "Async branch is gated by isAsyncLetterGeneration=true and isPOD<>true. The reviewed LWC initializes async true and sets it false for RTB_ manual tokens; the displayed HOSTProviderFreeformLetter token JSON has no RTB_ names. This makes async routing consistent with reviewed configuration, but actual runtime flag values/execution remain unverified. No send/response path or node override is configured in the displayed transformation fields."
     }
   ],
   "missingForRunnableBuild": [
