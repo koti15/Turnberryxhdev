@@ -2451,3 +2451,83 @@ Generated from canonical runtimeReview. Existing HOSTProviderFreeformLetter is v
 ```
 
 Next: select the displayed letter row and use Next to capture the following screen. No print submission is required.
+
+
+## Runtime review: Communication Address — 2026-10-06, 10:42 PM CT
+
+Generated from canonical runtimeReview. Supersedes earlier runtime continuation points: the journey has reached Communication Address. Checked one-time address state and blank inputs do not establish defaults or persistence behavior.
+
+```json
+{
+  "captureDate": "2026-10-06",
+  "environment": "xhdev1 sandbox",
+  "evidenceScreenshot": "IMG_0FC9CC3C-65AB-48C7-A80A-9FF6D7CA53FC.jpeg",
+  "title": "Communication Address",
+  "journeyContext": "Following the Select Letter review of Other Communication / Print; selected letter identity is not displayed on this screen.",
+  "fields": [
+    {
+      "label": "Addressee Name",
+      "requiredIndicatorVisible": true,
+      "visibleValue": "",
+      "validationMessage": "Error: Addressee Name is required."
+    },
+    {
+      "label": "Address",
+      "requiredIndicatorVisible": false,
+      "visibleValue": "",
+      "editableVerified": null
+    },
+    {
+      "label": "Address Line 1",
+      "requiredIndicatorVisible": true,
+      "visibleValue": ""
+    },
+    {
+      "label": "Address Line 2",
+      "requiredIndicatorVisible": false,
+      "visibleValue": ""
+    },
+    {
+      "label": "City",
+      "requiredIndicatorVisible": true,
+      "visibleValue": ""
+    },
+    {
+      "label": "Zip",
+      "requiredIndicatorVisible": true,
+      "visibleValue": ""
+    },
+    {
+      "label": "State",
+      "requiredIndicatorVisible": true,
+      "visibleValue": ""
+    },
+    {
+      "label": "Country",
+      "requiredIndicatorVisible": true,
+      "visibleValue": ""
+    }
+  ],
+  "oneTimeCommunicationAddress": {
+    "label": "One time Communication Address",
+    "checked": true,
+    "defaultVerified": false,
+    "conditionalVisibilityVerified": false
+  },
+  "navigationVisible": [
+    "Previous",
+    "Next"
+  ],
+  "unknowns": [
+    "Field API/JSON names and mappings",
+    "Address prepopulation source",
+    "Behavior with one-time checkbox unchecked",
+    "Whether entered address updates a record or only this communication",
+    "Relationship to Provider recipient and later review edits",
+    "Validation rules beyond the visible Addressee Name error"
+  ],
+  "notes": "Blank fields and checked checkbox are visible runtime state, not proof of defaults. Manual address controls are displayed; successful input, navigation, persistence, generation and print submission remain unverified."
+}
+```
+
+Next: use approved sandbox test details to complete the address, select Next and capture the following screen. No print submission is required.
