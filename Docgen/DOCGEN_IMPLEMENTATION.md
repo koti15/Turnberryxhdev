@@ -62,10 +62,16 @@ Pending:
 
 Estimates remain provisional until reuse and required changes are established. Story points follow the team's scale; five points per story is not a verified commitment.
 
+## Launch review checkpoint — 2026-10-06, 10:33 PM CT
+
+Confirmed: the Case button and source quick action/LWC wiring are captured. The launcher checks ownership and Account presence before passing the Case ID to the OmniScript. Exact settings and screenshot references: canonical caseIntegration and the generated handoff supplement.
+
+Story relationship: all three use this shared entry point. CS-1474 explicitly requires an owned case, which matches the visible launcher check. CS-1831/1832 mention MEA/Supervisor/Leader, but do not establish a non-owner exception; role bypass is not shown. This is a requirement comparison to revisit after the existing flow is understood, not proof a launcher change is needed.
+
+Still unknown: first runtime screen after launch, active source OmniScript version, working template selection and generation path. Button visibility alone does not prove ITS Host restrictions inside the flow. Target recreation remains separate.
+
 ## Next item to send
 
-Open the original Send Communication process using a suitable test case. At Provider → Other Communication → Print, show the existing letter/template selection list and identify a letter known to generate successfully.
+Click Send Communication on the existing suitable test Case and send the first screen that opens, with sensitive details hidden. Include any error displayed instead of a screen. Do not change the launcher or submit a print request.
 
-Send that screen first, with the template name visible and sensitive case details excluded. Do not submit a print request just to capture this screen. If the environment has no working letter, record that fact and use the existing template designer/configuration as the baseline instead.
-
-After this, the next request will be the selected baseline template's designer/configuration, not the entire OmniScript tree.
+After reviewing that screen, continue toward Provider → Other Communication → Print and capture template selection. No need to resend the launch code or all 52 elements.
