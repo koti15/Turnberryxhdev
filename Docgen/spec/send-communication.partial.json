@@ -2007,6 +2007,81 @@
         "IMG_A7E26B77-B101-4132-90A9-B8ECE52EC500.jpeg",
         "IMG_7ACBD6F4-31F7-4D59-9114-9D0C1195E8F6.jpeg"
       ]
+    },
+    {
+      "elementName": "AdditionalInformation",
+      "type": "Step",
+      "fieldLabel": "",
+      "chartLabel": "",
+      "instruction": "",
+      "allowSaveForLater": true,
+      "visibleLayoutItems": [
+        {
+          "visibleOrder": 1,
+          "elementName": null,
+          "type": null,
+          "displayText": "Enter Additional Information for Letter Selected",
+          "conditionalView": null
+        },
+        {
+          "visibleOrder": 2,
+          "elementName": null,
+          "type": null,
+          "displayText": "Enter Additional Information for Cover Letter",
+          "conditionalView": null
+        },
+        {
+          "visibleOrder": 3,
+          "elementName": null,
+          "type": null,
+          "displayText": "Edit Email",
+          "conditionalView": null
+        },
+        {
+          "visibleOrder": 4,
+          "elementName": null,
+          "type": null,
+          "displayText": "Additional Information for Subscription",
+          "conditionalView": null
+        },
+        {
+          "visibleOrder": 5,
+          "elementName": "EnterAdditionalInformation",
+          "type": null,
+          "componentName": "cncSendCommunicationAdditionalInfo",
+          "renderedMarkup": "<c:cncSendCommunicationAdditionalInfo />",
+          "inputMapping": null,
+          "conditionalView": null
+        }
+      ],
+      "adjacentElementsObserved": {
+        "preceding": {
+          "elementName": "RA-UpdateLinks",
+          "type": "Remote Action"
+        },
+        "following": [
+          {
+            "elementName": "RA-InsertSelectedForms",
+            "type": "Remote Action"
+          },
+          {
+            "elementName": "IP-DeleteLetterData",
+            "type": "Integration Procedure Action"
+          }
+        ]
+      },
+      "evidenceScreenshots": [
+        "IMG_DA63D02D-536A-42EC-A1DE-80111203FBBF.jpeg"
+      ],
+      "captureComplete": false,
+      "missing": [
+        "Custom LWC element properties and input mappings",
+        "Heading identities/types and execution conditions",
+        "Step conditional/button properties",
+        "Full cncSendCommunicationAdditionalInfo source",
+        "Token data origin and JSON updates"
+      ],
+      "notes": "Step properties are selected in screenshot. Custom LWC component identity is visible in canvas markup; field-rendering implementation and token-driven behavior are not established. Adjacent action names/types do not establish their behavior or whether they execute for this route."
     }
   ],
   "customMetadataEvidence": {
