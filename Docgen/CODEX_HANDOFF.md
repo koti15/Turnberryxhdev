@@ -2920,3 +2920,315 @@ Generated from canonical lwcSourceEvidence by component name. Active and comment
 ```
 
 Next: continue getTokenDetails below approximately line 523, capturing the non-email branch and token-source call. Earlier request for Custom LWC element properties remains a later gap; do not interrupt this source review to repeat captured sections.
+
+
+## Complete captured configuration supplement: AdditionalInfo manual token processing — 2026-10-06, 10:56 PM CT
+
+Generated from canonical lwcSourceEvidence. Supersedes the prior Print-branch gap for captured methods. Full source/template data/downstream generation remain incomplete.
+
+```json
+{
+  "name": "cncSendCommunicationAdditionalInfo",
+  "environment": "xhdev1 sandbox",
+  "sourceFile": "cncSendCommunicationAdditionalInfo.js",
+  "baseClass": "OmniscriptBaseMixin(NavigationMixin(LightningElement))",
+  "captureDate": "2026-10-06",
+  "sourceCaptureComplete": false,
+  "evidenceScreenshots": [
+    "IMG_F9575910-5641-49FE-A3BA-47CFE7E90DEB.jpeg",
+    "IMG_58F3F8D4-852C-4A6F-BE15-5F142F7DE38D.jpeg",
+    "IMG_03A12AD0-02EB-4951-9D81-DBDF216F595E.jpeg",
+    "IMG_6EED452C-61BF-4AA7-B314-89EC764ADE16.jpeg",
+    "IMG_D8559AFD-CE92-4138-B379-B2C851E35F4A.jpeg",
+    "IMG_0552C7DD-107F-47C8-ABDD-4D296CF82BEA.jpeg",
+    "IMG_28BF83F9-71F6-4DDA-9CE6-65E261C33184.jpeg",
+    "IMG_B1931D0D-ADCC-476F-AA63-282C4044D671.jpeg",
+    "IMG_1DB37A4D-15A5-4A9B-A9FA-B1890ABEC983.jpeg",
+    "IMG_499C774D-9BD7-43EA-A39C-F17D4A8FADF9.jpeg",
+    "IMG_BF338C35-1460-4F01-886A-D1DDD65F87DD.jpeg",
+    "IMG_80198A6F-2437-4880-97A9-68715496BFEB.jpeg",
+    "IMG_7DB86B58-1373-4E56-B4AB-55ADC044B022.jpeg",
+    "IMG_A96C2FAE-C29C-4B4A-A618-89079456EB3A.jpeg",
+    "IMG_D0C0C36E-7476-49A5-9F65-10AF3A2C3C28.jpeg",
+    "IMG_FDEFC39B-334B-41FD-9FAF-C737A54CC4AA.jpeg",
+    "IMG_27C15046-65DA-48CD-9C37-CFAFD2B11D29.jpeg",
+    "IMG_E834A435-8B63-4BEB-BB57-28F37BB86680.jpeg"
+  ],
+  "initialProperties": {
+    "tokenMapping": [],
+    "tokenInputFields": [],
+    "selectedLetterHeader": "To Review Letter selected in previous step, ",
+    "selectedLetterPreviewText": "Preview here.",
+    "isPOD": false,
+    "showSubHeader": true,
+    "isEmail": false,
+    "isAsyncLetterGeneration": true,
+    "today": "1970-01-01"
+  },
+  "richTextFormats": [
+    "font",
+    "size",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "list",
+    "indent",
+    "align",
+    "link",
+    "image",
+    "clean",
+    "table",
+    "header"
+  ],
+  "lifecycle": {
+    "connectedCallback": [
+      "this.initilizeTokenData();",
+      "this.initializeMinDate();"
+    ],
+    "initializeMinDate": "this.today = new Date().toISOString().slice(0,10);"
+  },
+  "tokenInitialization": {
+    "method": "initilizeTokenData",
+    "jsonSource": "this.omniJsonData",
+    "flags": {
+      "isEmail": "When JSON has isEmail and it is truthy: showSubHeader=false, setEmailBody(), isEmail=true.",
+      "isPOD": "When JSON has isPOD and it is truthy: isPOD=true."
+    },
+    "memberEmailResolution": {
+      "oneTimeFlag": "SelectEmail.SelectOneTimeEmail === true",
+      "oneTimeValue": "SelectEmail.EmailAddressOneTime",
+      "podValue": "SelectEmail.podEmailAddress",
+      "fallbacks": [
+        "memberEmail",
+        "memberInfo.memberEmailAddress",
+        null
+      ],
+      "priority": "If SelectEmail exists: one-time flag plus populated one-time email, otherwise populated POD email, otherwise fallbacks. Without SelectEmail use fallbacks."
+    },
+    "templateSelection": {
+      "source": "selectedTemplate",
+      "additionalInfoTokenDataId": "selectedTemplate.Id",
+      "previewContentDocumentId": "selectedTemplate.documentInfo.ContentDocumentId when documentInfo exists and ContentDocumentId != null"
+    },
+    "templateChangedBranch": {
+      "condition": "JSON has additionalInfoTokenDataId && additionalInfoTokenDataId != selectedTemplate.Id",
+      "actions": [
+        "tokenInputFields=[]",
+        "tokenMapping=[]",
+        "getTokenDetails(selectedTemplate)"
+      ]
+    },
+    "existingTokensBranch": {
+      "condition": "Otherwise JSON has tokenInputs",
+      "source": "tokenInputs",
+      "refreshCondition": "item.mappingName != null && JSON has item.mappingName && isRefreshTokens",
+      "refreshedValue": "omniscriptJsonData[item.mappingName]",
+      "actions": [
+        "Assign mapped list to tokenInputFields",
+        "setToEmail()"
+      ],
+      "fallback": "Without tokenInputs call getTokenDetails(selectedTemplate)."
+    },
+    "finalJsonUpdate": {
+      "method": "omniApplyCallResp",
+      "payload": {
+        "isRefreshTokens": false
+      }
+    }
+  },
+  "setToEmail": {
+    "tokenMatch": "t.name === 'To'",
+    "value": "this.memberEmail",
+    "jsonUpdate": {
+      "tokenInputs": "this.tokenInputFields"
+    },
+    "method": "omniApplyCallResp"
+  },
+  "emailBody": {
+    "source": "selectedTemplate.HtmlValue",
+    "placeholderPattern": "/{{\\s*\\b\\w+\\b\\s*}}/gi",
+    "placeholderKey": "Remove braces and trim whitespace.",
+    "lookup": "jsonData[variableName]",
+    "currentYearFallback": "If undefined and variableName === 'currentYear', use new Date().getFullYear().toString().",
+    "substitution": "Replace placeholder when value !== undefined; otherwise remove placeholder if match.includes('manual').",
+    "memberInfoAssignment": "If memberInfo exists and memberEmailAddress != null, assign both memberEmail and memberName from memberInfo.memberEmailAddress.",
+    "subject": "selectedTemplate.emailTemplateSubject when truthy",
+    "jsonUpdate": {
+      "customBody": "this.emailBody",
+      "memberEmail": "this.memberEmail",
+      "memberName": "this.memberName",
+      "subject": "this.subject"
+    },
+    "notes": "Email path captured for completeness; do not apply these substitutions to Print generation."
+  },
+  "getTokenDetails": {
+    "method": "getTokenDetails(selectedTemplate)",
+    "emailBranchCondition": "this.isEmail",
+    "emailTokens": [
+      {
+        "name": "To",
+        "label": "To",
+        "errorMessage": "Error: To is required.",
+        "showTA": false,
+        "showRTA": false,
+        "showEmail": true,
+        "showPicklist": false,
+        "isRequired": true,
+        "showText": false,
+        "value": "this.memberEmail",
+        "isReadOnly": true
+      },
+      {
+        "name": "Subject",
+        "label": "Subject",
+        "errorMessage": "Error: Subject is required.",
+        "showTA": false,
+        "showRTA": false,
+        "showEmail": false,
+        "showPicklist": true,
+        "isRequired": true,
+        "showText": false,
+        "value": "this.subject"
+      }
+    ],
+    "emailAssignment": "this.tokenInputFields = emailTokens;",
+    "printBranchCaptured": true,
+    "templateTokenProcessing": {
+      "source": "selectedTemplate.tokens",
+      "filter": "this.isManualToken(token.Name)",
+      "isManualToken": {
+        "lastIndex": "input.lastIndexOf('_')",
+        "condition": "lastIndex > 0",
+        "acceptedSuffixesCaseInsensitive": [
+          "_manual",
+          "_apimanual"
+        ]
+      },
+      "labelConversion": "If input startsWith('RTB_'), remove first four characters. Remove final underscore suffix when present, then replace remaining underscores with spaces.",
+      "initialValue": "When token.mappingName is truthy, jsonData[token.mappingName].",
+      "initialFlags": {
+        "showTA": false,
+        "showText": false,
+        "showRTA": false,
+        "isRequired": false,
+        "isValid": true,
+        "isReadOnly": false
+      },
+      "richTextRule": "If token.Name.includes('RTB_'): showRTA=true and this.isAsyncLetterGeneration=false; otherwise showTA=true.",
+      "metadataFlags": [
+        "token.isRequired sets isRequired=true when truthy",
+        "token.isReadOnly sets isReadOnly=true when truthy"
+      ],
+      "inputProperties": [
+        "name=token.Name",
+        "label",
+        "value",
+        "errorMessage='Error: '+label+' is required.'",
+        "showTA",
+        "showRTA",
+        "isRequired",
+        "isValid",
+        "mappingName=token.mappingName",
+        "showText=false",
+        "isReadOnly"
+      ],
+      "additionalTokens": "If JSON has rtbTokenInputs and it is not null, append ...jsonData.rtbTokenInputs.",
+      "jsonUpdate": {
+        "additionalInfoTokenDataId": "this.additionalInfoTokenDataId",
+        "isAsyncLetterGeneration": "this.isAsyncLetterGeneration",
+        "tokenInputs": "this.tokenInputFields"
+      },
+      "notes": "No new token-fetch IP/Apex call is visible in this method. It consumes the selectedTemplate.tokens array already supplied upstream. Precise upstream record/source and actual template tokens remain unknown."
+    }
+  },
+  "commentedCode": {
+    "notes": "Alternative initialization beginning around line 56, subscription sections, alternate setToEmail around line 299 and earlier getTokenDetails around line 364 are visibly block-commented. Do not treat them as active behavior.",
+    "subscriptionTokensObserved": [
+      "effectiveFrom",
+      "effectiveTo",
+      "frequency",
+      "AssociatedCase",
+      "Member",
+      "Type"
+    ],
+    "activeSubscriptionBehaviorVerified": false
+  },
+  "remainingEvidence": [
+    "Actual HOSTProviderFreeformLetter token definitions and mappingName/isRequired/isReadOnly values",
+    "Upstream producer of selectedTemplate.tokens and rtbTokenInputs",
+    "HTML rendering and any additional handlers in uncaptured lines approximately 612–670",
+    "Complete file coverage and js-meta.xml",
+    "OmniScript Custom LWC input mappings",
+    "Downstream consumer of tokenMapping/isAsyncLetterGeneration and actual document-generation response"
+  ],
+  "notes": "Partial source observations only, not executable reconstruction or deployment. Active template-token filtering, manual input handling, validation guard and OmniScript output mappings captured. Template-specific data and generation integration remain pending.",
+  "previewNavigation": {
+    "method": "viewFilePreviewer",
+    "type": "standard__namedPage",
+    "attributes": {
+      "pageName": "filePreview"
+    },
+    "state": {
+      "selectedRecordId": "this.selectedContentDocumentId"
+    },
+    "notes": "Uses previously selected template document ContentDocumentId; this alone does not establish a newly generated personalized letter preview."
+  },
+  "manualInputHandling": {
+    "method": "handleInputChange",
+    "index": "event.target.dataset.index",
+    "value": "event.target.value",
+    "tokenUpdate": "Update tokenInputFields entry at parseInt(index) then omniApplyCallResp({tokenInputs: this.tokenInputFields}).",
+    "requiredValidation": "For blank required values: RTB input sets matching token isValid=false/errorMessage; other input uses setCustomValidity and reportValidity. Nonblank values clear error state.",
+    "nextMethod": "handleNextClick",
+    "nextGuard": "this.isInputFieldValid()",
+    "tokenMapping": "For non-RTB tokens with value != null: tokenMapping[token.name]=token.value. RTB tokens with value != null use handleRTBTokens(token.name, token.value).",
+    "nextActions": [
+      "Assign this.tokenMapping",
+      "updateOmniScript()",
+      "omniNextStep()"
+    ],
+    "previousAction": "omniPrevStep()",
+    "validationMethod": "isInputFieldValid",
+    "validationSelector": ".inputFieldValidity,lightning-input-rich-text",
+    "validationNotes": "Blank required or invalid native fields set return flag false. RTB required errors also set class slds-has-error. Runtime invalid/valid scenarios are not tested in this capture."
+  },
+  "richTextTokenSubstitution": {
+    "method": "handleRTBTokens(rtbTokenName, rtbTokenData)",
+    "placeholderPattern": "/{{\\s*\\b\\w+\\b\\s*}}/gi",
+    "lookup": "tokenInputFields.find(token => token.rtbTokenName == rtbTokenName && token.name == variableName)",
+    "replacement": "Replace matching placeholder with token.value when a matching token exists.",
+    "fontMethod": "handleRTBfont",
+    "font": {
+      "font": "Times New Roman",
+      "size": 12
+    },
+    "fontInvocationNote": "handleRTBfont call in handleNextClick is commented; do not claim font enforcement from the method definition."
+  },
+  "finalOmniScriptUpdate": {
+    "method": "updateOmniScript",
+    "call": "omniApplyCallResp",
+    "payload": {
+      "tokenMapping": "this.tokenMapping",
+      "tokenInputs": "this.tokenInputFields",
+      "additionalInfoTokenDataId": "this.additionalInfoTokenDataId",
+      "memberEmail": "this.memberEmail",
+      "subject": "this.subject",
+      "effectiveFrom": "this.effectiveFrom",
+      "effectiveTo": "this.effectiveTo",
+      "frequency": "this.frequencyValue"
+    }
+  },
+  "otherVisibleGetters": {
+    "options": "If isPOD == false: label/value Form/Document Request. Otherwise label Your requested plan materials, value this.subject.",
+    "frequency": [
+      "Monthly",
+      "Every 6 months",
+      "Annually"
+    ],
+    "showStandard": "!(this.isEmail == false), with subscription clause commented out."
+  }
+}
+```
+
+Next: inspect HOSTProviderFreeformLetter template/token definitions. Capture exact names, mappingName, isRequired and isReadOnly. Upstream selectedTemplate.tokens source remains unknown; no new IP/Apex fetch call appears in captured getTokenDetails.
