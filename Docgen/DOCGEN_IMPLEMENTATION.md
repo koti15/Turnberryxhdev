@@ -162,8 +162,12 @@ Today's supplied evidence has been saved to Git. The checkpoint in canonical rev
 
 We have traced the Case launch, manual letter-input mechanism, existing free-form template, custom extractor pass-through, and configured async PDF generation route. The observed send failure remains unexplained. Automatic merge-field population, Brief Description placement and successful generation/delivery still need verification.
 
+## Story capture — October 7, 2026
+
+CS-1474 reference letter preview is now captured in the story notes and canonical storyReferenceDocuments. Visible placeholders have a provisional correspondence to the existing token names. Real Word token bindings and automatic values are not verified. Brief Description placement remains unresolved because no separate placeholder appears in the supplied preview.
+
 ## Next item to send
 
-Resume at RA-SetDefaultTokenMapping in the OmniScript, before AdditionalInformation. Capture Remote Class/Method, Extra Payload and Conditional View, then trace its source for the automatic letter values. No need to resend today's screenshots.
+Continue the user's story-first review: send CS-1474's description and full acceptance criteria, then capture each remaining story. Native Word content and exact bindings remain pending.
 
-After that, use the canonical remaining-items list to continue the targeted review and compare the findings against CS-1474, CS-1831 and CS-1832.
+The OmniScript investigation stays paused at RA-SetDefaultTokenMapping before AdditionalInformation. Resume there after story capture; no need to resend the configuration already recorded.
