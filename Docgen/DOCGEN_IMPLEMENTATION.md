@@ -156,6 +156,14 @@ The reviewed LWC starts with async generation enabled and disables it for RTB_ m
 
 For the three stories, this narrows the generation dependency we should validate. The next missing link is automatic data entering tokenMapping; the current extractor simply passes the supplied map through.
 
+## Session paused — October 6, 2026, 11:16 PM CT
+
+Today's supplied evidence has been saved to Git. The checkpoint in canonical reviewCheckpoint records completed captures, remaining gaps and the exact continuation point. This marks completion of today's documentation session; implementation review and story validation remain open.
+
+We have traced the Case launch, manual letter-input mechanism, existing free-form template, custom extractor pass-through, and configured async PDF generation route. The observed send failure remains unexplained. Automatic merge-field population, Brief Description placement and successful generation/delivery still need verification.
+
 ## Next item to send
 
-Go to RA-SetDefaultTokenMapping before AdditionalInformation. Send its Remote Class/Method, Extra Payload and Conditional View. We will trace its source next to verify Case Number, Date of Service, provider and patient mappings. The clipped async IP formulas remain pending for a later targeted capture.
+Resume at RA-SetDefaultTokenMapping in the OmniScript, before AdditionalInformation. Capture Remote Class/Method, Extra Payload and Conditional View, then trace its source for the automatic letter values. No need to resend today's screenshots.
+
+After that, use the canonical remaining-items list to continue the targeted review and compare the findings against CS-1474, CS-1831 and CS-1832.
