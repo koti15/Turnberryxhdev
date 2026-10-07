@@ -3285,3 +3285,60 @@ Generated from canonical documentTemplateEvidence. This supersedes the previous 
 ```
 
 Next: review CNC_CustomTokenDataExtractor entry method and token mapping. Do not infer runtime values from empty Token JSON entries or claim Brief Description is implemented without inspecting Word content.
+
+
+## Custom extractor checkpoint — 2026-10-06, 11:05 PM CT
+
+Generated from canonical apexSourceEvidence. Supersedes the prior request for this class: the displayed class passes through tokenMapping; automatic values must be traced upstream.
+
+```json
+{
+  "name": "CNC_CustomTokenDataExtractor",
+  "evidence": "Two user-provided screenshots, class lines 1–48, 2026-10-06 11:05 PM CT",
+  "sourceCoverage": "Visible class body through closing brace; screenshot transcription, not retrieved org source or tested deployment artifact",
+  "apiVersion": "58.0",
+  "declaration": "global with sharing class CNC_CustomTokenDataExtractor implements omnistudio.VlocityOpenInterface, Callable",
+  "constants": {
+    "IP_TOKENDATA_NAME": "CNC_GetLetterTemplateTokenData",
+    "IP_CLAIMDATA_NAME": "CNC_GetLetterTemplateTokenData",
+    "NAMESPACE_PREFIX": "omnistudio__"
+  },
+  "callEntry": {
+    "method": "call",
+    "arguments": [
+      "action",
+      "args"
+    ],
+    "reads": [
+      "args.input",
+      "args.output",
+      "args.options"
+    ],
+    "delegatesTo": "invokeMethod(action, input, output, options)"
+  },
+  "invokeMethod": {
+    "initialResult": true,
+    "dispatch": "If methodName == 'getTokenData', call getTokenData(input, output, options).",
+    "ignoresGetTokenDataReturn": true,
+    "exceptionHandling": "Debug cause/message/stack trace/line and set result=false.",
+    "returns": "result",
+    "unknownAction": "No explicit rejection branch; result remains true without dispatch."
+  },
+  "getTokenData": {
+    "initialSuccess": false,
+    "inputKey": "tokenMapping",
+    "accepts": "Map<String,Object>",
+    "behavior": "Create empty tokenMap; when input.tokenMapping is a Map<String,Object>, copy all entries using putAll.",
+    "outputKey": "tokenMap",
+    "returnValue": false,
+    "noSuccessAssignmentVisible": true
+  },
+  "observations": [
+    "The class passes supplied token data through; no SOQL, IP invocation, external call or automatic field construction appears in the displayed class.",
+    "The IP-name constants are declarations only and are not used in the visible methods.",
+    "The helper returns false while invokeMethod ignores that return and returns true unless an exception is caught. This alone does not diagnose the observed runtime send failure.",
+    "LWC updateOmniScript supplies tokenMapping, matching this class's expected key. Actual caller input and enrichment of automatic tokens remain unverified."
+  ],
+  "nextEvidence": "OmniScript action or IP preparing/passing tokenMapping to generation: input mappings and automatic-token enrichment."
+}
+```
