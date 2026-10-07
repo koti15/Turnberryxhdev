@@ -148,6 +148,14 @@ This provides a generation mechanism that may be reusable across the three stori
 
 The parameter formulas and output formulas are clipped. Their defaults and success/error logic remain unknown. The actual runtime response, job completion, personalized PDF, print delivery and storage are still unverified.
 
+## Async routing checkpoint — 2026-10-06, 11:14 PM CT
+
+The outer async action is conditional on isAsyncLetterGeneration=true AND isPOD<>true. Its Send JSON Path/Node and Response JSON Path/Node are blank. Exact observations are in canonical confirmedActions and the generated handoff.
+
+The reviewed LWC starts with async generation enabled and disables it for RTB_ manual tokens. HOSTProviderFreeformLetter's displayed token JSON contains no RTB_ names, so the configuration is consistent with async generation for the non-POD letter. Actual runtime flag values and action execution remain unverified. A template's ClientSide setting alone does not establish which custom OmniScript branch runs.
+
+For the three stories, this narrows the generation dependency we should validate. The next missing link is automatic data entering tokenMapping; the current extractor simply passes the supplied map through.
+
 ## Next item to send
 
-Stay on the OmniScript IP-GenerateLetterinAsync action and send Conditional View plus Send/Response Transformations. This tells us whether the current free-form letter uses this branch and where its result is stored. After that, use Edit as JSON for the IP's clipped parameter/output formulas and remote action transformations if needed; no need to resend the already captured payload.
+Go to RA-SetDefaultTokenMapping before AdditionalInformation. Send its Remote Class/Method, Extra Payload and Conditional View. We will trace its source next to verify Case Number, Date of Service, provider and patient mappings. The clipped async IP formulas remain pending for a later targeted capture.
