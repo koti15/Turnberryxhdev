@@ -3592,3 +3592,50 @@ Generated from canonical confirmedActions. Supersedes previous missing outer con
 ```
 
 Next: review upstream RA-SetDefaultTokenMapping properties (class/method, extra payload and condition) to identify where automatic token values enter tokenMapping. Exact internal async formulas remain an outstanding capture item, not a reason to review every OmniScript action.
+
+
+## Paused session checkpoint — October 6, 2026, 11:16 PM America/Chicago
+
+Generated from canonical reviewCheckpoint. This is the current continuation instruction; earlier next-item requests are superseded by this checkpoint.
+
+```json
+{
+  "date": "2026-10-06",
+  "timeZone": "America/Chicago",
+  "time": "23:16",
+  "status": "Paused at user request; today's evidence capture saved. Implementation review remains incomplete.",
+  "completedToday": [
+    "Case Send Communication quick action and LWC launch guards/navigation",
+    "Runtime Other Communication / Print free-form letter path through failed confirmation",
+    "AdditionalInformation designer and partial cncSendCommunicationAdditionalInfo JavaScript behavior",
+    "HOSTProviderFreeformLetter settings and visible 13-token JSON",
+    "CNC_CustomTokenDataExtractor visible class contract and pass-through behavior",
+    "RA-InsertSelectedForms configuration and Forms/Documents condition",
+    "IP-GenerateLetterinAsync payload, blank transformations and async/non-POD condition",
+    "CNC_AsyncLetterGeneration version 3 visible structure, gateway call and response keys"
+  ],
+  "resumeAt": {
+    "elementName": "RA-SetDefaultTokenMapping",
+    "location": "OmniScript, before AdditionalInformation",
+    "captureNext": [
+      "Remote Class",
+      "Remote Method",
+      "Extra Payload",
+      "Conditional View"
+    ],
+    "purpose": "Identify the automatic token-mapping implementation, then review its source and map story-required merge fields."
+  },
+  "remaining": [
+    "Automatic merge values and selectedTemplate.tokens enrichment",
+    "Brief Description token and actual Word template content",
+    "Clipped async IP parameter/output formulas and remote transformations",
+    "Complete LWC HTML/metadata and missing JS portions for deployable recreation",
+    "Runtime generation job result and cause of unable-to-send confirmation",
+    "Successful PDF/print delivery, case association, storage and retry",
+    "Story-by-story scope and estimate confirmation"
+  ],
+  "scopeNote": "Documentation checkpoint only; no claim that implementation, deployable replication or story acceptance criteria are complete."
+}
+```
+
+When resuming, read this checkpoint and canonical evidence first. Do not request previously captured screenshots again. Start at RA-SetDefaultTokenMapping; review only dependencies needed for the three stories before estimating changes.
