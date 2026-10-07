@@ -3342,3 +3342,56 @@ Generated from canonical apexSourceEvidence. Supersedes the prior request for th
   "nextEvidence": "OmniScript action or IP preparing/passing tokenMapping to generation: input mappings and automatic-token enrichment."
 }
 ```
+
+
+## Selected forms action checkpoint — 2026-10-06, 11:08 PM CT
+
+Generated from canonical confirmedActions. The action immediately after AdditionalInformation is conditional on Forms/Documents, so it is not the token-generation dependency for the observed Other Communication selection.
+
+```json
+{
+  "elementName": "RA-InsertSelectedForms",
+  "fieldLabel": "RA-InsertSelectedForms",
+  "elementType": "Remote Action",
+  "observedActive": true,
+  "invokeMode": "Default",
+  "showToastOnCompletion": false,
+  "remoteClass": "CNC_SendCommunication",
+  "remoteMethod": "createAttachments",
+  "useContinuation": false,
+  "preTransformDataMapperInterface": "",
+  "postTransformDataMapperInterface": "",
+  "remoteOptions": [],
+  "extraPayload": [
+    {
+      "key": "selectedForms",
+      "value": "%selectedForms%"
+    },
+    {
+      "key": "caseId",
+      "value": "%ContextId%"
+    }
+  ],
+  "sendOnlyExtraPayload": true,
+  "conditionalView": {
+    "conditionType": "Show Element if True",
+    "displayedCondition": "(MaterialType = Forms OR MaterialType = Documents)"
+  },
+  "responseMapping": null,
+  "executionResult": null,
+  "complete": false,
+  "evidenceScreenshots": [
+    "IMG_C51042A7-CA49-4628-9B6F-67ABC6EAACFB.jpeg",
+    "IMG_D1550A64-24EC-4C84-ADEC-B2697A53E10C.jpeg",
+    "IMG_72F08B4E-847E-4482-B9F2-F02D02904C6B.jpeg",
+    "IMG_BD192402-9D2A-4710-AB44-BF0EAFE28CCE.jpeg"
+  ],
+  "interpretation": "Configured for Forms/Documents; the displayed condition excludes Other Communication. No tokenMapping key appears in its extra payload. Method implementation and actual attachment behavior remain unreviewed.",
+  "missing": [
+    "Send/response transformations",
+    "Method source and response contract"
+  ]
+}
+```
+
+Next: IP-GenerateLetterinAsync properties, including target procedure, extra payload, send/response transformations and condition. Automatic-token population may occur earlier; IP-GETAPITokenData and RA-SetDefaultTokenMapping are visible upstream candidates whose internals are still unknown.
