@@ -110,6 +110,14 @@ Confirmed: the custom LWC reads selectedTemplate and tokenInputs from OmniScript
 
 Story relationship: existing token-state handling is a reuse candidate for CS-1474. The captured getTokenDetails section shows only the active Email To/Subject fields, not the Print branch that supplies provider/free-form fields. No template-only conclusion or API/manual token classification is yet established. Canonical lwcSourceEvidence records exact observations, including email logic without conflating it with Print.
 
+## Manual token mechanism confirmed — 2026-10-06, 10:56 PM CT
+
+Confirmed: getTokenDetails consumes selectedTemplate.tokens and selects names ending in _manual or _apimanual, case-insensitively. mappingName supplies initial values from OmniScript JSON. Token flags govern required/read-only state. RTB_ names choose rich-text controls and set isAsyncLetterGeneration=false; other selected tokens choose textarea controls. User edits update tokenInputs; Next validates inputs, builds tokenMapping, updates OmniScript JSON and advances. Exact rules remain in canonical lwcSourceEvidence and the generated handoff.
+
+Story relationship: CS-1474 has an existing generic manual-input mechanism to reuse if its template defines suitable Brief Description and Free Form Content tokens. These actual definitions remain unseen, so template-only scope is still provisional. Automatic API tokens excluded from manual input filtering need separate data/generation tracing. The observed generation-mode flag also needs its downstream consumer verified.
+
+The Preview here method navigates to the selected template's existing ContentDocumentId. This does not by itself prove personalized document preview or successful generation. Current runtime failure remains undiagnosed.
+
 ## Next item to send
 
-Continue the same JS file below approximately line 523, within getTokenDetails. Capture the non-email branch and any method/IP/Apex call used to fetch token definitions. Keep a little overlap and the left side of each line visible. No need to resend the initialization or email sections.
+Open HOSTProviderFreeformLetter in the template designer and send its token list/mapping configuration. We need exact token names and available mappingName, required/read-only settings, especially Free Form Text and Brief Description. If those settings are stored outside the template designer, send the screen that defines them; do not assume they are Custom Metadata. No need to resend captured JS sections.
