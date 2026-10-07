@@ -2347,3 +2347,40 @@ Generated from the canonical caseIntegration entry for the 2026-10-06 screenshot
   }
 }
 ```
+
+## Runtime review: first post-launch screen — 2026-10-06, 10:37 PM CT
+
+Generated from canonical runtimeReview; display observations only, not complete designer properties or deployment verification.
+
+```json
+{
+  "captureDate": "2026-10-06",
+  "environment": "xhdev1 sandbox",
+  "evidenceScreenshot": "IMG_9D720EBB-D83D-4DD4-8065-44FCEFB1760A.jpeg",
+  "title": "Material and Outbound Channel Selection",
+  "materialType": {
+    "requiredIndicatorVisible": true,
+    "options": [
+      "Forms",
+      "Documents",
+      "Letters",
+      "Other Communication",
+      "Member Materials Request (MMR) Documents"
+    ],
+    "selectedValueObserved": null
+  },
+  "outboundChannel": {
+    "requiredIndicatorVisible": true,
+    "options": [
+      "Email",
+      "Print"
+    ],
+    "selectedValueObserved": null
+  },
+  "recipientControlVisible": false,
+  "navigationButtonsCaptured": false,
+  "notes": "Runtime screen after launching from Case. No options visibly selected. Do not infer stored option values, defaults, recipient handling or active OmniScript version from display labels. No generation/submission observed."
+}
+```
+
+Next: select Other Communication and Print, then capture the resulting screen. Recipient selection is not visible in this screenshot; do not invent an initial Recipient control.
