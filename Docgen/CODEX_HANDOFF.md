@@ -3639,3 +3639,121 @@ Generated from canonical reviewCheckpoint. This is the current continuation inst
 ```
 
 When resuming, read this checkpoint and canonical evidence first. Do not request previously captured screenshots again. Start at RA-SetDefaultTokenMapping; review only dependencies needed for the three stories before estimating changes.
+
+
+## Story capture checkpoint — October 7, 2026, 3:11 PM CT
+
+User requested story-by-story capture before resuming OmniScript investigation. Current reference evidence is generated from canonical storyReferenceDocuments:
+
+```json
+{
+  "storyId": "CS-1474",
+  "captureDate": "2026-10-07",
+  "sourceKind": "Screenshots of Jira reference letter preview; native DOCX not provided",
+  "evidenceScreenshots": [
+    "IMG_FB17A417-4FC6-4D7D-92DC-70388C2BA263.jpeg",
+    "IMG_CA20C0F9-D800-44BA-8855-CEC3C98BF3F2.jpeg"
+  ],
+  "layout": {
+    "header": "Blue Cross and Blue Shield of Minnesota branding/logo and fixed mail processing return address",
+    "date": "(Date)",
+    "recipientBlock": [
+      "BILLING PROVIDER NAME",
+      "BILLING PROVIDER ADDRESS",
+      "PROVIDER CITY, STATE, ZIP CODE"
+    ],
+    "detailsLeft": [
+      "Patient Name: (Patient Name)",
+      "Member ID: (Patient ID #)",
+      "Date of Service: (Claim DOS)"
+    ],
+    "detailsRight": [
+      "Claim Number: (Claim Number)",
+      "Case Number: (Case Number)",
+      "Patient Account Number: (Patient Acct #)"
+    ],
+    "salutation": "Dear Provider:",
+    "body": "In response to your recent inquiry, (Free Form Text).",
+    "fixedClosing": "Provider Services contact paragraph, Sincerely, organization name",
+    "footer": "bluecrossmn.com and licensing/legal footer; small document code not confidently transcribed"
+  },
+  "tokenSyntaxVerified": false,
+  "briefDescriptionPlacement": null,
+  "candidateTokenCorrespondence": [
+    {
+      "referenceField": "Date",
+      "existingToken": "Current_Date_system",
+      "status": "Candidate based on names only; actual binding/data source not verified"
+    },
+    {
+      "referenceField": "Billing Provider Name",
+      "existingToken": "Provider_Name_apimanual",
+      "status": "Candidate based on names only; actual binding/data source not verified"
+    },
+    {
+      "referenceField": "Billing Provider Address",
+      "existingToken": "Provider_Address_apimanual",
+      "status": "Candidate based on names only; actual binding/data source not verified"
+    },
+    {
+      "referenceField": "Provider City",
+      "existingToken": "City_apimanual",
+      "status": "Candidate based on names only; actual binding/data source not verified"
+    },
+    {
+      "referenceField": "Provider State",
+      "existingToken": "State_apimanual",
+      "status": "Candidate based on names only; actual binding/data source not verified"
+    },
+    {
+      "referenceField": "Provider Zip Code",
+      "existingToken": "Zip_Code_apimanual",
+      "status": "Candidate based on names only; actual binding/data source not verified"
+    },
+    {
+      "referenceField": "Patient Name",
+      "existingToken": "Patient_Full_Name_manual",
+      "status": "Candidate based on names only; actual binding/data source not verified"
+    },
+    {
+      "referenceField": "Member ID",
+      "existingToken": "Member_ID_or_Patient_Account_Number",
+      "status": "Candidate based on names only; actual binding/data source not verified"
+    },
+    {
+      "referenceField": "Date of Service",
+      "existingToken": "Claim_DOS",
+      "status": "Candidate based on names only; actual binding/data source not verified"
+    },
+    {
+      "referenceField": "Claim Number",
+      "existingToken": "Claim_Number_or_Authorization_Number_manual",
+      "status": "Candidate based on names only; actual binding/data source not verified"
+    },
+    {
+      "referenceField": "Case Number",
+      "existingToken": "Case_Number",
+      "status": "Candidate based on names only; actual binding/data source not verified"
+    },
+    {
+      "referenceField": "Patient Account Number",
+      "existingToken": "Patient_Acct_Num",
+      "status": "Candidate based on names only; actual binding/data source not verified"
+    },
+    {
+      "referenceField": "Free Form Text",
+      "existingToken": "Free_Form_Text_apimanual",
+      "status": "Candidate based on names only; actual binding/data source not verified"
+    }
+  ],
+  "openQuestions": [
+    "Where does required Brief Description appear? No separate placeholder is visible in the reference screenshots.",
+    "Does Member_ID_or_Patient_Account_Number correctly supply Member ID when Patient_Acct_Num separately supplies Patient Account Number?",
+    "Does Claim_Number_or_Authorization_Number_manual supply the required Claim Number for this story?",
+    "Compare native story DOCX and actual uploaded template for real token bindings, approved wording and formatting."
+  ],
+  "scopeNote": "This captures reference content, not a generated document or a working print result."
+}
+```
+
+Next: CS-1474 description and complete acceptance criteria to verify current story wording. Native DOCX remains optional pending evidence. Continue remaining story captures one at a time. OmniScript investigation remains paused at RA-SetDefaultTokenMapping; do not replace that continuation point.
