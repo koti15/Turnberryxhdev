@@ -118,6 +118,14 @@ Story relationship: CS-1474 has an existing generic manual-input mechanism to re
 
 The Preview here method navigates to the selected template's existing ContentDocumentId. This does not by itself prove personalized document preview or successful generation. Current runtime failure remains undiagnosed.
 
+## Free-form template checkpoint — 2026-10-06, 11:01 PM CT
+
+The template designer confirms a Microsoft Word template using JSON token mapping through the custom class CNC_CustomTokenDataExtractor and ClientSide generation. Exact settings and the 13 visible token keys are recorded once in canonical documentTemplateEvidence and reproduced in the generated handoff.
+
+CS-1474 relationship: Free_Form_Text_apimanual is present and matches the existing LWC's manual-input suffix rule. No Brief Description token appears in this displayed list. Inspect the actual Word content and extractor mapping before deciding whether to add a token or change code. Empty Token JSON strings do not establish missing runtime data. Required/read-only flags and mappingName are not shown here.
+
+This confirms an existing template and custom mapping dependency, but does not verify all automatic merge fields or resolve the observed send failure. Successful generation, print processing, case association and storage remain unverified.
+
 ## Next item to send
 
-Open HOSTProviderFreeformLetter in the template designer and send its token list/mapping configuration. We need exact token names and available mappingName, required/read-only settings, especially Free Form Text and Brief Description. If those settings are stored outside the template designer, send the screen that defines them; do not assume they are Custom Metadata. No need to resend captured JS sections.
+Open the Apex class CNC_CustomTokenDataExtractor and send its entry method and the section that builds/maps token values. Start with those sections; no need to send all OmniScript steps. After that, inspect the actual Host Provider Free Form Letter.docx content for the Brief Description and Free Form Content sections.
