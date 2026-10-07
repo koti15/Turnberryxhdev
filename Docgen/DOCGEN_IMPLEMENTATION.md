@@ -90,6 +90,14 @@ Confirmed: the runtime journey now displays Communication Address, a checked One
 
 Story relationship: this establishes an existing address-entry screen relevant to CS-1474's recipient/address requirement. It does not yet prove Provider-specific prepopulation, edits on the later review screen or persistence behavior. Those mappings and conditions remain unknown; no new address component can be declared necessary or unnecessary yet.
 
+## Additional Information, Review and failure — 2026-10-06, 10:46 PM CT
+
+Confirmed: after test address entry, the flow displays additional letter inputs, including provider/address fields, patient name, claim/authorization number and Free Form Text. Review and Submit then displays HOSTProviderFreeformLetter with a View link and attachment/return-envelope checkboxes. Confirmation displays an unable-to-send message. Exact observations are in canonical runtimeReview and the generated handoff; entered test values are omitted.
+
+Story relationship: CS-1474 already has a candidate manual-content/address UI to inspect for reuse. The screen does not establish the Brief Description token, all automatic merge fields, final Word/PDF content or address editing at review. CS-1831/1832 may reuse the downstream generation/delivery route, but successful processing is not verified. The failure message corresponds closely to the story's failure scenario; its cause and retry behavior remain unknown.
+
+Do not diagnose the failure from test address values alone. The failing generation/storage/delivery action and its request/response are not yet captured. A row in the review table is not proof of a valid generated PDF.
+
 ## Next item to send
 
-Use approved sandbox test addressee/address details, click Next and send the following screen with entered details hidden. Do not submit a print request. We will inspect one-time address behavior and source mappings after tracing the screens.
+Open the original OmniScript designer and select AdditionalInformation. Send its properties and visible child/component list. This lets us identify the input-rendering and token component before reviewing the relevant IP/Apex dependency. If the runtime View link is still accessible, a sanitized letter preview would also establish whether the document contains the entered values; no further print submission is required.
