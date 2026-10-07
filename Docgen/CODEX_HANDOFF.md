@@ -2384,3 +2384,70 @@ Generated from canonical runtimeReview; display observations only, not complete 
 ```
 
 Next: select Other Communication and Print, then capture the resulting screen. Recipient selection is not visible in this screenshot; do not invent an initial Recipient control.
+
+## Runtime review: Other Communication / Print and Select Letter — 2026-10-06, 10:39 PM CT
+
+Generated from canonical runtimeReview. Existing HOSTProviderFreeformLetter is visible; it has not yet been selected or generated. Template labels do not establish backend record identity or story completion.
+
+```json
+[
+  {
+    "captureDate": "2026-10-06",
+    "evidenceScreenshot": "IMG_52FFF2FE-44AE-4098-9334-6B25DA148E86.jpeg",
+    "environment": "xhdev1 sandbox",
+    "title": "Material and Outbound Channel Selection",
+    "selectedDisplayValues": {
+      "materialType": "Other Communication",
+      "outboundChannel": "Print"
+    },
+    "navigationVisible": [
+      "Next"
+    ],
+    "notes": "Display selections confirmed. Stored JSON values and designer conditions are not established by this runtime screenshot."
+  },
+  {
+    "captureDate": "2026-10-06",
+    "evidenceScreenshot": "IMG_6E22A63D-D751-42A1-A7F7-6E1E8FE4216C.jpeg",
+    "environment": "xhdev1 sandbox",
+    "title": "Select Letter",
+    "precedingDisplaySelections": {
+      "materialType": "Other Communication",
+      "outboundChannel": "Print"
+    },
+    "table": {
+      "columns": [
+        "Department",
+        "Group",
+        "Letter"
+      ],
+      "visibleRows": [
+        {
+          "Department": "Service",
+          "Group": "ITS Host",
+          "Letter": "HOSTProviderFreeformLetter",
+          "selected": false
+        }
+      ],
+      "completeInventoryVerified": false
+    },
+    "upload": {
+      "guidance": "Upload Forms/Documents - PDF documents only",
+      "qualifier": "(If Applicable)",
+      "attachmentCount": 0,
+      "controls": [
+        "Upload Files",
+        "Or drop files"
+      ],
+      "fileTypeEnforcementVerified": false
+    },
+    "navigationVisible": [
+      "Previous",
+      "Next"
+    ],
+    "recipientControlVisible": false,
+    "notes": "One visible unselected row; backend template identity, selection source, filtering logic, token definitions and successful generation remain unknown. Do not infer that no other templates exist."
+  }
+]
+```
+
+Next: select the displayed letter row and use Next to capture the following screen. No print submission is required.
