@@ -2,6 +2,11 @@
 
 Updated 2026-10-01. This file contains the reconstruction instructions, completed capture work, pending gaps and all structured configuration recorded so far. Codex can start and continue from this file.
 
+
+## Case launch path captured — 2026-10-06, 10:33 PM CT
+
+Confirmed from source screenshots: Case quick action and dynamic visibility, launcher ownership/Account checks, OmniStudio wrapper target and Case ID navigation input. Exact configuration is in canonical caseIntegration. This resolves the previously wholly unknown source launch mechanism; full metadata/source and target deployment remain unverified. No post-click runtime screen or successful letter generation captured. Next: click the existing Case action and capture its first screen. Prior launcher-gap statements below are historical where superseded.
+
 ## Seven-element visual review ? 2026-10-01
 
 Created preview/first-seven-layout.html to show captured outer order and user-facing Material/Step1 labels. Explicit visual review only; not Salesforce execution, not a deployable exact replica. Uncaptured message content/types, headings/visibility, stored values/defaults and radio identities remain unresolved; no Salesforce configuration changed in this operation. The visual includes those gaps visibly rather than inventing their settings. Use it to review supplied text/order without treating it as completed implementation.
@@ -2223,3 +2228,122 @@ Continuation: Header values complete; capture CNC_Master_Attributes__mdt.Send_Co
 ```
 
 Continuation: Master Entity_Type__c=Member is now captured. Verify the Master schema/field count before claiming full record completion. Do not repeat captured values. Forms/Documents/Letters Line and nine Header records remain complete.
+
+## Complete captured configuration supplement: caseIntegration
+
+Generated from the canonical caseIntegration entry for the 2026-10-06 screenshot batch. This entry supersedes earlier null launch settings; it does not change target deployment status.
+
+```json
+{
+  "requiredByUser": true,
+  "objectApiName": "Case",
+  "launchMechanism": "Case.Send_Communication Lightning Web Component quick action → cncSendCommunicationQuickAction → OmniStudio wrapper",
+  "recordIdInputMapping": {
+    "source": "this.recordId",
+    "navigationStateKey": "c__ContextId"
+  },
+  "status": "source-launch-wiring-captured-target-implementation-unverified",
+  "sourceEvidence": {
+    "captureDate": "2026-10-06",
+    "environment": "xhdev1 sandbox",
+    "screenshots": [
+      "IMG_463D7F0B-DDB8-42EC-B51F-6A364F21F1B0.jpeg",
+      "IMG_119C859F-5BA9-4428-B26D-DAE4AE4E2E7A.jpeg",
+      "IMG_45A5CA2A-6D1E-4A06-B39E-BB1AF7C4ACAC.jpeg",
+      "IMG_80733F3B-5320-4BA6-AF2D-24835BE35B83.jpeg",
+      "IMG_1EBC5EC4-2FBC-4C4A-BFA1-3909F5DBFC18.jpeg",
+      "IMG_B19E7B17-ECE4-4777-ABE1-D74A61B676EC.jpeg",
+      "IMG_7AF88FDA-CA38-4108-8415-1330BC5A6D21.jpeg"
+    ],
+    "runtimeObservation": "Send Communication button visible on Case record page. No post-click screen or successful letter generation supplied."
+  },
+  "quickAction": {
+    "label": "Send Communication",
+    "name": "Send_Communication",
+    "objectApiName": "Case",
+    "lightningWebComponent": "cncSendCommunicationQuickAction",
+    "subtype": "Action",
+    "description": "This quick action is used to send forms/documents/letters."
+  },
+  "visibility": {
+    "location": "Lightning App Builder Highlights Panel dynamic action",
+    "fieldLabel": "Caller Type",
+    "fieldApiName": null,
+    "operator": "Equal",
+    "values": [
+      "Provider",
+      "Member",
+      "Plan to Plan"
+    ],
+    "combination": "Any filters are true",
+    "recordPageApiName": null,
+    "activationAssignments": null,
+    "notes": "Shown visibility filters do not include an ITS Host or owner filter. LWC invocation separately checks ownership."
+  },
+  "launcherLwc": {
+    "name": "cncSendCommunicationQuickAction",
+    "baseClass": "NavigationMixin(LightningElement)",
+    "recordIdPublicProperty": true,
+    "invocationMethod": "@api invoke()",
+    "recordRead": {
+      "adapter": "getRecord",
+      "recordId": "$recordId",
+      "fields": [
+        "Case.OwnerId",
+        "Case.AccountId"
+      ]
+    },
+    "userIdImport": "@salesforce/user/Id",
+    "ownerCheck": "caseOwnerId == USER_ID",
+    "missingAccountCheck": "caseAccountId == null || caseAccountId == \"\" || caseAccountId == undefined",
+    "missingAccountToast": {
+      "title": "Update Account name on case before sending communication.",
+      "variant": "error"
+    },
+    "nonOwnerToast": {
+      "title": "Please contact the case owner for any updates to the case",
+      "variant": "error"
+    },
+    "toastMethod": "showToastNotification()",
+    "toastImplementation": {
+      "event": "ShowToastEvent",
+      "properties": {
+        "title": "this.title",
+        "variant": "this.variant"
+      },
+      "dispatch": "this.dispatchEvent(evt)"
+    },
+    "navigation": {
+      "method": "this[NavigationMixin.Navigate]",
+      "type": "standard__component",
+      "attributes": {
+        "componentName": "omnistudio__vlocityLWCOmniWrapper"
+      },
+      "state": {
+        "c__target": "c:CNCSendCommunicationEnglish",
+        "c__layout": "lightning",
+        "c__tabIcon": "custom:custom18",
+        "c__tabLabel": "Send Communication",
+        "c__ContextId": "this.recordId"
+      }
+    },
+    "sourceCaptureComplete": false,
+    "remainingEvidence": [
+      "HTML content",
+      "js-meta.xml content",
+      "Confirmation of full JS file coverage and any omitted handling"
+    ]
+  },
+  "remainingEvidence": [
+    "Post-click runtime screen and source active OmniScript version",
+    "Record page API name and activation assignments if needed for deployment",
+    "Launcher HTML/js-meta.xml and full source before deployable recreation",
+    "Downstream consumption of ContextId and working Print letter path"
+  ],
+  "storyImplications": {
+    "confirmed": "Shared Case launcher checks ownership and requires an Account before opening the OmniScript.",
+    "proposed": "Reuse this entry point for all three letter stories unless confirmed scope requires a change.",
+    "unknown": "CS-1831/1832 role access for non-owners is not established by story wording; visible launcher blocks all non-owners. No role bypass is shown."
+  }
+}
+```
