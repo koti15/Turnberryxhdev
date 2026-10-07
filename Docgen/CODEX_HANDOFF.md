@@ -3395,3 +3395,176 @@ Generated from canonical confirmedActions. The action immediately after Addition
 ```
 
 Next: IP-GenerateLetterinAsync properties, including target procedure, extra payload, send/response transformations and condition. Automatic-token population may occur earlier; IP-GETAPITokenData and RA-SetDefaultTokenMapping are visible upstream candidates whose internals are still unknown.
+
+
+## Async letter generation checkpoint — 2026-10-06, 11:10 PM CT
+
+Generated from canonical confirmedActions and integrationProcedures. Replaces the previous request for basic async action/IP identity. Missing formulas and outer condition remain explicitly unknown.
+
+```json
+{
+  "action": {
+    "elementName": "IP-GenerateLetterinAsync",
+    "fieldLabel": "IP-GenerateLetterinAsync",
+    "elementType": "Integration Procedure Action",
+    "integrationProcedure": "CNC_AsyncLetterGeneration",
+    "observedActive": true,
+    "invokeMode": "Default",
+    "showToastOnCompletion": false,
+    "extraPayload": [
+      {
+        "key": "templateId",
+        "value": "%selectedTemplate:Id%"
+      },
+      {
+        "key": "objectId",
+        "value": "%ContextId%"
+      },
+      {
+        "key": "tokenDataMap",
+        "value": "%tokenMapping%"
+      },
+      {
+        "key": "returnAsPdf",
+        "value": "true"
+      },
+      {
+        "key": "keepIntermediate",
+        "value": "false"
+      },
+      {
+        "key": "outputFileFormat",
+        "value": "pdf"
+      },
+      {
+        "key": "title",
+        "value": "%documentTitle%"
+      }
+    ],
+    "sendOnlyExtraPayload": true,
+    "responseMapping": null,
+    "executionCondition": null,
+    "remoteProperties": null,
+    "complete": false,
+    "evidenceScreenshots": [
+      "IMG_2589F3C1-EDEB-4B1F-92E9-13013F9E8AA9.jpeg",
+      "IMG_C37F5649-2C1B-4ADD-ACB9-51B618B1231A.jpeg"
+    ],
+    "missing": [
+      "Outer action send/response transformations",
+      "Outer action conditional view",
+      "Remote properties"
+    ],
+    "interpretation": "Configured to supply tokenMapping directly as tokenDataMap for server generation. Whether this branch executes for the observed runtime selection is not yet established."
+  },
+  "ip": {
+    "key": "CNC_AsyncLetterGeneration",
+    "name": "Async Letter Generation",
+    "type": "CNC",
+    "subType": "AsyncLetterGeneration",
+    "observedVersion": 3,
+    "observedActive": true,
+    "description": "This IP is used to Generate the letter templates asynchronously in Server side.",
+    "visibleElements": [
+      "setupServiceCallInputParams",
+      "generateDocumentWithTokenDataService",
+      "ipResponse"
+    ],
+    "complete": false,
+    "evidenceScreenshots": [
+      "IMG_27F1482A-BEDF-4B68-8328-75EB41C65CD0.jpeg",
+      "IMG_62AFFF34-C83D-4771-9535-1183262B7C98.jpeg",
+      "IMG_196222FD-D382-440B-8BF8-804D57F7C625.jpeg",
+      "IMG_6D2DD8BD-A89F-4138-9C08-2D06364C3132.jpeg",
+      "IMG_677FB22B-E29F-4B76-BA88-228D00940C7A.jpeg"
+    ],
+    "elements": [
+      {
+        "name": "setupServiceCallInputParams",
+        "type": "Set Values",
+        "observedActive": true,
+        "valueMap": [
+          {
+            "name": "title",
+            "type": "JSON Node",
+            "formula": null
+          },
+          {
+            "name": "returnAsPdf",
+            "type": "JSON Node",
+            "formula": null
+          },
+          {
+            "name": "keepIntermediate",
+            "type": "JSON Node",
+            "formula": null
+          }
+        ],
+        "formulaEvidence": "All three displayed formulas begin with IF/OR checks; right ends are clipped, so exact formulas/defaults remain unknown.",
+        "responseJsonPath": "",
+        "responseJsonNode": ""
+      },
+      {
+        "name": "generateDocumentWithTokenDataService",
+        "type": "Remote Action",
+        "observedActive": true,
+        "remoteClass": "omnistudio.DocumentServiceGateway",
+        "remoteMethod": "generateDocumentWithTokenData",
+        "remoteOptions": [
+          {
+            "key": "title",
+            "value": "%setupServiceCallInputParams:title%"
+          },
+          {
+            "key": "returnAsPdf",
+            "value": "%setupServiceCallInputParams:returnAsPdf%"
+          },
+          {
+            "key": "keepIntermediate",
+            "value": "%setupServiceCallInputParams:keepIntermediate%"
+          }
+        ],
+        "sendResponseTransformations": null
+      },
+      {
+        "name": "ipResponse",
+        "type": "Response Action",
+        "observedActive": true,
+        "responseFormat": "JSON",
+        "returnFullDataJson": false,
+        "sendJsonPath": "",
+        "sendJsonNode": "",
+        "responseJsonPath": "",
+        "responseJsonNode": "",
+        "returnOnlyAdditionalOutput": true,
+        "additionalOutput": [
+          {
+            "key": "asyncErrorMessage",
+            "formula": null,
+            "formulaEvidence": "Begins IF referencing generateDocumentWithTokenDataService; remainder clipped."
+          },
+          {
+            "key": "jobId",
+            "formula": null,
+            "formulaEvidence": "References generateDocumentWithTokenDataService job field; full text/casing requires confirmation."
+          }
+        ],
+        "executionConditionalFormula": ""
+      }
+    ],
+    "interpretation": [
+      "Server-side generation infrastructure exists alongside template ClientSide configuration. The outer execution condition and synchronous review branch must be inspected to establish the actual selected route.",
+      "No automatic-token construction is visible in these three elements; tokenDataMap is supplied by the outer action.",
+      "Configured output includes jobId and asyncErrorMessage; no actual generation response or successful job completion was provided."
+    ],
+    "missing": [
+      "Full Set Values formulas",
+      "Remote Action send/response transformations",
+      "Full additional output formulas",
+      "Procedure settings beyond identity/version"
+    ]
+  }
+}
+```
+
+Next: outer IP-GenerateLetterinAsync Conditional View and Send/Response Transformations. Then use Edit as JSON for clipped internal formulas/remote transformations. Do not claim this async branch actually executed, or that job completion/print success occurred.
