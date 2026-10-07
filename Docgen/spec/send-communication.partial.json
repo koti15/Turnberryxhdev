@@ -19,7 +19,7 @@
   "caseIntegration": {
     "requiredByUser": true,
     "objectApiName": "Case",
-    "launchMechanism": "Case.Send_Communication Lightning Web Component quick action → cncSendCommunicationQuickAction → OmniStudio wrapper",
+    "launchMechanism": "Case.Send_Communication Lightning Web Component quick action \u2192 cncSendCommunicationQuickAction \u2192 OmniStudio wrapper",
     "recordIdInputMapping": {
       "source": "this.recordId",
       "navigationStateKey": "c__ContextId"
@@ -342,6 +342,55 @@
         "Remote properties"
       ],
       "interpretation": "Async branch is gated by isAsyncLetterGeneration=true and isPOD<>true. The reviewed LWC initializes async true and sets it false for RTB_ manual tokens; the displayed HOSTProviderFreeformLetter token JSON has no RTB_ names. This makes async routing consistent with reviewed configuration, but actual runtime flag values/execution remain unverified. No send/response path or node override is configured in the displayed transformation fields."
+    },
+    {
+      "elementName": "RA-SetDefaultTokenMapping",
+      "elementType": "Remote Action",
+      "remoteClass": "CNC_SendCommunication",
+      "remoteMethod": "transformTokenData",
+      "invokeMode": "Default",
+      "preTransformDataMapperInterface": "",
+      "remoteOptions": [],
+      "extraPayload": [],
+      "sendOnlyExtraPayload": false,
+      "executionCondition": {
+        "conditionType": "Show Element if True",
+        "displayedCondition": "(isPOD <> true)"
+      },
+      "complete": false,
+      "captureDate": "2026-10-07",
+      "evidenceScreenshots": [
+        "IMG_07618DAD-E3D8-4586-B779-A087C3B5E47F.jpeg",
+        "IMG_4D3EC56A-EFF1-4381-9FA4-4670F35B9C04.jpeg",
+        "IMG_C0BC6FED-85DF-44B8-8A61-260BA3018CFF.jpeg",
+        "IMG_B126EBE5-BA79-4FE1-B0C8-D65EF4F7D48E.jpeg",
+        "IMG_8721C56B-E0C9-45BF-AB7F-0FE49C81AF59.jpeg"
+      ],
+      "missing": [
+        "Remaining response properties and runtime input/output"
+      ]
+    },
+    {
+      "elementName": "IP-GetPatientDemographics",
+      "elementType": "Integration Procedure Action",
+      "integrationProcedure": "CNC_Member360",
+      "extraPayload": [
+        {
+          "key": "memberId",
+          "value": "%memberId%"
+        }
+      ],
+      "sendOnlyExtraPayload": true,
+      "sendJsonPath": "",
+      "sendJsonNode": "",
+      "responseJsonPath": "",
+      "responseJsonNode": "",
+      "transformationEvidence": "User reported blank Send/Response Transformations fields; extra payload photographed separately.",
+      "complete": false,
+      "evidenceScreenshots": [
+        "IMG_68EDD180-DC11-484E-87F5-057455E71FB3.jpeg",
+        "IMG_F313C0EE-579A-4998-B53E-A74140FDF659.jpeg"
+      ]
     }
   ],
   "missingForRunnableBuild": [
@@ -626,6 +675,143 @@
         "Full additional output formulas",
         "Procedure settings beyond identity/version"
       ]
+    },
+    {
+      "key": "CNC_Member360",
+      "name": "Patient Demographics",
+      "visibleStructure": [
+        "ConditionalBlock: RA-GetIntegrationCreds, HTTPGetPatient, DR-T-PatientInfo",
+        "RA-UpdateIntegrationCreds",
+        "IfAuthTokenExpiresWithin24Hrs: RA-GetIntegrationCreds2, HTTPGetPatient2, DR-T-PatientInfo2",
+        "RA-UpdateIntegrationCreds2",
+        "ResponseAction1",
+        "ResponseAction2"
+      ],
+      "visibleElements": [
+        {
+          "elementName": "DR-T-PatientInfo",
+          "type": "Data Mapper Transform Action",
+          "dataMapper": "CNCTransformMemberInfo",
+          "ignoreCache": false,
+          "sendJsonPath": "HTTPGetPatient:entry:resource",
+          "sendJsonNode": "",
+          "responseJsonPath": "",
+          "responseJsonNode": "",
+          "additionalInput": [
+            {
+              "key": "localMemberId",
+              "value": "%memberId%"
+            }
+          ],
+          "sendOnlyAdditionalInput": false,
+          "returnOnlyAdditionalOutput": false,
+          "additionalOutput": [],
+          "executionConditionalFormula": "ISNOTBLANK(%HTTPGetPatient%) && %HTTPGetPatient:success% != false",
+          "failOnStepError": false,
+          "failureConditionalFormula": "",
+          "complete": false
+        },
+        {
+          "elementName": "ResponseAction1",
+          "type": "Response Action",
+          "responseFormat": "JSON",
+          "returnFullDataJson": false,
+          "sendJsonPath": "DR-T-PatientInfo",
+          "sendJsonNode": "",
+          "responseJsonPath": "",
+          "responseJsonNode": "",
+          "executionConditionalFormula": "ISNOTBLANK(%DR-T-PatientInfo%)",
+          "additionalOutputResponse": null,
+          "complete": false
+        },
+        {
+          "elementName": "ResponseAction2",
+          "type": "Response Action",
+          "responseFormat": "JSON",
+          "returnFullDataJson": false,
+          "sendJsonPath": "DR-T-PatientInfo2",
+          "sendJsonNode": "",
+          "responseJsonPath": "",
+          "responseJsonNode": "",
+          "executionConditionalFormula": "ISNOTBLANK(%DR-T-PatientInfo2%)",
+          "additionalOutputResponse": null,
+          "complete": false
+        }
+      ],
+      "complete": false,
+      "missing": [
+        "HTTP configuration, conditional-block formulas, retry-transform definition and full procedure settings",
+        "Additional Output Response sections are collapsed; do not assume empty"
+      ],
+      "evidenceScreenshots": [
+        "IMG_6EEF06F3-AC79-41BE-92B0-9054D1A39490.jpeg",
+        "IMG_B2747504-727B-46E5-99AD-C3DF5895EB43.jpeg",
+        "IMG_524918FE-371D-44DD-A19A-69704BDB54F5.jpeg",
+        "IMG_03933351-7AEA-432D-B25E-8DAE1D672207.jpeg",
+        "IMG_70A284F8-99C1-445F-9743-92F96468FF53.jpeg",
+        "IMG_8AF6A71B-E701-4142-B401-3DB3EC33ED5D.jpeg",
+        "IMG_0FB9632A-7E3A-40DF-A4CE-74CC11B20B14.jpeg",
+        "IMG_FE5AC411-378A-4045-9842-73C7D1E9DFA6.jpeg",
+        "IMG_5CA97591-F262-46C8-AFA4-53031192339D.jpeg"
+      ]
+    },
+    {
+      "key": "CNC_GetLetterTemplates",
+      "name": "Get Letter Templates",
+      "observedVersion": 4,
+      "observedActive": true,
+      "visibleElements": [
+        {
+          "elementName": "SV-DataMapping",
+          "type": "Set Values",
+          "values": null
+        },
+        {
+          "elementName": "DR-E-GetHeaderAttributes",
+          "type": "Data Mapper Extract Action",
+          "dataMapper": null
+        },
+        {
+          "elementName": "DR-E-LetterTemplates",
+          "type": "Data Mapper Extract Action",
+          "dataMapper": "CNCGetLetterTemplates",
+          "inputParameters": [
+            {
+              "dataSource": "SV-DataMapping:letterType",
+              "filterValue": "letterType"
+            },
+            {
+              "dataSource": "MaterialType",
+              "filterValue": "materialType"
+            }
+          ]
+        },
+        {
+          "elementName": "ResponseAction",
+          "type": "Response Action",
+          "sendJsonPath": "DR-E-GetHeaderAttributes",
+          "additionalOutput": [
+            {
+              "key": "responsedata",
+              "value": "%DR-E-LetterTemplates:letters%"
+            },
+            {
+              "key": "selectedlettertype",
+              "value": "%SV-DataMapping:letterType%"
+            }
+          ]
+        }
+      ],
+      "previewInput": {
+        "OutboundChannel": "Print",
+        "MaterialType": "Other Communication"
+      },
+      "mapperPreviewInput": {
+        "letterType": "Generic Letter",
+        "materialType": "Other Communication"
+      },
+      "complete": false,
+      "verification": "Captured visible flow and mappings; complete SV expressions and remaining settings unknown."
     }
   ],
   "dataMappers": [
@@ -936,7 +1122,15 @@
           "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
         }
       ],
-      "formulaVerification": "Exact formulas 1–13 now reconciled from newer PENDING_WORK.md evidence. Do not request them again. Runtime validation remains pending."
+      "formulaVerification": "Exact formulas 1\u201313 now reconciled from newer PENDING_WORK.md evidence. Do not request them again. Runtime validation remains pending.",
+      "latestEvidenceScreenshots": [
+        "IMG_DE10F392-11C2-48F2-9666-71DA08DF4A09.jpeg",
+        "IMG_83757801-E6D8-4415-8159-D2E7345C841C.jpeg",
+        "IMG_7692FDD7-99EB-4AB5-99D2-A71BEC980753.jpeg",
+        "IMG_02B432B6-93CA-4A20-BB23-33A5AF1F82D7.jpeg",
+        "IMG_ED440796-B81F-4FF6-B8B3-1A21D4757B5B.jpeg"
+      ],
+      "latestVerification": "October 7 screenshots reconfirm existing Case/User extracts, first two formulas and output rows through sourceSystem. Preserve earlier captured remaining rows; latest batch does not reconfirm them. Do not append duplicate mappings."
     },
     {
       "name": "GetMMREmailTemplate",
@@ -1496,6 +1690,155 @@
         "customOptionsConfigured": false,
         "individualDefaultValuesVerified": false
       }
+    },
+    {
+      "name": "CNCTransformMemberInfo",
+      "interfaceType": "Transform",
+      "inputType": "JSON",
+      "outputType": "JSON",
+      "outputMappings": [
+        {
+          "inputJsonPath": "birthDate",
+          "outputJsonPath": "memberInfo:birthDate"
+        },
+        {
+          "inputJsonPath": "email:value",
+          "outputJsonPath": "memberInfo:memberEmailAddress"
+        },
+        {
+          "inputJsonPath": "gender",
+          "outputJsonPath": "memberInfo:gender"
+        },
+        {
+          "inputJsonPath": "link:relation",
+          "outputJsonPath": "memberInfo:relationShip"
+        },
+        {
+          "inputJsonPath": "maxisid:value",
+          "outputJsonPath": "memberInfo:maxxisId"
+        },
+        {
+          "inputJsonPath": "memberGivenName",
+          "outputJsonPath": "memberInfo:memberGivenName"
+        },
+        {
+          "inputJsonPath": "memberRec:value",
+          "outputJsonPath": "memberInfo:memberId"
+        },
+        {
+          "inputJsonPath": "name|1:family",
+          "outputJsonPath": "memberInfo:memberFamilyName"
+        },
+        {
+          "inputJsonPath": "name|1:text",
+          "outputJsonPath": "memberInfo:memberFullName"
+        },
+        {
+          "inputJsonPath": "phone:value",
+          "outputJsonPath": "memberInfo:phone"
+        },
+        {
+          "inputJsonPath": "physicalAddress",
+          "outputJsonPath": "memberInfo:physicalAddress"
+        },
+        {
+          "inputJsonPath": "pmiId:value",
+          "outputJsonPath": "memberInfo:pmiId"
+        },
+        {
+          "inputJsonPath": "postalAddress",
+          "outputJsonPath": "memberInfo:postalAddress"
+        }
+      ],
+      "complete": false,
+      "verification": "Visible mapping rows transcribed from screenshots; row settings and remaining formulas/options not captured. Exact unusual capitalization/spelling requires export before executable reconstruction.",
+      "evidenceScreenshots": [
+        "IMG_8A9CA76B-5E03-4BC0-9163-BB346A0C7C5F.jpeg",
+        "IMG_55111E6B-C133-4642-AA11-F62EA72948A0.jpeg"
+      ]
+    },
+    {
+      "name": "CNCGetLetterTemplates",
+      "interfaceType": "Extract",
+      "inputType": "JSON",
+      "outputType": "JSON",
+      "extractSteps": [
+        {
+          "object": "DocumentTemplate",
+          "outputPath": "letters",
+          "filters": [
+            {
+              "field": "Material_Type__c",
+              "operator": "INCLUDES",
+              "input": "materialType"
+            },
+            {
+              "field": "Letter_Type__c",
+              "operator": "=",
+              "input": "letterType"
+            },
+            {
+              "field": "TokenMappingType",
+              "operator": "=",
+              "input": "'JSON'"
+            },
+            {
+              "field": "Type",
+              "operator": "=",
+              "input": "'MicrosoftWord'"
+            },
+            {
+              "field": "IsActive",
+              "operator": "=",
+              "input": "'true'"
+            }
+          ],
+          "orderBy": "Name ASC"
+        },
+        {
+          "object": "DocumentTemplateToken",
+          "outputPath": "letters:tokens",
+          "filter": {
+            "field": "DocumentTemplateId",
+            "operator": "=",
+            "input": "letters:Id"
+          }
+        },
+        {
+          "object": "DocumentTemplateContentDoc",
+          "outputPath": "letters:documentInfo",
+          "filter": {
+            "field": "DocumentTemplateId",
+            "operator": "=",
+            "input": "letters:Id"
+          },
+          "orderBy": "CreatedDate DESC"
+        },
+        {
+          "object": "EmailTemplate",
+          "outputPath": "letters:emailTemplate",
+          "filters": [
+            {
+              "field": "Name",
+              "operator": "=",
+              "input": "letters:Email_Template_Name__c"
+            },
+            {
+              "field": "UiType",
+              "operator": "=",
+              "input": "'SFX'"
+            }
+          ]
+        }
+      ],
+      "complete": false,
+      "environmentComparison": "Visible Dev and QA extract filters match. No Group/department/profile/Print filter is shown in this mapper. UI filtering remains unknown.",
+      "evidenceScreenshots": [
+        "IMG_5AA320F4-79E2-4B78-8473-518F3F68511A.jpeg",
+        "IMG_E741B1B5-FECE-4285-B51C-FFB4770A4B83.jpeg",
+        "IMG_52CBBD68-F840-467D-8E26-B08FE8DF79AA.jpeg",
+        "IMG_128F2920-0D3B-4F00-AA15-1515D8874ABA.jpeg"
+      ]
     }
   ],
   "setValuesElements": [
@@ -1613,6 +1956,41 @@
         }
       ],
       "complete": false
+    },
+    {
+      "elementName": "SV-ResetTokenMapping",
+      "type": "Set Values",
+      "values": [
+        {
+          "name": "tokenMapping",
+          "value": null,
+          "verification": "Value not legible; appears blank in screenshot. Do not infer null versus empty object/string."
+        },
+        {
+          "name": "isRefreshTokens",
+          "valueText": "true",
+          "runtimeValueType": "unverified"
+        },
+        {
+          "name": "memberEmail",
+          "expression": null,
+          "visiblePrefix": "%IP-GetPatientDemographics:memberInfo:",
+          "verification": "Remaining path clipped"
+        },
+        {
+          "name": "podEmailAddress",
+          "elementType": "Email",
+          "expression": null,
+          "visiblePrefix": "%IP-GetPatientDemographics:memberInfo:",
+          "verification": "Remaining path clipped"
+        }
+      ],
+      "complete": false,
+      "evidenceScreenshots": [
+        "IMG_628F8D8B-9320-4A63-9821-B777DFB3D0E9.jpeg",
+        "IMG_D7625317-966C-4AAF-9196-83C0DD201239.jpeg",
+        "IMG_F307DE5C-E942-4C8F-81E2-A896F0D96D8C.jpeg"
+      ]
     }
   ],
   "validationPreference": {
@@ -4086,7 +4464,7 @@
       "remainingEvidence": [
         "Actual HOSTProviderFreeformLetter token definitions and mappingName/isRequired/isReadOnly values",
         "Upstream producer of selectedTemplate.tokens and rtbTokenInputs",
-        "HTML rendering and any additional handlers in uncaptured lines approximately 612–670",
+        "HTML rendering and any additional handlers in uncaptured lines approximately 612\u2013670",
         "Complete file coverage and js-meta.xml",
         "OmniScript Custom LWC input mappings",
         "Downstream consumer of tokenMapping/isAsyncLetterGeneration and actual document-generation response"
@@ -4172,7 +4550,7 @@
       "documentGenerationMechanism": "ClientSide",
       "uploadedFileName": "Host Provider Free Form Letter.docx",
       "uploadedFileStatus": "File has been uploaded",
-      "wordContentInspected": false,
+      "wordContentInspected": true,
       "tokenJson": {
         "Current_Date_system": "",
         "Provider_Name_apimanual": "",
@@ -4189,25 +4567,71 @@
         "Free_Form_Text_apimanual": ""
       },
       "tokenMetadata": {
-        "mappingName": null,
-        "isRequired": null,
-        "isReadOnly": null,
-        "sourceOfSelectedTemplateTokens": null
+        "sourceOfSelectedTemplateTokens": "CNCGetLetterTemplates DocumentTemplateToken extraction",
+        "visibleTokens": [
+          {
+            "name": "Claim_Number_or_Authorization_Number_manual",
+            "mappingName": "claimNumber",
+            "mappingNamePresentInResponse": true,
+            "isReadOnly": false,
+            "isRequired": false
+          },
+          {
+            "name": "Member_ID_or_Patient_Account_Number",
+            "mappingName": "memberId",
+            "mappingNamePresentInResponse": true,
+            "isReadOnly": false,
+            "isRequired": false
+          },
+          {
+            "name": "Case_Number",
+            "mappingName": "caseNumber",
+            "mappingNamePresentInResponse": true,
+            "isReadOnly": false,
+            "isRequired": false
+          },
+          {
+            "name": "Claim_DOS",
+            "mappingName": null,
+            "mappingNamePresentInResponse": false,
+            "isReadOnly": false,
+            "isRequired": false
+          },
+          {
+            "name": "Patient_Acct_Num",
+            "mappingName": null,
+            "mappingNamePresentInResponse": false,
+            "isReadOnly": false,
+            "isRequired": false
+          },
+          {
+            "name": "Free_Form_Text_apimanual",
+            "mappingName": null,
+            "mappingNamePresentInResponse": false,
+            "isReadOnly": false,
+            "isRequired": false
+          }
+        ],
+        "coverage": "Six lower token entries captured; upper token metadata remains unknown. Absence from returned JSON does not prove underlying database field is absent."
       },
       "interpretation": [
-        "Empty strings are displayed Token JSON values, not evidence that runtime merge data is missing.",
-        "The existing LWC suffix filter would include the visible _manual and _apimanual tokens, including Free_Form_Text_apimanual.",
-        "No Brief Description token is visible in the displayed Token JSON. CS-1474 requires Brief Description and Free Form Content; inspect Word content and mapping before deciding changes.",
-        "Custom class configuration identifies the next automatic-data dependency. Its implementation and runtime inputs/outputs are not yet reviewed.",
-        "Template file content, all story merge-field mappings, personalized generation, print delivery, case association and storage success remain unverified."
+        "Token JSON blank strings are schema preview values, not runtime data.",
+        "Custom extractor copies supplied tokenMapping into tokenMap; it does not retrieve source data.",
+        "Current root-input Apex mapping depends on mappingName matching an existing key.",
+        "Claim_DOS and Patient_Acct_Num lack mappingName in the displayed response and lack the manual suffix used by the reviewed LWC; current captured paths do not populate them.",
+        "ClientSide template setting does not prove actual branch execution; async branch remains gated by runtime flags.",
+        "The current screenshots show a template designer rendition, not proof of a successful generated letter or print submission."
       ],
-      "nextEvidence": "CNC_CustomTokenDataExtractor Apex source: entry method, input contract, token construction and mapping. Then inspect actual Word template content."
+      "nextEvidence": "Remaining CNCGetCaseInfo output rows and intervening mappings to root memberId/claimNumber; runtime tokenMapping before generation.",
+      "environment": "xhdev1 sandbox",
+      "observedActive": true,
+      "wordContentEvidence": "Template designer PDF rendition visibly shows matching {{token}} placeholders. Native DOCX XML not retrieved."
     }
   ],
   "apexSourceEvidence": [
     {
       "name": "CNC_CustomTokenDataExtractor",
-      "evidence": "Two user-provided screenshots, class lines 1–48, 2026-10-06 11:05 PM CT",
+      "evidence": "Two user-provided screenshots, class lines 1\u201348, 2026-10-06 11:05 PM CT",
       "sourceCoverage": "Visible class body through closing brace; screenshot transcription, not retrieved org source or tested deployment artifact",
       "apiVersion": "58.0",
       "declaration": "global with sharing class CNC_CustomTokenDataExtractor implements omnistudio.VlocityOpenInterface, Callable",
@@ -4253,53 +4677,80 @@
         "LWC updateOmniScript supplies tokenMapping, matching this class's expected key. Actual caller input and enrichment of automatic tokens remain unverified."
       ],
       "nextEvidence": "OmniScript action or IP preparing/passing tokenMapping to generation: input mappings and automatic-token enrichment."
+    },
+    {
+      "name": "CNC_SendCommunication",
+      "apiVersion": "68.0",
+      "captureDate": "2026-10-07",
+      "sourceCoverage": "Partial screenshots, including transformTokenData and portions of sendFilesToS3. Not a deployable class export.",
+      "transformTokenData": {
+        "inputTemplateKey": "selectedTemplate",
+        "templateTokensKey": "tokens",
+        "tokenFields": [
+          "Name",
+          "mappingName"
+        ],
+        "mappingBehavior": "For each token, if the root input map contains its mappingName, copy input[mappingName] as String into tokenMapping[tokenName]. No nested path traversal or source query is visible in this method.",
+        "outputs": [
+          "tokenMapping",
+          "showAdditionalInformation"
+        ],
+        "manualDetection": "Token name contains the manual constant and ends in a recognized suffix. Visible _manual branch confirmed; second suffix clipped in Apex screenshot. LWC separately confirms _apimanual.",
+        "isEmailBehavior": "isEmail=true forces hasmanualTokens=true",
+        "sourceLookupPerformed": false
+      },
+      "sendFilesToS3": {
+        "observedBehavior": [
+          "Reads caseId and Case/Account information",
+          "Collects case ContentDocumentLinks and queries ContentVersion",
+          "Uses S3 callout response and updates ContentVersion JobId/review fields in visible code"
+        ],
+        "verification": "Partial code only; actual executed route, request body, completion/error handling and print delivery not established. Do not infer this method executes for the selected template."
+      },
+      "evidenceScreenshots": [
+        "IMG_90CCF988-645D-4ABC-8E01-8DAB9C5DDED5.jpeg",
+        "IMG_2E335494-73A9-4558-8C0D-4208B83B0D6F.jpeg",
+        "IMG_9F785049-2764-467F-807E-57D63C9F5420.jpeg",
+        "IMG_E05D64AB-85B3-4150-9DA6-DEBD0F4A6EE8.jpeg",
+        "IMG_725A5870-D92C-422A-AC1A-C14AC4D3AF57.jpeg"
+      ]
     }
   ],
   "reviewCheckpoint": {
-    "date": "2026-10-06",
+    "date": "2026-10-07",
     "timeZone": "America/Chicago",
-    "time": "23:16",
-    "status": "Paused at user request; today's evidence capture saved. Implementation review remains incomplete.",
+    "time": "18:03",
+    "status": "Capture saved; implementation review remains incomplete",
     "completedToday": [
-      "Case Send Communication quick action and LWC launch guards/navigation",
-      "Runtime Other Communication / Print free-form letter path through failed confirmation",
-      "AdditionalInformation designer and partial cncSendCommunicationAdditionalInfo JavaScript behavior",
-      "HOSTProviderFreeformLetter settings and visible 13-token JSON",
-      "CNC_CustomTokenDataExtractor visible class contract and pass-through behavior",
-      "RA-InsertSelectedForms configuration and Forms/Documents condition",
-      "IP-GenerateLetterinAsync payload, blank transformations and async/non-POD condition",
-      "CNC_AsyncLetterGeneration version 3 visible structure, gateway call and response keys"
+      "Dev/QA filter and template-record comparison",
+      "Free-form Word token placeholders and lower six token metadata entries",
+      "CNC_SendCommunication.transformTokenData source behavior",
+      "RA-SetDefaultTokenMapping payload/condition",
+      "CNC_Member360 transform action, response actions and request payload",
+      "CNCTransformMemberInfo visible output mappings",
+      "SV-ResetTokenMapping visible values",
+      "SV-InitialMapping owner flag and CNCGetCaseInfo reconfirmation"
     ],
     "resumeAt": {
-      "elementName": "RA-SetDefaultTokenMapping",
-      "location": "OmniScript, before AdditionalInformation",
+      "component": "Token source trace",
+      "location": "Review already captured CNCGetCaseInfo outputs and downstream Set Values/Apex mappings",
       "captureNext": [
-        "Remote Class",
-        "Remote Method",
-        "Extra Payload",
-        "Conditional View"
-      ],
-      "purpose": "Identify the automatic token-mapping implementation, then review its source and map story-required merge fields."
+        "Trace root memberId/claimNumber initialization using existing evidence first",
+        "Resolve missing DOS/patient-account bindings and upper token metadata",
+        "Verify sanitized runtime tokenMapping and generation/submission results"
+      ]
     },
     "remaining": [
-      "Automatic merge values and selectedTemplate.tokens enrichment",
-      "Brief Description token and actual Word template content",
-      "Clipped async IP parameter/output formulas and remote transformations",
-      "Complete LWC HTML/metadata and missing JS portions for deployable recreation",
-      "Runtime generation job result and cause of unable-to-send confirmation",
-      "Successful PDF/print delivery, case association, storage and retry",
-      "Story-by-story scope and estimate confirmation"
+      "Root memberId initialization/enrichment",
+      "Root claimNumber source",
+      "Claim_DOS and Patient_Acct_Num intended source and mappings",
+      "Upper token mappingName entries",
+      "Full email Set Values paths",
+      "Brief Description storage/placement",
+      "Generation runtime flags and exact final payload",
+      "Successful print request, confirmation, case association, storage and retry"
     ],
-    "scopeNote": "Documentation checkpoint only; no claim that implementation, deployable replication or story acceptance criteria are complete.",
-    "storyCapture": {
-      "status": "In progress",
-      "date": "2026-10-07",
-      "currentStory": "CS-1474",
-      "received": "Reference letter screenshots",
-      "next": "Story description and complete acceptance criteria; then remaining stories",
-      "omniScriptResumeAt": "RA-SetDefaultTokenMapping",
-      "investigationPaused": true
-    }
+    "scopeNote": "Source sandbox investigation only. Earlier target reconstruction/deployment history remains separate; no Salesforce changes or deployment performed in this capture."
   },
   "storyReferenceDocuments": [
     {
@@ -4410,5 +4861,53 @@
       ],
       "scopeNote": "This captures reference content, not a generated document or a working print result."
     }
-  ]
+  ],
+  "environmentComparison": {
+    "captureDate": "2026-10-07",
+    "confirmed": [
+      "User reports HOSTProviderFreeformLetter exists in Dev but not QA",
+      "Visible mapper filters match across Dev/QA",
+      "Observed response examples concern different template records: QA Provider/Serverside; Dev ITS Host/ClientSide"
+    ],
+    "unknown": [
+      "Complete eligible record inventory",
+      "Any additional LWC filtering",
+      "Same-template cross-org version comparison"
+    ],
+    "correction": "Per the earlier user correction, the first three response screenshots were QA and the following two were Dev. Do not reverse environments or treat different records as one template."
+  },
+  "tokenSourceTrace": {
+    "status": "Partial; no implementation or deployment",
+    "confirmed": [
+      {
+        "source": "caseInfo:CaseNumber",
+        "mapperOutput": "caseNumber",
+        "templateToken": "Case_Number"
+      },
+      {
+        "source": "caseInfo:Account.Member_Id__pc",
+        "mapperOutput": "localMemberId",
+        "templateToken": "Member_ID_or_Patient_Account_Number",
+        "expectedRootKey": "memberId",
+        "interveningMappingVerified": false
+      },
+      {
+        "source": "currentDate formula",
+        "mapperOutput": "currentDate",
+        "templateToken": "Current_Date_system",
+        "tokenMappingNameVerified": false
+      }
+    ],
+    "unknown": [
+      "Root memberId initialization/enrichment",
+      "Root claimNumber source",
+      "Claim_DOS and Patient_Acct_Num intended source and mappings",
+      "Upper token mappingName entries",
+      "Full email Set Values paths",
+      "Brief Description storage/placement"
+    ],
+    "proposed": [
+      "After verifying real source keys, map missing automatic tokens; alternatively, if manual entry is required, align token suffixes and matching Word placeholders. These are options, not approved or implemented changes."
+    ]
+  }
 }

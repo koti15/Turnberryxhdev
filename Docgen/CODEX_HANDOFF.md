@@ -1,5 +1,10 @@
 # Send Communication: single-file working record
 
+## Latest source review — October 7, 2026, 6:03 PM CT
+
+CS-1474 investigation progressed through template selection, token metadata, Apex default mapping and patient demographics. CNCGetCaseInfo already has 32 captured output rows; review those before requesting more screenshots. Next trace root memberId/claimNumber and final tokenMapping. Root memberId/claimNumber and DOS/patient-account bindings remain unresolved. This supersedes earlier paused-at-RA continuation points. No org changes or deployment in this capture. See [latest evidence](evidence/2026-10-07-CS-1474-review.md).
+
+
 Updated 2026-10-01. This file contains the reconstruction instructions, completed capture work, pending gaps and all structured configuration recorded so far. Codex can start and continue from this file.
 
 
@@ -340,3420 +345,4920 @@ Read Docgen/AGENTS.md and Docgen/CODEX_HANDOFF.md first. Use Docgen/spec/send-co
 
 ## Complete captured configuration
 
-Every recorded field from the structured specification follows, grouped by its full property path. Arrays retain their source order. `null` is not deployable configuration and can mean unresolved or unset depending on the accompanying evidence. Captured blank strings and empty arrays are explicitly distinguished. Evidence-only behavior descriptions must not be converted into guessed executable formulas.
-
-### artifactKind
-
-evidence-based-build-specification
-
-### deployable
-
-false
-
-### status
-
-partial-configuration
-
-### source
-
-| Property | Captured value |
-| --- | --- |
-| kind | user-supplied-designer-screenshots |
-| capturedDate | 2026-10-01 |
-| latestScreenshot | IMG_7ACBD6F4-31F7-4D59-9114-9D0C1195E8F6.jpeg |
-
-### omniScript
-
-| Property | Captured value |
-| --- | --- |
-| displayName | Send Communication |
-| language | English |
-| observedVersion | 43 |
-| observedActive | true |
-| type | CNC |
-| subType | SendCommunication |
-| description | MMR- email go live prep |
-
-### caseIntegration
-
-| Property | Captured value |
-| --- | --- |
-| requiredByUser | true |
-| objectApiName | Case |
-| launchMechanism | `null` — unresolved/unset; see context |
-| recordIdInputMapping | `null` — unresolved/unset; see context |
-| status | required-not-implemented |
-
-### confirmedActions
-
-#### confirmedActions[0] · IP-GETCaseDetails
-
-| Property | Captured value |
-| --- | --- |
-| elementName | IP-GETCaseDetails |
-| fieldLabel | IP-GETCaseDetails |
-| elementType | Integration Procedure Action |
-| integrationProcedure | CNC_GetCaseInformation |
-| invokeMode | Default |
-| inputMapping | `null` — unresolved/unset; see context |
-| responseMapping | `null` — unresolved/unset; see context |
-| executionCondition | `null` — unresolved/unset; see context |
-
-#### confirmedActions[1] · ExtractEmailBodyForMMR
-
-| Property | Captured value |
-| --- | --- |
-| elementName | ExtractEmailBodyForMMR |
-| fieldLabel | ExtractEmailBodyForMMR |
-| elementType | Data Mapper Extract Action |
-| dataMapper | GetMMREmailTemplate |
-| ignoreCache | false |
-| responseTransformations | `null` — unresolved/unset; see context |
-| userMessage | `null` — unresolved/unset; see context |
-| errorMessages | `null` — unresolved/unset; see context |
-| executionCondition | `null` — unresolved/unset; see context |
-| complete | false |
-
-##### confirmedActions[1] · ExtractEmailBodyForMMR.inputParameters
-
-| dataSource | filterValueDisplayed | literalQuotingVerified |
-| --- | --- | --- |
-| DeveloperName | MMR_EMAIL_TEMPLATE | false |
-
-##### confirmedActions[1] · ExtractEmailBodyForMMR.evidenceScreenshots
-
-1. IMG_F2B01301-44F0-407A-A0CF-FF1F66E6AD37.jpeg
-2. IMG_1F03F5AE-FCFF-4C84-840C-04F207E1D6B4.jpeg
-3. IMG_D335A082-5392-4EA2-A7F9-9B27AE72E1E1.jpeg
-4. IMG_7CABAFDD-8FD1-42F9-B32F-92158778A7D8.jpeg
-
-#### confirmedActions[2] · IP-GetForms
-
-| Property | Captured value |
-| --- | --- |
-| elementName | IP-GetForms |
-| elementType | Integration Procedure Action |
-| integrationProcedure | CNC_GetEmailFormsDetails |
-| complete | false |
-| captureStatus | in-progress |
-| preTransformDataMapperInterface | `""` — captured blank |
-| postTransformDataMapperInterface | `""` — captured blank |
-| sendOnlyExtraPayload | true |
-| sendJsonPath | `""` — captured blank |
-| sendJsonNode | `""` — captured blank |
-| responseJsonPath | `""` — captured blank |
-| responseJsonNode | formsdata |
-| lwcComponentOverride | `""` — captured blank |
-| screenshotContext | Top properties confirm IP-GetForms identity; continuation captures stored in this same action entry. |
-| fieldLabel | IP-GetForms |
-| invokeMode | Default |
-| observedActive | true |
-| showToastOnCompletion | false |
-
-##### confirmedActions[2] · IP-GetForms.conditionalViewEvidence
-
-| Property | Captured value |
-| --- | --- |
-| conditionType | Show Element if True |
-| displayedCondition | (MaterialType = Forms OR MaterialType = Documents) |
-| context | IP-GetForms selected in preceding screenshot; selected-element header not visible in condition close-up |
-| lwcComponentOverride | `""` — captured blank |
-
-###### confirmedActions[2] · IP-GetForms.conditionalViewEvidence.messagingFramework
-
-| Property | Captured value |
-| --- | --- |
-| windowPostMessage | false |
-| pubSub | false |
-| sessionStorage | false |
-
-##### confirmedActions[2] · IP-GetForms.missing
-
-1. Remaining user-message/error-message properties
-2. Referenced Integration Procedure full definition and settings
-
-##### confirmedActions[2] · IP-GetForms.evidenceScreenshots
-
-1. IMG_70FF597B-607B-4E91-AE8E-7DFD2310FF27.jpeg
-2. IMG_ECB61E00-ECA1-4281-8303-D3380D236979.jpeg
-3. IMG_A7EC281B-F3FC-4FCF-BD04-501ED686935E.jpeg
-4. IMG_7ED0B145-6A45-4A1C-A157-8CF97DE80626.jpeg
-5. IMG_A9F862A3-2547-42D2-991A-234FA36FDDB2.jpeg
-
-##### confirmedActions[2] · IP-GetForms.remoteOptions
-
-`[]` — no entries recorded; coverage notes determine whether complete.
-
-##### confirmedActions[2] · IP-GetForms.extraPayload
-
-| key | value |
-| --- | --- |
-| MaterialType | %MaterialType% |
-| OutboundChannel | %OutboundChannel% |
-
-##### confirmedActions[2] · IP-GetForms.inputMapping
-
-| Property | Captured value |
-| --- | --- |
-| kind | extra-payload-only |
-
-###### confirmedActions[2] · IP-GetForms.inputMapping.keys
-
-1. MaterialType
-2. OutboundChannel
-
-##### confirmedActions[2] · IP-GetForms.responseMapping
-
-| Property | Captured value |
-| --- | --- |
-| sendJsonPath | `""` — captured blank |
-| sendJsonNode | `""` — captured blank |
-| responseJsonPath | `""` — captured blank |
-| responseJsonNode | formsdata |
-
-##### confirmedActions[2] · IP-GetForms.remoteProperties
-
-| Property | Captured value |
-| --- | --- |
-| useFuture | false |
-| chainable | false |
-| useContinuation | false |
-| useQueueable | false |
-| queueableChainable | false |
-
-### missingForRunnableBuild
-
-1. OmniScript exported definition
-2. Complete IP-GETCaseDetails properties including input/output mappings and conditions
-3. CNC_GetCaseInformation exported definition and dependencies
-4. Case launch component/action configuration
-5. Remaining elements, nested steps, properties and dependencies
-6. Generation template and actual generation payload/call
-
-### safety
-
-| Property | Captured value |
-| --- | --- |
-| activate | false |
-| deploy | false |
-| includeSecrets | false |
-
-### integrationProcedures
-
-#### integrationProcedures[0] · Get Case Information
-
-| Property | Captured value |
-| --- | --- |
-| key | CNC_GetCaseInformation |
-| name | Get Case Information |
-| type | CNC |
-| subType | GetCaseInformation |
-| observedVersion | 3 |
-| observedActive | true |
-| complete | false |
-
-##### integrationProcedures[0] · Get Case Information.visibleElements
-
-###### integrationProcedures[0] · Get Case Information.visibleElements[0] · DR-E-GetCaseInfo
-
-| Property | Captured value |
-| --- | --- |
-| elementName | DR-E-GetCaseInfo |
-| type | Data Mapper Extract Action |
-| dataMapper | CNCGetCaseInfo |
-| sendJsonPath | `""` — captured blank |
-| sendJsonNode | `""` — captured blank |
-| responseJsonPath | `""` — captured blank |
-| responseJsonNode | response |
-| ignoreCache | false |
-| sendOnlyAdditionalInput | false |
-| returnOnlyAdditionalOutput | false |
-
-**integrationProcedures[0] · Get Case Information.visibleElements[0] · DR-E-GetCaseInfo.inputParameters**
-
-| dataSource | filterValue |
-| --- | --- |
-| caseId | caseId |
-
-#### integrationProcedures[1] · Email Forms Details
-
-| Property | Captured value |
-| --- | --- |
-| key | CNC_GetEmailFormsDetails |
-| name | Email Forms Details |
-| type | CNC |
-| subType | GetEmailFormsDetails |
-| observedVersion | 5 |
-| observedActive | true |
-| description | MNPP-3048 - Updated Outbound channel check. |
-| complete | false |
-| identityVerification | Procedure Configuration screenshot confirms Type/SubType matching the OmniScript IP-GetForms reference; prior photographed IP element captures linked here. |
-
-##### integrationProcedures[1] · Email Forms Details.configuration
-
-| Property | Captured value |
-| --- | --- |
-| includeAllActionsInResponse | false |
-| rollbackOnError | false |
-| requiredPermission | `""` — captured blank |
-
-###### integrationProcedures[1] · Email Forms Details.configuration.trackingCustomData
-
-`[]` — no entries recorded; coverage notes determine whether complete.
-
-##### integrationProcedures[1] · Email Forms Details.visibleElements
-
-###### integrationProcedures[1] · Email Forms Details.visibleElements[0] · SV-DefaultMapping
-
-| Property | Captured value |
-| --- | --- |
-| elementName | SV-DefaultMapping |
-| type | Set Values |
-| responseJsonPath | `""` — captured blank |
-| responseJsonNode | `""` — captured blank |
-| executionConditionalFormula | `""` — captured blank |
-| failOnStepError | false |
-| complete | false |
-| order | 1 |
-
-**integrationProcedures[1] · Email Forms Details.visibleElements[0] · SV-DefaultMapping.values**
-
-| name | expression | verification | expressionDisplayed |
-| --- | --- | --- | --- |
-| sectionName | IF(%MaterialType% = "Forms","Send Communication Forms","Send Communication Documents") | Full expression supplied by user in browser address bar screenshot; runtime/export syntax not validated. | =IF(%MaterialType% = "Forms","Send Communication Forms","Send Communication Documents") |
-| type | IF(%MaterialType% = "Forms","Email Forms","Email Documents") | readable screenshot transcription; exact export syntax not validated | — not recorded |
-
-**integrationProcedures[1] · Email Forms Details.visibleElements[0] · SV-DefaultMapping.evidenceScreenshots**
-
-1. IMG_29034490-76E5-4170-AD4B-EC3073A16790.jpeg
-
-###### integrationProcedures[1] · Email Forms Details.visibleElements[1] · DR-E-GetHeaderAttributes
-
-| Property | Captured value |
-| --- | --- |
-| elementName | DR-E-GetHeaderAttributes |
-| type | Data Mapper Extract Action |
-| dataMapper | CNCGetHeaderAttributes |
-| ignoreCache | false |
-| sendJsonPath | `""` — captured blank |
-| sendJsonNode | `""` — captured blank |
-| responseJsonPath | `""` — captured blank |
-| responseJsonNode | `""` — captured blank |
-| sendOnlyAdditionalInput | false |
-| complete | false |
-| order | 2 |
-
-**integrationProcedures[1] · Email Forms Details.visibleElements[1] · DR-E-GetHeaderAttributes.inputParameters**
-
-| dataSource | filterValue |
-| --- | --- |
-| SV-DefaultMapping:sectionName | sectionName |
-
-###### integrationProcedures[1] · Email Forms Details.visibleElements[2] · DR-E-GetForms
-
-| Property | Captured value |
-| --- | --- |
-| elementName | DR-E-GetForms |
-| type | Data Mapper Extract Action |
-| order | 3 |
-| dataMapper | CNCGetInternalAndExternalLinks |
-| complete | false |
-| ignoreCache | false |
-| sendJsonPath | `""` — captured blank |
-| sendJsonNode | `""` — captured blank |
-| responseJsonPath | `""` — captured blank |
-| responseJsonNode | `""` — captured blank |
-| sendOnlyAdditionalInput | false |
-
-**integrationProcedures[1] · Email Forms Details.visibleElements[2] · DR-E-GetForms.inputParameters**
-
-| dataSource | filterValue |
-| --- | --- |
-| SV-DefaultMapping:type | type |
-| OutboundChannel | OutboundChannel |
-
-**integrationProcedures[1] · Email Forms Details.visibleElements[2] · DR-E-GetForms.missing**
-
-1. Additional input/output/failure response settings below photographed area
-2. Execution conditions and remaining properties
-
-**integrationProcedures[1] · Email Forms Details.visibleElements[2] · DR-E-GetForms.evidenceScreenshots**
-
-1. IMG_DE6E1E82-E36E-4E62-B5E8-644C75D8468A.jpeg
-
-###### integrationProcedures[1] · Email Forms Details.visibleElements[3] · ResponseAction
-
-| Property | Captured value |
-| --- | --- |
-| elementName | ResponseAction |
-| type | Response Action |
-| order | 4 |
-| complete | false |
-| responseFormat | JSON |
-| sendJsonPath | DR-E-GetHeaderAttributes |
-| responseJsonPath | `""` — captured blank |
-| sendJsonNode | `""` — captured blank |
-| responseJsonNode | `""` — captured blank |
-| executionConditionalFormula | `""` — captured blank |
-| internalNotes | `""` — captured blank |
-| captureStatus | visible-properties-captured |
-
-**integrationProcedures[1] · Email Forms Details.visibleElements[3] · ResponseAction.responseHeaders**
-
-`[]` — no entries recorded; coverage notes determine whether complete.
-
-**integrationProcedures[1] · Email Forms Details.visibleElements[3] · ResponseAction.additionalOutputResponse**
-
-| Property | Captured value |
-| --- | --- |
-| returnOnlyAdditionalOutput | false |
-
-**integrationProcedures[1] · Email Forms Details.visibleElements[3] · ResponseAction.additionalOutputResponse.additionalOutput**
-
-| key | value |
-| --- | --- |
-| responsedata | %DR-E-GetForms:links% |
-
-**integrationProcedures[1] · Email Forms Details.visibleElements[3] · ResponseAction.missing**
-
-`[]` — no entries recorded; coverage notes determine whether complete.
-
-**integrationProcedures[1] · Email Forms Details.visibleElements[3] · ResponseAction.evidenceScreenshots**
-
-1. IMG_B73A6677-0F30-4A98-BEEF-3584372AE0F9.jpeg
-2. IMG_4BED4E5F-62CF-401A-B701-7A367A0B6D0E.jpeg
-
-##### integrationProcedures[1] · Email Forms Details.evidenceScreenshots
-
-1. IMG_442D406A-B405-4965-AF08-059D1EBDE932.jpeg
-2. IMG_B5075B6E-84B4-4C77-876E-0C2C5E5EAEE2.jpeg
-3. IMG_412EA20C-02BE-4372-9367-69A1AFEA733F.jpeg
-4. IMG_DE6E1E82-E36E-4E62-B5E8-644C75D8468A.jpeg
-
-##### integrationProcedures[1] · Email Forms Details.missing
-
-1. Remaining DR-E-GetForms properties and CNCGetInternalAndExternalLinks definition
-2. Any additional procedure settings outside visible area
-
-### dataMappers
-
-#### dataMappers[0] · CNCGetCaseInfo
-
-Reconciled exact record, including newer captured formulas and User filter:
+Generated from [canonical specification](spec/send-communication.partial.json). Unknown properties remain null; capture is not deployment.
 
 ```json
 {
-  "name": "CNCGetCaseInfo",
-  "interfaceType": "Extract",
-  "inputType": "JSON",
-  "outputType": "JSON",
-  "extractSteps": [
-    {
-      "object": "Case",
-      "outputPath": "caseInfo",
-      "filter": {
-        "field": "Id",
-        "operator": "=",
-        "input": "caseId"
-      }
-    },
-    {
-      "object": "User",
-      "outputPath": "loggedInUserInfo",
-      "filterExpressionStatus": "Exact displayed input captured in newer PENDING_WORK.md evidence; implementation pending.",
-      "filter": {
-        "field": "Id",
-        "operator": "=",
-        "input": "$Vlocity.UserId"
-      }
-    }
-  ],
-  "formulaCountObserved": 13,
-  "outputMappings": [
-    {
-      "extractJsonPath": "caseInfo:Account.Blue_Shield_Id__c",
-      "outputJsonPath": "providerBlueshildId",
-      "verification": "Output spelling appears providerBlueshildId in mapping screenshot; earlier schema transcription was providerBlueshieldId. Confirm exact spelling from export or close-up before executable build."
-    },
-    {
-      "extractJsonPath": "caseInfo:Account.Member_Id__pc",
-      "outputJsonPath": "localMemberId"
-    },
-    {
-      "extractJsonPath": "caseInfo:Account.NPI__c",
-      "outputJsonPath": "providerNPI"
-    },
-    {
-      "extractJsonPath": "caseInfo:Account.PersonBirthdate",
-      "outputJsonPath": "memberDOB"
-    },
-    {
-      "extractJsonPath": "caseInfo:Account.PersonEmail",
-      "outputJsonPath": "memberEmail"
-    },
-    {
-      "extractJsonPath": "caseInfo:Account.PersonMailingCity",
-      "outputJsonPath": "localCity"
-    },
-    {
-      "extractJsonPath": "caseInfo:Account.PersonMailingCountry",
-      "outputJsonPath": "localCountry"
-    },
-    {
-      "extractJsonPath": "caseInfo:Account.PersonMailingPostalCode",
-      "outputJsonPath": "localPostalCode"
-    },
-    {
-      "extractJsonPath": "caseInfo:Account.PersonMailingState",
-      "outputJsonPath": "localState"
-    },
-    {
-      "extractJsonPath": "caseInfo:Account.PersonMailingStreet",
-      "outputJsonPath": "localStreet"
-    },
-    {
-      "extractJsonPath": "caseInfo:Account.Primary_Address__pc",
-      "outputJsonPath": "localFullAddress"
-    },
-    {
-      "extractJsonPath": "caseInfo:Account.Subscriber_Id__pc",
-      "outputJsonPath": "subscriberId"
-    },
-    {
-      "extractJsonPath": "caseInfo:Account.UMPI__c",
-      "outputJsonPath": "providerUMPI"
-    },
-    {
-      "extractJsonPath": "caseInfo:CaseNumber",
-      "outputJsonPath": "caseNumber"
-    },
-    {
-      "extractJsonPath": "caseInfo:Description",
-      "outputJsonPath": "caseDescription"
-    },
-    {
-      "extractJsonPath": "caseInfo:Id",
-      "outputJsonPath": "Id"
-    },
-    {
-      "extractJsonPath": "caseInfo:Owner.Name",
-      "outputJsonPath": "ownerName"
-    },
-    {
-      "extractJsonPath": "caseInfo:OwnerId",
-      "outputJsonPath": "caseOwnerId"
-    },
-    {
-      "extractJsonPath": "caseInfo:relationship",
-      "outputJsonPath": "caseType"
-    },
-    {
-      "extractJsonPath": "caseInfo:Source_System__c",
-      "outputJsonPath": "sourceSystem"
-    },
-    {
-      "extractJsonPath": "createdDate",
-      "outputJsonPath": "createdDate"
-    },
-    {
-      "extractJsonPath": "currentDate",
-      "outputJsonPath": "currentDate"
-    },
-    {
-      "extractJsonPath": "localEnterprisePersonId",
-      "outputJsonPath": "localEnterprisePersonId"
-    },
-    {
-      "extractJsonPath": "localMemberFirstName",
-      "outputJsonPath": "localMemberFirstName"
-    },
-    {
-      "extractJsonPath": "localMemberLastName",
-      "outputJsonPath": "localMemberLastName"
-    },
-    {
-      "extractJsonPath": "localMemberName",
-      "outputJsonPath": "localMemberName"
-    },
-    {
-      "extractJsonPath": "loggedInUserInfo:Id",
-      "outputJsonPath": "loggedInUserId"
-    },
-    {
-      "extractJsonPath": "receivedDate",
-      "outputJsonPath": "receivedDate"
-    },
-    {
-      "extractJsonPath": "relatedEntities",
-      "outputJsonPath": "relatedEntities"
-    },
-    {
-      "extractJsonPath": "relatedEntityCount",
-      "outputJsonPath": "relatedEntityCount"
-    },
-    {
-      "extractJsonPath": "serviceRepName",
-      "outputJsonPath": "serviceRepName"
-    },
-    {
-      "extractJsonPath": "todayDate",
-      "outputJsonPath": "todayDate"
-    }
-  ],
-  "evidencePath": "Docgen/evidence/CNC_GetCaseInformation.md",
-  "complete": false,
-  "visibleOutputSchemaKeys": [
-    "localMemberFirstName",
-    "memberDOB",
-    "providerBlueshieldId",
-    "memberEmail",
-    "localPostalCode",
-    "currentDate",
-    "relatedEntityCount",
-    "localStreet",
-    "loggedInUserId",
-    "localCity",
-    "caseDescription",
-    "ownerName",
-    "sourceSystem",
-    "caseNumber",
-    "todayDate",
-    "providerNPI",
-    "localFullAddress",
-    "localMemberName",
-    "createdDate",
-    "localState",
-    "localEnterprisePersonId",
-    "providerUMPI",
-    "localCountry",
-    "caseType",
-    "subscriberId",
-    "localMemberId",
-    "caseOwnerId",
-    "Id",
-    "localMemberLastName",
-    "serviceRepName",
-    "relatedEntities",
-    "receivedDate"
-  ],
-  "options": {
-    "timeToLiveMinutes": 0,
-    "checkFieldLevelSecurity": false,
-    "platformCacheType": null,
-    "overwriteTargetForAllNullInputs": false
+  "artifactKind": "evidence-based-build-specification",
+  "deployable": false,
+  "status": "partial-configuration",
+  "source": {
+    "kind": "user-supplied-designer-screenshots",
+    "capturedDate": "2026-10-01",
+    "latestScreenshot": "IMG_54F0625D-D0F5-4CF5-8FB0-87CAA9385FAE.jpeg"
   },
-  "previewEvidence": {
-    "inputKey": "caseId",
-    "caseQueryResultCount": 0,
-    "successfulCaseRetrievalVerified": false,
-    "personalValuesOmitted": true
+  "omniScript": {
+    "displayName": "Send Communication",
+    "language": "English",
+    "observedVersion": 43,
+    "observedActive": true,
+    "type": "CNC",
+    "subType": "SendCommunication",
+    "description": "MMR- email go live prep"
   },
-  "outputMappingCoverage": {
-    "visibleRows": 32,
-    "allPreviouslyCapturedKeysRepresentedExceptSpellingDiscrepancy": true,
-    "rowDetailPropertiesVerified": false,
-    "spellingDiscrepancies": [
-      "providerBlueshildId versus providerBlueshieldId"
-    ]
-  },
-  "formulaEvidence": [
-    {
-      "order": 1,
-      "resultPath": "relatedEntityCount",
-      "readableBehavior": "COUNTQUERY against Case_Sub_Entity__c filtered by Case__c using caseId",
-      "expression": "COUNTQUERY(\"SELECT COUNT() FROM Case_Sub_Entity__c WHERE Case__c = '{0}'\",caseId)",
-      "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
-    },
-    {
-      "order": 2,
-      "resultPath": "currentDate",
-      "readableBehavior": "FORMATDATETIME of NOW(), format MM/dd/yyyy",
-      "expression": "FORMATDATETIME(NOW(),\"MM/dd/yyyy\")",
-      "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
-    },
-    {
-      "order": 3,
-      "resultPath": "todayDate",
-      "readableBehavior": "FORMATDATETIME of NOW(), format MMMM dd, yyyy",
-      "expression": "FORMATDATETIME(NOW(),\"MMMM dd, yyyy\")",
-      "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
-    },
-    {
-      "order": 4,
-      "resultPath": "serviceRepName",
-      "readableBehavior": "If loggedInUserInfo:FirstName is blank, use the first character of LastName; otherwise concatenate FirstName and the first character of LastName",
-      "expression": "IF(ISBLANK(loggedInUserInfo:FirstName),SUBSTRING(loggedInUserInfo:LastName,0,1),CONCAT(loggedInUserInfo:FirstName,\" \",SUBSTRING(loggedInUserInfo:LastName,0,1)))",
-      "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
-    },
-    {
-      "order": 5,
-      "resultPath": "caseInfo:relationship",
-      "readableBehavior": "Account.Record_Type__c Member or Unlisted Member maps to Member; otherwise Provider",
-      "expression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",\"Member\",\"Provider\")",
-      "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
-    },
-    {
-      "order": 6,
-      "resultPath": "localMemberName",
-      "readableBehavior": "For Member/Unlisted Member use caseInfo:Account.Name; otherwise caseInfo:Contact.Name",
-      "expression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",caseInfo:Account.Name,caseInfo:Contact.Name)",
-      "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
-    },
-    {
-      "order": 7,
-      "resultPath": "localMemberFirstName",
-      "readableBehavior": "For Member/Unlisted Member use caseInfo:Account.FirstName; otherwise empty string",
-      "expression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",caseInfo:Account.FirstName,\"\")",
-      "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
-    },
-    {
-      "order": 8,
-      "resultPath": "localMemberLastName",
-      "readableBehavior": "For Member/Unlisted Member use caseInfo:Account.LastName; otherwise empty string",
-      "expression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",caseInfo:Account.LastName,\"\")",
-      "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
-    },
-    {
-      "order": 9,
-      "resultPath": "localEnterprisePersonId",
-      "readableBehavior": "For Member/Unlisted Member use caseInfo:Account.Enterprise_Person_Id__c; otherwise empty string",
-      "expression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",caseInfo:Account.Enterprise_Person_Id__c,\"\")",
-      "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
-    },
-    {
-      "order": 10,
-      "resultPath": "createdDate",
-      "readableBehavior": "FORMATDATETIME of caseInfo:CreatedDate, format MM/dd/yyyy",
-      "expression": "FORMATDATETIME(caseInfo:CreatedDate,\"MM/dd/yyyy\")",
-      "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
-    },
-    {
-      "order": 11,
-      "resultPath": "receivedDate",
-      "readableBehavior": "FORMATDATETIME of caseInfo:Received_Date__c, format MM/dd/yyyy",
-      "expression": "FORMATDATETIME(caseInfo:Received_Date__c,\"MM/dd/yyyy\")",
-      "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
-    },
-    {
-      "order": 12,
-      "resultPath": "relatedEntitiesList",
-      "readableBehavior": "QUERY selects Entity_Type__c from Case_Sub_Entity__c filtered by Case__c using caseId",
-      "expression": "QUERY(\"SELECT Entity_Type__c FROM Case_Sub_Entity__c WHERE Case__c = '{0}'\",caseId)",
-      "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
-    },
-    {
-      "order": 13,
-      "resultPath": "relatedEntities",
-      "readableBehavior": "TOSTRING(relatedEntitiesList)",
-      "expression": "TOSTRING(relatedEntitiesList)",
-      "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
-    }
-  ],
-  "formulaVerification": "Exact formulas 1–13 now reconciled from newer PENDING_WORK.md evidence. Do not request them again. Runtime validation remains pending."
-}
-```
-
-#### dataMappers[1] · GetMMREmailTemplate
-
-| Property | Captured value |
-| --- | --- |
-| name | GetMMREmailTemplate |
-| interfaceType | Extract |
-| inputType | JSON |
-| outputType | JSON |
-| formulas | `null` — unresolved/unset; see context |
-| options | `null` — unresolved/unset; see context |
-| complete | false |
-
-##### dataMappers[1] · GetMMREmailTemplate.extractSteps
-
-###### dataMappers[1] · GetMMREmailTemplate.extractSteps[0]
-
-| Property | Captured value |
-| --- | --- |
-| object | EmailTemplate |
-| outputPath | Email |
-
-**dataMappers[1] · GetMMREmailTemplate.extractSteps[0].filter**
-
-| Property | Captured value |
-| --- | --- |
-| field | DeveloperName |
-| operator | = |
-| valueDisplayed | 'MMR_EMAIL_TEMPLATE' |
-| sourceKind | displayed-quoted-value |
-| exactQuoteSemanticsVerified | false |
-
-##### dataMappers[1] · GetMMREmailTemplate.outputMappings
-
-| extractJsonPath | outputJsonPath |
-| --- | --- |
-| Email:HtmlValue | mmrEmailTemplate:selectedTemplate:htmlValue |
-| Email:Subject | mmrEmailTemplate:selectedTemplate:emailTemplateSubject |
-
-##### dataMappers[1] · GetMMREmailTemplate.previewEvidence
-
-| Property | Captured value |
-| --- | --- |
-| inputKey | DeveloperName |
-| inputValue | MMR_EMAIL_TEMPLATE |
-| responseVisible | false |
-| executedSuccessfullyVerified | false |
-
-##### dataMappers[1] · GetMMREmailTemplate.evidenceScreenshots
-
-1. IMG_F2B01301-44F0-407A-A0CF-FF1F66E6AD37.jpeg
-2. IMG_1F03F5AE-FCFF-4C84-840C-04F207E1D6B4.jpeg
-3. IMG_D335A082-5392-4EA2-A7F9-9B27AE72E1E1.jpeg
-4. IMG_7CABAFDD-8FD1-42F9-B32F-92158778A7D8.jpeg
-
-#### dataMappers[2] · CNCGetHeaderAttributes
-
-| Property | Captured value |
-| --- | --- |
-| name | CNCGetHeaderAttributes |
-| interfaceType | Extract |
-| inputType | JSON |
-| outputType | JSON |
-| formulaCountObserved | 11 |
-| complete | false |
-
-##### dataMappers[2] · CNCGetHeaderAttributes.extractSteps
-
-###### dataMappers[2] · CNCGetHeaderAttributes.extractSteps[0]
-
-| Property | Captured value |
-| --- | --- |
-| object | CNC_Line_Attributes__mdt |
-| outputPath | section |
-| limit | 1 |
-
-**dataMappers[2] · CNCGetHeaderAttributes.extractSteps[0].filter**
-
-| Property | Captured value |
-| --- | --- |
-| combine | OR |
-
-**dataMappers[2] · CNCGetHeaderAttributes.extractSteps[0].filter.conditions**
-
-| field | operator | input |
-| --- | --- | --- |
-| Section_Name__c | = | sectionName |
-| DeveloperName | = | lineAttributeName |
-
-###### dataMappers[2] · CNCGetHeaderAttributes.extractSteps[1]
-
-| Property | Captured value |
-| --- | --- |
-| object | CNC_Header_Attribute__mdt |
-| outputPath | columns |
-| orderBy | Column_Order__c |
-
-**dataMappers[2] · CNCGetHeaderAttributes.extractSteps[1].filter**
-
-| Property | Captured value |
-| --- | --- |
-| field | CNC_Line_Attributes__c |
-| operator | = |
-| input | section:Id |
-
-###### dataMappers[2] · CNCGetHeaderAttributes.extractSteps[2]
-
-| Property | Captured value |
-| --- | --- |
-| object | CNC_Button_Attribute__mdt |
-| outputPath | buttonattributes |
-| orderBy | Order__c |
-
-**dataMappers[2] · CNCGetHeaderAttributes.extractSteps[2].filter**
-
-| Property | Captured value |
-| --- | --- |
-| field | CNC_Line_Attributes__c |
-| operator | = |
-| input | section:Id |
-
-###### dataMappers[2] · CNCGetHeaderAttributes.extractSteps[3]
-
-| Property | Captured value |
-| --- | --- |
-| object | CNC_Search_Attributes__mdt |
-| outputPath | search |
-| orderBy | Order__c |
-
-**dataMappers[2] · CNCGetHeaderAttributes.extractSteps[3].filter**
-
-| Property | Captured value |
-| --- | --- |
-| field | CNC_Line_Attributes__c |
-| operator | = |
-| input | section:Id |
-
-###### dataMappers[2] · CNCGetHeaderAttributes.extractSteps[4]
-
-| Property | Captured value |
-| --- | --- |
-| object | Account |
-| outputPath | memberInfo |
-| limit | 1 |
-
-**dataMappers[2] · CNCGetHeaderAttributes.extractSteps[4].filter**
-
-| Property | Captured value |
-| --- | --- |
-| combine | OR |
-
-**dataMappers[2] · CNCGetHeaderAttributes.extractSteps[4].filter.conditions**
-
-| field | operator | input |
-| --- | --- | --- |
-| Id | = | recId |
-| Member_Id__pc | = | memberId |
-
-###### dataMappers[2] · CNCGetHeaderAttributes.extractSteps[5]
-
-| Property | Captured value |
-| --- | --- |
-| object | Case |
-| outputPath | caseInfo |
-
-**dataMappers[2] · CNCGetHeaderAttributes.extractSteps[5].filter**
-
-| Property | Captured value |
-| --- | --- |
-| field | Id |
-| operator | = |
-| input | caseRecordId |
-
-##### dataMappers[2] · CNCGetHeaderAttributes.formulas
-
-| observedIndex | resultPath | expression | isDisabled | verification |
-| --- | --- | --- | --- | --- |
-| 1 | columns:typeAttributeVariant | IF(columns:Data_Type__c == "button","base","") | false | screenshot transcription; exact casing/syntax to confirm from export |
-| 2 | columns:typeAttributeLabel | IF(columns:Data_Type__c == "button",columns:API_Response__c,"") | false | screenshot transcription; exact casing/syntax to confirm from export |
-| 3 | columns:typeAttributeName | IF(columns:Data_Type__c == "button",columns:API_Response__c,"") | false | screenshot transcription; exact casing/syntax to confirm from export |
-| 4 | columns:typeAttributeDisabled | IF(columns:Data_Type__c == "button",true,"") | false | screenshot transcription; exact casing/syntax to confirm from export |
-| 5 | section:Show_Pagination__c | IF(isViewAll == "VIEWALL",true,section:Show_Pagination__c) | false | readable screenshot transcription; runtime not validated |
-| 6 | section:Show_ViewAll__c | IF(isViewAll == "VIEWALL",false,section:Show_ViewAll__c) | false | readable screenshot transcription; runtime not validated |
-| 7 | section:Record_Limit_Per_Page__c | IF(isViewAll == "VIEWALL",50,section:Record_Limit_Per_Page__c) | false | readable screenshot transcription; runtime not validated |
-| 8 | section:APIRecordLimit | IF(isViewAll == "VIEWALL",200,10) | false | screenshot transcription; exact casing/syntax to confirm from export |
-| 9 | columns:typeattributesdaymonth | IF((columns:Data_Type__c == "date" OR columns:Data_Type__c == "date-local"),"2-digit","") | false | screenshot transcription; exact casing/syntax to confirm from export |
-| 10 | columns:typeattributesyear | IF((columns:Data_Type__c == "date" OR columns:Data_Type__c == "date-local"),"numeric","") | false | screenshot transcription; exact casing/syntax to confirm from export |
-| 11 | columns:wrapText | IF(columns:Wrap_Text__c, true, "") | false | screenshot transcription; exact casing/syntax to confirm from export |
-
-##### dataMappers[2] · CNCGetHeaderAttributes.missingFormulaIndices
-
-`[]` — no entries recorded; coverage notes determine whether complete.
-
-##### dataMappers[2] · CNCGetHeaderAttributes.outputMappings
-
-| extractJsonPath | outputJsonPath |
-| --- | --- |
-| buttonattributes:Action_Name__c | buttons:Name |
-| buttonattributes:Order__c | buttons:order |
-| caseInfo:CaseNumber | caseNumber |
-| caseInfo:Id | caseId |
-| caseInfo:OwnerId | caseOwnerId |
-| caseInfo:Previous_Owner__c | previousCaseOwnerId |
-| caseInfo:Source_System_ID__c | externalId |
-| columns:API_Response__c | Columns:fieldName |
-| columns:Column_Order__c | columns:orders |
-| columns:Data_Type__c | Columns:type |
-| columns:Help_Text__c | Columns:helpText |
-| columns:Is_Sortable__c | Columns:sortable |
-| columns:Response_Label__c | Columns:label |
-| columns:Type_Attribute_Target__c | Columns:typeAttributes:target |
-| columns:typeAttributeLabel | Columns:typeAttributes:label:fieldName |
-| columns:typeAttributeName | Columns:typeAttributes:name |
-| columns:typeattributesdaymonth | Columns:typeAttributes:day |
-| columns:typeattributesdaymonth | Columns:typeAttributes:month |
-| columns:typeattributesyear | Columns:typeAttributes:year |
-| columns:typeAttributeVariant | Columns:typeAttributes:variant |
-| columns:wrapText | Columns:wrapText |
-| memberInfo:Blue_Shield_Id__c | blueShieldId |
-| memberInfo:Enterprise_Person_Id__c | personId |
-| memberInfo:HIPAA_Flag__pc | hipaaFlag |
-| memberInfo:Id | Id |
-| memberInfo:Member_Id__pc | memberId |
-| memberInfo:Name | Name |
-| memberInfo:NPI__c | providerNPI |
-| memberInfo:UMPI__c | providerUMPI |
-| profileName:Profile.Name | profName |
-| search:API_Response__c | search:fieldName |
-| search:Field_Type__c | search:FieldType |
-| search:Order__c | search:orderlist |
-| search:Response_Label__c | search:labelName |
-| section:APIRecordLimit | apiRecordLimit |
-| section:Component_Name__c | componentName |
-| section:Is_Selectable__c | IsSelectable |
-| section:Query_Clause__c | fieldToFilter |
-| section:Record_Limit_Per_Page__c | recordLimitPerPage |
-| section:Section_Name__c | sectionName |
-| section:Selectable_Type__c | selectableType |
-| section:Show_Filter_By__c | showFilterBy |
-| section:Show_Pagination__c | showPagination |
-| section:Show_Row_Number__c | showRowNumber |
-| section:Show_Search__c | showSearch |
-| section:Show_ViewAll__c | showViewAll |
-
-##### dataMappers[2] · CNCGetHeaderAttributes.options
-
-| Property | Captured value |
-| --- | --- |
-| timeToLiveMinutes | 0 |
-| checkFieldLevelSecurity | false |
-| platformCacheType | `null` — unresolved/unset; see context |
-| overwriteTargetForAllNullInputs | false |
-
-##### dataMappers[2] · CNCGetHeaderAttributes.evidenceScreenshots
-
-1. IMG_1BAC4DC5-FC40-4742-AAB8-A5BD2987AA4A.jpeg
-2. IMG_BB607193-012A-49A6-9BFB-31ED46B4A509.jpeg
-3. IMG_6DEB6056-6CC2-42BC-82CD-D5026D874782.jpeg
-4. IMG_E233A1B5-FBAF-4481-9189-5571277C4FAB.jpeg
-5. IMG_D0D11294-E903-4AC7-934C-EAC08EA9C3A0.jpeg
-6. IMG_0BFF5C8A-39D1-4135-876D-CAFA3588C477.jpeg
-7. IMG_8338C9DE-FFCF-40DB-83A8-872406407A35.jpeg
-8. IMG_24C75048-B01C-4F62-84DF-031521FFB715.jpeg
-9. IMG_AAC4E10A-A045-42EF-96F1-77BD29279D7A.jpeg
-10. IMG_8BB5FFE5-E0AB-44C4-B8AF-10E6FD13D929.jpeg
-11. IMG_52BBECB3-3338-4435-A68C-7D43A4DAA4C2.jpeg
-
-##### dataMappers[2] · CNCGetHeaderAttributes.dependencies
-
-| Property | Captured value |
-| --- | --- |
-| customMetadataRecords | Required records and their values not supplied |
-
-###### dataMappers[2] · CNCGetHeaderAttributes.dependencies.customMetadataTypes
-
-1. CNC_Line_Attributes__mdt
-2. CNC_Header_Attribute__mdt
-3. CNC_Button_Attribute__mdt
-4. CNC_Search_Attributes__mdt
-
-##### dataMappers[2] · CNCGetHeaderAttributes.outputMappingCoverage
-
-| Property | Captured value |
-| --- | --- |
-| capturedSourceToTargetRows | 46 |
-| complete | false |
-| rowDetailPropertiesVerified | false |
-
-###### dataMappers[2] · CNCGetHeaderAttributes.outputMappingCoverage.visibleRowsWithBlankSource
-
-| extractJsonPath | outputJsonPath |
-| --- | --- |
-| `""` — captured blank | search |
-| `""` — captured blank | Columns |
-
-###### dataMappers[2] · CNCGetHeaderAttributes.outputMappingCoverage.notes
-
-1. Blank source rows are recorded as displayed; their detailed settings and purpose are unknown.
-2. Preserve Columns versus columns casing and columns:orders spelling; do not normalize.
-3. profileName:Profile.Name is mapped, but its source extraction step is not captured.
-4. Output list begins with buttonattributes in this batch; do not assume there are no earlier rows.
-
-##### dataMappers[2] · CNCGetHeaderAttributes.formulaCapture
-
-| Property | Captured value |
-| --- | --- |
-| capturedCount | 11 |
-| observedCount | 11 |
-| allObservedIndicesCaptured | true |
-| runtimeValidated | false |
-
-#### dataMappers[3] · CNCGetInternalAndExternalLinks
-
-| Property | Captured value |
-| --- | --- |
-| name | CNCGetInternalAndExternalLinks |
-| interfaceType | Extract |
-| inputType | JSON |
-| outputType | JSON |
-| complete | false |
-| captureStatus | in-progress |
-
-##### dataMappers[3] · CNCGetInternalAndExternalLinks.referencedBy
-
-| integrationProcedure | elementName |
-| --- | --- |
-| CNC_GetEmailFormsDetails | DR-E-GetForms |
-
-##### dataMappers[3] · CNCGetInternalAndExternalLinks.missing
-
-1. Output row-level properties/defaults/types
-2. Verify extract filter grouping and false literal semantics
-
-##### dataMappers[3] · CNCGetInternalAndExternalLinks.evidenceScreenshots
-
-1. IMG_DE6E1E82-E36E-4E62-B5E8-644C75D8468A.jpeg
-2. IMG_ECB8E752-3AAA-48FB-8B2E-52BAD3BA8DD7.jpeg
-3. IMG_D5CD7D49-B200-4276-8248-5035EE499929.jpeg
-
-##### dataMappers[3] · CNCGetInternalAndExternalLinks.extractSteps
-
-###### dataMappers[3] · CNCGetInternalAndExternalLinks.extractSteps[0]
-
-| Property | Captured value |
-| --- | --- |
-| object | CNC_Internal_and_External_Website__mdt |
-| outputPath | links |
-| filterGrouping | `null` — unresolved/unset; see context |
-| filterGroupingVerification | Rows and join operators transcribed as displayed; explicit grouping and literal semantics not verified from export. |
-| orderBy | Order__c |
-
-**dataMappers[3] · CNCGetInternalAndExternalLinks.extractSteps[0].filterRows**
-
-| field | operator | input | join | valueDisplayed |
-| --- | --- | --- | --- | --- |
-| Entity_Type__c | = | entityType | — not recorded | — not recorded |
-| Outbound_Channel_Type__c | LIKE | OutboundChannel | OR | — not recorded |
-| Type__c | = | type | AND | — not recorded |
-| Is_Inactive__c | = | — not recorded | AND | 'false' |
-
-##### dataMappers[3] · CNCGetInternalAndExternalLinks.outputMappings
-
-| extractJsonPath | outputJsonPath |
-| --- | --- |
-| links:Department__c | links:department |
-| links:Group__c | links:group |
-| links:Id | links:Id |
-| links:Is_Internal__c | links:isInternal |
-| links:Order__c | links:order |
-| links:Type__c | links:type |
-| links:URL__c | links:url |
-| links:URL_Label__c | links:label |
-
-##### dataMappers[3] · CNCGetInternalAndExternalLinks.outputMappingCoverage
-
-| Property | Captured value |
-| --- | --- |
-| visibleRows | 8 |
-| rowDetailPropertiesVerified | false |
-
-##### dataMappers[3] · CNCGetInternalAndExternalLinks.formulas
-
-`[]` — no entries recorded; coverage notes determine whether complete.
-
-##### dataMappers[3] · CNCGetInternalAndExternalLinks.formulaCoverage
-
-| Property | Captured value |
-| --- | --- |
-| count | 0 |
-| verification | User confirmed no formulas on 2026-10-01 |
-
-##### dataMappers[3] · CNCGetInternalAndExternalLinks.optionsEvidence
-
-| Property | Captured value |
-| --- | --- |
-| verification | User stated no options on 2026-10-01 |
-| customOptionsConfigured | false |
-| individualDefaultValuesVerified | false |
-
-### setValuesElements
-
-#### setValuesElements[0] · SV-InitialMapping
-
-| Property | Captured value |
-| --- | --- |
-| elementName | SV-InitialMapping |
-| type | Set Values |
-| complete | false |
-
-##### setValuesElements[0] · SV-InitialMapping.values
-
-| name | useExpression | expression |
-| --- | --- | --- |
-| isLoggedInUserSameAsCaseOwner | true | IF(%caseOwnerId% = %loggedInUserId%, true, false) |
-
-#### setValuesElements[1] · SV-DefaultMapping
-
-| Property | Captured value |
-| --- | --- |
-| elementName | SV-DefaultMapping |
-| type | Set Values |
-| complete | false |
-
-##### setValuesElements[1] · SV-DefaultMapping.values
-
-| name | useExpression | expression | valueText | runtimeValueType | displayedValue | verification | elementType | inputTokenVerification |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| isPrint | true | IF(%OutboundChannel% = "Print" \|\| %OutboundChannel2% = "Print", true, false) | — not recorded | — not recorded | — not recorded | — not recorded | — not recorded | — not recorded |
-| isEmail | true | IF(%OutboundChannel% = "Email", true, false) | — not recorded | — not recorded | — not recorded | — not recorded | — not recorded | — not recorded |
-| isAsyncLetterGeneration | true | IF(%MaterialType% = "POD Documents", false, true) | — not recorded | — not recorded | — not recorded | — not recorded | — not recorded | — not recorded |
-| isDocumentUploaded | false | — not recorded | false | unverified | — not recorded | — not recorded | — not recorded | — not recorded |
-| selectedTemplate | true | null | — not recorded | — not recorded | — not recorded | — not recorded | — not recorded | — not recorded |
-| selectedEntity | `null` — unresolved/unset; see context | — not recorded | — not recorded | — not recorded | =null | summary-only | — not recorded | — not recorded |
-| preSelectedLetterTemplate | `null` — unresolved/unset; see context | — not recorded | — not recorded | — not recorded | =null | summary-only | — not recorded | — not recorded |
-| preSelectedCaseEntity | `null` — unresolved/unset; see context | — not recorded | — not recorded | — not recorded | =null | summary-only | — not recorded | — not recorded |
-| preSelectedForms | `null` — unresolved/unset; see context | — not recorded | — not recorded | — not recorded | =null | summary-only | — not recorded | — not recorded |
-| addresseeCommName | `null` — unresolved/unset; see context | — not recorded | — not recorded | — not recorded | =null | summary-only | Text | — not recorded |
-| mailingAddress | `null` — unresolved/unset; see context | — not recorded | — not recorded | — not recorded | =null | summary-only | Text | — not recorded |
-| isFormshasAttachments | `null` — unresolved/unset; see context | — not recorded | true | unverified | — not recorded | summary-only | — not recorded | — not recorded |
-| hasMaximumPOD | `null` — unresolved/unset; see context | — not recorded | false | unverified | — not recorded | summary-only | — not recorded | — not recorded |
-| isLetterReviewRequired | `null` — unresolved/unset; see context | — not recorded | false | unverified | — not recorded | summary-only | — not recorded | — not recorded |
-| isPOD | true | IF(%MaterialType% = "POD Documents", true, false) | — not recorded | — not recorded | — not recorded | — not recorded | — not recorded | — not recorded |
-| isSubscription | true | IF(%isAMMrSubscription% = "Yes", true, false) | — not recorded | — not recorded | — not recorded | — not recorded | — not recorded | Confirm exact casing against export |
-
-### validationPreference
-
-| Property | Captured value |
-| --- | --- |
-| preview | deferred-by-user |
-| runtimeValidated | false |
-
-### outerTree
-
-| Property | Captured value |
-| --- | --- |
-| evidencePath | Docgen/OMNISCRIPT_TREE.md |
-| childrenExpanded | false |
-| statusMeaning | Saved/Pending indicate documentation capture progress; not org implementation |
-
-#### outerTree.elements
-
-| name | type | source | order | status |
-| --- | --- | --- | --- | --- |
-| IP-GETCaseDetails | Integration Procedure Action | IMG_32747BB1-44F4-4042-B621-D0803ACBBBA5.jpeg | 1 | Saved |
-| SV-InitialMapping | Set Values | IMG_32747BB1-44F4-4042-B621-D0803ACBBBA5.jpeg | 2 | Saved |
-| MaterialAndCommunicationChannel | Step | IMG_32747BB1-44F4-4042-B621-D0803ACBBBA5.jpeg | 3 | Saved |
-| SV-DefaultMapping | Set Values | IMG_32747BB1-44F4-4042-B621-D0803ACBBBA5.jpeg | 4 | Saved |
-| ExtractEmailBodyForMMR | Data Mapper Extract Action | IMG_32747BB1-44F4-4042-B621-D0803ACBBBA5.jpeg | 5 | Saved |
-| IP-GetForms | Integration Procedure Action | IMG_32747BB1-44F4-4042-B621-D0803ACBBBA5.jpeg | 6 | In progress |
-| Step1 | Step | IMG_32747BB1-44F4-4042-B621-D0803ACBBBA5.jpeg | 7 | In progress |
-| SV-FormSelectionValues | Set Values | IMG_32747BB1-44F4-4042-B621-D0803ACBBBA5.jpeg | 8 | Pending |
-| SE-FormSelectionError | Set Errors | IMG_32747BB1-44F4-4042-B621-D0803ACBBBA5.jpeg | 9 | Pending |
-| IP-GetPODDocs | Integration Procedure Action | IMG_6DEFBD37-5BB5-4656-ABB3-0451ACAFB032.jpeg | 10 | Pending |
-| SelectPODDocs | Step | IMG_6DEFBD37-5BB5-4656-ABB3-0451ACAFB032.jpeg | 11 | Pending |
-| SetValues1 | Set Values | IMG_6DEFBD37-5BB5-4656-ABB3-0451ACAFB032.jpeg | 12 | Pending |
-| SE-PODSelectionError | Set Errors | IMG_6DEFBD37-5BB5-4656-ABB3-0451ACAFB032.jpeg | 13 | Pending |
-| SE-PODSelectionCountError | Set Errors | IMG_6DEFBD37-5BB5-4656-ABB3-0451ACAFB032.jpeg | 14 | Pending |
-| IP-GetLetterData | Integration Procedure Action | IMG_6DEFBD37-5BB5-4656-ABB3-0451ACAFB032.jpeg | 15 | Pending |
-| SelectEmailAndLetters | Step | IMG_6DEFBD37-5BB5-4656-ABB3-0451ACAFB032.jpeg | 16 | Pending |
-| SV-LetterSelectionValues | Set Values | IMG_6DEFBD37-5BB5-4656-ABB3-0451ACAFB032.jpeg | 17 | Pending |
-| SE-LetterSelectionError | Set Errors | IMG_A6047F95-A130-4DF6-B4C8-FC30B2668577.jpeg | 18 | Pending |
-| IP-GetCaseEntityDetails | Integration Procedure Action | IMG_A6047F95-A130-4DF6-B4C8-FC30B2668577.jpeg | 19 | Pending |
-| SV-EntityMapping | Set Values | IMG_A6047F95-A130-4DF6-B4C8-FC30B2668577.jpeg | 20 | Pending |
-| SelectEntity | Step | IMG_A6047F95-A130-4DF6-B4C8-FC30B2668577.jpeg | 21 | Pending |
-| SV-EntitySelection | Set Values | IMG_A6047F95-A130-4DF6-B4C8-FC30B2668577.jpeg | 22 | Pending |
-| SE-EntitySelectionError | Set Errors | IMG_A6047F95-A130-4DF6-B4C8-FC30B2668577.jpeg | 23 | Pending |
-| IP-GETAPITokenData | Integration Procedure Action | IMG_A6047F95-A130-4DF6-B4C8-FC30B2668577.jpeg | 24 | Pending |
-| SV-SetCommAddressData | Set Values | IMG_A6047F95-A130-4DF6-B4C8-FC30B2668577.jpeg | 25 | Pending |
-| SelectAddress | Step | IMG_A6047F95-A130-4DF6-B4C8-FC30B2668577.jpeg | 26 | Pending |
-| SV-AddressMapping | Set Values | IMG_B4D7FFA4-34B2-428C-8F4D-CAE20646F9D7.jpeg | 27 | Pending |
-| SE-CommAddError | Set Errors | IMG_B4D7FFA4-34B2-428C-8F4D-CAE20646F9D7.jpeg | 28 | Pending |
-| DR-CheckIfParagraphsExists | Data Mapper Extract Action | IMG_B4D7FFA4-34B2-428C-8F4D-CAE20646F9D7.jpeg | 29 | Pending |
-| SelectParagraphs | Step | IMG_B4D7FFA4-34B2-428C-8F4D-CAE20646F9D7.jpeg | 30 | Pending |
-| IP-GetPatientDemographics | Integration Procedure Action | IMG_B4D7FFA4-34B2-428C-8F4D-CAE20646F9D7.jpeg | 31 | Pending |
-| SV-ResetTokenMapping | Set Values | IMG_B4D7FFA4-34B2-428C-8F4D-CAE20646F9D7.jpeg | 32 | Pending |
-| RA-SetDefaultTokenMapping | Remote Action | IMG_B4D7FFA4-34B2-428C-8F4D-CAE20646F9D7.jpeg | 33 | Pending |
-| sv-podMappings | Set Values | IMG_B4D7FFA4-34B2-428C-8F4D-CAE20646F9D7.jpeg | 34 | Pending |
-| SelectEmail | Step | IMG_B4D7FFA4-34B2-428C-8F4D-CAE20646F9D7.jpeg | 35 | Pending |
-| RA-updateLinks | Remote Action | IMG_0B8CD2B8-2F3F-4456-8E16-98469A98486F.jpeg | 36 | Pending |
-| AdditionalInformation | Step | IMG_0B8CD2B8-2F3F-4456-8E16-98469A98486F.jpeg | 37 | Pending |
-| RA-InsertSelectedForms | Remote Action | IMG_0B8CD2B8-2F3F-4456-8E16-98469A98486F.jpeg | 38 | Pending |
-| IP-DeleteLetterData | Integration Procedure Action | IMG_0B8CD2B8-2F3F-4456-8E16-98469A98486F.jpeg | 39 | Pending |
-| IP-GenerateLetterinAsync | Integration Procedure Action | IMG_0B8CD2B8-2F3F-4456-8E16-98469A98486F.jpeg | 40 | Pending |
-| Set Generation_Options | Set Values | IMG_0B8CD2B8-2F3F-4456-8E16-98469A98486F.jpeg | 41 | Pending |
-| ReviewandSubmitAsync | Step | IMG_0B8CD2B8-2F3F-4456-8E16-98469A98486F.jpeg | 42 | Pending |
-| ReviewandSubmitSync | Step | IMG_0B8CD2B8-2F3F-4456-8E16-98469A98486F.jpeg | 43 | Pending |
-| set-sectionName | Set Values | IMG_0B8CD2B8-2F3F-4456-8E16-98469A98486F.jpeg | 44 | Pending |
-| ReviewPOD | Step | IMG_9ECBF03F-7E51-455D-9A3B-65293944794F.jpeg | 45 | Pending |
-| SV-BuddyFileMapping | Set Values | IMG_9ECBF03F-7E51-455D-9A3B-65293944794F.jpeg | 46 | Pending |
-| RA-SendEFilesToS3 | Remote Action | IMG_9ECBF03F-7E51-455D-9A3B-65293944794F.jpeg | 47 | Pending |
-| SV-UploadSuccess | Set Values | IMG_9ECBF03F-7E51-455D-9A3B-65293944794F.jpeg | 48 | Pending |
-| RA-SendEmail | Remote Action | IMG_9ECBF03F-7E51-455D-9A3B-65293944794F.jpeg | 49 | Pending |
-| RA-createContactPoint | Remote Action | IMG_9ECBF03F-7E51-455D-9A3B-65293944794F.jpeg | 50 | Pending |
-| Confirmation | Step | IMG_9ECBF03F-7E51-455D-9A3B-65293944794F.jpeg | 51 | Pending |
-| RA-creteATrackCommunicationRecord | Remote Action | IMG_9ECBF03F-7E51-455D-9A3B-65293944794F.jpeg | 52 | Pending |
-
-### procedureDiscovery
-
-`[]` — no entries recorded; coverage notes determine whether complete.
-
-### stepElements
-
-#### stepElements[0] · Step1
-
-| Property | Captured value |
-| --- | --- |
-| elementName | Step1 |
-| elementType | Step |
-| captureStatus | in-progress |
-| complete | false |
-| observedActive | true |
-| fieldLabel | `""` — captured blank |
-| chartLabel | `""` — captured blank |
-| instruction | `""` — captured blank |
-| allowSaveForLater | true |
-
-##### stepElements[0] · Step1.visibleLayoutItems
-
-###### stepElements[0] · Step1.visibleLayoutItems[0]
-
-| Property | Captured value |
-| --- | --- |
-| order | 1 |
-| elementName | `null` — unresolved/unset; see context |
-| displayText | Select Forms |
-| elementType | `null` — unresolved/unset; see context |
-
-###### stepElements[0] · Step1.visibleLayoutItems[1]
-
-| Property | Captured value |
-| --- | --- |
-| order | 2 |
-| elementName | `null` — unresolved/unset; see context |
-| displayText | Select Documents |
-| elementType | `null` — unresolved/unset; see context |
-
-###### stepElements[0] · Step1.visibleLayoutItems[2] · Messaging12
-
-| Property | Captured value |
-| --- | --- |
-| order | 3 |
-| elementName | Messaging12 |
-| elementType | `null` — unresolved/unset; see context |
-
-###### stepElements[0] · Step1.visibleLayoutItems[3] · Messaging13
-
-| Property | Captured value |
-| --- | --- |
-| order | 4 |
-| elementName | Messaging13 |
-| elementType | `null` — unresolved/unset; see context |
-
-###### stepElements[0] · Step1.visibleLayoutItems[4] · LineBreak13
-
-| Property | Captured value |
-| --- | --- |
-| order | 5 |
-| elementName | LineBreak13 |
-| elementType | `null` — unresolved/unset; see context |
-
-###### stepElements[0] · Step1.visibleLayoutItems[5] · CustomLWC4
-
-| Property | Captured value |
-| --- | --- |
-| order | 6 |
-| elementName | CustomLWC4 |
-| elementType | Custom LWC |
-| componentDisplayed | c:cncDynamicTableSections |
-| fieldLabel | SelectFormsLwc |
-| componentName | cncDynamicTableSections |
-| observedActive | true |
-| standaloneLwc | false |
-| propertyListComplete | false |
-| conditionalView | `null` — unresolved/unset; see context |
-
-**stepElements[0] · Step1.visibleLayoutItems[5] · CustomLWC4.propertyMappings**
-
-| name | source |
-| --- | --- |
-| recorddata | %formsdata% |
-| isomniscript | true |
-| omniscriptname | SendCommunication |
-| omniscriptstepname | SelectForms |
-| preselecteddata | %preSelectedForms% |
-| table-height | 524 |
-
-**stepElements[0] · Step1.visibleLayoutItems[5] · CustomLWC4.evidenceScreenshots**
-
-1. IMG_1568837F-8F59-4017-A58E-18D3356EB1BC.jpeg
-
-###### stepElements[0] · Step1.visibleLayoutItems[6] · LineBreak14
-
-| Property | Captured value |
-| --- | --- |
-| order | 7 |
-| elementName | LineBreak14 |
-| elementType | `null` — unresolved/unset; see context |
-
-###### stepElements[0] · Step1.visibleLayoutItems[7]
-
-| Property | Captured value |
-| --- | --- |
-| order | 8 |
-| elementName | `null` — unresolved/unset; see context |
-| displayText | Upload Forms/Documents - PDF documents only<br>(If Applicable) |
-| elementType | `null` — unresolved/unset; see context |
-
-###### stepElements[0] · Step1.visibleLayoutItems[8] · CustomLWC2
-
-| Property | Captured value |
-| --- | --- |
-| order | 9 |
-| elementName | CustomLWC2 |
-| elementType | Custom LWC |
-| componentDisplayed | c:cncAttachmentsUploadSection |
-| fieldLabel | uploadFormsAndDocuments |
-| componentName | cncAttachmentsUploadSection |
-| observedActive | true |
-| standaloneLwc | false |
-| propertyListComplete | true |
-| conditionalView | `null` — unresolved/unset; see context |
-| internalNotes | `""` — captured blank |
-
-**stepElements[0] · Step1.visibleLayoutItems[8] · CustomLWC2.propertyMappings**
-
-| name | source |
-| --- | --- |
-| uploadforms | true |
-| currentrecordid | %ContextId% |
-
-**stepElements[0] · Step1.visibleLayoutItems[8] · CustomLWC2.evidenceScreenshots**
-
-1. IMG_826F9DCF-A34C-4E03-B0B2-336B8376D9CE.jpeg
-
-###### stepElements[0] · Step1.visibleLayoutItems[9]
-
-| Property | Captured value |
-| --- | --- |
-| order | 10 |
-| elementName | `null` — unresolved/unset; see context |
-| displayText | Ensure Email is selected only for Non-PHI Forms |
-| elementType | `null` — unresolved/unset; see context |
-
-###### stepElements[0] · Step1.visibleLayoutItems[10]
-
-| Property | Captured value |
-| --- | --- |
-| order | 11 |
-| elementName | `null` — unresolved/unset; see context |
-| displayText | Ensure Email is selected only for Non-PHI Document |
-| elementType | `null` — unresolved/unset; see context |
-
-##### stepElements[0] · Step1.navigationVisible
-
-1. Previous
-2. Next
-
-##### stepElements[0] · Step1.missing
-
-1. Remaining Step/button properties and conditional view
-2. Unnamed heading/guidance element identities and types
-3. Messaging, heading and line-break properties/conditions
-4. CustomLWC4 remaining attributes and both custom component conditional views
-5. Custom component source and dependencies
-
-##### stepElements[0] · Step1.evidenceScreenshots
-
-1. IMG_BB1CA589-D991-47C2-8064-76907F69E666.jpeg
-2. IMG_AF8E6CC8-D43D-4C47-97F8-C76516956DE7.jpeg
-3. IMG_1568837F-8F59-4017-A58E-18D3356EB1BC.jpeg
-4. IMG_826F9DCF-A34C-4E03-B0B2-336B8376D9CE.jpeg
-
-##### stepElements[0] · Step1.buttonProperties
-
-| Property | Captured value |
-| --- | --- |
-| previousLabel | Previous |
-| nextLabel | Next |
-
-#### stepElements[1] · MaterialAndCommunicationChannel
-
-| Property | Captured value |
-| --- | --- |
-| elementName | MaterialAndCommunicationChannel |
-| elementType | Step |
-| captureStatus | visible-layout-and-condition-evidence-captured |
-| complete | false |
-| visibleTitle | Material and Outbound Channel Selection |
-
-##### stepElements[1] · MaterialAndCommunicationChannel.materialType
-
-| Property | Captured value |
-| --- | --- |
-| displayLabel | Material Type |
-| elementName | `null` — unresolved/unset; see context |
-| storedValuesVerified | false |
-
-###### stepElements[1] · MaterialAndCommunicationChannel.materialType.visibleChoices
-
-1. Forms
-2. Documents
-3. Letters
-4. Other Communication
-5. Member Materials Request (MMR) Documents
-
-##### stepElements[1] · MaterialAndCommunicationChannel.conditionalViewEvidence
-
-###### stepElements[1] · MaterialAndCommunicationChannel.conditionalViewEvidence[0] · MSG_CaseOwnerError
-
-| Property | Captured value |
-| --- | --- |
-| elementName | MSG_CaseOwnerError |
-| displayedCondition | (isLoggedInUserSameAsCaseOwner = false) |
-| conditionType | `null` — unresolved/unset; see context |
-| evidenceScreenshot | IMG_F486DE2B-37F2-4A41-8971-123AFDA8B732.jpeg |
-
-###### stepElements[1] · MaterialAndCommunicationChannel.conditionalViewEvidence[1]
-
-| Property | Captured value |
-| --- | --- |
-| elementName | `null` — unresolved/unset; see context |
-| visibleLocation | First Outbound Channel control |
-| displayLabel | Outbound Channel |
-| displayedCondition | (MaterialType <> Letters) |
-| conditionType | `null` — unresolved/unset; see context |
-| evidenceScreenshot | IMG_70A81DDB-AC28-42DC-8088-05F8251167CA.jpeg |
-
-**stepElements[1] · MaterialAndCommunicationChannel.conditionalViewEvidence[1].visibleChoices**
-
-1. Email
-2. Print
-
-###### stepElements[1] · MaterialAndCommunicationChannel.conditionalViewEvidence[2]
-
-| Property | Captured value |
-| --- | --- |
-| elementName | `null` — unresolved/unset; see context |
-| visibleLocation | Second Outbound Channel control |
-| displayLabel | Outbound Channel |
-| displayedCondition | (MaterialType = Letters) |
-| conditionType | `null` — unresolved/unset; see context |
-| evidenceScreenshot | IMG_A7E26B77-B101-4132-90A9-B8ECE52EC500.jpeg |
-
-**stepElements[1] · MaterialAndCommunicationChannel.conditionalViewEvidence[2].visibleChoices**
-
-1. Email
-2. Print
-
-###### stepElements[1] · MaterialAndCommunicationChannel.conditionalViewEvidence[3]
-
-| Property | Captured value |
-| --- | --- |
-| elementName | `null` — unresolved/unset; see context |
-| visibleLocation | Email guidance below channel controls |
-| displayText | Ensure Email is selected only for Non-PHI Blank Forms and Documents |
-| displayedCondition | (MaterialType <>  AND MaterialType <> Letters AND OutboundChannel = Email) |
-| conditionType | `null` — unresolved/unset; see context |
-| verification | First MaterialType comparison has no readable right-hand value in the tooltip. Preserve the displayed blank; exact export syntax and empty-value semantics remain unverified. |
-| evidenceScreenshot | IMG_7ACBD6F4-31F7-4D59-9114-9D0C1195E8F6.jpeg |
-
-##### stepElements[1] · MaterialAndCommunicationChannel.navigationVisible
-
-1. Next
-
-##### stepElements[1] · MaterialAndCommunicationChannel.missing
-
-1. Step properties and remaining child identities/types
-2. Material Type stored values, defaults and complete radio properties
-3. Both channel control element names, stored values, defaults and complete properties
-4. Condition types and exact exported syntax; first comparison value in guidance tooltip
-5. Case-owner message content and enforcement behavior
-6. Remaining child properties and conditions
-
-##### stepElements[1] · MaterialAndCommunicationChannel.evidenceScreenshots
-
-1. IMG_F486DE2B-37F2-4A41-8971-123AFDA8B732.jpeg
-2. IMG_70A81DDB-AC28-42DC-8088-05F8251167CA.jpeg
-3. IMG_A7E26B77-B101-4132-90A9-B8ECE52EC500.jpeg
-4. IMG_7ACBD6F4-31F7-4D59-9114-9D0C1195E8F6.jpeg
-
-
-### customMetadataEvidence
-
-| Property | Captured value |
-| --- | --- |
-| captureDate | 2026-10-01 |
-
-#### customMetadataEvidence.types
-
-##### customMetadataEvidence.types[0]
-
-| Property | Captured value |
-| --- | --- |
-| name | CNC_Button_Attribute__mdt |
-| singularLabel | CNC Button Attribute |
-| pluralLabel | CNC Button Attributes |
-| visibility | Public |
-| reportedCustomFieldCount | 7 |
-| fieldInventoryComplete | true |
-| fieldDefinitionDetailsComplete | false |
-| recordDetailsCaptured | false |
-| recordValues | `null` — unresolved |
-| status | captured-schema-inventory-only-not-deployed |
-
-###### customMetadataEvidence.types[0].fields
-
-| apiName | label | dataType | indexed | fieldManageability | settingsDetailCaptured | defaultValue |
-| --- | --- | --- | --- | --- | --- | --- |
-| Action_Name__c | Action Name | Text(15) | false | Upgradable | false | `null` — unresolved |
-| Button_Label__c | Button Label | Text(15) | false | Upgradable | false | `null` — unresolved |
-| Button_Location__c | Button Location | Text(20) | false | Upgradable | false | `null` — unresolved |
-| CNC_Line_Attributes__c | CNC Line Attributes | Metadata Relationship(CNC Line Attributes) | true | Upgradable | false | `null` — unresolved |
-| CNC_Master_Attributes__c | CNC Master Attributes | Metadata Relationship(CNC Master Attributes) | true | Upgradable | false | `null` — unresolved |
-| Disabled__c | Disabled | Text(5) | false | Upgradable | false | `null` — unresolved |
-| Order__c | Order | Number(18, 0) | false | Upgradable | false | `null` — unresolved |
-
-###### customMetadataEvidence.types[0].evidenceScreenshots
-
-1. IMG_CC9BD776-A527-446E-9DC0-4E749B63CA5C.jpeg
-2. IMG_F5902140-0A3B-4558-BE50-A6A444CD04FD.jpeg
-
-##### customMetadataEvidence.types[1]
-
-| Property | Captured value |
-| --- | --- |
-| name | CNC_Header_Attribute__mdt |
-| singularLabel | CNC Header Attribute |
-| pluralLabel | CNC Header Attributes |
-| visibility | Public |
-| reportedCustomFieldCount | 9 |
-| fieldInventoryComplete | true |
-| fieldDefinitionDetailsComplete | false |
-| recordDetailsCaptured | false |
-| recordValues | `null` — unresolved |
-| status | captured-schema-inventory-only-not-deployed |
-
-###### customMetadataEvidence.types[1].fields
-
-| apiName | label | dataType | indexed | fieldManageability | settingsDetailCaptured | defaultValue |
-| --- | --- | --- | --- | --- | --- | --- |
-| API_Response__c | API Response | Text(50) | false | Upgradable | false | `null` — unresolved |
-| CNC_Line_Attributes__c | CNC Line Attributes | Metadata Relationship(CNC Line Attributes) | true | Upgradable | false | `null` — unresolved |
-| Column_Order__c | Column Order | Number(18, 0) | false | Upgradable | false | `null` — unresolved |
-| Data_Type__c | Data Type | Text(15) | false | Upgradable | false | `null` — unresolved |
-| Default_Value__c | Default Value | Text(255) | false | Upgradable | false | `null` — unresolved |
-| Help_Text__c | Help Text | Text(255) | false | Upgradable | false | `null` — unresolved |
-| Is_Sortable__c | Is Sortable | Checkbox | false | Upgradable | false | `null` — unresolved |
-| Response_Label__c | Response Label | Text(70) | false | Upgradable | false | `null` — unresolved |
-| Wrap_Text__c | Wrap Text | Checkbox | false | Upgradable | false | `null` — unresolved |
-
-###### customMetadataEvidence.types[1].evidenceScreenshots
-
-1. IMG_4A5C39F9-F33E-4410-AC3F-275FDCEDE138.jpeg
-2. IMG_3AB333F1-2CBF-45E5-9485-9190914BB6B3.jpeg
-
-##### customMetadataEvidence.types[2]
-
-| Property | Captured value |
-| --- | --- |
-| name | CNC_Line_Attributes__mdt |
-| singularLabel | CNC Line Attributes |
-| pluralLabel | CNC Line Attributes |
-| visibility | Public |
-| reportedCustomFieldCount | 16 |
-| fieldInventoryComplete | true |
-| fieldDefinitionDetailsComplete | false |
-| recordDetailsCaptured | false |
-| recordValues | `null` — unresolved |
-| status | captured-schema-inventory-only-not-deployed |
-
-###### customMetadataEvidence.types[2].fields
-
-| apiName | label | dataType | indexed | fieldManageability | settingsDetailCaptured | defaultValue |
-| --- | --- | --- | --- | --- | --- | --- |
-| CNC_Master_Attribute__c | CNC Master Attribute | Metadata Relationship(CNC Master Attributes) | true | Upgradable | false | `null` — unresolved |
-| Component_Name__c | Component Name | Text(255) | false | Upgradable | false | `null` — unresolved |
-| Component_Type__c | Component Type | Picklist | false | Upgradable | false | `null` — unresolved |
-| isAccordian__c | isAccordian | Checkbox | false | Upgradable | false | `null` — unresolved |
-| Is_Selectable__c | Is Selectable | Checkbox | false | Upgradable | false | `null` — unresolved |
-| Order__c | Order | Number(18, 0) | false | Upgradable | false | `null` — unresolved |
-| Query_Clause__c | Query Clause | Text(20) | false | Upgradable | false | `null` — unresolved |
-| Record_Limit_Per_Page__c | Record Limit Per Page | Number(18, 0) | false | Upgradable | false | `null` — unresolved |
-| Section_Name__c | Section Name | Text(255) | false | Upgradable | false | `null` — unresolved |
-| Selectable_Type__c | Selectable Type | Picklist | false | Upgradable | false | `null` — unresolved |
-| Show_Filter_By__c | Show Filter By | Checkbox | false | Upgradable | false | `null` — unresolved |
-| Show_Pagination__c | Show Pagination | Checkbox | false | Upgradable | false | `null` — unresolved |
-| Show_Row_Number__c | Show Row Number | Checkbox | false | Upgradable | false | `null` — unresolved |
-| Show_Search__c | Show Search | Checkbox | false | Upgradable | false | `null` — unresolved |
-| Show_ViewAll__c | Show ViewAll | Checkbox | false | Upgradable | false | `null` — unresolved |
-| UI_Type__c | UI Type | Picklist | false | Upgradable | false | `null` — unresolved |
-
-###### customMetadataEvidence.types[2].evidenceScreenshots
-
-1. IMG_7F84F67A-F3A5-4B04-A3E0-FEFA2840BBD7.jpeg
-2. IMG_29048FA2-7C9D-4557-8D4C-9ADFE1EA1A20.jpeg
-
-##### customMetadataEvidence.types[3]
-
-| Property | Captured value |
-| --- | --- |
-| name | CNC_Search_Attributes__mdt |
-| singularLabel | CNC Search Attributes |
-| pluralLabel | CNC Search Attributes |
-| visibility | Public |
-| reportedCustomFieldCount | 6 |
-| fieldInventoryComplete | false |
-| fieldDefinitionDetailsComplete | false |
-| recordDetailsCaptured | false |
-| recordValues | `null` — unresolved |
-| status | captured-schema-inventory-only-not-deployed |
-
-###### customMetadataEvidence.types[3].fields
-
-| apiName | label | dataType | indexed | fieldManageability | settingsDetailCaptured | defaultValue |
-| --- | --- | --- | --- | --- | --- | --- |
-| API_Response__c | API Response | Text(255) | false | Upgradable | false | `null` — unresolved |
-| CNC_Line_Attributes__c | CNC Line Attributes | Metadata Relationship(CNC Line Attributes) | true | Upgradable | false | `null` — unresolved |
-
-###### customMetadataEvidence.types[3].evidenceScreenshots
-
-1. IMG_E84F76EB-303E-4C4C-9C63-D4F0BD7BDEA0.jpeg
-
-#### customMetadataEvidence.dependencies
-
-| name | reason | schemaCaptured | recordsCaptured |
-| --- | --- | --- | --- |
-| CNC_Master_Attributes__mdt | Metadata relationship targets in Button and Line inventories | false | false |
-
-#### customMetadataEvidence.recordInventories
-
-##### customMetadataEvidence.recordInventories[0]
-
-| Property | Captured value |
-| --- | --- |
-| typeName | CNC_Button_Attribute__mdt |
-| inventoryComplete | false |
-
-###### customMetadataEvidence.recordInventories[0].records
-
-| label | developerName | fieldValues |
-| --- | --- | --- |
-| Case Comments | Ref_Case_Comments | `null` — unresolved |
-| New Case | Auth_New_Case | `null` — unresolved |
-| New Case | Claims_New_Case | `null` — unresolved |
-| New Case | External_New_Case | `null` — unresolved |
-| New Case | New_Case | `null` — unresolved |
-| New Case | Ref_New_Case | `null` — unresolved |
-| Provider Search | Provider_Search | `null` — unresolved |
-| View Documents | Auth_View_Documents | `null` — unresolved |
-| View Documents | Plan_Documents | `null` — unresolved |
-| View Documents | Ref_View_Documents | `null` — unresolved |
-| View Documents | View_Documents | `null` — unresolved |
-| View ID Card | View_ID_Card | `null` — unresolved |
-
-###### customMetadataEvidence.recordInventories[0].evidenceScreenshots
-
-1. IMG_37767B2B-AAC2-44A5-9A22-E23515C10137.jpeg
-
-##### customMetadataEvidence.recordInventories[1]
-
-| Property | Captured value |
-| --- | --- |
-| typeName | CNC_Header_Attribute__mdt |
-| inventoryComplete | false |
-
-###### customMetadataEvidence.recordInventories[1].records
-
-| developerName | label | fieldValues |
-| --- | --- | --- |
-| Accum_Name | Account Name | `null` — unresolved |
-| Accum_Billed | Accum Billed | `null` — unresolved |
-| Accum_Claim_Number | Accum Claim Number | `null` — unresolved |
-| Accum_ClaimSubtype | Accum ClaimSubtype | `null` — unresolved |
-| Accum_Date_Claim_Paid | Accum Date Claim Paid | `null` — unresolved |
-| Accum_ProviderName | Accum ProviderName | `null` — unresolved |
-| Accum_ServiceDateFrom | Accum ServiceDateFrom | `null` — unresolved |
-| Accum_ServiceDateThru | Accum ServiceDateThru | `null` — unresolved |
-| Accum_Status | Accum Status | `null` — unresolved |
-| Accums_Limits_Accumulator_Description | Accums Limits Accumulator Description | `null` — unresolved |
-| Accums_Limits_Total_Amount_Limit | Accums Limits Total AmountLimit | `null` — unresolved |
-| Accumulation_Details_Accum_Number | Accumulation_Details_Accum_Number | `null` — unresolved |
-| Accumulation_Details_Accum_Type | Accumulation_Details_Accum_Type | `null` — unresolved |
-| Accumulation_Details_Amt1 | Accumulation_Details_Amt1 | `null` — unresolved |
-| Accumulation_Details_Ctr1 | Accumulation_Details_Ctr1 | `null` — unresolved |
-| Accumulation_Details_Trans_Amt1 | Accumulation_Details_Trans_Amt1 | `null` — unresolved |
-| Accumulation_Details_Trans_Ctr1 | Accumulation_Details_Trans_Ctr1 | `null` — unresolved |
-| Action | Action | `null` — unresolved |
-| Accums_Limits_Carry_Over_Amount_Limit | Accums Limits Carry Over AmountLimit | `null` — unresolved |
-| Accums_Limits_Met_Amount_Limit | Accums Limits Met AmountLimit | `null` — unresolved |
-| Accums_Limits_Period | Accums Limits Period | `null` — unresolved |
-| Accums_Limits_Remaining_Amount_Limit | Accums Limits Remaining AmountLimit | `null` — unresolved |
-| Address | Address | `null` — unresolved |
-| Address1 | Address1 | `null` — unresolved |
-| Address1_POD | Address1_POD | `null` — unresolved |
-| Address2 | Address2 | `null` — unresolved |
-| Address2_POD | Address2_POD | `null` — unresolved |
-| Admission_Date | Admission Date | `null` — unresolved |
-| Admit_Date | Admit Date | `null` — unresolved |
-| Attach_Entity_Member_Id | Attach Entity Member Id | `null` — unresolved |
-| Attach_Entity_Paid | Attach Entity Paid | `null` — unresolved |
-| Attach_Entity_Plan_Description | Attach Entity Plan Description | `null` — unresolved |
-| Attach_Entity_Plan_Effective | Attach Entity Plan Effective | `null` — unresolved |
-| Attach_Entity_Plan_Elderly_Waiver | Attach Entity Plan Elderly Waiver | `null` — unresolved |
-| Attach_Entity_Plan_Group_ID | Attach Entity Plan Group ID | `null` — unresolved |
-| Attach_Entity_Plan_ID | Attach Entity Plan ID | `null` — unresolved |
-| Attach_Entity_Plan_Status | Attach Entity Plan Status | `null` — unresolved |
-| Attach_Entity_Plan_Term | Attach Entity Plan Term | `null` — unresolved |
-| Attach_Entity_Provider | Attach Entity Provider | `null` — unresolved |
-| Attach_Entity_Referral | Attach Entity Referral | `null` — unresolved |
-| Attach_Entity_Relative | Attach Entity Relative | `null` — unresolved |
-| Attach_Entity_Review_Determination | Attach Entity Review Determination | `null` — unresolved |
-| Attach_Entity_Service_Date_From | Attach Entity Service Date From | `null` — unresolved |
-| Attach_Entity_Service_Date_Thru | Attach Entity Service Date Thru | `null` — unresolved |
-| Attach_Entity_Service_Date_To | Attach Entity Service Date To | `null` — unresolved |
-| Attach_Entity_Status | Attach Entity Status | `null` — unresolved |
-| AttachmentControlNbr | AttachmentControlNbr | `null` — unresolved |
-| Auth_Case_Category | Auth_Case_Category | `null` — unresolved |
-| Auth_Case_CreateDate | Auth_Case_CreateDate | `null` — unresolved |
-| Auth_Case_LineOfBusiness | Auth_Case_LineOfBusiness | `null` — unresolved |
-| Auth_Case_Status | Auth_Case_Status | `null` — unresolved |
-| Auth_Case_Subcategory | Auth_Case_Subcategory | `null` — unresolved |
-| Auth_Case_SubSubcategory | Auth_Case_SubSubcategory | `null` — unresolved |
-| Auth_CaseNumber | Auth_CaseNumber | `null` — unresolved |
-
-###### customMetadataEvidence.recordInventories[1].evidenceScreenshots
-
-1. IMG_0491389E-AA15-4741-B2DF-066942D4A06F.jpeg
-2. IMG_0D04879D-90FC-46E8-8852-96DF832B8824.jpeg
-3. IMG_5B44D25C-5BC3-4159-9B34-6CADBB1FEEDB.jpeg
-
-#### customMetadataEvidence.coverageNotes
-
-1. Inventory screenshots show field types/lengths, indexed flags and metadata relationship targets; they do not show field editor defaults, picklist values or relationship settings.
-2. Button 7/7, Header 9/9 and Line 16/16 custom fields inventoried; Search 2/6 visible. Internal/External Website schema is absent from this batch.
-3. Header current inventory has no Type_Attribute_Target__c although captured mapper uses it. Preserve this source mismatch for verification; do not invent a field.
-4. Header/search record lists show names only and do not establish Send Communication membership or any field values.
-5. Record inventories are partial: clipped rows excluded; repeated visible rows deduplicated by DeveloperName.
-6. No LWC source received in this batch. MDT/LWC implementation remains deferred under existing scope.
-
-
-### customMetadataEvidence.recordInventories · CNC_Line_Attributes__mdt
-
-Forms, Letters and Documents: 16/16 custom field values captured for each. Other records remain identity-only. Field schema editor settings and deployment are separate work.
-
-| DeveloperName | MasterLabel | Custom field capture |
-| --- | --- | --- |
-| Send_Communication_Case_Review | Send Communication Case Review | null — off-screen |
-| Send_Communication_Cover_Letter | Send Communication Cover Letter | null — off-screen |
-| Send_Communication_Documents | Send Communication Documents | 16/16 fields |
-| Send_Communication_Email_Template | Send Communication Email Template | null — off-screen |
-| Send_Communication_Forms | Send Communication Forms | 16/16 fields |
-| Send_Communication_Letters | Send Communication Letters | 16/16 fields |
-| Send_Communication_POD | Send Communication POD | null — off-screen |
-| Send_Communication_Paragraph | Send Communication Paragraph | null — off-screen |
-| Send_Communication_Review | Send Communication Review | null — off-screen |
-| Send_Communication_Review_POD | Send Communication Review POD | null — off-screen |
-| Send_Communication_Select_Entity | Send Communication Select Entity | null — off-screen |
-
-| Field | Forms | Letters | Documents |
-| --- | --- | --- | --- |
-| CNC_Master_Attribute__c | {"referencedType":"CNC_Master_Attributes__mdt","developerName":"Send_Communication"} | {"referencedType":"CNC_Master_Attributes__mdt","developerName":"Send_Communication"} | {"referencedType":"CNC_Master_Attributes__mdt","developerName":"Send_Communication"} |
-| Component_Name__c | "" — captured blank | "" — captured blank | "" — captured blank |
-| Component_Type__c | FlexCards | FlexCards | FlexCards |
-| isAccordian__c | false | false | false |
-| Is_Selectable__c | true | true | true |
-| Order__c | 1 | 1 | 7 |
-| Query_Clause__c | "" — captured blank | "" — captured blank | "" — captured blank |
-| Record_Limit_Per_Page__c | 50 | 50 | 50 |
-| Section_Name__c | Send Communication Forms | Send Communication Letters | Send Communication Documents |
-| Selectable_Type__c | Check Box | Radio | Check Box |
-| Show_Filter_By__c | true | true | true |
-| Show_Pagination__c | true | true | true |
-| Show_Row_Number__c | false | false | false |
-| Show_Search__c | false | false | false |
-| Show_ViewAll__c | false | false | false |
-| UI_Type__c | Datatable | Datatable | Datatable |
-
-Remaining custom field values for these three records: none. All reference Master DeveloperName Send_Communication. Documents relationship explicitly verified by IMG_1DEB262E-FB1F-4515-9017-91CB1384832F.jpeg. Forms/Letters final selectable/page-limit values were user-confirmed. Do not request completed values again. No deployment claimed.
-
-### customMetadataEvidence · Forms/Documents/Letters Header details
-
-All nine records have all nine custom field values captured. Sources: IMG_DEC6A101-0268-49B2-9E71-1A4F3C201D88.jpeg and IMG_E72A1B8D-3153-4D59-AE16-CA98F13660EB.jpeg. No deployment.
-
-| DeveloperName | API_Response__c | CNC_Line_Attributes__c | Column_Order__c | Data_Type__c | Default_Value__c | Help_Text__c | Is_Sortable__c | Response_Label__c | Wrap_Text__c |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Documents_Department | department | Send_Communication_Documents | 1 | text | "" — blank | "" — blank | true | Department | false |
-| Documents_Group | group | Send_Communication_Documents | 2 | text | "" — blank | "" — blank | true | Group | false |
-| Documents_Name | label | Send_Communication_Documents | 3 | text | "" — blank | "" — blank | true | Document | false |
-| Forms_Department | department | Send_Communication_Forms | 1 | text | "" — blank | "" — blank | true | Department | false |
-| Forms_Group | group | Send_Communication_Forms | 2 | text | "" — blank | "" — blank | true | Group | false |
-| Forms_Name | label | Send_Communication_Forms | 3 | text | "" — blank | "" — blank | true | Form | false |
-| Letters_Department | department | Send_Communication_Letters | 1 | text | "" — blank | "" — blank | true | Department | false |
-| Letters_Group | group | Send_Communication_Letters | 2 | text | "" — blank | "" — blank | true | Group | false |
-| Letters_Name | Name | Send_Communication_Letters | 3 | text | "" — blank | "" — blank | true | Letter | false |
-
-### customMetadataEvidence · Scoped empty queries
-
-| Type | Line filter | Result |
-| --- | --- | --- |
-| CNC_Button_Attribute__mdt | Send_Communication_Forms, Send_Communication_Documents, Send_Communication_Letters | 0 rows; No data exported. |
-| CNC_Search_Attributes__mdt | Send_Communication_Forms, Send_Communication_Documents, Send_Communication_Letters | 0 rows; No data exported. |
-
-Continuation: Header values complete; capture CNC_Master_Attributes__mdt.Send_Communication settings. Button/Search empty results apply only to these Line relationship filters.
-
-### customMetadataEvidence · Master identity and Department query correction
-
-```json
-{
-  "master": {
-    "developerName": "Send_Communication",
-    "label": "Send Communication",
-    "language": "en_US",
-    "namespacePrefix": "",
-    "qualifiedApiName": "Send_Communication",
-    "fieldValues": {
-      "Entity_Type__c": "Member"
-    },
-    "customFieldValuesComplete": false,
-    "captureNotes": "FIELDS(ALL) result confirms identity and Entity_Type__c=Member. This screenshot reaches the Entity_Type__c column. Full Master schema/field count is not yet captured, so do not assume additional custom fields or record completeness; no repeated query is needed for this captured value.",
-    "evidenceScreenshots": [
-      "IMG_F3EB90FE-A0BA-4A8A-876D-8D8174409AB5.jpeg",
-      "IMG_7C2826C2-8ECB-46C9-B934-45E719D76483.jpeg"
-    ]
-  },
-  "headerQueryObservation": {
-    "key": "CNC_Header_Attribute__mdt:Department-header-names-applied-to-Line-filter",
-    "typeName": "CNC_Header_Attribute__mdt",
-    "filter": {
-      "relationship": "CNC_Line_Attributes__r.DeveloperName",
-      "values": [
-        "Documents_Department",
-        "Forms_Department",
-        "Letters_Department"
-      ]
-    },
-    "limit": 150,
-    "returnedRecordCount": 6,
-    "evidenceScreenshots": [
-      "IMG_E5299535-7ECC-430E-939A-87A8F83498FE.jpeg",
-      "IMG_01F24BF6-C852-4763-8888-7E88D5AA094A.jpeg"
-    ],
-    "requestedCaptureResolved": false,
-    "scopeNote": "Screenshot query filters Line relationship DeveloperName using Header record names, instead of WHERE DeveloperName. Returned rows are Account_Name, Contact_Name, Referral_Account_Name, Referral_Case_CreatedDate, Referral_Subject and Subject; they do not resolve requested Documents/Forms/Letters Department labels. Line relationship cells are visibly blank; no association to Send Communication inferred.",
-    "returnedDeveloperNames": [
-      "Account_Name",
-      "Contact_Name",
-      "Referral_Account_Name",
-      "Referral_Case_CreatedDate",
-      "Referral_Subject",
-      "Subject"
-    ]
-  }
-}
-```
-
-Continuation: Master Entity_Type__c=Member is now captured. Verify the Master schema/field count before claiming full record completion. Do not repeat captured values. Forms/Documents/Letters Line and nine Header records remain complete.
-
-## Complete captured configuration supplement: caseIntegration
-
-Generated from the canonical caseIntegration entry for the 2026-10-06 screenshot batch. This entry supersedes earlier null launch settings; it does not change target deployment status.
-
-```json
-{
-  "requiredByUser": true,
-  "objectApiName": "Case",
-  "launchMechanism": "Case.Send_Communication Lightning Web Component quick action → cncSendCommunicationQuickAction → OmniStudio wrapper",
-  "recordIdInputMapping": {
-    "source": "this.recordId",
-    "navigationStateKey": "c__ContextId"
-  },
-  "status": "source-launch-wiring-captured-target-implementation-unverified",
-  "sourceEvidence": {
-    "captureDate": "2026-10-06",
-    "environment": "xhdev1 sandbox",
-    "screenshots": [
-      "IMG_463D7F0B-DDB8-42EC-B51F-6A364F21F1B0.jpeg",
-      "IMG_119C859F-5BA9-4428-B26D-DAE4AE4E2E7A.jpeg",
-      "IMG_45A5CA2A-6D1E-4A06-B39E-BB1AF7C4ACAC.jpeg",
-      "IMG_80733F3B-5320-4BA6-AF2D-24835BE35B83.jpeg",
-      "IMG_1EBC5EC4-2FBC-4C4A-BFA1-3909F5DBFC18.jpeg",
-      "IMG_B19E7B17-ECE4-4777-ABE1-D74A61B676EC.jpeg",
-      "IMG_7AF88FDA-CA38-4108-8415-1330BC5A6D21.jpeg"
-    ],
-    "runtimeObservation": "Send Communication button visible on Case record page. No post-click screen or successful letter generation supplied."
-  },
-  "quickAction": {
-    "label": "Send Communication",
-    "name": "Send_Communication",
+  "caseIntegration": {
+    "requiredByUser": true,
     "objectApiName": "Case",
-    "lightningWebComponent": "cncSendCommunicationQuickAction",
-    "subtype": "Action",
-    "description": "This quick action is used to send forms/documents/letters."
-  },
-  "visibility": {
-    "location": "Lightning App Builder Highlights Panel dynamic action",
-    "fieldLabel": "Caller Type",
-    "fieldApiName": null,
-    "operator": "Equal",
-    "values": [
-      "Provider",
-      "Member",
-      "Plan to Plan"
-    ],
-    "combination": "Any filters are true",
-    "recordPageApiName": null,
-    "activationAssignments": null,
-    "notes": "Shown visibility filters do not include an ITS Host or owner filter. LWC invocation separately checks ownership."
-  },
-  "launcherLwc": {
-    "name": "cncSendCommunicationQuickAction",
-    "baseClass": "NavigationMixin(LightningElement)",
-    "recordIdPublicProperty": true,
-    "invocationMethod": "@api invoke()",
-    "recordRead": {
-      "adapter": "getRecord",
-      "recordId": "$recordId",
-      "fields": [
-        "Case.OwnerId",
-        "Case.AccountId"
-      ]
+    "launchMechanism": "Case.Send_Communication Lightning Web Component quick action \u2192 cncSendCommunicationQuickAction \u2192 OmniStudio wrapper",
+    "recordIdInputMapping": {
+      "source": "this.recordId",
+      "navigationStateKey": "c__ContextId"
     },
-    "userIdImport": "@salesforce/user/Id",
-    "ownerCheck": "caseOwnerId == USER_ID",
-    "missingAccountCheck": "caseAccountId == null || caseAccountId == \"\" || caseAccountId == undefined",
-    "missingAccountToast": {
-      "title": "Update Account name on case before sending communication.",
-      "variant": "error"
-    },
-    "nonOwnerToast": {
-      "title": "Please contact the case owner for any updates to the case",
-      "variant": "error"
-    },
-    "toastMethod": "showToastNotification()",
-    "toastImplementation": {
-      "event": "ShowToastEvent",
-      "properties": {
-        "title": "this.title",
-        "variant": "this.variant"
-      },
-      "dispatch": "this.dispatchEvent(evt)"
-    },
-    "navigation": {
-      "method": "this[NavigationMixin.Navigate]",
-      "type": "standard__component",
-      "attributes": {
-        "componentName": "omnistudio__vlocityLWCOmniWrapper"
-      },
-      "state": {
-        "c__target": "c:CNCSendCommunicationEnglish",
-        "c__layout": "lightning",
-        "c__tabIcon": "custom:custom18",
-        "c__tabLabel": "Send Communication",
-        "c__ContextId": "this.recordId"
-      }
-    },
-    "sourceCaptureComplete": false,
-    "remainingEvidence": [
-      "HTML content",
-      "js-meta.xml content",
-      "Confirmation of full JS file coverage and any omitted handling"
-    ]
-  },
-  "remainingEvidence": [
-    "Post-click runtime screen and source active OmniScript version",
-    "Record page API name and activation assignments if needed for deployment",
-    "Launcher HTML/js-meta.xml and full source before deployable recreation",
-    "Downstream consumption of ContextId and working Print letter path"
-  ],
-  "storyImplications": {
-    "confirmed": "Shared Case launcher checks ownership and requires an Account before opening the OmniScript.",
-    "proposed": "Reuse this entry point for all three letter stories unless confirmed scope requires a change.",
-    "unknown": "CS-1831/1832 role access for non-owners is not established by story wording; visible launcher blocks all non-owners. No role bypass is shown."
-  }
-}
-```
-
-## Runtime review: first post-launch screen — 2026-10-06, 10:37 PM CT
-
-Generated from canonical runtimeReview; display observations only, not complete designer properties or deployment verification.
-
-```json
-{
-  "captureDate": "2026-10-06",
-  "environment": "xhdev1 sandbox",
-  "evidenceScreenshot": "IMG_9D720EBB-D83D-4DD4-8065-44FCEFB1760A.jpeg",
-  "title": "Material and Outbound Channel Selection",
-  "materialType": {
-    "requiredIndicatorVisible": true,
-    "options": [
-      "Forms",
-      "Documents",
-      "Letters",
-      "Other Communication",
-      "Member Materials Request (MMR) Documents"
-    ],
-    "selectedValueObserved": null
-  },
-  "outboundChannel": {
-    "requiredIndicatorVisible": true,
-    "options": [
-      "Email",
-      "Print"
-    ],
-    "selectedValueObserved": null
-  },
-  "recipientControlVisible": false,
-  "navigationButtonsCaptured": false,
-  "notes": "Runtime screen after launching from Case. No options visibly selected. Do not infer stored option values, defaults, recipient handling or active OmniScript version from display labels. No generation/submission observed."
-}
-```
-
-Next: select Other Communication and Print, then capture the resulting screen. Recipient selection is not visible in this screenshot; do not invent an initial Recipient control.
-
-## Runtime review: Other Communication / Print and Select Letter — 2026-10-06, 10:39 PM CT
-
-Generated from canonical runtimeReview. Existing HOSTProviderFreeformLetter is visible; it has not yet been selected or generated. Template labels do not establish backend record identity or story completion.
-
-```json
-[
-  {
-    "captureDate": "2026-10-06",
-    "evidenceScreenshot": "IMG_52FFF2FE-44AE-4098-9334-6B25DA148E86.jpeg",
-    "environment": "xhdev1 sandbox",
-    "title": "Material and Outbound Channel Selection",
-    "selectedDisplayValues": {
-      "materialType": "Other Communication",
-      "outboundChannel": "Print"
-    },
-    "navigationVisible": [
-      "Next"
-    ],
-    "notes": "Display selections confirmed. Stored JSON values and designer conditions are not established by this runtime screenshot."
-  },
-  {
-    "captureDate": "2026-10-06",
-    "evidenceScreenshot": "IMG_6E22A63D-D751-42A1-A7F7-6E1E8FE4216C.jpeg",
-    "environment": "xhdev1 sandbox",
-    "title": "Select Letter",
-    "precedingDisplaySelections": {
-      "materialType": "Other Communication",
-      "outboundChannel": "Print"
-    },
-    "table": {
-      "columns": [
-        "Department",
-        "Group",
-        "Letter"
+    "status": "source-launch-wiring-captured-target-implementation-unverified",
+    "sourceEvidence": {
+      "captureDate": "2026-10-06",
+      "environment": "xhdev1 sandbox",
+      "screenshots": [
+        "IMG_463D7F0B-DDB8-42EC-B51F-6A364F21F1B0.jpeg",
+        "IMG_119C859F-5BA9-4428-B26D-DAE4AE4E2E7A.jpeg",
+        "IMG_45A5CA2A-6D1E-4A06-B39E-BB1AF7C4ACAC.jpeg",
+        "IMG_80733F3B-5320-4BA6-AF2D-24835BE35B83.jpeg",
+        "IMG_1EBC5EC4-2FBC-4C4A-BFA1-3909F5DBFC18.jpeg",
+        "IMG_B19E7B17-ECE4-4777-ABE1-D74A61B676EC.jpeg",
+        "IMG_7AF88FDA-CA38-4108-8415-1330BC5A6D21.jpeg",
+        "IMG_9D720EBB-D83D-4DD4-8065-44FCEFB1760A.jpeg"
       ],
-      "visibleRows": [
-        {
-          "Department": "Service",
-          "Group": "ITS Host",
-          "Letter": "HOSTProviderFreeformLetter",
-          "selected": false
-        }
+      "runtimeObservation": "User-supplied post-launch screenshot shows Material and Outbound Channel Selection. Successful letter generation remains unverified."
+    },
+    "quickAction": {
+      "label": "Send Communication",
+      "name": "Send_Communication",
+      "objectApiName": "Case",
+      "lightningWebComponent": "cncSendCommunicationQuickAction",
+      "subtype": "Action",
+      "description": "This quick action is used to send forms/documents/letters."
+    },
+    "visibility": {
+      "location": "Lightning App Builder Highlights Panel dynamic action",
+      "fieldLabel": "Caller Type",
+      "fieldApiName": null,
+      "operator": "Equal",
+      "values": [
+        "Provider",
+        "Member",
+        "Plan to Plan"
       ],
-      "completeInventoryVerified": false
+      "combination": "Any filters are true",
+      "recordPageApiName": null,
+      "activationAssignments": null,
+      "notes": "Shown visibility filters do not include an ITS Host or owner filter. LWC invocation separately checks ownership."
     },
-    "upload": {
-      "guidance": "Upload Forms/Documents - PDF documents only",
-      "qualifier": "(If Applicable)",
-      "attachmentCount": 0,
-      "controls": [
-        "Upload Files",
-        "Or drop files"
-      ],
-      "fileTypeEnforcementVerified": false
-    },
-    "navigationVisible": [
-      "Previous",
-      "Next"
-    ],
-    "recipientControlVisible": false,
-    "notes": "One visible unselected row; backend template identity, selection source, filtering logic, token definitions and successful generation remain unknown. Do not infer that no other templates exist."
-  }
-]
-```
-
-Next: select the displayed letter row and use Next to capture the following screen. No print submission is required.
-
-
-## Runtime review: Communication Address — 2026-10-06, 10:42 PM CT
-
-Generated from canonical runtimeReview. Supersedes earlier runtime continuation points: the journey has reached Communication Address. Checked one-time address state and blank inputs do not establish defaults or persistence behavior.
-
-```json
-{
-  "captureDate": "2026-10-06",
-  "environment": "xhdev1 sandbox",
-  "evidenceScreenshot": "IMG_0FC9CC3C-65AB-48C7-A80A-9FF6D7CA53FC.jpeg",
-  "title": "Communication Address",
-  "journeyContext": "Following the Select Letter review of Other Communication / Print; selected letter identity is not displayed on this screen.",
-  "fields": [
-    {
-      "label": "Addressee Name",
-      "requiredIndicatorVisible": true,
-      "visibleValue": "",
-      "validationMessage": "Error: Addressee Name is required."
-    },
-    {
-      "label": "Address",
-      "requiredIndicatorVisible": false,
-      "visibleValue": "",
-      "editableVerified": null
-    },
-    {
-      "label": "Address Line 1",
-      "requiredIndicatorVisible": true,
-      "visibleValue": ""
-    },
-    {
-      "label": "Address Line 2",
-      "requiredIndicatorVisible": false,
-      "visibleValue": ""
-    },
-    {
-      "label": "City",
-      "requiredIndicatorVisible": true,
-      "visibleValue": ""
-    },
-    {
-      "label": "Zip",
-      "requiredIndicatorVisible": true,
-      "visibleValue": ""
-    },
-    {
-      "label": "State",
-      "requiredIndicatorVisible": true,
-      "visibleValue": ""
-    },
-    {
-      "label": "Country",
-      "requiredIndicatorVisible": true,
-      "visibleValue": ""
-    }
-  ],
-  "oneTimeCommunicationAddress": {
-    "label": "One time Communication Address",
-    "checked": true,
-    "defaultVerified": false,
-    "conditionalVisibilityVerified": false
-  },
-  "navigationVisible": [
-    "Previous",
-    "Next"
-  ],
-  "unknowns": [
-    "Field API/JSON names and mappings",
-    "Address prepopulation source",
-    "Behavior with one-time checkbox unchecked",
-    "Whether entered address updates a record or only this communication",
-    "Relationship to Provider recipient and later review edits",
-    "Validation rules beyond the visible Addressee Name error"
-  ],
-  "notes": "Blank fields and checked checkbox are visible runtime state, not proof of defaults. Manual address controls are displayed; successful input, navigation, persistence, generation and print submission remain unverified."
-}
-```
-
-Next: use approved sandbox test details to complete the address, select Next and capture the following screen. No print submission is required.
-
-
-## Runtime review: Additional Information, Review and failure — 2026-10-06, 10:46 PM CT
-
-Generated from canonical runtimeReview. Supersedes prior continuation points: address entry progressed to manual letter inputs, review displayed the selected letter and Confirmation displayed a failure. No successful generation/delivery is established.
-
-```json
-[
-  {
-    "captureDate": "2026-10-06",
-    "environment": "xhdev1 sandbox",
-    "evidenceScreenshot": "IMG_B08262EB-AE94-4A28-A141-9ED1298F9E53.jpeg",
-    "title": "Communication Address",
-    "oneTimeCommunicationAddressChecked": true,
-    "inputObservation": "Test values entered into Addressee Name, Address Line 1, City, State, Zip and Country. Address Line 2 and combined Address appear blank. Exact entered values omitted from tracking.",
-    "notes": "Later screenshot reaches Additional Information, establishing progression past address entry for this run. Persistence and validation constraints remain unknown."
-  },
-  {
-    "captureDate": "2026-10-06",
-    "environment": "xhdev1 sandbox",
-    "evidenceScreenshot": "IMG_F4262D90-BDA8-46EA-B546-1D861E972D62.jpeg",
-    "title": "Enter Additional Information for Letter Selected",
-    "guidance": "To Review Letter selected in previous step, Preview here.",
-    "fields": [
-      "Provider Name",
-      "Provider Address",
-      "City",
-      "State",
-      "Zip Code",
-      "Patient Full Name",
-      "Claim Number or Authorization Number",
-      "Free Form Text"
-    ],
-    "inputObservation": "Provider Name, Provider Address, City, State and Zip Code display values matching the preceding address inputs. Patient Full Name, Claim Number or Authorization Number and Free Form Text appear blank.",
-    "navigationVisible": [
-      "Previous",
-      "Next"
-    ],
-    "unknowns": [
-      "Whether values are automatically copied, manually entered or both",
-      "Field JSON names, token definitions and API/manual modes",
-      "Required flags and conditions",
-      "Brief Description mapping required by CS-1474",
-      "Preview here control behavior"
-    ],
-    "notes": "Visible editable input controls establish existing manual-content UI, not successful token merge or template output."
-  },
-  {
-    "captureDate": "2026-10-06",
-    "environment": "xhdev1 sandbox",
-    "evidenceScreenshot": "IMG_4119FA6D-3E65-4BCD-B29D-331B8124652B.jpeg",
-    "title": "Review and Submit",
-    "state": "Loading spinner visible",
-    "notes": "Loading state only. No generation response, file artifact or success verified."
-  },
-  {
-    "captureDate": "2026-10-06",
-    "environment": "xhdev1 sandbox",
-    "evidenceScreenshot": "IMG_055359E2-BD88-4E57-B30C-A9752D485630.jpeg",
-    "title": "Review and Submit",
-    "table": {
-      "columns": [
-        "Name",
-        "Type",
-        "View",
-        "Remove"
-      ],
-      "visibleRows": [
-        {
-          "Name": "HOSTProviderFreeformLetter",
-          "Type": "Letter",
-          "View": "View",
-          "Remove": "No control visible in row"
-        }
-      ]
-    },
-    "checkboxes": [
-      {
-        "label": "I confirm the attachments are correct",
-        "checked": false
-      },
-      {
-        "label": "Include Return Envelope",
-        "checked": false
-      }
-    ],
-    "navigationObservation": "Previous visible; right action appears greyed out and its label is not legible.",
-    "notes": "Letter row and View link visible. PDF content, generated-file identity and successful generation are unverified. Confirmation/submit click sequence not captured."
-  },
-  {
-    "captureDate": "2026-10-06",
-    "environment": "xhdev1 sandbox",
-    "evidenceScreenshot": "IMG_ECF268D2-F08E-4B3E-BBF0-8C0C5BDAF16B.jpeg",
-    "title": "Confirmation",
-    "message": "Unable to send Communication at this time, try again in a few minutes",
-    "navigationVisible": [
-      "Done"
-    ],
-    "outcome": "Failure message displayed",
-    "unknowns": [
-      "Failing action, IP/Apex/API and response",
-      "Whether failure occurred during generation, storage or print delivery",
-      "Whether any request/file persisted",
-      "Retry behavior"
-    ],
-    "notes": "Observed failure wording closely corresponds to story error requirement. No successful print submission, case association or Alfresco storage verified; screenshot does not establish root cause."
-  }
-]
-```
-
-Next: inspect the original OmniScript AdditionalInformation element and its visible properties/child list to identify the component that supplies these input fields. Trace only observed dependencies. Failure root cause remains unknown until actual action/response evidence arrives.
-
-
-## Complete captured configuration supplement: AdditionalInformation — 2026-10-06, 10:50 PM CT
-
-Generated from canonical stepElements by elementName. Step and embedded LWC identity captured; actual custom LWC properties/source remain pending.
-
-```json
-{
-  "elementName": "AdditionalInformation",
-  "type": "Step",
-  "fieldLabel": "",
-  "chartLabel": "",
-  "instruction": "",
-  "allowSaveForLater": true,
-  "visibleLayoutItems": [
-    {
-      "visibleOrder": 1,
-      "elementName": null,
-      "type": null,
-      "displayText": "Enter Additional Information for Letter Selected",
-      "conditionalView": null
-    },
-    {
-      "visibleOrder": 2,
-      "elementName": null,
-      "type": null,
-      "displayText": "Enter Additional Information for Cover Letter",
-      "conditionalView": null
-    },
-    {
-      "visibleOrder": 3,
-      "elementName": null,
-      "type": null,
-      "displayText": "Edit Email",
-      "conditionalView": null
-    },
-    {
-      "visibleOrder": 4,
-      "elementName": null,
-      "type": null,
-      "displayText": "Additional Information for Subscription",
-      "conditionalView": null
-    },
-    {
-      "visibleOrder": 5,
-      "elementName": "EnterAdditionalInformation",
-      "type": null,
-      "componentName": "cncSendCommunicationAdditionalInfo",
-      "renderedMarkup": "<c:cncSendCommunicationAdditionalInfo />",
-      "inputMapping": null,
-      "conditionalView": null
-    }
-  ],
-  "adjacentElementsObserved": {
-    "preceding": {
-      "elementName": "RA-UpdateLinks",
-      "type": "Remote Action"
-    },
-    "following": [
-      {
-        "elementName": "RA-InsertSelectedForms",
-        "type": "Remote Action"
-      },
-      {
-        "elementName": "IP-DeleteLetterData",
-        "type": "Integration Procedure Action"
-      }
-    ]
-  },
-  "evidenceScreenshots": [
-    "IMG_DA63D02D-536A-42EC-A1DE-80111203FBBF.jpeg"
-  ],
-  "captureComplete": false,
-  "missing": [
-    "Custom LWC element properties and input mappings",
-    "Heading identities/types and execution conditions",
-    "Step conditional/button properties",
-    "Full cncSendCommunicationAdditionalInfo source",
-    "Token data origin and JSON updates"
-  ],
-  "notes": "Step properties are selected in screenshot. Custom LWC component identity is visible in canvas markup; field-rendering implementation and token-driven behavior are not established. Adjacent action names/types do not establish their behavior or whether they execute for this route."
-}
-```
-
-Next: select EnterAdditionalInformation inside the Step and capture its Custom LWC properties, including input parameters and conditional settings. Do not collect all outer elements.
-
-
-## Complete captured configuration supplement: AdditionalInfo LWC partial source — 2026-10-06, 10:53 PM CT
-
-Generated from canonical lwcSourceEvidence by component name. Active and commented code distinguished. Print token definition/rendering branch remains uncaptured; email implementation must not be assumed to apply to Print.
-
-```json
-{
-  "name": "cncSendCommunicationAdditionalInfo",
-  "environment": "xhdev1 sandbox",
-  "sourceFile": "cncSendCommunicationAdditionalInfo.js",
-  "baseClass": "OmniscriptBaseMixin(NavigationMixin(LightningElement))",
-  "captureDate": "2026-10-06",
-  "sourceCaptureComplete": false,
-  "evidenceScreenshots": [
-    "IMG_F9575910-5641-49FE-A3BA-47CFE7E90DEB.jpeg",
-    "IMG_58F3F8D4-852C-4A6F-BE15-5F142F7DE38D.jpeg",
-    "IMG_03A12AD0-02EB-4951-9D81-DBDF216F595E.jpeg",
-    "IMG_6EED452C-61BF-4AA7-B314-89EC764ADE16.jpeg",
-    "IMG_D8559AFD-CE92-4138-B379-B2C851E35F4A.jpeg",
-    "IMG_0552C7DD-107F-47C8-ABDD-4D296CF82BEA.jpeg",
-    "IMG_28BF83F9-71F6-4DDA-9CE6-65E261C33184.jpeg",
-    "IMG_B1931D0D-ADCC-476F-AA63-282C4044D671.jpeg",
-    "IMG_1DB37A4D-15A5-4A9B-A9FA-B1890ABEC983.jpeg",
-    "IMG_499C774D-9BD7-43EA-A39C-F17D4A8FADF9.jpeg"
-  ],
-  "initialProperties": {
-    "tokenMapping": [],
-    "tokenInputFields": [],
-    "selectedLetterHeader": "To Review Letter selected in previous step, ",
-    "selectedLetterPreviewText": "Preview here.",
-    "isPOD": false,
-    "showSubHeader": true,
-    "isEmail": false,
-    "isAsyncLetterGeneration": true,
-    "today": "1970-01-01"
-  },
-  "richTextFormats": [
-    "font",
-    "size",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "list",
-    "indent",
-    "align",
-    "link",
-    "image",
-    "clean",
-    "table",
-    "header"
-  ],
-  "lifecycle": {
-    "connectedCallback": [
-      "this.initilizeTokenData();",
-      "this.initializeMinDate();"
-    ],
-    "initializeMinDate": "this.today = new Date().toISOString().slice(0,10);"
-  },
-  "tokenInitialization": {
-    "method": "initilizeTokenData",
-    "jsonSource": "this.omniJsonData",
-    "flags": {
-      "isEmail": "When JSON has isEmail and it is truthy: showSubHeader=false, setEmailBody(), isEmail=true.",
-      "isPOD": "When JSON has isPOD and it is truthy: isPOD=true."
-    },
-    "memberEmailResolution": {
-      "oneTimeFlag": "SelectEmail.SelectOneTimeEmail === true",
-      "oneTimeValue": "SelectEmail.EmailAddressOneTime",
-      "podValue": "SelectEmail.podEmailAddress",
-      "fallbacks": [
-        "memberEmail",
-        "memberInfo.memberEmailAddress",
-        null
-      ],
-      "priority": "If SelectEmail exists: one-time flag plus populated one-time email, otherwise populated POD email, otherwise fallbacks. Without SelectEmail use fallbacks."
-    },
-    "templateSelection": {
-      "source": "selectedTemplate",
-      "additionalInfoTokenDataId": "selectedTemplate.Id",
-      "previewContentDocumentId": "selectedTemplate.documentInfo.ContentDocumentId when documentInfo exists and ContentDocumentId != null"
-    },
-    "templateChangedBranch": {
-      "condition": "JSON has additionalInfoTokenDataId && additionalInfoTokenDataId != selectedTemplate.Id",
-      "actions": [
-        "tokenInputFields=[]",
-        "tokenMapping=[]",
-        "getTokenDetails(selectedTemplate)"
-      ]
-    },
-    "existingTokensBranch": {
-      "condition": "Otherwise JSON has tokenInputs",
-      "source": "tokenInputs",
-      "refreshCondition": "item.mappingName != null && JSON has item.mappingName && isRefreshTokens",
-      "refreshedValue": "omniscriptJsonData[item.mappingName]",
-      "actions": [
-        "Assign mapped list to tokenInputFields",
-        "setToEmail()"
-      ],
-      "fallback": "Without tokenInputs call getTokenDetails(selectedTemplate)."
-    },
-    "finalJsonUpdate": {
-      "method": "omniApplyCallResp",
-      "payload": {
-        "isRefreshTokens": false
-      }
-    }
-  },
-  "setToEmail": {
-    "tokenMatch": "t.name === 'To'",
-    "value": "this.memberEmail",
-    "jsonUpdate": {
-      "tokenInputs": "this.tokenInputFields"
-    },
-    "method": "omniApplyCallResp"
-  },
-  "emailBody": {
-    "source": "selectedTemplate.HtmlValue",
-    "placeholderPattern": "/{{\\s*\\b\\w+\\b\\s*}}/gi",
-    "placeholderKey": "Remove braces and trim whitespace.",
-    "lookup": "jsonData[variableName]",
-    "currentYearFallback": "If undefined and variableName === 'currentYear', use new Date().getFullYear().toString().",
-    "substitution": "Replace placeholder when value !== undefined; otherwise remove placeholder if match.includes('manual').",
-    "memberInfoAssignment": "If memberInfo exists and memberEmailAddress != null, assign both memberEmail and memberName from memberInfo.memberEmailAddress.",
-    "subject": "selectedTemplate.emailTemplateSubject when truthy",
-    "jsonUpdate": {
-      "customBody": "this.emailBody",
-      "memberEmail": "this.memberEmail",
-      "memberName": "this.memberName",
-      "subject": "this.subject"
-    },
-    "notes": "Email path captured for completeness; do not apply these substitutions to Print generation."
-  },
-  "getTokenDetails": {
-    "method": "getTokenDetails(selectedTemplate)",
-    "emailBranchCondition": "this.isEmail",
-    "emailTokens": [
-      {
-        "name": "To",
-        "label": "To",
-        "errorMessage": "Error: To is required.",
-        "showTA": false,
-        "showRTA": false,
-        "showEmail": true,
-        "showPicklist": false,
-        "isRequired": true,
-        "showText": false,
-        "value": "this.memberEmail",
-        "isReadOnly": true
-      },
-      {
-        "name": "Subject",
-        "label": "Subject",
-        "errorMessage": "Error: Subject is required.",
-        "showTA": false,
-        "showRTA": false,
-        "showEmail": false,
-        "showPicklist": true,
-        "isRequired": true,
-        "showText": false,
-        "value": "this.subject"
-      }
-    ],
-    "emailAssignment": "this.tokenInputFields = emailTokens;",
-    "printBranchCaptured": false
-  },
-  "commentedCode": {
-    "notes": "Alternative initialization beginning around line 56, subscription sections, alternate setToEmail around line 299 and earlier getTokenDetails around line 364 are visibly block-commented. Do not treat them as active behavior.",
-    "subscriptionTokensObserved": [
-      "effectiveFrom",
-      "effectiveTo",
-      "frequency",
-      "AssociatedCase",
-      "Member",
-      "Type"
-    ],
-    "activeSubscriptionBehaviorVerified": false
-  },
-  "remainingEvidence": [
-    "getTokenDetails continuation after approximately line 523, especially non-email/Print branch",
-    "Token definition source and exact API/manual classification",
-    "Input handlers and OmniScript updates for manual Print values",
-    "HTML rendering and validation",
-    "Preview navigation and generation calls",
-    "Complete file coverage and js-meta.xml",
-    "OmniScript Custom LWC element input mappings"
-  ],
-  "notes": "Partial source observations only; no executable file reconstructed, no deployment. Directly seen tokenInputs state flow confirms token list reuse/refresh. It does not yet establish the source of Print field definitions or required CS-1474 tokens."
-}
-```
-
-Next: continue getTokenDetails below approximately line 523, capturing the non-email branch and token-source call. Earlier request for Custom LWC element properties remains a later gap; do not interrupt this source review to repeat captured sections.
-
-
-## Complete captured configuration supplement: AdditionalInfo manual token processing — 2026-10-06, 10:56 PM CT
-
-Generated from canonical lwcSourceEvidence. Supersedes the prior Print-branch gap for captured methods. Full source/template data/downstream generation remain incomplete.
-
-```json
-{
-  "name": "cncSendCommunicationAdditionalInfo",
-  "environment": "xhdev1 sandbox",
-  "sourceFile": "cncSendCommunicationAdditionalInfo.js",
-  "baseClass": "OmniscriptBaseMixin(NavigationMixin(LightningElement))",
-  "captureDate": "2026-10-06",
-  "sourceCaptureComplete": false,
-  "evidenceScreenshots": [
-    "IMG_F9575910-5641-49FE-A3BA-47CFE7E90DEB.jpeg",
-    "IMG_58F3F8D4-852C-4A6F-BE15-5F142F7DE38D.jpeg",
-    "IMG_03A12AD0-02EB-4951-9D81-DBDF216F595E.jpeg",
-    "IMG_6EED452C-61BF-4AA7-B314-89EC764ADE16.jpeg",
-    "IMG_D8559AFD-CE92-4138-B379-B2C851E35F4A.jpeg",
-    "IMG_0552C7DD-107F-47C8-ABDD-4D296CF82BEA.jpeg",
-    "IMG_28BF83F9-71F6-4DDA-9CE6-65E261C33184.jpeg",
-    "IMG_B1931D0D-ADCC-476F-AA63-282C4044D671.jpeg",
-    "IMG_1DB37A4D-15A5-4A9B-A9FA-B1890ABEC983.jpeg",
-    "IMG_499C774D-9BD7-43EA-A39C-F17D4A8FADF9.jpeg",
-    "IMG_BF338C35-1460-4F01-886A-D1DDD65F87DD.jpeg",
-    "IMG_80198A6F-2437-4880-97A9-68715496BFEB.jpeg",
-    "IMG_7DB86B58-1373-4E56-B4AB-55ADC044B022.jpeg",
-    "IMG_A96C2FAE-C29C-4B4A-A618-89079456EB3A.jpeg",
-    "IMG_D0C0C36E-7476-49A5-9F65-10AF3A2C3C28.jpeg",
-    "IMG_FDEFC39B-334B-41FD-9FAF-C737A54CC4AA.jpeg",
-    "IMG_27C15046-65DA-48CD-9C37-CFAFD2B11D29.jpeg",
-    "IMG_E834A435-8B63-4BEB-BB57-28F37BB86680.jpeg"
-  ],
-  "initialProperties": {
-    "tokenMapping": [],
-    "tokenInputFields": [],
-    "selectedLetterHeader": "To Review Letter selected in previous step, ",
-    "selectedLetterPreviewText": "Preview here.",
-    "isPOD": false,
-    "showSubHeader": true,
-    "isEmail": false,
-    "isAsyncLetterGeneration": true,
-    "today": "1970-01-01"
-  },
-  "richTextFormats": [
-    "font",
-    "size",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "list",
-    "indent",
-    "align",
-    "link",
-    "image",
-    "clean",
-    "table",
-    "header"
-  ],
-  "lifecycle": {
-    "connectedCallback": [
-      "this.initilizeTokenData();",
-      "this.initializeMinDate();"
-    ],
-    "initializeMinDate": "this.today = new Date().toISOString().slice(0,10);"
-  },
-  "tokenInitialization": {
-    "method": "initilizeTokenData",
-    "jsonSource": "this.omniJsonData",
-    "flags": {
-      "isEmail": "When JSON has isEmail and it is truthy: showSubHeader=false, setEmailBody(), isEmail=true.",
-      "isPOD": "When JSON has isPOD and it is truthy: isPOD=true."
-    },
-    "memberEmailResolution": {
-      "oneTimeFlag": "SelectEmail.SelectOneTimeEmail === true",
-      "oneTimeValue": "SelectEmail.EmailAddressOneTime",
-      "podValue": "SelectEmail.podEmailAddress",
-      "fallbacks": [
-        "memberEmail",
-        "memberInfo.memberEmailAddress",
-        null
-      ],
-      "priority": "If SelectEmail exists: one-time flag plus populated one-time email, otherwise populated POD email, otherwise fallbacks. Without SelectEmail use fallbacks."
-    },
-    "templateSelection": {
-      "source": "selectedTemplate",
-      "additionalInfoTokenDataId": "selectedTemplate.Id",
-      "previewContentDocumentId": "selectedTemplate.documentInfo.ContentDocumentId when documentInfo exists and ContentDocumentId != null"
-    },
-    "templateChangedBranch": {
-      "condition": "JSON has additionalInfoTokenDataId && additionalInfoTokenDataId != selectedTemplate.Id",
-      "actions": [
-        "tokenInputFields=[]",
-        "tokenMapping=[]",
-        "getTokenDetails(selectedTemplate)"
-      ]
-    },
-    "existingTokensBranch": {
-      "condition": "Otherwise JSON has tokenInputs",
-      "source": "tokenInputs",
-      "refreshCondition": "item.mappingName != null && JSON has item.mappingName && isRefreshTokens",
-      "refreshedValue": "omniscriptJsonData[item.mappingName]",
-      "actions": [
-        "Assign mapped list to tokenInputFields",
-        "setToEmail()"
-      ],
-      "fallback": "Without tokenInputs call getTokenDetails(selectedTemplate)."
-    },
-    "finalJsonUpdate": {
-      "method": "omniApplyCallResp",
-      "payload": {
-        "isRefreshTokens": false
-      }
-    }
-  },
-  "setToEmail": {
-    "tokenMatch": "t.name === 'To'",
-    "value": "this.memberEmail",
-    "jsonUpdate": {
-      "tokenInputs": "this.tokenInputFields"
-    },
-    "method": "omniApplyCallResp"
-  },
-  "emailBody": {
-    "source": "selectedTemplate.HtmlValue",
-    "placeholderPattern": "/{{\\s*\\b\\w+\\b\\s*}}/gi",
-    "placeholderKey": "Remove braces and trim whitespace.",
-    "lookup": "jsonData[variableName]",
-    "currentYearFallback": "If undefined and variableName === 'currentYear', use new Date().getFullYear().toString().",
-    "substitution": "Replace placeholder when value !== undefined; otherwise remove placeholder if match.includes('manual').",
-    "memberInfoAssignment": "If memberInfo exists and memberEmailAddress != null, assign both memberEmail and memberName from memberInfo.memberEmailAddress.",
-    "subject": "selectedTemplate.emailTemplateSubject when truthy",
-    "jsonUpdate": {
-      "customBody": "this.emailBody",
-      "memberEmail": "this.memberEmail",
-      "memberName": "this.memberName",
-      "subject": "this.subject"
-    },
-    "notes": "Email path captured for completeness; do not apply these substitutions to Print generation."
-  },
-  "getTokenDetails": {
-    "method": "getTokenDetails(selectedTemplate)",
-    "emailBranchCondition": "this.isEmail",
-    "emailTokens": [
-      {
-        "name": "To",
-        "label": "To",
-        "errorMessage": "Error: To is required.",
-        "showTA": false,
-        "showRTA": false,
-        "showEmail": true,
-        "showPicklist": false,
-        "isRequired": true,
-        "showText": false,
-        "value": "this.memberEmail",
-        "isReadOnly": true
-      },
-      {
-        "name": "Subject",
-        "label": "Subject",
-        "errorMessage": "Error: Subject is required.",
-        "showTA": false,
-        "showRTA": false,
-        "showEmail": false,
-        "showPicklist": true,
-        "isRequired": true,
-        "showText": false,
-        "value": "this.subject"
-      }
-    ],
-    "emailAssignment": "this.tokenInputFields = emailTokens;",
-    "printBranchCaptured": true,
-    "templateTokenProcessing": {
-      "source": "selectedTemplate.tokens",
-      "filter": "this.isManualToken(token.Name)",
-      "isManualToken": {
-        "lastIndex": "input.lastIndexOf('_')",
-        "condition": "lastIndex > 0",
-        "acceptedSuffixesCaseInsensitive": [
-          "_manual",
-          "_apimanual"
+    "launcherLwc": {
+      "name": "cncSendCommunicationQuickAction",
+      "baseClass": "NavigationMixin(LightningElement)",
+      "recordIdPublicProperty": true,
+      "invocationMethod": "@api invoke()",
+      "recordRead": {
+        "adapter": "getRecord",
+        "recordId": "$recordId",
+        "fields": [
+          "Case.OwnerId",
+          "Case.AccountId"
         ]
       },
-      "labelConversion": "If input startsWith('RTB_'), remove first four characters. Remove final underscore suffix when present, then replace remaining underscores with spaces.",
-      "initialValue": "When token.mappingName is truthy, jsonData[token.mappingName].",
-      "initialFlags": {
-        "showTA": false,
-        "showText": false,
-        "showRTA": false,
-        "isRequired": false,
-        "isValid": true,
-        "isReadOnly": false
+      "userIdImport": "@salesforce/user/Id",
+      "ownerCheck": "caseOwnerId == USER_ID",
+      "missingAccountCheck": "caseAccountId == null || caseAccountId == \"\" || caseAccountId == undefined",
+      "missingAccountToast": {
+        "title": "Update Account name on case before sending communication.",
+        "variant": "error"
       },
-      "richTextRule": "If token.Name.includes('RTB_'): showRTA=true and this.isAsyncLetterGeneration=false; otherwise showTA=true.",
-      "metadataFlags": [
-        "token.isRequired sets isRequired=true when truthy",
-        "token.isReadOnly sets isReadOnly=true when truthy"
-      ],
-      "inputProperties": [
-        "name=token.Name",
-        "label",
-        "value",
-        "errorMessage='Error: '+label+' is required.'",
-        "showTA",
-        "showRTA",
-        "isRequired",
-        "isValid",
-        "mappingName=token.mappingName",
-        "showText=false",
-        "isReadOnly"
-      ],
-      "additionalTokens": "If JSON has rtbTokenInputs and it is not null, append ...jsonData.rtbTokenInputs.",
-      "jsonUpdate": {
-        "additionalInfoTokenDataId": "this.additionalInfoTokenDataId",
-        "isAsyncLetterGeneration": "this.isAsyncLetterGeneration",
-        "tokenInputs": "this.tokenInputFields"
+      "nonOwnerToast": {
+        "title": "Please contact the case owner for any updates to the case",
+        "variant": "error"
       },
-      "notes": "No new token-fetch IP/Apex call is visible in this method. It consumes the selectedTemplate.tokens array already supplied upstream. Precise upstream record/source and actual template tokens remain unknown."
+      "toastMethod": "showToastNotification()",
+      "toastImplementation": {
+        "event": "ShowToastEvent",
+        "properties": {
+          "title": "this.title",
+          "variant": "this.variant"
+        },
+        "dispatch": "this.dispatchEvent(evt)"
+      },
+      "navigation": {
+        "method": "this[NavigationMixin.Navigate]",
+        "type": "standard__component",
+        "attributes": {
+          "componentName": "omnistudio__vlocityLWCOmniWrapper"
+        },
+        "state": {
+          "c__target": "c:CNCSendCommunicationEnglish",
+          "c__layout": "lightning",
+          "c__tabIcon": "custom:custom18",
+          "c__tabLabel": "Send Communication",
+          "c__ContextId": "this.recordId"
+        }
+      },
+      "sourceCaptureComplete": false,
+      "remainingEvidence": [
+        "HTML content",
+        "js-meta.xml content",
+        "Confirmation of full JS file coverage and any omitted handling"
+      ]
+    },
+    "remainingEvidence": [
+      "Source active OmniScript version (first post-click screen captured)",
+      "Record page API name and activation assignments if needed for deployment",
+      "Launcher HTML/js-meta.xml and full source before deployable recreation",
+      "Downstream consumption of ContextId and working Print letter path"
+    ],
+    "storyImplications": {
+      "confirmed": "Shared Case launcher checks ownership and requires an Account before opening the OmniScript.",
+      "proposed": "Reuse this entry point for all three letter stories unless confirmed scope requires a change.",
+      "unknown": "CS-1831/1832 role access for non-owners is not established by story wording; visible launcher blocks all non-owners. No role bypass is shown."
     }
   },
-  "commentedCode": {
-    "notes": "Alternative initialization beginning around line 56, subscription sections, alternate setToEmail around line 299 and earlier getTokenDetails around line 364 are visibly block-commented. Do not treat them as active behavior.",
-    "subscriptionTokensObserved": [
-      "effectiveFrom",
-      "effectiveTo",
-      "frequency",
-      "AssociatedCase",
-      "Member",
-      "Type"
-    ],
-    "activeSubscriptionBehaviorVerified": false
-  },
-  "remainingEvidence": [
-    "Actual HOSTProviderFreeformLetter token definitions and mappingName/isRequired/isReadOnly values",
-    "Upstream producer of selectedTemplate.tokens and rtbTokenInputs",
-    "HTML rendering and any additional handlers in uncaptured lines approximately 612–670",
-    "Complete file coverage and js-meta.xml",
-    "OmniScript Custom LWC input mappings",
-    "Downstream consumer of tokenMapping/isAsyncLetterGeneration and actual document-generation response"
-  ],
-  "notes": "Partial source observations only, not executable reconstruction or deployment. Active template-token filtering, manual input handling, validation guard and OmniScript output mappings captured. Template-specific data and generation integration remain pending.",
-  "previewNavigation": {
-    "method": "viewFilePreviewer",
-    "type": "standard__namedPage",
-    "attributes": {
-      "pageName": "filePreview"
-    },
-    "state": {
-      "selectedRecordId": "this.selectedContentDocumentId"
-    },
-    "notes": "Uses previously selected template document ContentDocumentId; this alone does not establish a newly generated personalized letter preview."
-  },
-  "manualInputHandling": {
-    "method": "handleInputChange",
-    "index": "event.target.dataset.index",
-    "value": "event.target.value",
-    "tokenUpdate": "Update tokenInputFields entry at parseInt(index) then omniApplyCallResp({tokenInputs: this.tokenInputFields}).",
-    "requiredValidation": "For blank required values: RTB input sets matching token isValid=false/errorMessage; other input uses setCustomValidity and reportValidity. Nonblank values clear error state.",
-    "nextMethod": "handleNextClick",
-    "nextGuard": "this.isInputFieldValid()",
-    "tokenMapping": "For non-RTB tokens with value != null: tokenMapping[token.name]=token.value. RTB tokens with value != null use handleRTBTokens(token.name, token.value).",
-    "nextActions": [
-      "Assign this.tokenMapping",
-      "updateOmniScript()",
-      "omniNextStep()"
-    ],
-    "previousAction": "omniPrevStep()",
-    "validationMethod": "isInputFieldValid",
-    "validationSelector": ".inputFieldValidity,lightning-input-rich-text",
-    "validationNotes": "Blank required or invalid native fields set return flag false. RTB required errors also set class slds-has-error. Runtime invalid/valid scenarios are not tested in this capture."
-  },
-  "richTextTokenSubstitution": {
-    "method": "handleRTBTokens(rtbTokenName, rtbTokenData)",
-    "placeholderPattern": "/{{\\s*\\b\\w+\\b\\s*}}/gi",
-    "lookup": "tokenInputFields.find(token => token.rtbTokenName == rtbTokenName && token.name == variableName)",
-    "replacement": "Replace matching placeholder with token.value when a matching token exists.",
-    "fontMethod": "handleRTBfont",
-    "font": {
-      "font": "Times New Roman",
-      "size": 12
-    },
-    "fontInvocationNote": "handleRTBfont call in handleNextClick is commented; do not claim font enforcement from the method definition."
-  },
-  "finalOmniScriptUpdate": {
-    "method": "updateOmniScript",
-    "call": "omniApplyCallResp",
-    "payload": {
-      "tokenMapping": "this.tokenMapping",
-      "tokenInputs": "this.tokenInputFields",
-      "additionalInfoTokenDataId": "this.additionalInfoTokenDataId",
-      "memberEmail": "this.memberEmail",
-      "subject": "this.subject",
-      "effectiveFrom": "this.effectiveFrom",
-      "effectiveTo": "this.effectiveTo",
-      "frequency": "this.frequencyValue"
-    }
-  },
-  "otherVisibleGetters": {
-    "options": "If isPOD == false: label/value Form/Document Request. Otherwise label Your requested plan materials, value this.subject.",
-    "frequency": [
-      "Monthly",
-      "Every 6 months",
-      "Annually"
-    ],
-    "showStandard": "!(this.isEmail == false), with subscription clause commented out."
-  }
-}
-```
-
-Next: inspect HOSTProviderFreeformLetter template/token definitions. Capture exact names, mappingName, isRequired and isReadOnly. Upstream selectedTemplate.tokens source remains unknown; no new IP/Apex fetch call appears in captured getTokenDetails.
-
-
-## Template settings and token JSON — 2026-10-06, 11:01 PM CT
-
-Generated from canonical documentTemplateEvidence. This supersedes the previous request for the template token list; per-token metadata remains unknown.
-
-```json
-{
-  "name": "HOSTProviderFreeformLetter",
-  "source": "User-provided template designer and Token JSON screenshots; 2026-10-06, 11:01 PM CT",
-  "version": 1,
-  "templateType": "Microsoft Word",
-  "tokenMapping": "JSON",
-  "tokenMappingMethod": "Custom Class",
-  "customClass": "CNC_CustomTokenDataExtractor",
-  "usageType": null,
-  "documentGenerationMechanism": "ClientSide",
-  "uploadedFileName": "Host Provider Free Form Letter.docx",
-  "uploadedFileStatus": "File has been uploaded",
-  "wordContentInspected": false,
-  "tokenJson": {
-    "Current_Date_system": "",
-    "Provider_Name_apimanual": "",
-    "Provider_Address_apimanual": "",
-    "City_apimanual": "",
-    "State_apimanual": "",
-    "Zip_Code_apimanual": "",
-    "Patient_Full_Name_manual": "",
-    "Claim_Number_or_Authorization_Number_manual": "",
-    "Member_ID_or_Patient_Account_Number": "",
-    "Case_Number": "",
-    "Claim_DOS": "",
-    "Patient_Acct_Num": "",
-    "Free_Form_Text_apimanual": ""
-  },
-  "tokenMetadata": {
-    "mappingName": null,
-    "isRequired": null,
-    "isReadOnly": null,
-    "sourceOfSelectedTemplateTokens": null
-  },
-  "interpretation": [
-    "Empty strings are displayed Token JSON values, not evidence that runtime merge data is missing.",
-    "The existing LWC suffix filter would include the visible _manual and _apimanual tokens, including Free_Form_Text_apimanual.",
-    "No Brief Description token is visible in the displayed Token JSON. CS-1474 requires Brief Description and Free Form Content; inspect Word content and mapping before deciding changes.",
-    "Custom class configuration identifies the next automatic-data dependency. Its implementation and runtime inputs/outputs are not yet reviewed.",
-    "Template file content, all story merge-field mappings, personalized generation, print delivery, case association and storage success remain unverified."
-  ],
-  "nextEvidence": "CNC_CustomTokenDataExtractor Apex source: entry method, input contract, token construction and mapping. Then inspect actual Word template content."
-}
-```
-
-Next: review CNC_CustomTokenDataExtractor entry method and token mapping. Do not infer runtime values from empty Token JSON entries or claim Brief Description is implemented without inspecting Word content.
-
-
-## Custom extractor checkpoint — 2026-10-06, 11:05 PM CT
-
-Generated from canonical apexSourceEvidence. Supersedes the prior request for this class: the displayed class passes through tokenMapping; automatic values must be traced upstream.
-
-```json
-{
-  "name": "CNC_CustomTokenDataExtractor",
-  "evidence": "Two user-provided screenshots, class lines 1–48, 2026-10-06 11:05 PM CT",
-  "sourceCoverage": "Visible class body through closing brace; screenshot transcription, not retrieved org source or tested deployment artifact",
-  "apiVersion": "58.0",
-  "declaration": "global with sharing class CNC_CustomTokenDataExtractor implements omnistudio.VlocityOpenInterface, Callable",
-  "constants": {
-    "IP_TOKENDATA_NAME": "CNC_GetLetterTemplateTokenData",
-    "IP_CLAIMDATA_NAME": "CNC_GetLetterTemplateTokenData",
-    "NAMESPACE_PREFIX": "omnistudio__"
-  },
-  "callEntry": {
-    "method": "call",
-    "arguments": [
-      "action",
-      "args"
-    ],
-    "reads": [
-      "args.input",
-      "args.output",
-      "args.options"
-    ],
-    "delegatesTo": "invokeMethod(action, input, output, options)"
-  },
-  "invokeMethod": {
-    "initialResult": true,
-    "dispatch": "If methodName == 'getTokenData', call getTokenData(input, output, options).",
-    "ignoresGetTokenDataReturn": true,
-    "exceptionHandling": "Debug cause/message/stack trace/line and set result=false.",
-    "returns": "result",
-    "unknownAction": "No explicit rejection branch; result remains true without dispatch."
-  },
-  "getTokenData": {
-    "initialSuccess": false,
-    "inputKey": "tokenMapping",
-    "accepts": "Map<String,Object>",
-    "behavior": "Create empty tokenMap; when input.tokenMapping is a Map<String,Object>, copy all entries using putAll.",
-    "outputKey": "tokenMap",
-    "returnValue": false,
-    "noSuccessAssignmentVisible": true
-  },
-  "observations": [
-    "The class passes supplied token data through; no SOQL, IP invocation, external call or automatic field construction appears in the displayed class.",
-    "The IP-name constants are declarations only and are not used in the visible methods.",
-    "The helper returns false while invokeMethod ignores that return and returns true unless an exception is caught. This alone does not diagnose the observed runtime send failure.",
-    "LWC updateOmniScript supplies tokenMapping, matching this class's expected key. Actual caller input and enrichment of automatic tokens remain unverified."
-  ],
-  "nextEvidence": "OmniScript action or IP preparing/passing tokenMapping to generation: input mappings and automatic-token enrichment."
-}
-```
-
-
-## Selected forms action checkpoint — 2026-10-06, 11:08 PM CT
-
-Generated from canonical confirmedActions. The action immediately after AdditionalInformation is conditional on Forms/Documents, so it is not the token-generation dependency for the observed Other Communication selection.
-
-```json
-{
-  "elementName": "RA-InsertSelectedForms",
-  "fieldLabel": "RA-InsertSelectedForms",
-  "elementType": "Remote Action",
-  "observedActive": true,
-  "invokeMode": "Default",
-  "showToastOnCompletion": false,
-  "remoteClass": "CNC_SendCommunication",
-  "remoteMethod": "createAttachments",
-  "useContinuation": false,
-  "preTransformDataMapperInterface": "",
-  "postTransformDataMapperInterface": "",
-  "remoteOptions": [],
-  "extraPayload": [
+  "confirmedActions": [
     {
-      "key": "selectedForms",
-      "value": "%selectedForms%"
+      "elementName": "IP-GETCaseDetails",
+      "fieldLabel": "IP-GETCaseDetails",
+      "elementType": "Integration Procedure Action",
+      "integrationProcedure": "CNC_GetCaseInformation",
+      "invokeMode": "Default",
+      "inputMapping": null,
+      "responseMapping": null,
+      "executionCondition": null
     },
     {
-      "key": "caseId",
-      "value": "%ContextId%"
-    }
-  ],
-  "sendOnlyExtraPayload": true,
-  "conditionalView": {
-    "conditionType": "Show Element if True",
-    "displayedCondition": "(MaterialType = Forms OR MaterialType = Documents)"
-  },
-  "responseMapping": null,
-  "executionResult": null,
-  "complete": false,
-  "evidenceScreenshots": [
-    "IMG_C51042A7-CA49-4628-9B6F-67ABC6EAACFB.jpeg",
-    "IMG_D1550A64-24EC-4C84-ADEC-B2697A53E10C.jpeg",
-    "IMG_72F08B4E-847E-4482-B9F2-F02D02904C6B.jpeg",
-    "IMG_BD192402-9D2A-4710-AB44-BF0EAFE28CCE.jpeg"
-  ],
-  "interpretation": "Configured for Forms/Documents; the displayed condition excludes Other Communication. No tokenMapping key appears in its extra payload. Method implementation and actual attachment behavior remain unreviewed.",
-  "missing": [
-    "Send/response transformations",
-    "Method source and response contract"
-  ]
-}
-```
-
-Next: IP-GenerateLetterinAsync properties, including target procedure, extra payload, send/response transformations and condition. Automatic-token population may occur earlier; IP-GETAPITokenData and RA-SetDefaultTokenMapping are visible upstream candidates whose internals are still unknown.
-
-
-## Async letter generation checkpoint — 2026-10-06, 11:10 PM CT
-
-Generated from canonical confirmedActions and integrationProcedures. Replaces the previous request for basic async action/IP identity. Missing formulas and outer condition remain explicitly unknown.
-
-```json
-{
-  "action": {
-    "elementName": "IP-GenerateLetterinAsync",
-    "fieldLabel": "IP-GenerateLetterinAsync",
-    "elementType": "Integration Procedure Action",
-    "integrationProcedure": "CNC_AsyncLetterGeneration",
-    "observedActive": true,
-    "invokeMode": "Default",
-    "showToastOnCompletion": false,
-    "extraPayload": [
-      {
-        "key": "templateId",
-        "value": "%selectedTemplate:Id%"
+      "elementName": "ExtractEmailBodyForMMR",
+      "fieldLabel": "ExtractEmailBodyForMMR",
+      "elementType": "Data Mapper Extract Action",
+      "dataMapper": "GetMMREmailTemplate",
+      "ignoreCache": false,
+      "inputParameters": [
+        {
+          "dataSource": "DeveloperName",
+          "filterValueDisplayed": "MMR_EMAIL_TEMPLATE",
+          "literalQuotingVerified": false
+        }
+      ],
+      "responseTransformations": null,
+      "userMessage": null,
+      "errorMessages": null,
+      "executionCondition": null,
+      "complete": false,
+      "evidenceScreenshots": [
+        "IMG_F2B01301-44F0-407A-A0CF-FF1F66E6AD37.jpeg",
+        "IMG_1F03F5AE-FCFF-4C84-840C-04F207E1D6B4.jpeg",
+        "IMG_D335A082-5392-4EA2-A7F9-9B27AE72E1E1.jpeg",
+        "IMG_7CABAFDD-8FD1-42F9-B32F-92158778A7D8.jpeg"
+      ]
+    },
+    {
+      "elementName": "IP-GetForms",
+      "elementType": "Integration Procedure Action",
+      "integrationProcedure": "CNC_GetEmailFormsDetails",
+      "complete": false,
+      "captureStatus": "in-progress",
+      "conditionalViewEvidence": {
+        "conditionType": "Show Element if True",
+        "displayedCondition": "(MaterialType = Forms OR MaterialType = Documents)",
+        "context": "IP-GetForms selected in preceding screenshot; selected-element header not visible in condition close-up",
+        "messagingFramework": {
+          "windowPostMessage": false,
+          "pubSub": false,
+          "sessionStorage": false
+        },
+        "lwcComponentOverride": ""
       },
-      {
-        "key": "objectId",
-        "value": "%ContextId%"
+      "missing": [
+        "Remaining user-message/error-message properties",
+        "Referenced Integration Procedure full definition and settings"
+      ],
+      "evidenceScreenshots": [
+        "IMG_70FF597B-607B-4E91-AE8E-7DFD2310FF27.jpeg",
+        "IMG_ECB61E00-ECA1-4281-8303-D3380D236979.jpeg",
+        "IMG_A7EC281B-F3FC-4FCF-BD04-501ED686935E.jpeg",
+        "IMG_7ED0B145-6A45-4A1C-A157-8CF97DE80626.jpeg",
+        "IMG_A9F862A3-2547-42D2-991A-234FA36FDDB2.jpeg"
+      ],
+      "preTransformDataMapperInterface": "",
+      "postTransformDataMapperInterface": "",
+      "remoteOptions": [],
+      "extraPayload": [
+        {
+          "key": "MaterialType",
+          "value": "%MaterialType%"
+        },
+        {
+          "key": "OutboundChannel",
+          "value": "%OutboundChannel%"
+        }
+      ],
+      "sendOnlyExtraPayload": true,
+      "sendJsonPath": "",
+      "sendJsonNode": "",
+      "responseJsonPath": "",
+      "responseJsonNode": "formsdata",
+      "inputMapping": {
+        "kind": "extra-payload-only",
+        "keys": [
+          "MaterialType",
+          "OutboundChannel"
+        ]
       },
-      {
-        "key": "tokenDataMap",
-        "value": "%tokenMapping%"
-      },
-      {
-        "key": "returnAsPdf",
-        "value": "true"
-      },
-      {
-        "key": "keepIntermediate",
-        "value": "false"
-      },
-      {
-        "key": "outputFileFormat",
-        "value": "pdf"
-      },
-      {
-        "key": "title",
-        "value": "%documentTitle%"
-      }
-    ],
-    "sendOnlyExtraPayload": true,
-    "responseMapping": null,
-    "executionCondition": null,
-    "remoteProperties": null,
-    "complete": false,
-    "evidenceScreenshots": [
-      "IMG_2589F3C1-EDEB-4B1F-92E9-13013F9E8AA9.jpeg",
-      "IMG_C37F5649-2C1B-4ADD-ACB9-51B618B1231A.jpeg"
-    ],
-    "missing": [
-      "Outer action send/response transformations",
-      "Outer action conditional view",
-      "Remote properties"
-    ],
-    "interpretation": "Configured to supply tokenMapping directly as tokenDataMap for server generation. Whether this branch executes for the observed runtime selection is not yet established."
-  },
-  "ip": {
-    "key": "CNC_AsyncLetterGeneration",
-    "name": "Async Letter Generation",
-    "type": "CNC",
-    "subType": "AsyncLetterGeneration",
-    "observedVersion": 3,
-    "observedActive": true,
-    "description": "This IP is used to Generate the letter templates asynchronously in Server side.",
-    "visibleElements": [
-      "setupServiceCallInputParams",
-      "generateDocumentWithTokenDataService",
-      "ipResponse"
-    ],
-    "complete": false,
-    "evidenceScreenshots": [
-      "IMG_27F1482A-BEDF-4B68-8328-75EB41C65CD0.jpeg",
-      "IMG_62AFFF34-C83D-4771-9535-1183262B7C98.jpeg",
-      "IMG_196222FD-D382-440B-8BF8-804D57F7C625.jpeg",
-      "IMG_6D2DD8BD-A89F-4138-9C08-2D06364C3132.jpeg",
-      "IMG_677FB22B-E29F-4B76-BA88-228D00940C7A.jpeg"
-    ],
-    "elements": [
-      {
-        "name": "setupServiceCallInputParams",
-        "type": "Set Values",
-        "observedActive": true,
-        "valueMap": [
-          {
-            "name": "title",
-            "type": "JSON Node",
-            "formula": null
-          },
-          {
-            "name": "returnAsPdf",
-            "type": "JSON Node",
-            "formula": null
-          },
-          {
-            "name": "keepIntermediate",
-            "type": "JSON Node",
-            "formula": null
-          }
-        ],
-        "formulaEvidence": "All three displayed formulas begin with IF/OR checks; right ends are clipped, so exact formulas/defaults remain unknown.",
-        "responseJsonPath": "",
-        "responseJsonNode": ""
-      },
-      {
-        "name": "generateDocumentWithTokenDataService",
-        "type": "Remote Action",
-        "observedActive": true,
-        "remoteClass": "omnistudio.DocumentServiceGateway",
-        "remoteMethod": "generateDocumentWithTokenData",
-        "remoteOptions": [
-          {
-            "key": "title",
-            "value": "%setupServiceCallInputParams:title%"
-          },
-          {
-            "key": "returnAsPdf",
-            "value": "%setupServiceCallInputParams:returnAsPdf%"
-          },
-          {
-            "key": "keepIntermediate",
-            "value": "%setupServiceCallInputParams:keepIntermediate%"
-          }
-        ],
-        "sendResponseTransformations": null
-      },
-      {
-        "name": "ipResponse",
-        "type": "Response Action",
-        "observedActive": true,
-        "responseFormat": "JSON",
-        "returnFullDataJson": false,
+      "responseMapping": {
         "sendJsonPath": "",
         "sendJsonNode": "",
         "responseJsonPath": "",
-        "responseJsonNode": "",
-        "returnOnlyAdditionalOutput": true,
-        "additionalOutput": [
+        "responseJsonNode": "formsdata"
+      },
+      "lwcComponentOverride": "",
+      "screenshotContext": "Top properties confirm IP-GetForms identity; continuation captures stored in this same action entry.",
+      "fieldLabel": "IP-GetForms",
+      "invokeMode": "Default",
+      "observedActive": true,
+      "showToastOnCompletion": false,
+      "remoteProperties": {
+        "useFuture": false,
+        "chainable": false,
+        "useContinuation": false,
+        "useQueueable": false,
+        "queueableChainable": false
+      }
+    },
+    {
+      "elementName": "RA-InsertSelectedForms",
+      "fieldLabel": "RA-InsertSelectedForms",
+      "elementType": "Remote Action",
+      "observedActive": true,
+      "invokeMode": "Default",
+      "showToastOnCompletion": false,
+      "remoteClass": "CNC_SendCommunication",
+      "remoteMethod": "createAttachments",
+      "useContinuation": false,
+      "preTransformDataMapperInterface": "",
+      "postTransformDataMapperInterface": "",
+      "remoteOptions": [],
+      "extraPayload": [
+        {
+          "key": "selectedForms",
+          "value": "%selectedForms%"
+        },
+        {
+          "key": "caseId",
+          "value": "%ContextId%"
+        }
+      ],
+      "sendOnlyExtraPayload": true,
+      "conditionalView": {
+        "conditionType": "Show Element if True",
+        "displayedCondition": "(MaterialType = Forms OR MaterialType = Documents)"
+      },
+      "responseMapping": null,
+      "executionResult": null,
+      "complete": false,
+      "evidenceScreenshots": [
+        "IMG_C51042A7-CA49-4628-9B6F-67ABC6EAACFB.jpeg",
+        "IMG_D1550A64-24EC-4C84-ADEC-B2697A53E10C.jpeg",
+        "IMG_72F08B4E-847E-4482-B9F2-F02D02904C6B.jpeg",
+        "IMG_BD192402-9D2A-4710-AB44-BF0EAFE28CCE.jpeg"
+      ],
+      "interpretation": "Configured for Forms/Documents; the displayed condition excludes Other Communication. No tokenMapping key appears in its extra payload. Method implementation and actual attachment behavior remain unreviewed.",
+      "missing": [
+        "Send/response transformations",
+        "Method source and response contract"
+      ]
+    },
+    {
+      "elementName": "IP-GenerateLetterinAsync",
+      "fieldLabel": "IP-GenerateLetterinAsync",
+      "elementType": "Integration Procedure Action",
+      "integrationProcedure": "CNC_AsyncLetterGeneration",
+      "observedActive": true,
+      "invokeMode": "Default",
+      "showToastOnCompletion": false,
+      "extraPayload": [
+        {
+          "key": "templateId",
+          "value": "%selectedTemplate:Id%"
+        },
+        {
+          "key": "objectId",
+          "value": "%ContextId%"
+        },
+        {
+          "key": "tokenDataMap",
+          "value": "%tokenMapping%"
+        },
+        {
+          "key": "returnAsPdf",
+          "value": "true"
+        },
+        {
+          "key": "keepIntermediate",
+          "value": "false"
+        },
+        {
+          "key": "outputFileFormat",
+          "value": "pdf"
+        },
+        {
+          "key": "title",
+          "value": "%documentTitle%"
+        }
+      ],
+      "sendOnlyExtraPayload": true,
+      "responseMapping": {
+        "sendJsonPath": "",
+        "sendJsonNode": "",
+        "responseJsonPath": "",
+        "responseJsonNode": ""
+      },
+      "executionCondition": {
+        "conditionType": "Show Element if True",
+        "displayedCondition": "(isAsyncLetterGeneration = true AND isPOD <> true)"
+      },
+      "remoteProperties": null,
+      "complete": false,
+      "evidenceScreenshots": [
+        "IMG_2589F3C1-EDEB-4B1F-92E9-13013F9E8AA9.jpeg",
+        "IMG_C37F5649-2C1B-4ADD-ACB9-51B618B1231A.jpeg",
+        "IMG_FC652828-4342-4FA3-A38E-DD7E5199E8F1.jpeg",
+        "IMG_621353BF-9610-4053-BC10-06B10CA8C4B0.jpeg"
+      ],
+      "missing": [
+        "Remote properties"
+      ],
+      "interpretation": "Async branch is gated by isAsyncLetterGeneration=true and isPOD<>true. The reviewed LWC initializes async true and sets it false for RTB_ manual tokens; the displayed HOSTProviderFreeformLetter token JSON has no RTB_ names. This makes async routing consistent with reviewed configuration, but actual runtime flag values/execution remain unverified. No send/response path or node override is configured in the displayed transformation fields."
+    },
+    {
+      "elementName": "RA-SetDefaultTokenMapping",
+      "elementType": "Remote Action",
+      "remoteClass": "CNC_SendCommunication",
+      "remoteMethod": "transformTokenData",
+      "invokeMode": "Default",
+      "preTransformDataMapperInterface": "",
+      "remoteOptions": [],
+      "extraPayload": [],
+      "sendOnlyExtraPayload": false,
+      "executionCondition": {
+        "conditionType": "Show Element if True",
+        "displayedCondition": "(isPOD <> true)"
+      },
+      "complete": false,
+      "captureDate": "2026-10-07",
+      "evidenceScreenshots": [
+        "IMG_07618DAD-E3D8-4586-B779-A087C3B5E47F.jpeg",
+        "IMG_4D3EC56A-EFF1-4381-9FA4-4670F35B9C04.jpeg",
+        "IMG_C0BC6FED-85DF-44B8-8A61-260BA3018CFF.jpeg",
+        "IMG_B126EBE5-BA79-4FE1-B0C8-D65EF4F7D48E.jpeg",
+        "IMG_8721C56B-E0C9-45BF-AB7F-0FE49C81AF59.jpeg"
+      ],
+      "missing": [
+        "Remaining response properties and runtime input/output"
+      ]
+    },
+    {
+      "elementName": "IP-GetPatientDemographics",
+      "elementType": "Integration Procedure Action",
+      "integrationProcedure": "CNC_Member360",
+      "extraPayload": [
+        {
+          "key": "memberId",
+          "value": "%memberId%"
+        }
+      ],
+      "sendOnlyExtraPayload": true,
+      "sendJsonPath": "",
+      "sendJsonNode": "",
+      "responseJsonPath": "",
+      "responseJsonNode": "",
+      "transformationEvidence": "User reported blank Send/Response Transformations fields; extra payload photographed separately.",
+      "complete": false,
+      "evidenceScreenshots": [
+        "IMG_68EDD180-DC11-484E-87F5-057455E71FB3.jpeg",
+        "IMG_F313C0EE-579A-4998-B53E-A74140FDF659.jpeg"
+      ]
+    }
+  ],
+  "missingForRunnableBuild": [
+    "OmniScript exported definition",
+    "Complete IP-GETCaseDetails properties including input/output mappings and conditions",
+    "CNC_GetCaseInformation exported definition and dependencies",
+    "Case launch source metadata completeness and target implementation verification (source action/LWC navigation wiring captured 2026-10-06)",
+    "Remaining elements, nested steps, properties and dependencies",
+    "Generation template and actual generation payload/call"
+  ],
+  "safety": {
+    "activate": false,
+    "deploy": false,
+    "includeSecrets": false
+  },
+  "integrationProcedures": [
+    {
+      "key": "CNC_GetCaseInformation",
+      "name": "Get Case Information",
+      "type": "CNC",
+      "subType": "GetCaseInformation",
+      "observedVersion": 3,
+      "observedActive": true,
+      "visibleElements": [
+        {
+          "elementName": "DR-E-GetCaseInfo",
+          "type": "Data Mapper Extract Action",
+          "dataMapper": "CNCGetCaseInfo",
+          "inputParameters": [
+            {
+              "dataSource": "caseId",
+              "filterValue": "caseId"
+            }
+          ],
+          "sendJsonPath": "",
+          "sendJsonNode": "",
+          "responseJsonPath": "",
+          "responseJsonNode": "response",
+          "ignoreCache": false,
+          "sendOnlyAdditionalInput": false,
+          "returnOnlyAdditionalOutput": false
+        }
+      ],
+      "complete": false
+    },
+    {
+      "key": "CNC_GetEmailFormsDetails",
+      "name": "Email Forms Details",
+      "type": "CNC",
+      "subType": "GetEmailFormsDetails",
+      "observedVersion": 5,
+      "observedActive": true,
+      "description": "MNPP-3048 - Updated Outbound channel check.",
+      "configuration": {
+        "trackingCustomData": [],
+        "includeAllActionsInResponse": false,
+        "rollbackOnError": false,
+        "requiredPermission": ""
+      },
+      "visibleElements": [
+        {
+          "elementName": "SV-DefaultMapping",
+          "type": "Set Values",
+          "values": [
+            {
+              "name": "sectionName",
+              "expression": "IF(%MaterialType% = \"Forms\",\"Send Communication Forms\",\"Send Communication Documents\")",
+              "verification": "Full expression supplied by user in browser address bar screenshot; runtime/export syntax not validated.",
+              "expressionDisplayed": "=IF(%MaterialType% = \"Forms\",\"Send Communication Forms\",\"Send Communication Documents\")"
+            },
+            {
+              "name": "type",
+              "expression": "IF(%MaterialType% = \"Forms\",\"Email Forms\",\"Email Documents\")",
+              "verification": "readable screenshot transcription; exact export syntax not validated"
+            }
+          ],
+          "responseJsonPath": "",
+          "responseJsonNode": "",
+          "executionConditionalFormula": "",
+          "failOnStepError": false,
+          "complete": false,
+          "order": 1,
+          "evidenceScreenshots": [
+            "IMG_29034490-76E5-4170-AD4B-EC3073A16790.jpeg"
+          ]
+        },
+        {
+          "elementName": "DR-E-GetHeaderAttributes",
+          "type": "Data Mapper Extract Action",
+          "dataMapper": "CNCGetHeaderAttributes",
+          "ignoreCache": false,
+          "inputParameters": [
+            {
+              "dataSource": "SV-DefaultMapping:sectionName",
+              "filterValue": "sectionName"
+            }
+          ],
+          "sendJsonPath": "",
+          "sendJsonNode": "",
+          "responseJsonPath": "",
+          "responseJsonNode": "",
+          "sendOnlyAdditionalInput": false,
+          "complete": false,
+          "order": 2
+        },
+        {
+          "elementName": "DR-E-GetForms",
+          "type": "Data Mapper Extract Action",
+          "order": 3,
+          "dataMapper": "CNCGetInternalAndExternalLinks",
+          "complete": false,
+          "ignoreCache": false,
+          "inputParameters": [
+            {
+              "dataSource": "SV-DefaultMapping:type",
+              "filterValue": "type"
+            },
+            {
+              "dataSource": "OutboundChannel",
+              "filterValue": "OutboundChannel"
+            }
+          ],
+          "sendJsonPath": "",
+          "sendJsonNode": "",
+          "responseJsonPath": "",
+          "responseJsonNode": "",
+          "sendOnlyAdditionalInput": false,
+          "missing": [
+            "Additional input/output/failure response settings below photographed area",
+            "Execution conditions and remaining properties"
+          ],
+          "evidenceScreenshots": [
+            "IMG_DE6E1E82-E36E-4E62-B5E8-644C75D8468A.jpeg"
+          ]
+        },
+        {
+          "elementName": "ResponseAction",
+          "type": "Response Action",
+          "order": 4,
+          "complete": false,
+          "responseFormat": "JSON",
+          "responseHeaders": [],
+          "sendJsonPath": "DR-E-GetHeaderAttributes",
+          "responseJsonPath": "",
+          "sendJsonNode": "",
+          "responseJsonNode": "",
+          "additionalOutputResponse": {
+            "returnOnlyAdditionalOutput": false,
+            "additionalOutput": [
+              {
+                "key": "responsedata",
+                "value": "%DR-E-GetForms:links%"
+              }
+            ]
+          },
+          "executionConditionalFormula": "",
+          "internalNotes": "",
+          "missing": [],
+          "evidenceScreenshots": [
+            "IMG_B73A6677-0F30-4A98-BEEF-3584372AE0F9.jpeg",
+            "IMG_4BED4E5F-62CF-401A-B701-7A367A0B6D0E.jpeg"
+          ],
+          "captureStatus": "visible-properties-captured"
+        }
+      ],
+      "complete": false,
+      "evidenceScreenshots": [
+        "IMG_442D406A-B405-4965-AF08-059D1EBDE932.jpeg",
+        "IMG_B5075B6E-84B4-4C77-876E-0C2C5E5EAEE2.jpeg",
+        "IMG_412EA20C-02BE-4372-9367-69A1AFEA733F.jpeg",
+        "IMG_DE6E1E82-E36E-4E62-B5E8-644C75D8468A.jpeg"
+      ],
+      "identityVerification": "Procedure Configuration screenshot confirms Type/SubType matching the OmniScript IP-GetForms reference; prior photographed IP element captures linked here.",
+      "missing": [
+        "Remaining DR-E-GetForms properties and CNCGetInternalAndExternalLinks definition",
+        "Any additional procedure settings outside visible area"
+      ]
+    },
+    {
+      "key": "CNC_AsyncLetterGeneration",
+      "name": "Async Letter Generation",
+      "type": "CNC",
+      "subType": "AsyncLetterGeneration",
+      "observedVersion": 3,
+      "observedActive": true,
+      "description": "This IP is used to Generate the letter templates asynchronously in Server side.",
+      "visibleElements": [
+        "setupServiceCallInputParams",
+        "generateDocumentWithTokenDataService",
+        "ipResponse"
+      ],
+      "complete": false,
+      "evidenceScreenshots": [
+        "IMG_27F1482A-BEDF-4B68-8328-75EB41C65CD0.jpeg",
+        "IMG_62AFFF34-C83D-4771-9535-1183262B7C98.jpeg",
+        "IMG_196222FD-D382-440B-8BF8-804D57F7C625.jpeg",
+        "IMG_6D2DD8BD-A89F-4138-9C08-2D06364C3132.jpeg",
+        "IMG_677FB22B-E29F-4B76-BA88-228D00940C7A.jpeg"
+      ],
+      "elements": [
+        {
+          "name": "setupServiceCallInputParams",
+          "type": "Set Values",
+          "observedActive": true,
+          "valueMap": [
+            {
+              "name": "title",
+              "type": "JSON Node",
+              "formula": null
+            },
+            {
+              "name": "returnAsPdf",
+              "type": "JSON Node",
+              "formula": null
+            },
+            {
+              "name": "keepIntermediate",
+              "type": "JSON Node",
+              "formula": null
+            }
+          ],
+          "formulaEvidence": "All three displayed formulas begin with IF/OR checks; right ends are clipped, so exact formulas/defaults remain unknown.",
+          "responseJsonPath": "",
+          "responseJsonNode": ""
+        },
+        {
+          "name": "generateDocumentWithTokenDataService",
+          "type": "Remote Action",
+          "observedActive": true,
+          "remoteClass": "omnistudio.DocumentServiceGateway",
+          "remoteMethod": "generateDocumentWithTokenData",
+          "remoteOptions": [
+            {
+              "key": "title",
+              "value": "%setupServiceCallInputParams:title%"
+            },
+            {
+              "key": "returnAsPdf",
+              "value": "%setupServiceCallInputParams:returnAsPdf%"
+            },
+            {
+              "key": "keepIntermediate",
+              "value": "%setupServiceCallInputParams:keepIntermediate%"
+            }
+          ],
+          "sendResponseTransformations": null
+        },
+        {
+          "name": "ipResponse",
+          "type": "Response Action",
+          "observedActive": true,
+          "responseFormat": "JSON",
+          "returnFullDataJson": false,
+          "sendJsonPath": "",
+          "sendJsonNode": "",
+          "responseJsonPath": "",
+          "responseJsonNode": "",
+          "returnOnlyAdditionalOutput": true,
+          "additionalOutput": [
+            {
+              "key": "asyncErrorMessage",
+              "formula": null,
+              "formulaEvidence": "Begins IF referencing generateDocumentWithTokenDataService; remainder clipped."
+            },
+            {
+              "key": "jobId",
+              "formula": null,
+              "formulaEvidence": "References generateDocumentWithTokenDataService job field; full text/casing requires confirmation."
+            }
+          ],
+          "executionConditionalFormula": ""
+        }
+      ],
+      "interpretation": [
+        "Server-side generation infrastructure exists alongside template ClientSide configuration. The outer execution condition and synchronous review branch must be inspected to establish the actual selected route.",
+        "No automatic-token construction is visible in these three elements; tokenDataMap is supplied by the outer action.",
+        "Configured output includes jobId and asyncErrorMessage; no actual generation response or successful job completion was provided."
+      ],
+      "missing": [
+        "Full Set Values formulas",
+        "Remote Action send/response transformations",
+        "Full additional output formulas",
+        "Procedure settings beyond identity/version"
+      ]
+    },
+    {
+      "key": "CNC_Member360",
+      "name": "Patient Demographics",
+      "visibleStructure": [
+        "ConditionalBlock: RA-GetIntegrationCreds, HTTPGetPatient, DR-T-PatientInfo",
+        "RA-UpdateIntegrationCreds",
+        "IfAuthTokenExpiresWithin24Hrs: RA-GetIntegrationCreds2, HTTPGetPatient2, DR-T-PatientInfo2",
+        "RA-UpdateIntegrationCreds2",
+        "ResponseAction1",
+        "ResponseAction2"
+      ],
+      "visibleElements": [
+        {
+          "elementName": "DR-T-PatientInfo",
+          "type": "Data Mapper Transform Action",
+          "dataMapper": "CNCTransformMemberInfo",
+          "ignoreCache": false,
+          "sendJsonPath": "HTTPGetPatient:entry:resource",
+          "sendJsonNode": "",
+          "responseJsonPath": "",
+          "responseJsonNode": "",
+          "additionalInput": [
+            {
+              "key": "localMemberId",
+              "value": "%memberId%"
+            }
+          ],
+          "sendOnlyAdditionalInput": false,
+          "returnOnlyAdditionalOutput": false,
+          "additionalOutput": [],
+          "executionConditionalFormula": "ISNOTBLANK(%HTTPGetPatient%) && %HTTPGetPatient:success% != false",
+          "failOnStepError": false,
+          "failureConditionalFormula": "",
+          "complete": false
+        },
+        {
+          "elementName": "ResponseAction1",
+          "type": "Response Action",
+          "responseFormat": "JSON",
+          "returnFullDataJson": false,
+          "sendJsonPath": "DR-T-PatientInfo",
+          "sendJsonNode": "",
+          "responseJsonPath": "",
+          "responseJsonNode": "",
+          "executionConditionalFormula": "ISNOTBLANK(%DR-T-PatientInfo%)",
+          "additionalOutputResponse": null,
+          "complete": false
+        },
+        {
+          "elementName": "ResponseAction2",
+          "type": "Response Action",
+          "responseFormat": "JSON",
+          "returnFullDataJson": false,
+          "sendJsonPath": "DR-T-PatientInfo2",
+          "sendJsonNode": "",
+          "responseJsonPath": "",
+          "responseJsonNode": "",
+          "executionConditionalFormula": "ISNOTBLANK(%DR-T-PatientInfo2%)",
+          "additionalOutputResponse": null,
+          "complete": false
+        }
+      ],
+      "complete": false,
+      "missing": [
+        "HTTP configuration, conditional-block formulas, retry-transform definition and full procedure settings",
+        "Additional Output Response sections are collapsed; do not assume empty"
+      ],
+      "evidenceScreenshots": [
+        "IMG_6EEF06F3-AC79-41BE-92B0-9054D1A39490.jpeg",
+        "IMG_B2747504-727B-46E5-99AD-C3DF5895EB43.jpeg",
+        "IMG_524918FE-371D-44DD-A19A-69704BDB54F5.jpeg",
+        "IMG_03933351-7AEA-432D-B25E-8DAE1D672207.jpeg",
+        "IMG_70A284F8-99C1-445F-9743-92F96468FF53.jpeg",
+        "IMG_8AF6A71B-E701-4142-B401-3DB3EC33ED5D.jpeg",
+        "IMG_0FB9632A-7E3A-40DF-A4CE-74CC11B20B14.jpeg",
+        "IMG_FE5AC411-378A-4045-9842-73C7D1E9DFA6.jpeg",
+        "IMG_5CA97591-F262-46C8-AFA4-53031192339D.jpeg"
+      ]
+    },
+    {
+      "key": "CNC_GetLetterTemplates",
+      "name": "Get Letter Templates",
+      "observedVersion": 4,
+      "observedActive": true,
+      "visibleElements": [
+        {
+          "elementName": "SV-DataMapping",
+          "type": "Set Values",
+          "values": null
+        },
+        {
+          "elementName": "DR-E-GetHeaderAttributes",
+          "type": "Data Mapper Extract Action",
+          "dataMapper": null
+        },
+        {
+          "elementName": "DR-E-LetterTemplates",
+          "type": "Data Mapper Extract Action",
+          "dataMapper": "CNCGetLetterTemplates",
+          "inputParameters": [
+            {
+              "dataSource": "SV-DataMapping:letterType",
+              "filterValue": "letterType"
+            },
+            {
+              "dataSource": "MaterialType",
+              "filterValue": "materialType"
+            }
+          ]
+        },
+        {
+          "elementName": "ResponseAction",
+          "type": "Response Action",
+          "sendJsonPath": "DR-E-GetHeaderAttributes",
+          "additionalOutput": [
+            {
+              "key": "responsedata",
+              "value": "%DR-E-LetterTemplates:letters%"
+            },
+            {
+              "key": "selectedlettertype",
+              "value": "%SV-DataMapping:letterType%"
+            }
+          ]
+        }
+      ],
+      "previewInput": {
+        "OutboundChannel": "Print",
+        "MaterialType": "Other Communication"
+      },
+      "mapperPreviewInput": {
+        "letterType": "Generic Letter",
+        "materialType": "Other Communication"
+      },
+      "complete": false,
+      "verification": "Captured visible flow and mappings; complete SV expressions and remaining settings unknown."
+    }
+  ],
+  "dataMappers": [
+    {
+      "name": "CNCGetCaseInfo",
+      "interfaceType": "Extract",
+      "inputType": "JSON",
+      "outputType": "JSON",
+      "extractSteps": [
+        {
+          "object": "Case",
+          "outputPath": "caseInfo",
+          "filter": {
+            "field": "Id",
+            "operator": "=",
+            "input": "caseId"
+          }
+        },
+        {
+          "object": "User",
+          "outputPath": "loggedInUserInfo",
+          "filterExpressionStatus": "Exact displayed input captured in newer PENDING_WORK.md evidence; implementation pending.",
+          "filter": {
+            "field": "Id",
+            "operator": "=",
+            "input": "$Vlocity.UserId"
+          }
+        }
+      ],
+      "formulaCountObserved": 13,
+      "outputMappings": [
+        {
+          "extractJsonPath": "caseInfo:Account.Blue_Shield_Id__c",
+          "outputJsonPath": "providerBlueshildId",
+          "verification": "Output spelling appears providerBlueshildId in mapping screenshot; earlier schema transcription was providerBlueshieldId. Confirm exact spelling from export or close-up before executable build."
+        },
+        {
+          "extractJsonPath": "caseInfo:Account.Member_Id__pc",
+          "outputJsonPath": "localMemberId"
+        },
+        {
+          "extractJsonPath": "caseInfo:Account.NPI__c",
+          "outputJsonPath": "providerNPI"
+        },
+        {
+          "extractJsonPath": "caseInfo:Account.PersonBirthdate",
+          "outputJsonPath": "memberDOB"
+        },
+        {
+          "extractJsonPath": "caseInfo:Account.PersonEmail",
+          "outputJsonPath": "memberEmail"
+        },
+        {
+          "extractJsonPath": "caseInfo:Account.PersonMailingCity",
+          "outputJsonPath": "localCity"
+        },
+        {
+          "extractJsonPath": "caseInfo:Account.PersonMailingCountry",
+          "outputJsonPath": "localCountry"
+        },
+        {
+          "extractJsonPath": "caseInfo:Account.PersonMailingPostalCode",
+          "outputJsonPath": "localPostalCode"
+        },
+        {
+          "extractJsonPath": "caseInfo:Account.PersonMailingState",
+          "outputJsonPath": "localState"
+        },
+        {
+          "extractJsonPath": "caseInfo:Account.PersonMailingStreet",
+          "outputJsonPath": "localStreet"
+        },
+        {
+          "extractJsonPath": "caseInfo:Account.Primary_Address__pc",
+          "outputJsonPath": "localFullAddress"
+        },
+        {
+          "extractJsonPath": "caseInfo:Account.Subscriber_Id__pc",
+          "outputJsonPath": "subscriberId"
+        },
+        {
+          "extractJsonPath": "caseInfo:Account.UMPI__c",
+          "outputJsonPath": "providerUMPI"
+        },
+        {
+          "extractJsonPath": "caseInfo:CaseNumber",
+          "outputJsonPath": "caseNumber"
+        },
+        {
+          "extractJsonPath": "caseInfo:Description",
+          "outputJsonPath": "caseDescription"
+        },
+        {
+          "extractJsonPath": "caseInfo:Id",
+          "outputJsonPath": "Id"
+        },
+        {
+          "extractJsonPath": "caseInfo:Owner.Name",
+          "outputJsonPath": "ownerName"
+        },
+        {
+          "extractJsonPath": "caseInfo:OwnerId",
+          "outputJsonPath": "caseOwnerId"
+        },
+        {
+          "extractJsonPath": "caseInfo:relationship",
+          "outputJsonPath": "caseType"
+        },
+        {
+          "extractJsonPath": "caseInfo:Source_System__c",
+          "outputJsonPath": "sourceSystem"
+        },
+        {
+          "extractJsonPath": "createdDate",
+          "outputJsonPath": "createdDate"
+        },
+        {
+          "extractJsonPath": "currentDate",
+          "outputJsonPath": "currentDate"
+        },
+        {
+          "extractJsonPath": "localEnterprisePersonId",
+          "outputJsonPath": "localEnterprisePersonId"
+        },
+        {
+          "extractJsonPath": "localMemberFirstName",
+          "outputJsonPath": "localMemberFirstName"
+        },
+        {
+          "extractJsonPath": "localMemberLastName",
+          "outputJsonPath": "localMemberLastName"
+        },
+        {
+          "extractJsonPath": "localMemberName",
+          "outputJsonPath": "localMemberName"
+        },
+        {
+          "extractJsonPath": "loggedInUserInfo:Id",
+          "outputJsonPath": "loggedInUserId"
+        },
+        {
+          "extractJsonPath": "receivedDate",
+          "outputJsonPath": "receivedDate"
+        },
+        {
+          "extractJsonPath": "relatedEntities",
+          "outputJsonPath": "relatedEntities"
+        },
+        {
+          "extractJsonPath": "relatedEntityCount",
+          "outputJsonPath": "relatedEntityCount"
+        },
+        {
+          "extractJsonPath": "serviceRepName",
+          "outputJsonPath": "serviceRepName"
+        },
+        {
+          "extractJsonPath": "todayDate",
+          "outputJsonPath": "todayDate"
+        }
+      ],
+      "evidencePath": "Docgen/evidence/CNC_GetCaseInformation.md",
+      "complete": false,
+      "visibleOutputSchemaKeys": [
+        "localMemberFirstName",
+        "memberDOB",
+        "providerBlueshieldId",
+        "memberEmail",
+        "localPostalCode",
+        "currentDate",
+        "relatedEntityCount",
+        "localStreet",
+        "loggedInUserId",
+        "localCity",
+        "caseDescription",
+        "ownerName",
+        "sourceSystem",
+        "caseNumber",
+        "todayDate",
+        "providerNPI",
+        "localFullAddress",
+        "localMemberName",
+        "createdDate",
+        "localState",
+        "localEnterprisePersonId",
+        "providerUMPI",
+        "localCountry",
+        "caseType",
+        "subscriberId",
+        "localMemberId",
+        "caseOwnerId",
+        "Id",
+        "localMemberLastName",
+        "serviceRepName",
+        "relatedEntities",
+        "receivedDate"
+      ],
+      "options": {
+        "timeToLiveMinutes": 0,
+        "checkFieldLevelSecurity": false,
+        "platformCacheType": null,
+        "overwriteTargetForAllNullInputs": false
+      },
+      "previewEvidence": {
+        "inputKey": "caseId",
+        "caseQueryResultCount": 0,
+        "successfulCaseRetrievalVerified": false,
+        "personalValuesOmitted": true
+      },
+      "outputMappingCoverage": {
+        "visibleRows": 32,
+        "allPreviouslyCapturedKeysRepresentedExceptSpellingDiscrepancy": true,
+        "rowDetailPropertiesVerified": false,
+        "spellingDiscrepancies": [
+          "providerBlueshildId versus providerBlueshieldId"
+        ]
+      },
+      "formulaEvidence": [
+        {
+          "order": 1,
+          "resultPath": "relatedEntityCount",
+          "readableBehavior": "COUNTQUERY against Case_Sub_Entity__c filtered by Case__c using caseId",
+          "expression": "COUNTQUERY(\"SELECT COUNT() FROM Case_Sub_Entity__c WHERE Case__c = '{0}'\",caseId)",
+          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+        },
+        {
+          "order": 2,
+          "resultPath": "currentDate",
+          "readableBehavior": "FORMATDATETIME of NOW(), format MM/dd/yyyy",
+          "expression": "FORMATDATETIME(NOW(),\"MM/dd/yyyy\")",
+          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+        },
+        {
+          "order": 3,
+          "resultPath": "todayDate",
+          "readableBehavior": "FORMATDATETIME of NOW(), format MMMM dd, yyyy",
+          "expression": "FORMATDATETIME(NOW(),\"MMMM dd, yyyy\")",
+          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+        },
+        {
+          "order": 4,
+          "resultPath": "serviceRepName",
+          "readableBehavior": "If loggedInUserInfo:FirstName is blank, use the first character of LastName; otherwise concatenate FirstName and the first character of LastName",
+          "expression": "IF(ISBLANK(loggedInUserInfo:FirstName),SUBSTRING(loggedInUserInfo:LastName,0,1),CONCAT(loggedInUserInfo:FirstName,\" \",SUBSTRING(loggedInUserInfo:LastName,0,1)))",
+          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+        },
+        {
+          "order": 5,
+          "resultPath": "caseInfo:relationship",
+          "readableBehavior": "Account.Record_Type__c Member or Unlisted Member maps to Member; otherwise Provider",
+          "expression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",\"Member\",\"Provider\")",
+          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+        },
+        {
+          "order": 6,
+          "resultPath": "localMemberName",
+          "readableBehavior": "For Member/Unlisted Member use caseInfo:Account.Name; otherwise caseInfo:Contact.Name",
+          "expression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",caseInfo:Account.Name,caseInfo:Contact.Name)",
+          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+        },
+        {
+          "order": 7,
+          "resultPath": "localMemberFirstName",
+          "readableBehavior": "For Member/Unlisted Member use caseInfo:Account.FirstName; otherwise empty string",
+          "expression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",caseInfo:Account.FirstName,\"\")",
+          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+        },
+        {
+          "order": 8,
+          "resultPath": "localMemberLastName",
+          "readableBehavior": "For Member/Unlisted Member use caseInfo:Account.LastName; otherwise empty string",
+          "expression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",caseInfo:Account.LastName,\"\")",
+          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+        },
+        {
+          "order": 9,
+          "resultPath": "localEnterprisePersonId",
+          "readableBehavior": "For Member/Unlisted Member use caseInfo:Account.Enterprise_Person_Id__c; otherwise empty string",
+          "expression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",caseInfo:Account.Enterprise_Person_Id__c,\"\")",
+          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+        },
+        {
+          "order": 10,
+          "resultPath": "createdDate",
+          "readableBehavior": "FORMATDATETIME of caseInfo:CreatedDate, format MM/dd/yyyy",
+          "expression": "FORMATDATETIME(caseInfo:CreatedDate,\"MM/dd/yyyy\")",
+          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+        },
+        {
+          "order": 11,
+          "resultPath": "receivedDate",
+          "readableBehavior": "FORMATDATETIME of caseInfo:Received_Date__c, format MM/dd/yyyy",
+          "expression": "FORMATDATETIME(caseInfo:Received_Date__c,\"MM/dd/yyyy\")",
+          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+        },
+        {
+          "order": 12,
+          "resultPath": "relatedEntitiesList",
+          "readableBehavior": "QUERY selects Entity_Type__c from Case_Sub_Entity__c filtered by Case__c using caseId",
+          "expression": "QUERY(\"SELECT Entity_Type__c FROM Case_Sub_Entity__c WHERE Case__c = '{0}'\",caseId)",
+          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+        },
+        {
+          "order": 13,
+          "resultPath": "relatedEntities",
+          "readableBehavior": "TOSTRING(relatedEntitiesList)",
+          "expression": "TOSTRING(relatedEntitiesList)",
+          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+        }
+      ],
+      "formulaVerification": "Exact formulas 1\u201313 now reconciled from newer PENDING_WORK.md evidence. Do not request them again. Runtime validation remains pending.",
+      "latestEvidenceScreenshots": [
+        "IMG_DE10F392-11C2-48F2-9666-71DA08DF4A09.jpeg",
+        "IMG_83757801-E6D8-4415-8159-D2E7345C841C.jpeg",
+        "IMG_7692FDD7-99EB-4AB5-99D2-A71BEC980753.jpeg",
+        "IMG_02B432B6-93CA-4A20-BB23-33A5AF1F82D7.jpeg",
+        "IMG_ED440796-B81F-4FF6-B8B3-1A21D4757B5B.jpeg"
+      ],
+      "latestVerification": "October 7 screenshots reconfirm existing Case/User extracts, first two formulas and output rows through sourceSystem. Preserve earlier captured remaining rows; latest batch does not reconfirm them. Do not append duplicate mappings."
+    },
+    {
+      "name": "GetMMREmailTemplate",
+      "interfaceType": "Extract",
+      "inputType": "JSON",
+      "outputType": "JSON",
+      "extractSteps": [
+        {
+          "object": "EmailTemplate",
+          "outputPath": "Email",
+          "filter": {
+            "field": "DeveloperName",
+            "operator": "=",
+            "valueDisplayed": "'MMR_EMAIL_TEMPLATE'",
+            "sourceKind": "displayed-quoted-value",
+            "exactQuoteSemanticsVerified": false
+          }
+        }
+      ],
+      "outputMappings": [
+        {
+          "extractJsonPath": "Email:HtmlValue",
+          "outputJsonPath": "mmrEmailTemplate:selectedTemplate:htmlValue"
+        },
+        {
+          "extractJsonPath": "Email:Subject",
+          "outputJsonPath": "mmrEmailTemplate:selectedTemplate:emailTemplateSubject"
+        }
+      ],
+      "formulas": null,
+      "options": null,
+      "complete": false,
+      "previewEvidence": {
+        "inputKey": "DeveloperName",
+        "inputValue": "MMR_EMAIL_TEMPLATE",
+        "responseVisible": false,
+        "executedSuccessfullyVerified": false
+      },
+      "evidenceScreenshots": [
+        "IMG_F2B01301-44F0-407A-A0CF-FF1F66E6AD37.jpeg",
+        "IMG_1F03F5AE-FCFF-4C84-840C-04F207E1D6B4.jpeg",
+        "IMG_D335A082-5392-4EA2-A7F9-9B27AE72E1E1.jpeg",
+        "IMG_7CABAFDD-8FD1-42F9-B32F-92158778A7D8.jpeg"
+      ]
+    },
+    {
+      "name": "CNCGetHeaderAttributes",
+      "interfaceType": "Extract",
+      "inputType": "JSON",
+      "outputType": "JSON",
+      "extractSteps": [
+        {
+          "object": "CNC_Line_Attributes__mdt",
+          "outputPath": "section",
+          "filter": {
+            "combine": "OR",
+            "conditions": [
+              {
+                "field": "Section_Name__c",
+                "operator": "=",
+                "input": "sectionName"
+              },
+              {
+                "field": "DeveloperName",
+                "operator": "=",
+                "input": "lineAttributeName"
+              }
+            ]
+          },
+          "limit": 1
+        },
+        {
+          "object": "CNC_Header_Attribute__mdt",
+          "outputPath": "columns",
+          "filter": {
+            "field": "CNC_Line_Attributes__c",
+            "operator": "=",
+            "input": "section:Id"
+          },
+          "orderBy": "Column_Order__c"
+        },
+        {
+          "object": "CNC_Button_Attribute__mdt",
+          "outputPath": "buttonattributes",
+          "filter": {
+            "field": "CNC_Line_Attributes__c",
+            "operator": "=",
+            "input": "section:Id"
+          },
+          "orderBy": "Order__c"
+        },
+        {
+          "object": "CNC_Search_Attributes__mdt",
+          "outputPath": "search",
+          "filter": {
+            "field": "CNC_Line_Attributes__c",
+            "operator": "=",
+            "input": "section:Id"
+          },
+          "orderBy": "Order__c"
+        },
+        {
+          "object": "Account",
+          "outputPath": "memberInfo",
+          "filter": {
+            "combine": "OR",
+            "conditions": [
+              {
+                "field": "Id",
+                "operator": "=",
+                "input": "recId"
+              },
+              {
+                "field": "Member_Id__pc",
+                "operator": "=",
+                "input": "memberId"
+              }
+            ]
+          },
+          "limit": 1
+        },
+        {
+          "object": "Case",
+          "outputPath": "caseInfo",
+          "filter": {
+            "field": "Id",
+            "operator": "=",
+            "input": "caseRecordId"
+          }
+        }
+      ],
+      "formulas": [
+        {
+          "observedIndex": 1,
+          "resultPath": "columns:typeAttributeVariant",
+          "expression": "IF(columns:Data_Type__c == \"button\",\"base\",\"\")",
+          "isDisabled": false,
+          "verification": "screenshot transcription; exact casing/syntax to confirm from export"
+        },
+        {
+          "observedIndex": 2,
+          "resultPath": "columns:typeAttributeLabel",
+          "expression": "IF(columns:Data_Type__c == \"button\",columns:API_Response__c,\"\")",
+          "isDisabled": false,
+          "verification": "screenshot transcription; exact casing/syntax to confirm from export"
+        },
+        {
+          "observedIndex": 3,
+          "resultPath": "columns:typeAttributeName",
+          "expression": "IF(columns:Data_Type__c == \"button\",columns:API_Response__c,\"\")",
+          "isDisabled": false,
+          "verification": "screenshot transcription; exact casing/syntax to confirm from export"
+        },
+        {
+          "observedIndex": 4,
+          "resultPath": "columns:typeAttributeDisabled",
+          "expression": "IF(columns:Data_Type__c == \"button\",true,\"\")",
+          "isDisabled": false,
+          "verification": "screenshot transcription; exact casing/syntax to confirm from export"
+        },
+        {
+          "observedIndex": 5,
+          "resultPath": "section:Show_Pagination__c",
+          "expression": "IF(isViewAll == \"VIEWALL\",true,section:Show_Pagination__c)",
+          "isDisabled": false,
+          "verification": "readable screenshot transcription; runtime not validated"
+        },
+        {
+          "observedIndex": 6,
+          "resultPath": "section:Show_ViewAll__c",
+          "expression": "IF(isViewAll == \"VIEWALL\",false,section:Show_ViewAll__c)",
+          "isDisabled": false,
+          "verification": "readable screenshot transcription; runtime not validated"
+        },
+        {
+          "observedIndex": 7,
+          "resultPath": "section:Record_Limit_Per_Page__c",
+          "expression": "IF(isViewAll == \"VIEWALL\",50,section:Record_Limit_Per_Page__c)",
+          "isDisabled": false,
+          "verification": "readable screenshot transcription; runtime not validated"
+        },
+        {
+          "observedIndex": 8,
+          "resultPath": "section:APIRecordLimit",
+          "expression": "IF(isViewAll == \"VIEWALL\",200,10)",
+          "isDisabled": false,
+          "verification": "screenshot transcription; exact casing/syntax to confirm from export"
+        },
+        {
+          "observedIndex": 9,
+          "resultPath": "columns:typeattributesdaymonth",
+          "expression": "IF((columns:Data_Type__c == \"date\" OR columns:Data_Type__c == \"date-local\"),\"2-digit\",\"\")",
+          "isDisabled": false,
+          "verification": "screenshot transcription; exact casing/syntax to confirm from export"
+        },
+        {
+          "observedIndex": 10,
+          "resultPath": "columns:typeattributesyear",
+          "expression": "IF((columns:Data_Type__c == \"date\" OR columns:Data_Type__c == \"date-local\"),\"numeric\",\"\")",
+          "isDisabled": false,
+          "verification": "screenshot transcription; exact casing/syntax to confirm from export"
+        },
+        {
+          "observedIndex": 11,
+          "resultPath": "columns:wrapText",
+          "expression": "IF(columns:Wrap_Text__c, true, \"\")",
+          "isDisabled": false,
+          "verification": "screenshot transcription; exact casing/syntax to confirm from export"
+        }
+      ],
+      "formulaCountObserved": 11,
+      "missingFormulaIndices": [],
+      "outputMappings": [
+        {
+          "extractJsonPath": "buttonattributes:Action_Name__c",
+          "outputJsonPath": "buttons:Name"
+        },
+        {
+          "extractJsonPath": "buttonattributes:Order__c",
+          "outputJsonPath": "buttons:order"
+        },
+        {
+          "extractJsonPath": "caseInfo:CaseNumber",
+          "outputJsonPath": "caseNumber"
+        },
+        {
+          "extractJsonPath": "caseInfo:Id",
+          "outputJsonPath": "caseId"
+        },
+        {
+          "extractJsonPath": "caseInfo:OwnerId",
+          "outputJsonPath": "caseOwnerId"
+        },
+        {
+          "extractJsonPath": "caseInfo:Previous_Owner__c",
+          "outputJsonPath": "previousCaseOwnerId"
+        },
+        {
+          "extractJsonPath": "caseInfo:Source_System_ID__c",
+          "outputJsonPath": "externalId"
+        },
+        {
+          "extractJsonPath": "columns:API_Response__c",
+          "outputJsonPath": "Columns:fieldName"
+        },
+        {
+          "extractJsonPath": "columns:Column_Order__c",
+          "outputJsonPath": "columns:orders"
+        },
+        {
+          "extractJsonPath": "columns:Data_Type__c",
+          "outputJsonPath": "Columns:type"
+        },
+        {
+          "extractJsonPath": "columns:Help_Text__c",
+          "outputJsonPath": "Columns:helpText"
+        },
+        {
+          "extractJsonPath": "columns:Is_Sortable__c",
+          "outputJsonPath": "Columns:sortable"
+        },
+        {
+          "extractJsonPath": "columns:Response_Label__c",
+          "outputJsonPath": "Columns:label"
+        },
+        {
+          "extractJsonPath": "columns:Type_Attribute_Target__c",
+          "outputJsonPath": "Columns:typeAttributes:target"
+        },
+        {
+          "extractJsonPath": "columns:typeAttributeLabel",
+          "outputJsonPath": "Columns:typeAttributes:label:fieldName"
+        },
+        {
+          "extractJsonPath": "columns:typeAttributeName",
+          "outputJsonPath": "Columns:typeAttributes:name"
+        },
+        {
+          "extractJsonPath": "columns:typeattributesdaymonth",
+          "outputJsonPath": "Columns:typeAttributes:day"
+        },
+        {
+          "extractJsonPath": "columns:typeattributesdaymonth",
+          "outputJsonPath": "Columns:typeAttributes:month"
+        },
+        {
+          "extractJsonPath": "columns:typeattributesyear",
+          "outputJsonPath": "Columns:typeAttributes:year"
+        },
+        {
+          "extractJsonPath": "columns:typeAttributeVariant",
+          "outputJsonPath": "Columns:typeAttributes:variant"
+        },
+        {
+          "extractJsonPath": "columns:wrapText",
+          "outputJsonPath": "Columns:wrapText"
+        },
+        {
+          "extractJsonPath": "memberInfo:Blue_Shield_Id__c",
+          "outputJsonPath": "blueShieldId"
+        },
+        {
+          "extractJsonPath": "memberInfo:Enterprise_Person_Id__c",
+          "outputJsonPath": "personId"
+        },
+        {
+          "extractJsonPath": "memberInfo:HIPAA_Flag__pc",
+          "outputJsonPath": "hipaaFlag"
+        },
+        {
+          "extractJsonPath": "memberInfo:Id",
+          "outputJsonPath": "Id"
+        },
+        {
+          "extractJsonPath": "memberInfo:Member_Id__pc",
+          "outputJsonPath": "memberId"
+        },
+        {
+          "extractJsonPath": "memberInfo:Name",
+          "outputJsonPath": "Name"
+        },
+        {
+          "extractJsonPath": "memberInfo:NPI__c",
+          "outputJsonPath": "providerNPI"
+        },
+        {
+          "extractJsonPath": "memberInfo:UMPI__c",
+          "outputJsonPath": "providerUMPI"
+        },
+        {
+          "extractJsonPath": "profileName:Profile.Name",
+          "outputJsonPath": "profName"
+        },
+        {
+          "extractJsonPath": "search:API_Response__c",
+          "outputJsonPath": "search:fieldName"
+        },
+        {
+          "extractJsonPath": "search:Field_Type__c",
+          "outputJsonPath": "search:FieldType"
+        },
+        {
+          "extractJsonPath": "search:Order__c",
+          "outputJsonPath": "search:orderlist"
+        },
+        {
+          "extractJsonPath": "search:Response_Label__c",
+          "outputJsonPath": "search:labelName"
+        },
+        {
+          "extractJsonPath": "section:APIRecordLimit",
+          "outputJsonPath": "apiRecordLimit"
+        },
+        {
+          "extractJsonPath": "section:Component_Name__c",
+          "outputJsonPath": "componentName"
+        },
+        {
+          "extractJsonPath": "section:Is_Selectable__c",
+          "outputJsonPath": "IsSelectable"
+        },
+        {
+          "extractJsonPath": "section:Query_Clause__c",
+          "outputJsonPath": "fieldToFilter"
+        },
+        {
+          "extractJsonPath": "section:Record_Limit_Per_Page__c",
+          "outputJsonPath": "recordLimitPerPage"
+        },
+        {
+          "extractJsonPath": "section:Section_Name__c",
+          "outputJsonPath": "sectionName"
+        },
+        {
+          "extractJsonPath": "section:Selectable_Type__c",
+          "outputJsonPath": "selectableType"
+        },
+        {
+          "extractJsonPath": "section:Show_Filter_By__c",
+          "outputJsonPath": "showFilterBy"
+        },
+        {
+          "extractJsonPath": "section:Show_Pagination__c",
+          "outputJsonPath": "showPagination"
+        },
+        {
+          "extractJsonPath": "section:Show_Row_Number__c",
+          "outputJsonPath": "showRowNumber"
+        },
+        {
+          "extractJsonPath": "section:Show_Search__c",
+          "outputJsonPath": "showSearch"
+        },
+        {
+          "extractJsonPath": "section:Show_ViewAll__c",
+          "outputJsonPath": "showViewAll"
+        }
+      ],
+      "options": {
+        "timeToLiveMinutes": 0,
+        "checkFieldLevelSecurity": false,
+        "platformCacheType": null,
+        "overwriteTargetForAllNullInputs": false
+      },
+      "complete": false,
+      "evidenceScreenshots": [
+        "IMG_1BAC4DC5-FC40-4742-AAB8-A5BD2987AA4A.jpeg",
+        "IMG_BB607193-012A-49A6-9BFB-31ED46B4A509.jpeg",
+        "IMG_6DEB6056-6CC2-42BC-82CD-D5026D874782.jpeg",
+        "IMG_E233A1B5-FBAF-4481-9189-5571277C4FAB.jpeg",
+        "IMG_D0D11294-E903-4AC7-934C-EAC08EA9C3A0.jpeg",
+        "IMG_0BFF5C8A-39D1-4135-876D-CAFA3588C477.jpeg",
+        "IMG_8338C9DE-FFCF-40DB-83A8-872406407A35.jpeg",
+        "IMG_24C75048-B01C-4F62-84DF-031521FFB715.jpeg",
+        "IMG_AAC4E10A-A045-42EF-96F1-77BD29279D7A.jpeg",
+        "IMG_8BB5FFE5-E0AB-44C4-B8AF-10E6FD13D929.jpeg",
+        "IMG_52BBECB3-3338-4435-A68C-7D43A4DAA4C2.jpeg"
+      ],
+      "dependencies": {
+        "customMetadataTypes": [
+          "CNC_Line_Attributes__mdt",
+          "CNC_Header_Attribute__mdt",
+          "CNC_Button_Attribute__mdt",
+          "CNC_Search_Attributes__mdt"
+        ],
+        "customMetadataRecords": "Required records and their values not supplied"
+      },
+      "outputMappingCoverage": {
+        "capturedSourceToTargetRows": 46,
+        "complete": false,
+        "rowDetailPropertiesVerified": false,
+        "visibleRowsWithBlankSource": [
           {
-            "key": "asyncErrorMessage",
-            "formula": null,
-            "formulaEvidence": "Begins IF referencing generateDocumentWithTokenDataService; remainder clipped."
+            "extractJsonPath": "",
+            "outputJsonPath": "search"
           },
           {
-            "key": "jobId",
-            "formula": null,
-            "formulaEvidence": "References generateDocumentWithTokenDataService job field; full text/casing requires confirmation."
+            "extractJsonPath": "",
+            "outputJsonPath": "Columns"
           }
         ],
-        "executionConditionalFormula": ""
+        "notes": [
+          "Blank source rows are recorded as displayed; their detailed settings and purpose are unknown.",
+          "Preserve Columns versus columns casing and columns:orders spelling; do not normalize.",
+          "profileName:Profile.Name is mapped, but its source extraction step is not captured.",
+          "Output list begins with buttonattributes in this batch; do not assume there are no earlier rows."
+        ]
+      },
+      "formulaCapture": {
+        "capturedCount": 11,
+        "observedCount": 11,
+        "allObservedIndicesCaptured": true,
+        "runtimeValidated": false
+      }
+    },
+    {
+      "name": "CNCGetInternalAndExternalLinks",
+      "interfaceType": "Extract",
+      "inputType": "JSON",
+      "outputType": "JSON",
+      "complete": false,
+      "captureStatus": "in-progress",
+      "referencedBy": [
+        {
+          "integrationProcedure": "CNC_GetEmailFormsDetails",
+          "elementName": "DR-E-GetForms"
+        }
+      ],
+      "missing": [
+        "Output row-level properties/defaults/types",
+        "Verify extract filter grouping and false literal semantics"
+      ],
+      "evidenceScreenshots": [
+        "IMG_DE6E1E82-E36E-4E62-B5E8-644C75D8468A.jpeg",
+        "IMG_ECB8E752-3AAA-48FB-8B2E-52BAD3BA8DD7.jpeg",
+        "IMG_D5CD7D49-B200-4276-8248-5035EE499929.jpeg"
+      ],
+      "extractSteps": [
+        {
+          "object": "CNC_Internal_and_External_Website__mdt",
+          "outputPath": "links",
+          "filterRows": [
+            {
+              "field": "Entity_Type__c",
+              "operator": "=",
+              "input": "entityType"
+            },
+            {
+              "join": "OR",
+              "field": "Outbound_Channel_Type__c",
+              "operator": "LIKE",
+              "input": "OutboundChannel"
+            },
+            {
+              "join": "AND",
+              "field": "Type__c",
+              "operator": "=",
+              "input": "type"
+            },
+            {
+              "join": "AND",
+              "field": "Is_Inactive__c",
+              "operator": "=",
+              "valueDisplayed": "'false'"
+            }
+          ],
+          "filterGrouping": null,
+          "filterGroupingVerification": "Rows and join operators transcribed as displayed; explicit grouping and literal semantics not verified from export.",
+          "orderBy": "Order__c"
+        }
+      ],
+      "outputMappings": [
+        {
+          "extractJsonPath": "links:Department__c",
+          "outputJsonPath": "links:department"
+        },
+        {
+          "extractJsonPath": "links:Group__c",
+          "outputJsonPath": "links:group"
+        },
+        {
+          "extractJsonPath": "links:Id",
+          "outputJsonPath": "links:Id"
+        },
+        {
+          "extractJsonPath": "links:Is_Internal__c",
+          "outputJsonPath": "links:isInternal"
+        },
+        {
+          "extractJsonPath": "links:Order__c",
+          "outputJsonPath": "links:order"
+        },
+        {
+          "extractJsonPath": "links:Type__c",
+          "outputJsonPath": "links:type"
+        },
+        {
+          "extractJsonPath": "links:URL__c",
+          "outputJsonPath": "links:url"
+        },
+        {
+          "extractJsonPath": "links:URL_Label__c",
+          "outputJsonPath": "links:label"
+        }
+      ],
+      "outputMappingCoverage": {
+        "visibleRows": 8,
+        "rowDetailPropertiesVerified": false
+      },
+      "formulas": [],
+      "formulaCoverage": {
+        "count": 0,
+        "verification": "User confirmed no formulas on 2026-10-01"
+      },
+      "optionsEvidence": {
+        "verification": "User stated no options on 2026-10-01",
+        "customOptionsConfigured": false,
+        "individualDefaultValuesVerified": false
+      }
+    },
+    {
+      "name": "CNCTransformMemberInfo",
+      "interfaceType": "Transform",
+      "inputType": "JSON",
+      "outputType": "JSON",
+      "outputMappings": [
+        {
+          "inputJsonPath": "birthDate",
+          "outputJsonPath": "memberInfo:birthDate"
+        },
+        {
+          "inputJsonPath": "email:value",
+          "outputJsonPath": "memberInfo:memberEmailAddress"
+        },
+        {
+          "inputJsonPath": "gender",
+          "outputJsonPath": "memberInfo:gender"
+        },
+        {
+          "inputJsonPath": "link:relation",
+          "outputJsonPath": "memberInfo:relationShip"
+        },
+        {
+          "inputJsonPath": "maxisid:value",
+          "outputJsonPath": "memberInfo:maxxisId"
+        },
+        {
+          "inputJsonPath": "memberGivenName",
+          "outputJsonPath": "memberInfo:memberGivenName"
+        },
+        {
+          "inputJsonPath": "memberRec:value",
+          "outputJsonPath": "memberInfo:memberId"
+        },
+        {
+          "inputJsonPath": "name|1:family",
+          "outputJsonPath": "memberInfo:memberFamilyName"
+        },
+        {
+          "inputJsonPath": "name|1:text",
+          "outputJsonPath": "memberInfo:memberFullName"
+        },
+        {
+          "inputJsonPath": "phone:value",
+          "outputJsonPath": "memberInfo:phone"
+        },
+        {
+          "inputJsonPath": "physicalAddress",
+          "outputJsonPath": "memberInfo:physicalAddress"
+        },
+        {
+          "inputJsonPath": "pmiId:value",
+          "outputJsonPath": "memberInfo:pmiId"
+        },
+        {
+          "inputJsonPath": "postalAddress",
+          "outputJsonPath": "memberInfo:postalAddress"
+        }
+      ],
+      "complete": false,
+      "verification": "Visible mapping rows transcribed from screenshots; row settings and remaining formulas/options not captured. Exact unusual capitalization/spelling requires export before executable reconstruction.",
+      "evidenceScreenshots": [
+        "IMG_8A9CA76B-5E03-4BC0-9163-BB346A0C7C5F.jpeg",
+        "IMG_55111E6B-C133-4642-AA11-F62EA72948A0.jpeg"
+      ]
+    },
+    {
+      "name": "CNCGetLetterTemplates",
+      "interfaceType": "Extract",
+      "inputType": "JSON",
+      "outputType": "JSON",
+      "extractSteps": [
+        {
+          "object": "DocumentTemplate",
+          "outputPath": "letters",
+          "filters": [
+            {
+              "field": "Material_Type__c",
+              "operator": "INCLUDES",
+              "input": "materialType"
+            },
+            {
+              "field": "Letter_Type__c",
+              "operator": "=",
+              "input": "letterType"
+            },
+            {
+              "field": "TokenMappingType",
+              "operator": "=",
+              "input": "'JSON'"
+            },
+            {
+              "field": "Type",
+              "operator": "=",
+              "input": "'MicrosoftWord'"
+            },
+            {
+              "field": "IsActive",
+              "operator": "=",
+              "input": "'true'"
+            }
+          ],
+          "orderBy": "Name ASC"
+        },
+        {
+          "object": "DocumentTemplateToken",
+          "outputPath": "letters:tokens",
+          "filter": {
+            "field": "DocumentTemplateId",
+            "operator": "=",
+            "input": "letters:Id"
+          }
+        },
+        {
+          "object": "DocumentTemplateContentDoc",
+          "outputPath": "letters:documentInfo",
+          "filter": {
+            "field": "DocumentTemplateId",
+            "operator": "=",
+            "input": "letters:Id"
+          },
+          "orderBy": "CreatedDate DESC"
+        },
+        {
+          "object": "EmailTemplate",
+          "outputPath": "letters:emailTemplate",
+          "filters": [
+            {
+              "field": "Name",
+              "operator": "=",
+              "input": "letters:Email_Template_Name__c"
+            },
+            {
+              "field": "UiType",
+              "operator": "=",
+              "input": "'SFX'"
+            }
+          ]
+        }
+      ],
+      "complete": false,
+      "environmentComparison": "Visible Dev and QA extract filters match. No Group/department/profile/Print filter is shown in this mapper. UI filtering remains unknown.",
+      "evidenceScreenshots": [
+        "IMG_5AA320F4-79E2-4B78-8473-518F3F68511A.jpeg",
+        "IMG_E741B1B5-FECE-4285-B51C-FFB4770A4B83.jpeg",
+        "IMG_52CBBD68-F840-467D-8E26-B08FE8DF79AA.jpeg",
+        "IMG_128F2920-0D3B-4F00-AA15-1515D8874ABA.jpeg"
+      ]
+    }
+  ],
+  "setValuesElements": [
+    {
+      "elementName": "SV-InitialMapping",
+      "type": "Set Values",
+      "values": [
+        {
+          "name": "isLoggedInUserSameAsCaseOwner",
+          "useExpression": true,
+          "expression": "IF(%caseOwnerId% = %loggedInUserId%, true, false)"
+        }
+      ],
+      "complete": false
+    },
+    {
+      "elementName": "SV-DefaultMapping",
+      "type": "Set Values",
+      "values": [
+        {
+          "name": "isPrint",
+          "useExpression": true,
+          "expression": "IF(%OutboundChannel% = \"Print\" || %OutboundChannel2% = \"Print\", true, false)"
+        },
+        {
+          "name": "isEmail",
+          "useExpression": true,
+          "expression": "IF(%OutboundChannel% = \"Email\", true, false)"
+        },
+        {
+          "name": "isAsyncLetterGeneration",
+          "useExpression": true,
+          "expression": "IF(%MaterialType% = \"POD Documents\", false, true)"
+        },
+        {
+          "name": "isDocumentUploaded",
+          "useExpression": false,
+          "valueText": "false",
+          "runtimeValueType": "unverified"
+        },
+        {
+          "name": "selectedTemplate",
+          "useExpression": true,
+          "expression": "null"
+        },
+        {
+          "name": "selectedEntity",
+          "displayedValue": "=null",
+          "useExpression": null,
+          "verification": "summary-only"
+        },
+        {
+          "name": "preSelectedLetterTemplate",
+          "displayedValue": "=null",
+          "useExpression": null,
+          "verification": "summary-only"
+        },
+        {
+          "name": "preSelectedCaseEntity",
+          "displayedValue": "=null",
+          "useExpression": null,
+          "verification": "summary-only"
+        },
+        {
+          "name": "preSelectedForms",
+          "displayedValue": "=null",
+          "useExpression": null,
+          "verification": "summary-only"
+        },
+        {
+          "name": "addresseeCommName",
+          "displayedValue": "=null",
+          "useExpression": null,
+          "verification": "summary-only",
+          "elementType": "Text"
+        },
+        {
+          "name": "mailingAddress",
+          "displayedValue": "=null",
+          "useExpression": null,
+          "verification": "summary-only",
+          "elementType": "Text"
+        },
+        {
+          "name": "isFormshasAttachments",
+          "valueText": "true",
+          "useExpression": null,
+          "runtimeValueType": "unverified",
+          "verification": "summary-only"
+        },
+        {
+          "name": "hasMaximumPOD",
+          "valueText": "false",
+          "useExpression": null,
+          "runtimeValueType": "unverified",
+          "verification": "summary-only"
+        },
+        {
+          "name": "isLetterReviewRequired",
+          "valueText": "false",
+          "useExpression": null,
+          "runtimeValueType": "unverified",
+          "verification": "summary-only"
+        },
+        {
+          "name": "isPOD",
+          "useExpression": true,
+          "expression": "IF(%MaterialType% = \"POD Documents\", true, false)"
+        },
+        {
+          "name": "isSubscription",
+          "useExpression": true,
+          "expression": "IF(%isAMMrSubscription% = \"Yes\", true, false)",
+          "inputTokenVerification": "Confirm exact casing against export"
+        }
+      ],
+      "complete": false
+    },
+    {
+      "elementName": "SV-ResetTokenMapping",
+      "type": "Set Values",
+      "values": [
+        {
+          "name": "tokenMapping",
+          "value": null,
+          "verification": "Value not legible; appears blank in screenshot. Do not infer null versus empty object/string."
+        },
+        {
+          "name": "isRefreshTokens",
+          "valueText": "true",
+          "runtimeValueType": "unverified"
+        },
+        {
+          "name": "memberEmail",
+          "expression": null,
+          "visiblePrefix": "%IP-GetPatientDemographics:memberInfo:",
+          "verification": "Remaining path clipped"
+        },
+        {
+          "name": "podEmailAddress",
+          "elementType": "Email",
+          "expression": null,
+          "visiblePrefix": "%IP-GetPatientDemographics:memberInfo:",
+          "verification": "Remaining path clipped"
+        }
+      ],
+      "complete": false,
+      "evidenceScreenshots": [
+        "IMG_628F8D8B-9320-4A63-9821-B777DFB3D0E9.jpeg",
+        "IMG_D7625317-966C-4AAF-9196-83C0DD201239.jpeg",
+        "IMG_F307DE5C-E942-4C8F-81E2-A896F0D96D8C.jpeg"
+      ]
+    }
+  ],
+  "validationPreference": {
+    "preview": "deferred-by-user",
+    "runtimeValidated": false
+  },
+  "outerTree": {
+    "evidencePath": "Docgen/OMNISCRIPT_TREE.md",
+    "childrenExpanded": false,
+    "statusMeaning": "Saved/Pending indicate documentation capture progress; not org implementation",
+    "elements": [
+      {
+        "name": "IP-GETCaseDetails",
+        "type": "Integration Procedure Action",
+        "source": "IMG_32747BB1-44F4-4042-B621-D0803ACBBBA5.jpeg",
+        "order": 1,
+        "status": "Saved"
+      },
+      {
+        "name": "SV-InitialMapping",
+        "type": "Set Values",
+        "source": "IMG_32747BB1-44F4-4042-B621-D0803ACBBBA5.jpeg",
+        "order": 2,
+        "status": "Saved"
+      },
+      {
+        "name": "MaterialAndCommunicationChannel",
+        "type": "Step",
+        "source": "IMG_32747BB1-44F4-4042-B621-D0803ACBBBA5.jpeg",
+        "order": 3,
+        "status": "Saved"
+      },
+      {
+        "name": "SV-DefaultMapping",
+        "type": "Set Values",
+        "source": "IMG_32747BB1-44F4-4042-B621-D0803ACBBBA5.jpeg",
+        "order": 4,
+        "status": "Saved"
+      },
+      {
+        "name": "ExtractEmailBodyForMMR",
+        "type": "Data Mapper Extract Action",
+        "source": "IMG_32747BB1-44F4-4042-B621-D0803ACBBBA5.jpeg",
+        "order": 5,
+        "status": "Saved"
+      },
+      {
+        "name": "IP-GetForms",
+        "type": "Integration Procedure Action",
+        "source": "IMG_32747BB1-44F4-4042-B621-D0803ACBBBA5.jpeg",
+        "order": 6,
+        "status": "In progress"
+      },
+      {
+        "name": "Step1",
+        "type": "Step",
+        "source": "IMG_32747BB1-44F4-4042-B621-D0803ACBBBA5.jpeg",
+        "order": 7,
+        "status": "In progress"
+      },
+      {
+        "name": "SV-FormSelectionValues",
+        "type": "Set Values",
+        "source": "IMG_32747BB1-44F4-4042-B621-D0803ACBBBA5.jpeg",
+        "order": 8,
+        "status": "Pending"
+      },
+      {
+        "name": "SE-FormSelectionError",
+        "type": "Set Errors",
+        "source": "IMG_32747BB1-44F4-4042-B621-D0803ACBBBA5.jpeg",
+        "order": 9,
+        "status": "Pending"
+      },
+      {
+        "name": "IP-GetPODDocs",
+        "type": "Integration Procedure Action",
+        "source": "IMG_6DEFBD37-5BB5-4656-ABB3-0451ACAFB032.jpeg",
+        "order": 10,
+        "status": "Pending"
+      },
+      {
+        "name": "SelectPODDocs",
+        "type": "Step",
+        "source": "IMG_6DEFBD37-5BB5-4656-ABB3-0451ACAFB032.jpeg",
+        "order": 11,
+        "status": "Pending"
+      },
+      {
+        "name": "SetValues1",
+        "type": "Set Values",
+        "source": "IMG_6DEFBD37-5BB5-4656-ABB3-0451ACAFB032.jpeg",
+        "order": 12,
+        "status": "Pending"
+      },
+      {
+        "name": "SE-PODSelectionError",
+        "type": "Set Errors",
+        "source": "IMG_6DEFBD37-5BB5-4656-ABB3-0451ACAFB032.jpeg",
+        "order": 13,
+        "status": "Pending"
+      },
+      {
+        "name": "SE-PODSelectionCountError",
+        "type": "Set Errors",
+        "source": "IMG_6DEFBD37-5BB5-4656-ABB3-0451ACAFB032.jpeg",
+        "order": 14,
+        "status": "Pending"
+      },
+      {
+        "name": "IP-GetLetterData",
+        "type": "Integration Procedure Action",
+        "source": "IMG_6DEFBD37-5BB5-4656-ABB3-0451ACAFB032.jpeg",
+        "order": 15,
+        "status": "Pending"
+      },
+      {
+        "name": "SelectEmailAndLetters",
+        "type": "Step",
+        "source": "IMG_6DEFBD37-5BB5-4656-ABB3-0451ACAFB032.jpeg",
+        "order": 16,
+        "status": "Pending"
+      },
+      {
+        "name": "SV-LetterSelectionValues",
+        "type": "Set Values",
+        "source": "IMG_6DEFBD37-5BB5-4656-ABB3-0451ACAFB032.jpeg",
+        "order": 17,
+        "status": "Pending"
+      },
+      {
+        "name": "SE-LetterSelectionError",
+        "type": "Set Errors",
+        "source": "IMG_A6047F95-A130-4DF6-B4C8-FC30B2668577.jpeg",
+        "order": 18,
+        "status": "Pending"
+      },
+      {
+        "name": "IP-GetCaseEntityDetails",
+        "type": "Integration Procedure Action",
+        "source": "IMG_A6047F95-A130-4DF6-B4C8-FC30B2668577.jpeg",
+        "order": 19,
+        "status": "Pending"
+      },
+      {
+        "name": "SV-EntityMapping",
+        "type": "Set Values",
+        "source": "IMG_A6047F95-A130-4DF6-B4C8-FC30B2668577.jpeg",
+        "order": 20,
+        "status": "Pending"
+      },
+      {
+        "name": "SelectEntity",
+        "type": "Step",
+        "source": "IMG_A6047F95-A130-4DF6-B4C8-FC30B2668577.jpeg",
+        "order": 21,
+        "status": "Pending"
+      },
+      {
+        "name": "SV-EntitySelection",
+        "type": "Set Values",
+        "source": "IMG_A6047F95-A130-4DF6-B4C8-FC30B2668577.jpeg",
+        "order": 22,
+        "status": "Pending"
+      },
+      {
+        "name": "SE-EntitySelectionError",
+        "type": "Set Errors",
+        "source": "IMG_A6047F95-A130-4DF6-B4C8-FC30B2668577.jpeg",
+        "order": 23,
+        "status": "Pending"
+      },
+      {
+        "name": "IP-GETAPITokenData",
+        "type": "Integration Procedure Action",
+        "source": "IMG_A6047F95-A130-4DF6-B4C8-FC30B2668577.jpeg",
+        "order": 24,
+        "status": "Pending"
+      },
+      {
+        "name": "SV-SetCommAddressData",
+        "type": "Set Values",
+        "source": "IMG_A6047F95-A130-4DF6-B4C8-FC30B2668577.jpeg",
+        "order": 25,
+        "status": "Pending"
+      },
+      {
+        "name": "SelectAddress",
+        "type": "Step",
+        "source": "IMG_A6047F95-A130-4DF6-B4C8-FC30B2668577.jpeg",
+        "order": 26,
+        "status": "Pending"
+      },
+      {
+        "name": "SV-AddressMapping",
+        "type": "Set Values",
+        "source": "IMG_B4D7FFA4-34B2-428C-8F4D-CAE20646F9D7.jpeg",
+        "order": 27,
+        "status": "Pending"
+      },
+      {
+        "name": "SE-CommAddError",
+        "type": "Set Errors",
+        "source": "IMG_B4D7FFA4-34B2-428C-8F4D-CAE20646F9D7.jpeg",
+        "order": 28,
+        "status": "Pending"
+      },
+      {
+        "name": "DR-CheckIfParagraphsExists",
+        "type": "Data Mapper Extract Action",
+        "source": "IMG_B4D7FFA4-34B2-428C-8F4D-CAE20646F9D7.jpeg",
+        "order": 29,
+        "status": "Pending"
+      },
+      {
+        "name": "SelectParagraphs",
+        "type": "Step",
+        "source": "IMG_B4D7FFA4-34B2-428C-8F4D-CAE20646F9D7.jpeg",
+        "order": 30,
+        "status": "Pending"
+      },
+      {
+        "name": "IP-GetPatientDemographics",
+        "type": "Integration Procedure Action",
+        "source": "IMG_B4D7FFA4-34B2-428C-8F4D-CAE20646F9D7.jpeg",
+        "order": 31,
+        "status": "Pending"
+      },
+      {
+        "name": "SV-ResetTokenMapping",
+        "type": "Set Values",
+        "source": "IMG_B4D7FFA4-34B2-428C-8F4D-CAE20646F9D7.jpeg",
+        "order": 32,
+        "status": "Pending"
+      },
+      {
+        "name": "RA-SetDefaultTokenMapping",
+        "type": "Remote Action",
+        "source": "IMG_B4D7FFA4-34B2-428C-8F4D-CAE20646F9D7.jpeg",
+        "order": 33,
+        "status": "Pending"
+      },
+      {
+        "name": "sv-podMappings",
+        "type": "Set Values",
+        "source": "IMG_B4D7FFA4-34B2-428C-8F4D-CAE20646F9D7.jpeg",
+        "order": 34,
+        "status": "Pending"
+      },
+      {
+        "name": "SelectEmail",
+        "type": "Step",
+        "source": "IMG_B4D7FFA4-34B2-428C-8F4D-CAE20646F9D7.jpeg",
+        "order": 35,
+        "status": "Pending"
+      },
+      {
+        "name": "RA-updateLinks",
+        "type": "Remote Action",
+        "source": "IMG_0B8CD2B8-2F3F-4456-8E16-98469A98486F.jpeg",
+        "order": 36,
+        "status": "Pending"
+      },
+      {
+        "name": "AdditionalInformation",
+        "type": "Step",
+        "source": "IMG_0B8CD2B8-2F3F-4456-8E16-98469A98486F.jpeg",
+        "order": 37,
+        "status": "Pending"
+      },
+      {
+        "name": "RA-InsertSelectedForms",
+        "type": "Remote Action",
+        "source": "IMG_0B8CD2B8-2F3F-4456-8E16-98469A98486F.jpeg",
+        "order": 38,
+        "status": "In progress"
+      },
+      {
+        "name": "IP-DeleteLetterData",
+        "type": "Integration Procedure Action",
+        "source": "IMG_0B8CD2B8-2F3F-4456-8E16-98469A98486F.jpeg",
+        "order": 39,
+        "status": "Pending"
+      },
+      {
+        "name": "IP-GenerateLetterinAsync",
+        "type": "Integration Procedure Action",
+        "source": "IMG_0B8CD2B8-2F3F-4456-8E16-98469A98486F.jpeg",
+        "order": 40,
+        "status": "In progress"
+      },
+      {
+        "name": "Set Generation_Options",
+        "type": "Set Values",
+        "source": "IMG_0B8CD2B8-2F3F-4456-8E16-98469A98486F.jpeg",
+        "order": 41,
+        "status": "Pending"
+      },
+      {
+        "name": "ReviewandSubmitAsync",
+        "type": "Step",
+        "source": "IMG_0B8CD2B8-2F3F-4456-8E16-98469A98486F.jpeg",
+        "order": 42,
+        "status": "Pending"
+      },
+      {
+        "name": "ReviewandSubmitSync",
+        "type": "Step",
+        "source": "IMG_0B8CD2B8-2F3F-4456-8E16-98469A98486F.jpeg",
+        "order": 43,
+        "status": "Pending"
+      },
+      {
+        "name": "set-sectionName",
+        "type": "Set Values",
+        "source": "IMG_0B8CD2B8-2F3F-4456-8E16-98469A98486F.jpeg",
+        "order": 44,
+        "status": "Pending"
+      },
+      {
+        "name": "ReviewPOD",
+        "type": "Step",
+        "source": "IMG_9ECBF03F-7E51-455D-9A3B-65293944794F.jpeg",
+        "order": 45,
+        "status": "Pending"
+      },
+      {
+        "name": "SV-BuddyFileMapping",
+        "type": "Set Values",
+        "source": "IMG_9ECBF03F-7E51-455D-9A3B-65293944794F.jpeg",
+        "order": 46,
+        "status": "Pending"
+      },
+      {
+        "name": "RA-SendEFilesToS3",
+        "type": "Remote Action",
+        "source": "IMG_9ECBF03F-7E51-455D-9A3B-65293944794F.jpeg",
+        "order": 47,
+        "status": "Pending"
+      },
+      {
+        "name": "SV-UploadSuccess",
+        "type": "Set Values",
+        "source": "IMG_9ECBF03F-7E51-455D-9A3B-65293944794F.jpeg",
+        "order": 48,
+        "status": "Pending"
+      },
+      {
+        "name": "RA-SendEmail",
+        "type": "Remote Action",
+        "source": "IMG_9ECBF03F-7E51-455D-9A3B-65293944794F.jpeg",
+        "order": 49,
+        "status": "Pending"
+      },
+      {
+        "name": "RA-createContactPoint",
+        "type": "Remote Action",
+        "source": "IMG_9ECBF03F-7E51-455D-9A3B-65293944794F.jpeg",
+        "order": 50,
+        "status": "Pending"
+      },
+      {
+        "name": "Confirmation",
+        "type": "Step",
+        "source": "IMG_9ECBF03F-7E51-455D-9A3B-65293944794F.jpeg",
+        "order": 51,
+        "status": "Pending"
+      },
+      {
+        "name": "RA-creteATrackCommunicationRecord",
+        "type": "Remote Action",
+        "source": "IMG_9ECBF03F-7E51-455D-9A3B-65293944794F.jpeg",
+        "order": 52,
+        "status": "Pending"
+      }
+    ]
+  },
+  "procedureDiscovery": [],
+  "stepElements": [
+    {
+      "elementName": "Step1",
+      "elementType": "Step",
+      "captureStatus": "in-progress",
+      "complete": false,
+      "visibleLayoutItems": [
+        {
+          "order": 1,
+          "elementName": null,
+          "displayText": "Select Forms",
+          "elementType": null
+        },
+        {
+          "order": 2,
+          "elementName": null,
+          "displayText": "Select Documents",
+          "elementType": null
+        },
+        {
+          "order": 3,
+          "elementName": "Messaging12",
+          "elementType": null
+        },
+        {
+          "order": 4,
+          "elementName": "Messaging13",
+          "elementType": null
+        },
+        {
+          "order": 5,
+          "elementName": "LineBreak13",
+          "elementType": null
+        },
+        {
+          "order": 6,
+          "elementName": "CustomLWC4",
+          "elementType": "Custom LWC",
+          "componentDisplayed": "c:cncDynamicTableSections",
+          "fieldLabel": "SelectFormsLwc",
+          "componentName": "cncDynamicTableSections",
+          "observedActive": true,
+          "standaloneLwc": false,
+          "propertyMappings": [
+            {
+              "name": "recorddata",
+              "source": "%formsdata%"
+            },
+            {
+              "name": "isomniscript",
+              "source": "true"
+            },
+            {
+              "name": "omniscriptname",
+              "source": "SendCommunication"
+            },
+            {
+              "name": "omniscriptstepname",
+              "source": "SelectForms"
+            },
+            {
+              "name": "preselecteddata",
+              "source": "%preSelectedForms%"
+            },
+            {
+              "name": "table-height",
+              "source": "524"
+            }
+          ],
+          "propertyListComplete": false,
+          "conditionalView": null,
+          "evidenceScreenshots": [
+            "IMG_1568837F-8F59-4017-A58E-18D3356EB1BC.jpeg"
+          ]
+        },
+        {
+          "order": 7,
+          "elementName": "LineBreak14",
+          "elementType": null
+        },
+        {
+          "order": 8,
+          "elementName": null,
+          "displayText": "Upload Forms/Documents - PDF documents only\n(If Applicable)",
+          "elementType": null
+        },
+        {
+          "order": 9,
+          "elementName": "CustomLWC2",
+          "elementType": "Custom LWC",
+          "componentDisplayed": "c:cncAttachmentsUploadSection",
+          "fieldLabel": "uploadFormsAndDocuments",
+          "componentName": "cncAttachmentsUploadSection",
+          "observedActive": true,
+          "standaloneLwc": false,
+          "propertyMappings": [
+            {
+              "name": "uploadforms",
+              "source": "true"
+            },
+            {
+              "name": "currentrecordid",
+              "source": "%ContextId%"
+            }
+          ],
+          "propertyListComplete": true,
+          "conditionalView": null,
+          "internalNotes": "",
+          "evidenceScreenshots": [
+            "IMG_826F9DCF-A34C-4E03-B0B2-336B8376D9CE.jpeg"
+          ]
+        },
+        {
+          "order": 10,
+          "elementName": null,
+          "displayText": "Ensure Email is selected only for Non-PHI Forms",
+          "elementType": null
+        },
+        {
+          "order": 11,
+          "elementName": null,
+          "displayText": "Ensure Email is selected only for Non-PHI Document",
+          "elementType": null
+        }
+      ],
+      "navigationVisible": [
+        "Previous",
+        "Next"
+      ],
+      "missing": [
+        "Remaining Step/button properties and conditional view",
+        "Unnamed heading/guidance element identities and types",
+        "Messaging, heading and line-break properties/conditions",
+        "CustomLWC4 remaining attributes and both custom component conditional views",
+        "Custom component source and dependencies"
+      ],
+      "evidenceScreenshots": [
+        "IMG_BB1CA589-D991-47C2-8064-76907F69E666.jpeg",
+        "IMG_AF8E6CC8-D43D-4C47-97F8-C76516956DE7.jpeg",
+        "IMG_1568837F-8F59-4017-A58E-18D3356EB1BC.jpeg",
+        "IMG_826F9DCF-A34C-4E03-B0B2-336B8376D9CE.jpeg"
+      ],
+      "observedActive": true,
+      "fieldLabel": "",
+      "chartLabel": "",
+      "instruction": "",
+      "allowSaveForLater": true,
+      "buttonProperties": {
+        "previousLabel": "Previous",
+        "nextLabel": "Next"
+      }
+    },
+    {
+      "elementName": "MaterialAndCommunicationChannel",
+      "elementType": "Step",
+      "captureStatus": "visible-layout-and-condition-evidence-captured",
+      "complete": false,
+      "visibleTitle": "Material and Outbound Channel Selection",
+      "materialType": {
+        "displayLabel": "Material Type",
+        "elementName": null,
+        "visibleChoices": [
+          "Forms",
+          "Documents",
+          "Letters",
+          "Other Communication",
+          "Member Materials Request (MMR) Documents"
+        ],
+        "storedValuesVerified": false
+      },
+      "conditionalViewEvidence": [
+        {
+          "elementName": "MSG_CaseOwnerError",
+          "displayedCondition": "(isLoggedInUserSameAsCaseOwner = false)",
+          "conditionType": null,
+          "evidenceScreenshot": "IMG_F486DE2B-37F2-4A41-8971-123AFDA8B732.jpeg"
+        },
+        {
+          "elementName": null,
+          "visibleLocation": "First Outbound Channel control",
+          "displayLabel": "Outbound Channel",
+          "visibleChoices": [
+            "Email",
+            "Print"
+          ],
+          "displayedCondition": "(MaterialType <> Letters)",
+          "conditionType": null,
+          "evidenceScreenshot": "IMG_70A81DDB-AC28-42DC-8088-05F8251167CA.jpeg"
+        },
+        {
+          "elementName": null,
+          "visibleLocation": "Second Outbound Channel control",
+          "displayLabel": "Outbound Channel",
+          "visibleChoices": [
+            "Email",
+            "Print"
+          ],
+          "displayedCondition": "(MaterialType = Letters)",
+          "conditionType": null,
+          "evidenceScreenshot": "IMG_A7E26B77-B101-4132-90A9-B8ECE52EC500.jpeg"
+        },
+        {
+          "elementName": null,
+          "visibleLocation": "Email guidance below channel controls",
+          "displayText": "Ensure Email is selected only for Non-PHI Blank Forms and Documents",
+          "displayedCondition": "(MaterialType <>  AND MaterialType <> Letters AND OutboundChannel = Email)",
+          "conditionType": null,
+          "verification": "First MaterialType comparison has no readable right-hand value in the tooltip. Preserve the displayed blank; exact export syntax and empty-value semantics remain unverified.",
+          "evidenceScreenshot": "IMG_7ACBD6F4-31F7-4D59-9114-9D0C1195E8F6.jpeg"
+        }
+      ],
+      "navigationVisible": [
+        "Next"
+      ],
+      "missing": [
+        "Step properties and remaining child identities/types",
+        "Material Type stored values, defaults and complete radio properties",
+        "Both channel control element names, stored values, defaults and complete properties",
+        "Condition types and exact exported syntax; first comparison value in guidance tooltip",
+        "Case-owner message content and enforcement behavior",
+        "Remaining child properties and conditions"
+      ],
+      "evidenceScreenshots": [
+        "IMG_F486DE2B-37F2-4A41-8971-123AFDA8B732.jpeg",
+        "IMG_70A81DDB-AC28-42DC-8088-05F8251167CA.jpeg",
+        "IMG_A7E26B77-B101-4132-90A9-B8ECE52EC500.jpeg",
+        "IMG_7ACBD6F4-31F7-4D59-9114-9D0C1195E8F6.jpeg"
+      ]
+    },
+    {
+      "elementName": "AdditionalInformation",
+      "type": "Step",
+      "fieldLabel": "",
+      "chartLabel": "",
+      "instruction": "",
+      "allowSaveForLater": true,
+      "visibleLayoutItems": [
+        {
+          "visibleOrder": 1,
+          "elementName": null,
+          "type": null,
+          "displayText": "Enter Additional Information for Letter Selected",
+          "conditionalView": null
+        },
+        {
+          "visibleOrder": 2,
+          "elementName": null,
+          "type": null,
+          "displayText": "Enter Additional Information for Cover Letter",
+          "conditionalView": null
+        },
+        {
+          "visibleOrder": 3,
+          "elementName": null,
+          "type": null,
+          "displayText": "Edit Email",
+          "conditionalView": null
+        },
+        {
+          "visibleOrder": 4,
+          "elementName": null,
+          "type": null,
+          "displayText": "Additional Information for Subscription",
+          "conditionalView": null
+        },
+        {
+          "visibleOrder": 5,
+          "elementName": "EnterAdditionalInformation",
+          "type": null,
+          "componentName": "cncSendCommunicationAdditionalInfo",
+          "renderedMarkup": "<c:cncSendCommunicationAdditionalInfo />",
+          "inputMapping": null,
+          "conditionalView": null
+        }
+      ],
+      "adjacentElementsObserved": {
+        "preceding": {
+          "elementName": "RA-UpdateLinks",
+          "type": "Remote Action"
+        },
+        "following": [
+          {
+            "elementName": "RA-InsertSelectedForms",
+            "type": "Remote Action"
+          },
+          {
+            "elementName": "IP-DeleteLetterData",
+            "type": "Integration Procedure Action"
+          }
+        ]
+      },
+      "evidenceScreenshots": [
+        "IMG_DA63D02D-536A-42EC-A1DE-80111203FBBF.jpeg"
+      ],
+      "captureComplete": false,
+      "missing": [
+        "Custom LWC element properties and input mappings",
+        "Heading identities/types and execution conditions",
+        "Step conditional/button properties",
+        "Full cncSendCommunicationAdditionalInfo source",
+        "Token data origin and JSON updates"
+      ],
+      "notes": "Step properties are selected in screenshot. Custom LWC component identity is visible in canvas markup; field-rendering implementation and token-driven behavior are not established. Adjacent action names/types do not establish their behavior or whether they execute for this route."
+    }
+  ],
+  "customMetadataEvidence": {
+    "types": [
+      {
+        "name": "CNC_Button_Attribute__mdt",
+        "singularLabel": "CNC Button Attribute",
+        "pluralLabel": "CNC Button Attributes",
+        "visibility": "Public",
+        "reportedCustomFieldCount": 7,
+        "fieldInventoryComplete": true,
+        "fields": [
+          {
+            "apiName": "Action_Name__c",
+            "label": "Action Name",
+            "dataType": "Text(15)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Button_Label__c",
+            "label": "Button Label",
+            "dataType": "Text(15)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Button_Location__c",
+            "label": "Button Location",
+            "dataType": "Text(20)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "CNC_Line_Attributes__c",
+            "label": "CNC Line Attributes",
+            "dataType": "Metadata Relationship(CNC Line Attributes)",
+            "indexed": true,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "CNC_Master_Attributes__c",
+            "label": "CNC Master Attributes",
+            "dataType": "Metadata Relationship(CNC Master Attributes)",
+            "indexed": true,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Disabled__c",
+            "label": "Disabled",
+            "dataType": "Text(5)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Order__c",
+            "label": "Order",
+            "dataType": "Number(18, 0)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          }
+        ],
+        "fieldDefinitionDetailsComplete": false,
+        "recordDetailsCaptured": false,
+        "recordValues": null,
+        "evidenceScreenshots": [
+          "IMG_CC9BD776-A527-446E-9DC0-4E749B63CA5C.jpeg",
+          "IMG_F5902140-0A3B-4558-BE50-A6A444CD04FD.jpeg"
+        ],
+        "status": "captured-schema-inventory-only-not-deployed"
+      },
+      {
+        "name": "CNC_Header_Attribute__mdt",
+        "singularLabel": "CNC Header Attribute",
+        "pluralLabel": "CNC Header Attributes",
+        "visibility": "Public",
+        "reportedCustomFieldCount": 9,
+        "fieldInventoryComplete": true,
+        "fields": [
+          {
+            "apiName": "API_Response__c",
+            "label": "API Response",
+            "dataType": "Text(50)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "CNC_Line_Attributes__c",
+            "label": "CNC Line Attributes",
+            "dataType": "Metadata Relationship(CNC Line Attributes)",
+            "indexed": true,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Column_Order__c",
+            "label": "Column Order",
+            "dataType": "Number(18, 0)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Data_Type__c",
+            "label": "Data Type",
+            "dataType": "Text(15)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Default_Value__c",
+            "label": "Default Value",
+            "dataType": "Text(255)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Help_Text__c",
+            "label": "Help Text",
+            "dataType": "Text(255)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Is_Sortable__c",
+            "label": "Is Sortable",
+            "dataType": "Checkbox",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Response_Label__c",
+            "label": "Response Label",
+            "dataType": "Text(70)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Wrap_Text__c",
+            "label": "Wrap Text",
+            "dataType": "Checkbox",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          }
+        ],
+        "fieldDefinitionDetailsComplete": false,
+        "recordDetailsCaptured": false,
+        "recordValues": null,
+        "evidenceScreenshots": [
+          "IMG_4A5C39F9-F33E-4410-AC3F-275FDCEDE138.jpeg",
+          "IMG_3AB333F1-2CBF-45E5-9485-9190914BB6B3.jpeg"
+        ],
+        "status": "captured-schema-inventory-only-not-deployed"
+      },
+      {
+        "name": "CNC_Line_Attributes__mdt",
+        "singularLabel": "CNC Line Attributes",
+        "pluralLabel": "CNC Line Attributes",
+        "visibility": "Public",
+        "reportedCustomFieldCount": 16,
+        "fieldInventoryComplete": true,
+        "fields": [
+          {
+            "apiName": "CNC_Master_Attribute__c",
+            "label": "CNC Master Attribute",
+            "dataType": "Metadata Relationship(CNC Master Attributes)",
+            "indexed": true,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Component_Name__c",
+            "label": "Component Name",
+            "dataType": "Text(255)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Component_Type__c",
+            "label": "Component Type",
+            "dataType": "Picklist",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "isAccordian__c",
+            "label": "isAccordian",
+            "dataType": "Checkbox",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Is_Selectable__c",
+            "label": "Is Selectable",
+            "dataType": "Checkbox",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Order__c",
+            "label": "Order",
+            "dataType": "Number(18, 0)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Query_Clause__c",
+            "label": "Query Clause",
+            "dataType": "Text(20)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Record_Limit_Per_Page__c",
+            "label": "Record Limit Per Page",
+            "dataType": "Number(18, 0)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Section_Name__c",
+            "label": "Section Name",
+            "dataType": "Text(255)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Selectable_Type__c",
+            "label": "Selectable Type",
+            "dataType": "Picklist",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Show_Filter_By__c",
+            "label": "Show Filter By",
+            "dataType": "Checkbox",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Show_Pagination__c",
+            "label": "Show Pagination",
+            "dataType": "Checkbox",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Show_Row_Number__c",
+            "label": "Show Row Number",
+            "dataType": "Checkbox",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Show_Search__c",
+            "label": "Show Search",
+            "dataType": "Checkbox",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "Show_ViewAll__c",
+            "label": "Show ViewAll",
+            "dataType": "Checkbox",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "UI_Type__c",
+            "label": "UI Type",
+            "dataType": "Picklist",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          }
+        ],
+        "fieldDefinitionDetailsComplete": false,
+        "recordDetailsCaptured": false,
+        "recordValues": null,
+        "evidenceScreenshots": [
+          "IMG_7F84F67A-F3A5-4B04-A3E0-FEFA2840BBD7.jpeg",
+          "IMG_29048FA2-7C9D-4557-8D4C-9ADFE1EA1A20.jpeg"
+        ],
+        "status": "captured-schema-inventory-only-not-deployed"
+      },
+      {
+        "name": "CNC_Search_Attributes__mdt",
+        "singularLabel": "CNC Search Attributes",
+        "pluralLabel": "CNC Search Attributes",
+        "visibility": "Public",
+        "reportedCustomFieldCount": 6,
+        "fieldInventoryComplete": false,
+        "fields": [
+          {
+            "apiName": "API_Response__c",
+            "label": "API Response",
+            "dataType": "Text(255)",
+            "indexed": false,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          },
+          {
+            "apiName": "CNC_Line_Attributes__c",
+            "label": "CNC Line Attributes",
+            "dataType": "Metadata Relationship(CNC Line Attributes)",
+            "indexed": true,
+            "fieldManageability": "Upgradable",
+            "settingsDetailCaptured": false,
+            "defaultValue": null
+          }
+        ],
+        "fieldDefinitionDetailsComplete": false,
+        "recordDetailsCaptured": false,
+        "recordValues": null,
+        "evidenceScreenshots": [
+          "IMG_E84F76EB-303E-4C4C-9C63-D4F0BD7BDEA0.jpeg"
+        ],
+        "status": "captured-schema-inventory-only-not-deployed"
       }
     ],
-    "interpretation": [
-      "Server-side generation infrastructure exists alongside template ClientSide configuration. The outer execution condition and synchronous review branch must be inspected to establish the actual selected route.",
-      "No automatic-token construction is visible in these three elements; tokenDataMap is supplied by the outer action.",
-      "Configured output includes jobId and asyncErrorMessage; no actual generation response or successful job completion was provided."
+    "dependencies": [
+      {
+        "name": "CNC_Master_Attributes__mdt",
+        "reason": "Metadata relationship targets in Button and Line inventories",
+        "schemaCaptured": false,
+        "recordsCaptured": false
+      }
     ],
-    "missing": [
-      "Full Set Values formulas",
-      "Remote Action send/response transformations",
-      "Full additional output formulas",
-      "Procedure settings beyond identity/version"
+    "recordInventories": [
+      {
+        "typeName": "CNC_Button_Attribute__mdt",
+        "records": [
+          {
+            "label": "Case Comments",
+            "developerName": "Ref_Case_Comments",
+            "fieldValues": null
+          },
+          {
+            "label": "New Case",
+            "developerName": "Auth_New_Case",
+            "fieldValues": null
+          },
+          {
+            "label": "New Case",
+            "developerName": "Claims_New_Case",
+            "fieldValues": null
+          },
+          {
+            "label": "New Case",
+            "developerName": "External_New_Case",
+            "fieldValues": null
+          },
+          {
+            "label": "New Case",
+            "developerName": "New_Case",
+            "fieldValues": null
+          },
+          {
+            "label": "New Case",
+            "developerName": "Ref_New_Case",
+            "fieldValues": null
+          },
+          {
+            "label": "Provider Search",
+            "developerName": "Provider_Search",
+            "fieldValues": null
+          },
+          {
+            "label": "View Documents",
+            "developerName": "Auth_View_Documents",
+            "fieldValues": null
+          },
+          {
+            "label": "View Documents",
+            "developerName": "Plan_Documents",
+            "fieldValues": null
+          },
+          {
+            "label": "View Documents",
+            "developerName": "Ref_View_Documents",
+            "fieldValues": null
+          },
+          {
+            "label": "View Documents",
+            "developerName": "View_Documents",
+            "fieldValues": null
+          },
+          {
+            "label": "View ID Card",
+            "developerName": "View_ID_Card",
+            "fieldValues": null
+          }
+        ],
+        "evidenceScreenshots": [
+          "IMG_37767B2B-AAC2-44A5-9A22-E23515C10137.jpeg"
+        ],
+        "inventoryComplete": false
+      },
+      {
+        "typeName": "CNC_Header_Attribute__mdt",
+        "records": [
+          {
+            "developerName": "Accum_Name",
+            "label": "Account Name",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accum_Billed",
+            "label": "Accum Billed",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accum_Claim_Number",
+            "label": "Accum Claim Number",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accum_ClaimSubtype",
+            "label": "Accum ClaimSubtype",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accum_Date_Claim_Paid",
+            "label": "Accum Date Claim Paid",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accum_ProviderName",
+            "label": "Accum ProviderName",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accum_ServiceDateFrom",
+            "label": "Accum ServiceDateFrom",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accum_ServiceDateThru",
+            "label": "Accum ServiceDateThru",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accum_Status",
+            "label": "Accum Status",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accums_Limits_Accumulator_Description",
+            "label": "Accums Limits Accumulator Description",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accums_Limits_Total_Amount_Limit",
+            "label": "Accums Limits Total AmountLimit",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accumulation_Details_Accum_Number",
+            "label": "Accumulation_Details_Accum_Number",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accumulation_Details_Accum_Type",
+            "label": "Accumulation_Details_Accum_Type",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accumulation_Details_Amt1",
+            "label": "Accumulation_Details_Amt1",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accumulation_Details_Ctr1",
+            "label": "Accumulation_Details_Ctr1",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accumulation_Details_Trans_Amt1",
+            "label": "Accumulation_Details_Trans_Amt1",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accumulation_Details_Trans_Ctr1",
+            "label": "Accumulation_Details_Trans_Ctr1",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Action",
+            "label": "Action",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accums_Limits_Carry_Over_Amount_Limit",
+            "label": "Accums Limits Carry Over AmountLimit",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accums_Limits_Met_Amount_Limit",
+            "label": "Accums Limits Met AmountLimit",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accums_Limits_Period",
+            "label": "Accums Limits Period",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Accums_Limits_Remaining_Amount_Limit",
+            "label": "Accums Limits Remaining AmountLimit",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Address",
+            "label": "Address",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Address1",
+            "label": "Address1",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Address1_POD",
+            "label": "Address1_POD",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Address2",
+            "label": "Address2",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Address2_POD",
+            "label": "Address2_POD",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Admission_Date",
+            "label": "Admission Date",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Admit_Date",
+            "label": "Admit Date",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Member_Id",
+            "label": "Attach Entity Member Id",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Paid",
+            "label": "Attach Entity Paid",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Plan_Description",
+            "label": "Attach Entity Plan Description",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Plan_Effective",
+            "label": "Attach Entity Plan Effective",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Plan_Elderly_Waiver",
+            "label": "Attach Entity Plan Elderly Waiver",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Plan_Group_ID",
+            "label": "Attach Entity Plan Group ID",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Plan_ID",
+            "label": "Attach Entity Plan ID",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Plan_Status",
+            "label": "Attach Entity Plan Status",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Plan_Term",
+            "label": "Attach Entity Plan Term",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Provider",
+            "label": "Attach Entity Provider",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Referral",
+            "label": "Attach Entity Referral",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Relative",
+            "label": "Attach Entity Relative",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Review_Determination",
+            "label": "Attach Entity Review Determination",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Service_Date_From",
+            "label": "Attach Entity Service Date From",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Service_Date_Thru",
+            "label": "Attach Entity Service Date Thru",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Service_Date_To",
+            "label": "Attach Entity Service Date To",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Attach_Entity_Status",
+            "label": "Attach Entity Status",
+            "fieldValues": null
+          },
+          {
+            "developerName": "AttachmentControlNbr",
+            "label": "AttachmentControlNbr",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Auth_Case_Category",
+            "label": "Auth_Case_Category",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Auth_Case_CreateDate",
+            "label": "Auth_Case_CreateDate",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Auth_Case_LineOfBusiness",
+            "label": "Auth_Case_LineOfBusiness",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Auth_Case_Status",
+            "label": "Auth_Case_Status",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Auth_Case_Subcategory",
+            "label": "Auth_Case_Subcategory",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Auth_Case_SubSubcategory",
+            "label": "Auth_Case_SubSubcategory",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Auth_CaseNumber",
+            "label": "Auth_CaseNumber",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Documents_Department",
+            "label": "Documents Department",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": {
+              "API_Response__c": "department",
+              "CNC_Line_Attributes__c": {
+                "referencedType": "CNC_Line_Attributes__mdt",
+                "developerName": "Send_Communication_Documents"
+              },
+              "Column_Order__c": 1,
+              "Data_Type__c": "text",
+              "Default_Value__c": "",
+              "Help_Text__c": "",
+              "Is_Sortable__c": true,
+              "Response_Label__c": "Department",
+              "Wrap_Text__c": false
+            },
+            "customFieldValuesComplete": true,
+            "remainingCustomFields": [],
+            "evidenceScreenshots": [
+              "IMG_DEC6A101-0268-49B2-9E71-1A4F3C201D88.jpeg",
+              "IMG_E72A1B8D-3153-4D59-AE16-CA98F13660EB.jpeg"
+            ],
+            "captureNotes": "All nine custom field values captured. Previously clipped Response_Label__c explicitly verified as Department by the direct Header DeveloperName query."
+          },
+          {
+            "developerName": "Documents_Group",
+            "label": "Documents Group",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": {
+              "API_Response__c": "group",
+              "CNC_Line_Attributes__c": {
+                "referencedType": "CNC_Line_Attributes__mdt",
+                "developerName": "Send_Communication_Documents"
+              },
+              "Column_Order__c": 2,
+              "Data_Type__c": "text",
+              "Default_Value__c": "",
+              "Help_Text__c": "",
+              "Is_Sortable__c": true,
+              "Response_Label__c": "Group",
+              "Wrap_Text__c": false
+            },
+            "customFieldValuesComplete": true,
+            "remainingCustomFields": [],
+            "evidenceScreenshots": [
+              "IMG_DEC6A101-0268-49B2-9E71-1A4F3C201D88.jpeg"
+            ],
+            "captureNotes": "All nine custom field values visible. Exact casing preserved."
+          },
+          {
+            "developerName": "Documents_Name",
+            "label": "Documents Name",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": {
+              "API_Response__c": "label",
+              "CNC_Line_Attributes__c": {
+                "referencedType": "CNC_Line_Attributes__mdt",
+                "developerName": "Send_Communication_Documents"
+              },
+              "Column_Order__c": 3,
+              "Data_Type__c": "text",
+              "Default_Value__c": "",
+              "Help_Text__c": "",
+              "Is_Sortable__c": true,
+              "Response_Label__c": "Document",
+              "Wrap_Text__c": false
+            },
+            "customFieldValuesComplete": true,
+            "remainingCustomFields": [],
+            "evidenceScreenshots": [
+              "IMG_DEC6A101-0268-49B2-9E71-1A4F3C201D88.jpeg"
+            ],
+            "captureNotes": "All nine custom field values visible. Exact casing preserved."
+          },
+          {
+            "developerName": "Forms_Department",
+            "label": "Forms Department",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": {
+              "API_Response__c": "department",
+              "CNC_Line_Attributes__c": {
+                "referencedType": "CNC_Line_Attributes__mdt",
+                "developerName": "Send_Communication_Forms"
+              },
+              "Column_Order__c": 1,
+              "Data_Type__c": "text",
+              "Default_Value__c": "",
+              "Help_Text__c": "",
+              "Is_Sortable__c": true,
+              "Response_Label__c": "Department",
+              "Wrap_Text__c": false
+            },
+            "customFieldValuesComplete": true,
+            "remainingCustomFields": [],
+            "evidenceScreenshots": [
+              "IMG_DEC6A101-0268-49B2-9E71-1A4F3C201D88.jpeg",
+              "IMG_E72A1B8D-3153-4D59-AE16-CA98F13660EB.jpeg"
+            ],
+            "captureNotes": "All nine custom field values captured. Previously clipped Response_Label__c explicitly verified as Department by the direct Header DeveloperName query."
+          },
+          {
+            "developerName": "Forms_Group",
+            "label": "Forms Group",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": {
+              "API_Response__c": "group",
+              "CNC_Line_Attributes__c": {
+                "referencedType": "CNC_Line_Attributes__mdt",
+                "developerName": "Send_Communication_Forms"
+              },
+              "Column_Order__c": 2,
+              "Data_Type__c": "text",
+              "Default_Value__c": "",
+              "Help_Text__c": "",
+              "Is_Sortable__c": true,
+              "Response_Label__c": "Group",
+              "Wrap_Text__c": false
+            },
+            "customFieldValuesComplete": true,
+            "remainingCustomFields": [],
+            "evidenceScreenshots": [
+              "IMG_DEC6A101-0268-49B2-9E71-1A4F3C201D88.jpeg"
+            ],
+            "captureNotes": "All nine custom field values visible. Exact casing preserved."
+          },
+          {
+            "developerName": "Forms_Name",
+            "label": "Forms Name",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": {
+              "API_Response__c": "label",
+              "CNC_Line_Attributes__c": {
+                "referencedType": "CNC_Line_Attributes__mdt",
+                "developerName": "Send_Communication_Forms"
+              },
+              "Column_Order__c": 3,
+              "Data_Type__c": "text",
+              "Default_Value__c": "",
+              "Help_Text__c": "",
+              "Is_Sortable__c": true,
+              "Response_Label__c": "Form",
+              "Wrap_Text__c": false
+            },
+            "customFieldValuesComplete": true,
+            "remainingCustomFields": [],
+            "evidenceScreenshots": [
+              "IMG_DEC6A101-0268-49B2-9E71-1A4F3C201D88.jpeg"
+            ],
+            "captureNotes": "All nine custom field values visible. Exact casing preserved."
+          },
+          {
+            "developerName": "Letters_Department",
+            "label": "Letters Department",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": {
+              "API_Response__c": "department",
+              "CNC_Line_Attributes__c": {
+                "referencedType": "CNC_Line_Attributes__mdt",
+                "developerName": "Send_Communication_Letters"
+              },
+              "Column_Order__c": 1,
+              "Data_Type__c": "text",
+              "Default_Value__c": "",
+              "Help_Text__c": "",
+              "Is_Sortable__c": true,
+              "Response_Label__c": "Department",
+              "Wrap_Text__c": false
+            },
+            "customFieldValuesComplete": true,
+            "remainingCustomFields": [],
+            "evidenceScreenshots": [
+              "IMG_DEC6A101-0268-49B2-9E71-1A4F3C201D88.jpeg",
+              "IMG_E72A1B8D-3153-4D59-AE16-CA98F13660EB.jpeg"
+            ],
+            "captureNotes": "All nine custom field values captured. Previously clipped Response_Label__c explicitly verified as Department by the direct Header DeveloperName query."
+          },
+          {
+            "developerName": "Letters_Group",
+            "label": "Letters Group",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": {
+              "API_Response__c": "group",
+              "CNC_Line_Attributes__c": {
+                "referencedType": "CNC_Line_Attributes__mdt",
+                "developerName": "Send_Communication_Letters"
+              },
+              "Column_Order__c": 2,
+              "Data_Type__c": "text",
+              "Default_Value__c": "",
+              "Help_Text__c": "",
+              "Is_Sortable__c": true,
+              "Response_Label__c": "Group",
+              "Wrap_Text__c": false
+            },
+            "customFieldValuesComplete": true,
+            "remainingCustomFields": [],
+            "evidenceScreenshots": [
+              "IMG_DEC6A101-0268-49B2-9E71-1A4F3C201D88.jpeg"
+            ],
+            "captureNotes": "All nine custom field values visible. Exact casing preserved."
+          },
+          {
+            "developerName": "Letters_Name",
+            "label": "Letters Name",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": {
+              "API_Response__c": "Name",
+              "CNC_Line_Attributes__c": {
+                "referencedType": "CNC_Line_Attributes__mdt",
+                "developerName": "Send_Communication_Letters"
+              },
+              "Column_Order__c": 3,
+              "Data_Type__c": "text",
+              "Default_Value__c": "",
+              "Help_Text__c": "",
+              "Is_Sortable__c": true,
+              "Response_Label__c": "Letter",
+              "Wrap_Text__c": false
+            },
+            "customFieldValuesComplete": true,
+            "remainingCustomFields": [],
+            "evidenceScreenshots": [
+              "IMG_DEC6A101-0268-49B2-9E71-1A4F3C201D88.jpeg"
+            ],
+            "captureNotes": "All nine custom field values visible. Exact casing preserved."
+          }
+        ],
+        "evidenceScreenshots": [
+          "IMG_0491389E-AA15-4741-B2DF-066942D4A06F.jpeg",
+          "IMG_0D04879D-90FC-46E8-8852-96DF832B8824.jpeg",
+          "IMG_5B44D25C-5BC3-4159-9B34-6CADBB1FEEDB.jpeg"
+        ],
+        "inventoryComplete": false
+      },
+      {
+        "typeName": "CNC_Line_Attributes__mdt",
+        "records": [
+          {
+            "developerName": "Send_Communication_Case_Review",
+            "label": "Send Communication Case Review",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Send_Communication_Cover_Letter",
+            "label": "Send Communication Cover Letter",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Send_Communication_Documents",
+            "label": "Send Communication Documents",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": {
+              "Component_Name__c": "",
+              "Component_Type__c": "FlexCards",
+              "Is_Selectable__c": true,
+              "Order__c": 7,
+              "Query_Clause__c": "",
+              "Record_Limit_Per_Page__c": 50,
+              "Section_Name__c": "Send Communication Documents",
+              "Selectable_Type__c": "Check Box",
+              "Show_Filter_By__c": true,
+              "Show_Pagination__c": true,
+              "Show_Row_Number__c": false,
+              "Show_Search__c": false,
+              "Show_ViewAll__c": false,
+              "UI_Type__c": "Datatable",
+              "isAccordian__c": false,
+              "CNC_Master_Attribute__c": {
+                "referencedType": "CNC_Master_Attributes__mdt",
+                "developerName": "Send_Communication"
+              }
+            },
+            "evidenceScreenshots": [
+              "IMG_CC79B120-66C2-42C0-B5ED-BF2E4CC418D7.jpeg",
+              "IMG_280CA63E-6012-4FF6-AA7D-BCF3533D27CA.jpeg",
+              "IMG_78BFB5BB-59D1-4320-ADE7-4E874E9BB1A6.jpeg",
+              "IMG_1DEB262E-FB1F-4515-9017-91CB1384832F.jpeg"
+            ],
+            "customFieldValuesComplete": true,
+            "remainingCustomFields": [],
+            "captureNotes": "16/16 custom field values captured. Latest relationship query explicitly pairs Send_Communication_Documents with Master DeveloperName Send_Communication. No field values remain unresolved; schema editor details and deployment are separate."
+          },
+          {
+            "developerName": "Send_Communication_Email_Template",
+            "label": "Send Communication Email Template",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Send_Communication_Forms",
+            "label": "Send Communication Forms",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": {
+              "Section_Name__c": "Send Communication Forms",
+              "Selectable_Type__c": "Check Box",
+              "Show_Filter_By__c": true,
+              "Show_Pagination__c": true,
+              "Show_Row_Number__c": false,
+              "Show_Search__c": false,
+              "Show_ViewAll__c": false,
+              "UI_Type__c": "Datatable",
+              "isAccordian__c": false,
+              "Component_Name__c": "",
+              "Component_Type__c": "FlexCards",
+              "Order__c": 1,
+              "Query_Clause__c": "",
+              "CNC_Master_Attribute__c": {
+                "referencedType": "CNC_Master_Attributes__mdt",
+                "developerName": "Send_Communication"
+              },
+              "Is_Selectable__c": true,
+              "Record_Limit_Per_Page__c": 50
+            },
+            "qualifiedApiName": "Send_Communication_Forms",
+            "evidenceScreenshots": [
+              "IMG_2C1CBB84-957D-4F1F-9D80-B1395831EEB5.jpeg",
+              "IMG_FFE73573-C622-4D49-A8AC-05A5CF638927.jpeg",
+              "IMG_54F0625D-D0F5-4CF5-8FB0-87CAA9385FAE.jpeg"
+            ],
+            "customFieldValuesComplete": true,
+            "remainingCustomFields": [],
+            "captureNotes": "Visible WHERE selects Forms and Letters; all shown scalar values and Master DeveloperName are identical in both rows, establishing association without row-order inference. 16/16 custom field values captured; final Is_Selectable__c=true and Record_Limit_Per_Page__c=50 confirmed by user in follow-up to the query for both Forms and Letters.",
+            "userConfirmedEvidence": {
+              "date": "2026-10-01",
+              "statement": "True and 50",
+              "appliesTo": [
+                "Is_Selectable__c",
+                "Record_Limit_Per_Page__c"
+              ],
+              "scope": "Both Forms and Letters, in response to the preceding two-record query."
+            }
+          },
+          {
+            "developerName": "Send_Communication_Letters",
+            "label": "Send Communication Letters",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": {
+              "Section_Name__c": "Send Communication Letters",
+              "Selectable_Type__c": "Radio",
+              "Show_Filter_By__c": true,
+              "Show_Pagination__c": true,
+              "Show_Row_Number__c": false,
+              "Show_Search__c": false,
+              "Show_ViewAll__c": false,
+              "UI_Type__c": "Datatable",
+              "isAccordian__c": false,
+              "Component_Name__c": "",
+              "Component_Type__c": "FlexCards",
+              "Order__c": 1,
+              "Query_Clause__c": "",
+              "CNC_Master_Attribute__c": {
+                "referencedType": "CNC_Master_Attributes__mdt",
+                "developerName": "Send_Communication"
+              },
+              "Is_Selectable__c": true,
+              "Record_Limit_Per_Page__c": 50
+            },
+            "qualifiedApiName": "Send_Communication_Letters",
+            "evidenceScreenshots": [
+              "IMG_2C1CBB84-957D-4F1F-9D80-B1395831EEB5.jpeg",
+              "IMG_FFE73573-C622-4D49-A8AC-05A5CF638927.jpeg",
+              "IMG_54F0625D-D0F5-4CF5-8FB0-87CAA9385FAE.jpeg"
+            ],
+            "customFieldValuesComplete": true,
+            "remainingCustomFields": [],
+            "captureNotes": "Visible WHERE selects Forms and Letters; all shown scalar values and Master DeveloperName are identical in both rows, establishing association without row-order inference. 16/16 custom field values captured; final Is_Selectable__c=true and Record_Limit_Per_Page__c=50 confirmed by user in follow-up to the query for both Forms and Letters.",
+            "userConfirmedEvidence": {
+              "date": "2026-10-01",
+              "statement": "True and 50",
+              "appliesTo": [
+                "Is_Selectable__c",
+                "Record_Limit_Per_Page__c"
+              ],
+              "scope": "Both Forms and Letters, in response to the preceding two-record query."
+            }
+          },
+          {
+            "developerName": "Send_Communication_POD",
+            "label": "Send Communication POD",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Send_Communication_Paragraph",
+            "label": "Send Communication Paragraph",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Send_Communication_Review",
+            "label": "Send Communication Review",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Send_Communication_Review_POD",
+            "label": "Send Communication Review POD",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": null
+          },
+          {
+            "developerName": "Send_Communication_Select_Entity",
+            "label": "Send Communication Select Entity",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "fieldValues": null
+          }
+        ],
+        "evidenceScreenshots": [
+          "IMG_7B24DFE5-CA6C-4596-AC0B-580DC6B72D07.jpeg",
+          "IMG_49C41762-E981-441C-BD19-A5F17D4BCC28.jpeg",
+          "IMG_2C1CBB84-957D-4F1F-9D80-B1395831EEB5.jpeg",
+          "IMG_FFE73573-C622-4D49-A8AC-05A5CF638927.jpeg"
+        ],
+        "inventoryComplete": false,
+        "scope": "Visible rows after result filter send; not complete type inventory",
+        "customFieldValuesCaptured": true,
+        "customFieldValuesComplete": false
+      },
+      {
+        "typeName": "CNC_Master_Attributes__mdt",
+        "records": [
+          {
+            "developerName": "Send_Communication",
+            "label": "Send Communication",
+            "language": "en_US",
+            "namespacePrefix": "",
+            "qualifiedApiName": "Send_Communication",
+            "fieldValues": {
+              "Entity_Type__c": "Member"
+            },
+            "customFieldValuesComplete": false,
+            "captureNotes": "FIELDS(ALL) result confirms identity and Entity_Type__c=Member. This screenshot reaches the Entity_Type__c column. Full Master schema/field count is not yet captured, so do not assume additional custom fields or record completeness; no repeated query is needed for this captured value.",
+            "evidenceScreenshots": [
+              "IMG_F3EB90FE-A0BA-4A8A-876D-8D8174409AB5.jpeg",
+              "IMG_7C2826C2-8ECB-46C9-B934-45E719D76483.jpeg"
+            ]
+          }
+        ],
+        "inventoryComplete": false
+      }
+    ],
+    "captureDate": "2026-10-01",
+    "coverageNotes": [
+      "Inventory screenshots show field types/lengths, indexed flags and metadata relationship targets; they do not show field editor defaults, picklist values or relationship settings.",
+      "Button 7/7, Header 9/9 and Line 16/16 custom fields inventoried; Search 2/6 visible. Internal/External Website schema is absent from this batch.",
+      "Header current inventory has no Type_Attribute_Target__c although captured mapper uses it. Preserve this source mismatch for verification; do not invent a field.",
+      "Header/search record lists show names only and do not establish Send Communication membership or any field values.",
+      "Record inventories are partial: clipped rows excluded; repeated visible rows deduplicated by DeveloperName.",
+      "No LWC source received in this batch. MDT/LWC implementation remains deferred under existing scope."
+    ],
+    "unassignedQueryObservations": [
+      {
+        "evidenceScreenshot": "IMG_FF76DE60-C085-4B1E-BEB0-9F7A9707D0C3.jpeg",
+        "typeName": "CNC_Line_Attributes__mdt",
+        "visibleRowCount": 2,
+        "developerNameNotSelected": true,
+        "whereClauseCropped": true,
+        "recordAssociationVerified": false,
+        "commonVisibleValues": {
+          "Component_Name__c": "",
+          "Component_Type__c": "FlexCards",
+          "Order__c": 1,
+          "Query_Clause__c": ""
+        },
+        "masterRelationshipObservation": "Both rows show same reference ID; exact ID transcription and referenced DeveloperName unresolved",
+        "remainingRequestedFields": [
+          "DeveloperName",
+          "Is_Selectable__c",
+          "Record_Limit_Per_Page__c",
+          "CNC_Master_Attribute__r.DeveloperName"
+        ],
+        "captureDate": "2026-10-01",
+        "resolvedByScreenshot": "IMG_54F0625D-D0F5-4CF5-8FB0-87CAA9385FAE.jpeg",
+        "resolution": "Same query's visible Forms/Letters filter and identical values in both rows establish common values for both records. Master DeveloperName=Send_Communication; original reference ID not needed."
+      }
+    ],
+    "queryResults": [
+      {
+        "key": "CNC_Button_Attribute__mdt:Forms/Documents/Letters",
+        "typeName": "CNC_Button_Attribute__mdt",
+        "filter": {
+          "relationship": "CNC_Line_Attributes__r.DeveloperName",
+          "values": [
+            "Send_Communication_Forms",
+            "Send_Communication_Documents",
+            "Send_Communication_Letters"
+          ]
+        },
+        "limit": 150,
+        "returnedRecordCount": 0,
+        "observedMessage": "No data exported.",
+        "evidenceScreenshots": [
+          "IMG_64680B13-27CC-4331-9C13-B8AD9C04A18A.jpeg"
+        ],
+        "captureCompleteForQuery": true,
+        "scopeNote": "Zero rows for this exact query in the photographed source org. Does not imply no records globally or no Master-level Button records."
+      },
+      {
+        "key": "CNC_Search_Attributes__mdt:Forms/Documents/Letters",
+        "typeName": "CNC_Search_Attributes__mdt",
+        "filter": {
+          "relationship": "CNC_Line_Attributes__r.DeveloperName",
+          "values": [
+            "Send_Communication_Forms",
+            "Send_Communication_Documents",
+            "Send_Communication_Letters"
+          ]
+        },
+        "limit": 150,
+        "returnedRecordCount": 0,
+        "observedMessage": "No data exported.",
+        "evidenceScreenshots": [
+          "IMG_86C6FFA9-9D4A-49B2-B4F7-6C3BA24B8DE3.jpeg"
+        ],
+        "captureCompleteForQuery": true,
+        "scopeNote": "Zero rows for this exact query in the photographed source org. Does not imply no records globally or no Master-level Button records."
+      },
+      {
+        "key": "CNC_Header_Attribute__mdt:Department-header-names-applied-to-Line-filter",
+        "typeName": "CNC_Header_Attribute__mdt",
+        "filter": {
+          "relationship": "CNC_Line_Attributes__r.DeveloperName",
+          "values": [
+            "Documents_Department",
+            "Forms_Department",
+            "Letters_Department"
+          ]
+        },
+        "limit": 150,
+        "returnedRecordCount": 6,
+        "evidenceScreenshots": [
+          "IMG_E5299535-7ECC-430E-939A-87A8F83498FE.jpeg",
+          "IMG_01F24BF6-C852-4763-8888-7E88D5AA094A.jpeg"
+        ],
+        "requestedCaptureResolved": false,
+        "scopeNote": "Screenshot query filters Line relationship DeveloperName using Header record names, instead of WHERE DeveloperName. Returned rows are Account_Name, Contact_Name, Referral_Account_Name, Referral_Case_CreatedDate, Referral_Subject and Subject; they do not resolve requested Documents/Forms/Letters Department labels. Line relationship cells are visibly blank; no association to Send Communication inferred.",
+        "returnedDeveloperNames": [
+          "Account_Name",
+          "Contact_Name",
+          "Referral_Account_Name",
+          "Referral_Case_CreatedDate",
+          "Referral_Subject",
+          "Subject"
+        ]
+      }
+    ]
+  },
+  "runtimeReview": {
+    "observations": [
+      {
+        "captureDate": "2026-10-06",
+        "environment": "xhdev1 sandbox",
+        "evidenceScreenshot": "IMG_9D720EBB-D83D-4DD4-8065-44FCEFB1760A.jpeg",
+        "title": "Material and Outbound Channel Selection",
+        "materialType": {
+          "requiredIndicatorVisible": true,
+          "options": [
+            "Forms",
+            "Documents",
+            "Letters",
+            "Other Communication",
+            "Member Materials Request (MMR) Documents"
+          ],
+          "selectedValueObserved": null
+        },
+        "outboundChannel": {
+          "requiredIndicatorVisible": true,
+          "options": [
+            "Email",
+            "Print"
+          ],
+          "selectedValueObserved": null
+        },
+        "recipientControlVisible": false,
+        "navigationButtonsCaptured": false,
+        "notes": "Runtime screen after launching from Case. No options visibly selected. Do not infer stored option values, defaults, recipient handling or active OmniScript version from display labels. No generation/submission observed."
+      },
+      {
+        "captureDate": "2026-10-06",
+        "evidenceScreenshot": "IMG_52FFF2FE-44AE-4098-9334-6B25DA148E86.jpeg",
+        "environment": "xhdev1 sandbox",
+        "title": "Material and Outbound Channel Selection",
+        "selectedDisplayValues": {
+          "materialType": "Other Communication",
+          "outboundChannel": "Print"
+        },
+        "navigationVisible": [
+          "Next"
+        ],
+        "notes": "Display selections confirmed. Stored JSON values and designer conditions are not established by this runtime screenshot."
+      },
+      {
+        "captureDate": "2026-10-06",
+        "evidenceScreenshot": "IMG_6E22A63D-D751-42A1-A7F7-6E1E8FE4216C.jpeg",
+        "environment": "xhdev1 sandbox",
+        "title": "Select Letter",
+        "precedingDisplaySelections": {
+          "materialType": "Other Communication",
+          "outboundChannel": "Print"
+        },
+        "table": {
+          "columns": [
+            "Department",
+            "Group",
+            "Letter"
+          ],
+          "visibleRows": [
+            {
+              "Department": "Service",
+              "Group": "ITS Host",
+              "Letter": "HOSTProviderFreeformLetter",
+              "selected": false
+            }
+          ],
+          "completeInventoryVerified": false
+        },
+        "upload": {
+          "guidance": "Upload Forms/Documents - PDF documents only",
+          "qualifier": "(If Applicable)",
+          "attachmentCount": 0,
+          "controls": [
+            "Upload Files",
+            "Or drop files"
+          ],
+          "fileTypeEnforcementVerified": false
+        },
+        "navigationVisible": [
+          "Previous",
+          "Next"
+        ],
+        "recipientControlVisible": false,
+        "notes": "One visible unselected row; backend template identity, selection source, filtering logic, token definitions and successful generation remain unknown. Do not infer that no other templates exist."
+      },
+      {
+        "captureDate": "2026-10-06",
+        "environment": "xhdev1 sandbox",
+        "evidenceScreenshot": "IMG_0FC9CC3C-65AB-48C7-A80A-9FF6D7CA53FC.jpeg",
+        "title": "Communication Address",
+        "journeyContext": "Following the Select Letter review of Other Communication / Print; selected letter identity is not displayed on this screen.",
+        "fields": [
+          {
+            "label": "Addressee Name",
+            "requiredIndicatorVisible": true,
+            "visibleValue": "",
+            "validationMessage": "Error: Addressee Name is required."
+          },
+          {
+            "label": "Address",
+            "requiredIndicatorVisible": false,
+            "visibleValue": "",
+            "editableVerified": null
+          },
+          {
+            "label": "Address Line 1",
+            "requiredIndicatorVisible": true,
+            "visibleValue": ""
+          },
+          {
+            "label": "Address Line 2",
+            "requiredIndicatorVisible": false,
+            "visibleValue": ""
+          },
+          {
+            "label": "City",
+            "requiredIndicatorVisible": true,
+            "visibleValue": ""
+          },
+          {
+            "label": "Zip",
+            "requiredIndicatorVisible": true,
+            "visibleValue": ""
+          },
+          {
+            "label": "State",
+            "requiredIndicatorVisible": true,
+            "visibleValue": ""
+          },
+          {
+            "label": "Country",
+            "requiredIndicatorVisible": true,
+            "visibleValue": ""
+          }
+        ],
+        "oneTimeCommunicationAddress": {
+          "label": "One time Communication Address",
+          "checked": true,
+          "defaultVerified": false,
+          "conditionalVisibilityVerified": false
+        },
+        "navigationVisible": [
+          "Previous",
+          "Next"
+        ],
+        "unknowns": [
+          "Field API/JSON names and mappings",
+          "Address prepopulation source",
+          "Behavior with one-time checkbox unchecked",
+          "Whether entered address updates a record or only this communication",
+          "Relationship to Provider recipient and later review edits",
+          "Validation rules beyond the visible Addressee Name error"
+        ],
+        "notes": "Blank fields and checked checkbox are visible runtime state, not proof of defaults. Manual address controls are displayed; successful input, navigation, persistence, generation and print submission remain unverified."
+      },
+      {
+        "captureDate": "2026-10-06",
+        "environment": "xhdev1 sandbox",
+        "evidenceScreenshot": "IMG_B08262EB-AE94-4A28-A141-9ED1298F9E53.jpeg",
+        "title": "Communication Address",
+        "oneTimeCommunicationAddressChecked": true,
+        "inputObservation": "Test values entered into Addressee Name, Address Line 1, City, State, Zip and Country. Address Line 2 and combined Address appear blank. Exact entered values omitted from tracking.",
+        "notes": "Later screenshot reaches Additional Information, establishing progression past address entry for this run. Persistence and validation constraints remain unknown."
+      },
+      {
+        "captureDate": "2026-10-06",
+        "environment": "xhdev1 sandbox",
+        "evidenceScreenshot": "IMG_F4262D90-BDA8-46EA-B546-1D861E972D62.jpeg",
+        "title": "Enter Additional Information for Letter Selected",
+        "guidance": "To Review Letter selected in previous step, Preview here.",
+        "fields": [
+          "Provider Name",
+          "Provider Address",
+          "City",
+          "State",
+          "Zip Code",
+          "Patient Full Name",
+          "Claim Number or Authorization Number",
+          "Free Form Text"
+        ],
+        "inputObservation": "Provider Name, Provider Address, City, State and Zip Code display values matching the preceding address inputs. Patient Full Name, Claim Number or Authorization Number and Free Form Text appear blank.",
+        "navigationVisible": [
+          "Previous",
+          "Next"
+        ],
+        "unknowns": [
+          "Whether values are automatically copied, manually entered or both",
+          "Field JSON names, token definitions and API/manual modes",
+          "Required flags and conditions",
+          "Brief Description mapping required by CS-1474",
+          "Preview here control behavior"
+        ],
+        "notes": "Visible editable input controls establish existing manual-content UI, not successful token merge or template output."
+      },
+      {
+        "captureDate": "2026-10-06",
+        "environment": "xhdev1 sandbox",
+        "evidenceScreenshot": "IMG_4119FA6D-3E65-4BCD-B29D-331B8124652B.jpeg",
+        "title": "Review and Submit",
+        "state": "Loading spinner visible",
+        "notes": "Loading state only. No generation response, file artifact or success verified."
+      },
+      {
+        "captureDate": "2026-10-06",
+        "environment": "xhdev1 sandbox",
+        "evidenceScreenshot": "IMG_055359E2-BD88-4E57-B30C-A9752D485630.jpeg",
+        "title": "Review and Submit",
+        "table": {
+          "columns": [
+            "Name",
+            "Type",
+            "View",
+            "Remove"
+          ],
+          "visibleRows": [
+            {
+              "Name": "HOSTProviderFreeformLetter",
+              "Type": "Letter",
+              "View": "View",
+              "Remove": "No control visible in row"
+            }
+          ]
+        },
+        "checkboxes": [
+          {
+            "label": "I confirm the attachments are correct",
+            "checked": false
+          },
+          {
+            "label": "Include Return Envelope",
+            "checked": false
+          }
+        ],
+        "navigationObservation": "Previous visible; right action appears greyed out and its label is not legible.",
+        "notes": "Letter row and View link visible. PDF content, generated-file identity and successful generation are unverified. Confirmation/submit click sequence not captured."
+      },
+      {
+        "captureDate": "2026-10-06",
+        "environment": "xhdev1 sandbox",
+        "evidenceScreenshot": "IMG_ECF268D2-F08E-4B3E-BBF0-8C0C5BDAF16B.jpeg",
+        "title": "Confirmation",
+        "message": "Unable to send Communication at this time, try again in a few minutes",
+        "navigationVisible": [
+          "Done"
+        ],
+        "outcome": "Failure message displayed",
+        "unknowns": [
+          "Failing action, IP/Apex/API and response",
+          "Whether failure occurred during generation, storage or print delivery",
+          "Whether any request/file persisted",
+          "Retry behavior"
+        ],
+        "notes": "Observed failure wording closely corresponds to story error requirement. No successful print submission, case association or Alfresco storage verified; screenshot does not establish root cause."
+      }
+    ]
+  },
+  "lwcSourceEvidence": [
+    {
+      "name": "cncSendCommunicationAdditionalInfo",
+      "environment": "xhdev1 sandbox",
+      "sourceFile": "cncSendCommunicationAdditionalInfo.js",
+      "baseClass": "OmniscriptBaseMixin(NavigationMixin(LightningElement))",
+      "captureDate": "2026-10-06",
+      "sourceCaptureComplete": false,
+      "evidenceScreenshots": [
+        "IMG_F9575910-5641-49FE-A3BA-47CFE7E90DEB.jpeg",
+        "IMG_58F3F8D4-852C-4A6F-BE15-5F142F7DE38D.jpeg",
+        "IMG_03A12AD0-02EB-4951-9D81-DBDF216F595E.jpeg",
+        "IMG_6EED452C-61BF-4AA7-B314-89EC764ADE16.jpeg",
+        "IMG_D8559AFD-CE92-4138-B379-B2C851E35F4A.jpeg",
+        "IMG_0552C7DD-107F-47C8-ABDD-4D296CF82BEA.jpeg",
+        "IMG_28BF83F9-71F6-4DDA-9CE6-65E261C33184.jpeg",
+        "IMG_B1931D0D-ADCC-476F-AA63-282C4044D671.jpeg",
+        "IMG_1DB37A4D-15A5-4A9B-A9FA-B1890ABEC983.jpeg",
+        "IMG_499C774D-9BD7-43EA-A39C-F17D4A8FADF9.jpeg",
+        "IMG_BF338C35-1460-4F01-886A-D1DDD65F87DD.jpeg",
+        "IMG_80198A6F-2437-4880-97A9-68715496BFEB.jpeg",
+        "IMG_7DB86B58-1373-4E56-B4AB-55ADC044B022.jpeg",
+        "IMG_A96C2FAE-C29C-4B4A-A618-89079456EB3A.jpeg",
+        "IMG_D0C0C36E-7476-49A5-9F65-10AF3A2C3C28.jpeg",
+        "IMG_FDEFC39B-334B-41FD-9FAF-C737A54CC4AA.jpeg",
+        "IMG_27C15046-65DA-48CD-9C37-CFAFD2B11D29.jpeg",
+        "IMG_E834A435-8B63-4BEB-BB57-28F37BB86680.jpeg"
+      ],
+      "initialProperties": {
+        "tokenMapping": [],
+        "tokenInputFields": [],
+        "selectedLetterHeader": "To Review Letter selected in previous step, ",
+        "selectedLetterPreviewText": "Preview here.",
+        "isPOD": false,
+        "showSubHeader": true,
+        "isEmail": false,
+        "isAsyncLetterGeneration": true,
+        "today": "1970-01-01"
+      },
+      "richTextFormats": [
+        "font",
+        "size",
+        "bold",
+        "italic",
+        "underline",
+        "strike",
+        "list",
+        "indent",
+        "align",
+        "link",
+        "image",
+        "clean",
+        "table",
+        "header"
+      ],
+      "lifecycle": {
+        "connectedCallback": [
+          "this.initilizeTokenData();",
+          "this.initializeMinDate();"
+        ],
+        "initializeMinDate": "this.today = new Date().toISOString().slice(0,10);"
+      },
+      "tokenInitialization": {
+        "method": "initilizeTokenData",
+        "jsonSource": "this.omniJsonData",
+        "flags": {
+          "isEmail": "When JSON has isEmail and it is truthy: showSubHeader=false, setEmailBody(), isEmail=true.",
+          "isPOD": "When JSON has isPOD and it is truthy: isPOD=true."
+        },
+        "memberEmailResolution": {
+          "oneTimeFlag": "SelectEmail.SelectOneTimeEmail === true",
+          "oneTimeValue": "SelectEmail.EmailAddressOneTime",
+          "podValue": "SelectEmail.podEmailAddress",
+          "fallbacks": [
+            "memberEmail",
+            "memberInfo.memberEmailAddress",
+            null
+          ],
+          "priority": "If SelectEmail exists: one-time flag plus populated one-time email, otherwise populated POD email, otherwise fallbacks. Without SelectEmail use fallbacks."
+        },
+        "templateSelection": {
+          "source": "selectedTemplate",
+          "additionalInfoTokenDataId": "selectedTemplate.Id",
+          "previewContentDocumentId": "selectedTemplate.documentInfo.ContentDocumentId when documentInfo exists and ContentDocumentId != null"
+        },
+        "templateChangedBranch": {
+          "condition": "JSON has additionalInfoTokenDataId && additionalInfoTokenDataId != selectedTemplate.Id",
+          "actions": [
+            "tokenInputFields=[]",
+            "tokenMapping=[]",
+            "getTokenDetails(selectedTemplate)"
+          ]
+        },
+        "existingTokensBranch": {
+          "condition": "Otherwise JSON has tokenInputs",
+          "source": "tokenInputs",
+          "refreshCondition": "item.mappingName != null && JSON has item.mappingName && isRefreshTokens",
+          "refreshedValue": "omniscriptJsonData[item.mappingName]",
+          "actions": [
+            "Assign mapped list to tokenInputFields",
+            "setToEmail()"
+          ],
+          "fallback": "Without tokenInputs call getTokenDetails(selectedTemplate)."
+        },
+        "finalJsonUpdate": {
+          "method": "omniApplyCallResp",
+          "payload": {
+            "isRefreshTokens": false
+          }
+        }
+      },
+      "setToEmail": {
+        "tokenMatch": "t.name === 'To'",
+        "value": "this.memberEmail",
+        "jsonUpdate": {
+          "tokenInputs": "this.tokenInputFields"
+        },
+        "method": "omniApplyCallResp"
+      },
+      "emailBody": {
+        "source": "selectedTemplate.HtmlValue",
+        "placeholderPattern": "/{{\\s*\\b\\w+\\b\\s*}}/gi",
+        "placeholderKey": "Remove braces and trim whitespace.",
+        "lookup": "jsonData[variableName]",
+        "currentYearFallback": "If undefined and variableName === 'currentYear', use new Date().getFullYear().toString().",
+        "substitution": "Replace placeholder when value !== undefined; otherwise remove placeholder if match.includes('manual').",
+        "memberInfoAssignment": "If memberInfo exists and memberEmailAddress != null, assign both memberEmail and memberName from memberInfo.memberEmailAddress.",
+        "subject": "selectedTemplate.emailTemplateSubject when truthy",
+        "jsonUpdate": {
+          "customBody": "this.emailBody",
+          "memberEmail": "this.memberEmail",
+          "memberName": "this.memberName",
+          "subject": "this.subject"
+        },
+        "notes": "Email path captured for completeness; do not apply these substitutions to Print generation."
+      },
+      "getTokenDetails": {
+        "method": "getTokenDetails(selectedTemplate)",
+        "emailBranchCondition": "this.isEmail",
+        "emailTokens": [
+          {
+            "name": "To",
+            "label": "To",
+            "errorMessage": "Error: To is required.",
+            "showTA": false,
+            "showRTA": false,
+            "showEmail": true,
+            "showPicklist": false,
+            "isRequired": true,
+            "showText": false,
+            "value": "this.memberEmail",
+            "isReadOnly": true
+          },
+          {
+            "name": "Subject",
+            "label": "Subject",
+            "errorMessage": "Error: Subject is required.",
+            "showTA": false,
+            "showRTA": false,
+            "showEmail": false,
+            "showPicklist": true,
+            "isRequired": true,
+            "showText": false,
+            "value": "this.subject"
+          }
+        ],
+        "emailAssignment": "this.tokenInputFields = emailTokens;",
+        "printBranchCaptured": true,
+        "templateTokenProcessing": {
+          "source": "selectedTemplate.tokens",
+          "filter": "this.isManualToken(token.Name)",
+          "isManualToken": {
+            "lastIndex": "input.lastIndexOf('_')",
+            "condition": "lastIndex > 0",
+            "acceptedSuffixesCaseInsensitive": [
+              "_manual",
+              "_apimanual"
+            ]
+          },
+          "labelConversion": "If input startsWith('RTB_'), remove first four characters. Remove final underscore suffix when present, then replace remaining underscores with spaces.",
+          "initialValue": "When token.mappingName is truthy, jsonData[token.mappingName].",
+          "initialFlags": {
+            "showTA": false,
+            "showText": false,
+            "showRTA": false,
+            "isRequired": false,
+            "isValid": true,
+            "isReadOnly": false
+          },
+          "richTextRule": "If token.Name.includes('RTB_'): showRTA=true and this.isAsyncLetterGeneration=false; otherwise showTA=true.",
+          "metadataFlags": [
+            "token.isRequired sets isRequired=true when truthy",
+            "token.isReadOnly sets isReadOnly=true when truthy"
+          ],
+          "inputProperties": [
+            "name=token.Name",
+            "label",
+            "value",
+            "errorMessage='Error: '+label+' is required.'",
+            "showTA",
+            "showRTA",
+            "isRequired",
+            "isValid",
+            "mappingName=token.mappingName",
+            "showText=false",
+            "isReadOnly"
+          ],
+          "additionalTokens": "If JSON has rtbTokenInputs and it is not null, append ...jsonData.rtbTokenInputs.",
+          "jsonUpdate": {
+            "additionalInfoTokenDataId": "this.additionalInfoTokenDataId",
+            "isAsyncLetterGeneration": "this.isAsyncLetterGeneration",
+            "tokenInputs": "this.tokenInputFields"
+          },
+          "notes": "No new token-fetch IP/Apex call is visible in this method. It consumes the selectedTemplate.tokens array already supplied upstream. Precise upstream record/source and actual template tokens remain unknown."
+        }
+      },
+      "commentedCode": {
+        "notes": "Alternative initialization beginning around line 56, subscription sections, alternate setToEmail around line 299 and earlier getTokenDetails around line 364 are visibly block-commented. Do not treat them as active behavior.",
+        "subscriptionTokensObserved": [
+          "effectiveFrom",
+          "effectiveTo",
+          "frequency",
+          "AssociatedCase",
+          "Member",
+          "Type"
+        ],
+        "activeSubscriptionBehaviorVerified": false
+      },
+      "remainingEvidence": [
+        "Actual HOSTProviderFreeformLetter token definitions and mappingName/isRequired/isReadOnly values",
+        "Upstream producer of selectedTemplate.tokens and rtbTokenInputs",
+        "HTML rendering and any additional handlers in uncaptured lines approximately 612\u2013670",
+        "Complete file coverage and js-meta.xml",
+        "OmniScript Custom LWC input mappings",
+        "Downstream consumer of tokenMapping/isAsyncLetterGeneration and actual document-generation response"
+      ],
+      "notes": "Partial source observations only, not executable reconstruction or deployment. Active template-token filtering, manual input handling, validation guard and OmniScript output mappings captured. Template-specific data and generation integration remain pending.",
+      "previewNavigation": {
+        "method": "viewFilePreviewer",
+        "type": "standard__namedPage",
+        "attributes": {
+          "pageName": "filePreview"
+        },
+        "state": {
+          "selectedRecordId": "this.selectedContentDocumentId"
+        },
+        "notes": "Uses previously selected template document ContentDocumentId; this alone does not establish a newly generated personalized letter preview."
+      },
+      "manualInputHandling": {
+        "method": "handleInputChange",
+        "index": "event.target.dataset.index",
+        "value": "event.target.value",
+        "tokenUpdate": "Update tokenInputFields entry at parseInt(index) then omniApplyCallResp({tokenInputs: this.tokenInputFields}).",
+        "requiredValidation": "For blank required values: RTB input sets matching token isValid=false/errorMessage; other input uses setCustomValidity and reportValidity. Nonblank values clear error state.",
+        "nextMethod": "handleNextClick",
+        "nextGuard": "this.isInputFieldValid()",
+        "tokenMapping": "For non-RTB tokens with value != null: tokenMapping[token.name]=token.value. RTB tokens with value != null use handleRTBTokens(token.name, token.value).",
+        "nextActions": [
+          "Assign this.tokenMapping",
+          "updateOmniScript()",
+          "omniNextStep()"
+        ],
+        "previousAction": "omniPrevStep()",
+        "validationMethod": "isInputFieldValid",
+        "validationSelector": ".inputFieldValidity,lightning-input-rich-text",
+        "validationNotes": "Blank required or invalid native fields set return flag false. RTB required errors also set class slds-has-error. Runtime invalid/valid scenarios are not tested in this capture."
+      },
+      "richTextTokenSubstitution": {
+        "method": "handleRTBTokens(rtbTokenName, rtbTokenData)",
+        "placeholderPattern": "/{{\\s*\\b\\w+\\b\\s*}}/gi",
+        "lookup": "tokenInputFields.find(token => token.rtbTokenName == rtbTokenName && token.name == variableName)",
+        "replacement": "Replace matching placeholder with token.value when a matching token exists.",
+        "fontMethod": "handleRTBfont",
+        "font": {
+          "font": "Times New Roman",
+          "size": 12
+        },
+        "fontInvocationNote": "handleRTBfont call in handleNextClick is commented; do not claim font enforcement from the method definition."
+      },
+      "finalOmniScriptUpdate": {
+        "method": "updateOmniScript",
+        "call": "omniApplyCallResp",
+        "payload": {
+          "tokenMapping": "this.tokenMapping",
+          "tokenInputs": "this.tokenInputFields",
+          "additionalInfoTokenDataId": "this.additionalInfoTokenDataId",
+          "memberEmail": "this.memberEmail",
+          "subject": "this.subject",
+          "effectiveFrom": "this.effectiveFrom",
+          "effectiveTo": "this.effectiveTo",
+          "frequency": "this.frequencyValue"
+        }
+      },
+      "otherVisibleGetters": {
+        "options": "If isPOD == false: label/value Form/Document Request. Otherwise label Your requested plan materials, value this.subject.",
+        "frequency": [
+          "Monthly",
+          "Every 6 months",
+          "Annually"
+        ],
+        "showStandard": "!(this.isEmail == false), with subscription clause commented out."
+      }
+    }
+  ],
+  "documentTemplateEvidence": [
+    {
+      "name": "HOSTProviderFreeformLetter",
+      "source": "User-provided template designer and Token JSON screenshots; 2026-10-06, 11:01 PM CT",
+      "version": 1,
+      "templateType": "Microsoft Word",
+      "tokenMapping": "JSON",
+      "tokenMappingMethod": "Custom Class",
+      "customClass": "CNC_CustomTokenDataExtractor",
+      "usageType": null,
+      "documentGenerationMechanism": "ClientSide",
+      "uploadedFileName": "Host Provider Free Form Letter.docx",
+      "uploadedFileStatus": "File has been uploaded",
+      "wordContentInspected": true,
+      "tokenJson": {
+        "Current_Date_system": "",
+        "Provider_Name_apimanual": "",
+        "Provider_Address_apimanual": "",
+        "City_apimanual": "",
+        "State_apimanual": "",
+        "Zip_Code_apimanual": "",
+        "Patient_Full_Name_manual": "",
+        "Claim_Number_or_Authorization_Number_manual": "",
+        "Member_ID_or_Patient_Account_Number": "",
+        "Case_Number": "",
+        "Claim_DOS": "",
+        "Patient_Acct_Num": "",
+        "Free_Form_Text_apimanual": ""
+      },
+      "tokenMetadata": {
+        "sourceOfSelectedTemplateTokens": "CNCGetLetterTemplates DocumentTemplateToken extraction",
+        "visibleTokens": [
+          {
+            "name": "Claim_Number_or_Authorization_Number_manual",
+            "mappingName": "claimNumber",
+            "mappingNamePresentInResponse": true,
+            "isReadOnly": false,
+            "isRequired": false
+          },
+          {
+            "name": "Member_ID_or_Patient_Account_Number",
+            "mappingName": "memberId",
+            "mappingNamePresentInResponse": true,
+            "isReadOnly": false,
+            "isRequired": false
+          },
+          {
+            "name": "Case_Number",
+            "mappingName": "caseNumber",
+            "mappingNamePresentInResponse": true,
+            "isReadOnly": false,
+            "isRequired": false
+          },
+          {
+            "name": "Claim_DOS",
+            "mappingName": null,
+            "mappingNamePresentInResponse": false,
+            "isReadOnly": false,
+            "isRequired": false
+          },
+          {
+            "name": "Patient_Acct_Num",
+            "mappingName": null,
+            "mappingNamePresentInResponse": false,
+            "isReadOnly": false,
+            "isRequired": false
+          },
+          {
+            "name": "Free_Form_Text_apimanual",
+            "mappingName": null,
+            "mappingNamePresentInResponse": false,
+            "isReadOnly": false,
+            "isRequired": false
+          }
+        ],
+        "coverage": "Six lower token entries captured; upper token metadata remains unknown. Absence from returned JSON does not prove underlying database field is absent."
+      },
+      "interpretation": [
+        "Token JSON blank strings are schema preview values, not runtime data.",
+        "Custom extractor copies supplied tokenMapping into tokenMap; it does not retrieve source data.",
+        "Current root-input Apex mapping depends on mappingName matching an existing key.",
+        "Claim_DOS and Patient_Acct_Num lack mappingName in the displayed response and lack the manual suffix used by the reviewed LWC; current captured paths do not populate them.",
+        "ClientSide template setting does not prove actual branch execution; async branch remains gated by runtime flags.",
+        "The current screenshots show a template designer rendition, not proof of a successful generated letter or print submission."
+      ],
+      "nextEvidence": "Remaining CNCGetCaseInfo output rows and intervening mappings to root memberId/claimNumber; runtime tokenMapping before generation.",
+      "environment": "xhdev1 sandbox",
+      "observedActive": true,
+      "wordContentEvidence": "Template designer PDF rendition visibly shows matching {{token}} placeholders. Native DOCX XML not retrieved."
+    }
+  ],
+  "apexSourceEvidence": [
+    {
+      "name": "CNC_CustomTokenDataExtractor",
+      "evidence": "Two user-provided screenshots, class lines 1\u201348, 2026-10-06 11:05 PM CT",
+      "sourceCoverage": "Visible class body through closing brace; screenshot transcription, not retrieved org source or tested deployment artifact",
+      "apiVersion": "58.0",
+      "declaration": "global with sharing class CNC_CustomTokenDataExtractor implements omnistudio.VlocityOpenInterface, Callable",
+      "constants": {
+        "IP_TOKENDATA_NAME": "CNC_GetLetterTemplateTokenData",
+        "IP_CLAIMDATA_NAME": "CNC_GetLetterTemplateTokenData",
+        "NAMESPACE_PREFIX": "omnistudio__"
+      },
+      "callEntry": {
+        "method": "call",
+        "arguments": [
+          "action",
+          "args"
+        ],
+        "reads": [
+          "args.input",
+          "args.output",
+          "args.options"
+        ],
+        "delegatesTo": "invokeMethod(action, input, output, options)"
+      },
+      "invokeMethod": {
+        "initialResult": true,
+        "dispatch": "If methodName == 'getTokenData', call getTokenData(input, output, options).",
+        "ignoresGetTokenDataReturn": true,
+        "exceptionHandling": "Debug cause/message/stack trace/line and set result=false.",
+        "returns": "result",
+        "unknownAction": "No explicit rejection branch; result remains true without dispatch."
+      },
+      "getTokenData": {
+        "initialSuccess": false,
+        "inputKey": "tokenMapping",
+        "accepts": "Map<String,Object>",
+        "behavior": "Create empty tokenMap; when input.tokenMapping is a Map<String,Object>, copy all entries using putAll.",
+        "outputKey": "tokenMap",
+        "returnValue": false,
+        "noSuccessAssignmentVisible": true
+      },
+      "observations": [
+        "The class passes supplied token data through; no SOQL, IP invocation, external call or automatic field construction appears in the displayed class.",
+        "The IP-name constants are declarations only and are not used in the visible methods.",
+        "The helper returns false while invokeMethod ignores that return and returns true unless an exception is caught. This alone does not diagnose the observed runtime send failure.",
+        "LWC updateOmniScript supplies tokenMapping, matching this class's expected key. Actual caller input and enrichment of automatic tokens remain unverified."
+      ],
+      "nextEvidence": "OmniScript action or IP preparing/passing tokenMapping to generation: input mappings and automatic-token enrichment."
+    },
+    {
+      "name": "CNC_SendCommunication",
+      "apiVersion": "68.0",
+      "captureDate": "2026-10-07",
+      "sourceCoverage": "Partial screenshots, including transformTokenData and portions of sendFilesToS3. Not a deployable class export.",
+      "transformTokenData": {
+        "inputTemplateKey": "selectedTemplate",
+        "templateTokensKey": "tokens",
+        "tokenFields": [
+          "Name",
+          "mappingName"
+        ],
+        "mappingBehavior": "For each token, if the root input map contains its mappingName, copy input[mappingName] as String into tokenMapping[tokenName]. No nested path traversal or source query is visible in this method.",
+        "outputs": [
+          "tokenMapping",
+          "showAdditionalInformation"
+        ],
+        "manualDetection": "Token name contains the manual constant and ends in a recognized suffix. Visible _manual branch confirmed; second suffix clipped in Apex screenshot. LWC separately confirms _apimanual.",
+        "isEmailBehavior": "isEmail=true forces hasmanualTokens=true",
+        "sourceLookupPerformed": false
+      },
+      "sendFilesToS3": {
+        "observedBehavior": [
+          "Reads caseId and Case/Account information",
+          "Collects case ContentDocumentLinks and queries ContentVersion",
+          "Uses S3 callout response and updates ContentVersion JobId/review fields in visible code"
+        ],
+        "verification": "Partial code only; actual executed route, request body, completion/error handling and print delivery not established. Do not infer this method executes for the selected template."
+      },
+      "evidenceScreenshots": [
+        "IMG_90CCF988-645D-4ABC-8E01-8DAB9C5DDED5.jpeg",
+        "IMG_2E335494-73A9-4558-8C0D-4208B83B0D6F.jpeg",
+        "IMG_9F785049-2764-467F-807E-57D63C9F5420.jpeg",
+        "IMG_E05D64AB-85B3-4150-9DA6-DEBD0F4A6EE8.jpeg",
+        "IMG_725A5870-D92C-422A-AC1A-C14AC4D3AF57.jpeg"
+      ]
+    }
+  ],
+  "reviewCheckpoint": {
+    "date": "2026-10-07",
+    "timeZone": "America/Chicago",
+    "time": "18:03",
+    "status": "Capture saved; implementation review remains incomplete",
+    "completedToday": [
+      "Dev/QA filter and template-record comparison",
+      "Free-form Word token placeholders and lower six token metadata entries",
+      "CNC_SendCommunication.transformTokenData source behavior",
+      "RA-SetDefaultTokenMapping payload/condition",
+      "CNC_Member360 transform action, response actions and request payload",
+      "CNCTransformMemberInfo visible output mappings",
+      "SV-ResetTokenMapping visible values",
+      "SV-InitialMapping owner flag and CNCGetCaseInfo reconfirmation"
+    ],
+    "resumeAt": {
+      "component": "Token source trace",
+      "location": "Review already captured CNCGetCaseInfo outputs and downstream Set Values/Apex mappings",
+      "captureNext": [
+        "Trace root memberId/claimNumber initialization using existing evidence first",
+        "Resolve missing DOS/patient-account bindings and upper token metadata",
+        "Verify sanitized runtime tokenMapping and generation/submission results"
+      ]
+    },
+    "remaining": [
+      "Root memberId initialization/enrichment",
+      "Root claimNumber source",
+      "Claim_DOS and Patient_Acct_Num intended source and mappings",
+      "Upper token mappingName entries",
+      "Full email Set Values paths",
+      "Brief Description storage/placement",
+      "Generation runtime flags and exact final payload",
+      "Successful print request, confirmation, case association, storage and retry"
+    ],
+    "scopeNote": "Source sandbox investigation only. Earlier target reconstruction/deployment history remains separate; no Salesforce changes or deployment performed in this capture."
+  },
+  "storyReferenceDocuments": [
+    {
+      "storyId": "CS-1474",
+      "captureDate": "2026-10-07",
+      "sourceKind": "Screenshots of Jira reference letter preview; native DOCX not provided",
+      "evidenceScreenshots": [
+        "IMG_FB17A417-4FC6-4D7D-92DC-70388C2BA263.jpeg",
+        "IMG_CA20C0F9-D800-44BA-8855-CEC3C98BF3F2.jpeg"
+      ],
+      "layout": {
+        "header": "Blue Cross and Blue Shield of Minnesota branding/logo and fixed mail processing return address",
+        "date": "(Date)",
+        "recipientBlock": [
+          "BILLING PROVIDER NAME",
+          "BILLING PROVIDER ADDRESS",
+          "PROVIDER CITY, STATE, ZIP CODE"
+        ],
+        "detailsLeft": [
+          "Patient Name: (Patient Name)",
+          "Member ID: (Patient ID #)",
+          "Date of Service: (Claim DOS)"
+        ],
+        "detailsRight": [
+          "Claim Number: (Claim Number)",
+          "Case Number: (Case Number)",
+          "Patient Account Number: (Patient Acct #)"
+        ],
+        "salutation": "Dear Provider:",
+        "body": "In response to your recent inquiry, (Free Form Text).",
+        "fixedClosing": "Provider Services contact paragraph, Sincerely, organization name",
+        "footer": "bluecrossmn.com and licensing/legal footer; small document code not confidently transcribed"
+      },
+      "tokenSyntaxVerified": false,
+      "briefDescriptionPlacement": null,
+      "candidateTokenCorrespondence": [
+        {
+          "referenceField": "Date",
+          "existingToken": "Current_Date_system",
+          "status": "Candidate based on names only; actual binding/data source not verified"
+        },
+        {
+          "referenceField": "Billing Provider Name",
+          "existingToken": "Provider_Name_apimanual",
+          "status": "Candidate based on names only; actual binding/data source not verified"
+        },
+        {
+          "referenceField": "Billing Provider Address",
+          "existingToken": "Provider_Address_apimanual",
+          "status": "Candidate based on names only; actual binding/data source not verified"
+        },
+        {
+          "referenceField": "Provider City",
+          "existingToken": "City_apimanual",
+          "status": "Candidate based on names only; actual binding/data source not verified"
+        },
+        {
+          "referenceField": "Provider State",
+          "existingToken": "State_apimanual",
+          "status": "Candidate based on names only; actual binding/data source not verified"
+        },
+        {
+          "referenceField": "Provider Zip Code",
+          "existingToken": "Zip_Code_apimanual",
+          "status": "Candidate based on names only; actual binding/data source not verified"
+        },
+        {
+          "referenceField": "Patient Name",
+          "existingToken": "Patient_Full_Name_manual",
+          "status": "Candidate based on names only; actual binding/data source not verified"
+        },
+        {
+          "referenceField": "Member ID",
+          "existingToken": "Member_ID_or_Patient_Account_Number",
+          "status": "Candidate based on names only; actual binding/data source not verified"
+        },
+        {
+          "referenceField": "Date of Service",
+          "existingToken": "Claim_DOS",
+          "status": "Candidate based on names only; actual binding/data source not verified"
+        },
+        {
+          "referenceField": "Claim Number",
+          "existingToken": "Claim_Number_or_Authorization_Number_manual",
+          "status": "Candidate based on names only; actual binding/data source not verified"
+        },
+        {
+          "referenceField": "Case Number",
+          "existingToken": "Case_Number",
+          "status": "Candidate based on names only; actual binding/data source not verified"
+        },
+        {
+          "referenceField": "Patient Account Number",
+          "existingToken": "Patient_Acct_Num",
+          "status": "Candidate based on names only; actual binding/data source not verified"
+        },
+        {
+          "referenceField": "Free Form Text",
+          "existingToken": "Free_Form_Text_apimanual",
+          "status": "Candidate based on names only; actual binding/data source not verified"
+        }
+      ],
+      "openQuestions": [
+        "Where does required Brief Description appear? No separate placeholder is visible in the reference screenshots.",
+        "Does Member_ID_or_Patient_Account_Number correctly supply Member ID when Patient_Acct_Num separately supplies Patient Account Number?",
+        "Does Claim_Number_or_Authorization_Number_manual supply the required Claim Number for this story?",
+        "Compare native story DOCX and actual uploaded template for real token bindings, approved wording and formatting."
+      ],
+      "scopeNote": "This captures reference content, not a generated document or a working print result."
+    }
+  ],
+  "environmentComparison": {
+    "captureDate": "2026-10-07",
+    "confirmed": [
+      "User reports HOSTProviderFreeformLetter exists in Dev but not QA",
+      "Visible mapper filters match across Dev/QA",
+      "Observed response examples concern different template records: QA Provider/Serverside; Dev ITS Host/ClientSide"
+    ],
+    "unknown": [
+      "Complete eligible record inventory",
+      "Any additional LWC filtering",
+      "Same-template cross-org version comparison"
+    ],
+    "correction": "Per the earlier user correction, the first three response screenshots were QA and the following two were Dev. Do not reverse environments or treat different records as one template."
+  },
+  "tokenSourceTrace": {
+    "status": "Partial; no implementation or deployment",
+    "confirmed": [
+      {
+        "source": "caseInfo:CaseNumber",
+        "mapperOutput": "caseNumber",
+        "templateToken": "Case_Number"
+      },
+      {
+        "source": "caseInfo:Account.Member_Id__pc",
+        "mapperOutput": "localMemberId",
+        "templateToken": "Member_ID_or_Patient_Account_Number",
+        "expectedRootKey": "memberId",
+        "interveningMappingVerified": false
+      },
+      {
+        "source": "currentDate formula",
+        "mapperOutput": "currentDate",
+        "templateToken": "Current_Date_system",
+        "tokenMappingNameVerified": false
+      }
+    ],
+    "unknown": [
+      "Root memberId initialization/enrichment",
+      "Root claimNumber source",
+      "Claim_DOS and Patient_Acct_Num intended source and mappings",
+      "Upper token mappingName entries",
+      "Full email Set Values paths",
+      "Brief Description storage/placement"
+    ],
+    "proposed": [
+      "After verifying real source keys, map missing automatic tokens; alternatively, if manual entry is required, align token suffixes and matching Word placeholders. These are options, not approved or implemented changes."
     ]
   }
 }
 ```
-
-Next: outer IP-GenerateLetterinAsync Conditional View and Send/Response Transformations. Then use Edit as JSON for clipped internal formulas/remote transformations. Do not claim this async branch actually executed, or that job completion/print success occurred.
-
-
-## Async branch condition checkpoint — 2026-10-06, 11:14 PM CT
-
-Generated from canonical confirmedActions. Supersedes previous missing outer condition/transformation requests.
-
-```json
-{
-  "elementName": "IP-GenerateLetterinAsync",
-  "responseMapping": {
-    "sendJsonPath": "",
-    "sendJsonNode": "",
-    "responseJsonPath": "",
-    "responseJsonNode": ""
-  },
-  "executionCondition": {
-    "conditionType": "Show Element if True",
-    "displayedCondition": "(isAsyncLetterGeneration = true AND isPOD <> true)"
-  },
-  "interpretation": "Async branch is gated by isAsyncLetterGeneration=true and isPOD<>true. The reviewed LWC initializes async true and sets it false for RTB_ manual tokens; the displayed HOSTProviderFreeformLetter token JSON has no RTB_ names. This makes async routing consistent with reviewed configuration, but actual runtime flag values/execution remain unverified. No send/response path or node override is configured in the displayed transformation fields."
-}
-```
-
-Next: review upstream RA-SetDefaultTokenMapping properties (class/method, extra payload and condition) to identify where automatic token values enter tokenMapping. Exact internal async formulas remain an outstanding capture item, not a reason to review every OmniScript action.
-
-
-## Paused session checkpoint — October 6, 2026, 11:16 PM America/Chicago
-
-Generated from canonical reviewCheckpoint. This is the current continuation instruction; earlier next-item requests are superseded by this checkpoint.
-
-```json
-{
-  "date": "2026-10-06",
-  "timeZone": "America/Chicago",
-  "time": "23:16",
-  "status": "Paused at user request; today's evidence capture saved. Implementation review remains incomplete.",
-  "completedToday": [
-    "Case Send Communication quick action and LWC launch guards/navigation",
-    "Runtime Other Communication / Print free-form letter path through failed confirmation",
-    "AdditionalInformation designer and partial cncSendCommunicationAdditionalInfo JavaScript behavior",
-    "HOSTProviderFreeformLetter settings and visible 13-token JSON",
-    "CNC_CustomTokenDataExtractor visible class contract and pass-through behavior",
-    "RA-InsertSelectedForms configuration and Forms/Documents condition",
-    "IP-GenerateLetterinAsync payload, blank transformations and async/non-POD condition",
-    "CNC_AsyncLetterGeneration version 3 visible structure, gateway call and response keys"
-  ],
-  "resumeAt": {
-    "elementName": "RA-SetDefaultTokenMapping",
-    "location": "OmniScript, before AdditionalInformation",
-    "captureNext": [
-      "Remote Class",
-      "Remote Method",
-      "Extra Payload",
-      "Conditional View"
-    ],
-    "purpose": "Identify the automatic token-mapping implementation, then review its source and map story-required merge fields."
-  },
-  "remaining": [
-    "Automatic merge values and selectedTemplate.tokens enrichment",
-    "Brief Description token and actual Word template content",
-    "Clipped async IP parameter/output formulas and remote transformations",
-    "Complete LWC HTML/metadata and missing JS portions for deployable recreation",
-    "Runtime generation job result and cause of unable-to-send confirmation",
-    "Successful PDF/print delivery, case association, storage and retry",
-    "Story-by-story scope and estimate confirmation"
-  ],
-  "scopeNote": "Documentation checkpoint only; no claim that implementation, deployable replication or story acceptance criteria are complete."
-}
-```
-
-When resuming, read this checkpoint and canonical evidence first. Do not request previously captured screenshots again. Start at RA-SetDefaultTokenMapping; review only dependencies needed for the three stories before estimating changes.
-
-
-## Story capture checkpoint — October 7, 2026, 3:11 PM CT
-
-User requested story-by-story capture before resuming OmniScript investigation. Current reference evidence is generated from canonical storyReferenceDocuments:
-
-```json
-{
-  "storyId": "CS-1474",
-  "captureDate": "2026-10-07",
-  "sourceKind": "Screenshots of Jira reference letter preview; native DOCX not provided",
-  "evidenceScreenshots": [
-    "IMG_FB17A417-4FC6-4D7D-92DC-70388C2BA263.jpeg",
-    "IMG_CA20C0F9-D800-44BA-8855-CEC3C98BF3F2.jpeg"
-  ],
-  "layout": {
-    "header": "Blue Cross and Blue Shield of Minnesota branding/logo and fixed mail processing return address",
-    "date": "(Date)",
-    "recipientBlock": [
-      "BILLING PROVIDER NAME",
-      "BILLING PROVIDER ADDRESS",
-      "PROVIDER CITY, STATE, ZIP CODE"
-    ],
-    "detailsLeft": [
-      "Patient Name: (Patient Name)",
-      "Member ID: (Patient ID #)",
-      "Date of Service: (Claim DOS)"
-    ],
-    "detailsRight": [
-      "Claim Number: (Claim Number)",
-      "Case Number: (Case Number)",
-      "Patient Account Number: (Patient Acct #)"
-    ],
-    "salutation": "Dear Provider:",
-    "body": "In response to your recent inquiry, (Free Form Text).",
-    "fixedClosing": "Provider Services contact paragraph, Sincerely, organization name",
-    "footer": "bluecrossmn.com and licensing/legal footer; small document code not confidently transcribed"
-  },
-  "tokenSyntaxVerified": false,
-  "briefDescriptionPlacement": null,
-  "candidateTokenCorrespondence": [
-    {
-      "referenceField": "Date",
-      "existingToken": "Current_Date_system",
-      "status": "Candidate based on names only; actual binding/data source not verified"
-    },
-    {
-      "referenceField": "Billing Provider Name",
-      "existingToken": "Provider_Name_apimanual",
-      "status": "Candidate based on names only; actual binding/data source not verified"
-    },
-    {
-      "referenceField": "Billing Provider Address",
-      "existingToken": "Provider_Address_apimanual",
-      "status": "Candidate based on names only; actual binding/data source not verified"
-    },
-    {
-      "referenceField": "Provider City",
-      "existingToken": "City_apimanual",
-      "status": "Candidate based on names only; actual binding/data source not verified"
-    },
-    {
-      "referenceField": "Provider State",
-      "existingToken": "State_apimanual",
-      "status": "Candidate based on names only; actual binding/data source not verified"
-    },
-    {
-      "referenceField": "Provider Zip Code",
-      "existingToken": "Zip_Code_apimanual",
-      "status": "Candidate based on names only; actual binding/data source not verified"
-    },
-    {
-      "referenceField": "Patient Name",
-      "existingToken": "Patient_Full_Name_manual",
-      "status": "Candidate based on names only; actual binding/data source not verified"
-    },
-    {
-      "referenceField": "Member ID",
-      "existingToken": "Member_ID_or_Patient_Account_Number",
-      "status": "Candidate based on names only; actual binding/data source not verified"
-    },
-    {
-      "referenceField": "Date of Service",
-      "existingToken": "Claim_DOS",
-      "status": "Candidate based on names only; actual binding/data source not verified"
-    },
-    {
-      "referenceField": "Claim Number",
-      "existingToken": "Claim_Number_or_Authorization_Number_manual",
-      "status": "Candidate based on names only; actual binding/data source not verified"
-    },
-    {
-      "referenceField": "Case Number",
-      "existingToken": "Case_Number",
-      "status": "Candidate based on names only; actual binding/data source not verified"
-    },
-    {
-      "referenceField": "Patient Account Number",
-      "existingToken": "Patient_Acct_Num",
-      "status": "Candidate based on names only; actual binding/data source not verified"
-    },
-    {
-      "referenceField": "Free Form Text",
-      "existingToken": "Free_Form_Text_apimanual",
-      "status": "Candidate based on names only; actual binding/data source not verified"
-    }
-  ],
-  "openQuestions": [
-    "Where does required Brief Description appear? No separate placeholder is visible in the reference screenshots.",
-    "Does Member_ID_or_Patient_Account_Number correctly supply Member ID when Patient_Acct_Num separately supplies Patient Account Number?",
-    "Does Claim_Number_or_Authorization_Number_manual supply the required Claim Number for this story?",
-    "Compare native story DOCX and actual uploaded template for real token bindings, approved wording and formatting."
-  ],
-  "scopeNote": "This captures reference content, not a generated document or a working print result."
-}
-```
-
-Next: CS-1474 description and complete acceptance criteria to verify current story wording. Native DOCX remains optional pending evidence. Continue remaining story captures one at a time. OmniScript investigation remains paused at RA-SetDefaultTokenMapping; do not replace that continuation point.

@@ -1,5 +1,10 @@
 # Docgen
 
+## October 7 CS-1474 review
+
+Template/token metadata, partial Apex default mapping, patient-demographics wiring and visible Set Values are captured in the [canonical specification](spec/send-communication.partial.json). See [review evidence](evidence/2026-10-07-CS-1474-review.md) and [story](stories/CS-1474.md). Root memberId/claimNumber, DOS/patient-account bindings and successful runtime generation/submission remain unresolved. CNCGetCaseInfo’s existing 32 outputs and 13 formulas are already captured; do not request them again. No Salesforce changes or deployment in this Git update. Earlier status sections are historical where superseded.
+
+
 Track the verified Document Generation implementation, learning progress, story changes, and deployment evidence.
 
 ## Overall OmniScript tree
