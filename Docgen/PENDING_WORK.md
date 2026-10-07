@@ -3,6 +3,11 @@
 Updated 2026-10-01. Status: pending evidence or implementation, not completed. See [CODEX_HANDOFF.md](CODEX_HANDOFF.md) for the working record and [deployment/captured-audit.json](deployment/captured-audit.json) for the detailed deployment blockers.
 
 
+
+## Case launch path captured — 2026-10-06, 10:33 PM CT
+
+Confirmed from source screenshots: Case quick action and dynamic visibility, launcher ownership/Account checks, OmniStudio wrapper target and Case ID navigation input. Exact configuration is in canonical caseIntegration. This resolves the previously wholly unknown source launch mechanism; full metadata/source and target deployment remain unverified. No post-click runtime screen or successful letter generation captured. Next: click the existing Case action and capture its first screen. Prior launcher-gap statements below are historical where superseded.
+
 ## Master Entity Type captured — 2026-10-01, 8:24 PM CT
 
 Latest screenshot confirms CNC_Master_Attributes__mdt.Send_Communication → Entity_Type__c = Member. The prior statement that all Master custom values were off-screen is superseded. Master schema/field count remains unverified; do not assume additional fields or ask to repeat this value. Forms/Documents/Letters Line values and nine Header records remain capture-complete. This checkpoint records evidence, not deployment.
