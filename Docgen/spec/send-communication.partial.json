@@ -35,9 +35,10 @@
         "IMG_80733F3B-5320-4BA6-AF2D-24835BE35B83.jpeg",
         "IMG_1EBC5EC4-2FBC-4C4A-BFA1-3909F5DBFC18.jpeg",
         "IMG_B19E7B17-ECE4-4777-ABE1-D74A61B676EC.jpeg",
-        "IMG_7AF88FDA-CA38-4108-8415-1330BC5A6D21.jpeg"
+        "IMG_7AF88FDA-CA38-4108-8415-1330BC5A6D21.jpeg",
+        "IMG_9D720EBB-D83D-4DD4-8065-44FCEFB1760A.jpeg"
       ],
-      "runtimeObservation": "Send Communication button visible on Case record page. No post-click screen or successful letter generation supplied."
+      "runtimeObservation": "User-supplied post-launch screenshot shows Material and Outbound Channel Selection. Successful letter generation remains unverified."
     },
     "quickAction": {
       "label": "Send Communication",
@@ -117,7 +118,7 @@
       ]
     },
     "remainingEvidence": [
-      "Post-click runtime screen and source active OmniScript version",
+      "Source active OmniScript version (first post-click screen captured)",
       "Record page API name and activation assignments if needed for deployment",
       "Launcher HTML/js-meta.xml and full source before deployable recreation",
       "Downstream consumption of ContextId and working Print letter path"
@@ -3307,6 +3308,38 @@
           "Referral_Subject",
           "Subject"
         ]
+      }
+    ]
+  },
+  "runtimeReview": {
+    "observations": [
+      {
+        "captureDate": "2026-10-06",
+        "environment": "xhdev1 sandbox",
+        "evidenceScreenshot": "IMG_9D720EBB-D83D-4DD4-8065-44FCEFB1760A.jpeg",
+        "title": "Material and Outbound Channel Selection",
+        "materialType": {
+          "requiredIndicatorVisible": true,
+          "options": [
+            "Forms",
+            "Documents",
+            "Letters",
+            "Other Communication",
+            "Member Materials Request (MMR) Documents"
+          ],
+          "selectedValueObserved": null
+        },
+        "outboundChannel": {
+          "requiredIndicatorVisible": true,
+          "options": [
+            "Email",
+            "Print"
+          ],
+          "selectedValueObserved": null
+        },
+        "recipientControlVisible": false,
+        "navigationButtonsCaptured": false,
+        "notes": "Runtime screen after launching from Case. No options visibly selected. Do not infer stored option values, defaults, recipient handling or active OmniScript version from display labels. No generation/submission observed."
       }
     ]
   }
