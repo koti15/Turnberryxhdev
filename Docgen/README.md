@@ -81,3 +81,7 @@ See [OmniScript Set Values](evidence/OmniScript_SetValues.md) for captured expre
 ## Single configuration record
 
 Use spec/send-communication.partial.json as the canonical structured configuration. Update actions by elementName, Data Mappers by name, and mappings by their source/output pair; repeated screenshots must not append duplicates. Track status and link to the canonical record rather than repeating property tables across notes. Saved means evidence capture, not verified complete configuration or org implementation.
+
+## Story-focused implementation review
+
+Use [DOCGEN_IMPLEMENTATION.md](DOCGEN_IMPLEMENTATION.md) for the incremental review of a working provider Print letter and the changes required for CS-1831, CS-1832 and CS-1474. It tracks understanding and the next screenshot; exact configuration remains in the canonical specification and CODEX_HANDOFF.md.
