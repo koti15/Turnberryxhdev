@@ -104,6 +104,12 @@ Confirmed: AdditionalInformation hosts EnterAdditionalInformation with visible c
 
 Story relationship: inspect this existing custom component for the Free Form Text/manual token behavior relevant to CS-1474. The designer identity alone does not prove token-driven rendering or establish a required code change. Input parameters, JSON updates and source are the next dependency to trace.
 
+## AdditionalInfo LWC source checkpoint — 2026-10-06, 10:53 PM CT
+
+Confirmed: the custom LWC reads selectedTemplate and tokenInputs from OmniScript JSON. When template identity changes it clears local token state and calls getTokenDetails. Otherwise it reuses tokenInputs and, when isRefreshTokens is set, refreshes mapped values from JSON before clearing the flag. The component also handles Email/POD paths. Several alternate initialization/subscription sections are commented out; these are not active behavior.
+
+Story relationship: existing token-state handling is a reuse candidate for CS-1474. The captured getTokenDetails section shows only the active Email To/Subject fields, not the Print branch that supplies provider/free-form fields. No template-only conclusion or API/manual token classification is yet established. Canonical lwcSourceEvidence records exact observations, including email logic without conflating it with Print.
+
 ## Next item to send
 
-Click EnterAdditionalInformation, the custom component inside the Step, and send its Custom LWC properties. Include the component name, input parameters and conditions. The current screenshot shows parent Step properties, not the embedded component's configuration.
+Continue the same JS file below approximately line 523, within getTokenDetails. Capture the non-email branch and any method/IP/Apex call used to fetch token definitions. Keep a little overlap and the left side of each line visible. No need to resend the initialization or email sections.
