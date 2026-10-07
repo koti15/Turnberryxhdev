@@ -2642,3 +2642,88 @@ Generated from canonical runtimeReview. Supersedes prior continuation points: ad
 ```
 
 Next: inspect the original OmniScript AdditionalInformation element and its visible properties/child list to identify the component that supplies these input fields. Trace only observed dependencies. Failure root cause remains unknown until actual action/response evidence arrives.
+
+
+## Complete captured configuration supplement: AdditionalInformation — 2026-10-06, 10:50 PM CT
+
+Generated from canonical stepElements by elementName. Step and embedded LWC identity captured; actual custom LWC properties/source remain pending.
+
+```json
+{
+  "elementName": "AdditionalInformation",
+  "type": "Step",
+  "fieldLabel": "",
+  "chartLabel": "",
+  "instruction": "",
+  "allowSaveForLater": true,
+  "visibleLayoutItems": [
+    {
+      "visibleOrder": 1,
+      "elementName": null,
+      "type": null,
+      "displayText": "Enter Additional Information for Letter Selected",
+      "conditionalView": null
+    },
+    {
+      "visibleOrder": 2,
+      "elementName": null,
+      "type": null,
+      "displayText": "Enter Additional Information for Cover Letter",
+      "conditionalView": null
+    },
+    {
+      "visibleOrder": 3,
+      "elementName": null,
+      "type": null,
+      "displayText": "Edit Email",
+      "conditionalView": null
+    },
+    {
+      "visibleOrder": 4,
+      "elementName": null,
+      "type": null,
+      "displayText": "Additional Information for Subscription",
+      "conditionalView": null
+    },
+    {
+      "visibleOrder": 5,
+      "elementName": "EnterAdditionalInformation",
+      "type": null,
+      "componentName": "cncSendCommunicationAdditionalInfo",
+      "renderedMarkup": "<c:cncSendCommunicationAdditionalInfo />",
+      "inputMapping": null,
+      "conditionalView": null
+    }
+  ],
+  "adjacentElementsObserved": {
+    "preceding": {
+      "elementName": "RA-UpdateLinks",
+      "type": "Remote Action"
+    },
+    "following": [
+      {
+        "elementName": "RA-InsertSelectedForms",
+        "type": "Remote Action"
+      },
+      {
+        "elementName": "IP-DeleteLetterData",
+        "type": "Integration Procedure Action"
+      }
+    ]
+  },
+  "evidenceScreenshots": [
+    "IMG_DA63D02D-536A-42EC-A1DE-80111203FBBF.jpeg"
+  ],
+  "captureComplete": false,
+  "missing": [
+    "Custom LWC element properties and input mappings",
+    "Heading identities/types and execution conditions",
+    "Step conditional/button properties",
+    "Full cncSendCommunicationAdditionalInfo source",
+    "Token data origin and JSON updates"
+  ],
+  "notes": "Step properties are selected in screenshot. Custom LWC component identity is visible in canvas markup; field-rendering implementation and token-driven behavior are not established. Adjacent action names/types do not establish their behavior or whether they execute for this route."
+}
+```
+
+Next: select EnterAdditionalInformation inside the Step and capture its Custom LWC properties, including input parameters and conditional settings. Do not collect all outer elements.
