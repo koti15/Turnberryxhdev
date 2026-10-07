@@ -3232,3 +3232,56 @@ Generated from canonical lwcSourceEvidence. Supersedes the prior Print-branch ga
 ```
 
 Next: inspect HOSTProviderFreeformLetter template/token definitions. Capture exact names, mappingName, isRequired and isReadOnly. Upstream selectedTemplate.tokens source remains unknown; no new IP/Apex fetch call appears in captured getTokenDetails.
+
+
+## Template settings and token JSON — 2026-10-06, 11:01 PM CT
+
+Generated from canonical documentTemplateEvidence. This supersedes the previous request for the template token list; per-token metadata remains unknown.
+
+```json
+{
+  "name": "HOSTProviderFreeformLetter",
+  "source": "User-provided template designer and Token JSON screenshots; 2026-10-06, 11:01 PM CT",
+  "version": 1,
+  "templateType": "Microsoft Word",
+  "tokenMapping": "JSON",
+  "tokenMappingMethod": "Custom Class",
+  "customClass": "CNC_CustomTokenDataExtractor",
+  "usageType": null,
+  "documentGenerationMechanism": "ClientSide",
+  "uploadedFileName": "Host Provider Free Form Letter.docx",
+  "uploadedFileStatus": "File has been uploaded",
+  "wordContentInspected": false,
+  "tokenJson": {
+    "Current_Date_system": "",
+    "Provider_Name_apimanual": "",
+    "Provider_Address_apimanual": "",
+    "City_apimanual": "",
+    "State_apimanual": "",
+    "Zip_Code_apimanual": "",
+    "Patient_Full_Name_manual": "",
+    "Claim_Number_or_Authorization_Number_manual": "",
+    "Member_ID_or_Patient_Account_Number": "",
+    "Case_Number": "",
+    "Claim_DOS": "",
+    "Patient_Acct_Num": "",
+    "Free_Form_Text_apimanual": ""
+  },
+  "tokenMetadata": {
+    "mappingName": null,
+    "isRequired": null,
+    "isReadOnly": null,
+    "sourceOfSelectedTemplateTokens": null
+  },
+  "interpretation": [
+    "Empty strings are displayed Token JSON values, not evidence that runtime merge data is missing.",
+    "The existing LWC suffix filter would include the visible _manual and _apimanual tokens, including Free_Form_Text_apimanual.",
+    "No Brief Description token is visible in the displayed Token JSON. CS-1474 requires Brief Description and Free Form Content; inspect Word content and mapping before deciding changes.",
+    "Custom class configuration identifies the next automatic-data dependency. Its implementation and runtime inputs/outputs are not yet reviewed.",
+    "Template file content, all story merge-field mappings, personalized generation, print delivery, case association and storage success remain unverified."
+  ],
+  "nextEvidence": "CNC_CustomTokenDataExtractor Apex source: entry method, input contract, token construction and mapping. Then inspect actual Word template content."
+}
+```
+
+Next: review CNC_CustomTokenDataExtractor entry method and token mapping. Do not infer runtime values from empty Token JSON entries or claim Brief Description is implemented without inspecting Word content.
