@@ -3466,6 +3466,105 @@
           "Validation rules beyond the visible Addressee Name error"
         ],
         "notes": "Blank fields and checked checkbox are visible runtime state, not proof of defaults. Manual address controls are displayed; successful input, navigation, persistence, generation and print submission remain unverified."
+      },
+      {
+        "captureDate": "2026-10-06",
+        "environment": "xhdev1 sandbox",
+        "evidenceScreenshot": "IMG_B08262EB-AE94-4A28-A141-9ED1298F9E53.jpeg",
+        "title": "Communication Address",
+        "oneTimeCommunicationAddressChecked": true,
+        "inputObservation": "Test values entered into Addressee Name, Address Line 1, City, State, Zip and Country. Address Line 2 and combined Address appear blank. Exact entered values omitted from tracking.",
+        "notes": "Later screenshot reaches Additional Information, establishing progression past address entry for this run. Persistence and validation constraints remain unknown."
+      },
+      {
+        "captureDate": "2026-10-06",
+        "environment": "xhdev1 sandbox",
+        "evidenceScreenshot": "IMG_F4262D90-BDA8-46EA-B546-1D861E972D62.jpeg",
+        "title": "Enter Additional Information for Letter Selected",
+        "guidance": "To Review Letter selected in previous step, Preview here.",
+        "fields": [
+          "Provider Name",
+          "Provider Address",
+          "City",
+          "State",
+          "Zip Code",
+          "Patient Full Name",
+          "Claim Number or Authorization Number",
+          "Free Form Text"
+        ],
+        "inputObservation": "Provider Name, Provider Address, City, State and Zip Code display values matching the preceding address inputs. Patient Full Name, Claim Number or Authorization Number and Free Form Text appear blank.",
+        "navigationVisible": [
+          "Previous",
+          "Next"
+        ],
+        "unknowns": [
+          "Whether values are automatically copied, manually entered or both",
+          "Field JSON names, token definitions and API/manual modes",
+          "Required flags and conditions",
+          "Brief Description mapping required by CS-1474",
+          "Preview here control behavior"
+        ],
+        "notes": "Visible editable input controls establish existing manual-content UI, not successful token merge or template output."
+      },
+      {
+        "captureDate": "2026-10-06",
+        "environment": "xhdev1 sandbox",
+        "evidenceScreenshot": "IMG_4119FA6D-3E65-4BCD-B29D-331B8124652B.jpeg",
+        "title": "Review and Submit",
+        "state": "Loading spinner visible",
+        "notes": "Loading state only. No generation response, file artifact or success verified."
+      },
+      {
+        "captureDate": "2026-10-06",
+        "environment": "xhdev1 sandbox",
+        "evidenceScreenshot": "IMG_055359E2-BD88-4E57-B30C-A9752D485630.jpeg",
+        "title": "Review and Submit",
+        "table": {
+          "columns": [
+            "Name",
+            "Type",
+            "View",
+            "Remove"
+          ],
+          "visibleRows": [
+            {
+              "Name": "HOSTProviderFreeformLetter",
+              "Type": "Letter",
+              "View": "View",
+              "Remove": "No control visible in row"
+            }
+          ]
+        },
+        "checkboxes": [
+          {
+            "label": "I confirm the attachments are correct",
+            "checked": false
+          },
+          {
+            "label": "Include Return Envelope",
+            "checked": false
+          }
+        ],
+        "navigationObservation": "Previous visible; right action appears greyed out and its label is not legible.",
+        "notes": "Letter row and View link visible. PDF content, generated-file identity and successful generation are unverified. Confirmation/submit click sequence not captured."
+      },
+      {
+        "captureDate": "2026-10-06",
+        "environment": "xhdev1 sandbox",
+        "evidenceScreenshot": "IMG_ECF268D2-F08E-4B3E-BBF0-8C0C5BDAF16B.jpeg",
+        "title": "Confirmation",
+        "message": "Unable to send Communication at this time, try again in a few minutes",
+        "navigationVisible": [
+          "Done"
+        ],
+        "outcome": "Failure message displayed",
+        "unknowns": [
+          "Failing action, IP/Apex/API and response",
+          "Whether failure occurred during generation, storage or print delivery",
+          "Whether any request/file persisted",
+          "Retry behavior"
+        ],
+        "notes": "Observed failure wording closely corresponds to story error requirement. No successful print submission, case association or Alfresco storage verified; screenshot does not establish root cause."
       }
     ]
   }
