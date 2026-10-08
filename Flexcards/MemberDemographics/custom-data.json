@@ -1,0 +1,14 @@
+[
+  {
+    "firstName": "Alex",
+    "middleName": "",
+    "lastName": "Morgan",
+    "residentialAddress": "123 Example Street\nMinneapolis, MN 55501",
+    "mailingAddress": "123 Example Street\nMinneapolis, MN 55501",
+    "mailingAddressType": "Office",
+    "memberId": "TEST-MEMBER-001",
+    "legacyId": "",
+    "epid": "TEST-EPID-001",
+    "subscriberId": "TEST-SUBSCRIBER-001"
+  }
+]
