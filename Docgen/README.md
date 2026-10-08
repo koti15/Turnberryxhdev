@@ -1,5 +1,10 @@
 # Docgen
 
+## Brian’s DocGen spike walkthrough — October 8, 2026
+
+[Supplied call transcript](transcripts/2026-10-08-Brian-DocGen-Spike-CS-1792.md) records the group walkthrough for CS-1792. Speech-recognition errors are preserved; it is not an audio-verified transcript or a replacement for the referenced developer guide. Relevant to CS-1474, CS-1831 and CS-1832. No org changes or deployment are recorded by saving this transcript.
+
+
 ## October 7 CS-1474 review
 
 Template/token metadata, partial Apex default mapping, patient-demographics wiring and visible Set Values are captured in the [canonical specification](spec/send-communication.partial.json). See [review evidence](evidence/2026-10-07-CS-1474-review.md) and [story](stories/CS-1474.md). Root memberId/claimNumber, DOS/patient-account bindings and successful runtime generation/submission remain unresolved. CNCGetCaseInfo’s existing 32 outputs and 13 formulas are already captured; do not request them again. No Salesforce changes or deployment in this Git update. Earlier status sections are historical where superseded.
