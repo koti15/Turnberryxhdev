@@ -1,0 +1,10 @@
+<template>
+  <lightning-card title="PIN Details" icon-name="utility:lock">
+    <div class="slds-p-around_medium">
+      <p>Assigned PIN: ••••••</p>
+      <lightning-input type="password" label="New PIN" maxlength="6" value={pin} onchange={onPin} required></lightning-input>
+      <lightning-input type="password" label="Confirm PIN" maxlength="6" value={confirmation} onchange={onConfirmation} required></lightning-input>
+      <lightning-button label="Validate PIN" variant="brand" onclick={validate}></lightning-button>
+    </div>
+  </lightning-card>
+</template>
