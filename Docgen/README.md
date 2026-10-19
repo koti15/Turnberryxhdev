@@ -1,5 +1,12 @@
 # Docgen
 
+## October 19, 2026 — member ID trace resolved
+
+The configured final memberId assignment was found in SV-AddressMapping. CNCGetCaseInfo chooses the local Account field using Account.Record_Type__c, not LOB; Set Values prefers a nonempty/non-null apiMemberId and otherwise uses localMemberId. DOS and patient-account source mappings are captured. These findings supersede older unresolved-source statements below for the observed XHDev1 configuration. Actual runtime branch/source values and final layout verification remain pending.
+
+[Today's call notes](call-notes/2026-10-19-Brian-DocGen-Working-Session.md) · [Full investigation](evidence/2026-10-19-CS-1832-Mapping-Investigation.md) · [Canonical specification](spec/send-communication.partial.json)
+
+
 ## Brian’s DocGen spike walkthrough — October 8, 2026
 
 [Supplied call transcript](transcripts/2026-10-08-Brian-DocGen-Spike-CS-1792.md) records the group walkthrough for CS-1792. Speech-recognition errors are preserved; it is not an audio-verified transcript or a replacement for the referenced developer guide. Relevant to CS-1474, CS-1831 and CS-1832. No org changes or deployment are recorded by saving this transcript.
@@ -95,3 +102,4 @@ Use spec/send-communication.partial.json as the canonical structured configurati
 ## Story-focused implementation review
 
 Use [DOCGEN_IMPLEMENTATION.md](DOCGEN_IMPLEMENTATION.md) for the incremental review of a working provider Print letter and the changes required for CS-1831, CS-1832 and CS-1474. It tracks understanding and the next screenshot; exact configuration remains in the canonical specification and CODEX_HANDOFF.md.
+

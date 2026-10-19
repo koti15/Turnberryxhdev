@@ -1,5 +1,12 @@
 # Send Communication: single-file working record
 
+## October 19, 2026 — member ID trace resolved
+
+The configured final memberId assignment was found in SV-AddressMapping. CNCGetCaseInfo chooses the local Account field using Account.Record_Type__c, not LOB; Set Values prefers a nonempty/non-null apiMemberId and otherwise uses localMemberId. DOS and patient-account source mappings are captured. These findings supersede older unresolved-source statements below for the observed XHDev1 configuration. Actual runtime branch/source values and final layout verification remain pending.
+
+[Today's call notes](call-notes/2026-10-19-Brian-DocGen-Working-Session.md) · [Full investigation](evidence/2026-10-19-CS-1832-Mapping-Investigation.md) · [Canonical specification](spec/send-communication.partial.json)
+
+
 ## Latest source review — October 7, 2026, 6:03 PM CT
 
 CS-1474 investigation progressed through template selection, token metadata, Apex default mapping and patient demographics. CNCGetCaseInfo already has 32 captured output rows; review those before requesting more screenshots. Next trace root memberId/claimNumber and final tokenMapping. Root memberId/claimNumber and DOS/patient-account bindings remain unresolved. This supersedes earlier paused-at-RA continuation points. No org changes or deployment in this capture. See [latest evidence](evidence/2026-10-07-CS-1474-review.md).
@@ -355,7 +362,8 @@ Generated from [canonical specification](spec/send-communication.partial.json). 
   "source": {
     "kind": "user-supplied-designer-screenshots",
     "capturedDate": "2026-10-01",
-    "latestScreenshot": "IMG_54F0625D-D0F5-4CF5-8FB0-87CAA9385FAE.jpeg"
+    "latestScreenshot": "IMG_54F0625D-D0F5-4CF5-8FB0-87CAA9385FAE.jpeg",
+    "latestCaptureDate": "2026-10-19"
   },
   "omniScript": {
     "displayName": "Send Communication",
@@ -364,12 +372,14 @@ Generated from [canonical specification](spec/send-communication.partial.json). 
     "observedActive": true,
     "type": "CNC",
     "subType": "SendCommunication",
-    "description": "MMR- email go live prep"
+    "description": "MMR- email go live prep",
+    "latestObservedVersion": 44,
+    "latestObservedDescription": "MMR-email go live prep"
   },
   "caseIntegration": {
     "requiredByUser": true,
     "objectApiName": "Case",
-    "launchMechanism": "Case.Send_Communication Lightning Web Component quick action \u2192 cncSendCommunicationQuickAction \u2192 OmniStudio wrapper",
+    "launchMechanism": "Case.Send_Communication Lightning Web Component quick action → cncSendCommunicationQuickAction → OmniStudio wrapper",
     "recordIdInputMapping": {
       "source": "this.recordId",
       "navigationStateKey": "c__ContextId"
@@ -699,7 +709,7 @@ Generated from [canonical specification](spec/send-communication.partial.json). 
       "remoteClass": "CNC_SendCommunication",
       "remoteMethod": "transformTokenData",
       "invokeMode": "Default",
-      "preTransformDataMapperInterface": "",
+      "preTransformDataMapperInterface": null,
       "remoteOptions": [],
       "extraPayload": [],
       "sendOnlyExtraPayload": false,
@@ -718,18 +728,22 @@ Generated from [canonical specification](spec/send-communication.partial.json). 
       ],
       "missing": [
         "Remaining response properties and runtime input/output"
-      ]
+      ],
+      "postTransformDataMapperInterface": null,
+      "sendJsonPath": null,
+      "sendJsonNode": null,
+      "responseJsonPath": null,
+      "responseJsonNode": null,
+      "latestCaptureDate": "2026-10-19",
+      "additionalInputCoverage": "Not fully captured; four blank send/response fields are not proof of absent additional inputs"
     },
     {
       "elementName": "IP-GetPatientDemographics",
       "elementType": "Integration Procedure Action",
       "integrationProcedure": "CNC_Member360",
-      "extraPayload": [
-        {
-          "key": "memberId",
-          "value": "%memberId%"
-        }
-      ],
+      "extraPayload": {
+        "memberId": "%memberId%"
+      },
       "sendOnlyExtraPayload": true,
       "sendJsonPath": "",
       "sendJsonNode": "",
@@ -740,7 +754,19 @@ Generated from [canonical specification](spec/send-communication.partial.json). 
       "evidenceScreenshots": [
         "IMG_68EDD180-DC11-484E-87F5-057455E71FB3.jpeg",
         "IMG_F313C0EE-579A-4998-B53E-A74140FDF659.jpeg"
-      ]
+      ],
+      "latestCaptureDate": "2026-10-19"
+    },
+    {
+      "elementName": "IP-GETAPITokenData",
+      "elementType": "Integration Procedure Action",
+      "captureDate": "2026-10-19",
+      "complete": false,
+      "executionCondition": {
+        "expression": "selectedEntity <> null OR isPOD = true",
+        "evidence": "Selected action eye tooltip"
+      },
+      "runtimeExecutionVerified": false
     }
   ],
   "missingForRunnableBuild": [
@@ -1103,7 +1129,18 @@ Generated from [canonical specification](spec/send-communication.partial.json). 
         "IMG_0FB9632A-7E3A-40DF-A4CE-74CC11B20B14.jpeg",
         "IMG_FE5AC411-378A-4045-9842-73C7D1E9DFA6.jpeg",
         "IMG_5CA97591-F262-46C8-AFA4-53031192339D.jpeg"
-      ]
+      ],
+      "oct19MemberTransformAction": {
+        "dataMapper": "CNCTransformMemberInfo",
+        "sendJsonPath": "HTTPGetPatient2:entry:resource",
+        "additionalInput": {
+          "localMemberId": "%memberId%"
+        },
+        "sendOnlyAdditionalInput": false,
+        "responseJsonPath": null,
+        "responseJsonNode": null,
+        "executionCondition": "ISNOTBLANK(%HTTPGetPatient2%) && %HTTPGetPatient2:success% != false"
+      }
     },
     {
       "key": "CNC_GetLetterTemplates",
@@ -1162,6 +1199,29 @@ Generated from [canonical specification](spec/send-communication.partial.json). 
       },
       "complete": false,
       "verification": "Captured visible flow and mappings; complete SV expressions and remaining settings unknown."
+    },
+    {
+      "name": "Send Communication API Mapping",
+      "observedVersion": 8,
+      "observedActive": true,
+      "captureDate": "2026-10-19",
+      "complete": false,
+      "visibleElements": [
+        "SetEntityInputs",
+        "IP-GETClaimInfo",
+        "IP-GetClaimInfov2",
+        "SetProviderInputs",
+        "IP-GETProviderDetails",
+        "IP-GetMemberPlan",
+        "DR-T-TokenMapping",
+        "ResponseAction"
+      ],
+      "responseAction": {
+        "sendJsonPath": "DR-T-TokenMapping",
+        "responseJsonPath": null,
+        "responseJsonNode": null,
+        "additionalOutputShown": false
+      }
     }
   ],
   "dataMappers": [
@@ -1191,7 +1251,7 @@ Generated from [canonical specification](spec/send-communication.partial.json). 
           }
         }
       ],
-      "formulaCountObserved": 13,
+      "formulaCountObserved": 14,
       "outputMappings": [
         {
           "extractJsonPath": "caseInfo:Account.Blue_Shield_Id__c",
@@ -1199,8 +1259,10 @@ Generated from [canonical specification](spec/send-communication.partial.json). 
           "verification": "Output spelling appears providerBlueshildId in mapping screenshot; earlier schema transcription was providerBlueshieldId. Confirm exact spelling from export or close-up before executable build."
         },
         {
-          "extractJsonPath": "caseInfo:Account.Member_Id__pc",
-          "outputJsonPath": "localMemberId"
+          "extractJsonPath": "localMemberId",
+          "outputJsonPath": "localMemberId",
+          "captureDate": "2026-10-19",
+          "verification": "October 19 output screenshot supersedes earlier direct Account.Member_Id__pc output row."
         },
         {
           "extractJsonPath": "caseInfo:Account.NPI__c",
@@ -1323,7 +1385,7 @@ Generated from [canonical specification](spec/send-communication.partial.json). 
           "outputJsonPath": "todayDate"
         }
       ],
-      "evidencePath": "Docgen/evidence/CNC_GetCaseInformation.md",
+      "evidencePath": "Docgen/evidence/2026-10-19-CS-1832-Mapping-Investigation.md",
       "complete": false,
       "visibleOutputSchemaKeys": [
         "localMemberFirstName",
@@ -1383,96 +1445,124 @@ Generated from [canonical specification](spec/send-communication.partial.json). 
         {
           "order": 1,
           "resultPath": "relatedEntityCount",
-          "readableBehavior": "COUNTQUERY against Case_Sub_Entity__c filtered by Case__c using caseId",
+          "readableBehavior": "Counts Case_Sub_Entity__c records for the input caseId using COUNTQUERY.",
           "expression": "COUNTQUERY(\"SELECT COUNT() FROM Case_Sub_Entity__c WHERE Case__c = '{0}'\",caseId)",
-          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+          "verification": "Behavior transcribed from October 19 photographs; not deployable metadata. Formula 14 second record-type literal unverified.",
+          "captureDate": "2026-10-19"
         },
         {
           "order": 2,
           "resultPath": "currentDate",
-          "readableBehavior": "FORMATDATETIME of NOW(), format MM/dd/yyyy",
+          "readableBehavior": "Formats NOW() as MM/dd/yyyy.",
           "expression": "FORMATDATETIME(NOW(),\"MM/dd/yyyy\")",
-          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+          "verification": "Behavior transcribed from October 19 photographs; not deployable metadata. Formula 14 second record-type literal unverified.",
+          "captureDate": "2026-10-19"
         },
         {
           "order": 3,
-          "resultPath": "todayDate",
-          "readableBehavior": "FORMATDATETIME of NOW(), format MMMM dd, yyyy",
+          "resultPath": "todaysDate",
+          "readableBehavior": "Formats NOW() as MMMM dd, yyyy.",
           "expression": "FORMATDATETIME(NOW(),\"MMMM dd, yyyy\")",
-          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+          "verification": "Behavior transcribed from October 19 photographs; not deployable metadata. Formula 14 second record-type literal unverified.",
+          "captureDate": "2026-10-19"
         },
         {
           "order": 4,
           "resultPath": "serviceRepName",
-          "readableBehavior": "If loggedInUserInfo:FirstName is blank, use the first character of LastName; otherwise concatenate FirstName and the first character of LastName",
+          "readableBehavior": "If loggedInUserInfo:FirstName is blank, first character of LastName; otherwise lowercase FirstName plus first character of LastName.",
           "expression": "IF(ISBLANK(loggedInUserInfo:FirstName),SUBSTRING(loggedInUserInfo:LastName,0,1),CONCAT(loggedInUserInfo:FirstName,\" \",SUBSTRING(loggedInUserInfo:LastName,0,1)))",
-          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+          "verification": "Behavior transcribed from October 19 photographs; not deployable metadata. Formula 14 second record-type literal unverified.",
+          "captureDate": "2026-10-19"
         },
         {
           "order": 5,
           "resultPath": "caseInfo:relationship",
-          "readableBehavior": "Account.Record_Type__c Member or Unlisted Member maps to Member; otherwise Provider",
+          "readableBehavior": "Account.Record_Type__c equal to Member, Unlisted Member, or ITS Host produces Member; otherwise Provider.",
           "expression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",\"Member\",\"Provider\")",
-          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+          "verification": "Behavior transcribed from October 19 photographs; not deployable metadata. Formula 14 second record-type literal unverified.",
+          "captureDate": "2026-10-19"
         },
         {
           "order": 6,
           "resultPath": "localMemberName",
-          "readableBehavior": "For Member/Unlisted Member use caseInfo:Account.Name; otherwise caseInfo:Contact.Name",
+          "readableBehavior": "For Member or Unlisted Member, Account.Name; otherwise Contact.Name.",
           "expression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",caseInfo:Account.Name,caseInfo:Contact.Name)",
-          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+          "verification": "Behavior transcribed from October 19 photographs; not deployable metadata. Formula 14 second record-type literal unverified.",
+          "captureDate": "2026-10-19"
         },
         {
           "order": 7,
           "resultPath": "localMemberFirstName",
-          "readableBehavior": "For Member/Unlisted Member use caseInfo:Account.FirstName; otherwise empty string",
+          "readableBehavior": "For Member or Unlisted Member, Account.FirstName; otherwise empty string.",
           "expression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",caseInfo:Account.FirstName,\"\")",
-          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+          "verification": "Behavior transcribed from October 19 photographs; not deployable metadata. Formula 14 second record-type literal unverified.",
+          "captureDate": "2026-10-19"
         },
         {
           "order": 8,
           "resultPath": "localMemberLastName",
-          "readableBehavior": "For Member/Unlisted Member use caseInfo:Account.LastName; otherwise empty string",
+          "readableBehavior": "For Member or Unlisted Member, Account.LastName; otherwise empty string.",
           "expression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",caseInfo:Account.LastName,\"\")",
-          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+          "verification": "Behavior transcribed from October 19 photographs; not deployable metadata. Formula 14 second record-type literal unverified.",
+          "captureDate": "2026-10-19"
         },
         {
           "order": 9,
           "resultPath": "localEnterprisePersonId",
-          "readableBehavior": "For Member/Unlisted Member use caseInfo:Account.Enterprise_Person_Id__c; otherwise empty string",
+          "readableBehavior": "For Member or Unlisted Member, Account.Enterprise_Person_Id__c; otherwise empty string.",
           "expression": "IF(caseInfo:Account.Record_Type__c = \"Member\" || caseInfo:Account.Record_Type__c = \"Unlisted Member\",caseInfo:Account.Enterprise_Person_Id__c,\"\")",
-          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+          "verification": "Behavior transcribed from October 19 photographs; not deployable metadata. Formula 14 second record-type literal unverified.",
+          "captureDate": "2026-10-19"
         },
         {
           "order": 10,
           "resultPath": "createdDate",
-          "readableBehavior": "FORMATDATETIME of caseInfo:CreatedDate, format MM/dd/yyyy",
+          "readableBehavior": "Formats caseInfo:CreatedDate as MM/dd/yyyy.",
           "expression": "FORMATDATETIME(caseInfo:CreatedDate,\"MM/dd/yyyy\")",
-          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+          "verification": "Behavior transcribed from October 19 photographs; not deployable metadata. Formula 14 second record-type literal unverified.",
+          "captureDate": "2026-10-19"
         },
         {
           "order": 11,
           "resultPath": "receivedDate",
-          "readableBehavior": "FORMATDATETIME of caseInfo:Received_Date__c, format MM/dd/yyyy",
+          "readableBehavior": "Formats caseInfo:Received_Date__c as MM/dd/yyyy.",
           "expression": "FORMATDATETIME(caseInfo:Received_Date__c,\"MM/dd/yyyy\")",
-          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+          "verification": "Behavior transcribed from October 19 photographs; not deployable metadata. Formula 14 second record-type literal unverified.",
+          "captureDate": "2026-10-19"
         },
         {
           "order": 12,
           "resultPath": "relatedEntitiesList",
-          "readableBehavior": "QUERY selects Entity_Type__c from Case_Sub_Entity__c filtered by Case__c using caseId",
+          "readableBehavior": "Queries Entity_Type__c from Case_Sub_Entity__c for input caseId.",
           "expression": "QUERY(\"SELECT Entity_Type__c FROM Case_Sub_Entity__c WHERE Case__c = '{0}'\",caseId)",
-          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+          "verification": "Behavior transcribed from October 19 photographs; not deployable metadata. Formula 14 second record-type literal unverified.",
+          "captureDate": "2026-10-19"
         },
         {
           "order": 13,
           "resultPath": "relatedEntities",
-          "readableBehavior": "TOSTRING(relatedEntitiesList)",
+          "readableBehavior": "TOSTRING(relatedEntitiesList).",
           "expression": "TOSTRING(relatedEntitiesList)",
-          "verification": "Exact expression captured in PENDING_WORK.md from newer supplied screenshots; implementation and runtime validation pending."
+          "verification": "Behavior transcribed from October 19 photographs; not deployable metadata. Formula 14 second record-type literal unverified.",
+          "captureDate": "2026-10-19"
+        },
+        {
+          "order": 14,
+          "resultPath": "localMemberId",
+          "readableBehavior": "IF on Account.Record_Type__c: ITS Host OR a second member-type literal selects Account.Subscriber_Id__pc; otherwise Account.Member_Id__pc. The second literal appears to read Engen Member; confirm the exact spelling in the UI.",
+          "captureDate": "2026-10-19",
+          "verification": "Behavior transcribed from October 19 photographs; not deployable metadata. Formula 14 second record-type literal unverified.",
+          "expression": null,
+          "conditionField": "Account.Record_Type__c",
+          "confirmedRecordTypeLiteral": "ITS Host",
+          "secondRecordTypeLiteral": null,
+          "secondLiteralAppearance": "Engen Member (unverified spelling)",
+          "trueSourceField": "Account.Subscriber_Id__pc",
+          "falseSourceField": "Account.Member_Id__pc",
+          "checksLineOfBusiness": false
         }
       ],
-      "formulaVerification": "Exact formulas 1\u201313 now reconciled from newer PENDING_WORK.md evidence. Do not request them again. Runtime validation remains pending.",
+      "formulaVerification": "Exact formulas 1–13 now reconciled from newer PENDING_WORK.md evidence. Do not request them again. Runtime validation remains pending.",
       "latestEvidenceScreenshots": [
         "IMG_DE10F392-11C2-48F2-9666-71DA08DF4A09.jpeg",
         "IMG_83757801-E6D8-4415-8159-D2E7345C841C.jpeg",
@@ -1480,7 +1570,8 @@ Generated from [canonical specification](spec/send-communication.partial.json). 
         "IMG_02B432B6-93CA-4A20-BB23-33A5AF1F82D7.jpeg",
         "IMG_ED440796-B81F-4FF6-B8B3-1A21D4757B5B.jpeg"
       ],
-      "latestVerification": "October 7 screenshots reconfirm existing Case/User extracts, first two formulas and output rows through sourceSystem. Preserve earlier captured remaining rows; latest batch does not reconfirm them. Do not append duplicate mappings."
+      "latestVerification": "October 7 screenshots reconfirm existing Case/User extracts, first two formulas and output rows through sourceSystem. Preserve earlier captured remaining rows; latest batch does not reconfirm them. Do not append duplicate mappings.",
+      "latestCaptureDate": "2026-10-19"
     },
     {
       "name": "GetMMREmailTemplate",
@@ -2105,6 +2196,83 @@ Generated from [canonical specification](spec/send-communication.partial.json). 
       "evidenceScreenshots": [
         "IMG_8A9CA76B-5E03-4BC0-9163-BB346A0C7C5F.jpeg",
         "IMG_55111E6B-C133-4642-AA11-F62EA72948A0.jpeg"
+      ],
+      "captureDate": "2026-10-19",
+      "evidencePath": "Docgen/evidence/2026-10-19-CS-1832-Mapping-Investigation.md",
+      "formulaEvidence": [
+        {
+          "order": 5,
+          "resultPath": "pmiId",
+          "isDisabled": true,
+          "readableBehavior": "Filter identifier for pmi-id system"
+        },
+        {
+          "order": 6,
+          "resultPath": "maxisId",
+          "isDisabled": true,
+          "readableBehavior": "Filter identifier for maxis-id system"
+        },
+        {
+          "order": 7,
+          "resultPath": "memberRec",
+          "isDisabled": false,
+          "expression": null,
+          "readableBehavior": "Filter identifier for mmp-id system and value matching localMemberId; exact filter-string escaping not transcribed"
+        }
+      ],
+      "transformMappings": [
+        {
+          "inputJsonPath": "birthDate",
+          "outputJsonPath": "memberInfo:birthDate"
+        },
+        {
+          "inputJsonPath": "email:value",
+          "outputJsonPath": "memberInfo:memberEmailAddress"
+        },
+        {
+          "inputJsonPath": "gender",
+          "outputJsonPath": "memberInfo:gender"
+        },
+        {
+          "inputJsonPath": "link:relation",
+          "outputJsonPath": "memberInfo:relationship"
+        },
+        {
+          "inputJsonPath": "maxisId:value",
+          "outputJsonPath": "memberInfo:maxisId"
+        },
+        {
+          "inputJsonPath": "memberGivenName",
+          "outputJsonPath": "memberInfo:memberGivenName"
+        },
+        {
+          "inputJsonPath": "memberRec:value",
+          "outputJsonPath": "memberInfo:memberId"
+        },
+        {
+          "inputJsonPath": "name1:family",
+          "outputJsonPath": "memberInfo:memberFamilyName"
+        },
+        {
+          "inputJsonPath": "name1:text",
+          "outputJsonPath": "memberInfo:memberFullName"
+        },
+        {
+          "inputJsonPath": "phone:value",
+          "outputJsonPath": "memberInfo:phone"
+        },
+        {
+          "inputJsonPath": "physicalAddress",
+          "outputJsonPath": "memberInfo:physicalAddress"
+        },
+        {
+          "inputJsonPath": "pmiId:value",
+          "outputJsonPath": "memberInfo:pmiId"
+        },
+        {
+          "inputJsonPath": "postalAddress",
+          "outputJsonPath": "memberInfo:postalAddress"
+        }
       ]
     },
     {
@@ -2189,6 +2357,71 @@ Generated from [canonical specification](spec/send-communication.partial.json). 
         "IMG_52CBBD68-F840-467D-8E26-B08FE8DF79AA.jpeg",
         "IMG_128F2920-0D3B-4F00-AA15-1515D8874ABA.jpeg"
       ]
+    },
+    {
+      "name": "CNCTransformAPITokenMapping",
+      "interfaceType": "Transform",
+      "inputType": "JSON",
+      "outputType": "JSON",
+      "complete": false,
+      "captureDate": "2026-10-19",
+      "evidencePath": "Docgen/evidence/2026-10-19-CS-1832-Mapping-Investigation.md",
+      "formulaEvidence": [
+        {
+          "order": 7,
+          "resultPath": "claimResp:memberInfo:memberId",
+          "expression": "IF(ISNOTBLANK(claimResp:memberInfo:memberId), claimResp:memberInfo:memberId, %localMemberId%)"
+        },
+        {
+          "order": 9,
+          "resultPath": "claimDateOfService",
+          "expression": null,
+          "readableBehavior": "Both serviceDateFrom/serviceDateThru nonblank: concatenate From + space-hyphen-space + Thru; otherwise whichever is nonblank."
+        }
+      ],
+      "transformMappings": [
+        {
+          "inputJsonPath": "claimResp:memberInfo:memberId",
+          "outputJsonPath": "apiMemberId"
+        },
+        {
+          "inputJsonPath": "claimDateOfService",
+          "outputJsonPath": "claimDateofService"
+        },
+        {
+          "inputJsonPath": "claimResp:claimInfo:patientAccountNumber",
+          "outputJsonPath": "patientAccountNumber"
+        },
+        {
+          "inputJsonPath": "claimResp:claimInfo:serviceDateFrom",
+          "outputJsonPath": "claimServiceBeginDate"
+        },
+        {
+          "inputJsonPath": "claimResp:claimInfo:serviceDateThru",
+          "outputJsonPath": "claimServiceEndDate"
+        },
+        {
+          "inputJsonPath": "claimResp:memberInfo:memberFirstName",
+          "outputJsonPath": "apiMemberFirstName"
+        },
+        {
+          "inputJsonPath": "claimResp:memberInfo:memberFullName",
+          "outputJsonPath": "apiMemberName"
+        },
+        {
+          "inputJsonPath": "claimResp:memberInfo:memberLastName",
+          "outputJsonPath": "apiMemberLastName"
+        },
+        {
+          "inputJsonPath": "claimResp:memberInfo:enterprisePersonId",
+          "outputJsonPath": "apiEnterprisePersonId"
+        },
+        {
+          "inputJsonPath": "fullAddress",
+          "outputJsonPath": "apiFullAddress"
+        }
+      ],
+      "otherFormulaBehaviorReference": "Docgen/evidence/2026-10-19-CS-1832-Mapping-Investigation.md"
     }
   ],
   "setValuesElements": [
@@ -2340,6 +2573,27 @@ Generated from [canonical specification](spec/send-communication.partial.json). 
         "IMG_628F8D8B-9320-4A63-9821-B777DFB3D0E9.jpeg",
         "IMG_D7625317-966C-4AAF-9196-83C0DD201239.jpeg",
         "IMG_F307DE5C-E942-4C8F-81E2-A896F0D96D8C.jpeg"
+      ],
+      "latestCaptureDate": "2026-10-19",
+      "oct19Observation": {
+        "tokenMappingDisplayedValue": "=",
+        "exactResetExpression": null,
+        "isRefreshTokens": true,
+        "emailReferences": "IP-GetPatientDemographics:memberInfo:memberEmailA... (truncated)",
+        "memberIdAssignmentShown": false
+      }
+    },
+    {
+      "elementName": "SV-AddressMapping",
+      "type": "Set Values",
+      "complete": false,
+      "captureDate": "2026-10-19",
+      "values": [
+        {
+          "elementName": "memberId",
+          "expression": "IF(%selectedTemplate:letterEntity% = \"Provider\",\n   IF((%apiMemberId% != \"\" && %apiMemberId% != NULL),\n      %apiMemberId%, %localMemberId%),\n   IF((%apiMemberId% != \"\" && %apiMemberId% != NULL),\n      %apiMemberId%, %localMemberId%))",
+          "verification": "Captured expression; both letterEntity branches use identical fallback. No runtime value assertion."
+        }
       ]
     }
   ],
@@ -4814,7 +5068,7 @@ Generated from [canonical specification](spec/send-communication.partial.json). 
       "remainingEvidence": [
         "Actual HOSTProviderFreeformLetter token definitions and mappingName/isRequired/isReadOnly values",
         "Upstream producer of selectedTemplate.tokens and rtbTokenInputs",
-        "HTML rendering and any additional handlers in uncaptured lines approximately 612\u2013670",
+        "HTML rendering and any additional handlers in uncaptured lines approximately 612–670",
         "Complete file coverage and js-meta.xml",
         "OmniScript Custom LWC input mappings",
         "Downstream consumer of tokenMapping/isAsyncLetterGeneration and actual document-generation response"
@@ -4976,12 +5230,70 @@ Generated from [canonical specification](spec/send-communication.partial.json). 
       "environment": "xhdev1 sandbox",
       "observedActive": true,
       "wordContentEvidence": "Template designer PDF rendition visibly shows matching {{token}} placeholders. Native DOCX XML not retrieved."
+    },
+    {
+      "name": "Ancillary Letter",
+      "captureDate": "2026-10-19",
+      "observedActive": true,
+      "customClass": "CNC_CustomTokenDataExtractor",
+      "runtimeStatus": "User-operated preview generated in XHDev1; full token correctness/final layout not yet verified",
+      "evidencePath": "Docgen/evidence/2026-10-19-CS-1832-Mapping-Investigation.md",
+      "tokenMappings": [
+        {
+          "name": "Current_Date_system",
+          "mappingName": "todayDate"
+        },
+        {
+          "name": "Provider_Name_apimanual",
+          "mappingName": "addresseeName"
+        },
+        {
+          "name": "Provider_Address_apimanual",
+          "mappingName": "mailingAddressStreet"
+        },
+        {
+          "name": "City_apimanual",
+          "mappingName": "mailingAddressCity"
+        },
+        {
+          "name": "State_apimanual",
+          "mappingName": "mailingAddressState"
+        },
+        {
+          "name": "Zip_Code_apimanual",
+          "mappingName": "mailingAddressPostalCode"
+        },
+        {
+          "name": "Patient_Full_Name_manual",
+          "mappingName": "memberName"
+        },
+        {
+          "name": "Claim_Number_or_Authorization_Number_manual",
+          "mappingName": "claimNumber"
+        },
+        {
+          "name": "Member_ID_or_Patient_Account_Number",
+          "mappingName": "memberId"
+        },
+        {
+          "name": "Case_Number",
+          "mappingName": "caseNumber"
+        },
+        {
+          "name": "Claim_DOS",
+          "mappingName": "claimDateofService"
+        },
+        {
+          "name": "Patient_Acct_Num",
+          "mappingName": "patientAccountNumber"
+        }
+      ]
     }
   ],
   "apexSourceEvidence": [
     {
       "name": "CNC_CustomTokenDataExtractor",
-      "evidence": "Two user-provided screenshots, class lines 1\u201348, 2026-10-06 11:05 PM CT",
+      "evidence": "Two user-provided screenshots, class lines 1–48, 2026-10-06 11:05 PM CT",
       "sourceCoverage": "Visible class body through closing brace; screenshot transcription, not retrieved org source or tested deployment artifact",
       "apiVersion": "58.0",
       "declaration": "global with sharing class CNC_CustomTokenDataExtractor implements omnistudio.VlocityOpenInterface, Callable",
@@ -5063,44 +5375,28 @@ Generated from [canonical specification](spec/send-communication.partial.json). 
         "IMG_9F785049-2764-467F-807E-57D63C9F5420.jpeg",
         "IMG_E05D64AB-85B3-4150-9DA6-DEBD0F4A6EE8.jpeg",
         "IMG_725A5870-D92C-422A-AC1A-C14AC4D3AF57.jpeg"
-      ]
+      ],
+      "latestCaptureDate": "2026-10-19",
+      "oct19ConfirmedBehavior": {
+        "method": "transformTokenData",
+        "reads": "selectedTemplate tokens Name and MappingName",
+        "assignment": "if input.containsKey(mappingAPIName), tokenMapping.put(tokenName, (String)input.get(mappingAPIName))",
+        "memberSpecificRenameShown": false,
+        "outputs": [
+          "tokenMapping",
+          "showAdditionalInfoSection"
+        ],
+        "evidencePath": "Docgen/evidence/2026-10-19-CS-1832-Mapping-Investigation.md"
+      }
     }
   ],
   "reviewCheckpoint": {
-    "date": "2026-10-07",
-    "timeZone": "America/Chicago",
-    "time": "18:03",
-    "status": "Capture saved; implementation review remains incomplete",
-    "completedToday": [
-      "Dev/QA filter and template-record comparison",
-      "Free-form Word token placeholders and lower six token metadata entries",
-      "CNC_SendCommunication.transformTokenData source behavior",
-      "RA-SetDefaultTokenMapping payload/condition",
-      "CNC_Member360 transform action, response actions and request payload",
-      "CNCTransformMemberInfo visible output mappings",
-      "SV-ResetTokenMapping visible values",
-      "SV-InitialMapping owner flag and CNCGetCaseInfo reconfirmation"
-    ],
-    "resumeAt": {
-      "component": "Token source trace",
-      "location": "Review already captured CNCGetCaseInfo outputs and downstream Set Values/Apex mappings",
-      "captureNext": [
-        "Trace root memberId/claimNumber initialization using existing evidence first",
-        "Resolve missing DOS/patient-account bindings and upper token metadata",
-        "Verify sanitized runtime tokenMapping and generation/submission results"
-      ]
-    },
-    "remaining": [
-      "Root memberId initialization/enrichment",
-      "Root claimNumber source",
-      "Claim_DOS and Patient_Acct_Num intended source and mappings",
-      "Upper token mappingName entries",
-      "Full email Set Values paths",
-      "Brief Description storage/placement",
-      "Generation runtime flags and exact final payload",
-      "Successful print request, confirmation, case association, storage and retry"
-    ],
-    "scopeNote": "Source sandbox investigation only. Earlier target reconstruction/deployment history remains separate; no Salesforce changes or deployment performed in this capture."
+    "date": "2026-10-19",
+    "story": "CS-1832",
+    "status": "Mapping source investigation documented; no shared logic changes/deployment",
+    "nextStep": "Validate actual Account.Record_Type__c and compare sanitized localMemberId/apiMemberId/memberId after SV-AddressMapping; review common gaps with Brian",
+    "evidencePath": "Docgen/evidence/2026-10-19-CS-1832-Mapping-Investigation.md",
+    "callNotesPath": "Docgen/call-notes/2026-10-19-Brian-DocGen-Working-Session.md"
   },
   "storyReferenceDocuments": [
     {
@@ -5227,7 +5523,7 @@ Generated from [canonical specification](spec/send-communication.partial.json). 
     "correction": "Per the earlier user correction, the first three response screenshots were QA and the following two were Dev. Do not reverse environments or treat different records as one template."
   },
   "tokenSourceTrace": {
-    "status": "Partial; no implementation or deployment",
+    "status": "Member ID assignment and DOS/patient-account sources configuration-confirmed October 19; runtime branch verification pending",
     "confirmed": [
       {
         "source": "caseInfo:CaseNumber",
@@ -5235,11 +5531,12 @@ Generated from [canonical specification](spec/send-communication.partial.json). 
         "templateToken": "Case_Number"
       },
       {
-        "source": "caseInfo:Account.Member_Id__pc",
+        "source": "CNCGetCaseInfo Formula 14 conditional Account source",
         "mapperOutput": "localMemberId",
         "templateToken": "Member_ID_or_Patient_Account_Number",
         "expectedRootKey": "memberId",
-        "interveningMappingVerified": false
+        "interveningMappingVerified": true,
+        "verification": "Configuration traced; specific runtime case values not asserted"
       },
       {
         "source": "currentDate formula",
@@ -5249,16 +5546,35 @@ Generated from [canonical specification](spec/send-communication.partial.json). 
       }
     ],
     "unknown": [
-      "Root memberId initialization/enrichment",
-      "Root claimNumber source",
-      "Claim_DOS and Patient_Acct_Num intended source and mappings",
-      "Upper token mappingName entries",
+      "Formula 14 exact second record-type literal",
+      "Complete extraction relationship paths",
+      "Plain versus composite Host Subscriber ID",
+      "Expected listed/unlisted Host classification",
+      "Runtime branch and all final token values",
       "Full email Set Values paths",
       "Brief Description storage/placement"
     ],
     "proposed": [
       "After verifying real source keys, map missing automatic tokens; alternatively, if manual entry is required, align token suffixes and matching Word placeholders. These are options, not approved or implemented changes."
-    ]
+    ],
+    "latestCaptureDate": "2026-10-19",
+    "memberIdAssignment": {
+      "elementName": "SV-AddressMapping",
+      "output": "memberId",
+      "preferred": "apiMemberId when neither empty nor null",
+      "fallback": "localMemberId",
+      "localSourceCondition": "Account.Record_Type__c, not LOB"
+    },
+    "dosSource": {
+      "mapper": "CNCTransformAPITokenMapping",
+      "formulaResult": "claimDateOfService",
+      "output": "claimDateofService"
+    },
+    "patientAccountSource": {
+      "input": "claimResp:claimInfo:patientAccountNumber",
+      "output": "patientAccountNumber"
+    }
   }
 }
 ```
+
