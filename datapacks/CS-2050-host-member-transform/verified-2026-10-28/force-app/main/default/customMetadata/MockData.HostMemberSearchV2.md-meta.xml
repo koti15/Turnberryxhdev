@@ -1,0 +1,47 @@
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><label>HostMemberSearchV2</label><protected>false</protected><values><field>DataBody__c</field><value xsi:type="xsd:string">[
+  {
+    "mockKey": "TEST001",
+    "rowKey": "TEST001-1",
+    "submitted": {
+      "subscriberId": "TEST001",
+      "firstName": "ALEX",
+      "lastName": "DOE",
+      "dateOfBirth": "2000-01-01",
+      "isCoupeEmployee": false,
+      "source": "TEST"
+    },
+    "adjudicated": {
+      "subscriberId": "TEST001",
+      "firstName": "ALEXANDER",
+      "lastName": "DOE",
+      "dateOfBirth": "2000-01-01",
+      "isCoupeEmployee": false,
+      "source": "TEST"
+    }
+  },
+  {
+    "mockKey": "TEST001",
+    "rowKey": "TEST001-2",
+    "submitted": {
+      "subscriberId": "TEST001",
+      "firstName": "JAMIE",
+      "lastName": "DOE",
+      "dateOfBirth": "2001-02-03",
+      "isCoupeEmployee": true,
+      "source": "TEST"
+    }
+  },
+  {
+    "mockKey": "TEST002",
+    "rowKey": "TEST002-1",
+    "adjudicated": {
+      "subscriberId": "TEST002",
+      "firstName": "CASEY",
+      "lastName": "DOE",
+      "dateOfBirth": "2002-03-04",
+      "isCoupeEmployee": false,
+      "source": "TEST"
+    }
+  }
+]
+</value></values><values><field>ObjectType__c</field><value xsi:type="xsd:string">Member</value></values><values><field>Type__c</field><value xsi:type="xsd:string">Integration</value></values></CustomMetadata>

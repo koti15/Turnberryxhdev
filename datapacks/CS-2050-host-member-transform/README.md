@@ -25,3 +25,10 @@ All sample values are synthetic. No screenshot member values or internal attachm
 See [existing handoff](../../CallIntake/References/CS-2050-Host-Member-Transform-Codex-Handoff.md). The mapper includes subscriberId, firstName, lastName and dob display aliases from submitted (provisional precedence), submittedDob/adjudicatedDob, and a rowKey passthrough, for 17 mappings total. Six values from each side are retained. The IP MUST supply a unique deterministic rowKey per item, such as a lookup key plus the original 1-based array index; never use subscriberId or mockKey alone. The mapper does not generate row keys. Collect outputs under members, including an explicit empty members array for no matches. The existing memberSearchMockTransform is not overwritten.
 
 The handoff's IP wiring, rowKey generation, mock/live orchestration and selected modal checks are integration work still pending an authorized org export. This isolated mapper draft does not claim those acceptance checks pass.
+
+
+## 2026-10-28 supersession: tested canonical-array implementation
+
+The original single-member draft above is retained as historical evidence. The working development-org implementation uses `memberSearchMockTransform` and the existing `intakeWizard/MemberLookup` pattern. Its sanitized deployment package, Apex tests and test record are in `datapacks/CS-2050-host-member-transform/verified-2026-10-28/`.
+
+Verified in Turnberry5 Developer Edition: two flat member rows, one adjudicated-only row retained as an array, no-match empty array, both submitted/adjudicated names, true/false values, and 2/2 Apex test methods. Member IP remains inactive. The imported live branch is empty; live API and selected FlexCard modal integration remain unverified. Full story closure and production deployment are **not** claimed.

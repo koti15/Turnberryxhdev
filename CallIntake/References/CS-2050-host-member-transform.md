@@ -13,3 +13,10 @@ Open questions: final UI field names, absent-segment behavior, final list node, 
 Change history: 2026-10-28 — additive draft and synthetic fixtures created from supplied requirements and existing repository DataPack conventions. No source evidence overwritten.
 
 Existing source: [CS-2050 handoff](CS-2050-Host-Member-Transform-Codex-Handoff.md). Display aliases and Dob suffixes follow that proposed contract; rowKey is passed through from IP input. IP generation of row keys and members-list collection remain pending.
+
+
+## 2026-10-28 supersession: tested canonical-array implementation
+
+The original single-member draft above is retained as historical evidence. The working development-org implementation uses `memberSearchMockTransform` and the existing `intakeWizard/MemberLookup` pattern. Its sanitized deployment package, Apex tests and test record are in `datapacks/CS-2050-host-member-transform/verified-2026-10-28/`.
+
+Verified in Turnberry5 Developer Edition: two flat member rows, one adjudicated-only row retained as an array, no-match empty array, both submitted/adjudicated names, true/false values, and 2/2 Apex test methods. Member IP remains inactive. The imported live branch is empty; live API and selected FlexCard modal integration remain unverified. Full story closure and production deployment are **not** claimed.
