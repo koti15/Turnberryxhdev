@@ -1,0 +1,19 @@
+{
+    "submittedSubscriberId": "TEST000001",
+    "submittedFirstName": "Sample",
+    "submittedLastName": "Member",
+    "submittedDob": "2000-01-01",
+    "submittedIsCoupeEmployee": false,
+    "submittedSource": "TEST",
+    "adjudicatedSubscriberId": "TEST000001",
+    "adjudicatedFirstName": "Example",
+    "adjudicatedLastName": "Member",
+    "adjudicatedDob": "2000-01-01",
+    "adjudicatedIsCoupeEmployee": false,
+    "adjudicatedSource": "TEST",
+    "subscriberId": "TEST000001",
+    "firstName": "Sample",
+    "lastName": "Member",
+    "dob": "2000-01-01",
+    "rowKey": "TEST000001-1"
+}

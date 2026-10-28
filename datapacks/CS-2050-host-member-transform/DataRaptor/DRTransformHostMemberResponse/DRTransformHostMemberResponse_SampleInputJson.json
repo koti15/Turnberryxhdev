@@ -1,0 +1,19 @@
+{
+    "submitted": {
+        "subscriberId": "TEST000001",
+        "firstName": "Sample",
+        "lastName": "Member",
+        "dateOfBirth": "2000-01-01",
+        "isCoupeEmployee": false,
+        "source": "TEST"
+    },
+    "adjudicated": {
+        "subscriberId": "TEST000001",
+        "firstName": "Example",
+        "lastName": "Member",
+        "dateOfBirth": "2000-01-01",
+        "isCoupeEmployee": false,
+        "source": "TEST"
+    },
+    "rowKey": "TEST000001-1"
+}
