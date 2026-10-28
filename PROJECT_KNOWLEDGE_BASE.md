@@ -1,6 +1,6 @@
 # Turnberry XH Customer Service — Project Knowledge Base
 
-> Navigation and working context. This document is not a substitute for org metadata or approved design documents. Last updated 2026-10-26.
+> Navigation and working context. This document is not a substitute for org metadata or approved design documents. Index refreshed 2026-10-28; original project context retained.
 
 ## Purpose
 Use this repository as a reusable reference for Salesforce XH Customer Service development. Preserve *what was observed*, *where it was observed*, *how it was tested*, and *what remains unknown*. Never infer completed deployment from a Jira story or a saved screenshot.
@@ -16,7 +16,12 @@ Use this repository as a reusable reference for Salesforce XH Customer Service d
 | --- | --- |
 | Call Intake / member search / Host API mocks | [Call Intake knowledge index](CallIntake/README.md) |
 | CS-1446 canonical Host Member mock | [CS-1446 reference](CallIntake/References/CS-1446-Host-Member-Canonical-Mock-Response.md) |
+| CS-2050 member response transform | [CS-2050 draft and open checks](CallIntake/References/CS-2050-host-member-transform.md) · [draft DataPack README](datapacks/CS-2050-host-member-transform/README.md) |
 | Send Communication / DocGen | [Docgen README](Docgen/README.md) |
+| Case trigger/handler recovery and intake LOB | [CaseTriggerAndHandler README](CaseTriggerAndHandler/README.md) |
+| Member Demographics FlexCard | [FlexCard README](Flexcards/MemberDemographics/README.md) |
+| Sprint requirements and related cases | [Sprint context](config/docs/CONTEXT_HOME.md) · [Sprint 17 requirements](sprints/sprint17_2026-08-20/CS-784_CS-1587_REQUIREMENTS.md) |
+| GitHub area coverage and gaps | [Coverage inventory](SYNC_COVERAGE.md) |
 | DocGen remaining investigation | [Docgen pending work](Docgen/PENDING_WORK.md) |
 | How to record new stories and investigations | [Reference convention](REFERENCE_CONVENTIONS.md) |
 
@@ -32,7 +37,7 @@ Use this repository as a reusable reference for Salesforce XH Customer Service d
 ## Known boundaries
 - CS-1446 is documentation only; no Salesforce changes were made by adding its reference.
 - Existing Docgen records are partly verified, partly incomplete. Follow its dated notes and pending tracker.
-- Other areas may exist in this repository that have not yet been inventoried. Do not treat this index as a complete repository audit.
+- The 2026-10-28 [coverage inventory](SYNC_COVERAGE.md) enumerates the 13 top-level directories on the inspected default-branch tree. This does **not** establish that all Project conversations, branches or source files were reviewed.
 
 ## Data protection
 This repository is currently **public**. Do not commit real member PHI/PII, production payloads, access tokens, passwords, private internal attachments, or unapproved proprietary source. Use sanitized examples and check organizational policy before adding customer/project information.
