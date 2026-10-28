@@ -1,0 +1,49 @@
+{
+  "environment": "Turnberry5 Developer Edition",
+  "date": "2026-10-28",
+  "tests": [
+    {
+      "input": {
+        "memberId": "TEST001"
+      },
+      "passed": true,
+      "membersCount": 2,
+      "assertions": [
+        "flat rows",
+        "distinct rowKey",
+        "ALEX and ALEXANDER both preserved",
+        "submitted false and true preserved"
+      ]
+    },
+    {
+      "input": {
+        "memberId": "TEST002"
+      },
+      "passed": true,
+      "membersCount": 1,
+      "assertions": [
+        "members remains array",
+        "adjudicated-only display ID/name/DOB populated"
+      ]
+    },
+    {
+      "input": {
+        "memberId": "NO_MATCH"
+      },
+      "passed": true,
+      "response": {
+        "members": []
+      }
+    }
+  ],
+  "apex": {
+    "class": "FeatureToggleEvalActionTest",
+    "passedMethods": 2,
+    "totalMethods": 2
+  },
+  "notVerified": [
+    "live API endpoint",
+    "FlexCard selected modal",
+    "production deployment"
+  ]
+}

@@ -1,0 +1,1 @@
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata"><fullName>SandboxToggle__c</fullName><defaultValue>false</defaultValue><fieldManageability>SubscriberControlled</fieldManageability><label>Sandbox Toggle</label><type>Checkbox</type></CustomField>
