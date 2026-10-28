@@ -1,6 +1,6 @@
 # Call Intake — Knowledge Index
 
-> Navigation and technical reference, last updated 2026-10-26. This index is not an assertion that every component below has been inspected in the current org.
+> Navigation and technical reference, index refreshed 2026-10-28. This index is not an assertion that every component below has been inspected in the current org.
 
 ## Functional scope
 Call Intake workflows can involve member/provider identification, member search, Case creation, OmniStudio orchestration, integrations and navigation. Exact runtime paths vary by application, user permissions and environment.
@@ -8,7 +8,8 @@ Call Intake workflows can involve member/provider identification, member search,
 ## Available story reference
 | Story | Topic | Status | Read |
 | --- | --- | --- | --- |
-| CS-1446 | Canonical ITS Host Member mock responses in DEV; `IPMemberLookup` | Requirement captured; implementation unverified | [CS-1446](References/CS-1446-Host-Member-Canonical-Mock-Response.md) |
+| CS-1446 | Canonical Host Member mock responses and member lookup | Requirement and partial screenshot preview; full integration unverified | [CS-1446](References/CS-1446-Host-Member-Canonical-Mock-Response.md) |
+| CS-2050 | Flatten submitted and adjudicated values into one selectable member row | Draft DataPack and synthetic fixtures; no org Preview or deployment verified | [Draft record](References/CS-2050-host-member-transform.md) · [Codex handoff](References/CS-2050-Host-Member-Transform-Codex-Handoff.md) |
 
 ## CS-1446 key components (from Jira, not yet org-verified)
 - Integration Procedure: `IPMemberLookup`
@@ -18,6 +19,12 @@ Call Intake workflows can involve member/provider identification, member search,
 - Request options: member ID or demographics (first name, last name, DOB)
 - Response: `submitted` plus optional `adjudicated`
 - Related discovery: CS-2048 (marked Done in supplied Jira)
+
+## CS-2050 current implementation boundary
+
+- A separate draft mapper `DRTransformHostMemberResponse` was committed on 2026-10-28 under `datapacks/CS-2050-host-member-transform/`. It maps **one** member object per invocation; it is **not** evidence of a working multi-member IP loop or FlexCard integration.
+- The prior `memberSearchMockTransform` screenshot preview showed a `members` array containing nested `submitted` and `adjudicated` objects. A flattened UI response, unique `rowKey`, selected-modal contract and live/mock path behavior remain to be validated in the authorized org.
+- [Draft DataPack setup and tests](../datapacks/CS-2050-host-member-transform/README.md). Do not replace existing metadata or claim deployment based on repository files alone.
 
 ## Other investigations to index as evidence becomes available
 - Provider creation and created-provider-ID navigation
