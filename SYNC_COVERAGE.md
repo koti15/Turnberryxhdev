@@ -82,3 +82,37 @@ No duplicate CS-2050 story record was created by this audit. Existing handoff, d
 **Safety boundary:** The public repository already contains some binary evidence, code and deployment artifacts. This audit did **not** download, reproduce, or publish their sensitive contents; it is not a security clearance of pre-existing files. Review existing tracked material under an approved private process. This commit contains only navigation, status and coverage metadata.
 
 **Result:** GitHub folder discovery improved materially. ChatGPT Project-wide conversation coverage remains **unverified/incomplete**. Next run should seek an authoritative Project thread/folder inventory, continue selective review of safe area documentation, and keep org-specific details outside the public repository.
+
+## 2026-10-29 — incremental evidence and access audit
+
+**Scope and checkpoint.** This is an incremental documentation audit against the October 28 coverage commit `493c35a1c01f67616844711d00b259de25fd9d35`, **not** a verified complete ChatGPT Project sync. The current public `main` tree at `a2cd9d16bb035318c86c1b895aadf4836d40126c` returned `truncated=false`: **332 tracked files (blobs), 101 directory entries, 13 top-level directories**. This is +14 files and +10 directory entries compared with the previous 318/91 inventory. Git tree enumeration covers the default branch only, not file contents, other branches or ChatGPT threads.
+
+| GitHub directory | Tracked files in current tree | Review this run |
+| --- | ---: | --- |
+| `CallIntake/` | 6 | README and current CS-2050 reference read |
+| `CaseTriggerAndHandler/` | 36 | Root and intake-LOB README read; code/images not audited |
+| `Docgen/` | 41 | README and partial pending-work tracker read; no private attachments replicated |
+| `Flexcards/` | 5 | MemberDemographics README read |
+| `availity/` | 6 | Paths inventoried only; no area README |
+| `config/` | 11 | Context home and sprint index read |
+| `datapacks/` | 79 | CS-2050 original and *new* verified-2026-10-28 README, DocGen patch README read; package data not executed |
+| `force-app/` | 104 | Paths inventoried; source not exhaustively reviewed |
+| `interview-prep/` | 1 | Path inventoried only |
+| `manifest/` | 3 | Paths inventoried only |
+| `scripts/` | 14 | Paths inventoried, scripts not executed |
+| `sprint15/` | 6 | 2026-07-27 README read |
+| `sprints/` | 10 | Sprint 15 references/images/FlexCard-validation READMEs read; Sprint 17 folder inventoried |
+
+The 10 root files are separate from these directory counts. No additional top-level functional area was introduced in the compared commits. Newly discovered under `datapacks/CS-2050-host-member-transform/`: `verified-2026-10-28/` and nested metadata/test directories. Root `PROJECT_KNOWLEDGE_BASE.md`, `REFERENCE_CONVENTIONS.md`, and `AGENTS.md` were read again. Every discovered README/index path from the non-truncated default-branch tree was inspected, including the new verified implementation README.
+
+**GitHub delta since last checkpoint:** two commits, [`bb24fa6`](https://github.com/koti15/Turnberryxhdev/commit/bb24fa678900d7853c249ae563be7e2f44f5a275) and [`a2cd9d1`](https://github.com/koti15/Turnberryxhdev/commit/a2cd9d16bb035318c86c1b895aadf4836d40126c), affecting the CS-2050 transform reference, DataPack documentation and a new metadata/test package. The previously documented single-record mapper remains historical. The newer [verified implementation record](datapacks/CS-2050-host-member-transform/verified-2026-10-28/README.md) reports development-org mock-path Preview checks for two, one and zero member results, preservation of both result versions and booleans, and 2/2 Apex test methods. It also explicitly says the live branch is empty, the Member Lookup IP is inactive and selected-modal integration is not verified. **Confidence: documented in repository; not independently retested in Salesforce during this audit.** It is neither a production deployment claim nor full story closure. No need to duplicate its detailed configuration.
+
+**Current-conversation access:** the visible thread and its **five attached images** were accessible in this run, but this is only one thread. Previous Turnberry conversations surfaced through selected user-history summaries, not full independently enumerable conversations. No API in this run supplied an authoritative ChatGPT Project folder/thread roster, thread bodies, or folder membership. Therefore **Project-wide conversation coverage, including inaccessible subfolders/threads, cannot be verified**; unidentified threads are not counted as read.
+
+**File Library access:** the root listed a `/Turnberry` folder and other independent folders whose Project affiliation was not established. A filtered recursive listing of `/Turnberry` completed for **18 document-type files** (latest dated October 27) and **zero nested Library folder entries**. One October 27 member-transform blueprint was read and found to be an older *proposed, not deployed* configuration; its core requirements are superseded for the tested mock path by the newer GitHub record. A separate October 28-and-later modified-date filter returned **15 image files**, all on October 28; these are **metadata-inventoried only, not content-reviewed or published**. The unfiltered `/Turnberry` recursive enumeration reached **900 file entries across 10 pages with another cursor remaining**; it is **not** an exhaustive file inventory. Library files are not equivalent to a Project thread catalog.
+
+**Excluded/uncorroborated recent topics:** selected conversation summaries mention other Salesforce issues, but without verified Turnberry Project membership, complete source context or a clearly safe publication basis, no new story-level technical assertions were added to the public knowledge base. In particular, do not merge unrelated defect logs from root Library folders into this Project by inference.
+
+**No live-access claim:** no Salesforce org, Jira, Codex session, external chat thread or runtime metadata was accessed for independent tests. No Apex/OmniStudio code, DataPack, screenshots, private chat, raw payload, customer data, org ID or credentials were changed or committed by this audit. Existing tracked binaries and metadata in this **public** repository were not security-cleared; the repository owner should review previously committed materials through an approved private process.
+
+**Outstanding coverage:** identify authoritative ChatGPT Project folder/thread roster; review currently inaccessible/unknown thread bodies and their provenance; paginate the remaining unfiltered Library files only if justified and approved; and validate the linked CS-2050 mock-path evidence and outstanding live/modal integration in the authorized org.
