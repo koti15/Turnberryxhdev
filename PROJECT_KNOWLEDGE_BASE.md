@@ -41,3 +41,11 @@ Use this repository as a reusable reference for Salesforce XH Customer Service d
 
 ## Data protection
 This repository is currently **public**. Do not commit real member PHI/PII, production payloads, access tokens, passwords, private internal attachments, or unapproved proprietary source. Use sanitized examples and check organizational policy before adding customer/project information.
+
+## October 29, 2026 — current knowledge checkpoint
+
+[Coverage and access audit](SYNC_COVERAGE.md) reflects the non-truncated default-branch inventory at commit `a2cd9d16bb035318c86c1b895aadf4836d40126c`: **13 top-level directories, 332 tracked files and 101 directory entries**. All discovered README/index files were read; this is not an all-file content audit and **not** proof that all Turnberry ChatGPT Project conversations were accessible. A newer `datapacks/CS-2050-host-member-transform/verified-2026-10-28/` subarea is now indexed by the existing [Call Intake entry](CallIntake/README.md).
+
+**CS-2050 incremental evidence:** the linked [October 28 implementation record](datapacks/CS-2050-host-member-transform/verified-2026-10-28/README.md) *reports* validated mock-path transformation for multiple, single and empty results, preserving submitted/adjudicated values. This run reviewed its documentation but did not independently access a Salesforce org. The IP remains inactive and live-path and selected-modal integration are open; do not interpret the original draft or later repository package as production-deployed work.
+
+Historical summaries or Library screenshots are not automatically authenticated Project conversations. The coverage inventory explicitly separates source files, visible conversations, summary-only information and unavailable thread/folder enumeration. This public KB continues to contain navigation/status metadata only for this sync; proprietary working evidence belongs in approved private storage.
