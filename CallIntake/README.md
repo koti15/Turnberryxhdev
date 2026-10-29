@@ -43,3 +43,9 @@ These are topics from prior discussions, **not verified as existing files in thi
 
 ## Repository navigation
 [Project index](../PROJECT_KNOWLEDGE_BASE.md) · [Reference conventions](../REFERENCE_CONVENTIONS.md) · [Docgen](../Docgen/README.md)
+
+## 2026-10-29 incremental status note
+
+The older **draft** CS-2050 mapper description above is retained for provenance. Subsequent commits on October 28 added a [development-org mock-path implementation record](../datapacks/CS-2050-host-member-transform/verified-2026-10-28/README.md) and appended a [supersession note](References/CS-2050-host-member-transform.md). The new record reports repeated single-row-per-person mapping, array normalization and an explicit no-match empty list, with development preview results for 2, 1 and 0 rows and 2/2 Apex test methods. These are **documented verification claims in existing repository evidence**, not tests performed by this knowledge audit.
+
+**Current boundary:** the documented Member Lookup IP is still inactive; the live branch and selected-member modal contract have not been verified. The proposed standalone `DRTransformHostMemberResponse` and the later repeating `memberSearchMockTransform` are different approaches; use the dated latter evidence for mock-path status without deleting the former historical design. Confirm UI precedence and durable `rowKey` behavior against authorized environments. No production activation or complete CS-2050 closure is established.
