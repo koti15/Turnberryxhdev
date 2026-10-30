@@ -116,3 +116,35 @@ The 10 root files are separate from these directory counts. No additional top-le
 **No live-access claim:** no Salesforce org, Jira, Codex session, external chat thread or runtime metadata was accessed for independent tests. No Apex/OmniStudio code, DataPack, screenshots, private chat, raw payload, customer data, org ID or credentials were changed or committed by this audit. Existing tracked binaries and metadata in this **public** repository were not security-cleared; the repository owner should review previously committed materials through an approved private process.
 
 **Outstanding coverage:** identify authoritative ChatGPT Project folder/thread roster; review currently inaccessible/unknown thread bodies and their provenance; paginate the remaining unfiltered Library files only if justified and approved; and validate the linked CS-2050 mock-path evidence and outstanding live/modal integration in the authorized org.
+
+## 2026-10-30 — branch-wide and Library metadata audit
+
+**Checkpoint and delta.** This audit compares with the October 29 documentation sync at main commit `96f668b31f5e886a58ea47e10dc141ef0d87bb0e` (2026-10-29 16:19:23 UTC). At the start of this run, `main` still pointed to that commit; there were **no new GitHub commits since the previous sync**. The non-truncated recursive `main` tree remained **332 blobs, 101 directory entries and 13 top-level directories** (plus 10 root files). The current main area inventory remains exactly the October 29 table above. This is Git tree verification, not Salesforce runtime verification.
+
+### All discovered GitHub branches
+
+GitHub's branch listing returned **seven branches**; each named branch's recursive tree was retrieved with `truncated=false`. Branch-specific files below are **not merged to main** and should not be treated as active deployments.
+
+| Branch | Tracked files | Branch-only paths versus 2026-10-29 main | Review boundary |
+| --- | ---: | --- | --- |
+| `main` | 332 | Baseline: 13 root-level directories | Full path inventory; all discovered README/index files read; not all source content |
+| `agent/cs1347-name-premigration-v2` | 103 | 17 under `datapacks/CS-1347-live/` | Path inventory only; DataPack contents not read or imported |
+| `agent/cs-1347-sprint-context` | 49 | 1 under `scripts/` | Path inventory only; script not run |
+| `cs-1806-analysis-notes` | 97 | 2 under `force-app/main/default/classes/` | Path inventory only; no org verification |
+| `feature/pin-flexcard` | 305 | 4 under `Flexcards/PinFlexCard/` | Read branch-only README; prototype LWC, not evidence of an installed FlexCard or production PIN controls |
+| `provider-status-loop` | 95 | 1 under `codex/` | Path inventory only; branch-only working note not reused as confirmed requirement |
+| `story/741-member-search-page-updates` | 91 | 0 unique paths relative to current main | Path inventory only; branch contents may differ |
+
+Branch-only directory discovery expands the union of observed functional areas beyond the 13 `main` top-level directories: `codex/` occurs on the provider-status branch, `Flexcards/PinFlexCard/` occurs on the PIN feature branch, and `datapacks/CS-1347-live/` occurs on the agent branch. None is a newly committed directory on `main`. Branch file contents beyond the specifically named README were not comprehensively audited. Root `PROJECT_KNOWLEDGE_BASE.md`, `REFERENCE_CONVENTIONS.md`, `AGENTS.md`, and the 14 discovered `main` README/index paths were reread; the branch-only PIN README was also read. The prototype's README expressly distinguishes client-side validation from the unimplemented server-side authorization and secure storage required before actual use.
+
+### ChatGPT file Library: completed metadata pagination, not content review
+
+The recursive `/Turnberry` Library listing was followed through **13 pages, 1,163 file entries, no remaining cursor**. File extensions returned: 1,137 JPEG, 7 PNG, 15 TXT, 1 Markdown, 1 DOCX, 1 HTML and 1 ZIP. No Library subfolders were returned beneath `/Turnberry`; this is a flat *Library* collection, not a ChatGPT Project conversation-folder catalog. The listing showed **zero files modified October 29 or later**, and the document-type filter found 18 entries, with latest modified October 27. These are **metadata facts only**; 1,163 file bodies were not inspected and image contents were neither reproduced nor published. The prior October 29 report that the 900-item unfiltered inventory was incomplete is now superseded **for this Library folder's metadata listing only**.
+
+Library root contained `/Turnberry` plus other folders, but there is no authoritative evidence mapping those other folders to the Turnberry ChatGPT Project. No independent Project subfolder enumeration is available. The current chat's conversation-file API surfaced **four attached JPEG files**, not an all-thread export. Selected earlier-chat summaries were retrievable, but no exhaustive list of Project threads, folder membership, or original complete historical thread bodies was accessible. **Unidentified and inaccessible Project conversations/folders cannot be counted as covered.** Neither Library metadata completion nor the repository branch inventory closes this gap.
+
+### Incremental knowledge and publication decision
+
+The last GitHub story-level change remains the **October 28 CS-2050 mock-path implementation package**, whose development-org Preview and tests are **documented by that repository's author**, not independently reproduced in this audit. The IP's inactive status, pending live path and unverified modal behavior remain open. No new post-October-29, Project-attributed source record or independently validated Salesforce fix was found in the accessible materials. Related discussions in partial conversation summaries lack verified thread membership/provenance and cannot be promoted to new public story facts. Accordingly this run publishes **coverage and navigation findings only**, not duplicated technical requirements.
+
+**Security and environment boundary:** This is a public repository. No raw chats, Library data, screenshots, real member data, internal payloads, credentials, customer identifiers, proprietary code or test evidence were added. No scripts, DataPacks, Apex or org tests were executed; no Salesforce code or metadata was changed or deployed. Existing public repository artifacts are **not** implied safe by this documentation-only audit.
